@@ -1,33 +1,33 @@
 TARGET = Minecraft2
-OBJS = source/Aurora/Math/MathLib.o \
-source/Aurora/Math/Matrix3.o \
-source/Aurora/Math/Matrix4.o \
-source/Aurora/Math/Quaternion.o \
-source/Aurora/Math/BoundingBox.o \
-source/Aurora/Math/BoundingSphere.o \
-source/Aurora/Math/Plane.o \
-source/Aurora/Math/Ray.o \
-source/Aurora/Math/Frustum.o \
-source/Aurora/Math/Polygon.o \
-source/Aurora/Graphics/common.o \
-source/Aurora/Graphics/vfram.o \
-source/Aurora/Graphics/vram.o \
-source/Aurora/Graphics/RenderManager.o \
-source/Aurora/Graphics/TextureManager.o \
-source/Aurora/Graphics/Camera.o \
-source/Aurora/Graphics/Sprite.o \
-source/Aurora/Graphics/Models/ObjModel.o \
-source/Aurora/Graphics/Models/ObjModel.o \
-source/Aurora/Graphics/intraFont/libccc.o \
-source/Aurora/Graphics/intraFont/intraFont.o \
-source/Aurora/Utils/Logger.o \
-source/Aurora/Utils/Timer.o \
-source/Aurora/Utils/StateManager.o \
-source/Aurora/Utils/pgeZip.o \
-source/Aurora/Utils/pge.o \
-source/Aurora/Utils/pgeDir.o \
-source/Aurora/System/SystemManager.o \
-source/Aurora/System/NetworkManager.o \
+OBJS = Engine/Aurora/Math/MathLib.o \
+Engine/Aurora/Math/Matrix3.o \
+Engine/Aurora/Math/Matrix4.o \
+Engine/Aurora/Math/Quaternion.o \
+Engine/Aurora/Math/BoundingBox.o \
+Engine/Aurora/Math/BoundingSphere.o \
+Engine/Aurora/Math/Plane.o \
+Engine/Aurora/Math/Ray.o \
+Engine/Aurora/Math/Frustum.o \
+Engine/Aurora/Math/Polygon.o \
+Engine/Aurora/Graphics/common.o \
+Engine/Aurora/Graphics/vfram.o \
+Engine/Aurora/Graphics/vram.o \
+Engine/Aurora/Graphics/RenderManager.o \
+Engine/Aurora/Graphics/TextureManager.o \
+Engine/Aurora/Graphics/Camera.o \
+Engine/Aurora/Graphics/Sprite.o \
+Engine/Aurora/Graphics/Models/ObjModel.o \
+Engine/Aurora/Graphics/Models/ObjModel.o \
+Engine/Aurora/Graphics/intraFont/libccc.o \
+Engine/Aurora/Graphics/intraFont/intraFont.o \
+Engine/Aurora/Utils/Logger.o \
+Engine/Aurora/Utils/Timer.o \
+Engine/Aurora/Utils/StateManager.o \
+Engine/Aurora/Utils/pgeZip.o \
+Engine/Aurora/Utils/pge.o \
+Engine/Aurora/Utils/pgeDir.o \
+Engine/Aurora/System/SystemManager.o \
+Engine/Aurora/System/NetworkManager.o \
 LameCraft/BaseBlock.o \
 LameCraft/Blocks.o \
 LameCraft/BaseItem.o \
@@ -58,16 +58,16 @@ LameCraft/InputHelper.o \
 LameCraft/TextureHelper.o \
 LameCraft/sound_utils/pgeWav.o \
 LameCraft/SoundManager.o \
-source/Aurora/Graphics/Effects/Drop.o \
-source/Aurora/Graphics/Effects/TNT.o \
-source/Aurora/Graphics/Effects/InventoryPlayer.o \
-source/Aurora/Graphics/Effects/SnowBall2.o \
-source/Aurora/Graphics/Effects/SkyLight.o \
-source/Aurora/Graphics/Effects/SkyBox.o \
-source/Aurora/Graphics/Effects/Destroyer.o \
-source/Aurora/Graphics/Effects/StarsBox.o \
-source/Aurora/Graphics/Effects/Particle.o \
-source/Aurora/Graphics/Effects/WeatherSystem.o \
+Engine/Aurora/Graphics/Effects/Drop.o \
+Engine/Aurora/Graphics/Effects/TNT.o \
+Engine/Aurora/Graphics/Effects/InventoryPlayer.o \
+Engine/Aurora/Graphics/Effects/SnowBall2.o \
+Engine/Aurora/Graphics/Effects/SkyLight.o \
+Engine/Aurora/Graphics/Effects/SkyBox.o \
+Engine/Aurora/Graphics/Effects/Destroyer.o \
+Engine/Aurora/Graphics/Effects/StarsBox.o \
+Engine/Aurora/Graphics/Effects/Particle.o \
+Engine/Aurora/Graphics/Effects/WeatherSystem.o \
 LameCraft/mersenne-twister.o \
 LameCraft/SimplexNoise.o \
 LameCraft/WorldGenerator.o \
@@ -80,7 +80,7 @@ LameCraft/sound_utils/mod.o \
 Lamecraft.o
 
 INCDIR = $(PSPPATH)/include
-INCDIR += ./include ./source ./3libs
+INCDIR += ./include ./Engine ./3libs
 CFLAGS = -O3 -G0 -Wall -mpreferred-stack-boundary=4 #-enable-newlib-hw-fp -ffast-math
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
