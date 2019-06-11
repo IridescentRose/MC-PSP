@@ -1,0 +1,993 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Lamecraft.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\sound_utils\audio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\sound_utils\bgm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\sound_utils\media.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\sound_utils\mod.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\sound_utils\pgeWav.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\sound_utils\vfsFile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\sound_utils\VirtualFile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\BaseBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\BaseEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\BaseItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\BlockEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\Blocks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\Chest2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\ChunkDataProvider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\Cow2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\CraftWorld2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\Creeper2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\DirectionBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\Furnace2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\InputHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\ItemFrameEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\Items.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\JukeboxEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\LameMob.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\LamePlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\LoadingScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\mersenne-twister.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\MineCart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\Mobs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\MonsterSpawnerEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\NoteBlockEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\Sheep2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\SimpleMeshChunk2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\SimplexNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\SoundManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\SplashScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\StateMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\StateOptions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\StatePlay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\StatePlayCreative.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\TextureHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\WorldGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\Zombie2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\Destroyer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\Drop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\InventoryPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\Particle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\SkyBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\SkyLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\SnowBall2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\StarsBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\TNT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\WeatherSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\intraFont\intraFont.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\intraFont\libccc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Models\ObjModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\common.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\RenderManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Sprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\Sprite3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\TextureManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\TrueTypeFont.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\vfram.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Graphics\vram.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Math\BoundingBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Math\BoundingSphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Math\Frustum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Math\MathLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Math\Matrix3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Math\Matrix4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Math\Plane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Math\Polygon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Math\Quaternion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Math\Ray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\System\NetworkManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\System\SystemManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Utils\Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Utils\pge.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Utils\pgeDir.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Utils\pgeFile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Utils\pgeZip.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Utils\StateManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurora\Utils\Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\printMatrixFloat.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_acosf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_add_vector.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_asinf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_atanf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_cosf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_coshf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_ease_in_out.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_envmap_matrix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_expf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_fabsf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_fmaxf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_fminf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_fmodf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_identity_matrix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_logf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_normalize_vector.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_ortho_matrix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_perspective_matrix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_powf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_copy.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_exp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_from_euler.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_hermite_tangent.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_identity.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_ln.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_multiply.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_normalize.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_sample_hermite.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_sample_linear.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_to_matrix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_rand_8888.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_randf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_scale_vector.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_sincos.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_sinf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_sinhf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_sphere_to_cartesian.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_sqrtf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_srand.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_tanf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_tanhf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_translate_matrix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\libpspmath\vfpu_zero_vector.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\noisepp\NoiseBuilders.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\noisepp\NoiseColourValue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\noisepp\NoiseEndianUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\noisepp\NoiseGradientRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\noisepp\NoiseImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\noisepp\NoiseInStream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\noisepp\NoiseJobQueue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\noisepp\NoiseModules.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\noisepp\NoiseOutStream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\noisepp\NoiseReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\noisepp\NoiseSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\noisepp\NoiseWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pge.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeAdhoc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeControls.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeDir.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeEmulator.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeFile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeFont.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeGfx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeMath.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeMp3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeNet.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeObj.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeParticle.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeSystem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeTexture.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeTimer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeUsb.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeUtils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeVram.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeWav.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3libs\pge\pgeZip.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LameCraft\sound_utils\audio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\sound_utils\bgm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\sound_utils\oslib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\sound_utils\pgeWav.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\sound_utils\readwav.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\sound_utils\VirtualFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\BaseBlock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\BaseEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\BaseItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\BlockEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Blocks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Chest2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\ChunkDataProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Cow2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\CraftWorld2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Creeper2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\DirectionBlock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Furnace2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\InputHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\ItemFrameEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Items.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\JukeboxEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\LameFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\LameMob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\LamePlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\LoadingScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\mersenne-twister.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\MineCart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Mobs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\MonsterSpawnerEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\NoteBlockEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Sheep2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\SimpleMeshChunk2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\SimplexNoise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\SoundManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\SplashScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\StateMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\StateOptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\StatePlay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\StatePlayCreative.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\TextureHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\WorldGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Zombie2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\Destroyer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\Drop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\InventoryPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\Particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\SkyBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\SkyLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\SnowBall2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\StarsBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\TNT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\WeatherSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\intraFont\intraFont.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\intraFont\libccc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\Models\ObjModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\Image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\RenderManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\Sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\Sprite3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\TextureManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\TrueTypeFont.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\vfram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Graphics\vram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Math\BoundingBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Math\BoundingSphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Math\Frustum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Math\MathLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Math\Matrix3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Math\Matrix4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Math\Plane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Math\Polygon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Math\Quaternion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Math\Ray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Math\Vector2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Math\Vector3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Math\Vector4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\System\NetworkManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\System\SystemManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Utils\GameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Utils\Logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Utils\pge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Utils\pgeDir.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Utils\pgeFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Utils\pgeZip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Utils\StateManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurora\Utils\Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\libpspmath\pspmath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\Noise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseAbsolute.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseAddition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseBillow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseBlend.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseBuilders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseCheckerboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseClamp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseColourValue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseConstant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseCurve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseEndianUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseExponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseGradientRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseInStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseInvert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseJobQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseMaximum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseMinimum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseMultiply.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseOutStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoisePerlin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoisePipeline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoisePipelineJobs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoisePlatform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoisePower.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoisePrerequisites.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseRidgedMulti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseScaleBias.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseScalePoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseSelect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseStdHeaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseTerrace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseThreadedPipeline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseTranslatePoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseTurbulence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseVectorTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseVoronoi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\noisepp\NoiseWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeAdhoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeControls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeDir.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeEmulator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeFont.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeGfx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeMp3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeNet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeObj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeParticle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeUsb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeVram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeWav.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3libs\pge\pgeZip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

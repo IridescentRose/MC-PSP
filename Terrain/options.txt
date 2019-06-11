@@ -1,4 +1,0 @@
-<water_level>
-60
-<grass>
-1

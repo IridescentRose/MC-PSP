@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{DCF53EC4-D03F-4135-AE68-67AE86591C47}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeBuildCommandLine>build.bat</NMakeBuildCommandLine>
+    <NMakeOutput>Minecraft.exe</NMakeOutput>
+    <NMakeCleanCommandLine>cleanup.bad</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>rebuild.bat</NMakeReBuildCommandLine>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir />
+    <IntDir />
+    <IncludePath>$(SolutionDir)Engine\;C:\pspsdk\psp\sdk\include\libc;C:\pspsdk\psp\sdk\include;C:\pspsdk\psp\include;C:\pspsdk\include</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <BuildLog>
+      <Path />
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="3libs\libpspmath\printMatrixFloat.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_acosf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_add_vector.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_asinf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_atanf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_cosf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_coshf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_ease_in_out.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_envmap_matrix.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_expf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_fabsf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_fmaxf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_fminf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_fmodf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_identity_matrix.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_logf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_normalize_vector.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_ortho_matrix.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_perspective_matrix.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_powf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_copy.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_exp.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_from_euler.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_hermite_tangent.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_identity.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_ln.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_multiply.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_normalize.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_sample_hermite.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_sample_linear.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_quaternion_to_matrix.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_randf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_rand_8888.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_scale_vector.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_sincos.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_sinf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_sinhf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_sphere_to_cartesian.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_sqrtf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_srand.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_tanf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_tanhf.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_translate_matrix.c" />
+    <ClCompile Include="3libs\libpspmath\vfpu_zero_vector.c" />
+    <ClCompile Include="3libs\noisepp\NoiseBuilders.cpp" />
+    <ClCompile Include="3libs\noisepp\NoiseColourValue.cpp" />
+    <ClCompile Include="3libs\noisepp\NoiseEndianUtils.cpp" />
+    <ClCompile Include="3libs\noisepp\NoiseGradientRenderer.cpp" />
+    <ClCompile Include="3libs\noisepp\NoiseImage.cpp" />
+    <ClCompile Include="3libs\noisepp\NoiseInStream.cpp" />
+    <ClCompile Include="3libs\noisepp\NoiseJobQueue.cpp" />
+    <ClCompile Include="3libs\noisepp\NoiseModules.cpp" />
+    <ClCompile Include="3libs\noisepp\NoiseOutStream.cpp" />
+    <ClCompile Include="3libs\noisepp\NoiseReader.cpp" />
+    <ClCompile Include="3libs\noisepp\NoiseSystem.cpp" />
+    <ClCompile Include="3libs\noisepp\NoiseWriter.cpp" />
+    <ClCompile Include="3libs\pge\pge.c" />
+    <ClCompile Include="3libs\pge\pgeAdhoc.c" />
+    <ClCompile Include="3libs\pge\pgeControls.c" />
+    <ClCompile Include="3libs\pge\pgeDir.c" />
+    <ClCompile Include="3libs\pge\pgeEmulator.c" />
+    <ClCompile Include="3libs\pge\pgeFile.c" />
+    <ClCompile Include="3libs\pge\pgeFont.c" />
+    <ClCompile Include="3libs\pge\pgeGfx.c" />
+    <ClCompile Include="3libs\pge\pgeMath.c" />
+    <ClCompile Include="3libs\pge\pgeMp3.c" />
+    <ClCompile Include="3libs\pge\pgeNet.c" />
+    <ClCompile Include="3libs\pge\pgeObj.c" />
+    <ClCompile Include="3libs\pge\pgeParticle.c" />
+    <ClCompile Include="3libs\pge\pgeSystem.c" />
+    <ClCompile Include="3libs\pge\pgeTexture.c" />
+    <ClCompile Include="3libs\pge\pgeTimer.c" />
+    <ClCompile Include="3libs\pge\pgeUsb.c" />
+    <ClCompile Include="3libs\pge\pgeUtils.c" />
+    <ClCompile Include="3libs\pge\pgeVram.c" />
+    <ClCompile Include="3libs\pge\pgeWav.c" />
+    <ClCompile Include="3libs\pge\pgeZip.c" />
+    <ClCompile Include="Engine\Aurora\Graphics\Camera.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\common.c" />
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\Destroyer.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\Drop.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\InventoryPlayer.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\Particle.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\SkyBox.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\SkyLight.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\SnowBall2.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\StarsBox.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\TNT.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\Effects\WeatherSystem.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\Image.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\intraFont\intraFont.c" />
+    <ClCompile Include="Engine\Aurora\Graphics\intraFont\libccc.c" />
+    <ClCompile Include="Engine\Aurora\Graphics\Mesh.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\Models\ObjModel.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\Node.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\RenderManager.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\Sprite.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\Sprite3D.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\TextureManager.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\TrueTypeFont.cpp" />
+    <ClCompile Include="Engine\Aurora\Graphics\vfram.c" />
+    <ClCompile Include="Engine\Aurora\Graphics\vram.c" />
+    <ClCompile Include="Engine\Aurora\Math\BoundingBox.cpp" />
+    <ClCompile Include="Engine\Aurora\Math\BoundingSphere.cpp" />
+    <ClCompile Include="Engine\Aurora\Math\Frustum.cpp" />
+    <ClCompile Include="Engine\Aurora\Math\MathLib.cpp" />
+    <ClCompile Include="Engine\Aurora\Math\Matrix3.cpp" />
+    <ClCompile Include="Engine\Aurora\Math\Matrix4.cpp" />
+    <ClCompile Include="Engine\Aurora\Math\Plane.cpp" />
+    <ClCompile Include="Engine\Aurora\Math\Polygon.cpp" />
+    <ClCompile Include="Engine\Aurora\Math\Quaternion.cpp" />
+    <ClCompile Include="Engine\Aurora\Math\Ray.cpp" />
+    <ClCompile Include="Engine\Aurora\System\NetworkManager.cpp" />
+    <ClCompile Include="Engine\Aurora\System\SystemManager.cpp" />
+    <ClCompile Include="Engine\Aurora\Utils\Logger.cpp" />
+    <ClCompile Include="Engine\Aurora\Utils\pge.c" />
+    <ClCompile Include="Engine\Aurora\Utils\pgeDir.c" />
+    <ClCompile Include="Engine\Aurora\Utils\pgeFile.c" />
+    <ClCompile Include="Engine\Aurora\Utils\pgeZip.c" />
+    <ClCompile Include="Engine\Aurora\Utils\StateManager.cpp" />
+    <ClCompile Include="Engine\Aurora\Utils\Timer.cpp" />
+    <ClCompile Include="Lamecraft.cpp" />
+    <ClCompile Include="LameCraft\BaseBlock.cpp" />
+    <ClCompile Include="LameCraft\BaseEntity.cpp" />
+    <ClCompile Include="LameCraft\BaseItem.cpp" />
+    <ClCompile Include="LameCraft\BlockEntity.cpp" />
+    <ClCompile Include="LameCraft\Blocks.cpp" />
+    <ClCompile Include="LameCraft\Chest2.cpp" />
+    <ClCompile Include="LameCraft\ChunkDataProvider.cpp" />
+    <ClCompile Include="LameCraft\Cow2.cpp" />
+    <ClCompile Include="LameCraft\CraftWorld2.cpp" />
+    <ClCompile Include="LameCraft\Creeper2.cpp" />
+    <ClCompile Include="LameCraft\DirectionBlock.cpp" />
+    <ClCompile Include="LameCraft\Furnace2.cpp" />
+    <ClCompile Include="LameCraft\InputHelper.cpp" />
+    <ClCompile Include="LameCraft\ItemFrameEntity.cpp" />
+    <ClCompile Include="LameCraft\Items.cpp" />
+    <ClCompile Include="LameCraft\JukeboxEntity.cpp" />
+    <ClCompile Include="LameCraft\LameMob.cpp" />
+    <ClCompile Include="LameCraft\LamePlayer.cpp" />
+    <ClCompile Include="LameCraft\LoadingScreen.cpp" />
+    <ClCompile Include="LameCraft\mersenne-twister.cpp" />
+    <ClCompile Include="LameCraft\MineCart.cpp" />
+    <ClCompile Include="LameCraft\Mobs.cpp" />
+    <ClCompile Include="LameCraft\MonsterSpawnerEntity.cpp" />
+    <ClCompile Include="LameCraft\NoteBlockEntity.cpp" />
+    <ClCompile Include="LameCraft\Sheep2.cpp" />
+    <ClCompile Include="LameCraft\SimpleMeshChunk2.cpp" />
+    <ClCompile Include="LameCraft\SimplexNoise.cpp" />
+    <ClCompile Include="LameCraft\SoundManager.cpp" />
+    <ClCompile Include="LameCraft\sound_utils\audio.c" />
+    <ClCompile Include="LameCraft\sound_utils\bgm.c" />
+    <ClCompile Include="LameCraft\sound_utils\media.c" />
+    <ClCompile Include="LameCraft\sound_utils\mod.c" />
+    <ClCompile Include="LameCraft\sound_utils\pgeWav.c" />
+    <ClCompile Include="LameCraft\sound_utils\vfsFile.c" />
+    <ClCompile Include="LameCraft\sound_utils\VirtualFile.c" />
+    <ClCompile Include="LameCraft\SplashScreen.cpp" />
+    <ClCompile Include="LameCraft\StateMenu.cpp" />
+    <ClCompile Include="LameCraft\StateOptions.cpp" />
+    <ClCompile Include="LameCraft\StatePlay.cpp" />
+    <ClCompile Include="LameCraft\StatePlayCreative.cpp" />
+    <ClCompile Include="LameCraft\TextureHelper.cpp" />
+    <ClCompile Include="LameCraft\WorldGenerator.cpp" />
+    <ClCompile Include="LameCraft\Zombie2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="3libs\libpspmath\pspmath.h" />
+    <ClInclude Include="3libs\noisepp\Noise.h" />
+    <ClInclude Include="3libs\noisepp\NoiseAbsolute.h" />
+    <ClInclude Include="3libs\noisepp\NoiseAddition.h" />
+    <ClInclude Include="3libs\noisepp\NoiseBillow.h" />
+    <ClInclude Include="3libs\noisepp\NoiseBlend.h" />
+    <ClInclude Include="3libs\noisepp\NoiseBuilders.h" />
+    <ClInclude Include="3libs\noisepp\NoiseCheckerboard.h" />
+    <ClInclude Include="3libs\noisepp\NoiseClamp.h" />
+    <ClInclude Include="3libs\noisepp\NoiseColourValue.h" />
+    <ClInclude Include="3libs\noisepp\NoiseConfig.h" />
+    <ClInclude Include="3libs\noisepp\NoiseConstant.h" />
+    <ClInclude Include="3libs\noisepp\NoiseCurve.h" />
+    <ClInclude Include="3libs\noisepp\NoiseEndianUtils.h" />
+    <ClInclude Include="3libs\noisepp\NoiseExponent.h" />
+    <ClInclude Include="3libs\noisepp\NoiseGenerator.h" />
+    <ClInclude Include="3libs\noisepp\NoiseGradientRenderer.h" />
+    <ClInclude Include="3libs\noisepp\NoiseImage.h" />
+    <ClInclude Include="3libs\noisepp\NoiseInStream.h" />
+    <ClInclude Include="3libs\noisepp\NoiseInvert.h" />
+    <ClInclude Include="3libs\noisepp\NoiseJobQueue.h" />
+    <ClInclude Include="3libs\noisepp\NoiseMath.h" />
+    <ClInclude Include="3libs\noisepp\NoiseMaximum.h" />
+    <ClInclude Include="3libs\noisepp\NoiseMinimum.h" />
+    <ClInclude Include="3libs\noisepp\NoiseModule.h" />
+    <ClInclude Include="3libs\noisepp\NoiseMultiply.h" />
+    <ClInclude Include="3libs\noisepp\NoiseOutStream.h" />
+    <ClInclude Include="3libs\noisepp\NoisePerlin.h" />
+    <ClInclude Include="3libs\noisepp\NoisePipeline.h" />
+    <ClInclude Include="3libs\noisepp\NoisePipelineJobs.h" />
+    <ClInclude Include="3libs\noisepp\NoisePlatform.h" />
+    <ClInclude Include="3libs\noisepp\NoisePower.h" />
+    <ClInclude Include="3libs\noisepp\NoisePrerequisites.h" />
+    <ClInclude Include="3libs\noisepp\NoiseReader.h" />
+    <ClInclude Include="3libs\noisepp\NoiseRidgedMulti.h" />
+    <ClInclude Include="3libs\noisepp\NoiseScaleBias.h" />
+    <ClInclude Include="3libs\noisepp\NoiseScalePoint.h" />
+    <ClInclude Include="3libs\noisepp\NoiseSelect.h" />
+    <ClInclude Include="3libs\noisepp\NoiseStdHeaders.h" />
+    <ClInclude Include="3libs\noisepp\NoiseSystem.h" />
+    <ClInclude Include="3libs\noisepp\NoiseTerrace.h" />
+    <ClInclude Include="3libs\noisepp\NoiseThreadedPipeline.h" />
+    <ClInclude Include="3libs\noisepp\NoiseTranslatePoint.h" />
+    <ClInclude Include="3libs\noisepp\NoiseTurbulence.h" />
+    <ClInclude Include="3libs\noisepp\NoiseUtils.h" />
+    <ClInclude Include="3libs\noisepp\NoiseVectorTable.h" />
+    <ClInclude Include="3libs\noisepp\NoiseVoronoi.h" />
+    <ClInclude Include="3libs\noisepp\NoiseWriter.h" />
+    <ClInclude Include="3libs\pge\pge.h" />
+    <ClInclude Include="3libs\pge\pgeAdhoc.h" />
+    <ClInclude Include="3libs\pge\pgeControls.h" />
+    <ClInclude Include="3libs\pge\pgeDir.h" />
+    <ClInclude Include="3libs\pge\pgeEmulator.h" />
+    <ClInclude Include="3libs\pge\pgeFile.h" />
+    <ClInclude Include="3libs\pge\pgeFont.h" />
+    <ClInclude Include="3libs\pge\pgeGfx.h" />
+    <ClInclude Include="3libs\pge\pgeMath.h" />
+    <ClInclude Include="3libs\pge\pgeMp3.h" />
+    <ClInclude Include="3libs\pge\pgeNet.h" />
+    <ClInclude Include="3libs\pge\pgeObj.h" />
+    <ClInclude Include="3libs\pge\pgeParticle.h" />
+    <ClInclude Include="3libs\pge\pgeSystem.h" />
+    <ClInclude Include="3libs\pge\pgeTexture.h" />
+    <ClInclude Include="3libs\pge\pgeTimer.h" />
+    <ClInclude Include="3libs\pge\pgeUsb.h" />
+    <ClInclude Include="3libs\pge\pgeUtils.h" />
+    <ClInclude Include="3libs\pge\pgeVram.h" />
+    <ClInclude Include="3libs\pge\pgeWav.h" />
+    <ClInclude Include="3libs\pge\pgeZip.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\Camera.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\common.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\Destroyer.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\Drop.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\InventoryPlayer.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\Particle.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\SkyBox.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\SkyLight.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\SnowBall2.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\StarsBox.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\TNT.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\Effects\WeatherSystem.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\Image.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\intraFont\intraFont.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\intraFont\libccc.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\Models\ObjModel.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\RenderManager.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\Sprite.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\Sprite3D.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\TextureManager.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\TrueTypeFont.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\Vertex.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\vfram.h" />
+    <ClInclude Include="Engine\Aurora\Graphics\vram.h" />
+    <ClInclude Include="Engine\Aurora\Math\BoundingBox.h" />
+    <ClInclude Include="Engine\Aurora\Math\BoundingSphere.h" />
+    <ClInclude Include="Engine\Aurora\Math\Frustum.h" />
+    <ClInclude Include="Engine\Aurora\Math\MathLib.h" />
+    <ClInclude Include="Engine\Aurora\Math\Matrix3.h" />
+    <ClInclude Include="Engine\Aurora\Math\Matrix4.h" />
+    <ClInclude Include="Engine\Aurora\Math\Plane.h" />
+    <ClInclude Include="Engine\Aurora\Math\Polygon.h" />
+    <ClInclude Include="Engine\Aurora\Math\Quaternion.h" />
+    <ClInclude Include="Engine\Aurora\Math\Ray.h" />
+    <ClInclude Include="Engine\Aurora\Math\Vector2.h" />
+    <ClInclude Include="Engine\Aurora\Math\Vector3.h" />
+    <ClInclude Include="Engine\Aurora\Math\Vector4.h" />
+    <ClInclude Include="Engine\Aurora\System\NetworkManager.h" />
+    <ClInclude Include="Engine\Aurora\System\SystemManager.h" />
+    <ClInclude Include="Engine\Aurora\Utils\GameState.h" />
+    <ClInclude Include="Engine\Aurora\Utils\Logger.h" />
+    <ClInclude Include="Engine\Aurora\Utils\pge.h" />
+    <ClInclude Include="Engine\Aurora\Utils\pgeDir.h" />
+    <ClInclude Include="Engine\Aurora\Utils\pgeFile.h" />
+    <ClInclude Include="Engine\Aurora\Utils\pgeZip.h" />
+    <ClInclude Include="Engine\Aurora\Utils\StateManager.h" />
+    <ClInclude Include="Engine\Aurora\Utils\Timer.h" />
+    <ClInclude Include="LameCraft\BaseBlock.h" />
+    <ClInclude Include="LameCraft\BaseEntity.h" />
+    <ClInclude Include="LameCraft\BaseItem.h" />
+    <ClInclude Include="LameCraft\BlockEntity.h" />
+    <ClInclude Include="LameCraft\Blocks.h" />
+    <ClInclude Include="LameCraft\Chest2.h" />
+    <ClInclude Include="LameCraft\ChunkDataProvider.h" />
+    <ClInclude Include="LameCraft\Cow2.h" />
+    <ClInclude Include="LameCraft\CraftWorld2.h" />
+    <ClInclude Include="LameCraft\Creeper2.h" />
+    <ClInclude Include="LameCraft\DirectionBlock.h" />
+    <ClInclude Include="LameCraft\Furnace2.h" />
+    <ClInclude Include="LameCraft\InputHelper.h" />
+    <ClInclude Include="LameCraft\ItemFrameEntity.h" />
+    <ClInclude Include="LameCraft\Items.h" />
+    <ClInclude Include="LameCraft\JukeboxEntity.h" />
+    <ClInclude Include="LameCraft\LameFunctions.h" />
+    <ClInclude Include="LameCraft\LameMob.h" />
+    <ClInclude Include="LameCraft\LamePlayer.h" />
+    <ClInclude Include="LameCraft\LoadingScreen.h" />
+    <ClInclude Include="LameCraft\mersenne-twister.h" />
+    <ClInclude Include="LameCraft\MineCart.h" />
+    <ClInclude Include="LameCraft\Mobs.h" />
+    <ClInclude Include="LameCraft\MonsterSpawnerEntity.h" />
+    <ClInclude Include="LameCraft\NoteBlockEntity.h" />
+    <ClInclude Include="LameCraft\Sheep2.h" />
+    <ClInclude Include="LameCraft\SimpleMeshChunk2.h" />
+    <ClInclude Include="LameCraft\SimplexNoise.h" />
+    <ClInclude Include="LameCraft\SoundManager.h" />
+    <ClInclude Include="LameCraft\sound_utils\audio.h" />
+    <ClInclude Include="LameCraft\sound_utils\bgm.h" />
+    <ClInclude Include="LameCraft\sound_utils\oslib.h" />
+    <ClInclude Include="LameCraft\sound_utils\pgeWav.h" />
+    <ClInclude Include="LameCraft\sound_utils\readwav.h" />
+    <ClInclude Include="LameCraft\sound_utils\VirtualFile.h" />
+    <ClInclude Include="LameCraft\SplashScreen.h" />
+    <ClInclude Include="LameCraft\StateMenu.h" />
+    <ClInclude Include="LameCraft\StateOptions.h" />
+    <ClInclude Include="LameCraft\StatePlay.h" />
+    <ClInclude Include="LameCraft\StatePlayCreative.h" />
+    <ClInclude Include="LameCraft\TextureHelper.h" />
+    <ClInclude Include="LameCraft\WorldGenerator.h" />
+    <ClInclude Include="LameCraft\Zombie2.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
