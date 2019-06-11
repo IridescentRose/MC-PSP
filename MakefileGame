@@ -1,4 +1,4 @@
-TARGET = Tutorial1
+TARGET = Minecraft2
 OBJS = source/Aurora/Math/MathLib.o \
 source/Aurora/Math/Matrix3.o \
 source/Aurora/Math/Matrix4.o \
@@ -94,7 +94,7 @@ LDFLAGS =
 LIBS=  -lNoisepp -lpspaudiolib -lpspaudio -lmikmod -lmmio -lpspaudiocodec -lpng -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath #-lpsp_req -lcurl -lTiny
 
 EXTRA_TARGETS = EBOOT.PBP
-PSP_EBOOT_TITLE = MineCraft
+PSP_EBOOT_TITLE = MineCraft PSP 2
 PSP_EBOOT_ICON = ICON0.png
 PSP_EBOOT_PIC1 = PIC1.png
 
