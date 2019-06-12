@@ -366,6 +366,7 @@
     <ClInclude Include="LameCraft\StatePlay.h" />
     <ClInclude Include="LameCraft\StatePlayCreative.h" />
     <ClInclude Include="LameCraft\TextureHelper.h" />
+    <ClInclude Include="LameCraft\Version.h" />
     <ClInclude Include="LameCraft\WorldGenerator.h" />
     <ClInclude Include="LameCraft\Zombie2.h" />
   </ItemGroup>

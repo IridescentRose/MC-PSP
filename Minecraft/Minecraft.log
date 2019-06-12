@@ -251,25 +251,25 @@ LameCraft/Sheep2.cpp(4,1): warning G2C167E3C: "PI" redefined
   LameCraft/Sheep2.cpp: In member function 'virtual void Sheep::BoxCollision()':
   LameCraft/Sheep2.cpp:113: warning: comparison between signed and unsigned integer expressions
   psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/StateMenu.o LameCraft/StateMenu.cpp
-LameCraft/StateMenu.cpp(1050,39): warning GD807C594: multi-character character constant
-LameCraft/StateMenu.cpp(1305,35): warning GD807C594: multi-character character constant
-LameCraft/StateMenu.cpp(1354,39): warning GD807C594: multi-character character constant
+LameCraft/StateMenu.cpp(1077,39): warning GD807C594: multi-character character constant
+LameCraft/StateMenu.cpp(1332,35): warning GD807C594: multi-character character constant
+LameCraft/StateMenu.cpp(1381,39): warning GD807C594: multi-character character constant
   LameCraft/StateMenu.cpp: In member function 'virtual void StateMenu::HandleEvents(Aurora::Utils::StateManager*)':
-  LameCraft/StateMenu.cpp:608: warning: comparison between signed and unsigned integer expressions
-  LameCraft/StateMenu.cpp:1050: warning: overflow in implicit constant conversion
-  LameCraft/StateMenu.cpp:1230: warning: comparison between signed and unsigned integer expressions
-  LameCraft/StateMenu.cpp:1305: warning: overflow in implicit constant conversion
-  LameCraft/StateMenu.cpp:1354: warning: overflow in implicit constant conversion
-  LameCraft/StateMenu.cpp:1582: warning: value computed is not used
-  LameCraft/StateMenu.cpp:931: warning: unused variable 'buffer'
-  LameCraft/StateMenu.cpp:1864: warning: array subscript has type 'char'
-  LameCraft/StateMenu.cpp:1864: warning: array subscript has type 'char'
-  LameCraft/StateMenu.cpp:1963: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:635: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:1077: warning: overflow in implicit constant conversion
+  LameCraft/StateMenu.cpp:1257: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:1332: warning: overflow in implicit constant conversion
+  LameCraft/StateMenu.cpp:1381: warning: overflow in implicit constant conversion
+  LameCraft/StateMenu.cpp:1609: warning: value computed is not used
+  LameCraft/StateMenu.cpp:958: warning: unused variable 'buffer'
+  LameCraft/StateMenu.cpp:1891: warning: array subscript has type 'char'
+  LameCraft/StateMenu.cpp:1891: warning: array subscript has type 'char'
+  LameCraft/StateMenu.cpp:1990: warning: comparison between signed and unsigned integer expressions
   LameCraft/StateMenu.cpp: In member function 'virtual void StateMenu::Draw(Aurora::Utils::StateManager*)':
-  LameCraft/StateMenu.cpp:2854: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:2881: warning: comparison between signed and unsigned integer expressions
   LameCraft/StateMenu.cpp: In member function 'void StateMenu::ScanTexturePacks(const char*)':
-  LameCraft/StateMenu.cpp:3045: warning: comparison between signed and unsigned integer expressions
-  LameCraft/StateMenu.cpp:3094: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:3074: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:3123: warning: comparison between signed and unsigned integer expressions
   psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/StateOptions.o LameCraft/StateOptions.cpp
   psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/StatePlayCreative.o LameCraft/StatePlayCreative.cpp
 LameCraft/StatePlayCreative.cpp(7,1): warning G2C167E3C: "PI" redefined
@@ -538,7 +538,8 @@ LameCraft/WorldGenerator.cpp(999,18): warning G10BCEF52: "/*" within comment
   [3]          0 bytes | NULL
   [4]     256507 bytes | PIC1.png
   [5]          0 bytes | NULL
-  [6]    3589754 bytes | Minecraft2.prx
+  [6]    3589842 bytes | Minecraft2.prx
   [7]          0 bytes | NULL
   make[1]: Leaving directory `C:/Users/Nathan/Desktop/Minecraft2-PSP/Minecraft'
+          1 file(s) moved.
   Press any key to continue . . . 

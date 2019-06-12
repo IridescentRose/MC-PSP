@@ -23,22 +23,29 @@ void TextureHelper::Init()
     FastLoadTexture("environment/moon.png");
     FastLoadTexture("hud/utils.png");
     FastLoadTexture("title/dirt.png");
-    FastLoadTexture("terrain.png");
-    FastLoadTexture("terrain_mips.png");
-    FastLoadTexture("water_still.png");
-    FastLoadTexture("lava_still.png");
-    FastLoadTexture("items.png");
     FastLoadTexture("hud/blue.png");
-    FastLoadTexture("environment/sun.png");
-    FastLoadTexture("environment/moon.png");
-    FastLoadTexture("environment/stars.png");
-    FastLoadTexture("entity/snowball.png");
-    FastLoadTexture("entity/zombie.png");
-    FastLoadTexture("entity/steve.png");
     FastLoadTexture("title/logo.png");
     FastLoadTexture("title/choose_rectangles.png");
     FastLoadTexture("title/menu_elements.png");
     FastLoadTexture("title/load.png");
+	FastLoadTexture("title/background.png");
+
+	InitSecondPhase();
+}
+
+void TextureHelper::InitSecondPhase() {
+
+	FastLoadTexture("environment/sun.png");
+	FastLoadTexture("environment/moon.png");
+	FastLoadTexture("environment/stars.png");
+	FastLoadTexture("terrain.png");
+	FastLoadTexture("terrain_mips.png");
+	FastLoadTexture("water_still.png");
+	FastLoadTexture("lava_still.png");
+	FastLoadTexture("items.png");
+	FastLoadTexture("entity/snowball.png");
+	FastLoadTexture("entity/zombie.png");
+	FastLoadTexture("entity/steve.png");
     FastLoadTexture("hud/red.png");
     FastLoadTexture("hud/black.png");
     FastLoadTexture("hud/pumpkinblur.png");
@@ -78,7 +85,6 @@ void TextureHelper::Init()
 	FastLoadTexture("entity/creeper.png");
 	FastLoadTexture("entity/sheep.png");
 	FastLoadTexture("entity/sheep_fur.png");
-	FastLoadTexture("title/background.png");
 }
 
 int TextureHelper::GetTexture(Textures texture)

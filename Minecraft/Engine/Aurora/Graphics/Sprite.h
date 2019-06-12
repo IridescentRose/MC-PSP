@@ -46,6 +46,7 @@ namespace Aurora
 			float scaleX,scaleY;
 			float posX,posY;
 			int width,height;
+			int red, green, blue, alpha;
 		};
 
 	}

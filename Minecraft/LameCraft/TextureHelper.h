@@ -93,7 +93,9 @@ public:
 
 	int GetTexture(Textures texture);
     void Init();
-    void FastRemoveTexture(std::string name);
+	void InitSecondPhase();
+
+	void FastRemoveTexture(std::string name);
     void FastLoadTexture(std::string name);
 	void SetTextureFolderName(std::string name);
 	void SetTexturePack(std::string name);

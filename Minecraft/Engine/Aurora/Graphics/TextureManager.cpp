@@ -137,7 +137,7 @@ namespace Aurora
 			//}
 		}
 
-		void TextureManager::SetTextureModeulate(int number)
+		void TextureManager::SetTextureModeulate(int number, int minFilter, int magFilter)
 		{
 
 			if(currentTexture != number)
@@ -146,10 +146,11 @@ namespace Aurora
 
 				sceGuTexMode(image->ColorMode,0,0,image->Swizzle);
 				sceGuTexFunc(GU_TFX_MODULATE,GU_TCC_RGBA);
-				sceGuTexFilter(GU_NEAREST,GU_NEAREST);
+				sceGuTexFilter(minFilter,magFilter);
 				sceGuTexOffset( 0.0f, 0.0f );
 				sceGuTexWrap(GU_CLAMP,GU_CLAMP);
 				sceGuTexImage(0,image->power2Width,image->power2Height,image->power2Width,image->ImageData);
+
 
 				currentTexture = number;
 			}

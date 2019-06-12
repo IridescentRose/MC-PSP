@@ -2,7 +2,7 @@
 #define STATEMENU_H_
 
 #include <stdlib.h>
-
+#include "Version.h"
 #include <Aurora/Utils/StateManager.h>
 #include <Aurora/Utils/GameState.h>
 #include <Aurora/Graphics/RenderManager.h>
@@ -139,7 +139,6 @@ private:
     st mainStatistics;
     opt mainOptions;
 
-    Sprite *backgroundSprite;
     float bx, by;
     bool directionx;
     bool directiony;
@@ -156,7 +155,6 @@ private:
 	Sprite *mbuttonSprite;
 	Sprite *smbuttonSprite;
 
-	Sprite *backSprite;
 	Sprite *logoSprite;
 	Sprite *lamecraftSprite;
 
@@ -164,6 +162,16 @@ private:
 	Sprite *rectEmptySprite;
 
 	Sprite *blackBackground;
+
+
+	float op1;
+	float animTime;
+	Timer timer;
+
+	int currTime;
+
+
+	Sprite* bg[24];
 
 	RenderManager *mRender;
 	SystemManager *mSystemMgr;

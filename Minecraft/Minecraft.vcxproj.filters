@@ -989,5 +989,8 @@
     <ClInclude Include="3libs\pge\pgeZip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LameCraft\Version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

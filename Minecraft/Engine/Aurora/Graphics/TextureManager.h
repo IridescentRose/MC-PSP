@@ -164,7 +164,7 @@ namespace Aurora
 			int GetTextureNumber(std::string name);
 
 			void SetTexture(int number,int minFilter = GU_LINEAR,int maxFilter = GU_LINEAR);
-			void SetTextureModeulate(int number);
+			void SetTextureModeulate(int number, int minFilter = GU_LINEAR, int magFilter = GU_LINEAR);
 			void SetMipMapsTextures(int texture,int mipmap1,int mipmap2,int mipmap3);
 			void SetMipMaps2Textures(int texture,int mipmap1);
 

@@ -7,6 +7,8 @@
 #include "TextureHelper.h"
 #include <Aurora/System/NetworkManager.h>
 #include <zlib.h>
+#include <string>
+#include <Aurora/System/SystemManager.h>
 #include <dirent.h>
 #include <fcntl.h>
 #include <errno.h>
@@ -73,11 +75,71 @@ void StateMenu::Init()
     conversionStage = 0;
     errorType = 0;
 
+	timer = Timer();
+
+	currTime = 0;
+	op1 = 0;
+
     converterPos = 0;
     schematicExists = false;
 
     lol = "";
 
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/0.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/1.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/2.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/3.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/4.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/5.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/6.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/7.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/8.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/9.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/10.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/11.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/12.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/13.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/14.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/15.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/16.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/17.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/18.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/19.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/20.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/21.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/22.png");
+	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/23.png");
+
+
+	bg[0] =  new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/0.png"), 0, 0, 480, 272);
+	bg[1] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/1.png"), 0, 0, 480, 272);
+	bg[2] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/2.png"), 0, 0, 480, 272);
+	bg[3] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/3.png"), 0, 0, 480, 272);
+	bg[4] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/4.png"), 0, 0, 480, 272);
+	bg[5] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/5.png"), 0, 0, 480, 272);
+	bg[6] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/6.png"), 0, 0, 480, 272);
+	bg[7] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/7.png"), 0, 0, 480, 272);
+	bg[8] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/8.png"), 0, 0, 480, 272);
+	bg[9] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/9.png"), 0, 0, 480, 272);
+	bg[10] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/10.png"), 0, 0, 480, 272);
+	bg[11] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/11.png"), 0, 0, 480, 272);
+	bg[12] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/12.png"), 0, 0, 480, 272);
+	bg[13] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/13.png"), 0, 0, 480, 272);
+	bg[14] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/14.png"), 0, 0, 480, 272);
+	bg[15] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/15.png"), 0, 0, 480, 272);
+	bg[16] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/16.png"), 0, 0, 480, 272);
+	bg[17] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/17.png"), 0, 0, 480, 272);
+	bg[18] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/18.png"), 0, 0, 480, 272);
+	bg[19] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/19.png"), 0, 0, 480, 272);
+	bg[20] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/20.png"), 0, 0, 480, 272);
+	bg[21] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/21.png"), 0, 0, 480, 272);
+	bg[22] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/22.png"), 0, 0, 480, 272);
+	bg[23] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/23.png"), 0, 0, 480, 272);
+
+	for (int i = 0; i < 24; i++) {
+		bg[i]->Scale(2, 2);
+		bg[i]->SetPosition(480, 272);
+	}
 
     mainStatistics.blockPlaced = 0;
     mainStatistics.blockDestroyed = 0;
@@ -127,10 +189,7 @@ void StateMenu::Init()
     logoSprite->Scale(1.5f,1.5f);
     logoSprite->SetPosition(240,50);
 
-    backgroundSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::background));
-    backgroundSprite->Scale(2,2);
-    backgroundSprite->SetPosition(240,136);
-
+    
     bx = 240;
     by = 136;
     directionx = rand() % 2;
@@ -181,8 +240,6 @@ void StateMenu::Init()
     smbuttonSprite->SetPosition(240,150);
     smbuttonSprite->Scale(2,2);
 
-    backSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Dirt),0,0,32,32);
-    backSprite->Scale(2,2);
 
     lamecraftSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::lameCraft),0,0,320,90);
     lamecraftSprite->SetPosition(240,50);
@@ -198,7 +255,7 @@ void StateMenu::Init()
     ScanSaveFiles("Save/");
     ScanTexturePacks("Assets/Textures/");
 
-    menuState = -1;
+    menuState = 0;
     loadSelectPos = 0;
     loadSavePos = 0;
     aboutPos = 0;
@@ -265,15 +322,40 @@ void StateMenu::CleanUp()
     delete nbuttonSprite;
     delete mbuttonSprite;
     delete smbuttonSprite;
-    delete backSprite;
     delete lamecraftSprite;
 
     delete buttonSmallSprite;
     delete sbuttonSmallSprite;
     delete nbuttonSmallSprite;
 
-    delete backgroundSprite;
     delete blackBackground;
+	delete[] bg;
+
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/0.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/1.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/2.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/3.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/4.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/5.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/6.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/7.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/8.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/9.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/10.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/11.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/12.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/13.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/14.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/15.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/16.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/17.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/18.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/19.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/20.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/21.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/22.png"));
+	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/23.png"));
+
 }
 
 void StateMenu::Pause()
@@ -293,6 +375,8 @@ void StateMenu::HandleEvents(StateManager* sManager)
 {
     //update input
     mSystemMgr->InputUpdate();
+
+	//YEAH
 
     switch(menuState)
     {
@@ -2005,8 +2089,46 @@ void StateMenu::Update(StateManager* sManager)
 
 void StateMenu::Draw(StateManager* sManager)
 {
+
+
     //start rendering
     mRender->StartFrame(1,1,1);
+
+
+	sceGuDisable(GU_DEPTH_TEST);
+	sceGuEnable(GU_BLEND);
+	sceGuColor(GU_COLOR(1, 1, 1, 1.0f));
+
+	float dt = timer.GetDeltaTime();
+
+	animTime += dt * 3.124;
+	op1 += (dt) * 20;
+
+	if (op1 >= 255) {
+		currTime++;
+		op1 = 0;
+	}
+
+	if (currTime == 24) {
+		currTime = 0;
+	}
+
+
+	if (op1 > 255) {
+		op1 = 255;
+	}
+
+	bg[currTime]->Draw();
+
+	if (currTime == 23) {
+		bg[0]->Alpha(op1);
+		bg[0]->DrawLinear();
+	}
+	else {
+		bg[currTime + 1]->Alpha(op1);
+		bg[currTime + 1]->DrawLinear();
+	}
+
 
     switch(menuState)
     {
@@ -2015,15 +2137,6 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuDisable(GU_DEPTH_TEST);
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
-
-        for(int x = 0; x < 8; x++)
-        {
-            for(int y = 0; y < 5; y++)
-            {
-                backSprite->SetPosition(x*64,y*64);
-                backSprite->Draw();
-            }
-        }
 
         // english
         buttonSprite->SetPosition(240,120);
@@ -2052,14 +2165,6 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        /*for(int x = 0; x < 8; x++)
-        {
-            for(int y = 0; y < 5; y++)
-            {
-                backSprite->SetPosition(x*64,y*64);
-                backSprite->Draw();
-            }
-        }*/
 
         if(bx >= 360)
         {
@@ -2098,8 +2203,7 @@ void StateMenu::Draw(StateManager* sManager)
         }
 
 
-        backgroundSprite->SetPosition(bx,by);
-        backgroundSprite->DrawLinear();
+        
         //logo
         lamecraftSprite->Draw();
 
@@ -2180,14 +2284,6 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        for(int x = 0; x < 8; x++)
-        {
-            for(int y = 0; y < 5; y++)
-            {
-                backSprite->SetPosition(x*64,y*64);
-                backSprite->Draw();
-            }
-        }
 
         if(saveSubmenu) // delete world
         {
@@ -2449,14 +2545,6 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        for(int x = 0; x < 8; x++)
-        {
-            for(int y = 0; y < 5; y++)
-            {
-                backSprite->SetPosition(x*64,y*64);
-                backSprite->Draw();
-            }
-        }
 
         //check for update
         buttonSprite->SetPosition(240,225);
@@ -2481,25 +2569,29 @@ void StateMenu::Draw(StateManager* sManager)
             mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
             mRender->DebugPrint(440,100-40,"Marcin Ploska(Drakon)");
 
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            mRender->DebugPrint(40,124-40,"Modder:");
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,124-40,"Kirill Skibin(Woolio)");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			mRender->DebugPrint(40, 124 - 40, "Modder:");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
+			mRender->DebugPrint(440, 124 - 40, "Kirill Skibin(Woolio)");
 
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            mRender->DebugPrint(40,172-40,"Website:");
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,172-40,"vk.com/mine_psp");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			mRender->DebugPrint(40, 148 - 40, "Modder 2:");
+			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
+			mRender->DebugPrint(440, 148 - 40, "Nathan Bourgeois");
 
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            mRender->DebugPrint(40,196-40,"Version:");
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,196-40,"2.0");
+			if (!IS_SNAPSHOT) {
+				mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+				mRender->DebugPrint(40, 196 - 16, "Version: ");
+				mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
+				mRender->DebugPrint(440, 196 - 16, "%s", VERSION_NAME);
+			}
+			else {
+				mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+				mRender->DebugPrint(40, 196 - 16, "Snapshot: ");
+				mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
+				mRender->DebugPrint(440, 196 - 16, "%s", SNAPSHOT_NAME);
+			}
 
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            mRender->DebugPrint(40,220-40,"Development stage:");
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,220-40,"Release");
 
             aboutPos == 0 ? DrawText(240,234,GU_COLOR(1,1,0.25,1) ,default_size,"Converter") : DrawText(240,234,GU_COLOR(1,1,1,1) ,default_size,"Converter");
             aboutPos == 1 ? DrawText(240,264,GU_COLOR(1,1,0.25,1) ,default_size,"Cancel") : DrawText(240,264,GU_COLOR(1,1,1,1) ,default_size,"Cancel");
@@ -2549,14 +2641,6 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        for(int x = 0; x < 8; x++)
-        {
-            for(int y = 0; y < 5; y++)
-            {
-                backSprite->SetPosition(x*64,y*64);
-                backSprite->Draw();
-            }
-        }
 
 
         //name
@@ -2682,14 +2766,6 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        for(int x = 0; x < 8; x++)
-        {
-            for(int y = 0; y < 5; y++)
-            {
-                backSprite->SetPosition(x*64,y*64);
-                backSprite->Draw();
-            }
-        }
 
         //check for update
         buttonSprite->SetPosition(240,165);
@@ -2791,14 +2867,6 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        for(int x = 0; x < 8; x++)
-        {
-            for(int y = 0; y < 5; y++)
-            {
-                backSprite->SetPosition(x*64,y*64);
-                backSprite->Draw();
-            }
-        }
 
         buttonSprite->SetPosition(240,100);
         buttonSprite->Draw();
@@ -2834,14 +2902,6 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        for(int x = 0; x < 8; x++)
-        {
-            for(int y = 0; y < 5; y++)
-            {
-                backSprite->SetPosition(x*64,y*64);
-                backSprite->Draw();
-            }
-        }
 
         //select sprite
         if(texturePackList.size() > 0)
@@ -2932,17 +2992,27 @@ void StateMenu::Draw(StateManager* sManager)
     break;
     }
 
-    //mRender->SetFontStyle(0.5f,GU_COLOR(1,1,1,1),0,0x00000000);
-    //mRender->DebugPrint(30,50,"%f",size_f);
+    mRender->SetFontStyle(0.5f,GU_COLOR(1,1,1,1),0,0x00000000);
+
+	/*
+	mRender->DebugPrint(30,50,"%f",size_f);
 
     //draw debug text at the end
-    /*mRender->DebugPrint(40,30,"cpu: %d%%",mRender->GetCpuUsage());
+    mRender->DebugPrint(40,30,"cpu: %d%%",mRender->GetCpuUsage());
     mRender->DebugPrint(40,40,"gpu: %d%%",mRender->GetGpuUsage());
-    mRender->DebugPrint(40,50,"saves: %d",saveFilesList.size());*/
+	mRender->DebugPrint(40, 20, "memory: %.3f", ((float)SystemManager::Instance()->ramAvailable() / ((float)(1024 * 1024))) );
+    */
 
-    //mRender->SetFontStyle(0.5f,0xFFFFFFFF,0xFF000000,0x00000400);
-    //mRender->DebugPrint(475,15,"CraftSite.pl Edition");
-    //mRender->SetFontStyle(0.5f,0xFFFFFFFF,0xFF000000,0x00000200);
+	if (!IS_SNAPSHOT) {
+		mRender->SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000400);
+		mRender->DebugPrint(475, 270, "%s", VERSION_NAME);
+		mRender->SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000200);
+	}
+	else {
+		mRender->SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000400);
+		mRender->DebugPrint(475, 270, "Snapshot %s", SNAPSHOT_NAME);
+		mRender->SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000200);
+	}
 
     //end frame
     mRender->EndFrame();

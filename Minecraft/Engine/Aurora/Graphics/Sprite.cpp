@@ -10,6 +10,7 @@ namespace Aurora
 		Sprite::Sprite()
 		{
 			imageNumber = 0;
+			red = green = blue = alpha = 255;
 		}
 
 		TexturesPSPVertex getVertex(float u,float v,float x, float y,float z)
@@ -49,6 +50,7 @@ namespace Aurora
 			}
 
 			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturesPSPVertex));
+			red = green = blue = alpha = 255;
 		}
 
 		Sprite::Sprite(std::string filename, bool constOne)
@@ -79,6 +81,7 @@ namespace Aurora
                 }
 
                 sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturesPSPVertex));
+				red = green = blue = alpha = 255;
             }
 		}
 
@@ -106,6 +109,7 @@ namespace Aurora
 			}
 
 			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturesPSPVertex));
+				red = green = blue = alpha = 255;
 		}
 
 		Sprite::Sprite(int textureNumer, bool constOne)
@@ -139,6 +143,7 @@ namespace Aurora
 			}
 
 			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturesPSPVertex));
+			red = green = blue = alpha = 255;
 		}
 
 		Sprite::Sprite(const char* filename,int startW,int startH,int endW,int endH)
@@ -170,6 +175,7 @@ namespace Aurora
 
 			//sceKernelDcacheWritebackInvalidateAll();
 			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturesPSPVertex));
+			red = green = blue = alpha = 255;
 		}
 
 		Sprite::Sprite(int textureNumer,int startW,int startH,int endW,int endH)
@@ -199,6 +205,7 @@ namespace Aurora
 
 			//sceKernelDcacheWritebackInvalidateAll();
 			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturesPSPVertex));
+			red = green = blue = alpha = 255;
 		}
 
 		Sprite::Sprite(int textureNumer,int startW,int startH,int endW,int endH, bool obr)
@@ -228,6 +235,7 @@ namespace Aurora
 
 			//sceKernelDcacheWritebackInvalidateAll();
 			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturesPSPVertex));
+			red = green = blue = alpha = 255;
 		}
 
         void Sprite::SetMapPos(int textureNumer,int startW,int startH,int endW,int endH)
@@ -304,10 +312,14 @@ namespace Aurora
 
 		void Sprite::Alpha(float _alpha)
 		{
+			alpha = _alpha;
 		}
 
 		void Sprite::RGB(float _red, float _green, float _blue)
 		{
+			red = _red;
+			green = _green;
+			blue = _blue;
 		}
 
 		void Sprite::Draw()
@@ -318,7 +330,9 @@ namespace Aurora
 			sceGumTranslate(&loc);
 
 			sceGuEnable(GU_TEXTURE_2D);
-			TextureManager::Instance()->SetTexture(imageNumber,GU_NEAREST,GU_NEAREST);
+
+			sceGuColor(GU_RGBA(red, green, blue, alpha));
+			TextureManager::Instance()->SetTextureModeulate(imageNumber, GU_NEAREST, GU_NEAREST);
 
 			sceGumDrawArray(GU_TRIANGLE_STRIP,GU_TEXTURE_32BITF|GU_VERTEX_32BITF|GU_TRANSFORM_3D, 4, 0, vertices);
 
@@ -334,7 +348,9 @@ namespace Aurora
 			sceGumTranslate(&loc);
 
 			sceGuEnable(GU_TEXTURE_2D);
-			TextureManager::Instance()->SetTexture(imageNumber,GU_LINEAR,GU_LINEAR);
+
+			sceGuColor(GU_RGBA(red, green, blue, alpha));
+			TextureManager::Instance()->SetTextureModeulate(imageNumber, GU_LINEAR, GU_LINEAR);
 
 			sceGumDrawArray(GU_TRIANGLE_STRIP,GU_TEXTURE_32BITF|GU_VERTEX_32BITF|GU_TRANSFORM_3D, 4, 0, vertices);
 
