@@ -19,6 +19,7 @@ public:
 
 	enum Textures
 	{
+		 Iridescence,
          Genesis,
 		 Logo,
 		 Utils,

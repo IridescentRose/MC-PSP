@@ -18,6 +18,7 @@ void TextureHelper::Init()
     LoadTexturePackPath();
     texturePatch = defaulPatch+defaultFolder;
 
+	FastLoadTexture("title/iridescence.png");
     FastLoadTexture("title/genesis.png");
     FastLoadTexture("environment/moon.png");
     FastLoadTexture("hud/utils.png");
@@ -84,6 +85,12 @@ int TextureHelper::GetTexture(Textures texture)
 {
 	switch(texture)
 	{
+		case Iridescence:
+		{
+			fileName = texturePatch + "title/iridescence.png";
+			return TextureManager::Instance()->GetTextureNumber(fileName);
+		}
+		break;
 		case Genesis:
 		{
 			fileName = texturePatch + "title/genesis.png";

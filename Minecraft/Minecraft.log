@@ -1,0 +1,544 @@
+﻿  make -f MakefileGame clean
+  make[1]: Entering directory `C:/Users/Nathan/Desktop/Minecraft2-PSP/Minecraft'
+  c:/pspsdk/bin/rm -f Minecraft2.prx Minecraft2.elf Engine/Aurora/Math/MathLib.o Engine/Aurora/Math/Matrix3.o Engine/Aurora/Math/Matrix4.o Engine/Aurora/Math/Quaternion.o Engine/Aurora/Math/BoundingBox.o Engine/Aurora/Math/BoundingSphere.o Engine/Aurora/Math/Plane.o Engine/Aurora/Math/Ray.o Engine/Aurora/Math/Frustum.o Engine/Aurora/Math/Polygon.o Engine/Aurora/Graphics/common.o Engine/Aurora/Graphics/vfram.o Engine/Aurora/Graphics/vram.o Engine/Aurora/Graphics/RenderManager.o Engine/Aurora/Graphics/TextureManager.o Engine/Aurora/Graphics/Camera.o Engine/Aurora/Graphics/Sprite.o Engine/Aurora/Graphics/Models/ObjModel.o Engine/Aurora/Graphics/Models/ObjModel.o Engine/Aurora/Graphics/intraFont/libccc.o Engine/Aurora/Graphics/intraFont/intraFont.o Engine/Aurora/Utils/Logger.o Engine/Aurora/Utils/Timer.o Engine/Aurora/Utils/StateManager.o Engine/Aurora/Utils/pgeZip.o Engine/Aurora/Utils/pge.o Engine/Aurora/Utils/pgeDir.o Engine/Aurora/System/SystemManager.o Engine/Aurora/System/NetworkManager.o LameCraft/BaseBlock.o LameCraft/Blocks.o LameCraft/BaseItem.o LameCraft/Items.o LameCraft/SimpleMeshChunk2.o LameCraft/ChunkDataProvider.o LameCraft/BlockEntity.o LameCraft/NoteBlockEntity.o LameCraft/JukeboxEntity.o LameCraft/MonsterSpawnerEntity.o LameCraft/ItemFrameEntity.o LameCraft/Chest2.o LameCraft/DirectionBlock.o LameCraft/Furnace2.o LameCraft/CraftWorld2.o LameCraft/LameMob.o LameCraft/Zombie2.o LameCraft/Cow2.o LameCraft/Creeper2.o LameCraft/Sheep2.o LameCraft/StateMenu.o LameCraft/StateOptions.o LameCraft/StatePlayCreative.o LameCraft/StatePlay.o LameCraft/LoadingScreen.o LameCraft/SplashScreen.o LameCraft/InputHelper.o LameCraft/TextureHelper.o LameCraft/sound_utils/pgeWav.o LameCraft/SoundManager.o Engine/Aurora/Graphics/Effects/Drop.o Engine/Aurora/Graphics/Effects/TNT.o Engine/Aurora/Graphics/Effects/InventoryPlayer.o Engine/Aurora/Graphics/Effects/SnowBall2.o Engine/Aurora/Graphics/Effects/SkyLight.o Engine/Aurora/Graphics/Effects/SkyBox.o Engine/Aurora/Graphics/Effects/Destroyer.o Engine/Aurora/Graphics/Effects/StarsBox.o Engine/Aurora/Graphics/Effects/Particle.o Engine/Aurora/Graphics/Effects/WeatherSystem.o LameCraft/mersenne-twister.o LameCraft/SimplexNoise.o LameCraft/WorldGenerator.o LameCraft/sound_utils/vfsFile.o LameCraft/sound_utils/VirtualFile.o LameCraft/sound_utils/audio.o LameCraft/sound_utils/bgm.o LameCraft/sound_utils/media.o LameCraft/sound_utils/mod.o Lamecraft.o PARAM.SFO EBOOT.PBP EBOOT.PBP
+  make[1]: Leaving directory `C:/Users/Nathan/Desktop/Minecraft2-PSP/Minecraft'
+  make -f MakefileGame all
+  make[1]: Entering directory `C:/Users/Nathan/Desktop/Minecraft2-PSP/Minecraft'
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Math/MathLib.o Engine/Aurora/Math/MathLib.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Math/Matrix3.o Engine/Aurora/Math/Matrix3.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Math/Matrix4.o Engine/Aurora/Math/Matrix4.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Math/Quaternion.o Engine/Aurora/Math/Quaternion.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Math/BoundingBox.o Engine/Aurora/Math/BoundingBox.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Math/BoundingSphere.o Engine/Aurora/Math/BoundingSphere.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Math/Plane.o Engine/Aurora/Math/Plane.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Math/Ray.o Engine/Aurora/Math/Ray.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Math/Frustum.o Engine/Aurora/Math/Frustum.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Math/Polygon.o Engine/Aurora/Math/Polygon.cpp
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/common.o Engine/Aurora/Graphics/common.c
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/vfram.o Engine/Aurora/Graphics/vfram.c
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/vram.o Engine/Aurora/Graphics/vram.c
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/RenderManager.o Engine/Aurora/Graphics/RenderManager.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/TextureManager.o Engine/Aurora/Graphics/TextureManager.cpp
+  Engine/Aurora/Graphics/TextureManager.cpp: In member function 'void Aurora::Graphics::TextureManager::RemoveTexture(int)':
+  Engine/Aurora/Graphics/TextureManager.cpp:62: warning: comparison between signed and unsigned integer expressions
+  Engine/Aurora/Graphics/TextureManager.cpp: In member function 'void Aurora::Graphics::TextureManager::RemoveConstTextures()':
+  Engine/Aurora/Graphics/TextureManager.cpp:75: warning: comparison between signed and unsigned integer expressions
+  Engine/Aurora/Graphics/TextureManager.cpp: In member function 'void Aurora::Graphics::TextureManager::RemoveTextures()':
+  Engine/Aurora/Graphics/TextureManager.cpp:91: warning: comparison between signed and unsigned integer expressions
+  Engine/Aurora/Graphics/TextureManager.cpp: In member function 'int Aurora::Graphics::TextureManager::getRed(int, int, int)':
+  Engine/Aurora/Graphics/TextureManager.cpp:305: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp:308: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp: In member function 'int Aurora::Graphics::TextureManager::getGreen(int, int, int)':
+  Engine/Aurora/Graphics/TextureManager.cpp:338: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp:341: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp: In member function 'int Aurora::Graphics::TextureManager::getBlue(int, int, int)':
+  Engine/Aurora/Graphics/TextureManager.cpp:371: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp:374: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp: In member function 'int Aurora::Graphics::TextureManager::getAlpha(int, int, int)':
+  Engine/Aurora/Graphics/TextureManager.cpp:404: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp:407: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp: In member function 'void Aurora::Graphics::TextureManager::setColour(int, int, unsigned char, unsigned char, unsigned char, unsigned char, int)':
+  Engine/Aurora/Graphics/TextureManager.cpp:437: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp:440: warning: statement has no effect
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/Camera.o Engine/Aurora/Graphics/Camera.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/Sprite.o Engine/Aurora/Graphics/Sprite.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/Models/ObjModel.o Engine/Aurora/Graphics/Models/ObjModel.cpp
+  Engine/Aurora/Graphics/Models/ObjModel.cpp: In member function 'void Aurora::Graphics::ObjModel::LoadObj(const char*)':
+  Engine/Aurora/Graphics/Models/ObjModel.cpp:258: warning: format '%s' expects type 'char*', but argument 3 has type 'char (*)[100]'
+  Engine/Aurora/Graphics/Models/ObjModel.cpp:258: warning: format '%s' expects type 'char*', but argument 4 has type 'char (*)[100]'
+  Engine/Aurora/Graphics/Models/ObjModel.cpp:258: warning: format '%s' expects type 'char*', but argument 3 has type 'char (*)[100]'
+  Engine/Aurora/Graphics/Models/ObjModel.cpp:258: warning: format '%s' expects type 'char*', but argument 4 has type 'char (*)[100]'
+  Engine/Aurora/Graphics/Models/ObjModel.cpp:285: warning: format '%s' expects type 'char*', but argument 3 has type 'char (*)[50]'
+  Engine/Aurora/Graphics/Models/ObjModel.cpp:285: warning: format '%s' expects type 'char*', but argument 4 has type 'char (*)[50]'
+  Engine/Aurora/Graphics/Models/ObjModel.cpp:285: warning: format '%s' expects type 'char*', but argument 3 has type 'char (*)[50]'
+  Engine/Aurora/Graphics/Models/ObjModel.cpp:285: warning: format '%s' expects type 'char*', but argument 4 has type 'char (*)[50]'
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/intraFont/libccc.o Engine/Aurora/Graphics/intraFont/libccc.c
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/intraFont/intraFont.o Engine/Aurora/Graphics/intraFont/intraFont.c
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Utils/Logger.o Engine/Aurora/Utils/Logger.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Utils/Timer.o Engine/Aurora/Utils/Timer.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Utils/StateManager.o Engine/Aurora/Utils/StateManager.cpp
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Utils/pgeZip.o Engine/Aurora/Utils/pgeZip.c
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Utils/pge.o Engine/Aurora/Utils/pge.c
+  Engine/Aurora/Utils/pge.c:71: warning: 'pgeCallbackSetup' defined but not used
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Utils/pgeDir.o Engine/Aurora/Utils/pgeDir.c
+  Engine/Aurora/Utils/pgeDir.c: In function 'pgeDirMake':
+  Engine/Aurora/Utils/pgeDir.c:39: warning: implicit declaration of function 'mkdir'
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/System/SystemManager.o Engine/Aurora/System/SystemManager.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/System/NetworkManager.o Engine/Aurora/System/NetworkManager.cpp
+  Engine/Aurora/System/NetworkManager.cpp: In member function 'bool Aurora::System::NetworkManager::GetFile(const char*, const char*)':
+  Engine/Aurora/System/NetworkManager.cpp:157: warning: deprecated conversion from string constant to 'char*'
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/BaseBlock.o LameCraft/BaseBlock.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/Blocks.o LameCraft/Blocks.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/BaseItem.o LameCraft/BaseItem.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/Items.o LameCraft/Items.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/SimpleMeshChunk2.o LameCraft/SimpleMeshChunk2.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/ChunkDataProvider.o LameCraft/ChunkDataProvider.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/BlockEntity.o LameCraft/BlockEntity.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/NoteBlockEntity.o LameCraft/NoteBlockEntity.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/JukeboxEntity.o LameCraft/JukeboxEntity.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/MonsterSpawnerEntity.o LameCraft/MonsterSpawnerEntity.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/ItemFrameEntity.o LameCraft/ItemFrameEntity.cpp
+LameCraft/ItemFrameEntity.cpp(5,1): warning G2C167E3C: "PI" redefined
+  In file included from ./Engine/Aurora/Graphics/Effects/WeatherSystem.h:9,
+                   from LameCraft/CraftWorld2.h:14,
+                   from LameCraft/ItemFrameEntity.cpp:2:
+./LameCraft/LameFunctions.h(4,1): warning GEE513BF5: this is the location of the previous definition
+  LameCraft/ItemFrameEntity.cpp: In member function 'void ItemFrameEntity::Render(CraftWorld*, Aurora::Math::Frustum&, float)':
+  LameCraft/ItemFrameEntity.cpp:64: warning: 'rotate_y_offset' may be used uninitialized in this function
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/Chest2.o LameCraft/Chest2.cpp
+  LameCraft/Chest2.cpp: In constructor 'Chest::Chest(int, int, int)':
+  LameCraft/Chest2.cpp:8: warning: array subscript has type 'char'
+  LameCraft/Chest2.cpp:9: warning: array subscript has type 'char'
+  LameCraft/Chest2.cpp:10: warning: array subscript has type 'char'
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/DirectionBlock.o LameCraft/DirectionBlock.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/Furnace2.o LameCraft/Furnace2.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/CraftWorld2.o LameCraft/CraftWorld2.cpp
+LameCraft/CraftWorld2.cpp(9,1): warning G2C167E3C: "PI" redefined
+  In file included from ./Engine/Aurora/Graphics/Effects/WeatherSystem.h:9,
+                   from LameCraft/CraftWorld2.h:14,
+                   from LameCraft/CraftWorld2.cpp:1:
+./LameCraft/LameFunctions.h(4,1): warning GEE513BF5: this is the location of the previous definition
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::initWorldBlocksLight()':
+  LameCraft/CraftWorld2.cpp:1180: warning: suggest parentheses around && within ||
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::initPutBlocksLight(int, int)':
+  LameCraft/CraftWorld2.cpp:1511: warning: suggest parentheses around && within ||
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::initPutBlocksLight(int, int, int)':
+  LameCraft/CraftWorld2.cpp:1568: warning: suggest parentheses around && within ||
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyDrop(int)':
+  LameCraft/CraftWorld2.cpp:3289: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyZombie(int)':
+  LameCraft/CraftWorld2.cpp:3309: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyAllZombies()':
+  LameCraft/CraftWorld2.cpp:3318: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyCreeper(int)':
+  LameCraft/CraftWorld2.cpp:3350: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyAllCreepers()':
+  LameCraft/CraftWorld2.cpp:3359: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyCow(int)':
+  LameCraft/CraftWorld2.cpp:3378: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroySheep(int)':
+  LameCraft/CraftWorld2.cpp:3396: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyTNTentity(int)':
+  LameCraft/CraftWorld2.cpp:3452: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::CheckForTorchSupport(int, int, int, int)':
+  LameCraft/CraftWorld2.cpp:3804: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3825: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::CheckForLadderSupport(int, int, int)':
+  LameCraft/CraftWorld2.cpp:3881: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3898: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::DestroyAroundTrapdoors(int, int, int)':
+  LameCraft/CraftWorld2.cpp:3932: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3963: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3994: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4025: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4042: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4048: warning: no return statement in function returning non-void
+  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::DestroyAroundItemFrames(int, int, int)':
+  LameCraft/CraftWorld2.cpp:4075: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4106: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4137: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4168: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4185: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4191: warning: no return statement in function returning non-void
+  LameCraft/CraftWorld2.cpp: In member function 'std::string CraftWorld::NameBlock(int)':
+  LameCraft/CraftWorld2.cpp:4515: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4523: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::LightSourceBlock(int)':
+  LameCraft/CraftWorld2.cpp:4533: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'int CraftWorld::LootBlock(int)':
+  LameCraft/CraftWorld2.cpp:4547: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'int CraftWorld::DurabilityPointsItem(int)':
+  LameCraft/CraftWorld2.cpp:4561: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::StackableItem(int)':
+  LameCraft/CraftWorld2.cpp:4571: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::ItemHaveTerrainTexture(int)':
+  LameCraft/CraftWorld2.cpp:4582: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'char CraftWorld::ItemType(int)':
+  LameCraft/CraftWorld2.cpp:4592: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::GetItemVerts(int, BaseItem*)':
+  LameCraft/CraftWorld2.cpp:5198: warning: unused variable 'BlockLight'
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::RebuildFullMeshChunk(int)':
+  LameCraft/CraftWorld2.cpp:9396: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::RebuildOpaqueMeshChunk(int)':
+  LameCraft/CraftWorld2.cpp:9473: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::RebuildTransparentMeshChunk(int)':
+  LameCraft/CraftWorld2.cpp:9516: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::GetSpecialBlock(int, int, int, int&, SimpleMeshChunk*, block_t, bool)':
+  LameCraft/CraftWorld2.cpp:10214: warning: unused variable 'Block1'
+  LameCraft/CraftWorld2.cpp:9574: warning: unused variable 'Block1'
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::GetNormalBlock(int, int, int, int&, SimpleMeshChunk*, block_t, bool)':
+  LameCraft/CraftWorld2.cpp:11320: warning: unused variable 'xx'
+  LameCraft/CraftWorld2.cpp:11321: warning: unused variable 'yy'
+  LameCraft/CraftWorld2.cpp:11322: warning: unused variable 'zz'
+  LameCraft/CraftWorld2.cpp:11324: warning: unused variable 'anotherLight'
+  LameCraft/CraftWorld2.cpp:11343: warning: unused variable 'DefaultBlock'
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::UpdateLightAreaIn(Aurora::Math::Vector3)':
+  LameCraft/CraftWorld2.cpp:12578: warning: unused variable 'current'
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::AddChunkToUpdate(int)':
+  LameCraft/CraftWorld2.cpp:12627: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::AddChunkToFastUpdate(int)':
+  LameCraft/CraftWorld2.cpp:12650: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::UpdateChunkBlocks(int)':
+  LameCraft/CraftWorld2.cpp:13105: warning: unused variable 'upperBlock'
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::UpdateChunkGrowingBlocks(int, int)':
+  LameCraft/CraftWorld2.cpp:13342: warning: unused variable 'upperBlock'
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::AddChunkToFloodUpdate(int)':
+  LameCraft/CraftWorld2.cpp:14812: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::BuildWorldBlockPlaneNoCheck(BaseBlock*, int, int, int, int&, SimpleMeshChunk*, block_t, bool, char, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3)':
+  LameCraft/CraftWorld2.cpp:17590: warning: unused variable 'Block1'
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::BuildWorldBlockPlane(BaseBlock*, int, int, int, int&, SimpleMeshChunk*, block_t, bool, char, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3)':
+  LameCraft/CraftWorld2.cpp:18618: warning: unused variable 'DefaultBlock'
+  LameCraft/CraftWorld2.cpp:18649: warning: unused variable 'blockType1'
+  LameCraft/CraftWorld2.cpp: In member function 'short int CraftWorld::BlockMaterial(int, int, int)':
+  LameCraft/CraftWorld2.cpp:4391: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp: In member function 'short int CraftWorld::BlockLoot(int, int, int)':
+  LameCraft/CraftWorld2.cpp:4383: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::BlockSolid(int, int, int)':
+  LameCraft/CraftWorld2.cpp:4375: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::BlockUpdate2(int, int, int)':
+  LameCraft/CraftWorld2.cpp:4367: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp: In member function 'char CraftWorld::BlockSpecial(int, int, int)':
+  LameCraft/CraftWorld2.cpp:4354: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::BlockAnimated(int, int, int)':
+  LameCraft/CraftWorld2.cpp:4346: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::BlockTransparent(int, int, int)':
+  LameCraft/CraftWorld2.cpp:4333: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::BlockTransparentOrLightSource(int, int, int)':
+  LameCraft/CraftWorld2.cpp:4315: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::DestroyAroundItemFrames(int, int, int)':
+  LameCraft/CraftWorld2.cpp:4191: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::DestroyAroundTrapdoors(int, int, int)':
+  LameCraft/CraftWorld2.cpp:4048: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::BuildWorldBlockPlane(BaseBlock*, int, int, int, int&, SimpleMeshChunk*, block_t, bool, char, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, bool, bool, int, int)':
+  LameCraft/CraftWorld2.cpp:22524: warning: 'plane_y' may be used uninitialized in this function
+  LameCraft/CraftWorld2.cpp:22524: warning: 'plane_x' may be used uninitialized in this function
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::BuildWorldBlockPlane(BaseBlock*, int, int, int, int&, SimpleMeshChunk*, block_t, bool, char, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, bool, bool, int)':
+  LameCraft/CraftWorld2.cpp:21216: warning: 'plane_y' may be used uninitialized in this function
+  LameCraft/CraftWorld2.cpp:21216: warning: 'plane_x' may be used uninitialized in this function
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/LameMob.o LameCraft/LameMob.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/Zombie2.o LameCraft/Zombie2.cpp
+  In file included from ./Engine/Aurora/Graphics/Effects/WeatherSystem.h:9,
+                   from LameCraft/CraftWorld2.h:14,
+                   from LameCraft/Zombie2.cpp:9:
+./LameCraft/LameFunctions.h(4,1): warning G2C167E3C: "PI" redefined
+LameCraft/Zombie2.cpp(4,1): warning GEE513BF5: this is the location of the previous definition
+  LameCraft/Zombie2.cpp: In member function 'virtual void Zombie::BoxCollision()':
+  LameCraft/Zombie2.cpp:164: warning: comparison between signed and unsigned integer expressions
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/Cow2.o LameCraft/Cow2.cpp
+LameCraft/Cow2.cpp(4,1): warning G2C167E3C: "PI" redefined
+  In file included from ./Engine/Aurora/Graphics/Effects/WeatherSystem.h:9,
+                   from LameCraft/CraftWorld2.h:14,
+                   from LameCraft/Cow2.h:14,
+                   from LameCraft/Cow2.cpp:1:
+./LameCraft/LameFunctions.h(4,1): warning GEE513BF5: this is the location of the previous definition
+  LameCraft/Cow2.cpp: In member function 'virtual void Cow::BoxCollision()':
+  LameCraft/Cow2.cpp:54: warning: comparison between signed and unsigned integer expressions
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/Creeper2.o LameCraft/Creeper2.cpp
+  In file included from ./Engine/Aurora/Graphics/Effects/WeatherSystem.h:9,
+                   from LameCraft/CraftWorld2.h:14,
+                   from LameCraft/Creeper2.cpp:9:
+./LameCraft/LameFunctions.h(4,1): warning G2C167E3C: "PI" redefined
+LameCraft/Creeper2.cpp(4,1): warning GEE513BF5: this is the location of the previous definition
+  LameCraft/Creeper2.cpp: In member function 'virtual void Creeper::BoxCollision()':
+  LameCraft/Creeper2.cpp:78: warning: comparison between signed and unsigned integer expressions
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/Sheep2.o LameCraft/Sheep2.cpp
+LameCraft/Sheep2.cpp(4,1): warning G2C167E3C: "PI" redefined
+  In file included from ./Engine/Aurora/Graphics/Effects/WeatherSystem.h:9,
+                   from LameCraft/CraftWorld2.h:14,
+                   from LameCraft/Sheep2.h:14,
+                   from LameCraft/Sheep2.cpp:1:
+./LameCraft/LameFunctions.h(4,1): warning GEE513BF5: this is the location of the previous definition
+  LameCraft/Sheep2.cpp: In member function 'virtual void Sheep::BoxCollision()':
+  LameCraft/Sheep2.cpp:113: warning: comparison between signed and unsigned integer expressions
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/StateMenu.o LameCraft/StateMenu.cpp
+LameCraft/StateMenu.cpp(1050,39): warning GD807C594: multi-character character constant
+LameCraft/StateMenu.cpp(1305,35): warning GD807C594: multi-character character constant
+LameCraft/StateMenu.cpp(1354,39): warning GD807C594: multi-character character constant
+  LameCraft/StateMenu.cpp: In member function 'virtual void StateMenu::HandleEvents(Aurora::Utils::StateManager*)':
+  LameCraft/StateMenu.cpp:608: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:1050: warning: overflow in implicit constant conversion
+  LameCraft/StateMenu.cpp:1230: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:1305: warning: overflow in implicit constant conversion
+  LameCraft/StateMenu.cpp:1354: warning: overflow in implicit constant conversion
+  LameCraft/StateMenu.cpp:1582: warning: value computed is not used
+  LameCraft/StateMenu.cpp:931: warning: unused variable 'buffer'
+  LameCraft/StateMenu.cpp:1864: warning: array subscript has type 'char'
+  LameCraft/StateMenu.cpp:1864: warning: array subscript has type 'char'
+  LameCraft/StateMenu.cpp:1963: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp: In member function 'virtual void StateMenu::Draw(Aurora::Utils::StateManager*)':
+  LameCraft/StateMenu.cpp:2854: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp: In member function 'void StateMenu::ScanTexturePacks(const char*)':
+  LameCraft/StateMenu.cpp:3045: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:3094: warning: comparison between signed and unsigned integer expressions
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/StateOptions.o LameCraft/StateOptions.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/StatePlayCreative.o LameCraft/StatePlayCreative.cpp
+LameCraft/StatePlayCreative.cpp(7,1): warning G2C167E3C: "PI" redefined
+  In file included from ./Engine/Aurora/Graphics/Effects/WeatherSystem.h:9,
+                   from ./LameCraft/CraftWorld2.h:14,
+                   from ./Engine/Aurora/Graphics/Effects/SnowBall2.h:7,
+                   from LameCraft/StatePlayCreative.h:20,
+                   from LameCraft/StatePlayCreative.cpp:1:
+./LameCraft/LameFunctions.h(4,1): warning GEE513BF5: this is the location of the previous definition
+  In file included from ./3libs/noisepp/Noise.h:40,
+                   from LameCraft/WorldGenerator.h:8,
+                   from LameCraft/StatePlayCreative.cpp:4:
+  ./3libs/noisepp/NoiseCheckerboard.h: In member function 'virtual noisepp::Real noisepp::CheckerboardElement2D::getValue(noisepp::Real, noisepp::Real, noisepp::Cache*) const':
+  ./3libs/noisepp/NoiseCheckerboard.h:51: warning: suggest parentheses around arithmetic in operand of ^
+  ./3libs/noisepp/NoiseCheckerboard.h: In member function 'virtual noisepp::Real noisepp::CheckerboardElement3D::getValue(noisepp::Real, noisepp::Real, noisepp::Real, noisepp::Cache*) const':
+  ./3libs/noisepp/NoiseCheckerboard.h:63: warning: suggest parentheses around arithmetic in operand of ^
+  ./3libs/noisepp/NoiseCheckerboard.h:63: warning: suggest parentheses around arithmetic in operand of ^
+  LameCraft/StatePlayCreative.cpp: In member function 'virtual void StatePlayCreative::Init()':
+  LameCraft/StatePlayCreative.cpp:251: warning: unused variable 'curchunkTarget'
+  LameCraft/StatePlayCreative.cpp: In member function 'void StatePlayCreative::InitParametric(bool, bool, bool, unsigned int, int, char)':
+  LameCraft/StatePlayCreative.cpp:293: warning: unused variable 'curchunkTarget'
+  LameCraft/StatePlayCreative.cpp: In member function 'void StatePlayCreative::LoadMap(std::string, bool)':
+  LameCraft/StatePlayCreative.cpp:372: warning: unused variable 'curchunkTarget'
+  LameCraft/StatePlayCreative.cpp: In member function 'void StatePlayCreative::CraftItem3x3()':
+  LameCraft/StatePlayCreative.cpp:3513: warning: suggest parentheses around && within ||
+  LameCraft/StatePlayCreative.cpp: In member function 'virtual void StatePlayCreative::HandleEvents(Aurora::Utils::StateManager*)':
+  LameCraft/StatePlayCreative.cpp:4448: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlayCreative.cpp:4481: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlayCreative.cpp:4903: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlayCreative.cpp:5948: warning: unused variable 'chunkTarget'
+  LameCraft/StatePlayCreative.cpp:6066: warning: unused variable 'chunkTarget'
+  LameCraft/StatePlayCreative.cpp:7096: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlayCreative.cpp:7246: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7248: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7249: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7250: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7251: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7252: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7253: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7258: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7260: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7261: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7262: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7268: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7270: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7272: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7274: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7281: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7282: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7596: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7600: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7602: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7621: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7623: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7624: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7625: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7643: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7643: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7645: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7647: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7649: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7651: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7652: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7653: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7655: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7657: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7658: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7659: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7661: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp:7661: warning: array subscript has type 'char'
+  LameCraft/StatePlayCreative.cpp: In member function 'virtual void StatePlayCreative::Update(Aurora::Utils::StateManager*)':
+  LameCraft/StatePlayCreative.cpp:8658: warning: unused variable 'bobSine'
+  LameCraft/StatePlayCreative.cpp:8659: warning: unused variable 'bobCose'
+  LameCraft/StatePlayCreative.cpp: In member function 'virtual void StatePlayCreative::Draw(Aurora::Utils::StateManager*)':
+  LameCraft/StatePlayCreative.cpp:8978: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlayCreative.cpp:8980: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlayCreative.cpp:9297: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlayCreative.cpp:9709: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlayCreative.cpp:10106: warning: suggest parentheses around comparison in operand of !=
+  LameCraft/StatePlayCreative.cpp:10117: warning: suggest parentheses around comparison in operand of !=
+  LameCraft/StatePlayCreative.cpp:11120: warning: statement has no effect
+  LameCraft/StatePlayCreative.cpp:10553: warning: 'green' may be used uninitialized in this function
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/StatePlay.o LameCraft/StatePlay.cpp
+LameCraft/StatePlay.cpp(7,1): warning G2C167E3C: "PI" redefined
+  In file included from ./Engine/Aurora/Graphics/Effects/WeatherSystem.h:9,
+                   from ./Lamecraft/CraftWorld2.h:14,
+                   from ./Engine/Aurora/Graphics/Effects/InventoryPlayer.h:7,
+                   from LameCraft/StatePlay.h:19,
+                   from LameCraft/StatePlay.cpp:1:
+./LameCraft/LameFunctions.h(4,1): warning GEE513BF5: this is the location of the previous definition
+  In file included from ./3libs/noisepp/Noise.h:40,
+                   from LameCraft/WorldGenerator.h:8,
+                   from LameCraft/StatePlay.cpp:4:
+  ./3libs/noisepp/NoiseCheckerboard.h: In member function 'virtual noisepp::Real noisepp::CheckerboardElement2D::getValue(noisepp::Real, noisepp::Real, noisepp::Cache*) const':
+  ./3libs/noisepp/NoiseCheckerboard.h:51: warning: suggest parentheses around arithmetic in operand of ^
+  ./3libs/noisepp/NoiseCheckerboard.h: In member function 'virtual noisepp::Real noisepp::CheckerboardElement3D::getValue(noisepp::Real, noisepp::Real, noisepp::Real, noisepp::Cache*) const':
+  ./3libs/noisepp/NoiseCheckerboard.h:63: warning: suggest parentheses around arithmetic in operand of ^
+  ./3libs/noisepp/NoiseCheckerboard.h:63: warning: suggest parentheses around arithmetic in operand of ^
+  LameCraft/StatePlay.cpp: In member function 'virtual void StatePlay::Init()':
+  LameCraft/StatePlay.cpp:223: warning: unused variable 'curchunkTarget'
+  LameCraft/StatePlay.cpp: In member function 'void StatePlay::InitParametric(bool, bool, bool, unsigned int, int, char)':
+  LameCraft/StatePlay.cpp:268: warning: unused variable 'curchunkTarget'
+  LameCraft/StatePlay.cpp: In member function 'void StatePlay::LoadMap(std::string, bool)':
+  LameCraft/StatePlay.cpp:349: warning: unused variable 'curchunkTarget'
+  LameCraft/StatePlay.cpp: In member function 'void StatePlay::CraftItem3x3()':
+  LameCraft/StatePlay.cpp:3412: warning: suggest parentheses around && within ||
+  LameCraft/StatePlay.cpp: In member function 'virtual void StatePlay::HandleEvents(Aurora::Utils::StateManager*)':
+  LameCraft/StatePlay.cpp:3950: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:4327: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:4360: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:4865: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:6053: warning: unused variable 'chunkTarget'
+  LameCraft/StatePlay.cpp:6291: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:6338: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:6382: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:6426: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:6475: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:7246: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:8057: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8059: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8060: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8061: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8062: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8063: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8064: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8069: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8071: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8072: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8073: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8079: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8081: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8083: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8085: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8092: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8093: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8404: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8408: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8410: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8429: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8431: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8432: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8433: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8451: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8451: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8453: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8455: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8457: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8459: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8460: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8461: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8463: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8465: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8466: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8467: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8469: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8469: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp: In member function 'virtual void StatePlay::Update(Aurora::Utils::StateManager*)':
+  LameCraft/StatePlay.cpp:9117: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:9141: warning: unused variable 'spawn_y'
+  LameCraft/StatePlay.cpp: In member function 'virtual void StatePlay::Draw(Aurora::Utils::StateManager*)':
+  LameCraft/StatePlay.cpp:10196: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10198: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10327: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10329: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10432: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10434: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10482: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10484: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10531: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10533: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10712: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:11830: warning: suggest parentheses around comparison in operand of !=
+  LameCraft/StatePlay.cpp:11841: warning: suggest parentheses around comparison in operand of !=
+  LameCraft/StatePlay.cpp:12901: warning: statement has no effect
+  LameCraft/StatePlay.cpp:12315: warning: 'green' may be used uninitialized in this function
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/LoadingScreen.o LameCraft/LoadingScreen.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/SplashScreen.o LameCraft/SplashScreen.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/InputHelper.o LameCraft/InputHelper.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/TextureHelper.o LameCraft/TextureHelper.cpp
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o LameCraft/sound_utils/pgeWav.o LameCraft/sound_utils/pgeWav.c
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/SoundManager.o LameCraft/SoundManager.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/Effects/Drop.o Engine/Aurora/Graphics/Effects/Drop.cpp
+  Engine/Aurora/Graphics/Effects/Drop.cpp: In member function 'void Drop::CheckOtherDrops()':
+  Engine/Aurora/Graphics/Effects/Drop.cpp:47: warning: comparison between signed and unsigned integer expressions
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/Effects/TNT.o Engine/Aurora/Graphics/Effects/TNT.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/Effects/InventoryPlayer.o Engine/Aurora/Graphics/Effects/InventoryPlayer.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/Effects/SnowBall2.o Engine/Aurora/Graphics/Effects/SnowBall2.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/Effects/SkyLight.o Engine/Aurora/Graphics/Effects/SkyLight.cpp
+  Engine/Aurora/Graphics/Effects/SkyLight.cpp: In member function 'void Aurora::Graphics::SkyLight::UpdateLightSource(float)':
+  Engine/Aurora/Graphics/Effects/SkyLight.cpp:24: warning: unused variable 'shift'
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/Effects/SkyBox.o Engine/Aurora/Graphics/Effects/SkyBox.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/Effects/Destroyer.o Engine/Aurora/Graphics/Effects/Destroyer.cpp
+  Engine/Aurora/Graphics/Effects/Destroyer.cpp: In member function 'void Aurora::Graphics::Destroyer::Update(float, CraftWorld*, int)':
+  Engine/Aurora/Graphics/Effects/Destroyer.cpp:50: warning: unused variable 'block'
+  Engine/Aurora/Graphics/Effects/Destroyer.cpp:51: warning: unused variable 'block1'
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/Effects/StarsBox.o Engine/Aurora/Graphics/Effects/StarsBox.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/Effects/Particle.o Engine/Aurora/Graphics/Effects/Particle.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/Effects/WeatherSystem.o Engine/Aurora/Graphics/Effects/WeatherSystem.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/mersenne-twister.o LameCraft/mersenne-twister.cpp
+  LameCraft/mersenne-twister.cpp: In function 'void mt::generate_numbers()':
+  LameCraft/mersenne-twister.cpp:108: warning: array subscript is above array bounds
+  LameCraft/mersenne-twister.cpp: In function 'uint32_t mt::rand_u32()':
+  LameCraft/mersenne-twister.cpp:108: warning: array subscript is above array bounds
+  LameCraft/mersenne-twister.cpp: In function 'int mt::rand()':
+  LameCraft/mersenne-twister.cpp:108: warning: array subscript is above array bounds
+  LameCraft/mersenne-twister.cpp: In function 'float mt::randf_cc()':
+  LameCraft/mersenne-twister.cpp:108: warning: array subscript is above array bounds
+  LameCraft/mersenne-twister.cpp: In function 'float mt::randf_oo()':
+  LameCraft/mersenne-twister.cpp:108: warning: array subscript is above array bounds
+  LameCraft/mersenne-twister.cpp: In function 'float mt::randf_co()':
+  LameCraft/mersenne-twister.cpp:108: warning: array subscript is above array bounds
+  LameCraft/mersenne-twister.cpp: In function 'uint64_t mt::rand_u64()':
+  LameCraft/mersenne-twister.cpp:108: warning: array subscript is above array bounds
+  LameCraft/mersenne-twister.cpp:108: warning: array subscript is above array bounds
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/SimplexNoise.o LameCraft/SimplexNoise.cpp
+  LameCraft/SimplexNoise.cpp: In member function 'float SimplexNoise::sdnoise2(float, float, float*, float*)':
+  LameCraft/SimplexNoise.cpp:243: warning: unused variable 'aa'
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/WorldGenerator.o LameCraft/WorldGenerator.cpp
+LameCraft/WorldGenerator.cpp(837,18): warning G10BCEF52: "/*" within comment
+LameCraft/WorldGenerator.cpp(942,18): warning G10BCEF52: "/*" within comment
+LameCraft/WorldGenerator.cpp(987,20): warning G10BCEF52: "/*" within comment
+LameCraft/WorldGenerator.cpp(999,18): warning G10BCEF52: "/*" within comment
+  In file included from ./3libs/noisepp/Noise.h:40,
+                   from LameCraft/WorldGenerator.h:8,
+                   from LameCraft/WorldGenerator.cpp:1:
+  ./3libs/noisepp/NoiseCheckerboard.h: In member function 'virtual noisepp::Real noisepp::CheckerboardElement2D::getValue(noisepp::Real, noisepp::Real, noisepp::Cache*) const':
+  ./3libs/noisepp/NoiseCheckerboard.h:51: warning: suggest parentheses around arithmetic in operand of ^
+  ./3libs/noisepp/NoiseCheckerboard.h: In member function 'virtual noisepp::Real noisepp::CheckerboardElement3D::getValue(noisepp::Real, noisepp::Real, noisepp::Real, noisepp::Cache*) const':
+  ./3libs/noisepp/NoiseCheckerboard.h:63: warning: suggest parentheses around arithmetic in operand of ^
+  ./3libs/noisepp/NoiseCheckerboard.h:63: warning: suggest parentheses around arithmetic in operand of ^
+  LameCraft/WorldGenerator.cpp: In member function 'void WorldGenerator::initRandompMap(int, int, int, CraftWorld*, bool, bool, bool, unsigned int, int)':
+  LameCraft/WorldGenerator.cpp:41: warning: unused variable 'octave_count'
+  LameCraft/WorldGenerator.cpp:43: warning: unused variable 'middleHeight'
+  LameCraft/WorldGenerator.cpp:45: warning: unused variable 'persistence'
+  LameCraft/WorldGenerator.cpp:46: warning: unused variable 'frequency'
+  LameCraft/WorldGenerator.cpp:47: warning: unused variable 'scale'
+  LameCraft/WorldGenerator.cpp:48: warning: unused variable 'lacunarity'
+  LameCraft/WorldGenerator.cpp:23: warning: unused variable 'CHUNK_SIZE'
+  LameCraft/WorldGenerator.cpp:24: warning: unused variable 'WORLD_HEIGHT'
+  LameCraft/WorldGenerator.cpp: In member function 'void WorldGenerator::initBiome(int, CraftWorld*, noisepp::PerlinModule*, int)':
+  LameCraft/WorldGenerator.cpp:1573: warning: comparison between signed and unsigned integer expressions
+  LameCraft/WorldGenerator.cpp:1624: warning: comparison between signed and unsigned integer expressions
+  LameCraft/WorldGenerator.cpp: In member function 'void WorldGenerator::initTrees(int, CraftWorld*, noisepp::PerlinModule*, int)':
+  LameCraft/WorldGenerator.cpp:2356: warning: unused variable 'woodBlock'
+  LameCraft/WorldGenerator.cpp:2357: warning: unused variable 'leavesBlock'
+  LameCraft/WorldGenerator.cpp:2358: warning: unused variable 'snowTree'
+  LameCraft/WorldGenerator.cpp: In member function 'void WorldGenerator::initRandompMap(int, int, int, CraftWorld*, bool, bool, bool, unsigned int, int)':
+  LameCraft/WorldGenerator.cpp:36: warning: 'grass_' may be used uninitialized in this function
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o LameCraft/sound_utils/vfsFile.o LameCraft/sound_utils/vfsFile.c
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o LameCraft/sound_utils/VirtualFile.o LameCraft/sound_utils/VirtualFile.c
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o LameCraft/sound_utils/audio.o LameCraft/sound_utils/audio.c
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o LameCraft/sound_utils/bgm.o LameCraft/sound_utils/bgm.c
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o LameCraft/sound_utils/media.o LameCraft/sound_utils/media.c
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o LameCraft/sound_utils/mod.o LameCraft/sound_utils/mod.c
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Lamecraft.o Lamecraft.cpp
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371  -L./3libs/noisepp -L./3libs/libpspmath -L. -Lc:/pspsdk/psp/sdk/lib -specs=c:/pspsdk/psp/sdk/lib/prxspecs -Wl,-q,-Tc:/pspsdk/psp/sdk/lib/linkfile.prx   Engine/Aurora/Math/MathLib.o Engine/Aurora/Math/Matrix3.o Engine/Aurora/Math/Matrix4.o Engine/Aurora/Math/Quaternion.o Engine/Aurora/Math/BoundingBox.o Engine/Aurora/Math/BoundingSphere.o Engine/Aurora/Math/Plane.o Engine/Aurora/Math/Ray.o Engine/Aurora/Math/Frustum.o Engine/Aurora/Math/Polygon.o Engine/Aurora/Graphics/common.o Engine/Aurora/Graphics/vfram.o Engine/Aurora/Graphics/vram.o Engine/Aurora/Graphics/RenderManager.o Engine/Aurora/Graphics/TextureManager.o Engine/Aurora/Graphics/Camera.o Engine/Aurora/Graphics/Sprite.o Engine/Aurora/Graphics/Models/ObjModel.o Engine/Aurora/Graphics/intraFont/libccc.o Engine/Aurora/Graphics/intraFont/intraFont.o Engine/Aurora/Utils/Logger.o Engine/Aurora/Utils/Timer.o Engine/Aurora/Utils/StateManager.o Engine/Aurora/Utils/pgeZip.o Engine/Aurora/Utils/pge.o Engine/Aurora/Utils/pgeDir.o Engine/Aurora/System/SystemManager.o Engine/Aurora/System/NetworkManager.o LameCraft/BaseBlock.o LameCraft/Blocks.o LameCraft/BaseItem.o LameCraft/Items.o LameCraft/SimpleMeshChunk2.o LameCraft/ChunkDataProvider.o LameCraft/BlockEntity.o LameCraft/NoteBlockEntity.o LameCraft/JukeboxEntity.o LameCraft/MonsterSpawnerEntity.o LameCraft/ItemFrameEntity.o LameCraft/Chest2.o LameCraft/DirectionBlock.o LameCraft/Furnace2.o LameCraft/CraftWorld2.o LameCraft/LameMob.o LameCraft/Zombie2.o LameCraft/Cow2.o LameCraft/Creeper2.o LameCraft/Sheep2.o LameCraft/StateMenu.o LameCraft/StateOptions.o LameCraft/StatePlayCreative.o LameCraft/StatePlay.o LameCraft/LoadingScreen.o LameCraft/SplashScreen.o LameCraft/InputHelper.o LameCraft/TextureHelper.o LameCraft/sound_utils/pgeWav.o LameCraft/SoundManager.o Engine/Aurora/Graphics/Effects/Drop.o Engine/Aurora/Graphics/Effects/TNT.o Engine/Aurora/Graphics/Effects/InventoryPlayer.o Engine/Aurora/Graphics/Effects/SnowBall2.o Engine/Aurora/Graphics/Effects/SkyLight.o Engine/Aurora/Graphics/Effects/SkyBox.o Engine/Aurora/Graphics/Effects/Destroyer.o Engine/Aurora/Graphics/Effects/StarsBox.o Engine/Aurora/Graphics/Effects/Particle.o Engine/Aurora/Graphics/Effects/WeatherSystem.o LameCraft/mersenne-twister.o LameCraft/SimplexNoise.o LameCraft/WorldGenerator.o LameCraft/sound_utils/vfsFile.o LameCraft/sound_utils/VirtualFile.o LameCraft/sound_utils/audio.o LameCraft/sound_utils/bgm.o LameCraft/sound_utils/media.o LameCraft/sound_utils/mod.o Lamecraft.o c:/pspsdk/psp/sdk/lib/prxexports.o -lNoisepp -lpspaudiolib -lpspaudio -lmikmod -lmmio -lpspaudiocodec -lpng -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath  -lpspdebug -lpspdisplay -lpspge -lpspctrl -lpspsdk -lc -lpspnet -lpspnet_inet -lpspnet_apctl -lpspnet_resolver -lpsputility -lpspuser -lpspkernel -o Minecraft2.elf
+  psp-fixup-imports Minecraft2.elf
+  psp-prxgen Minecraft2.elf Minecraft2.prx
+  mksfoex -d MEMSIZE=1 'MineCraft PSP 2' PARAM.SFO
+  pack-pbp EBOOT.PBP PARAM.SFO ICON0.png  \
+  	NULL NULL PIC1.png  \
+  	NULL  Minecraft2.prx NULL
+  [0]        320 bytes | PARAM.SFO
+  [1]      17028 bytes | ICON0.png
+  [2]          0 bytes | NULL
+  [3]          0 bytes | NULL
+  [4]     256507 bytes | PIC1.png
+  [5]          0 bytes | NULL
+  [6]    3589754 bytes | Minecraft2.prx
+  [7]          0 bytes | NULL
+  make[1]: Leaving directory `C:/Users/Nathan/Desktop/Minecraft2-PSP/Minecraft'
+  Press any key to continue . . . 

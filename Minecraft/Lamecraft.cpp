@@ -49,9 +49,16 @@ int main()
 	RenderManager::InstancePtr()->SetClearColour(0xFF000000);
 
 	//splash screens
-	SplashScreen *screen = new SplashScreen(TextureHelper::Instance()->GetTexture(TextureHelper::Genesis),0,0,480,272,3);
+	
+	SplashScreen* screen = new SplashScreen(TextureHelper::Instance()->GetTexture(TextureHelper::Iridescence), 0, 0, 480, 272, 2);
 	screen->ShowSplash();
 	delete screen;
+	
+
+	SplashScreen* screen2 = new SplashScreen(TextureHelper::Instance()->GetTexture(TextureHelper::Genesis), 0, 0, 480, 272, 2);
+	screen2->ShowSplash();
+	delete screen2;
+	
 
 	RenderManager::InstancePtr()->SetClearColour(0xFFFFFFFF);
 
