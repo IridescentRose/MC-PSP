@@ -163,14 +163,14 @@ namespace Aurora
 			bool TextureExist(std::string name);
 			int GetTextureNumber(std::string name);
 
-			void SetTexture(int number,int minFilter = GU_LINEAR,int maxFilter = GU_LINEAR);
-			void SetTextureModeulate(int number, int minFilter = GU_LINEAR, int magFilter = GU_LINEAR);
+			void SetTexture(int number,int minFilter = GU_NEAREST,int maxFilter = GU_NEAREST);
+			void SetTextureModeulate(int number, int minFilter = GU_NEAREST, int magFilter = GU_NEAREST);
 			void SetMipMapsTextures(int texture,int mipmap1,int mipmap2,int mipmap3);
 			void SetMipMaps2Textures(int texture,int mipmap1);
 
             void LoadConstTexture(std::string fileName);
             int GetConstTextureNumber(std::string name);
-            void SetConstTexture(int number,int minFilter = GU_LINEAR,int maxFilter = GU_LINEAR);
+            void SetConstTexture(int number,int minFilter = GU_NEAREST,int maxFilter = GU_NEAREST);
             void RemoveConstTextures();
 
 			void LoadTexture(std::string fileName);

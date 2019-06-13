@@ -6,7 +6,7 @@
 #include <psptypes.h>
 
 #include <algorithm>
-
+#include "sound_utils/oslib.h"
 #include <Aurora/Math/Frustum.h>
 #include <Aurora/Math/Vector4.h>
 #include <Aurora/Graphics/Effects/Drop.h>

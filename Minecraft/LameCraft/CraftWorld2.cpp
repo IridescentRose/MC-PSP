@@ -15483,6 +15483,7 @@ void CraftWorld::drawWorld(Frustum &camFrustum, bool camUpdate)
     sceGuDisable(GU_BLEND);
     sceGuDisable(GU_ALPHA_TEST);
     sceGuDisable(GU_DEPTH_TEST);
+	oslAudioVSync();
 }
 
 void CraftWorld::UpdatePlayerZoneBB(Vector3 playerPosition)

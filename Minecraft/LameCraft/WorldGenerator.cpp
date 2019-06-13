@@ -2357,7 +2357,7 @@ void WorldGenerator::initTrees(int WORLD_SIZE, CraftWorld *world, PerlinModule* 
     char leavesBlock;
     bool snowTree = false;
 
-    int treesNum = 1700;
+    int treesNum = 1700 * 5;
 
     for (int i = 0; i < treesNum; i ++)
     {
@@ -2458,7 +2458,7 @@ void WorldGenerator::initPumpkins(int WORLD_SIZE, CraftWorld *world)
 
 void WorldGenerator::initFlowers(int WORLD_SIZE, CraftWorld *world) //generate flowers
 {
-    int num = 24 + rand() % 12;
+    int num = 150 + rand() % 24;
 
     for (int i = 0; i < num; ++i)
     {
@@ -2466,7 +2466,7 @@ void WorldGenerator::initFlowers(int WORLD_SIZE, CraftWorld *world) //generate f
         int centerZ = 10 + rand() % (WORLD_SIZE-10);
 
         int size = 2 + rand() % 3;
-        int typeProcent = 40 + rand() % 20;
+        int typeProcent = 60 + rand() % 20;
 
         for(int x = centerX-size; x <= centerX+size; x++)
         {
@@ -2512,7 +2512,7 @@ void WorldGenerator::initFlowers(int WORLD_SIZE, CraftWorld *world) //generate f
 void WorldGenerator::initGrass(int WORLD_SIZE, CraftWorld *world)
 {
 
-    int NumTypes = 600;
+    int NumTypes = 15000;
 
     for (int i = 0; i < NumTypes; ++i)
     {
@@ -2531,7 +2531,7 @@ void WorldGenerator::initGrass(int WORLD_SIZE, CraftWorld *world)
 void WorldGenerator::initOtherVegetation(int WORLD_SIZE, CraftWorld *world)
 {
 
-    int NumTypes = 100 + rand() % 100;
+    int NumTypes = 400 + rand() % 40;
 
     for (int i = 0; i < NumTypes; ++i)
     {

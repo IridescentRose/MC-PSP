@@ -26,20 +26,20 @@
   Engine/Aurora/Graphics/TextureManager.cpp: In member function 'void Aurora::Graphics::TextureManager::RemoveTextures()':
   Engine/Aurora/Graphics/TextureManager.cpp:91: warning: comparison between signed and unsigned integer expressions
   Engine/Aurora/Graphics/TextureManager.cpp: In member function 'int Aurora::Graphics::TextureManager::getRed(int, int, int)':
-  Engine/Aurora/Graphics/TextureManager.cpp:305: warning: statement has no effect
-  Engine/Aurora/Graphics/TextureManager.cpp:308: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp:306: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp:309: warning: statement has no effect
   Engine/Aurora/Graphics/TextureManager.cpp: In member function 'int Aurora::Graphics::TextureManager::getGreen(int, int, int)':
-  Engine/Aurora/Graphics/TextureManager.cpp:338: warning: statement has no effect
-  Engine/Aurora/Graphics/TextureManager.cpp:341: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp:339: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp:342: warning: statement has no effect
   Engine/Aurora/Graphics/TextureManager.cpp: In member function 'int Aurora::Graphics::TextureManager::getBlue(int, int, int)':
-  Engine/Aurora/Graphics/TextureManager.cpp:371: warning: statement has no effect
-  Engine/Aurora/Graphics/TextureManager.cpp:374: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp:372: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp:375: warning: statement has no effect
   Engine/Aurora/Graphics/TextureManager.cpp: In member function 'int Aurora::Graphics::TextureManager::getAlpha(int, int, int)':
-  Engine/Aurora/Graphics/TextureManager.cpp:404: warning: statement has no effect
-  Engine/Aurora/Graphics/TextureManager.cpp:407: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp:405: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp:408: warning: statement has no effect
   Engine/Aurora/Graphics/TextureManager.cpp: In member function 'void Aurora::Graphics::TextureManager::setColour(int, int, unsigned char, unsigned char, unsigned char, unsigned char, int)':
-  Engine/Aurora/Graphics/TextureManager.cpp:437: warning: statement has no effect
-  Engine/Aurora/Graphics/TextureManager.cpp:440: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp:438: warning: statement has no effect
+  Engine/Aurora/Graphics/TextureManager.cpp:441: warning: statement has no effect
   psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/Camera.o Engine/Aurora/Graphics/Camera.cpp
   psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/Sprite.o Engine/Aurora/Graphics/Sprite.cpp
   psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurora/Graphics/Models/ObjModel.o Engine/Aurora/Graphics/Models/ObjModel.cpp
@@ -99,122 +99,122 @@ LameCraft/CraftWorld2.cpp(9,1): warning G2C167E3C: "PI" redefined
                    from LameCraft/CraftWorld2.cpp:1:
 ./LameCraft/LameFunctions.h(4,1): warning GEE513BF5: this is the location of the previous definition
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::initWorldBlocksLight()':
-  LameCraft/CraftWorld2.cpp:1180: warning: suggest parentheses around && within ||
+  LameCraft/CraftWorld2.cpp:1183: warning: suggest parentheses around && within ||
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::initPutBlocksLight(int, int)':
-  LameCraft/CraftWorld2.cpp:1511: warning: suggest parentheses around && within ||
+  LameCraft/CraftWorld2.cpp:1514: warning: suggest parentheses around && within ||
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::initPutBlocksLight(int, int, int)':
-  LameCraft/CraftWorld2.cpp:1568: warning: suggest parentheses around && within ||
+  LameCraft/CraftWorld2.cpp:1571: warning: suggest parentheses around && within ||
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyDrop(int)':
-  LameCraft/CraftWorld2.cpp:3289: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3292: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyZombie(int)':
-  LameCraft/CraftWorld2.cpp:3309: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3312: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyAllZombies()':
-  LameCraft/CraftWorld2.cpp:3318: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3321: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyCreeper(int)':
-  LameCraft/CraftWorld2.cpp:3350: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3353: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyAllCreepers()':
-  LameCraft/CraftWorld2.cpp:3359: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3362: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyCow(int)':
-  LameCraft/CraftWorld2.cpp:3378: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3381: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroySheep(int)':
-  LameCraft/CraftWorld2.cpp:3396: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3399: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyTNTentity(int)':
-  LameCraft/CraftWorld2.cpp:3452: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3455: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::CheckForTorchSupport(int, int, int, int)':
-  LameCraft/CraftWorld2.cpp:3804: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:3825: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3807: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3828: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::CheckForLadderSupport(int, int, int)':
-  LameCraft/CraftWorld2.cpp:3881: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:3898: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3884: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3901: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::DestroyAroundTrapdoors(int, int, int)':
-  LameCraft/CraftWorld2.cpp:3932: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:3963: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:3994: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4025: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4042: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4048: warning: no return statement in function returning non-void
+  LameCraft/CraftWorld2.cpp:3935: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3966: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:3997: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4028: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4045: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4051: warning: no return statement in function returning non-void
   LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::DestroyAroundItemFrames(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4075: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4106: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4137: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4168: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4185: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4191: warning: no return statement in function returning non-void
+  LameCraft/CraftWorld2.cpp:4078: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4109: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4140: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4171: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4188: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4194: warning: no return statement in function returning non-void
   LameCraft/CraftWorld2.cpp: In member function 'std::string CraftWorld::NameBlock(int)':
-  LameCraft/CraftWorld2.cpp:4515: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4523: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4518: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4526: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::LightSourceBlock(int)':
-  LameCraft/CraftWorld2.cpp:4533: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4536: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'int CraftWorld::LootBlock(int)':
-  LameCraft/CraftWorld2.cpp:4547: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4550: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'int CraftWorld::DurabilityPointsItem(int)':
-  LameCraft/CraftWorld2.cpp:4561: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4564: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::StackableItem(int)':
-  LameCraft/CraftWorld2.cpp:4571: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4574: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::ItemHaveTerrainTexture(int)':
-  LameCraft/CraftWorld2.cpp:4582: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4585: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'char CraftWorld::ItemType(int)':
-  LameCraft/CraftWorld2.cpp:4592: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:4595: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::GetItemVerts(int, BaseItem*)':
-  LameCraft/CraftWorld2.cpp:5198: warning: unused variable 'BlockLight'
+  LameCraft/CraftWorld2.cpp:5201: warning: unused variable 'BlockLight'
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::RebuildFullMeshChunk(int)':
-  LameCraft/CraftWorld2.cpp:9396: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:9399: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::RebuildOpaqueMeshChunk(int)':
-  LameCraft/CraftWorld2.cpp:9473: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:9476: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::RebuildTransparentMeshChunk(int)':
-  LameCraft/CraftWorld2.cpp:9516: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:9519: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::GetSpecialBlock(int, int, int, int&, SimpleMeshChunk*, block_t, bool)':
-  LameCraft/CraftWorld2.cpp:10214: warning: unused variable 'Block1'
-  LameCraft/CraftWorld2.cpp:9574: warning: unused variable 'Block1'
+  LameCraft/CraftWorld2.cpp:10219: warning: unused variable 'Block1'
+  LameCraft/CraftWorld2.cpp:9577: warning: unused variable 'Block1'
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::GetNormalBlock(int, int, int, int&, SimpleMeshChunk*, block_t, bool)':
-  LameCraft/CraftWorld2.cpp:11320: warning: unused variable 'xx'
-  LameCraft/CraftWorld2.cpp:11321: warning: unused variable 'yy'
-  LameCraft/CraftWorld2.cpp:11322: warning: unused variable 'zz'
-  LameCraft/CraftWorld2.cpp:11324: warning: unused variable 'anotherLight'
-  LameCraft/CraftWorld2.cpp:11343: warning: unused variable 'DefaultBlock'
+  LameCraft/CraftWorld2.cpp:11325: warning: unused variable 'xx'
+  LameCraft/CraftWorld2.cpp:11326: warning: unused variable 'yy'
+  LameCraft/CraftWorld2.cpp:11327: warning: unused variable 'zz'
+  LameCraft/CraftWorld2.cpp:11329: warning: unused variable 'anotherLight'
+  LameCraft/CraftWorld2.cpp:11348: warning: unused variable 'DefaultBlock'
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::UpdateLightAreaIn(Aurora::Math::Vector3)':
-  LameCraft/CraftWorld2.cpp:12578: warning: unused variable 'current'
+  LameCraft/CraftWorld2.cpp:12583: warning: unused variable 'current'
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::AddChunkToUpdate(int)':
-  LameCraft/CraftWorld2.cpp:12627: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:12632: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::AddChunkToFastUpdate(int)':
-  LameCraft/CraftWorld2.cpp:12650: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:12655: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::UpdateChunkBlocks(int)':
-  LameCraft/CraftWorld2.cpp:13105: warning: unused variable 'upperBlock'
+  LameCraft/CraftWorld2.cpp:13110: warning: unused variable 'upperBlock'
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::UpdateChunkGrowingBlocks(int, int)':
-  LameCraft/CraftWorld2.cpp:13342: warning: unused variable 'upperBlock'
+  LameCraft/CraftWorld2.cpp:13347: warning: unused variable 'upperBlock'
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::AddChunkToFloodUpdate(int)':
-  LameCraft/CraftWorld2.cpp:14812: warning: comparison between signed and unsigned integer expressions
+  LameCraft/CraftWorld2.cpp:14817: warning: comparison between signed and unsigned integer expressions
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::BuildWorldBlockPlaneNoCheck(BaseBlock*, int, int, int, int&, SimpleMeshChunk*, block_t, bool, char, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3)':
-  LameCraft/CraftWorld2.cpp:17590: warning: unused variable 'Block1'
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::BuildWorldBlockPlane(BaseBlock*, int, int, int, int&, SimpleMeshChunk*, block_t, bool, char, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3)':
-  LameCraft/CraftWorld2.cpp:18618: warning: unused variable 'DefaultBlock'
-  LameCraft/CraftWorld2.cpp:18649: warning: unused variable 'blockType1'
+  LameCraft/CraftWorld2.cpp:17601: warning: unused variable 'Block1'
+  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::BuildWorldBlockPlane(BaseBlock*, int, int, int, int&, SimpleMeshChunk*, block_t, bool, char, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, bool)':
+  LameCraft/CraftWorld2.cpp:18629: warning: unused variable 'DefaultBlock'
+  LameCraft/CraftWorld2.cpp:18660: warning: unused variable 'blockType1'
   LameCraft/CraftWorld2.cpp: In member function 'short int CraftWorld::BlockMaterial(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4391: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp:4394: warning: control reaches end of non-void function
   LameCraft/CraftWorld2.cpp: In member function 'short int CraftWorld::BlockLoot(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4383: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp:4386: warning: control reaches end of non-void function
   LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::BlockSolid(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4375: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp:4378: warning: control reaches end of non-void function
   LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::BlockUpdate2(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4367: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp:4370: warning: control reaches end of non-void function
   LameCraft/CraftWorld2.cpp: In member function 'char CraftWorld::BlockSpecial(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4354: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp:4357: warning: control reaches end of non-void function
   LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::BlockAnimated(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4346: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp:4349: warning: control reaches end of non-void function
   LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::BlockTransparent(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4333: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp:4336: warning: control reaches end of non-void function
   LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::BlockTransparentOrLightSource(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4315: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp:4318: warning: control reaches end of non-void function
   LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::DestroyAroundItemFrames(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4191: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp:4194: warning: control reaches end of non-void function
   LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::DestroyAroundTrapdoors(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4048: warning: control reaches end of non-void function
+  LameCraft/CraftWorld2.cpp:4051: warning: control reaches end of non-void function
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::BuildWorldBlockPlane(BaseBlock*, int, int, int, int&, SimpleMeshChunk*, block_t, bool, char, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, bool, bool, int, int)':
-  LameCraft/CraftWorld2.cpp:22524: warning: 'plane_y' may be used uninitialized in this function
-  LameCraft/CraftWorld2.cpp:22524: warning: 'plane_x' may be used uninitialized in this function
+  LameCraft/CraftWorld2.cpp:22535: warning: 'plane_y' may be used uninitialized in this function
+  LameCraft/CraftWorld2.cpp:22535: warning: 'plane_x' may be used uninitialized in this function
   LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::BuildWorldBlockPlane(BaseBlock*, int, int, int, int&, SimpleMeshChunk*, block_t, bool, char, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, bool, bool, int)':
-  LameCraft/CraftWorld2.cpp:21216: warning: 'plane_y' may be used uninitialized in this function
-  LameCraft/CraftWorld2.cpp:21216: warning: 'plane_x' may be used uninitialized in this function
+  LameCraft/CraftWorld2.cpp:21227: warning: 'plane_y' may be used uninitialized in this function
+  LameCraft/CraftWorld2.cpp:21227: warning: 'plane_x' may be used uninitialized in this function
   psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/LameMob.o LameCraft/LameMob.cpp
   psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/Zombie2.o LameCraft/Zombie2.cpp
   In file included from ./Engine/Aurora/Graphics/Effects/WeatherSystem.h:9,
@@ -251,25 +251,25 @@ LameCraft/Sheep2.cpp(4,1): warning G2C167E3C: "PI" redefined
   LameCraft/Sheep2.cpp: In member function 'virtual void Sheep::BoxCollision()':
   LameCraft/Sheep2.cpp:113: warning: comparison between signed and unsigned integer expressions
   psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/StateMenu.o LameCraft/StateMenu.cpp
-LameCraft/StateMenu.cpp(1077,39): warning GD807C594: multi-character character constant
-LameCraft/StateMenu.cpp(1332,35): warning GD807C594: multi-character character constant
-LameCraft/StateMenu.cpp(1381,39): warning GD807C594: multi-character character constant
+LameCraft/StateMenu.cpp(1134,39): warning GD807C594: multi-character character constant
+LameCraft/StateMenu.cpp(1389,35): warning GD807C594: multi-character character constant
+LameCraft/StateMenu.cpp(1438,39): warning GD807C594: multi-character character constant
   LameCraft/StateMenu.cpp: In member function 'virtual void StateMenu::HandleEvents(Aurora::Utils::StateManager*)':
-  LameCraft/StateMenu.cpp:635: warning: comparison between signed and unsigned integer expressions
-  LameCraft/StateMenu.cpp:1077: warning: overflow in implicit constant conversion
-  LameCraft/StateMenu.cpp:1257: warning: comparison between signed and unsigned integer expressions
-  LameCraft/StateMenu.cpp:1332: warning: overflow in implicit constant conversion
-  LameCraft/StateMenu.cpp:1381: warning: overflow in implicit constant conversion
-  LameCraft/StateMenu.cpp:1609: warning: value computed is not used
-  LameCraft/StateMenu.cpp:958: warning: unused variable 'buffer'
-  LameCraft/StateMenu.cpp:1891: warning: array subscript has type 'char'
-  LameCraft/StateMenu.cpp:1891: warning: array subscript has type 'char'
-  LameCraft/StateMenu.cpp:1990: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:692: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:1134: warning: overflow in implicit constant conversion
+  LameCraft/StateMenu.cpp:1314: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:1389: warning: overflow in implicit constant conversion
+  LameCraft/StateMenu.cpp:1438: warning: overflow in implicit constant conversion
+  LameCraft/StateMenu.cpp:1666: warning: value computed is not used
+  LameCraft/StateMenu.cpp:1015: warning: unused variable 'buffer'
+  LameCraft/StateMenu.cpp:1948: warning: array subscript has type 'char'
+  LameCraft/StateMenu.cpp:1948: warning: array subscript has type 'char'
+  LameCraft/StateMenu.cpp:2047: warning: comparison between signed and unsigned integer expressions
   LameCraft/StateMenu.cpp: In member function 'virtual void StateMenu::Draw(Aurora::Utils::StateManager*)':
-  LameCraft/StateMenu.cpp:2881: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:2914: warning: comparison between signed and unsigned integer expressions
   LameCraft/StateMenu.cpp: In member function 'void StateMenu::ScanTexturePacks(const char*)':
-  LameCraft/StateMenu.cpp:3074: warning: comparison between signed and unsigned integer expressions
-  LameCraft/StateMenu.cpp:3123: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:3115: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:3164: warning: comparison between signed and unsigned integer expressions
   psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/StateOptions.o LameCraft/StateOptions.cpp
   psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/StatePlayCreative.o LameCraft/StatePlayCreative.cpp
 LameCraft/StatePlayCreative.cpp(7,1): warning G2C167E3C: "PI" redefined
@@ -538,7 +538,7 @@ LameCraft/WorldGenerator.cpp(999,18): warning G10BCEF52: "/*" within comment
   [3]          0 bytes | NULL
   [4]     256507 bytes | PIC1.png
   [5]          0 bytes | NULL
-  [6]    3589842 bytes | Minecraft2.prx
+  [6]    3608138 bytes | Minecraft2.prx
   [7]          0 bytes | NULL
   make[1]: Leaving directory `C:/Users/Nathan/Desktop/Minecraft2-PSP/Minecraft'
           1 file(s) moved.
