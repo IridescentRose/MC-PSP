@@ -16,6 +16,8 @@ CraftWorld::CraftWorld()
     WORLD_SIZE = 0;
     CHUNK_SIZE = 0;
     WORLD_HEIGHT = 0;
+	myAnimationTime = 0;
+	myAnimationTimer = Timer();
 
     // Инициализируем переменные статистики
     mainStatistics.blockPlaced = 0;
@@ -549,6 +551,7 @@ void CraftWorld::InitBlockVector()
     blockTypes.push_back(BedBlock7());
     blockTypes.push_back(BedBlock8());
 
+	mainOptions.fastRendering = false;
     blockTypes.push_back(BlackWoolCarpet());
     blockTypes.push_back(GrayWoolCarpet());
     blockTypes.push_back(RedWoolCarpet());
@@ -3824,7 +3827,7 @@ bool CraftWorld::CheckForTorchSupport(const int x, const int y, const int z,int 
         UpdateLightAreaIn(Vector3(x,y,z));
         for(int i = 0; i < toRebuild.size(); i++)
         {
-            RebuildTransparentMeshChunk(toRebuild[i]);
+            RebuildFullMeshChunk(toRebuild[i]);
         }
     }
     return haveTorch;
@@ -3897,7 +3900,7 @@ bool CraftWorld::CheckForLadderSupport(const int x, const int y, const int z)
     {
         for(int i = 0; i < toRebuild.size(); i++)
         {
-            RebuildTransparentMeshChunk(toRebuild[i]);
+            RebuildFullMeshChunk(toRebuild[i]);
         }
     }
     return haveLadder;
@@ -4041,10 +4044,10 @@ bool CraftWorld::DestroyAroundTrapdoors(const int x, const int y, const int z)
     {
         for(int i = 0; i < toRebuild.size(); i++)
         {
-            RebuildTransparentMeshChunk(toRebuild[i]);
+            RebuildFullMeshChunk(toRebuild[i]);
         }
     }
-    //RebuildTransparentMeshChunk(getChunkId(Vector3(x,y,z)));
+    //RebuildFullMeshChunk(getChunkId(Vector3(x,y,z)));
 }
 
 bool CraftWorld::DestroyAroundItemFrames(const int x, const int y, const int z)
@@ -4184,10 +4187,10 @@ bool CraftWorld::DestroyAroundItemFrames(const int x, const int y, const int z)
     {
         for(int i = 0; i < toRebuild.size(); i++)
         {
-            RebuildTransparentMeshChunk(toRebuild[i]);
+            RebuildFullMeshChunk(toRebuild[i]);
         }
     }
-    //RebuildTransparentMeshChunk(getChunkId(Vector3(x,y,z)));
+    //RebuildFullMeshChunk(getChunkId(Vector3(x,y,z)));
 }
 
 
@@ -9511,49 +9514,6 @@ void CraftWorld::RebuildOpaqueMeshChunk(int id)
     OpaqueMeshChunk->end();
 }
 
-void CraftWorld::RebuildTransparentMeshChunk(int id)
-{
-    if(id < 0 || id >= mChunks.size())
-    {
-        return;
-    }
-
-    SimpleMeshChunk* TransparentMeshChunk = mTransparentChunks[id];
-
-    int iTransparentVertex = 0;
-    block_t Block;
-
-    int StartZ = TransparentMeshChunk->chunkStartZ;
-    int StartY = TransparentMeshChunk->chunkStartY;
-    int StartX = TransparentMeshChunk->chunkStartX;
-
-    TransparentMeshChunk->reset();
-
-    for (int z = StartZ; z < CHUNK_SIZE + StartZ; ++z)
-    {
-        for (int y = StartY; y < CHUNK_SIZE + StartY; ++y)
-        {
-            for (int x = StartX; x < CHUNK_SIZE + StartX; ++x)
-            {
-                Block = GetBlockNoCheck(x,y,z);
-                if(Block == 0)continue;
-                if(blockTypes[Block].transparent == false) continue;
-
-                if(blockTypes[Block].blockModel == 0)
-                {
-                    GetNormalBlock(x,y,z,iTransparentVertex,TransparentMeshChunk,Block,true);
-                }
-                else
-                {
-                    GetSpecialBlock(x,y,z,iTransparentVertex,TransparentMeshChunk,Block,true);
-                }
-            }
-        }
-    }
-
-    TransparentMeshChunk->end();
-}
-
 void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk* MeshChunk,block_t Block,bool transparent)
 {
     BaseBlock *blockType = &blockTypes[Block];
@@ -9635,14 +9595,14 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
         /// LEAVES
         if(Block == 9 || Block == 37 || Block == 38)
         {
-            BuildWorldBlockPlane(blockType,x,y,z,iVertex,MeshChunk,Block,transparent,1,Vector3(0,0,16),Vector3(0,16,16),Vector3(0,16,0),Vector3(0,0,0));
-            BuildWorldBlockPlane(blockType,x,y,z,iVertex,MeshChunk,Block,transparent,2,Vector3(16,0,0),Vector3(16,16,0),Vector3(16,16,16),Vector3(16,0,16));
-
-            BuildWorldBlockPlane(blockType,x,y,z,iVertex,MeshChunk,Block,transparent,3,Vector3(0,0,0),Vector3(16,0,0),Vector3(16,0,16),Vector3(0,0,16));
-            BuildWorldBlockPlane(blockType,x,y,z,iVertex,MeshChunk,Block,transparent,4,Vector3(0,16,16),Vector3(16,16,16),Vector3(16,16,0),Vector3(0,16,0));
-
-            BuildWorldBlockPlane(blockType,x,y,z,iVertex,MeshChunk,Block,transparent,5,Vector3(0,16,0),Vector3(16,16,0),Vector3(16,0,0),Vector3(0,0,0));
-            BuildWorldBlockPlane(blockType,x,y,z,iVertex,MeshChunk,Block,transparent,6,Vector3(0,0,16),Vector3(16,0,16),Vector3(16,16,16),Vector3(0,16,16));
+			BuildWorldBlockPlane(blockType,x,y,z,iVertex,MeshChunk,Block,true,1,Vector3(0,0,16),Vector3(0,16,16),Vector3(0,16,0),Vector3(0,0,0));
+			BuildWorldBlockPlane(blockType,x,y,z,iVertex,MeshChunk,Block,true,2,Vector3(16,0,0),Vector3(16,16,0),Vector3(16,16,16),Vector3(16,0,16));
+																		
+			BuildWorldBlockPlane(blockType,x,y,z,iVertex,MeshChunk,Block,true,3,Vector3(0,0,0),Vector3(16,0,0),Vector3(16,0,16),Vector3(0,0,16));
+			BuildWorldBlockPlane(blockType,x,y,z,iVertex,MeshChunk,Block,true,4,Vector3(0,16,16),Vector3(16,16,16),Vector3(16,16,0),Vector3(0,16,0));
+																
+			BuildWorldBlockPlane(blockType,x,y,z,iVertex,MeshChunk,Block,true,5,Vector3(0,16,0),Vector3(16,16,0),Vector3(16,0,0),Vector3(0,0,0));
+			BuildWorldBlockPlane(blockType,x,y,z,iVertex,MeshChunk,Block,true,6,Vector3(0,0,16),Vector3(16,0,16),Vector3(16,16,16),Vector3(0,16,16));
             return;
         }
 
@@ -10217,10 +10177,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
             if(BlockSolid(x,y-1,z)) /////
             {
                 //x-1
-                MeshChunk->vert(x + 0.4375f,y			,z + 0.4375f + 0.0625*2+pixel	,right	, down,1,1,1);
-                MeshChunk->vert(x + 0.4375f,y + 0.0625*11,z + 0.4375f + 0.0625*2+pixel	,right	, up	,1,1,1);
-                MeshChunk->vert(x + 0.4375f,y + 0.0625*11,z + 0.4375f-pixel			,left	, up	,1,1,1);
-                MeshChunk->vert(x + 0.4375f,y			,z + 0.4375f-pixel			,left	, down	,1,1,1);
+                MeshChunk->vert(x + 0.4375f,y			,z + 0.4375f + 0.0625*2+pixel	,right	, down,1,1,1,Block);
+                MeshChunk->vert(x + 0.4375f,y + 0.0625*11,z + 0.4375f + 0.0625*2+pixel	,right	, up	,1,1,1, Block);
+                MeshChunk->vert(x + 0.4375f,y + 0.0625*11,z + 0.4375f-pixel			,left	, up	,1,1,1, Block);
+                MeshChunk->vert(x + 0.4375f,y			,z + 0.4375f-pixel			,left	, down	,1,1,1, Block);
 
                 MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                 MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10228,10 +10188,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                 iVertex += 4;
 
                 //x+1
-                MeshChunk->vert(x + 0.4375f + pixel*2,y		        ,z + 0.4375f-pixel            ,right, down,1,1,1);
-                MeshChunk->vert(x + 0.4375f + pixel*2,y + pixel*11  ,z + 0.4375f-pixel            ,right, up,1,1,1);
-                MeshChunk->vert(x + 0.4375f + pixel*2,y + pixel*11  ,z + 0.4375f + pixel*2+pixel  ,left, up,1,1,1);
-                MeshChunk->vert(x + 0.4375f + pixel*2,y		        ,z + 0.4375f + pixel*2+pixel  ,left, down,1,1,1);
+                MeshChunk->vert(x + 0.4375f + pixel*2,y		        ,z + 0.4375f-pixel            ,right, down,1,1,1, Block);
+                MeshChunk->vert(x + 0.4375f + pixel*2,y + pixel*11  ,z + 0.4375f-pixel            ,right, up,1,1,1, Block);
+                MeshChunk->vert(x + 0.4375f + pixel*2,y + pixel*11  ,z + 0.4375f + pixel*2+pixel  ,left, up,1,1,1, Block);
+                MeshChunk->vert(x + 0.4375f + pixel*2,y		        ,z + 0.4375f + pixel*2+pixel  ,left, down,1,1,1, Block);
 
                 MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                 MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10239,10 +10199,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                 iVertex += 4;
 
                 //z-1
-                MeshChunk->vert(x + 0.4375f-pixel		        ,y + pixel*11   ,z + 0.4375f,right, up,1,1,1);
-                MeshChunk->vert(x + 0.4375f + pixel*2+pixel   ,y + pixel*11   ,z + 0.4375f,left, up,1,1,1);
-                MeshChunk->vert(x + 0.4375f + pixel*2+pixel   ,y			    ,z + 0.4375f,left, down,1,1,1);
-                MeshChunk->vert(x + 0.4375f-pixel		        ,y			    ,z + 0.4375f,right, down,1,1,1);
+                MeshChunk->vert(x + 0.4375f-pixel		        ,y + pixel*11   ,z + 0.4375f,right, up,1,1,1, Block);
+                MeshChunk->vert(x + 0.4375f + pixel*2+pixel   ,y + pixel*11   ,z + 0.4375f,left, up,1,1,1, Block);
+                MeshChunk->vert(x + 0.4375f + pixel*2+pixel   ,y			    ,z + 0.4375f,left, down,1,1,1, Block);
+                MeshChunk->vert(x + 0.4375f-pixel		        ,y			    ,z + 0.4375f,right, down,1,1,1, Block);
 
                 MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                 MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10250,10 +10210,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                 iVertex += 4;
 
                 //z+1
-                MeshChunk->vert(x + 0.4375f-pixel		        ,y			    ,z + 0.4375f + pixel*2,left, down,1,1,1);
-                MeshChunk->vert(x + 0.4375f + pixel*2+pixel   ,y			    ,z + 0.4375f + pixel*2,right, down,1,1,1);
-                MeshChunk->vert(x + 0.4375f + pixel*2+pixel   ,y + pixel*11	    ,z + 0.4375f + pixel*2,right, up,1,1,1);
-                MeshChunk->vert(x + 0.4375f-pixel		        ,y + pixel*11	,z + 0.4375f + pixel*2,left, up,1,1,1);
+                MeshChunk->vert(x + 0.4375f-pixel		        ,y			    ,z + 0.4375f + pixel*2,left, down,1,1,1, Block);
+                MeshChunk->vert(x + 0.4375f + pixel*2+pixel   ,y			    ,z + 0.4375f + pixel*2,right, down,1,1,1, Block);
+                MeshChunk->vert(x + 0.4375f + pixel*2+pixel   ,y + pixel*11	    ,z + 0.4375f + pixel*2,right, up,1,1,1, Block);
+                MeshChunk->vert(x + 0.4375f-pixel		        ,y + pixel*11	,z + 0.4375f + pixel*2,left, up,1,1,1, Block);
 
                 MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                 MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10268,10 +10228,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                     left = percent * blockType->leftPlane_x + texturePixel*7;
                     right = left + texturePixel*2;
 
-                    MeshChunk->vert(x + 0.4375f		        ,y + pixel*10   ,z + 0.4375f + pixel*2  ,left, up,1,1,1);
-                    MeshChunk->vert(x + 0.4375f + pixel*2   ,y + pixel*10   ,z + 0.4375f + pixel*2  ,right, up,1,1,1);
-                    MeshChunk->vert(x + 0.4375f + pixel*2   ,y + pixel*10   ,z + 0.4375f            ,right, down,1,1,1);
-                    MeshChunk->vert(x + 0.4375f		        ,y + pixel*10   ,z + 0.4375f            ,left, down,1,1,1);
+                    MeshChunk->vert(x + 0.4375f		        ,y + pixel*10   ,z + 0.4375f + pixel*2  ,left, up,1,1,1, Block);
+                    MeshChunk->vert(x + 0.4375f + pixel*2   ,y + pixel*10   ,z + 0.4375f + pixel*2  ,right, up,1,1,1, Block);
+                    MeshChunk->vert(x + 0.4375f + pixel*2   ,y + pixel*10   ,z + 0.4375f            ,right, down,1,1,1, Block);
+                    MeshChunk->vert(x + 0.4375f		        ,y + pixel*10   ,z + 0.4375f            ,left, down,1,1,1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10287,10 +10247,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                 {
 
                     //x-1
-                    MeshChunk->vert(x - pixel   ,y + pixel*3    ,z + 0.4375f + pixel*2+pixel	,right	, down	,1,1,1);
-                    MeshChunk->vert(x + pixel*4 ,y + pixel*14   ,z + 0.4375f + pixel*2+pixel	,right	, up	,1,1,1);
-                    MeshChunk->vert(x + pixel*4 ,y + pixel*14   ,z + 0.4375f-pixel			,left	, up	,1,1,1);
-                    MeshChunk->vert(x - pixel   ,y + pixel*3    ,z + 0.4375f-pixel			,left	, down	,1,1,1);
+                    MeshChunk->vert(x - pixel   ,y + pixel*3    ,z + 0.4375f + pixel*2+pixel	,right	, down	,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*4 ,y + pixel*14   ,z + 0.4375f + pixel*2+pixel	,right	, up	,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*4 ,y + pixel*14   ,z + 0.4375f-pixel			,left	, up	,1, 1, 1, Block);
+                    MeshChunk->vert(x - pixel   ,y + pixel*3    ,z + 0.4375f-pixel			,left	, down	,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10298,10 +10258,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                     iVertex += 4;
 
                     //x+1
-                    MeshChunk->vert(x + pixel    ,y	+ pixel*3	,z + 0.4375f-pixel            ,right, down,1,1,1);
-                    MeshChunk->vert(x + pixel*6  ,y + pixel*14  ,z + 0.4375f-pixel            ,right, up  ,1,1,1);
-                    MeshChunk->vert(x + pixel*6  ,y + pixel*14  ,z + 0.4375f + pixel*2+pixel  ,left, up   ,1,1,1);
-                    MeshChunk->vert(x + pixel    ,y + pixel*3   ,z + 0.4375f + pixel*2+pixel  ,left, down ,1,1,1);
+                    MeshChunk->vert(x + pixel    ,y	+ pixel*3	,z + 0.4375f-pixel            ,right, down,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*6  ,y + pixel*14  ,z + 0.4375f-pixel            ,right, up  ,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*6  ,y + pixel*14  ,z + 0.4375f + pixel*2+pixel  ,left, up   ,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel    ,y + pixel*3   ,z + 0.4375f + pixel*2+pixel  ,left, down ,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10309,10 +10269,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                     iVertex += 4;
 
                     //z-1
-                    MeshChunk->vert(x + pixel*4-pixel   ,y + pixel*14   ,z + pixel*7,right, up  ,1,1,1);
-                    MeshChunk->vert(x + pixel*6+pixel   ,y + pixel*14   ,z + pixel*7,left, up   ,1,1,1);
-                    MeshChunk->vert(x + pixel+pixel     ,y + pixel*3	,z + pixel*7,left, down ,1,1,1);
-                    MeshChunk->vert(x - pixel-pixel	    ,y + pixel*3	,z + pixel*7,right, down,1,1,1);
+                    MeshChunk->vert(x + pixel*4-pixel   ,y + pixel*14   ,z + pixel*7,right, up  ,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*6+pixel   ,y + pixel*14   ,z + pixel*7,left, up   ,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel+pixel     ,y + pixel*3	,z + pixel*7,left, down ,1, 1, 1, Block);
+                    MeshChunk->vert(x - pixel-pixel	    ,y + pixel*3	,z + pixel*7,right, down,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10320,10 +10280,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                     iVertex += 4;
 
                     //z+1
-                    MeshChunk->vert(x - pixel-pixel	        ,y + pixel*3    ,z + pixel*9,left, down,1,1,1);
-                    MeshChunk->vert(x + pixel+pixel           ,y + pixel*3	,z + pixel*9,right, down,1,1,1);
-                    MeshChunk->vert(x + pixel*6+pixel         ,y + pixel*14	,z + pixel*9,right, up,1,1,1);
-                    MeshChunk->vert(x + pixel*4-pixel		    ,y + pixel*14	,z + pixel*9,left, up,1,1,1);
+                    MeshChunk->vert(x - pixel-pixel	        ,y + pixel*3    ,z + pixel*9,left, down,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel+pixel           ,y + pixel*3	,z + pixel*9,right, down,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*6+pixel         ,y + pixel*14	,z + pixel*9,right, up,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*4-pixel		    ,y + pixel*14	,z + pixel*9,left, up,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10338,10 +10298,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                     left = percent * blockType->leftPlane_x + texturePixel*7;
                     right = left + texturePixel*2;
 
-                    MeshChunk->vert(x + pixel*4 - pixel/2.0f		    ,y + pixel*13   ,z + pixel*7 + pixel*2  ,left, up,1,1,1);
-                    MeshChunk->vert(x + pixel*4 + pixel*2 - pixel/2.0f  ,y + pixel*13   ,z + pixel*7 + pixel*2  ,right, up,1,1,1);
-                    MeshChunk->vert(x + pixel*4 + pixel*2 - pixel/2.0f  ,y + pixel*13   ,z + pixel*7            ,right, down,1,1,1);
-                    MeshChunk->vert(x + pixel*4	- pixel/2.0f	        ,y + pixel*13   ,z + pixel*7            ,left, down,1,1,1);
+                    MeshChunk->vert(x + pixel*4 - pixel/2.0f		    ,y + pixel*13   ,z + pixel*7 + pixel*2  ,left, up,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*4 + pixel*2 - pixel/2.0f  ,y + pixel*13   ,z + pixel*7 + pixel*2  ,right, up,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*4 + pixel*2 - pixel/2.0f  ,y + pixel*13   ,z + pixel*7            ,right, down,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*4	- pixel/2.0f	        ,y + pixel*13   ,z + pixel*7            ,left, down,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10356,10 +10316,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                     left = percent * blockType->leftPlane_x + texturePixel*7;
                     right = left + texturePixel*2;
 
-                    MeshChunk->vert(x - pixel   ,y + pixel*3   ,z + pixel*7            ,left, up,1,1,1);
-                    MeshChunk->vert(x + pixel   ,y + pixel*3   ,z + pixel*7            ,right, up,1,1,1);
-                    MeshChunk->vert(x + pixel   ,y + pixel*3   ,z + pixel*7 + pixel*2  ,right, down,1,1,1);
-                    MeshChunk->vert(x - pixel	,y + pixel*3   ,z + pixel*7 + pixel*2  ,left, down,1,1,1);
+                    MeshChunk->vert(x - pixel   ,y + pixel*3   ,z + pixel*7            ,left, up,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel   ,y + pixel*3   ,z + pixel*7            ,right, up,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel   ,y + pixel*3   ,z + pixel*7 + pixel*2  ,right, down,1, 1, 1, Block);
+                    MeshChunk->vert(x - pixel	,y + pixel*3   ,z + pixel*7 + pixel*2  ,left, down,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10372,10 +10332,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                 if(BlockSolid(x+1,y,z) && canPlaseTorch)
                 {
                     //x-1
-                    MeshChunk->vert(x + pixel*15   ,y + pixel*3    ,z + 0.4375f + pixel*2+pixel	,right	, down	,1,1,1);
-                    MeshChunk->vert(x + pixel*10 ,y + pixel*14   ,z + 0.4375f + pixel*2+pixel	,right	, up	,1,1,1);
-                    MeshChunk->vert(x + pixel*10 ,y + pixel*14   ,z + 0.4375f-pixel			,left	, up	,1,1,1);
-                    MeshChunk->vert(x + pixel*15  ,y + pixel*3    ,z + 0.4375f-pixel			,left	, down	,1,1,1);
+                    MeshChunk->vert(x + pixel*15   ,y + pixel*3    ,z + 0.4375f + pixel*2+pixel	,right	, down	,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*10 ,y + pixel*14   ,z + 0.4375f + pixel*2+pixel	,right	, up	,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*10 ,y + pixel*14   ,z + 0.4375f-pixel			,left	, up	,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*15  ,y + pixel*3    ,z + 0.4375f-pixel			,left	, down	,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10383,10 +10343,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                     iVertex += 4;
 
                     //x+1
-                    MeshChunk->vert(x + pixel*17    ,y	+ pixel*3	,z + 0.4375f-pixel            ,right, down,1,1,1);
-                    MeshChunk->vert(x + pixel*12  ,y + pixel*14  ,z + 0.4375f-pixel            ,right, up  ,1,1,1);
-                    MeshChunk->vert(x + pixel*12  ,y + pixel*14  ,z + 0.4375f + pixel*2+pixel  ,left, up   ,1,1,1);
-                    MeshChunk->vert(x + pixel*17    ,y + pixel*3   ,z + 0.4375f + pixel*2+pixel  ,left, down ,1,1,1);
+                    MeshChunk->vert(x + pixel*17    ,y	+ pixel*3	,z + 0.4375f-pixel            ,right, down,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*12  ,y + pixel*14  ,z + 0.4375f-pixel            ,right, up  ,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*12  ,y + pixel*14  ,z + 0.4375f + pixel*2+pixel  ,left, up   ,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*17    ,y + pixel*3   ,z + 0.4375f + pixel*2+pixel  ,left, down ,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10394,10 +10354,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                     iVertex += 4;
 
                     //z-1
-                    MeshChunk->vert(x + pixel*12+pixel		,y + pixel*14  ,z + pixel*9,right, up  ,1,1,1);
-                    MeshChunk->vert(x + pixel*10-pixel     ,y + pixel*14   ,z + pixel*9,left, up   ,1,1,1);
-                    MeshChunk->vert(x + pixel*15-pixel       ,y + pixel*3	,z + pixel*9,left, down ,1,1,1);
-                    MeshChunk->vert(x + pixel*17+pixel	    ,y + pixel*3	,z + pixel*9,right, down,1,1,1);
+                    MeshChunk->vert(x + pixel*12+pixel		,y + pixel*14  ,z + pixel*9,right, up  ,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*10-pixel     ,y + pixel*14   ,z + pixel*9,left, up   ,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*15-pixel       ,y + pixel*3	,z + pixel*9,left, down ,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*17+pixel	    ,y + pixel*3	,z + pixel*9,right, down,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10405,10 +10365,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                     iVertex += 4;
 
                     //z+1
-                    MeshChunk->vert(x + pixel*17+pixel	        ,y + pixel*3    ,z + pixel*7,left, down,1,1,1);
-                    MeshChunk->vert(x + pixel*15-pixel           ,y + pixel*3	,z + pixel*7,right, down,1,1,1);
-                    MeshChunk->vert(x + pixel*10-pixel         ,y + pixel*14	,z + pixel*7,right, up,1,1,1);
-                    MeshChunk->vert(x + pixel*12+pixel		    ,y + pixel*14	,z + pixel*7,left, up,1,1,1);
+                    MeshChunk->vert(x + pixel*17+pixel	        ,y + pixel*3    ,z + pixel*7,left, down,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*15-pixel           ,y + pixel*3	,z + pixel*7,right, down,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*10-pixel         ,y + pixel*14	,z + pixel*7,right, up,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*12+pixel		    ,y + pixel*14	,z + pixel*7,left, up,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10422,10 +10382,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                         left = percent * blockType->leftPlane_x + texturePixel*7;
                         right = left + texturePixel*2;
 
-                        MeshChunk->vert(x + pixel*10 + pixel/2.0f	,y + pixel*13   ,z + pixel*7 + pixel*2  ,left, up,1,1,1);
-                        MeshChunk->vert(x + pixel*12 + pixel/2.0f   ,y + pixel*13   ,z + pixel*7 + pixel*2  ,right, up,1,1,1);
-                        MeshChunk->vert(x + pixel*12 + pixel/2.0f   ,y + pixel*13   ,z + pixel*7            ,right, down,1,1,1);
-                        MeshChunk->vert(x + pixel*10 + pixel/2.0f   ,y + pixel*13   ,z + pixel*7            ,left, down,1,1,1);
+                        MeshChunk->vert(x + pixel*10 + pixel/2.0f	,y + pixel*13   ,z + pixel*7 + pixel*2  ,left, up,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel*12 + pixel/2.0f   ,y + pixel*13   ,z + pixel*7 + pixel*2  ,right, up,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel*12 + pixel/2.0f   ,y + pixel*13   ,z + pixel*7            ,right, down,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel*10 + pixel/2.0f   ,y + pixel*13   ,z + pixel*7            ,left, down,1, 1, 1, Block);
 
                         MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                         MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10440,10 +10400,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                         left = percent * blockType->leftPlane_x + texturePixel*7;
                         right = left + texturePixel*2;
 
-                        MeshChunk->vert(x + pixel * 15  ,y + pixel*3   ,z + pixel*7            ,left, up,1,1,1);
-                        MeshChunk->vert(x + pixel * 17  ,y + pixel*3   ,z + pixel*7            ,right, up,1,1,1);
-                        MeshChunk->vert(x + pixel * 17  ,y + pixel*3   ,z + pixel*7 + pixel*2  ,right, down,1,1,1);
-                        MeshChunk->vert(x + pixel * 15 	,y + pixel*3   ,z + pixel*7 + pixel*2  ,left, down,1,1,1);
+                        MeshChunk->vert(x + pixel * 15  ,y + pixel*3   ,z + pixel*7            ,left, up,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel * 17  ,y + pixel*3   ,z + pixel*7            ,right, up,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel * 17  ,y + pixel*3   ,z + pixel*7 + pixel*2  ,right, down,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel * 15 	,y + pixel*3   ,z + pixel*7 + pixel*2  ,left, down,1, 1, 1, Block);
 
                         MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                         MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10456,10 +10416,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                 if(BlockSolid(x,y,z-1) && canPlaseTorch)
                 {
                     //x-1
-                    MeshChunk->vert(x + pixel*9,y + pixel*3		,z - pixel-pixel	    ,right	, down	,1,1,1);
-                    MeshChunk->vert(x + pixel*9,y + pixel*14    ,z + pixel*4-pixel	,right	, up	,1,1,1);
-                    MeshChunk->vert(x + pixel*9,y + pixel*14    ,z + pixel*6+pixel	,left	, up	,1,1,1);
-                    MeshChunk->vert(x + pixel*9,y + pixel*3		,z + pixel+pixel	    ,left	, down	,1,1,1);
+                    MeshChunk->vert(x + pixel*9,y + pixel*3		,z - pixel-pixel	    ,right	, down	,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*9,y + pixel*14    ,z + pixel*4-pixel	,right	, up	,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*9,y + pixel*14    ,z + pixel*6+pixel	,left	, up	,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*9,y + pixel*3		,z + pixel+pixel	    ,left	, down	,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10467,10 +10427,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                     iVertex += 4;
 
                     //x+1
-                    MeshChunk->vert(x + pixel*7,y + pixel*3     ,z + pixel+pixel          ,right, down,1,1,1);
-                    MeshChunk->vert(x + pixel*7,y + pixel*14    ,z + pixel*6+pixel           ,right, up,1,1,1);
-                    MeshChunk->vert(x + pixel*7,y + pixel*14    ,z + pixel*4-pixel  ,left, up,1,1,1);
-                    MeshChunk->vert(x + pixel*7,y + pixel*3	    ,z - pixel-pixel ,left, down,1,1,1);
+                    MeshChunk->vert(x + pixel*7,y + pixel*3     ,z + pixel+pixel          ,right, down,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7,y + pixel*14    ,z + pixel*6+pixel           ,right, up,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7,y + pixel*14    ,z + pixel*4-pixel  ,left, up,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7,y + pixel*3	    ,z - pixel-pixel ,left, down,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10478,10 +10438,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                     iVertex += 4;
 
                     //z-1
-                    MeshChunk->vert(x + pixel*7	- pixel	        ,y + pixel*14   ,z + pixel*4,right, up,1,1,1);
-                    MeshChunk->vert(x + pixel*7 + pixel*2 + pixel    ,y + pixel*14   ,z + pixel*4,left, up,1,1,1);
-                    MeshChunk->vert(x + pixel*7 + pixel*2 + pixel   ,y + pixel*3    ,z - pixel,left, down,1,1,1);
-                    MeshChunk->vert(x + pixel*7	- pixel	        ,y + pixel*3    ,z - pixel,right, down,1,1,1);
+                    MeshChunk->vert(x + pixel*7	- pixel	        ,y + pixel*14   ,z + pixel*4,right, up,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7 + pixel*2 + pixel    ,y + pixel*14   ,z + pixel*4,left, up,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7 + pixel*2 + pixel   ,y + pixel*3    ,z - pixel,left, down,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7	- pixel	        ,y + pixel*3    ,z - pixel,right, down,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10489,10 +10449,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                     iVertex += 4;
 
                     //z+1
-                    MeshChunk->vert(x + pixel*7	-pixel	        ,y + pixel*3    ,z + pixel,left, down,1,1,1);
-                    MeshChunk->vert(x + pixel*7 + pixel*2+pixel   ,y + pixel*3	,z + pixel,right, down,1,1,1);
-                    MeshChunk->vert(x + pixel*7 + pixel*2+pixel  ,y + pixel*14	,z + pixel*6,right, up,1,1,1);
-                    MeshChunk->vert(x + pixel*7	-pixel	        ,y + pixel*14	,z + pixel*6,left, up,1,1,1);
+                    MeshChunk->vert(x + pixel*7	-pixel	        ,y + pixel*3    ,z + pixel,left, down,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7 + pixel*2+pixel   ,y + pixel*3	,z + pixel,right, down,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7 + pixel*2+pixel  ,y + pixel*14	,z + pixel*6,right, up,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7	-pixel	        ,y + pixel*14	,z + pixel*6,left, up,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10507,10 +10467,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                         left = percent * blockType->leftPlane_x + texturePixel*7;
                         right = left + texturePixel*2;
 
-                        MeshChunk->vert(x + pixel*7		        ,y + pixel*13   ,z + pixel*6 - pixel/2.0f  ,left, up,1,1,1);
-                        MeshChunk->vert(x + pixel*7 + pixel*2   ,y + pixel*13   ,z + pixel*6 - pixel/2.0f ,right, up,1,1,1);
-                        MeshChunk->vert(x + pixel*7 + pixel*2   ,y + pixel*13   ,z + pixel*4 - pixel/2.0f           ,right, down,1,1,1);
-                        MeshChunk->vert(x + pixel*7		        ,y + pixel*13   ,z + pixel*4 - pixel/2.0f         ,left, down,1,1,1);
+                        MeshChunk->vert(x + pixel*7		        ,y + pixel*13   ,z + pixel*6 - pixel/2.0f  ,left, up,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel*7 + pixel*2   ,y + pixel*13   ,z + pixel*6 - pixel/2.0f ,right, up,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel*7 + pixel*2   ,y + pixel*13   ,z + pixel*4 - pixel/2.0f           ,right, down,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel*7		        ,y + pixel*13   ,z + pixel*4 - pixel/2.0f         ,left, down,1, 1, 1, Block);
 
                         MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                         MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10526,10 +10486,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                         left = percent * blockType->leftPlane_x + texturePixel*7;
                         right = left + texturePixel*2;
 
-                        MeshChunk->vert(x + pixel*7		        ,y + pixel*3   ,z + pixel  ,left, up,1,1,1);
-                        MeshChunk->vert(x + pixel*7             ,y + pixel*3   ,z - pixel  ,right, up,1,1,1);
-                        MeshChunk->vert(x + pixel*9             ,y + pixel*3   ,z - pixel  ,right, down,1,1,1);
-                        MeshChunk->vert(x + pixel*9		        ,y + pixel*3   ,z + pixel  ,left, down,1,1,1);
+                        MeshChunk->vert(x + pixel*7		        ,y + pixel*3   ,z + pixel  ,left, up,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel*7             ,y + pixel*3   ,z - pixel  ,right, up,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel*9             ,y + pixel*3   ,z - pixel  ,right, down,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel*9		        ,y + pixel*3   ,z + pixel  ,left, down,1, 1, 1, Block);
 
                         MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                         MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10543,10 +10503,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                 {
 
                     //x-1
-                    MeshChunk->vert(x + pixel*9,y + pixel*3		,z + pixel*15-pixel	    ,right	, down	,1,1,1);
-                    MeshChunk->vert(x + pixel*9,y + pixel*14    ,z + pixel*10-pixel	,right	, up	,1,1,1);
-                    MeshChunk->vert(x + pixel*9,y + pixel*14    ,z + pixel*12+pixel	,left	, up	,1,1,1);
-                    MeshChunk->vert(x + pixel*9,y + pixel*3		,z + pixel*17+pixel	    ,left	, down	,1,1,1);
+                    MeshChunk->vert(x + pixel*9,y + pixel*3		,z + pixel*15-pixel	    ,right	, down	,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*9,y + pixel*14    ,z + pixel*10-pixel	,right	, up	,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*9,y + pixel*14    ,z + pixel*12+pixel	,left	, up	,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*9,y + pixel*3		,z + pixel*17+pixel	    ,left	, down	,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10554,10 +10514,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                     iVertex += 4;
 
                     //x+1
-                    MeshChunk->vert(x + pixel*7,y + pixel*3     ,z + pixel*17+pixel         ,right, down,1,1,1);
-                    MeshChunk->vert(x + pixel*7,y + pixel*14    ,z + pixel*12+pixel           ,right, up,1,1,1);
-                    MeshChunk->vert(x + pixel*7,y + pixel*14    ,z + pixel*10-pixel  ,left, up,1,1,1);
-                    MeshChunk->vert(x + pixel*7,y + pixel*3	    ,z + pixel*15-pixel ,left, down,1,1,1);
+                    MeshChunk->vert(x + pixel*7,y + pixel*3     ,z + pixel*17+pixel         ,right, down,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7,y + pixel*14    ,z + pixel*12+pixel           ,right, up,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7,y + pixel*14    ,z + pixel*10-pixel  ,left, up,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7,y + pixel*3	    ,z + pixel*15-pixel ,left, down,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10565,10 +10525,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                     iVertex += 4;
 
                     //z-1
-                    MeshChunk->vert(x + pixel*7-pixel		        ,y + pixel*14   ,z + pixel*10,right, up,1,1,1);
-                    MeshChunk->vert(x + pixel*7 + pixel*2+pixel  ,y + pixel*14   ,z + pixel*10,left, up,1,1,1);
-                    MeshChunk->vert(x + pixel*7 + pixel*2+pixel   ,y + pixel*3    ,z + pixel*15,left, down,1,1,1);
-                    MeshChunk->vert(x + pixel*7-pixel		        ,y + pixel*3    ,z + pixel*15,right, down,1,1,1);
+                    MeshChunk->vert(x + pixel*7-pixel		        ,y + pixel*14   ,z + pixel*10,right, up,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7 + pixel*2+pixel  ,y + pixel*14   ,z + pixel*10,left, up,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7 + pixel*2+pixel   ,y + pixel*3    ,z + pixel*15,left, down,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7-pixel		        ,y + pixel*3    ,z + pixel*15,right, down,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10576,10 +10536,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                     iVertex += 4;
 
                     //z+1
-                    MeshChunk->vert(x + pixel*7-pixel		        ,y + pixel*3    ,z + pixel*17,left, down,1,1,1);
-                    MeshChunk->vert(x + pixel*7 + pixel*2+pixel   ,y + pixel*3	,z + pixel*17,right, down,1,1,1);
-                    MeshChunk->vert(x + pixel*7 + pixel*2+pixel   ,y + pixel*14	,z + pixel*12,right, up,1,1,1);
-                    MeshChunk->vert(x + pixel*7-pixel		        ,y + pixel*14	,z + pixel*12,left, up,1,1,1);
+                    MeshChunk->vert(x + pixel*7-pixel		        ,y + pixel*3    ,z + pixel*17,left, down,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7 + pixel*2+pixel   ,y + pixel*3	,z + pixel*17,right, down,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7 + pixel*2+pixel   ,y + pixel*14	,z + pixel*12,right, up,1, 1, 1, Block);
+                    MeshChunk->vert(x + pixel*7-pixel		        ,y + pixel*14	,z + pixel*12,left, up,1, 1, 1, Block);
 
                     MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                     MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10594,10 +10554,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                         left = percent * blockType->leftPlane_x + texturePixel*7;
                         right = left + texturePixel*2;
 
-                        MeshChunk->vert(x + pixel*7		        ,y + pixel*13   ,z + pixel*12 + pixel/2.0f ,left, up,1,1,1);
-                        MeshChunk->vert(x + pixel*7 + pixel*2   ,y + pixel*13   ,z + pixel*12 + pixel/2.0f ,right, up,1,1,1);
-                        MeshChunk->vert(x + pixel*7 + pixel*2   ,y + pixel*13   ,z + pixel*10 + pixel/2.0f ,right, down,1,1,1);
-                        MeshChunk->vert(x + pixel*7		        ,y + pixel*13   ,z + pixel*10 + pixel/2.0f ,left, down,1,1,1);
+                        MeshChunk->vert(x + pixel*7		        ,y + pixel*13   ,z + pixel*12 + pixel/2.0f ,left, up,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel*7 + pixel*2   ,y + pixel*13   ,z + pixel*12 + pixel/2.0f ,right, up,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel*7 + pixel*2   ,y + pixel*13   ,z + pixel*10 + pixel/2.0f ,right, down,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel*7		        ,y + pixel*13   ,z + pixel*10 + pixel/2.0f ,left, down,1, 1, 1, Block);
 
                         MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                         MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10613,10 +10573,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
                         left = percent * blockType->leftPlane_x + texturePixel*7;
                         right = left + texturePixel*2;
 
-                        MeshChunk->vert(x + pixel*7		        ,y + pixel*3   ,z + pixel *17  ,left, up,1,1,1);
-                        MeshChunk->vert(x + pixel*7             ,y + pixel*3   ,z + pixel *15 ,right, up,1,1,1);
-                        MeshChunk->vert(x + pixel*9             ,y + pixel*3   ,z + pixel *15 ,right, down,1,1,1);
-                        MeshChunk->vert(x + pixel*9		        ,y + pixel*3   ,z + pixel *17 ,left, down,1,1,1);
+                        MeshChunk->vert(x + pixel*7		        ,y + pixel*3   ,z + pixel *17  ,left, up,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel*7             ,y + pixel*3   ,z + pixel *15 ,right, up,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel*9             ,y + pixel*3   ,z + pixel *15 ,right, down,1, 1, 1, Block);
+                        MeshChunk->vert(x + pixel*9		        ,y + pixel*3   ,z + pixel *17 ,left, down,1, 1, 1, Block);
 
                         MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
                         MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10848,10 +10808,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
 
             light1 = light2 = light3 = light4 = BlockColorx1;
 
-            MeshChunk->vert(x, y, z+1, right, down, light1.x,light1.y,light1.z);
-            MeshChunk->vert(x, y+1, z+1, right, up, light2.x,light2.y,light2.z);
-            MeshChunk->vert(x+1, y+1, z, left, up, light4.x,light4.y,light4.z);
-            MeshChunk->vert(x+1, y, z, left, down, light3.x,light3.y,light3.z);
+            MeshChunk->vert(x, y, z+1, right, down, light1.x,light1.y,light1.z, Block);
+            MeshChunk->vert(x, y+1, z+1, right, up, light2.x,light2.y,light2.z, Block);
+            MeshChunk->vert(x+1, y+1, z, left, up, light4.x,light4.y,light4.z, Block);
+            MeshChunk->vert(x+1, y, z, left, down, light3.x,light3.y,light3.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10872,10 +10832,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
 
             light1 = light2 = light3 = light4 = BlockColorx2;
 
-            MeshChunk->vert(x, y, z, right, down, light3.x,light3.y,light3.z);
-            MeshChunk->vert(x, y+1, z, right, up, light4.x,light4.y,light4.z);
-            MeshChunk->vert(x+1, y+1, z+1, left, up, light2.x,light2.y,light2.z);
-            MeshChunk->vert(x+1, y, z+1, left, down, light1.x,light1.y,light1.z);
+            MeshChunk->vert(x, y, z, right, down, light3.x,light3.y,light3.z, Block);
+            MeshChunk->vert(x, y+1, z, right, up, light4.x,light4.y,light4.z, Block);
+            MeshChunk->vert(x+1, y+1, z+1, left, up, light2.x,light2.y,light2.z, Block);
+            MeshChunk->vert(x+1, y, z+1, left, down, light1.x,light1.y,light1.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10895,10 +10855,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
 
             light1 = light2 = light3 = light4 = BlockColorx2;
 
-            MeshChunk->vert(x+1, y, z+1, right, down, light3.x,light3.y,light3.z);
-            MeshChunk->vert(x+1, y+1, z+1, right, up, light4.x,light4.y,light4.z);
-            MeshChunk->vert(x, y+1, z, left, up, light2.x,light2.y,light2.z);
-            MeshChunk->vert(x, y, z, left, down, light1.x,light1.y,light1.z);
+            MeshChunk->vert(x+1, y, z+1, right, down, light3.x,light3.y,light3.z, Block);
+            MeshChunk->vert(x+1, y+1, z+1, right, up, light4.x,light4.y,light4.z, Block);
+            MeshChunk->vert(x, y+1, z, left, up, light2.x,light2.y,light2.z, Block);
+            MeshChunk->vert(x, y, z, left, down, light1.x,light1.y,light1.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10918,10 +10878,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
 
             light1 = light2 = light3 = light4 = BlockColorx1;
 
-            MeshChunk->vert(x+1, y, z, right, down, light1.x,light1.y,light1.z);
-            MeshChunk->vert(x+1, y+1, z, right, up, light2.x,light2.y,light2.z);
-            MeshChunk->vert(x, y+1, z+1, left, up, light4.x,light4.y,light4.z);
-            MeshChunk->vert(x, y, z+1, left, down, light3.x,light3.y,light3.z);
+            MeshChunk->vert(x+1, y, z, right, down, light1.x,light1.y,light1.z, Block);
+            MeshChunk->vert(x+1, y+1, z, right, up, light2.x,light2.y,light2.z, Block);
+            MeshChunk->vert(x, y+1, z+1, left, up, light4.x,light4.y,light4.z, Block);
+            MeshChunk->vert(x, y, z+1, left, down, light3.x,light3.y,light3.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10952,10 +10912,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
         {
             light1 = light2 = light3 = light4 = BlockColorx2;
 
-            MeshChunk->vert(x+pixel*4, y, z+1, right, down, light1.x,light1.y,light1.z);
-            MeshChunk->vert(x+pixel*4, y+1, z+1, right, up, light2.x,light2.y,light2.z);
-            MeshChunk->vert(x+pixel*4, y+1, z, left, up, light4.x,light4.y,light4.z);
-            MeshChunk->vert(x+pixel*4, y, z, left, down, light3.x,light3.y,light3.z);
+            MeshChunk->vert(x+pixel*4, y, z+1, right, down, light1.x,light1.y,light1.z, Block);
+            MeshChunk->vert(x+pixel*4, y+1, z+1, right, up, light2.x,light2.y,light2.z, Block);
+            MeshChunk->vert(x+pixel*4, y+1, z, left, up, light4.x,light4.y,light4.z, Block);
+            MeshChunk->vert(x+pixel*4, y, z, left, down, light3.x,light3.y,light3.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10967,10 +10927,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
         {
             light1 = light2 = light3 = light4 = BlockColorx2;
 
-            MeshChunk->vert(x+pixel*4, y, z, right, down, light3.x,light3.y,light3.z);
-            MeshChunk->vert(x+pixel*4, y+1, z, right, up, light4.x,light4.y,light4.z);
-            MeshChunk->vert(x+pixel*4, y+1, z+1, left, up, light2.x,light2.y,light2.z);
-            MeshChunk->vert(x+pixel*4, y, z+1, left, down, light1.x,light1.y,light1.z);
+            MeshChunk->vert(x+pixel*4, y, z, right, down, light3.x,light3.y,light3.z, Block);
+            MeshChunk->vert(x+pixel*4, y+1, z, right, up, light4.x,light4.y,light4.z, Block);
+            MeshChunk->vert(x+pixel*4, y+1, z+1, left, up, light2.x,light2.y,light2.z, Block);
+            MeshChunk->vert(x+pixel*4, y, z+1, left, down, light1.x,light1.y,light1.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10982,10 +10942,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
         {
             light1 = light2 = light3 = light4 = BlockColorx2;
 
-            MeshChunk->vert(x+pixel*12, y, z, right, down, light3.x,light3.y,light3.z);
-            MeshChunk->vert(x+pixel*12, y+1, z, right, up, light4.x,light4.y,light4.z);
-            MeshChunk->vert(x+pixel*12, y+1, z+1, left, up, light2.x,light2.y,light2.z);
-            MeshChunk->vert(x+pixel*12, y, z+1, left, down, light1.x,light1.y,light1.z);
+            MeshChunk->vert(x+pixel*12, y, z, right, down, light3.x,light3.y,light3.z, Block);
+            MeshChunk->vert(x+pixel*12, y+1, z, right, up, light4.x,light4.y,light4.z, Block);
+            MeshChunk->vert(x+pixel*12, y+1, z+1, left, up, light2.x,light2.y,light2.z, Block);
+            MeshChunk->vert(x+pixel*12, y, z+1, left, down, light1.x,light1.y,light1.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -10997,10 +10957,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
         {
             light1 = light2 = light3 = light4 = BlockColorx2;
 
-            MeshChunk->vert(x+pixel*12, y, z+1, right, down, light1.x,light1.y,light1.z);
-            MeshChunk->vert(x+pixel*12, y+1, z+1, right, up, light2.x,light2.y,light2.z);
-            MeshChunk->vert(x+pixel*12, y+1, z, left, up, light4.x,light4.y,light4.z);
-            MeshChunk->vert(x+pixel*12, y, z, left, down, light3.x,light3.y,light3.z);
+            MeshChunk->vert(x+pixel*12, y, z+1, right, down, light1.x,light1.y,light1.z, Block);
+            MeshChunk->vert(x+pixel*12, y+1, z+1, right, up, light2.x,light2.y,light2.z, Block);
+            MeshChunk->vert(x+pixel*12, y+1, z, left, up, light4.x,light4.y,light4.z, Block);
+            MeshChunk->vert(x+pixel*12, y, z, left, down, light3.x,light3.y,light3.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -11012,10 +10972,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
         {
             light1 = light2 = light3 = light4 = BlockColorz2;
 
-            MeshChunk->vert(x, y+1, z+pixel*4, right, up, light2.x,light2.y,light2.z);
-            MeshChunk->vert(x+1, y+1, z+pixel*4, left, up, light4.x,light4.y,light4.z);
-            MeshChunk->vert(x+1, y, z+pixel*4, left, down, light3.x,light3.y,light3.z);
-            MeshChunk->vert(x, y, z+pixel*4, right, down, light1.x,light1.y,light1.z);
+            MeshChunk->vert(x, y+1, z+pixel*4, right, up, light2.x,light2.y,light2.z, Block);
+            MeshChunk->vert(x+1, y+1, z+pixel*4, left, up, light4.x,light4.y,light4.z, Block);
+            MeshChunk->vert(x+1, y, z+pixel*4, left, down, light3.x,light3.y,light3.z, Block);
+            MeshChunk->vert(x, y, z+pixel*4, right, down, light1.x,light1.y,light1.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -11027,10 +10987,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
         {
             light1 = light2 = light3 = light4 = BlockColorz2;
 
-            MeshChunk->vert(x, y, z+pixel*4, left, down, light1.x,light1.y,light1.z);
-            MeshChunk->vert(x+1, y, z+pixel*4, right, down, light3.x,light3.y,light3.z);
-            MeshChunk->vert(x+1, y+1, z+pixel*4, right, up, light4.x,light4.y,light4.z);
-            MeshChunk->vert(x, y+1, z+pixel*4, left, up, light2.x,light2.y,light2.z);
+            MeshChunk->vert(x, y, z+pixel*4, left, down, light1.x,light1.y,light1.z, Block);
+            MeshChunk->vert(x+1, y, z+pixel*4, right, down, light3.x,light3.y,light3.z, Block);
+            MeshChunk->vert(x+1, y+1, z+pixel*4, right, up, light4.x,light4.y,light4.z, Block);
+            MeshChunk->vert(x, y+1, z+pixel*4, left, up, light2.x,light2.y,light2.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -11042,10 +11002,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
         {
             light1 = light2 = light3 = light4 = BlockColorz2;
 
-            MeshChunk->vert(x, y, z+pixel*12, left, down, light1.x,light1.y,light1.z);
-            MeshChunk->vert(x+1, y, z+pixel*12, right, down, light3.x,light3.y,light3.z);
-            MeshChunk->vert(x+1, y+1, z+pixel*12, right, up, light4.x,light4.y,light4.z);
-            MeshChunk->vert(x, y+1, z+pixel*12, left, up, light2.x,light2.y,light2.z);
+            MeshChunk->vert(x, y, z+pixel*12, left, down, light1.x,light1.y,light1.z, Block);
+            MeshChunk->vert(x+1, y, z+pixel*12, right, down, light3.x,light3.y,light3.z, Block);
+            MeshChunk->vert(x+1, y+1, z+pixel*12, right, up, light4.x,light4.y,light4.z, Block);
+            MeshChunk->vert(x, y+1, z+pixel*12, left, up, light2.x,light2.y,light2.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -11057,10 +11017,10 @@ void CraftWorld::GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk
         {
             light1 = light2 = light3 = light4 = BlockColorz2;
 
-            MeshChunk->vert(x, y+1, z+pixel*12, right, up, light2.x,light2.y,light2.z);
-            MeshChunk->vert(x+1, y+1, z+pixel*12, left, up, light4.x,light4.y,light4.z);
-            MeshChunk->vert(x+1, y, z+pixel*12, left, down, light3.x,light3.y,light3.z);
-            MeshChunk->vert(x, y, z+pixel*12, right, down, light1.x,light1.y,light1.z);
+            MeshChunk->vert(x, y+1, z+pixel*12, right, up, light2.x,light2.y,light2.z,Block);
+            MeshChunk->vert(x+1, y+1, z+pixel*12, left, up, light4.x,light4.y,light4.z,Block);
+            MeshChunk->vert(x+1, y, z+pixel*12, left, down, light3.x,light3.y,light3.z,Block);
+            MeshChunk->vert(x, y, z+pixel*12, right, down, light1.x,light1.y,light1.z,Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -11526,10 +11486,10 @@ void CraftWorld::GetNormalBlock(int x,int y, int z, int &iVertex, SimpleMeshChun
             }
         }
 
-        MeshChunk->vert(x, y, z+1, right, down, light1.x,light1.y,light1.z);
-        MeshChunk->vert(x, y+1, z+1, right, up, light2.x,light2.y,light2.z);
-        MeshChunk->vert(x, y+1, z, left, up, light4.x,light4.y,light4.z);
-        MeshChunk->vert(x, y, z, left, down,light3.x,light3.y,light3.z);
+        MeshChunk->vert(x, y, z+1, right, down, light1.x,light1.y,light1.z,Block);
+        MeshChunk->vert(x, y+1, z+1, right, up, light2.x,light2.y,light2.z,Block);
+        MeshChunk->vert(x, y+1, z, left, up, light4.x,light4.y,light4.z,Block);
+        MeshChunk->vert(x, y, z, left, down,light3.x,light3.y,light3.z,Block);
 
         MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
         MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -11703,10 +11663,10 @@ void CraftWorld::GetNormalBlock(int x,int y, int z, int &iVertex, SimpleMeshChun
             }
         }
 
-        MeshChunk->vert(x+1, y, z, right, down, light3.x,light3.y,light3.z);
-        MeshChunk->vert(x+1, y+1, z, right, up, light4.x,light4.y,light4.z);
-        MeshChunk->vert(x+1, y+1, z+1, left, up, light2.x,light2.y,light2.z);
-        MeshChunk->vert(x+1, y, z+1, left, down, light1.x,light1.y,light1.z);
+        MeshChunk->vert(x+1, y, z, right, down, light3.x,light3.y,light3.z,Block);
+        MeshChunk->vert(x+1, y+1, z, right, up, light4.x,light4.y,light4.z,Block);
+        MeshChunk->vert(x+1, y+1, z+1, left, up, light2.x,light2.y,light2.z,Block);
+        MeshChunk->vert(x+1, y, z+1, left, down, light1.x,light1.y,light1.z,Block);
 
         MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
         MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -11902,10 +11862,10 @@ void CraftWorld::GetNormalBlock(int x,int y, int z, int &iVertex, SimpleMeshChun
         up = percent*blockType->downPlane_y;
         down = percent*blockType->downPlane_y+percent;
 
-        MeshChunk->vert(x, y, z, left, up, light1.x,light1.y,light1.z);
-        MeshChunk->vert(x+1, y, z, right, up, light2.x,light2.y,light2.z);
-        MeshChunk->vert(x+1, y, z+1, right, down, light3.x,light3.y,light3.z);
-        MeshChunk->vert(x, y, z+1, left, down, light4.x,light4.y,light4.z);
+        MeshChunk->vert(x, y, z, left, up, light1.x,light1.y,light1.z,Block);
+        MeshChunk->vert(x+1, y, z, right, up, light2.x,light2.y,light2.z,Block);
+        MeshChunk->vert(x+1, y, z+1, right, down, light3.x,light3.y,light3.z,Block);
+        MeshChunk->vert(x, y, z+1, left, down, light4.x,light4.y,light4.z,Block);
 
         MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
         MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -12115,10 +12075,10 @@ void CraftWorld::GetNormalBlock(int x,int y, int z, int &iVertex, SimpleMeshChun
         up = percent*blockType->upPlane_y;
         down = percent*blockType->upPlane_y+percent;
 
-        MeshChunk->vert(x, y+1, z+1, left, up, light1.x,light1.y,light1.z);
-        MeshChunk->vert(x+1, y+1, z+1, right, up, light2.x,light2.y,light2.z);
-        MeshChunk->vert(x+1, y+1, z, right, down, light3.x,light3.y,light3.z);
-        MeshChunk->vert(x, y+1, z, left, down, light4.x,light4.y,light4.z);
+        MeshChunk->vert(x, y+1, z+1, left, up, light1.x,light1.y,light1.z,Block);
+        MeshChunk->vert(x+1, y+1, z+1, right, up, light2.x,light2.y,light2.z,Block);
+        MeshChunk->vert(x+1, y+1, z, right, down, light3.x,light3.y,light3.z,Block);
+        MeshChunk->vert(x, y+1, z, left, down, light4.x,light4.y,light4.z,Block);
 
         MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
         MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -12337,10 +12297,10 @@ void CraftWorld::GetNormalBlock(int x,int y, int z, int &iVertex, SimpleMeshChun
             }
         }
 
-        MeshChunk->vert(x, y+1, z, right, up, light2.x,light2.y,light2.z);
-        MeshChunk->vert(x+1, y+1, z, left, up, light4.x,light4.y,light4.z);
-        MeshChunk->vert(x+1, y, z, left, down, light3.x,light3.y,light3.z);
-        MeshChunk->vert(x, y, z, right, down, light1.x,light1.y,light1.z);
+        MeshChunk->vert(x, y+1, z, right, up, light2.x,light2.y,light2.z,Block);
+        MeshChunk->vert(x+1, y+1, z, left, up, light4.x,light4.y,light4.z,Block);
+        MeshChunk->vert(x+1, y, z, left, down, light3.x,light3.y,light3.z,Block);
+        MeshChunk->vert(x, y, z, right, down, light1.x,light1.y,light1.z,Block);
 
         MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
         MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -12557,10 +12517,10 @@ void CraftWorld::GetNormalBlock(int x,int y, int z, int &iVertex, SimpleMeshChun
             }
         }
 
-        MeshChunk->vert(x, y, z+1, left, down, light1.x,light1.y,light1.z);
-        MeshChunk->vert(x+1, y, z+1, right, down, light3.x,light3.y,light3.z);
-        MeshChunk->vert(x+1, y+1, z+1, right, up, light4.x,light4.y,light4.z);
-        MeshChunk->vert(x, y+1, z+1, left, up, light2.x,light2.y,light2.z);
+        MeshChunk->vert(x, y, z+1, left, down, light1.x,light1.y,light1.z,Block);
+        MeshChunk->vert(x+1, y, z+1, right, down, light3.x,light3.y,light3.z,Block);
+        MeshChunk->vert(x+1, y+1, z+1, right, up, light4.x,light4.y,light4.z,Block);
+        MeshChunk->vert(x, y+1, z+1, left, up, light2.x,light2.y,light2.z,Block);
 
         MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
         MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -12849,7 +12809,7 @@ void CraftWorld::rebuildNearestTransparentChunks(int id,Vector3 pos)
         chunkNumber = getChunkId(temp);
         if(chunkNumber != -1)
         {
-            RebuildTransparentMeshChunk(chunkNumber);
+            RebuildFullMeshChunk(chunkNumber);
         }
 
         //now check for other with this... //needed by shadows
@@ -12859,7 +12819,7 @@ void CraftWorld::rebuildNearestTransparentChunks(int id,Vector3 pos)
             chunkNumber = getChunkId(temp);
             if(chunkNumber != -1)
             {
-                RebuildTransparentMeshChunk(chunkNumber);
+                RebuildFullMeshChunk(chunkNumber);
             }
         }
 
@@ -12869,7 +12829,7 @@ void CraftWorld::rebuildNearestTransparentChunks(int id,Vector3 pos)
             chunkNumber = getChunkId(temp);
             if(chunkNumber != -1)
             {
-                RebuildTransparentMeshChunk(chunkNumber);
+                RebuildFullMeshChunk(chunkNumber);
             }
         }
     }
@@ -12883,7 +12843,7 @@ void CraftWorld::rebuildNearestTransparentChunks(int id,Vector3 pos)
         chunkNumber = getChunkId(temp);
         if(chunkNumber != -1)
         {
-            RebuildTransparentMeshChunk(chunkNumber);
+            RebuildFullMeshChunk(chunkNumber);
         }
 
         if(test.z != 0)
@@ -12892,7 +12852,7 @@ void CraftWorld::rebuildNearestTransparentChunks(int id,Vector3 pos)
             chunkNumber = getChunkId(temp);
             if(chunkNumber != -1)
             {
-                RebuildTransparentMeshChunk(chunkNumber);
+                RebuildFullMeshChunk(chunkNumber);
             }
         }
     }
@@ -12905,7 +12865,7 @@ void CraftWorld::rebuildNearestTransparentChunks(int id,Vector3 pos)
         chunkNumber = getChunkId(temp);
         if(chunkNumber != -1)
         {
-            RebuildTransparentMeshChunk(chunkNumber);
+            RebuildFullMeshChunk(chunkNumber);
         }
 
         if(test.x != 0)
@@ -12915,7 +12875,7 @@ void CraftWorld::rebuildNearestTransparentChunks(int id,Vector3 pos)
             chunkNumber = getChunkId(temp);
             if(chunkNumber != -1)
             {
-                RebuildTransparentMeshChunk(chunkNumber);
+                RebuildFullMeshChunk(chunkNumber);
             }
         }
     }
@@ -15378,12 +15338,18 @@ void CraftWorld::FetchNearestChunks()
 
 void CraftWorld::drawWorld(Frustum &camFrustum, bool camUpdate)
 {
+	myAnimationTime += myAnimationTimer.GetDeltaTime();
     //DrawSetCulling(true);
     drawnTriangles = 0;
     //normal not transparent chunks
     sceGuColor(0xFFFFFFFF);
     sceGuDisable(GU_BLEND);
     sceGuDisable(GU_ALPHA_TEST);
+
+	//transparent chunks
+	sceGuEnable(GU_DEPTH_TEST);
+	sceGuEnable(GU_ALPHA_TEST);
+	sceGuEnable(GU_BLEND);
 
     int lowestDistanse = 999;
     int toUpdateId = -1;
@@ -15407,7 +15373,7 @@ void CraftWorld::drawWorld(Frustum &camFrustum, bool camUpdate)
 
                         //check if we need to build vertices of this chunk
                         if((!mChunks[i]->created || mChunks[i]->needUpdate) && chunksCreatedInFrameCount == 0 && !found)
-                        {
+                        { 
                             int distance = FastDistance2d(abs(playerPos.x-(mChunks[i]->chunkStartX+7)),abs(playerPos.z-(mChunks[i]->chunkStartZ+7)))+abs(playerPos.y-(mChunks[i]->chunkStartY+7))*0.85f;
                             //int distance = abs(playerPos.x-(mChunks[i]->chunkStartX+8))+abs(playerPos.y-(mChunks[i]->chunkStartY+8))+abs(playerPos.z-(mChunks[i]->chunkStartZ+8));
                             if(distance < lowestDistanse)
@@ -15423,7 +15389,7 @@ void CraftWorld::drawWorld(Frustum &camFrustum, bool camUpdate)
 
                         if(mChunks[i]->trienglesCount > 0)
                         {
-                            mChunks[i]->drawChunk();
+							mChunks[i]->drawChunk(playerPos, false);
                             drawnTriangles += mChunks[i]->trienglesCount;
                         }
                     }
@@ -15473,7 +15439,7 @@ void CraftWorld::drawWorld(Frustum &camFrustum, bool camUpdate)
             {
                 if(mTransparentChunks[i]->inFrustum == true)
                 {
-                    mTransparentChunks[i]->drawChunk();
+                    mTransparentChunks[i]->drawChunk(playerPos, true);
                     drawnTriangles += mTransparentChunks[i]->trienglesCount;
                 }
             }
@@ -15486,9 +15452,15 @@ void CraftWorld::drawWorld(Frustum &camFrustum, bool camUpdate)
 	oslAudioVSync();
 }
 
+void CraftWorld::endDrawChunk() {
+	for (int i = 0; i < mTransparentChunks.size(); i++) {
+		mTransparentChunks[i]->endDrawChunk();
+	}
+}
+
 void CraftWorld::UpdatePlayerZoneBB(Vector3 playerPosition)
 {
-    playerPos = playerPosition;
+    playerPos = playerPosition; 
     playerZoneBB = BoundingBox(Vector3(playerPosition.x - playerZoneSize.x,playerPosition.y - playerZoneSize.y,playerPosition.z - playerZoneSize.z),Vector3(playerPosition.x + playerZoneSize.x,playerPosition.y + playerZoneSize.y,playerPosition.z + playerZoneSize.z));
 }
 
@@ -17716,16 +17688,16 @@ void CraftWorld::BuildWorldBlockPlaneNoCheck(BaseBlock *blockType, int x,int y, 
             up = percent*blockType->leftPlane_y + (16-point2.y)*texturePixel;
             down = percent*blockType->leftPlane_y + (16-point4.y)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light1.x,light1.y,light1.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light4.x,light4.y,light4.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light3.x,light3.y,light3.z);
 
@@ -17850,16 +17822,16 @@ void CraftWorld::BuildWorldBlockPlaneNoCheck(BaseBlock *blockType, int x,int y, 
             up = percent*blockType->rightPlane_y + (16-point3.y)*texturePixel;
             down = percent*blockType->rightPlane_y + (16-point1.y)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light4.x,light4.y,light4.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light1.x,light1.y,light1.z);
 
@@ -18029,16 +18001,16 @@ void CraftWorld::BuildWorldBlockPlaneNoCheck(BaseBlock *blockType, int x,int y, 
             up = percent*blockType->downPlane_y + (16-point1.z)*texturePixel;
             down = percent*blockType->downPlane_y + (16-point3.z)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light1.x,light1.y,light1.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light4.x,light4.y,light4.z);
 
@@ -18208,16 +18180,16 @@ void CraftWorld::BuildWorldBlockPlaneNoCheck(BaseBlock *blockType, int x,int y, 
             up = percent*blockType->upPlane_y + (16-point2.z)*texturePixel;
             down = percent*blockType->upPlane_y + (16-point4.z)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light1.x,light1.y,light1.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light4.x,light4.y,light4.z);
 
@@ -18398,16 +18370,16 @@ void CraftWorld::BuildWorldBlockPlaneNoCheck(BaseBlock *blockType, int x,int y, 
             up = percent*blockType->botPlane_y + (16-point2.y)*texturePixel;
             down = percent*blockType->botPlane_y + (16-point4.y)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light4.x,light4.y,light4.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light1.x,light1.y,light1.z);
 
@@ -18586,16 +18558,16 @@ void CraftWorld::BuildWorldBlockPlaneNoCheck(BaseBlock *blockType, int x,int y, 
             up = percent*blockType->forPlane_y + (16-point3.y)*texturePixel;
             down = percent*blockType->forPlane_y + (16-point1.y)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light1.x,light1.y,light1.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light4.x,light4.y,light4.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light2.x,light2.y,light2.z);
 
@@ -18809,10 +18781,10 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
                 right += percent;
             }
 
-            MeshChunk->vert(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, right, down, light1.x,light1.y,light1.z);
-            MeshChunk->vert(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, right, up, light2.x,light2.y,light2.z);
-            MeshChunk->vert(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, left, up, light4.x,light4.y,light4.z);
-            MeshChunk->vert(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, left, down, light3.x,light3.y,light3.z);
+            MeshChunk->vert(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, right, down, light1.x,light1.y,light1.z, Block);
+            MeshChunk->vert(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, right, up, light2.x,light2.y,light2.z, Block);
+            MeshChunk->vert(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, left, up, light4.x,light4.y,light4.z, Block);
+            MeshChunk->vert(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, left, down, light3.x,light3.y,light3.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -18982,10 +18954,10 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
                 right += percent;
             }
 
-            MeshChunk->vert(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, right, down, light3.x,light3.y,light3.z);
-            MeshChunk->vert(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, right, up, light4.x,light4.y,light4.z);
-            MeshChunk->vert(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, left, up, light2.x,light2.y,light2.z);
-            MeshChunk->vert(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, left, down, light1.x,light1.y,light1.z);
+            MeshChunk->vert(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, right, down, light3.x,light3.y,light3.z, Block);
+            MeshChunk->vert(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, right, up, light4.x,light4.y,light4.z, Block);
+            MeshChunk->vert(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, left, up, light2.x,light2.y,light2.z, Block);
+            MeshChunk->vert(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, left, down, light1.x,light1.y,light1.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -19206,10 +19178,10 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
                 right += percent;
             }
 
-            MeshChunk->vert(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, left, up, light1.x,light1.y,light1.z);
-            MeshChunk->vert(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, right, up, light2.x,light2.y,light2.z);
-            MeshChunk->vert(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, right, down, light3.x,light3.y,light3.z);
-            MeshChunk->vert(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, left, down, light4.x,light4.y,light4.z);
+            MeshChunk->vert(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, left, up, light1.x,light1.y,light1.z, Block);
+            MeshChunk->vert(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, right, up, light2.x,light2.y,light2.z, Block);
+            MeshChunk->vert(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, right, down, light3.x,light3.y,light3.z, Block);
+            MeshChunk->vert(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, left, down, light4.x,light4.y,light4.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -19435,10 +19407,10 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
                 right += percent;
             }
 
-            MeshChunk->vert(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, left, up, light1.x,light1.y,light1.z);
-            MeshChunk->vert(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, right, up, light2.x,light2.y,light2.z);
-            MeshChunk->vert(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, right, down, light3.x,light3.y,light3.z);
-            MeshChunk->vert(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, left, down, light4.x,light4.y,light4.z);
+            MeshChunk->vert(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, left, up, light1.x,light1.y,light1.z, Block);
+            MeshChunk->vert(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, right, up, light2.x,light2.y,light2.z, Block);
+            MeshChunk->vert(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, right, down, light3.x,light3.y,light3.z, Block);
+            MeshChunk->vert(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, left, down, light4.x,light4.y,light4.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -19664,10 +19636,10 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
                 right += percent;
             }
 
-            MeshChunk->vert(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, right, up, light2.x,light2.y,light2.z);
-            MeshChunk->vert(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, left, up, light4.x,light4.y,light4.z);
-            MeshChunk->vert(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, left, down, light3.x,light3.y,light3.z);
-            MeshChunk->vert(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, right, down, light1.x,light1.y,light1.z);
+            MeshChunk->vert(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, right, up, light2.x,light2.y,light2.z, Block);
+            MeshChunk->vert(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, left, up, light4.x,light4.y,light4.z, Block);
+            MeshChunk->vert(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, left, down, light3.x,light3.y,light3.z, Block);
+            MeshChunk->vert(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, right, down, light1.x,light1.y,light1.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -19891,10 +19863,10 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
                 right += percent;
             }
 
-            MeshChunk->vert(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, left, down, light1.x,light1.y,light1.z);
-            MeshChunk->vert(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, right, down, light3.x,light3.y,light3.z);
-            MeshChunk->vert(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, right, up, light4.x,light4.y,light4.z);
-            MeshChunk->vert(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, left, up, light2.x,light2.y,light2.z);
+            MeshChunk->vert(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, left, down, light1.x,light1.y,light1.z, Block);
+            MeshChunk->vert(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, right, down, light3.x,light3.y,light3.z, Block);
+            MeshChunk->vert(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, right, up, light4.x,light4.y,light4.z, Block);
+            MeshChunk->vert(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, left, up, light2.x,light2.y,light2.z, Block);
 
             MeshChunk->triangle(iVertex, iVertex+1, iVertex+2);
             MeshChunk->triangle(iVertex+2, iVertex+3, iVertex);
@@ -20093,16 +20065,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
             up = percent*blockType->leftPlane_y + (16-point2.y)*texturePixel;
             down = percent*blockType->leftPlane_y + (16-point4.y)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light1.x,light1.y,light1.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light4.x,light4.y,light4.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light3.x,light3.y,light3.z);
 
@@ -20270,16 +20242,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
             up = percent*blockType->rightPlane_y + (16-point3.y)*texturePixel;
             down = percent*blockType->rightPlane_y + (16-point1.y)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light4.x,light4.y,light4.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light1.x,light1.y,light1.z);
 
@@ -20496,16 +20468,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
             up = percent*blockType->downPlane_y + (16-point1.z)*texturePixel;
             down = percent*blockType->downPlane_y + (16-point3.z)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light1.x,light1.y,light1.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light4.x,light4.y,light4.z);
 
@@ -20711,16 +20683,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
             up = percent*blockType->upPlane_y + (16-point2.z)*texturePixel;
             down = percent*blockType->upPlane_y + (16-point4.z)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light1.x,light1.y,light1.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light4.x,light4.y,light4.z);
 
@@ -20942,16 +20914,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
             up = percent*blockType->botPlane_y + (16-point2.y)*texturePixel;
             down = percent*blockType->botPlane_y + (16-point4.y)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light4.x,light4.y,light4.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light1.x,light1.y,light1.z);
 
@@ -21175,16 +21147,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
             up = percent*blockType->forPlane_y + (16-point3.y)*texturePixel;
             down = percent*blockType->forPlane_y + (16-point1.y)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light1.x,light1.y,light1.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light4.x,light4.y,light4.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light2.x,light2.y,light2.z);
 
@@ -21401,16 +21373,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
             up = percent*plane_y + (16-point2.y)*texturePixel;
             down = percent*plane_y + (16-point4.y)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light1.x,light1.y,light1.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light4.x,light4.y,light4.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light3.x,light3.y,light3.z);
 
@@ -21578,16 +21550,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
             up = percent*plane_y + (16-point3.y)*texturePixel;
             down = percent*plane_y + (16-point1.y)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light4.x,light4.y,light4.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light1.x,light1.y,light1.z);
 
@@ -21804,16 +21776,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
             up = percent*plane_y + (16-point1.z)*texturePixel;
             down = percent*plane_y + (16-point3.z)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light1.x,light1.y,light1.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light4.x,light4.y,light4.z);
 
@@ -22019,16 +21991,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
             up = percent*plane_y + (16-point2.z)*texturePixel;
             down = percent*plane_y + (16-point4.z)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light1.x,light1.y,light1.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light4.x,light4.y,light4.z);
 
@@ -22250,16 +22222,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
             up = percent*plane_y + (16-point2.y)*texturePixel;
             down = percent*plane_y + (16-point4.y)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light4.x,light4.y,light4.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light1.x,light1.y,light1.z);
 
@@ -22483,16 +22455,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
             up = percent*plane_y + (16-point3.y)*texturePixel;
             down = percent*plane_y + (16-point1.y)*texturePixel;
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(left, down);
             MeshChunk->colour(light1.x,light1.y,light1.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(right, down);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(right, up);
             MeshChunk->colour(light4.x,light4.y,light4.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(left, up);
             MeshChunk->colour(light2.x,light2.y,light2.z);
 
@@ -22768,16 +22740,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
                 break;
             }
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(x1, y1);
             MeshChunk->colour(light1.x,light1.y,light1.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(x2, y2);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(x3, y3);
             MeshChunk->colour(light4.x,light4.y,light4.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(x4, y4);
             MeshChunk->colour(light3.x,light3.y,light3.z);
 
@@ -23004,16 +22976,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
                 break;
             }
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(x1, y1);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(x2, y2);
             MeshChunk->colour(light4.x,light4.y,light4.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(x3, y3);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(x4, y4);
             MeshChunk->colour(light1.x,light1.y,light1.z);
 
@@ -23290,16 +23262,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
                 break;
             }
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(x1, y1);
             MeshChunk->colour(light1.x,light1.y,light1.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(x2, y2);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(x3, y3);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(x4, y4);
             MeshChunk->colour(light4.x,light4.y,light4.z);
 
@@ -23564,16 +23536,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
                 break;
             }
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(x1, y1);
             MeshChunk->colour(light1.x,light1.y,light1.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(x2, y2);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(x3, y3);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(x4, y4);
             MeshChunk->colour(light4.x,light4.y,light4.z);
 
@@ -23855,16 +23827,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
                 break;
             }
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(x1, y1);
             MeshChunk->colour(light2.x,light2.y,light2.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(x2, y2);
             MeshChunk->colour(light4.x,light4.y,light4.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(x3, y3);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(x4, y4);
             MeshChunk->colour(light1.x,light1.y,light1.z);
 
@@ -24147,16 +24119,16 @@ void CraftWorld::BuildWorldBlockPlane(BaseBlock *blockType, int x,int y, int z, 
                 break;
             }
 
-            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel);
+            MeshChunk->position(x+point1.x*pixel, y+point1.y*pixel, z+point1.z*pixel, Block);
             MeshChunk->textureCoord(x1, y1);
             MeshChunk->colour(light1.x,light1.y,light1.z);
-            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel);
+            MeshChunk->position(x+point2.x*pixel, y+point2.y*pixel, z+point2.z*pixel, Block);
             MeshChunk->textureCoord(x2, y2);
             MeshChunk->colour(light3.x,light3.y,light3.z);
-            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel);
+            MeshChunk->position(x+point3.x*pixel, y+point3.y*pixel, z+point3.z*pixel, Block);
             MeshChunk->textureCoord(x3, y3);
             MeshChunk->colour(light4.x,light4.y,light4.z);
-            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel);
+            MeshChunk->position(x+point4.x*pixel, y+point4.y*pixel, z+point4.z*pixel, Block);
             MeshChunk->textureCoord(x4, y4);
             MeshChunk->colour(light2.x,light2.y,light2.z);
 

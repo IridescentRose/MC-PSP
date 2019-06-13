@@ -4170,7 +4170,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                                 mWorld->GetBlock(testPos.x, testPos.y, testPos.z) = 0;
 
                                 int	curchunkTarget = mWorld->getChunkId(testPos);
-                                mWorld->RebuildTransparentMeshChunk(curchunkTarget);
+                                mWorld->RebuildFullMeshChunk(curchunkTarget);
                                 fppCam->needUpdate = true;
                             }
 
@@ -4560,7 +4560,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                                     mWorld->invId[27+barPosition] = -1;
                                 }
                                 int	curchunkTarget = mWorld->getChunkId(testPos);
-                                mWorld->RebuildTransparentMeshChunk(curchunkTarget);
+                                mWorld->RebuildFullMeshChunk(curchunkTarget);
 
                                 fppCam->needUpdate = true;
                                 return;
@@ -4650,7 +4650,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
 
                                 int	curchunkTarget = mWorld->getChunkId(testPos);
                                 fppCam->needUpdate = true;
-                                mWorld->RebuildTransparentMeshChunk(curchunkTarget);
+                                mWorld->RebuildFullMeshChunk(curchunkTarget);
                                 return;
                             }
                         }
@@ -4679,7 +4679,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
 
                                 int	curchunkTarget = mWorld->getChunkId(testPos);
                                 fppCam->needUpdate = true;
-                                mWorld->RebuildTransparentMeshChunk(curchunkTarget);
+                                mWorld->RebuildFullMeshChunk(curchunkTarget);
                                 return;
                             }
                         }
@@ -4708,7 +4708,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
 
                                 int	curchunkTarget = mWorld->getChunkId(testPos);
                                 fppCam->needUpdate = true;
-                                mWorld->RebuildTransparentMeshChunk(curchunkTarget);
+                                mWorld->RebuildFullMeshChunk(curchunkTarget);
                                 return;
                             }
                         }
@@ -4737,7 +4737,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
 
                                 int	curchunkTarget = mWorld->getChunkId(testPos);
                                 fppCam->needUpdate = true;
-                                mWorld->RebuildTransparentMeshChunk(curchunkTarget);
+                                mWorld->RebuildFullMeshChunk(curchunkTarget);
                                 return;
                             }
                         }
@@ -4768,7 +4768,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
 
                                     int	curchunkTarget = mWorld->getChunkId(Vector3(testPos.x,testPos.y-1,testPos.z));
                                     fppCam->needUpdate = true;
-                                    mWorld->RebuildTransparentMeshChunk(curchunkTarget);
+                                    mWorld->RebuildFullMeshChunk(curchunkTarget);
                                     return;
                                 }
                             }
@@ -4800,7 +4800,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
 
                                     int	curchunkTarget = mWorld->getChunkId(Vector3(testPos.x,testPos.y-1,testPos.z));
                                     fppCam->needUpdate = true;
-                                    mWorld->RebuildTransparentMeshChunk(curchunkTarget);
+                                    mWorld->RebuildFullMeshChunk(curchunkTarget);
                                     return;
                                 }
                             }
@@ -5631,7 +5631,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                                                        mWorld->invSt[27+barPosition] = 0;
                                                        mWorld->invId[27+barPosition] = -1;
                                                     }
-                                                    mWorld->RebuildTransparentMeshChunk(mWorld->getChunkId(testPos2));
+                                                    mWorld->RebuildFullMeshChunk(mWorld->getChunkId(testPos2));
 
                                                     animGo = true;
                                                     animDest = 0.0f;
@@ -5656,7 +5656,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                                                        mWorld->invSt[27+barPosition] = 0;
                                                        mWorld->invId[27+barPosition] = -1;
                                                     }
-                                                    mWorld->RebuildTransparentMeshChunk(mWorld->getChunkId(testPos2));
+                                                    mWorld->RebuildFullMeshChunk(mWorld->getChunkId(testPos2));
 
                                                     animGo = true;
                                                     animDest = 0.0f;
@@ -5673,7 +5673,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
 
                                                 fppCam->needUpdate = true;
                                                 int chunkTarget = mWorld->getChunkId(testPos2);
-                                                mWorld->RebuildTransparentMeshChunk(chunkTarget);
+                                                mWorld->RebuildFullMeshChunk(chunkTarget);
                                                 mWorld->rebuildNearestChunks(chunkTarget,testPos2);
 
                                                 mWorld->invAm[27+barPosition] -= 1;
@@ -5693,7 +5693,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
 
                                                 fppCam->needUpdate = true;
                                                 int chunkTarget = mWorld->getChunkId(testPos2);
-                                                mWorld->RebuildTransparentMeshChunk(chunkTarget);
+                                                mWorld->RebuildFullMeshChunk(chunkTarget);
                                                 mWorld->rebuildNearestChunks(chunkTarget,testPos2);
 
                                                 mWorld->invAm[27+barPosition] -= 1;
@@ -5795,7 +5795,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
 
                                                     fppCam->needUpdate = true;
                                                     int chunkTarget = mWorld->getChunkId(testPos2);
-                                                    mWorld->RebuildTransparentMeshChunk(chunkTarget);
+                                                    mWorld->RebuildFullMeshChunk(chunkTarget);
                                                     mWorld->rebuildNearestChunks(chunkTarget,testPos2);
 
                                                     wasUpdated = true;
@@ -5869,7 +5869,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                                                 {
                                                     fppCam->needUpdate = true;
                                                     int chunkTarget = mWorld->getChunkId(testPos2);
-                                                    mWorld->RebuildTransparentMeshChunk(chunkTarget);
+                                                    mWorld->RebuildFullMeshChunk(chunkTarget);
                                                     mWorld->rebuildNearestChunks(chunkTarget,testPos2);
 
                                                     wasUpdated = true;
@@ -5944,7 +5944,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                                                     fppCam->needUpdate = true;
                                                     int chunkTarget = mWorld->getChunkId(testPos2);
 
-                                                    mWorld->RebuildTransparentMeshChunk(chunkTarget);
+                                                    mWorld->RebuildFullMeshChunk(chunkTarget);
 
                                                     mWorld->invAm[27+barPosition] -= 1;
                                                     if(mWorld->invAm[27+barPosition] == 0)
@@ -6004,7 +6004,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                                                     fppCam->needUpdate = true;
                                                     int chunkTarget = mWorld->getChunkId(testPos2);
 
-                                                    mWorld->RebuildTransparentMeshChunk(chunkTarget);
+                                                    mWorld->RebuildFullMeshChunk(chunkTarget);
                                                     mWorld->rebuildNearestChunks(chunkTarget,testPos2);
 
                                                     wasUpdated = true;
@@ -6968,7 +6968,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                                     if(mWorld->ChunksEqual(testPos1,testPos2) == false)
                                     {
                                         int chunkTarget = mWorld->getChunkId(testPos2);
-                                        mWorld->RebuildTransparentMeshChunk(chunkTarget);
+                                        mWorld->RebuildFullMeshChunk(chunkTarget);
                                     }
                                 }
 
@@ -6980,7 +6980,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                                         if(mWorld->ChunksEqual(testPos1, testPos2) == false)
                                         {
                                             int chunkTarget = mWorld->getChunkId(testPos2);
-                                            mWorld->RebuildTransparentMeshChunk(chunkTarget);
+                                            mWorld->RebuildFullMeshChunk(chunkTarget);
                                         }
                                         break;
                                     }
@@ -7198,7 +7198,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                                     if(mWorld->ChunksEqual(testPos1, testPos2) == false)
                                     {
                                         int chunkTarget = mWorld->getChunkId(testPos2);
-                                        mWorld->RebuildTransparentMeshChunk(chunkTarget);
+                                        mWorld->RebuildFullMeshChunk(chunkTarget);
                                     }
                                     break;
                                 }
@@ -12952,8 +12952,11 @@ void StatePlay::Draw(StateManager* sManager)
         mRender->SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200);
     }
 
+
     //end frame
     mRender->EndFrame();
+
+	mWorld->endDrawChunk();
 }
 
 //additional functions
@@ -13000,7 +13003,7 @@ bool StatePlay::TryToMove(Vector3 moveVector,float dt)
 
     float slowDown = 1.0f;
     if(footInLava || footInWater)
-    {
+    {  //
         slowDown = 0.89f;
     }
     if(headInLava || headInWater)

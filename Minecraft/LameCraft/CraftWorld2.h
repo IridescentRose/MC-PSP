@@ -178,6 +178,8 @@ public:
     void BuildWorldBlockPlaneNoCheck(BaseBlock *blockType, int x,int y, int z, int &iVertex, SimpleMeshChunk* MeshChunk, block_t Block, bool transparent, char side, Vector3 point1, Vector3 point2, Vector3 point3, Vector3 point4);
     void BuildGUIBlockPlane(BaseBlock* blockType, char side, Vector3 point1, Vector3 point2, Vector3 point3, Vector3 point4);
 
+	void endDrawChunk();
+
     float LengthDirX(float horAngle, float verAngle);
     float LengthDirY(float horAngle, float verAngle);
     float LengthDirZ(float horAngle, float verAngle);
@@ -667,6 +669,9 @@ private:
 	int drawnTriangles;
 	float lightShadowFactor;
 	Vector3 lightFactor;
+
+	Timer myAnimationTimer;
+	float myAnimationTime;
 
 };
 

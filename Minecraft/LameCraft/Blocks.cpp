@@ -196,7 +196,7 @@ LadderBlock::LadderBlock():BaseBlock()
     forPlane_x = 3;
     forPlane_y = 5;
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 3;
 
 	loot = 6;
@@ -303,7 +303,7 @@ LeavesBlock::LeavesBlock():BaseBlock()
 
 	editable = true;
 	allowLight = true;
-	transparent = false;
+	transparent = true;
 	soundType = 0;
 	blockModel = 5;
 
@@ -841,7 +841,7 @@ CactusBlock::CactusBlock():BaseBlock()
     forPlane_y = 4;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
     blockModel = 5;
 	soundType = 3;
 
@@ -946,7 +946,7 @@ CageBlock::CageBlock():BaseBlock()
     forPlane_y = 4;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	allowLight = false;
 	soundType = 2;
 
@@ -1253,7 +1253,7 @@ SpruceLeaves::SpruceLeaves():BaseBlock()
 
 	editable = true;
 	allowLight = true;
-	transparent = false;
+	transparent = true;
 	allowLight = true;
 	soundType = 0;
 	blockModel = 5;
@@ -1289,7 +1289,7 @@ BirchLeaves::BirchLeaves():BaseBlock()
 
 	editable = true;
 	allowLight = true;
-	transparent = false;
+	transparent = true;
 	allowLight = true;
 	soundType = 0;
 	blockModel = 5;
@@ -1356,7 +1356,7 @@ GlassBlock::GlassBlock():BaseBlock()
     forPlane_y = 3;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	allowLight = false;
 	soundType = 2;
 
@@ -1627,7 +1627,7 @@ Torch::Torch():BaseBlock()
     forPlane_y = 5;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 2;
 	lightSource = true;
     blockModel = 5;
@@ -1663,7 +1663,7 @@ Door1::Door1():BaseBlock()
     forPlane_y = 6;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 2;
     blockModel = 5;
 
@@ -1697,7 +1697,7 @@ Door2::Door2():BaseBlock()
     forPlane_y = 6;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 2;
     blockModel = 5;
 
@@ -1729,7 +1729,7 @@ Door3::Door3():BaseBlock()
     forPlane_y = 6;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 2;
     blockModel = 5;
 
@@ -1762,7 +1762,7 @@ Door4::Door4():BaseBlock()
     forPlane_y = 6;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 2;
     blockModel = 5;
 
@@ -1794,7 +1794,7 @@ Door5::Door5():BaseBlock()
     forPlane_y = 6;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 2;
     blockModel = 5;
 
@@ -1826,7 +1826,7 @@ Door6::Door6():BaseBlock()
     forPlane_y = 6;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 2;
     blockModel = 5;
 
@@ -1858,7 +1858,7 @@ Door7::Door7():BaseBlock()
     forPlane_y = 6;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 2;
     blockModel = 5;
 
@@ -1890,7 +1890,7 @@ Door8::Door8():BaseBlock()
     forPlane_y = 6;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 2;
     blockModel = 5;
 
@@ -1922,7 +1922,7 @@ Door9::Door9():BaseBlock()
     forPlane_y = 6;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 2;
     blockModel = 5;
 
@@ -1955,7 +1955,7 @@ Door10::Door10():BaseBlock()
     forPlane_y = 6;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 2;
     blockModel = 5;
 
@@ -2948,7 +2948,7 @@ Ladder1::Ladder1():BaseBlock()
     solid = false;
     allowLight = true;
     editable = true;
-    transparent = true;
+    transparent = false;
 
     collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(-0.375f,0.5f,0.5f));
 }
@@ -2983,7 +2983,7 @@ Ladder2::Ladder2():BaseBlock()
     solid = false;
     allowLight = true;
     editable = true;
-    transparent = true;
+    transparent = false;
 
     collideBox = BoundingBox(Vector3(0.375f,-0.5,-0.5f),Vector3(0.5f,0.5f,0.5f));
 }
@@ -3018,7 +3018,7 @@ Ladder3::Ladder3():BaseBlock()
     solid = false;
     allowLight = true;
     editable = true;
-    transparent = true;
+    transparent = false;
 
     collideBox = BoundingBox(Vector3(-0.5f,-0.5,-0.5f),Vector3(0.5f,0.5f,-0.375f));
 }
@@ -3053,7 +3053,7 @@ Ladder4::Ladder4():BaseBlock()
     solid = false;
     allowLight = true;
     editable = true;
-    transparent = true;
+    transparent = false;
 
     collideBox = BoundingBox(Vector3(-0.5f,-0.5,0.375f),Vector3(0.5f,0.5f,0.5f));
 }
@@ -3697,7 +3697,7 @@ Spawner::Spawner():BaseBlock()
 
     solid = true;
 	editable = true;
-	transparent = true;
+	transparent = false;
 	allowLight = true;
 
 	soundType = 2;
@@ -3858,7 +3858,7 @@ GlassPanel::GlassPanel():BaseBlock()
     forPlane_y = 3;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	solid = true;
     allowLight = true;
 
@@ -3891,7 +3891,7 @@ IronBars::IronBars():BaseBlock()
     forPlane_y = 5;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	solid = true;
     allowLight = true;
 
@@ -4900,7 +4900,7 @@ TrapdoorOpen1::TrapdoorOpen1():BaseBlock()
     forPlane_y = 5;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	allowLight = true;
 	solid = false;
 
@@ -4937,7 +4937,7 @@ TrapdoorOpen2::TrapdoorOpen2():BaseBlock()
     forPlane_y = 5;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	allowLight = true;
 	solid = false;
 
@@ -4974,7 +4974,7 @@ TrapdoorOpen3::TrapdoorOpen3():BaseBlock()
     forPlane_y = 5;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	allowLight = true;
 	solid = false;
 
@@ -5011,7 +5011,7 @@ TrapdoorOpen4::TrapdoorOpen4():BaseBlock()
     forPlane_y = 5;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	allowLight = true;
 	solid = false;
 
@@ -5048,7 +5048,7 @@ TrapdoorClosed1::TrapdoorClosed1():BaseBlock()
     forPlane_y = 5;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	allowLight = true;
 	solid = true;
 
@@ -5085,7 +5085,7 @@ TrapdoorClosed2::TrapdoorClosed2():BaseBlock()
     forPlane_y = 5;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	allowLight = true;
 	solid = true;
 
@@ -5122,7 +5122,7 @@ TrapdoorClosed3::TrapdoorClosed3():BaseBlock()
     forPlane_y = 5;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	allowLight = true;
 	solid = true;
 
@@ -5159,7 +5159,7 @@ TrapdoorClosed4::TrapdoorClosed4():BaseBlock()
     forPlane_y = 5;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	allowLight = true;
 	solid = true;
 
@@ -5816,7 +5816,7 @@ ItemFrame1::ItemFrame1():BaseBlock()
     forPlane_y = 8;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	allowLight = true;
 	solid = false;
 
@@ -5851,7 +5851,7 @@ ItemFrame2::ItemFrame2():BaseBlock()
     forPlane_y = 8;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	allowLight = true;
 	solid = false;
 
@@ -5886,7 +5886,7 @@ ItemFrame3::ItemFrame3():BaseBlock()
     forPlane_y = 8;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	allowLight = true;
 	solid = false;
 
@@ -5921,7 +5921,7 @@ ItemFrame4::ItemFrame4():BaseBlock()
     forPlane_y = 8;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	allowLight = true;
 	solid = false;
 
@@ -6378,7 +6378,7 @@ BedBlock1::BedBlock1():BaseBlock()
     forPlane_y = 9;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 3;
     blockModel = 1;
 
@@ -6412,7 +6412,7 @@ BedBlock2::BedBlock2():BaseBlock()
     forPlane_y = 10;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 3;
     blockModel = 1;
 
@@ -6446,7 +6446,7 @@ BedBlock3::BedBlock3():BaseBlock()
     forPlane_y = 9;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 3;
     blockModel = 1;
 
@@ -6480,7 +6480,7 @@ BedBlock4::BedBlock4():BaseBlock()
     forPlane_y = 9;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 3;
     blockModel = 1;
 
@@ -6514,7 +6514,7 @@ BedBlock5::BedBlock5():BaseBlock()
     forPlane_y = 9;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 3;
     blockModel = 1;
 
@@ -6548,7 +6548,7 @@ BedBlock6::BedBlock6():BaseBlock()
     forPlane_y = 10;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 3;
     blockModel = 1;
 
@@ -6582,7 +6582,7 @@ BedBlock7::BedBlock7():BaseBlock()
     forPlane_y = 9;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 3;
     blockModel = 1;
 
@@ -6616,7 +6616,7 @@ BedBlock8::BedBlock8():BaseBlock()
     forPlane_y = 9;
 
 	editable = true;
-	transparent = true;
+	transparent = false;
 	soundType = 3;
     blockModel = 1;
 
