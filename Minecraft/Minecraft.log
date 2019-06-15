@@ -92,3 +92,21 @@ LameCraft/StatePlay.cpp(7,1): warning G2C167E3C: "PI" redefined
   LameCraft/StatePlay.cpp:11852: warning: suggest parentheses around comparison in operand of !=
   LameCraft/StatePlay.cpp:11863: warning: suggest parentheses around comparison in operand of !=
   LameCraft/StatePlay.cpp:12923: warning: statement has no effect
+  LameCraft/StatePlay.cpp:12337: warning: 'green' may be used uninitialized in this function
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371  -L./3libs/noisepp -L./3libs/libpspmath -L. -Lc:/pspsdk/psp/sdk/lib -specs=c:/pspsdk/psp/sdk/lib/prxspecs -Wl,-q,-Tc:/pspsdk/psp/sdk/lib/linkfile.prx   Engine/Aurora/Math/MathLib.o Engine/Aurora/Math/Matrix3.o Engine/Aurora/Math/Matrix4.o Engine/Aurora/Math/Quaternion.o Engine/Aurora/Math/BoundingBox.o Engine/Aurora/Math/BoundingSphere.o Engine/Aurora/Math/Plane.o Engine/Aurora/Math/Ray.o Engine/Aurora/Math/Frustum.o Engine/Aurora/Math/Polygon.o Engine/Aurora/Graphics/common.o Engine/Aurora/Graphics/vfram.o Engine/Aurora/Graphics/vram.o Engine/Aurora/Graphics/RenderManager.o Engine/Aurora/Graphics/TextureManager.o Engine/Aurora/Graphics/Camera.o Engine/Aurora/Graphics/Sprite.o Engine/Aurora/Graphics/Models/ObjModel.o Engine/Aurora/Graphics/intraFont/libccc.o Engine/Aurora/Graphics/intraFont/intraFont.o Engine/Aurora/Utils/Logger.o Engine/Aurora/Utils/Timer.o Engine/Aurora/Utils/StateManager.o Engine/Aurora/Utils/pgeZip.o Engine/Aurora/Utils/pge.o Engine/Aurora/Utils/pgeDir.o Engine/Aurora/System/SystemManager.o Engine/Aurora/System/NetworkManager.o LameCraft/BaseBlock.o LameCraft/Blocks.o LameCraft/BaseItem.o LameCraft/Items.o LameCraft/SimpleMeshChunk2.o LameCraft/ChunkDataProvider.o LameCraft/BlockEntity.o LameCraft/NoteBlockEntity.o LameCraft/JukeboxEntity.o LameCraft/MonsterSpawnerEntity.o LameCraft/ItemFrameEntity.o LameCraft/Chest2.o LameCraft/DirectionBlock.o LameCraft/Furnace2.o LameCraft/CraftWorld2.o LameCraft/LameMob.o LameCraft/Zombie2.o LameCraft/Cow2.o LameCraft/Creeper2.o LameCraft/Sheep2.o LameCraft/StateMenu.o LameCraft/StateOptions.o LameCraft/StatePlayCreative.o LameCraft/StatePlay.o LameCraft/LoadingScreen.o LameCraft/SplashScreen.o LameCraft/InputHelper.o LameCraft/TextureHelper.o LameCraft/sound_utils/pgeWav.o LameCraft/SoundManager.o Engine/Aurora/Graphics/Effects/Drop.o Engine/Aurora/Graphics/Effects/TNT.o Engine/Aurora/Graphics/Effects/InventoryPlayer.o Engine/Aurora/Graphics/Effects/SnowBall2.o Engine/Aurora/Graphics/Effects/SkyLight.o Engine/Aurora/Graphics/Effects/SkyBox.o Engine/Aurora/Graphics/Effects/Destroyer.o Engine/Aurora/Graphics/Effects/StarsBox.o Engine/Aurora/Graphics/Effects/Particle.o Engine/Aurora/Graphics/Effects/WeatherSystem.o LameCraft/mersenne-twister.o LameCraft/SimplexNoise.o LameCraft/WorldGenerator.o LameCraft/sound_utils/vfsFile.o LameCraft/sound_utils/VirtualFile.o LameCraft/sound_utils/audio.o LameCraft/sound_utils/bgm.o LameCraft/sound_utils/media.o LameCraft/sound_utils/mod.o Lamecraft.o c:/pspsdk/psp/sdk/lib/prxexports.o -lNoisepp -lpspaudiolib -lpspaudio -lmikmod -lmmio -lpspaudiocodec -lpng -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath  -lpspdebug -lpspdisplay -lpspge -lpspctrl -lpspsdk -lc -lpspnet -lpspnet_inet -lpspnet_apctl -lpspnet_resolver -lpsputility -lpspuser -lpspkernel -o Minecraft2.elf
+  psp-fixup-imports Minecraft2.elf
+  psp-prxgen Minecraft2.elf Minecraft2.prx
+  pack-pbp EBOOT.PBP PARAM.SFO ICON0.png  \
+  	NULL NULL PIC1.png  \
+  	NULL  Minecraft2.prx NULL
+  [0]        320 bytes | PARAM.SFO
+  [1]      17028 bytes | ICON0.png
+  [2]          0 bytes | NULL
+  [3]          0 bytes | NULL
+  [4]     256507 bytes | PIC1.png
+  [5]          0 bytes | NULL
+  [6]    3607146 bytes | Minecraft2.prx
+  [7]          0 bytes | NULL
+  make[1]: Leaving directory `C:/Users/Nathan/Desktop/Minecraft2-PSP/Minecraft'
+          1 file(s) moved.
+  Press any key to continue . . . 
