@@ -207,6 +207,8 @@ void StatePlay::Init()
 
     WorldGenerator *mGen = new WorldGenerator();
 
+	handAmbient = Timer();
+	elapsedTimeHandAmbient = 0;
     //then create our perfect world
     mWorld = new CraftWorld();
     mWorld->initWorld(WORLD_SIZE, WORLD_HEIGHT, CHUNK_SIZE);
@@ -10807,11 +10809,28 @@ void StatePlay::Draw(StateManager* sManager)
                 TextureManager::Instance()->SetTextureModeulate(invPlayerTex);
                 sceGumPushMatrix();
 
+				float ambientX = 0.0f;
+				float ambientY = 0.0f;
+				float ambientZ = 0.0f;
+
+				if (!isWalking) {
+					elapsedTimeHandAmbient += handAmbient.GetDeltaTime();
+					ambientX = sinf(elapsedTimeHandAmbient*0.35f*2.0f) * 0.05f / 1.85f;
+					ambientY = cosf(elapsedTimeHandAmbient*0.43f*2.0f) * 0.05f / 1.32f;
+					ambientZ = sinf(elapsedTimeHandAmbient*0.24f*2.0f) * 0.05f / 2.67f;
+				}
+				else {
+					elapsedTimeHandAmbient = 0.0f;
+				}
+				
+				
+				
+
                 //set view matrix to identity
                 sceGumMatrixMode(GU_VIEW);
                 sceGumLoadIdentity();
                 //translate
-                ScePspFVector3 move = {0.53f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/200.0f+sinf(animDest)*-0.35,-0.42f+shift_y+cubeBob2+changeY,-0.5f+(mWorld->mainOptions.fov-70)/130.0f}; //446
+                ScePspFVector3 move = {ambientX + 0.3f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/200.0f+sinf(animDest)*-0.35,ambientY + -0.43f+shift_y+cubeBob2+changeY,ambientZ + -0.38f+(mWorld->mainOptions.fov-70)/130.0f}; //446
                 sceGumTranslate(&move);
                 //rotate
                 sceGumRotateX(-0.72f+sinf(animDest)*-1.5);//0.1
@@ -12952,6 +12971,15 @@ void StatePlay::Draw(StateManager* sManager)
         mRender->SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200);
     }
 
+
+	mRender->SetFontStyle(default_size, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_RIGHT);
+
+	if (IS_SNAPSHOT) {
+		mRender->DebugPrint(480, 270, "Snapshot %s", SNAPSHOT_NAME);
+	}
+	else {
+		mRender->DebugPrint(480, 270, "Version %s", VERSION_NAME);
+	}
 
     //end frame
     mRender->EndFrame();

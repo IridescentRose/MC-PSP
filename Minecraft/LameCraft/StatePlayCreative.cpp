@@ -9401,8 +9401,8 @@ void StatePlayCreative::Draw(StateManager* sManager)
                 sceGumMatrixMode(GU_VIEW);
                 sceGumLoadIdentity();
                 //translate
-                ScePspFVector3 move = {0.53f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/200.0f+sinf(animDest)*-0.35,-0.42f+shift_y+cubeBob2+changeY,-0.5f+(mWorld->mainOptions.fov-70)/130.0f}; //446
-                sceGumTranslate(&move);
+				ScePspFVector3 move = { 0.3f + cubeBob + shift_x + (mWorld->mainOptions.fov - 70) / 200.0f + sinf(animDest) * -0.35,-0.43f + shift_y + cubeBob2 + changeY,-0.38f + (mWorld->mainOptions.fov - 70) / 130.0f }; //446
+				sceGumTranslate(&move);
                 //rotate
                 sceGumRotateX(-0.72f+sinf(animDest)*-1.5);//0.1
                 sceGumRotateY(3.4839f+sinf(animDest)*-0.3); //0.9
@@ -11173,6 +11173,15 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
     //end frame
     mRender->EndFrame();
+
+	mRender->SetFontStyle(default_size, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_RIGHT);
+
+	if (IS_SNAPSHOT) {
+		mRender->DebugPrint(480, 270, "Snapshot %s", SNAPSHOT_NAME);
+	}
+	else {
+		mRender->DebugPrint(480, 270, "Version %s", VERSION_NAME);
+	}
 
 	mWorld->endDrawChunk();
 }

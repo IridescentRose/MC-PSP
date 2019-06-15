@@ -5,6 +5,7 @@
 #include <Aurora/Utils/StateManager.h>
 #include <Aurora/Utils/GameState.h>
 
+#include "Version.h"
 #include <math.h>
 #include <psptypes.h>
 

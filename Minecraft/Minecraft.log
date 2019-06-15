@@ -1,138 +1,112 @@
 ﻿  make -f MakefileGame all
   make[1]: Entering directory `C:/Users/Nathan/Desktop/Minecraft2-PSP/Minecraft'
-  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/CraftWorld2.o LameCraft/CraftWorld2.cpp
-LameCraft/CraftWorld2.cpp(9,1): warning G2C167E3C: "PI" redefined
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/StatePlay.o LameCraft/StatePlay.cpp
+LameCraft/StatePlay.cpp(7,1): warning G2C167E3C: "PI" redefined
   In file included from ./Engine/Aurora/Graphics/Effects/WeatherSystem.h:9,
-                   from LameCraft/CraftWorld2.h:14,
-                   from LameCraft/CraftWorld2.cpp:1:
+                   from ./Lamecraft/CraftWorld2.h:14,
+                   from ./Engine/Aurora/Graphics/Effects/InventoryPlayer.h:7,
+                   from LameCraft/StatePlay.h:20,
+                   from LameCraft/StatePlay.cpp:1:
 ./LameCraft/LameFunctions.h(4,1): warning GEE513BF5: this is the location of the previous definition
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::initWorldBlocksLight()':
-  LameCraft/CraftWorld2.cpp:1183: warning: suggest parentheses around && within ||
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::initPutBlocksLight(int, int)':
-  LameCraft/CraftWorld2.cpp:1514: warning: suggest parentheses around && within ||
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::initPutBlocksLight(int, int, int)':
-  LameCraft/CraftWorld2.cpp:1571: warning: suggest parentheses around && within ||
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyDrop(int)':
-  LameCraft/CraftWorld2.cpp:3292: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyZombie(int)':
-  LameCraft/CraftWorld2.cpp:3312: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyAllZombies()':
-  LameCraft/CraftWorld2.cpp:3321: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyCreeper(int)':
-  LameCraft/CraftWorld2.cpp:3353: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyAllCreepers()':
-  LameCraft/CraftWorld2.cpp:3362: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyCow(int)':
-  LameCraft/CraftWorld2.cpp:3381: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroySheep(int)':
-  LameCraft/CraftWorld2.cpp:3399: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::DestroyTNTentity(int)':
-  LameCraft/CraftWorld2.cpp:3455: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::CheckForTorchSupport(int, int, int, int)':
-  LameCraft/CraftWorld2.cpp:3807: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:3828: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::CheckForLadderSupport(int, int, int)':
-  LameCraft/CraftWorld2.cpp:3884: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:3901: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::DestroyAroundTrapdoors(int, int, int)':
-  LameCraft/CraftWorld2.cpp:3935: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:3966: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:3997: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4028: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4045: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4051: warning: no return statement in function returning non-void
-  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::DestroyAroundItemFrames(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4078: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4109: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4140: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4171: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4188: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4194: warning: no return statement in function returning non-void
-  LameCraft/CraftWorld2.cpp: In member function 'std::string CraftWorld::NameBlock(int)':
-  LameCraft/CraftWorld2.cpp:4518: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp:4526: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::LightSourceBlock(int)':
-  LameCraft/CraftWorld2.cpp:4536: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'int CraftWorld::LootBlock(int)':
-  LameCraft/CraftWorld2.cpp:4550: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'int CraftWorld::DurabilityPointsItem(int)':
-  LameCraft/CraftWorld2.cpp:4564: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::StackableItem(int)':
-  LameCraft/CraftWorld2.cpp:4574: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::ItemHaveTerrainTexture(int)':
-  LameCraft/CraftWorld2.cpp:4585: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'char CraftWorld::ItemType(int)':
-  LameCraft/CraftWorld2.cpp:4595: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::GetItemVerts(int, BaseItem*)':
-  LameCraft/CraftWorld2.cpp:5201: warning: unused variable 'BlockLight'
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::RebuildFullMeshChunk(int)':
-  LameCraft/CraftWorld2.cpp:9399: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::RebuildOpaqueMeshChunk(int)':
-  LameCraft/CraftWorld2.cpp:9476: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::GetSpecialBlock(int, int, int, int&, SimpleMeshChunk*, block_t, bool)':
-  LameCraft/CraftWorld2.cpp:10174: warning: unused variable 'Block1'
-  LameCraft/CraftWorld2.cpp:9534: warning: unused variable 'Block1'
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::GetNormalBlock(int, int, int, int&, SimpleMeshChunk*, block_t, bool)':
-  LameCraft/CraftWorld2.cpp:11280: warning: unused variable 'xx'
-  LameCraft/CraftWorld2.cpp:11281: warning: unused variable 'yy'
-  LameCraft/CraftWorld2.cpp:11282: warning: unused variable 'zz'
-  LameCraft/CraftWorld2.cpp:11284: warning: unused variable 'anotherLight'
-  LameCraft/CraftWorld2.cpp:11303: warning: unused variable 'DefaultBlock'
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::UpdateLightAreaIn(Aurora::Math::Vector3)':
-  LameCraft/CraftWorld2.cpp:12538: warning: unused variable 'current'
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::AddChunkToUpdate(int)':
-  LameCraft/CraftWorld2.cpp:12587: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::AddChunkToFastUpdate(int)':
-  LameCraft/CraftWorld2.cpp:12610: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::UpdateChunkBlocks(int)':
-  LameCraft/CraftWorld2.cpp:13065: warning: unused variable 'upperBlock'
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::UpdateChunkGrowingBlocks(int, int)':
-  LameCraft/CraftWorld2.cpp:13302: warning: unused variable 'upperBlock'
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::AddChunkToFloodUpdate(int)':
-  LameCraft/CraftWorld2.cpp:14772: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::endDrawChunk()':
-  LameCraft/CraftWorld2.cpp:15456: warning: comparison between signed and unsigned integer expressions
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::BuildWorldBlockPlaneNoCheck(BaseBlock*, int, int, int, int&, SimpleMeshChunk*, block_t, bool, char, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3)':
-  LameCraft/CraftWorld2.cpp:17563: warning: unused variable 'Block1'
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::BuildWorldBlockPlane(BaseBlock*, int, int, int, int&, SimpleMeshChunk*, block_t, bool, char, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3)':
-  LameCraft/CraftWorld2.cpp:18591: warning: unused variable 'DefaultBlock'
-  LameCraft/CraftWorld2.cpp:18622: warning: unused variable 'blockType1'
-  LameCraft/CraftWorld2.cpp: In member function 'short int CraftWorld::BlockMaterial(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4394: warning: control reaches end of non-void function
-  LameCraft/CraftWorld2.cpp: In member function 'short int CraftWorld::BlockLoot(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4386: warning: control reaches end of non-void function
-  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::BlockSolid(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4378: warning: control reaches end of non-void function
-  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::BlockUpdate2(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4370: warning: control reaches end of non-void function
-  LameCraft/CraftWorld2.cpp: In member function 'char CraftWorld::BlockSpecial(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4357: warning: control reaches end of non-void function
-  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::BlockAnimated(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4349: warning: control reaches end of non-void function
-  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::BlockTransparent(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4336: warning: control reaches end of non-void function
-  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::BlockTransparentOrLightSource(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4318: warning: control reaches end of non-void function
-  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::DestroyAroundItemFrames(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4194: warning: control reaches end of non-void function
-  LameCraft/CraftWorld2.cpp: In member function 'bool CraftWorld::DestroyAroundTrapdoors(int, int, int)':
-  LameCraft/CraftWorld2.cpp:4051: warning: control reaches end of non-void function
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::BuildWorldBlockPlane(BaseBlock*, int, int, int, int&, SimpleMeshChunk*, block_t, bool, char, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, bool, bool, int, int)':
-  LameCraft/CraftWorld2.cpp:22497: warning: 'plane_y' may be used uninitialized in this function
-  LameCraft/CraftWorld2.cpp:22497: warning: 'plane_x' may be used uninitialized in this function
-  LameCraft/CraftWorld2.cpp: In member function 'void CraftWorld::BuildWorldBlockPlane(BaseBlock*, int, int, int, int&, SimpleMeshChunk*, block_t, bool, char, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, Aurora::Math::Vector3, bool, bool, int)':
-  LameCraft/CraftWorld2.cpp:21189: warning: 'plane_y' may be used uninitialized in this function
-  LameCraft/CraftWorld2.cpp:21189: warning: 'plane_x' may be used uninitialized in this function
+  In file included from ./3libs/noisepp/Noise.h:40,
+                   from LameCraft/WorldGenerator.h:8,
+                   from LameCraft/StatePlay.cpp:4:
+  ./3libs/noisepp/NoiseCheckerboard.h: In member function 'virtual noisepp::Real noisepp::CheckerboardElement2D::getValue(noisepp::Real, noisepp::Real, noisepp::Cache*) const':
+  ./3libs/noisepp/NoiseCheckerboard.h:51: warning: suggest parentheses around arithmetic in operand of ^
+  ./3libs/noisepp/NoiseCheckerboard.h: In member function 'virtual noisepp::Real noisepp::CheckerboardElement3D::getValue(noisepp::Real, noisepp::Real, noisepp::Real, noisepp::Cache*) const':
+  ./3libs/noisepp/NoiseCheckerboard.h:63: warning: suggest parentheses around arithmetic in operand of ^
+  ./3libs/noisepp/NoiseCheckerboard.h:63: warning: suggest parentheses around arithmetic in operand of ^
+  LameCraft/StatePlay.cpp: In member function 'virtual void StatePlay::Init()':
+  LameCraft/StatePlay.cpp:225: warning: unused variable 'curchunkTarget'
+  LameCraft/StatePlay.cpp: In member function 'void StatePlay::InitParametric(bool, bool, bool, unsigned int, int, char)':
+  LameCraft/StatePlay.cpp:270: warning: unused variable 'curchunkTarget'
+  LameCraft/StatePlay.cpp: In member function 'void StatePlay::LoadMap(std::string, bool)':
+  LameCraft/StatePlay.cpp:351: warning: unused variable 'curchunkTarget'
+  LameCraft/StatePlay.cpp: In member function 'void StatePlay::CraftItem3x3()':
+  LameCraft/StatePlay.cpp:3414: warning: suggest parentheses around && within ||
+  LameCraft/StatePlay.cpp: In member function 'virtual void StatePlay::HandleEvents(Aurora::Utils::StateManager*)':
+  LameCraft/StatePlay.cpp:3952: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:4329: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:4362: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:4867: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:6055: warning: unused variable 'chunkTarget'
+  LameCraft/StatePlay.cpp:6293: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:6340: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:6384: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:6428: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:6477: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:7248: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:8059: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8061: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8062: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8063: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8064: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8065: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8066: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8071: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8073: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8074: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8075: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8081: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8083: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8085: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8087: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8094: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8095: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8406: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8410: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8412: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8431: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8433: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8434: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8435: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8453: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8453: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8455: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8457: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8459: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8461: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8462: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8463: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8465: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8467: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8468: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8469: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8471: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8471: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp: In member function 'virtual void StatePlay::Update(Aurora::Utils::StateManager*)':
+  LameCraft/StatePlay.cpp:9119: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:9143: warning: unused variable 'spawn_y'
+  LameCraft/StatePlay.cpp: In member function 'virtual void StatePlay::Draw(Aurora::Utils::StateManager*)':
+  LameCraft/StatePlay.cpp:10198: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10200: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10329: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10331: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10434: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10436: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10484: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10486: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10533: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10535: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10714: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:11849: warning: suggest parentheses around comparison in operand of !=
+  LameCraft/StatePlay.cpp:11860: warning: suggest parentheses around comparison in operand of !=
+  LameCraft/StatePlay.cpp:12920: warning: statement has no effect
+  LameCraft/StatePlay.cpp:12334: warning: 'green' may be used uninitialized in this function
   psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371  -L./3libs/noisepp -L./3libs/libpspmath -L. -Lc:/pspsdk/psp/sdk/lib -specs=c:/pspsdk/psp/sdk/lib/prxspecs -Wl,-q,-Tc:/pspsdk/psp/sdk/lib/linkfile.prx   Engine/Aurora/Math/MathLib.o Engine/Aurora/Math/Matrix3.o Engine/Aurora/Math/Matrix4.o Engine/Aurora/Math/Quaternion.o Engine/Aurora/Math/BoundingBox.o Engine/Aurora/Math/BoundingSphere.o Engine/Aurora/Math/Plane.o Engine/Aurora/Math/Ray.o Engine/Aurora/Math/Frustum.o Engine/Aurora/Math/Polygon.o Engine/Aurora/Graphics/common.o Engine/Aurora/Graphics/vfram.o Engine/Aurora/Graphics/vram.o Engine/Aurora/Graphics/RenderManager.o Engine/Aurora/Graphics/TextureManager.o Engine/Aurora/Graphics/Camera.o Engine/Aurora/Graphics/Sprite.o Engine/Aurora/Graphics/Models/ObjModel.o Engine/Aurora/Graphics/intraFont/libccc.o Engine/Aurora/Graphics/intraFont/intraFont.o Engine/Aurora/Utils/Logger.o Engine/Aurora/Utils/Timer.o Engine/Aurora/Utils/StateManager.o Engine/Aurora/Utils/pgeZip.o Engine/Aurora/Utils/pge.o Engine/Aurora/Utils/pgeDir.o Engine/Aurora/System/SystemManager.o Engine/Aurora/System/NetworkManager.o LameCraft/BaseBlock.o LameCraft/Blocks.o LameCraft/BaseItem.o LameCraft/Items.o LameCraft/SimpleMeshChunk2.o LameCraft/ChunkDataProvider.o LameCraft/BlockEntity.o LameCraft/NoteBlockEntity.o LameCraft/JukeboxEntity.o LameCraft/MonsterSpawnerEntity.o LameCraft/ItemFrameEntity.o LameCraft/Chest2.o LameCraft/DirectionBlock.o LameCraft/Furnace2.o LameCraft/CraftWorld2.o LameCraft/LameMob.o LameCraft/Zombie2.o LameCraft/Cow2.o LameCraft/Creeper2.o LameCraft/Sheep2.o LameCraft/StateMenu.o LameCraft/StateOptions.o LameCraft/StatePlayCreative.o LameCraft/StatePlay.o LameCraft/LoadingScreen.o LameCraft/SplashScreen.o LameCraft/InputHelper.o LameCraft/TextureHelper.o LameCraft/sound_utils/pgeWav.o LameCraft/SoundManager.o Engine/Aurora/Graphics/Effects/Drop.o Engine/Aurora/Graphics/Effects/TNT.o Engine/Aurora/Graphics/Effects/InventoryPlayer.o Engine/Aurora/Graphics/Effects/SnowBall2.o Engine/Aurora/Graphics/Effects/SkyLight.o Engine/Aurora/Graphics/Effects/SkyBox.o Engine/Aurora/Graphics/Effects/Destroyer.o Engine/Aurora/Graphics/Effects/StarsBox.o Engine/Aurora/Graphics/Effects/Particle.o Engine/Aurora/Graphics/Effects/WeatherSystem.o LameCraft/mersenne-twister.o LameCraft/SimplexNoise.o LameCraft/WorldGenerator.o LameCraft/sound_utils/vfsFile.o LameCraft/sound_utils/VirtualFile.o LameCraft/sound_utils/audio.o LameCraft/sound_utils/bgm.o LameCraft/sound_utils/media.o LameCraft/sound_utils/mod.o Lamecraft.o c:/pspsdk/psp/sdk/lib/prxexports.o -lNoisepp -lpspaudiolib -lpspaudio -lmikmod -lmmio -lpspaudiocodec -lpng -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath  -lpspdebug -lpspdisplay -lpspge -lpspctrl -lpspsdk -lc -lpspnet -lpspnet_inet -lpspnet_apctl -lpspnet_resolver -lpsputility -lpspuser -lpspkernel -o Minecraft2.elf
-  LameCraft/StatePlayCreative.o: In function `StatePlayCreative::HandleEvents(Aurora::Utils::StateManager*)':
-  StatePlayCreative.cpp:(.text+0x1fe5c): undefined reference to `CraftWorld::RebuildTransparentMeshChunk(int)'
-  StatePlayCreative.cpp:(.text+0x205cc): undefined reference to `CraftWorld::RebuildTransparentMeshChunk(int)'
-  StatePlayCreative.cpp:(.text+0x2129c): undefined reference to `CraftWorld::RebuildTransparentMeshChunk(int)'
-  StatePlayCreative.cpp:(.text+0x21a7c): undefined reference to `CraftWorld::RebuildTransparentMeshChunk(int)'
-  StatePlayCreative.cpp:(.text+0x21e84): undefined reference to `CraftWorld::RebuildTransparentMeshChunk(int)'
-  LameCraft/StatePlayCreative.o:StatePlayCreative.cpp:(.text+0x22598): more undefined references to `CraftWorld::RebuildTransparentMeshChunk(int)' follow
-  make[1]: *** [Minecraft2.elf] Error 1
+  psp-fixup-imports Minecraft2.elf
+  psp-prxgen Minecraft2.elf Minecraft2.prx
+  pack-pbp EBOOT.PBP PARAM.SFO ICON0.png  \
+  	NULL NULL PIC1.png  \
+  	NULL  Minecraft2.prx NULL
+  [0]        320 bytes | PARAM.SFO
+  [1]      17028 bytes | ICON0.png
+  [2]          0 bytes | NULL
+  [3]          0 bytes | NULL
+  [4]     256507 bytes | PIC1.png
+  [5]          0 bytes | NULL
+  [6]    3606442 bytes | Minecraft2.prx
+  [7]          0 bytes | NULL
   make[1]: Leaving directory `C:/Users/Nathan/Desktop/Minecraft2-PSP/Minecraft'
-  make: *** [build_game] Error 2
-  The system cannot find the file specified.
+          1 file(s) moved.
   Press any key to continue . . . 

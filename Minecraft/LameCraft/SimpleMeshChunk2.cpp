@@ -197,7 +197,7 @@ void SimpleMeshChunk::drawChunk(Vector3 camPos, bool transparent)
 			sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, trienglesCount, 0, meshVertices);
 		}
 		else {
-			if (FastDistance2d(abs(chunkStartX + 7 - camPos.x), abs(chunkStartZ + 7 - camPos.z) + abs(chunkStartY + 7 - camPos.y) * 0.85f) < 16) {
+			if (FastDistance2d(abs(chunkStartX + 7 - camPos.x), abs(chunkStartZ + 7 - camPos.z) + abs(chunkStartY + 7 - camPos.y) * 0.85f) < 12) {
 				sceGumMatrixMode(GU_MODEL);
 				elapsed += t.GetDeltaTime();
 
@@ -215,45 +215,12 @@ void SimpleMeshChunk::drawChunk(Vector3 camPos, bool transparent)
 
 				sceKernelDcacheWritebackInvalidateRange(meshVertices, (trienglesCount) * sizeof(CraftPSPVertex));
 				sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, trienglesCount, 0, meshVertices);
-				
-
-				/*
-				sceGumPushMatrix();
-				float sin = vfpu_sinf(elapsed / 1.4f) / 6.28f;
-				float cos = vfpu_cosf(elapsed / 0.9f) / 6.21f;
-
-
-				ScePspFVector3 vec = { (20 * sin * sin * sin * sin * sin + 10 * cos * cos) , (10 * sin * cos * sin + 5 * cos * sin * cos), (16 * cos * cos * cos + 8 * sin * sin) };
-				sceGumTranslate(&vec);
-
-				sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, trienglesCount, 0, meshVertices);
-				sceGumPopMatrix();*/
+			
 			}
 			else {
 				sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, trienglesCount, 0, meshVertices);
 			}
 		}
-
-
-		/*
-		if (FastDistance2d( abs(chunkStartX + 7 - camPos.x), abs(chunkStartZ + 7 - camPos.z) + abs(chunkStartY + 7 - camPos.y)*0.85f) < 24) {
-			sceGumMatrixMode(GU_MODEL);
-			elapsed += t.GetDeltaTime();
-			sceGumPushMatrix();
-			float sin = vfpu_sinf(elapsed / 1.4f) / 6.28f;
-			float cos = vfpu_cosf(elapsed / 0.9f) / 6.21f;
-
-
-			ScePspFVector3 vec = { (20 * sin * sin * sin * sin * sin + 10 * cos * cos) , (10 * sin * cos * sin + 5 * cos * sin * cos), (16 * cos * cos * cos + 8 * sin * sin) };
-			sceGumTranslate(&vec);
-
-			//sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, trienglesCount, 0, meshVertices);
-			//sceGumPopMatrix();
-		}
-		else {
-			//sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, trienglesCount, 0, meshVertices);
-		}
-		*/
     }
 }
 
