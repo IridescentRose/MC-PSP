@@ -10799,6 +10799,22 @@ void StatePlay::Draw(StateManager* sManager)
 	if(mWorld->mainOptions.guiDrawing == 1 && mWorld->HP > 0)
 	{
         float cubeBob = sinf(bobCycle - (3.14/2) + 3.14)/16; // some animtaion vars
+
+
+		float ambientX = 0.0f;
+		float ambientY = 0.0f;
+		float ambientZ = 0.0f;
+
+		if (!isWalking) {
+			elapsedTimeHandAmbient += handAmbient.GetDeltaTime();
+			ambientX = sinf(elapsedTimeHandAmbient * 0.35f * 2.0f) * 0.05f / 1.85f;
+			ambientY = cosf(elapsedTimeHandAmbient * 0.43f * 2.0f) * 0.05f / 1.32f;
+			ambientZ = sinf(elapsedTimeHandAmbient * 0.24f * 2.0f) * 0.05f / 2.67f;
+		}
+		else {
+			elapsedTimeHandAmbient = 0.0f;
+		}
+
         float cubeBob2 = cosf(bobCycle - (3.14/2) + 3.14)/18;
 
         sceGuColor(GU_COLOR(cubeLight,cubeLight,cubeLight,1)); // set color to drawing model
@@ -10809,19 +10825,6 @@ void StatePlay::Draw(StateManager* sManager)
                 TextureManager::Instance()->SetTextureModeulate(invPlayerTex);
                 sceGumPushMatrix();
 
-				float ambientX = 0.0f;
-				float ambientY = 0.0f;
-				float ambientZ = 0.0f;
-
-				if (!isWalking) {
-					elapsedTimeHandAmbient += handAmbient.GetDeltaTime();
-					ambientX = sinf(elapsedTimeHandAmbient*0.35f*2.0f) * 0.05f / 1.85f;
-					ambientY = cosf(elapsedTimeHandAmbient*0.43f*2.0f) * 0.05f / 1.32f;
-					ambientZ = sinf(elapsedTimeHandAmbient*0.24f*2.0f) * 0.05f / 2.67f;
-				}
-				else {
-					elapsedTimeHandAmbient = 0.0f;
-				}
 				
 				
 				
@@ -10859,7 +10862,7 @@ void StatePlay::Draw(StateManager* sManager)
                 sceGumMatrixMode(GU_VIEW);
                 sceGumLoadIdentity();
                 //translate
-                ScePspFVector3 move = {0.62f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/200.0f+sinf(animDest)*-0.35,-0.35f+shift_y+cubeBob2+changeY+sinf(animDest)*-0.1,-0.7f+(mWorld->mainOptions.fov-70)/130.0f}; //446
+                ScePspFVector3 move = {ambientX + 0.62f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/200.0f+sinf(animDest)*-0.35,ambientY + -0.35f+shift_y+cubeBob2+changeY+sinf(animDest)*-0.1,ambientZ + -0.7f+(mWorld->mainOptions.fov-70)/130.0f}; //446
                 sceGumTranslate(&move);
                 //rotate
                 sceGumRotateX(0.169+sinf(animDest)*-1.5);
@@ -10888,7 +10891,7 @@ void StatePlay::Draw(StateManager* sManager)
                 sceGumLoadIdentity();
 
                 //translate
-                ScePspFVector3 move = {0.523f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/250.0f+sinf(animDest)*-0.25,-0.24f+cubeBob2+shift_y+changeY,-0.6f+(mWorld->mainOptions.fov-70)/180.0f};//-0.17
+                ScePspFVector3 move = { ambientX + 0.523f+cubeBob+shift_x+(mWorld->mainOptions.fov-70)/250.0f+sinf(animDest)*-0.25,ambientY + -0.24f+cubeBob2+shift_y+changeY,ambientZ + -0.6f+(mWorld->mainOptions.fov-70)/180.0f};//-0.17
                 sceGumTranslate(&move); //-0.22
                 //rotate
                 sceGumRotateX(-0.33f);

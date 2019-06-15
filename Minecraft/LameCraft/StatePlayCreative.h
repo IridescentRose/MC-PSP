@@ -173,6 +173,9 @@ private:
 	Vector3 newPlayerPos;
 	Vector3 oldPlayerPos;
 
+	Timer handAmbient;
+	float elapsedTimeHandAmbient;
+
     bool moveForward;
 	bool walkingOnGround;
 	bool moving;
