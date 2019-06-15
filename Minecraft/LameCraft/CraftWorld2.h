@@ -239,7 +239,7 @@ public:
 
 	void GetSpecialBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk* MeshChunk,block_t Block,bool transparent);
 	void GetNormalBlock(int x,int y, int z,int &iVertex,SimpleMeshChunk* MeshChunk,block_t Block,bool transparent);
-
+	int vertexShaderAnimationCounter;
 	//load/save options
 	void SaveCompressedWorld(std::string filename);
 	void LoadWorld(const char *filename);

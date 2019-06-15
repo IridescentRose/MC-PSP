@@ -13,6 +13,7 @@
 
 CraftWorld::CraftWorld()
 {
+	vertexShaderAnimationCounter = 0;
     WORLD_SIZE = 0;
     CHUNK_SIZE = 0;
     WORLD_HEIGHT = 0;
@@ -15345,7 +15346,7 @@ void CraftWorld::drawWorld(Frustum &camFrustum, bool camUpdate)
     sceGuColor(0xFFFFFFFF);
     sceGuDisable(GU_BLEND);
     sceGuDisable(GU_ALPHA_TEST);
-
+	vertexShaderAnimationCounter++;
 	//transparent chunks
 	sceGuEnable(GU_DEPTH_TEST);
 	sceGuEnable(GU_ALPHA_TEST);
@@ -15439,7 +15440,12 @@ void CraftWorld::drawWorld(Frustum &camFrustum, bool camUpdate)
             {
                 if(mTransparentChunks[i]->inFrustum == true)
                 {
-                    mTransparentChunks[i]->drawChunk(playerPos, true);
+					if (vertexShaderAnimationCounter % 2 == 0) {
+						mTransparentChunks[i]->drawChunk(playerPos, true);
+					}
+					else {
+						mTransparentChunks[i]->drawChunk(playerPos, false);
+					}
                     drawnTriangles += mTransparentChunks[i]->trienglesCount;
                 }
             }
@@ -15453,8 +15459,10 @@ void CraftWorld::drawWorld(Frustum &camFrustum, bool camUpdate)
 }
 
 void CraftWorld::endDrawChunk() {
-	for (int i = 0; i < mTransparentChunks.size(); i++) {
-		mTransparentChunks[i]->endDrawChunk();
+	if (vertexShaderAnimationCounter % 2 == 1) {
+		for (int i = 0; i < mTransparentChunks.size(); i++) {
+			mTransparentChunks[i]->endDrawChunk();
+		}
 	}
 }
 
