@@ -57,6 +57,7 @@ public:
 	std::vector<int> oldXZ;
 
 	CraftPSPVertex *meshVertices;
+	bool needsRedraw;
 	CraftPSPVertex *floraVertices;
 
 private:

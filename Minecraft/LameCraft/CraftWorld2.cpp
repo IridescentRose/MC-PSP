@@ -9470,6 +9470,9 @@ void CraftWorld::RebuildFullMeshChunk(int id)
 
     OpaqueMeshChunk->end();
     TransparentMeshChunk->end();
+	//Don't screw the mesh!
+	TransparentMeshChunk->oldXZ.clear();
+	TransparentMeshChunk->needsRedraw = true;
 }
 
 void CraftWorld::RebuildOpaqueMeshChunk(int id)

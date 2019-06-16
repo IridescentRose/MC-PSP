@@ -15,7 +15,7 @@ SimpleMeshChunk::SimpleMeshChunk()
 	created = true;
 	needUpdate = false;
 	periodicallyUpadted = false;
-
+	needsRedraw = false;
 	inFrustum = false;
 	t = Timer();
 	elapsed = 0;
@@ -193,10 +193,11 @@ void SimpleMeshChunk::drawChunk(Vector3 camPos, bool transparent)
 {
 	if(trienglesCount > 0 && meshVertices != NULL)
     {
-		if (!transparent) {
+		if (!transparent && !needsRedraw) {
 			sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, trienglesCount, 0, meshVertices);
 		}
 		else {
+			needsRedraw = false;
 			if (FastDistance2d(abs(chunkStartX + 7 - camPos.x), abs(chunkStartZ + 7 - camPos.z) + abs(chunkStartY + 7 - camPos.y) * 0.85f) < 12) {
 				sceGumMatrixMode(GU_MODEL);
 				elapsed += t.GetDeltaTime();
