@@ -2,29 +2,29 @@
 #ifndef STATEPLAY_H_
 #define STATEPLAY_H_
 
-#include <Aurora/Utils/StateManager.h>
-#include <Aurora/Utils/GameState.h>
+#include <Aurealis/Utils/StateManager.h>
+#include <Aurealis/Utils/GameState.h>
 
 #include "Version.h"
 #include <math.h>
 #include <psptypes.h>
 
-#include <Aurora/Graphics/RenderManager.h>
-#include <Aurora/Utils/Logger.h>
-#include <Aurora/Utils/Timer.h>
-#include <Aurora/System/SystemManager.h>
-#include <Aurora/Graphics/Models/ObjModel.h>
-#include <Aurora/Graphics/Camera.h>
-#include <Aurora/Graphics/Sprite.h>
+#include <Aurealis/Graphics/RenderManager.h>
+#include <Aurealis/Utils/Logger.h>
+#include <Aurealis/Utils/Timer.h>
+#include <Aurealis/System/SystemManager.h>
+#include <Aurealis/Graphics/Models/ObjModel.h>
+#include <Aurealis/Graphics/Camera.h>
+#include <Aurealis/Graphics/Sprite.h>
 
-#include <Aurora/Graphics/Effects/InventoryPlayer.h>
-#include <Aurora/Graphics/Effects/SkyLight.h>
-#include <Aurora/Graphics/Effects/SnowBall2.h>
-#include <Aurora/Graphics/Effects/SkyBox.h>
-#include <Aurora/Graphics/Effects/Destroyer.h>
-#include <Aurora/Graphics/Effects/StarsBox.h>
-#include <Aurora/Graphics/Effects/Drop.h>
-#include <Aurora/Graphics/Effects/Particle.h>
+#include <Aurealis/Graphics/Effects/InventoryPlayer.h>
+#include <Aurealis/Graphics/Effects/SkyLight.h>
+#include <Aurealis/Graphics/Effects/SnowBall2.h>
+#include <Aurealis/Graphics/Effects/SkyBox.h>
+#include <Aurealis/Graphics/Effects/Destroyer.h>
+#include <Aurealis/Graphics/Effects/StarsBox.h>
+#include <Aurealis/Graphics/Effects/Drop.h>
+#include <Aurealis/Graphics/Effects/Particle.h>
 
 #include "ChunkDataProvider.h"
 
@@ -46,10 +46,10 @@
 
 #include "LameFunctions.h"
 
-using namespace Aurora::Graphics;
-using namespace Aurora::Utils;
-using namespace Aurora::System;
-using namespace Aurora;
+using namespace Aurealis::Graphics;
+using namespace Aurealis::Utils;
+using namespace Aurealis::System;
+using namespace Aurealis;
 
 
 class StatePlay : public CGameState

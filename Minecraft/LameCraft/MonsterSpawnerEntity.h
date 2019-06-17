@@ -6,8 +6,8 @@
 #include <string>
 #include <pspmath.h>
 #include <psptypes.h>
-#include <Aurora/Graphics/Vertex.h>
-#include <Aurora/Math/BoundingBox.h>
+#include <Aurealis/Graphics/Vertex.h>
+#include <Aurealis/Math/BoundingBox.h>
 
 class MonsterSpawnerEntity : public BlockEntity
 {

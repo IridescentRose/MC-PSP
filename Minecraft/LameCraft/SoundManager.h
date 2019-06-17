@@ -11,7 +11,7 @@ extern "C"
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include <Aurora/Utils/Logger.h>
+#include <Aurealis/Utils/Logger.h>
 
 #include<fstream>
 #include<iostream>

@@ -1,6 +1,6 @@
 #include "LameMob.h"
 #include "CraftWorld2.h"
-#include <Aurora/Graphics/TextureManager.h>
+#include <Aurealis/Graphics/TextureManager.h>
 
 #define DEG_TO_RAD (PI / 180.0f)
 #define PIXEL 1.0f / 16.0f

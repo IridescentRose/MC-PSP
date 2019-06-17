@@ -1,6 +1,6 @@
 #include "CraftWorld2.h"
-#include <Aurora/Graphics/RenderManager.h>
-#include <Aurora/Utils/Logger.h>
+#include <Aurealis/Graphics/RenderManager.h>
+#include <Aurealis/Utils/Logger.h>
 #include "TextureHelper.h"
 
 

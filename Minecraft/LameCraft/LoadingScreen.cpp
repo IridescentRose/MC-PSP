@@ -5,8 +5,8 @@
 #include <pspgum.h>
 #include <pspdisplay.h>
 
-#include <Aurora/Graphics/RenderManager.h>
-#include <Aurora/Graphics/Sprite.h>
+#include <Aurealis/Graphics/RenderManager.h>
+#include <Aurealis/Graphics/Sprite.h>
 
 // font vars
 #define default_size 0.5
@@ -15,7 +15,7 @@
 #define ENGLISH 1
 #define RUSSIAN 2
 
-using namespace Aurora::Graphics;
+using namespace Aurealis::Graphics;
 
 Sprite* backSprite;
 Sprite* loadSprite;

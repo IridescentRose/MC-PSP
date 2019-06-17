@@ -4,8 +4,8 @@
 #include <pspkerneltypes.h>
 
 #include <sys/time.h>
-#include <Aurora/Utils/Logger.h>
-#include <Aurora/Utils/Timer.h>
+#include <Aurealis/Utils/Logger.h>
+#include <Aurealis/Utils/Timer.h>
 
 #include <fstream>
 #include <ostream>

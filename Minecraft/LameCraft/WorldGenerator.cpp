@@ -2,7 +2,7 @@
 #include "CraftWorld2.h"
 #include "LoadingScreen.h"
 
-#include <Aurora/Utils/Logger.h>
+#include <Aurealis/Utils/Logger.h>
 
 #define PI 3.1415926535897f
 

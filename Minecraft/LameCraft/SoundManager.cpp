@@ -1,6 +1,6 @@
 #include "SoundManager.h"
 
-using namespace Aurora;
+using namespace Aurealis;
 
 SoundManager SoundManager::m_SoundManager;
 

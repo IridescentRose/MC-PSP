@@ -1,5 +1,5 @@
 #include "SimpleMeshChunk2.h"
-#include <Aurora/Graphics/RenderManager.h>
+#include <Aurealis/Graphics/RenderManager.h>
 
 template <typename T>
 void FreeAll( T & t ) {

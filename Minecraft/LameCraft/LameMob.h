@@ -4,10 +4,10 @@
 #include <math.h>
 #include <psptypes.h>
 
-#include <Aurora/Graphics/RenderManager.h>
-#include <Aurora/Utils/Logger.h>
-#include <Aurora/Utils/Timer.h>
-#include <Aurora/System/SystemManager.h>
+#include <Aurealis/Graphics/RenderManager.h>
+#include <Aurealis/Utils/Logger.h>
+#include <Aurealis/Utils/Timer.h>
+#include <Aurealis/System/SystemManager.h>
 #include "TextureHelper.h"
 
 class CraftWorld;

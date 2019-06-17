@@ -1,13 +1,13 @@
 #ifndef LOADINGSCREEN_H_
 #define LOADINGSCREEN_H_
 
-#include <Aurora/Graphics/RenderManager.h>
-#include <Aurora/Graphics/Sprite.h>
-#include <Aurora/Utils/Timer.h>
+#include <Aurealis/Graphics/RenderManager.h>
+#include <Aurealis/Graphics/Sprite.h>
+#include <Aurealis/Utils/Timer.h>
 #include "TextureHelper.h"
 
-using namespace Aurora::Graphics;
-using namespace Aurora::Utils;
+using namespace Aurealis::Graphics;
+using namespace Aurealis::Utils;
 
 class SplashScreen
 {

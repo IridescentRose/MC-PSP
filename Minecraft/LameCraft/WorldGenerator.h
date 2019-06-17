@@ -1,7 +1,7 @@
 #ifndef WorldGenerator_H
 #define WorldGenerator_H
 
-#include <Aurora/Math/Frustum.h>
+#include <Aurealis/Math/Frustum.h>
 #include <math.h>
 #include <psptypes.h>
 

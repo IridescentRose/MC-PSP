@@ -1,22 +1,22 @@
 #include <math.h>
 #include <psptypes.h>
 
-#include <Aurora/Graphics/RenderManager.h>
-#include <Aurora/Utils/Logger.h>
-#include <Aurora/Utils/Timer.h>
-#include <Aurora/System/SystemManager.h>
-#include <Aurora/Graphics/Camera.h>
-#include <Aurora/Utils/StateManager.h>
+#include <Aurealis/Graphics/RenderManager.h>
+#include <Aurealis/Utils/Logger.h>
+#include <Aurealis/Utils/Timer.h>
+#include <Aurealis/System/SystemManager.h>
+#include <Aurealis/Graphics/Camera.h>
+#include <Aurealis/Utils/StateManager.h>
 
 #include "LameCraft/StateMenu.h"
 #include "LameCraft/SplashScreen.h"
 #include "LameCraft/SoundManager.h"
 #include "LameCraft/TextureHelper.h"
 
-using namespace Aurora::Graphics;
-using namespace Aurora::Utils;
-using namespace Aurora::System;
-using namespace Aurora;
+using namespace Aurealis::Graphics;
+using namespace Aurealis::Utils;
+using namespace Aurealis::System;
+using namespace Aurealis;
 
 PSP_MODULE_INFO("LameCraft", 0, 1, 1);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_VFPU|THREAD_ATTR_USER);

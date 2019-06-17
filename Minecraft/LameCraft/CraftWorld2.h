@@ -7,11 +7,11 @@
 
 #include <algorithm>
 #include "sound_utils/oslib.h"
-#include <Aurora/Math/Frustum.h>
-#include <Aurora/Math/Vector4.h>
-#include <Aurora/Graphics/Effects/Drop.h>
-#include <Aurora/Graphics/Effects/TNT.h>
-#include <Aurora/Graphics/Effects/WeatherSystem.h>
+#include <Aurealis/Math/Frustum.h>
+#include <Aurealis/Math/Vector4.h>
+#include <Aurealis/Graphics/Effects/Drop.h>
+#include <Aurealis/Graphics/Effects/TNT.h>
+#include <Aurealis/Graphics/Effects/WeatherSystem.h>
 
 #include "Blocks.h"
 #include "Items.h"
@@ -31,8 +31,8 @@
 
 #include "LameFunctions.h"
 #include <sys/time.h>
-#include <Aurora/Utils/Logger.h>
-#include <Aurora/Utils/Timer.h>
+#include <Aurealis/Utils/Logger.h>
+#include <Aurealis/Utils/Timer.h>
 
 #include <fstream>
 #include <ostream>
@@ -49,9 +49,9 @@ class ItemFrameEntity;
 class WeatherSystem;
 
 using namespace std;
-using namespace Aurora::Utils;
-using namespace Aurora::System;
-using namespace Aurora;
+using namespace Aurealis::Utils;
+using namespace Aurealis::System;
+using namespace Aurealis;
 
 class CraftWorld
 {

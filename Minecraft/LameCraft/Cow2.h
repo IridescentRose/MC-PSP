@@ -1,14 +1,14 @@
 #ifndef COW_H_
 #define COW_H_
 
-#include <Aurora/Graphics/Vertex.h>
-#include <Aurora/Graphics/RenderManager.h>
+#include <Aurealis/Graphics/Vertex.h>
+#include <Aurealis/Graphics/RenderManager.h>
 #include <pspmath.h>
 #include <psptypes.h>
-#include <Aurora/Math/Frustum.h>
+#include <Aurealis/Math/Frustum.h>
 
-#include <Aurora/Math/BoundingBox.h>
-#include <Aurora/Math/Frustum.h>
+#include <Aurealis/Math/BoundingBox.h>
+#include <Aurealis/Math/Frustum.h>
 #include "LameMob.h"
 #include "Blocks.h"
 #include "CraftWorld2.h"

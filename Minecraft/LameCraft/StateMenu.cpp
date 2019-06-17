@@ -5,10 +5,10 @@
 #include "LoadingScreen.h"
 #include "InputHelper.h"
 #include "TextureHelper.h"
-#include <Aurora/System/NetworkManager.h>
+#include <Aurealis/System/NetworkManager.h>
 #include <zlib.h>
 #include <string>
-#include <Aurora/System/SystemManager.h>
+#include <Aurealis/System/SystemManager.h>
 #include <dirent.h>
 #include <fcntl.h>
 #include <errno.h>
@@ -49,10 +49,10 @@ $ = ü
 # = þ
 */
 
-using namespace Aurora::Graphics;
-using namespace Aurora::Utils;
-using namespace Aurora::System;
-using namespace Aurora;
+using namespace Aurealis::Graphics;
+using namespace Aurealis::Utils;
+using namespace Aurealis::System;
+using namespace Aurealis;
 
 StateMenu::StateMenu()
 {

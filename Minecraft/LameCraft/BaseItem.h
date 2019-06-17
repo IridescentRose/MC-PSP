@@ -1,11 +1,11 @@
 #ifndef BASEITEM_H
 #define BASEITEM_H
 
-#include <Aurora/Graphics/Vertex.h>
+#include <Aurealis/Graphics/Vertex.h>
 #include <stdlib.h>
 #include <string>
 
-using namespace Aurora::Graphics;
+using namespace Aurealis::Graphics;
 
 typedef unsigned short item_t;
 

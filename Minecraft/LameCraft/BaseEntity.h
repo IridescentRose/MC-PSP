@@ -1,14 +1,14 @@
 #ifndef BASEENTITY_H
 #define BASEENTITY_H
 
-#include <Aurora/Graphics/Vertex.h>
-#include <Aurora/Math/Vector3.h>
+#include <Aurealis/Graphics/Vertex.h>
+#include <Aurealis/Math/Vector3.h>
 #include <pspmath.h>
 #include <LameCraft/CraftWorld2.h>
 #include <math.h>
 #include <psptypes.h>
 
-using namespace Aurora::Graphics;
+using namespace Aurealis::Graphics;
 
 class BaseEntity
 {

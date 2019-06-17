@@ -1,5 +1,5 @@
 #include "Creeper2.h"
-#include <Aurora/Graphics/TextureManager.h>
+#include <Aurealis/Graphics/TextureManager.h>
 
 #define PI 3.14159f
 #define DEG_TO_RAD (PI / 180.0f)

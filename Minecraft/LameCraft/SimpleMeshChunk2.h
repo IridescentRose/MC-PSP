@@ -5,16 +5,16 @@
 #include <vector>
 #include <string>
 #include "Blocks.h"
-#include <Aurora/Utils/Timer.h>
+#include <Aurealis/Utils/Timer.h>
 //framework
-#include <Aurora/Math/BoundingBox.h>
-#include <Aurora/Math/Vector2.h>
-#include <Aurora/Graphics/Vertex.h>
+#include <Aurealis/Math/BoundingBox.h>
+#include <Aurealis/Math/Vector2.h>
+#include <Aurealis/Graphics/Vertex.h>
 #include <cstdlib>
 
-using namespace Aurora::Math;
-using namespace Aurora::Utils;
-using namespace Aurora::Graphics;
+using namespace Aurealis::Math;
+using namespace Aurealis::Utils;
+using namespace Aurealis::Graphics;
 
 class SimpleMeshChunk
 {

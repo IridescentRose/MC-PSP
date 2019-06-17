@@ -1,5 +1,5 @@
 #include "TextureHelper.h"
-#include <Aurora/Graphics/RenderManager.h>
+#include <Aurealis/Graphics/RenderManager.h>
 
 TextureHelper::TextureHelper()
 {

@@ -1,11 +1,11 @@
 #ifndef BLOCKENTITY_H
 #define BLOCKENTITY_H
 
-#include <Aurora/Graphics/Vertex.h>
-#include <Aurora/Math/BoundingBox.h>
+#include <Aurealis/Graphics/Vertex.h>
+#include <Aurealis/Math/BoundingBox.h>
 #include <stdlib.h>
 #include <string>
-#include <Aurora/Graphics/RenderManager.h>
+#include <Aurealis/Graphics/RenderManager.h>
 #include <pspmath.h>
 #include <psptypes.h>
 
