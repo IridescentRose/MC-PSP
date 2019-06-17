@@ -259,12 +259,13 @@ namespace Aurora
 				sceGumMatrixMode(GU_VIEW);
 				sceGumLoadIdentity();
 
-				ScePspFVector3 pos = {mCam->m_vPosition.x + mCam->m_vOffset.x,mCam->m_vPosition.y + mCam->m_vOffset.y,mCam->m_vPosition.z + mCam->m_vOffset.z};
+				ScePspFVector3 pos = {mCam->m_vPosition.x + mCam->m_vOffset.x,mCam->m_vPosition.y + mCam->m_vOffset.y + mCam->bobY,mCam->m_vPosition.z + mCam->m_vOffset.z};
 				ScePspFVector3 eye = {mCam->m_vView.x,mCam->m_vView.y,mCam->m_vView.z};
 				ScePspFVector3 up = {mCam->m_vUpVector.x,mCam->m_vUpVector.y,mCam->m_vUpVector.z};
 
-				sceGumLookAt(&pos, &eye, &up);
+				sceGumRotateZ(mCam->tiltAngle);
 
+				sceGumLookAt(&pos, &eye, &up);
 				sceGumStoreMatrix(&view);
 
 				sceGumMatrixMode(GU_MODEL);

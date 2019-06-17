@@ -22,6 +22,23 @@ namespace Aurora
 			m_vStrafe = Vector3(0.0f, 0.0f, 0.0f);
 			vVector = Vector3(0.0f, 0.0f, 0.0f);
 			m_vVelocity = Vector3(0.0f, 0.0f, 0.0f);
+
+			isBobbing = false;
+			bobTimer = Timer();
+		}
+
+		void Camera::update(bool isWalking) {
+			if (isWalking) {
+				bobElapsed += bobTimer.GetDeltaTime();
+				bobY = vfpu_sinf(-bobElapsed * 2.86 * PI)/48.0f;
+				tiltAngle = vfpu_sinf(bobElapsed * 2.86 * PI) * 1.0f * PI / 180.0f / 4.0f;
+			}
+			else {
+				bobY = 0;
+				tiltAngle = 0;
+				bobElapsed = 0;
+				bobTimer.GetDeltaTime();
+			}
 		}
 
 		Camera::~Camera()

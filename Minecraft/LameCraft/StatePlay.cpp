@@ -8948,6 +8948,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
 
 void StatePlay::Update(StateManager* sManager)
 {
+	fppCam->update(isWalking);
     if(mWorld->armorAm[0] <= 0)
     {
         mWorld->armorId[0] = 324;

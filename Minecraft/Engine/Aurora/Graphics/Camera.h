@@ -3,9 +3,11 @@
 
 #include <Aurora/Math/Vector3.h>
 #include <Aurora/Math/Frustum.h>
+#include <Aurora/Utils/Timer.h>
 #include <pspmath.h>
 
 using namespace Aurora::Math;
+using namespace Aurora::Utils;
 
 namespace Aurora
 {
@@ -42,6 +44,15 @@ namespace Aurora
 
 			Frustum mFrustum;
 			bool needUpdate;
+
+			Timer bobTimer;
+
+			float tiltAngle;
+			float bobY;
+			bool isBobbing;
+			float bobElapsed;
+			void update(bool isWalking);
+
 
 
 		//private:
