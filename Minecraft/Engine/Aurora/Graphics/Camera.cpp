@@ -50,8 +50,8 @@ namespace Aurora
 
 				//AMBIENT EFFECTS HERE
 				passiveElapsed += passiveTimer.GetDeltaTime();
-				offAngleX = vfpu_sinf(passiveElapsed * 0.523) / 24.0f;
-				offAngleY = vfpu_sinf(passiveElapsed * 0.238) / 24.0f;
+				offAngleX = vfpu_sinf(passiveElapsed * 0.523f) / 24.0f;
+				offAngleY = vfpu_sinf(passiveElapsed * 0.238f) / 24.0f;
 				
 			}
 		}
