@@ -46,14 +46,15 @@ namespace Aurora
 			bool needUpdate;
 
 			Timer bobTimer;
+			Timer passiveTimer;
 
 			float tiltAngle;
 			float bobY;
-			bool isBobbing;
 			float bobElapsed;
 			void update(bool isWalking);
 
-
+			float passiveElapsed;
+			float offAngleX, offAngleY;
 
 		//private:
 

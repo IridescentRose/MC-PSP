@@ -263,7 +263,8 @@ namespace Aurora
 				ScePspFVector3 eye = {mCam->m_vView.x,mCam->m_vView.y,mCam->m_vView.z};
 				ScePspFVector3 up = {mCam->m_vUpVector.x,mCam->m_vUpVector.y,mCam->m_vUpVector.z};
 
-				sceGumRotateZ(mCam->tiltAngle);
+				ScePspFVector3 rotVec = { mCam->offAngleX, mCam->offAngleY, mCam->tiltAngle };
+				sceGumRotateXYZ(&rotVec);
 
 				sceGumLookAt(&pos, &eye, &up);
 				sceGumStoreMatrix(&view);

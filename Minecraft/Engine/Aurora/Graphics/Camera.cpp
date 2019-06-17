@@ -23,8 +23,12 @@ namespace Aurora
 			vVector = Vector3(0.0f, 0.0f, 0.0f);
 			m_vVelocity = Vector3(0.0f, 0.0f, 0.0f);
 
-			isBobbing = false;
 			bobTimer = Timer();
+			offAngleX = 0.0f;
+			offAngleY = 0.0f;
+			tiltAngle = 0.0f;
+			passiveElapsed = 0.0f;
+			passiveTimer = Timer();
 		}
 
 		void Camera::update(bool isWalking) {
@@ -32,12 +36,23 @@ namespace Aurora
 				bobElapsed += bobTimer.GetDeltaTime();
 				bobY = vfpu_sinf(-bobElapsed * 2.86 * PI)/48.0f;
 				tiltAngle = vfpu_sinf(bobElapsed * 2.86 * PI) * 1.0f * PI / 180.0f / 4.0f;
+
+				passiveElapsed = 0.0f;
+				passiveTimer.GetDeltaTime();
+				offAngleX = 0.0f;
+				offAngleY = 0.0f;
 			}
 			else {
 				bobY = 0;
 				tiltAngle = 0;
 				bobElapsed = 0;
 				bobTimer.GetDeltaTime();
+
+				//AMBIENT EFFECTS HERE
+				passiveElapsed += passiveTimer.GetDeltaTime();
+				offAngleX = vfpu_sinf(passiveElapsed * 0.523) / 24.0f;
+				offAngleY = vfpu_sinf(passiveElapsed * 0.238) / 24.0f;
+				
 			}
 		}
 
