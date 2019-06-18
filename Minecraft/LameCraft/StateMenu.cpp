@@ -5,7 +5,6 @@
 #include "LoadingScreen.h"
 #include "InputHelper.h"
 #include "TextureHelper.h"
-#include <Aurealis/System/NetworkManager.h>
 #include <zlib.h>
 #include <string>
 #include <Aurealis/System/SystemManager.h>
@@ -182,7 +181,6 @@ void StateMenu::Init()
 
     //set render manager instance
     mRender = RenderManager::InstancePtr();
-    mSystemMgr = SystemManager::Instance();
     mSoundMgr = SoundManager::Instance();
 
     logoSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Logo),0,0,256,64);
@@ -374,7 +372,7 @@ void StateMenu::Resume()
 void StateMenu::HandleEvents(StateManager* sManager)
 {
     //update input
-    mSystemMgr->InputUpdate();
+    g_System.InputUpdate();
 
 	//YEAH
 
@@ -383,7 +381,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
     case -1:// language menu
     {
         //up, down
-        if(mSystemMgr->KeyPressed(PSP_CTRL_UP))
+        if(g_System.KeyPressed(PSP_CTRL_UP))
         {
             selectPos--;
             if(selectPos < 0)
@@ -392,7 +390,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             mSoundMgr->PlayMenuSound();
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_DOWN))
+        if(g_System.KeyPressed(PSP_CTRL_DOWN))
         {
             selectPos++;
             if(selectPos > 1)
@@ -401,7 +399,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             mSoundMgr->PlayMenuSound();
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+        if(g_System.KeyPressed(PSP_CTRL_CROSS))
         {
             RenderManager::InstancePtr()->defaultFontType = selectPos+1;
             RenderManager::InstancePtr()->SetDefaultFont();
@@ -415,14 +413,14 @@ void StateMenu::HandleEvents(StateManager* sManager)
     case 0://main menu
     {
         //if triangle button pressed the exit
-        if(mSystemMgr->KeyPressed(PSP_CTRL_START))
+        if(g_System.KeyPressed(PSP_CTRL_START))
         {
             //running = false;
             sManager->Quit();
         }
 
         //up, down
-        if(mSystemMgr->KeyPressed(PSP_CTRL_UP))
+        if(g_System.KeyPressed(PSP_CTRL_UP))
         {
             selectPos--;
             if(selectPos < 0)
@@ -431,7 +429,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             mSoundMgr->PlayMenuSound();
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_DOWN))
+        if(g_System.KeyPressed(PSP_CTRL_DOWN))
         {
             selectPos++;
             if(selectPos > 3)
@@ -440,7 +438,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             mSoundMgr->PlayMenuSound();
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_TRIANGLE))
+        if(g_System.KeyPressed(PSP_CTRL_TRIANGLE))
         {
             if(selectPos == 0)
             {
@@ -448,7 +446,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             }
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+        if(g_System.KeyPressed(PSP_CTRL_CROSS))
         {
             if(selectPos == 0)//play state
             {
@@ -507,7 +505,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
     {
         if(saveSubmenu)
         {
-            if(mSystemMgr->KeyPressed(PSP_CTRL_UP))
+            if(g_System.KeyPressed(PSP_CTRL_UP))
             {
                 saveSubMenuSelect--;
                 if(saveSubMenuSelect < 1)
@@ -516,7 +514,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                 mSoundMgr->PlayMenuSound();
             }
 
-            if(mSystemMgr->KeyPressed(PSP_CTRL_DOWN))
+            if(g_System.KeyPressed(PSP_CTRL_DOWN))
             {
                 saveSubMenuSelect++;
                 if(saveSubMenuSelect > 2)
@@ -525,7 +523,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                 mSoundMgr->PlayMenuSound();
             }
 
-            if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+            if(g_System.KeyPressed(PSP_CTRL_CROSS))
             {
                 if(saveSubMenuSelect == 1)//remove file
                 {
@@ -578,7 +576,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
         }
         else
         {
-            if(mSystemMgr->KeyPressed(PSP_CTRL_UP))
+            if(g_System.KeyPressed(PSP_CTRL_UP))
             {
                 if(loadSelectPos == 1 || loadSelectPos == 2)
                 {
@@ -592,7 +590,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                 }
             }
 
-            if(mSystemMgr->KeyPressed(PSP_CTRL_DOWN))
+            if(g_System.KeyPressed(PSP_CTRL_DOWN))
             {
                 if(loadSelectPos == 0 || loadSelectPos == 3)
                 {
@@ -601,7 +599,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                 }
             }
 
-            if(mSystemMgr->KeyPressed(PSP_CTRL_LEFT))
+            if(g_System.KeyPressed(PSP_CTRL_LEFT))
             {
                 if(saveFilesList.empty() == false)
                 {
@@ -624,7 +622,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             }
 
 
-            if(mSystemMgr->KeyPressed(PSP_CTRL_RIGHT))
+            if(g_System.KeyPressed(PSP_CTRL_RIGHT))
             {
                 switch(loadSelectPos)
                 {
@@ -643,7 +641,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                 }
             }
 
-            if(mSystemMgr->KeyPressed(PSP_CTRL_LTRIGGER))
+            if(g_System.KeyPressed(PSP_CTRL_LTRIGGER))
             {
                 if(saveFilesList.empty() == false)
                 {
@@ -672,7 +670,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                 }
             }
 
-            if(mSystemMgr->KeyPressed(PSP_CTRL_RTRIGGER))
+            if(g_System.KeyPressed(PSP_CTRL_RTRIGGER))
             {
                 if(saveFilesList.empty() == false)
                 {
@@ -700,12 +698,12 @@ void StateMenu::HandleEvents(StateManager* sManager)
                 }
             }
 
-            if(mSystemMgr->KeyPressed(PSP_CTRL_CIRCLE))
+            if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
             {
                 menuState = 0;
             }
 
-            if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+            if(g_System.KeyPressed(PSP_CTRL_CROSS))
             {
                 if(loadSelectPos == 0)//play selected world
                 {
@@ -738,7 +736,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
                         unsigned short test[128];
                         unsigned short opis[10] = {'W','o','r','l','d',' ','n','a','m','e'};
-                        if(mSystemMgr->ShowOSK(opis,test,128) != -1)
+                        if(g_System.ShowOSK(opis,test,128) != -1)
                         {
                             std::string newWorldName = "";
                             for(int j = 0; test[j]; j++)
@@ -808,7 +806,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
     break;
     case 3://about
     {
-        if(mSystemMgr->KeyPressed(PSP_CTRL_UP))
+        if(g_System.KeyPressed(PSP_CTRL_UP))
         {
             aboutPos--;
             if(aboutPos < 0)
@@ -817,7 +815,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             mSoundMgr->PlayMenuSound();
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_DOWN))
+        if(g_System.KeyPressed(PSP_CTRL_DOWN))
         {
             aboutPos++;
             if(aboutPos > 1)
@@ -826,7 +824,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             mSoundMgr->PlayMenuSound();
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+        if(g_System.KeyPressed(PSP_CTRL_CROSS))
         {
             if(aboutPos == 1)
             {
@@ -842,7 +840,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             }
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_CIRCLE))
+        if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
         {
             menuState = 0;
         }
@@ -851,7 +849,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
     case 5://parametric terrain
     {
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_UP))
+        if(g_System.KeyPressed(PSP_CTRL_UP))
         {
             mSoundMgr->PlayMenuSound();
 
@@ -864,7 +862,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             generateSelectPose--;
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_DOWN))
+        if(g_System.KeyPressed(PSP_CTRL_DOWN))
         {
             mSoundMgr->PlayMenuSound();
             if (generateSelectPose == 4)
@@ -876,7 +874,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_CIRCLE))
+        if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
         {
             ScanSaveFiles("Save/");
 
@@ -893,7 +891,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             loadSelectPos = 3;
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+        if(g_System.KeyPressed(PSP_CTRL_CROSS))
         {
             if(generateSelectPose == 0)
             {
@@ -901,7 +899,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
                 unsigned short test[128];
                 unsigned short opis[10] = {'W','o','r','l','d',' ','n','a','m','e'};
-                if(mSystemMgr->ShowOSK(opis,test,128) != -1)
+                if(g_System.ShowOSK(opis,test,128) != -1)
                 {
                     for(int j = 0; j < 14; j++)
                     {
@@ -921,7 +919,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
                 unsigned short test[128];
                 unsigned short opis[10] = {'W','o','r','l','d',' ','s','e','e','d'};
-                if(mSystemMgr->ShowOSK(opis,test,128) != -1)
+                if(g_System.ShowOSK(opis,test,128) != -1)
                 {
 
                     for(int j = 0; j < 14; j++)
@@ -983,7 +981,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
     break;
     case 6://converter
     {
-        if(mSystemMgr->KeyPressed(PSP_CTRL_UP))
+        if(g_System.KeyPressed(PSP_CTRL_UP))
         {
             converterPos--;
             if(converterPos < 0)
@@ -992,7 +990,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             mSoundMgr->PlayMenuSound();
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_DOWN))
+        if(g_System.KeyPressed(PSP_CTRL_DOWN))
         {
             converterPos++;
             if(converterPos > 2)
@@ -1001,7 +999,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             mSoundMgr->PlayMenuSound();
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+        if(g_System.KeyPressed(PSP_CTRL_CROSS))
         {
             if(converterPos == 0)
             {
@@ -1918,7 +1916,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             }
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_CIRCLE))
+        if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
         {
             menuState = 3;
         }
@@ -1926,21 +1924,21 @@ void StateMenu::HandleEvents(StateManager* sManager)
     break;
     case 10:
     {
-        if(mSystemMgr->KeyPressed(PSP_CTRL_UP))
+        if(g_System.KeyPressed(PSP_CTRL_UP))
         {
             saveSubMenuSelect == 0 ? saveSubMenuSelect = 1 : saveSubMenuSelect = 0;
 
             mSoundMgr->PlayMenuSound();
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_DOWN))
+        if(g_System.KeyPressed(PSP_CTRL_DOWN))
         {
             saveSubMenuSelect == 1 ? saveSubMenuSelect = 0 : saveSubMenuSelect = 1;
 
             mSoundMgr->PlayMenuSound();
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+        if(g_System.KeyPressed(PSP_CTRL_CROSS))
         {
             char worldNameTemp[50];
             for(char i = 0; i <= 49; i++)
@@ -1982,7 +1980,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
     break;
     case 11://tp
     {
-        if(mSystemMgr->KeyPressed(PSP_CTRL_LEFT))
+        if(g_System.KeyPressed(PSP_CTRL_LEFT))
         {
             tpSelectPos --;
             if(tpSelectPos < 0)
@@ -1992,7 +1990,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             mSoundMgr->PlayMenuSound();
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_RIGHT))
+        if(g_System.KeyPressed(PSP_CTRL_RIGHT))
         {
             tpSelectPos ++;
             if(tpSelectPos > 1)
@@ -2002,7 +2000,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             mSoundMgr->PlayMenuSound();
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_LTRIGGER))
+        if(g_System.KeyPressed(PSP_CTRL_LTRIGGER))
         {
             tpPos--;
             if(tpPos < tpStart)
@@ -2027,7 +2025,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             }
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_RTRIGGER))
+        if(g_System.KeyPressed(PSP_CTRL_RTRIGGER))
         {
             tpPos++;
             if(tpPos == tpMax)
@@ -2054,12 +2052,12 @@ void StateMenu::HandleEvents(StateManager* sManager)
             }
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_CIRCLE))
+        if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
         {
             menuState = 0;
         }
 
-        if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+        if(g_System.KeyPressed(PSP_CTRL_CROSS))
         {
             if(tpSelectPos == 0)//play state
             {
@@ -2580,16 +2578,12 @@ void StateMenu::Draw(StateManager* sManager)
 			mRender->DebugPrint(440, 148 - 40, "Nathan Bourgeois");
 
 			if (!IS_SNAPSHOT) {
-				mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
-				mRender->DebugPrint(40, 196 - 16, "Version: ");
-				mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
-				mRender->DebugPrint(440, 196 - 16, "%s", VERSION_NAME);
+				mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, INTRAFONT_ALIGN_RIGHT);
+				mRender->DebugPrint(480, 270, "Version: %s", VERSION_NAME);
 			}
 			else {
-				mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
-				mRender->DebugPrint(40, 196 - 16, "Snapshot: ");
-				mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
-				mRender->DebugPrint(440, 196 - 16, "%s", SNAPSHOT_NAME);
+				mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, INTRAFONT_ALIGN_RIGHT);
+				mRender->DebugPrint(480, 270, "Snapshot: %s", SNAPSHOT_NAME);
 			}
 
 

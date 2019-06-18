@@ -23,7 +23,6 @@ void StateOptions::Init()
 {
 	//set render manager instance
 	mRender = RenderManager::InstancePtr();
-	mSystemMgr = SystemManager::Instance();
 	mSoundMgr = SoundManager::Instance();
 
 	buttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,0,95,12);
@@ -104,14 +103,14 @@ void StateOptions::Resume()
 void StateOptions::HandleEvents(StateManager* sManager)
 {
 	//update input
-	mSystemMgr->InputUpdate();
+	g_System.InputUpdate();
 
 	switch(menuState)
 	{
 		case 0:
 		{
 			//up, down
-			if(mSystemMgr->KeyPressed(PSP_CTRL_UP))
+			if(g_System.KeyPressed(PSP_CTRL_UP))
 			{
 				selectPos--;
 				if(selectPos < 0)
@@ -120,7 +119,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				mSoundMgr->PlayMenuSound();
 			}
 
-			if(mSystemMgr->KeyPressed(PSP_CTRL_DOWN))
+			if(g_System.KeyPressed(PSP_CTRL_DOWN))
 			{
 				selectPos++;
 				if(selectPos > 2)
@@ -129,13 +128,13 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				mSoundMgr->PlayMenuSound();
 			}
 
-			if(mSystemMgr->KeyPressed(PSP_CTRL_CIRCLE))
+			if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
 			{
 				InputHelper::Instance()->Save();
 				sManager->RemoveState();
 			}
 
-			if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+			if(g_System.KeyPressed(PSP_CTRL_CROSS))
 			{
 				if(selectPos == 0)
 				{
@@ -170,40 +169,40 @@ void StateOptions::HandleEvents(StateManager* sManager)
 			if(chooseKeyState)//here we set new key for action
 			{
 				//check each button
-				if(mSystemMgr->KeyPressed(PSP_CTRL_UP))
+				if(g_System.KeyPressed(PSP_CTRL_UP))
 					currentKey = 0;//cross
-				if(mSystemMgr->KeyPressed(PSP_CTRL_DOWN))
+				if(g_System.KeyPressed(PSP_CTRL_DOWN))
 					currentKey = 1;//cross
-				if(mSystemMgr->KeyPressed(PSP_CTRL_LEFT))
+				if(g_System.KeyPressed(PSP_CTRL_LEFT))
 					currentKey = 2;//cross
-				if(mSystemMgr->KeyPressed(PSP_CTRL_RIGHT))
+				if(g_System.KeyPressed(PSP_CTRL_RIGHT))
 					currentKey = 3;//cross
 
-				if(mSystemMgr->KeyPressed(PSP_CTRL_TRIANGLE))
+				if(g_System.KeyPressed(PSP_CTRL_TRIANGLE))
 					currentKey = 4;//cross
-				if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+				if(g_System.KeyPressed(PSP_CTRL_CROSS))
 					currentKey = 5;//cross
-				if(mSystemMgr->KeyPressed(PSP_CTRL_SQUARE))
+				if(g_System.KeyPressed(PSP_CTRL_SQUARE))
 					currentKey = 6;//cross
-				if(mSystemMgr->KeyPressed(PSP_CTRL_CIRCLE))
+				if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
 					currentKey = 7;//cross
 
-				if(mSystemMgr->KeyPressed(PSP_CTRL_LTRIGGER))
+				if(g_System.KeyPressed(PSP_CTRL_LTRIGGER))
 					currentKey = 8;//cross
-				if(mSystemMgr->KeyPressed(PSP_CTRL_RTRIGGER))
+				if(g_System.KeyPressed(PSP_CTRL_RTRIGGER))
 					currentKey = 9;//cross
-				if(mSystemMgr->KeyPressed(PSP_CTRL_SELECT))
+				if(g_System.KeyPressed(PSP_CTRL_SELECT))
 					currentKey = 10;//cross
-				if(mSystemMgr->KeyPressed(PSP_CTRL_START))
+				if(g_System.KeyPressed(PSP_CTRL_START))
 					currentKey = 15;//cross
 
-				if(mSystemMgr->GetAnalogY() > InputHelper::Instance()->analogYup)//analog up
+				if(g_System.GetAnalogY() > InputHelper::Instance()->analogYup)//analog up
 					currentKey = 12;//cross
-				if(mSystemMgr->GetAnalogY() < InputHelper::Instance()->analogYdown)//analog down
+				if(g_System.GetAnalogY() < InputHelper::Instance()->analogYdown)//analog down
 					currentKey = 11;//cross
-				if(mSystemMgr->GetAnalogX() < InputHelper::Instance()->analogXleft)//analog left
+				if(g_System.GetAnalogX() < InputHelper::Instance()->analogXleft)//analog left
 					currentKey = 13;//cross
-				if(mSystemMgr->GetAnalogX() > InputHelper::Instance()->analogXright)//analog right
+				if(g_System.GetAnalogX() > InputHelper::Instance()->analogXright)//analog right
 					currentKey = 14;//cross
 
 				if(currentKey != -1)
@@ -223,7 +222,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 
 			}else
 			{
-				if(mSystemMgr->KeyPressed(PSP_CTRL_UP))
+				if(g_System.KeyPressed(PSP_CTRL_UP))
 				{
 					controlPos--;
 
@@ -251,7 +250,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 					mSoundMgr->PlayMenuSound();
 				}
 
-				if(mSystemMgr->KeyPressed(PSP_CTRL_DOWN))
+				if(g_System.KeyPressed(PSP_CTRL_DOWN))
 				{
 					controlPos++;
 
@@ -276,12 +275,12 @@ void StateOptions::HandleEvents(StateManager* sManager)
 					mSoundMgr->PlayMenuSound();
 				}
 
-				if(mSystemMgr->KeyPressed(PSP_CTRL_CIRCLE))
+				if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
 				{
 					menuState = 0;
 				}
 
-				if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+				if(g_System.KeyPressed(PSP_CTRL_CROSS))
 				{
 					if(controlPos == 16)//back button - exit from this menu
 					{
@@ -301,7 +300,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 		break;
 		case 2:
 		{
-			if(mSystemMgr->KeyPressed(PSP_CTRL_UP))
+			if(g_System.KeyPressed(PSP_CTRL_UP))
 			{
 				currentAnalogPos--;
 
@@ -311,7 +310,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				mSoundMgr->PlayMenuSound();
 			}
 
-			if(mSystemMgr->KeyPressed(PSP_CTRL_DOWN))
+			if(g_System.KeyPressed(PSP_CTRL_DOWN))
 			{
 				currentAnalogPos++;
 				if(currentAnalogPos > 4)
@@ -320,7 +319,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				mSoundMgr->PlayMenuSound();
 			}
 
-			if(mSystemMgr->KeyPressed(PSP_CTRL_LEFT))
+			if(g_System.KeyPressed(PSP_CTRL_LEFT))
 			{
 				//dodatnie
 				if(currentAnalogPos == 0 || currentAnalogPos == 3)
@@ -356,7 +355,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				mSoundMgr->PlayMenuSound();
 			}
 
-			if(mSystemMgr->KeyPressed(PSP_CTRL_RIGHT))
+			if(g_System.KeyPressed(PSP_CTRL_RIGHT))
 			{
 				//dodatnie
 				if(currentAnalogPos == 0 || currentAnalogPos == 3)
@@ -392,12 +391,12 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				mSoundMgr->PlayMenuSound();
 			}
 
-			if(mSystemMgr->KeyPressed(PSP_CTRL_CIRCLE))
+			if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
 			{
 				menuState = 0;
 			}
 
-			if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+			if(g_System.KeyPressed(PSP_CTRL_CROSS))
 			{
 				if(currentAnalogPos == 4)
 					menuState = 0;

@@ -110,7 +110,6 @@ private:
     double time12;
 
 	RenderManager *mRender;
-	SystemManager *mSystemMgr;
 	SoundManager *mSoundMgr;
 	InputHelper *mIhelper;
 	Camera *fppCam;

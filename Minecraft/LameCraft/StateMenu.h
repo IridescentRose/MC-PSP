@@ -174,7 +174,6 @@ private:
 	Sprite* bg[24];
 
 	RenderManager *mRender;
-	SystemManager *mSystemMgr;
 	SoundManager *mSoundMgr;
 
     // converter vars

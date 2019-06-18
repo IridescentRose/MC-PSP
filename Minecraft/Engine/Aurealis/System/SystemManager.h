@@ -18,10 +18,6 @@ namespace Aurealis
 		class SystemManager
 		{
 		private:
-
-			//static access
-			static SystemManager m_SystemManager;
-
 			//dialog params
 			pspUtilityMsgDialogParams dialog;
 			pspUtilityNetconfData networkData;
@@ -34,10 +30,6 @@ namespace Aurealis
 			SceCtrlData oldPadData,newPadData;
 
 		public:
-
-
-			static SystemManager* Instance();
-
 			void Init();
 
 			//memory
@@ -58,6 +50,8 @@ namespace Aurealis
 			float GetAnalogY();
 
 		};
+
+		extern SystemManager g_System;
 	}
 }
 

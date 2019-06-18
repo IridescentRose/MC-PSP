@@ -50,7 +50,6 @@ private:
 	Sprite *backSprite;
 
 	RenderManager *mRender;
-	SystemManager *mSystemMgr;
 	SoundManager *mSoundMgr;
 
 	int selectPos;

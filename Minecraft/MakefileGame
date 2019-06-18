@@ -27,7 +27,6 @@ Engine/Aurealis/Utils/pgeZip.o \
 Engine/Aurealis/Utils/pge.o \
 Engine/Aurealis/Utils/pgeDir.o \
 Engine/Aurealis/System/SystemManager.o \
-Engine/Aurealis/System/NetworkManager.o \
 LameCraft/BaseBlock.o \
 LameCraft/Blocks.o \
 LameCraft/BaseItem.o \

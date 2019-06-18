@@ -23,7 +23,6 @@ StatePlay::StatePlay()
 {
     time12 = 0.0f;
     mRender = NULL;
-    mSystemMgr = NULL;
     fppCam = NULL;
     UseChest = NULL;
     UseFurnace = NULL;
@@ -201,7 +200,6 @@ void StatePlay::Init()
 {
     //set render manager instance
     mRender = RenderManager::InstancePtr();
-    mSystemMgr = SystemManager::Instance();
     mSoundMgr = SoundManager::Instance();
     mIhelper = InputHelper::Instance();
 
@@ -247,7 +245,6 @@ void StatePlay::InitParametric(bool makeTrees,bool makeWater,bool makeCaves,unsi
 {
     //set render manager instance
     mRender = RenderManager::InstancePtr();
-    mSystemMgr = SystemManager::Instance();
     mSoundMgr = SoundManager::Instance();
     mIhelper = InputHelper::Instance();
 
@@ -314,7 +311,6 @@ void StatePlay::LoadMap(std::string fileName,bool compressed)
 
     //set render manager instance
     mRender = RenderManager::InstancePtr();
-    mSystemMgr = SystemManager::Instance();
     mSoundMgr = SoundManager::Instance();
     mIhelper = InputHelper::Instance();
 
@@ -3443,7 +3439,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
     {
         if(freeMemoryTimer > 3.0f)
         {
-            freeMemory = mSystemMgr->ramAvailable();
+            freeMemory = g_System.ramAvailable();
             freeMemoryTimer = 0.0f;
         }
     }
@@ -3451,13 +3447,13 @@ void StatePlay::HandleEvents(StateManager* sManager)
     {
         if(freeMemoryTimer > 15.0f)
         {
-            freeMemory = mSystemMgr->ramAvailable();
+            freeMemory = g_System.ramAvailable();
             freeMemoryTimer = 0.0f;
         }
     }
 
     //update input
-    mSystemMgr->InputUpdate();
+    g_System.InputUpdate();
 
     if(mWorld->HP > 0 && sleepTime <= 0.0f)
     {
@@ -3512,7 +3508,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                 }
 
                 // drop 1 item
-                if(mSystemMgr->KeyPressed(PSP_CTRL_UP))
+                if(g_System.KeyPressed(PSP_CTRL_UP))
                 {
                     if(keyPressed(InputHelper::Instance()->getButtonToAction(14)))
                     {
@@ -3878,9 +3874,9 @@ void StatePlay::HandleEvents(StateManager* sManager)
                 }
 
 
-           /* if (mSystemMgr->KeyPressed(PSP_CTRL_RTRIGGER)) //open inventory
+           /* if (g_System.KeyPressed(PSP_CTRL_RTRIGGER)) //open inventory
             {
-                if(mSystemMgr->KeyPressed(PSP_CTRL_LTRIGGER))
+                if(g_System.KeyPressed(PSP_CTRL_LTRIGGER))
                 {
 
                 }
@@ -7331,7 +7327,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
             if(invEn == true || craft3xEn == true || chestEn == true || furnaceEn == true)
             {
                 //Craft item
-                if(mSystemMgr->KeyPressed(PSP_CTRL_CIRCLE))
+                if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
                 {
                     if(invEn == true)
                     {
@@ -7792,7 +7788,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                 }
 
 
-                if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+                if(g_System.KeyPressed(PSP_CTRL_CROSS))
                 {
                     if (upEn == 0)
                     {
@@ -8110,7 +8106,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                     }
                 }
 
-                if(mSystemMgr->KeyPressed(PSP_CTRL_SQUARE))
+                if(g_System.KeyPressed(PSP_CTRL_SQUARE))
                 {
                     if (upEn == 0)
                     {
@@ -8494,7 +8490,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
             if(menuOptions)
             {
                 //up, down
-                if(mSystemMgr->KeyPressed(PSP_CTRL_UP))
+                if(g_System.KeyPressed(PSP_CTRL_UP))
                 {
                     if(optionsMenuPos == 8 || optionsMenuPos == 0)
                     {
@@ -8504,7 +8500,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                     mSoundMgr->PlayMenuSound();
                 }
 
-                if(mSystemMgr->KeyPressed(PSP_CTRL_DOWN))
+                if(g_System.KeyPressed(PSP_CTRL_DOWN))
                 {
                     if(optionsMenuPos == 7 || optionsMenuPos == 15)
                     {
@@ -8514,7 +8510,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                     mSoundMgr->PlayMenuSound();
                 }
 
-                if(mSystemMgr->KeyPressed(PSP_CTRL_RTRIGGER))
+                if(g_System.KeyPressed(PSP_CTRL_RTRIGGER))
                 {
                     if(optionsMenuPos + 8 > 15)
                     {
@@ -8524,7 +8520,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                     mSoundMgr->PlayMenuSound();
                 }
 
-                if(mSystemMgr->KeyPressed(PSP_CTRL_LTRIGGER))
+                if(g_System.KeyPressed(PSP_CTRL_LTRIGGER))
                 {
                     if(optionsMenuPos - 8 < 0)
                     {
@@ -8534,7 +8530,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                     mSoundMgr->PlayMenuSound();
                 }
 
-                if(mSystemMgr->KeyPressed(PSP_CTRL_RIGHT))
+                if(g_System.KeyPressed(PSP_CTRL_RIGHT))
                 {
                     if(optionsMenuPos == 0)
                     {
@@ -8582,7 +8578,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                     }
                 }
 
-                if(mSystemMgr->KeyPressed(PSP_CTRL_LEFT))
+                if(g_System.KeyPressed(PSP_CTRL_LEFT))
                 {
                     if(optionsMenuPos == 0)
                     {
@@ -8629,7 +8625,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                 }
 
                 //back
-                if(mSystemMgr->KeyPressed(PSP_CTRL_CIRCLE))
+                if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
                 {
                     if (mWorld->mainOptions.difficult == 0)
                     {
@@ -8640,7 +8636,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                     menuOptions = false;
                 }
 
-                if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+                if(g_System.KeyPressed(PSP_CTRL_CROSS))
                 {
                     //fog rendering
                     if(optionsMenuPos == 2)
@@ -8722,7 +8718,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                         makeScreen = true;
                         /*unsigned short test[128];
                         unsigned short opis[10] = {'W','o','r','l','d',' ','n','a','m','e'};
-                        if(mSystemMgr->ShowOSK(opis,test,128) != -1)
+                        if(g_System.ShowOSK(opis,test,128) != -1)
                         {
                             std::string newWorldName = "";
                             for(int j = 0; test[j]; j++)
@@ -8746,7 +8742,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
             else
             {
                 //up, down
-                if(mSystemMgr->KeyPressed(PSP_CTRL_UP))
+                if(g_System.KeyPressed(PSP_CTRL_UP))
                 {
                     selectPos--;
                     if(selectPos < 0)
@@ -8755,7 +8751,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                     mSoundMgr->PlayMenuSound();
                 }
 
-                if(mSystemMgr->KeyPressed(PSP_CTRL_DOWN))
+                if(g_System.KeyPressed(PSP_CTRL_DOWN))
                 {
                     selectPos++;
                     if(selectPos > 5)
@@ -8764,7 +8760,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                     mSoundMgr->PlayMenuSound();
                 }
 
-                if(mSystemMgr->KeyPressed(PSP_CTRL_CIRCLE))
+                if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
                 {
                     menuState = 0;
                     selectPos = 0;
@@ -8772,7 +8768,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                     menuOptions = false;
                 }
 
-                if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+                if(g_System.KeyPressed(PSP_CTRL_CROSS))
                 {
                     if(selectPos == 0)//resume
                     {
@@ -8813,12 +8809,12 @@ void StatePlay::HandleEvents(StateManager* sManager)
         }
         if (menuState == 3)
         {
-            if(mSystemMgr->KeyPressed(PSP_CTRL_CIRCLE))
+            if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
             {
                 selectPos = 2;
                 menuState = 1;
             }
-            if(mSystemMgr->KeyPressed(PSP_CTRL_RTRIGGER))
+            if(g_System.KeyPressed(PSP_CTRL_RTRIGGER))
             {
                 statisticsPage += 1;
                 if(statisticsPage == 2)
@@ -8826,7 +8822,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                     statisticsPage = 0;
                 }
             }
-            if(mSystemMgr->KeyPressed(PSP_CTRL_LTRIGGER))
+            if(g_System.KeyPressed(PSP_CTRL_LTRIGGER))
             {
                 statisticsPage -= 1;
                 if(statisticsPage == -1)
@@ -8882,7 +8878,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
             mWorld->mainStatistics.dies += 1;
             dieFactor = 0;
         }
-        if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
+        if(g_System.KeyPressed(PSP_CTRL_CROSS))
         {
             if(mWorld->gameModeWorld == 2)
             {
@@ -13160,59 +13156,59 @@ bool StatePlay::keyPressed(int currentKey)
     //analog reset
     if(analogUp)
     {
-        if(mSystemMgr->GetAnalogY() < InputHelper::Instance()->analogYup)
+        if(g_System.GetAnalogY() < InputHelper::Instance()->analogYup)
             analogUp = false;
     }
     if(analogDown)
     {
-        if(mSystemMgr->GetAnalogY() > InputHelper::Instance()->analogYdown)
+        if(g_System.GetAnalogY() > InputHelper::Instance()->analogYdown)
             analogDown = false;
     }
     if(analogLeft)
     {
-        if(mSystemMgr->GetAnalogX() > InputHelper::Instance()->analogXleft)
+        if(g_System.GetAnalogX() > InputHelper::Instance()->analogXleft)
             analogLeft = false;
     }
     if(analogRight)
     {
-        if(mSystemMgr->GetAnalogX() < InputHelper::Instance()->analogXright)
+        if(g_System.GetAnalogX() < InputHelper::Instance()->analogXright)
             analogRight = false;
     }
 
     //keys
     if(currentKey == 0)//cross
-        return mSystemMgr->KeyPressed(PSP_CTRL_UP);
+        return g_System.KeyPressed(PSP_CTRL_UP);
     if(currentKey == 1)//cross
-        return mSystemMgr->KeyPressed(PSP_CTRL_DOWN);
+        return g_System.KeyPressed(PSP_CTRL_DOWN);
     if(currentKey == 2)//cross
-        return mSystemMgr->KeyPressed(PSP_CTRL_LEFT);
+        return g_System.KeyPressed(PSP_CTRL_LEFT);
     if(currentKey == 3)//cross
-        return mSystemMgr->KeyPressed(PSP_CTRL_RIGHT);
+        return g_System.KeyPressed(PSP_CTRL_RIGHT);
 
     if(currentKey == 4)//cross
-        return mSystemMgr->KeyPressed(PSP_CTRL_TRIANGLE);
+        return g_System.KeyPressed(PSP_CTRL_TRIANGLE);
     if(currentKey == 5)//cross
-        return mSystemMgr->KeyPressed(PSP_CTRL_CROSS);
+        return g_System.KeyPressed(PSP_CTRL_CROSS);
     if(currentKey == 6)//cross
-        return mSystemMgr->KeyPressed(PSP_CTRL_SQUARE);
+        return g_System.KeyPressed(PSP_CTRL_SQUARE);
     if(currentKey == 7)//cross
-        return mSystemMgr->KeyPressed(PSP_CTRL_CIRCLE);
+        return g_System.KeyPressed(PSP_CTRL_CIRCLE);
 
     if(currentKey == 8)//cross
-        return mSystemMgr->KeyPressed(PSP_CTRL_LTRIGGER);
+        return g_System.KeyPressed(PSP_CTRL_LTRIGGER);
     if(currentKey == 9)//cross
-        return mSystemMgr->KeyPressed(PSP_CTRL_RTRIGGER);
+        return g_System.KeyPressed(PSP_CTRL_RTRIGGER);
     if(currentKey == 10)//cross
-        return mSystemMgr->KeyPressed(PSP_CTRL_SELECT);
+        return g_System.KeyPressed(PSP_CTRL_SELECT);
     if(currentKey == 15)//cross
-        return mSystemMgr->KeyPressed(PSP_CTRL_START);
+        return g_System.KeyPressed(PSP_CTRL_START);
 
     //analog stick....
     if(currentKey == 12)//cross
     {
         if(!analogUp)
         {
-            if(mSystemMgr->GetAnalogY() > InputHelper::Instance()->analogYup)
+            if(g_System.GetAnalogY() > InputHelper::Instance()->analogYup)
             {
                 analogUp = true;
                 return true;//analog up
@@ -13223,7 +13219,7 @@ bool StatePlay::keyPressed(int currentKey)
     {
         if(!analogDown)
         {
-            if(mSystemMgr->GetAnalogY() < InputHelper::Instance()->analogYdown)
+            if(g_System.GetAnalogY() < InputHelper::Instance()->analogYdown)
             {
                 analogDown = true;
                 return true;//analog down
@@ -13234,7 +13230,7 @@ bool StatePlay::keyPressed(int currentKey)
     {
         if(!analogLeft)
         {
-            if(mSystemMgr->GetAnalogX() < InputHelper::Instance()->analogXleft)
+            if(g_System.GetAnalogX() < InputHelper::Instance()->analogXleft)
             {
                 analogLeft = true;
                 return true;//analog left
@@ -13245,7 +13241,7 @@ bool StatePlay::keyPressed(int currentKey)
     {
         if(!analogRight)
         {
-            if(mSystemMgr->GetAnalogX() > InputHelper::Instance()->analogXright)
+            if(g_System.GetAnalogX() > InputHelper::Instance()->analogXright)
             {
                 analogRight = true;
                 return true;//analog right
@@ -13259,41 +13255,41 @@ bool StatePlay::keyPressed(int currentKey)
 bool StatePlay::keyHold(int currentKey)
 {
     if(currentKey == 0)//cross
-        return mSystemMgr->KeyHold(PSP_CTRL_UP);
+        return g_System.KeyHold(PSP_CTRL_UP);
     if(currentKey == 1)//cross
-        return mSystemMgr->KeyHold(PSP_CTRL_DOWN);
+        return g_System.KeyHold(PSP_CTRL_DOWN);
     if(currentKey == 2)//cross
-        return mSystemMgr->KeyHold(PSP_CTRL_LEFT);
+        return g_System.KeyHold(PSP_CTRL_LEFT);
     if(currentKey == 3)//cross
-        return mSystemMgr->KeyHold(PSP_CTRL_RIGHT);
+        return g_System.KeyHold(PSP_CTRL_RIGHT);
 
     if(currentKey == 4)//cross
-        return mSystemMgr->KeyHold(PSP_CTRL_TRIANGLE);
+        return g_System.KeyHold(PSP_CTRL_TRIANGLE);
     if(currentKey == 5)//cross
-        return mSystemMgr->KeyHold(PSP_CTRL_CROSS);
+        return g_System.KeyHold(PSP_CTRL_CROSS);
     if(currentKey == 6)//cross
-        return mSystemMgr->KeyHold(PSP_CTRL_SQUARE);
+        return g_System.KeyHold(PSP_CTRL_SQUARE);
     if(currentKey == 7)//cross
-        return mSystemMgr->KeyHold(PSP_CTRL_CIRCLE);
+        return g_System.KeyHold(PSP_CTRL_CIRCLE);
 
     if(currentKey == 8)//cross
-        return mSystemMgr->KeyHold(PSP_CTRL_LTRIGGER);
+        return g_System.KeyHold(PSP_CTRL_LTRIGGER);
     if(currentKey == 9)//cross
-        return mSystemMgr->KeyHold(PSP_CTRL_RTRIGGER);
+        return g_System.KeyHold(PSP_CTRL_RTRIGGER);
     if(currentKey == 10)//cross
-        return mSystemMgr->KeyHold(PSP_CTRL_SELECT);
+        return g_System.KeyHold(PSP_CTRL_SELECT);
     if(currentKey == 15)//cross
-        return mSystemMgr->KeyHold(PSP_CTRL_START);
+        return g_System.KeyHold(PSP_CTRL_START);
 
     //analog stick....
     if(currentKey == 12)//cross
-        return (mSystemMgr->GetAnalogY() > InputHelper::Instance()->analogYup);//analog up
+        return (g_System.GetAnalogY() > InputHelper::Instance()->analogYup);//analog up
     if(currentKey == 11)//cross
-        return (mSystemMgr->GetAnalogY() < InputHelper::Instance()->analogYdown);//analog down
+        return (g_System.GetAnalogY() < InputHelper::Instance()->analogYdown);//analog down
     if(currentKey == 13)//cross
-        return (mSystemMgr->GetAnalogX() < InputHelper::Instance()->analogXleft);//analog left
+        return (g_System.GetAnalogX() < InputHelper::Instance()->analogXleft);//analog left
     if(currentKey == 14)//cross
-        return (mSystemMgr->GetAnalogX() > InputHelper::Instance()->analogXright);//analog right
+        return (g_System.GetAnalogX() > InputHelper::Instance()->analogXright);//analog right
 
     return false;
 }

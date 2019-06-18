@@ -4,12 +4,7 @@ namespace Aurealis
 {
 	namespace System
 	{
-		SystemManager SystemManager::m_SystemManager;
-
-		SystemManager* SystemManager::Instance()
-		{
-			return &m_SystemManager;
-		}
+		SystemManager g_System;
 
 		void SystemManager::ConfigureDialog(pspUtilityMsgDialogParams *dialog, size_t dialog_size)
 		{

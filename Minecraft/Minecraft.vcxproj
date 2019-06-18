@@ -154,7 +154,6 @@
     <ClCompile Include="Engine\Aurealis\Math\Polygon.cpp" />
     <ClCompile Include="Engine\Aurealis\Math\Quaternion.cpp" />
     <ClCompile Include="Engine\Aurealis\Math\Ray.cpp" />
-    <ClCompile Include="Engine\Aurealis\System\NetworkManager.cpp" />
     <ClCompile Include="Engine\Aurealis\System\SystemManager.cpp" />
     <ClCompile Include="Engine\Aurealis\Utils\Logger.cpp" />
     <ClCompile Include="Engine\Aurealis\Utils\pge.c" />
@@ -315,7 +314,6 @@
     <ClInclude Include="Engine\Aurealis\Math\Vector2.h" />
     <ClInclude Include="Engine\Aurealis\Math\Vector3.h" />
     <ClInclude Include="Engine\Aurealis\Math\Vector4.h" />
-    <ClInclude Include="Engine\Aurealis\System\NetworkManager.h" />
     <ClInclude Include="Engine\Aurealis\System\SystemManager.h" />
     <ClInclude Include="Engine\Aurealis\Utils\GameState.h" />
     <ClInclude Include="Engine\Aurealis\Utils\Logger.h" />

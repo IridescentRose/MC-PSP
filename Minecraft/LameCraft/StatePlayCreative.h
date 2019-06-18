@@ -94,7 +94,6 @@ private:
 private:
 
 	RenderManager *mRender;
-	SystemManager *mSystemMgr;
 	SoundManager *mSoundMgr;
 	InputHelper *mIhelper;
 	Camera *fppCam;

@@ -483,9 +483,6 @@
     <ClCompile Include="Engine\Aurealis\Math\Ray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Aurealis\System\NetworkManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Aurealis\System\SystemManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -960,9 +957,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Aurealis\Math\Vector4.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Aurealis\System\NetworkManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Aurealis\System\SystemManager.h">
