@@ -222,7 +222,7 @@ namespace Aurealis
 
 			if ((fp = fopen(fileName.c_str(), "r")) == NULL)
 			{
-				Utils::Logger::Instance()->LogMessage("Can't loaded texture: %s\n",fileName.c_str());
+				Utils::g_Logger.LogMessage("Can't loaded texture: %s\n",fileName.c_str());
 				return false;
 			}
 
@@ -247,9 +247,9 @@ namespace Aurealis
 				{
 					Names.push_back(fileName);
 					Images.push_back(image);
-					Utils::Logger::Instance()->LogMessage("Loaded texture: %s\n",fileName.c_str());
+					Utils::g_Logger.LogMessage("Loaded texture: %s\n",fileName.c_str());
 				}else
-					Utils::Logger::Instance()->LogMessage("Can't open file %s\n",fileName.c_str());
+					Utils::g_Logger.LogMessage("Can't open file %s\n",fileName.c_str());
 			}
 		}
 
@@ -265,9 +265,9 @@ namespace Aurealis
 				{
 					ConstNames.push_back(fileName);
 					ConstImages.push_back(image);
-					Utils::Logger::Instance()->LogMessage("Loaded texture: %s \n",fileName.c_str());
+					Utils::g_Logger.LogMessage("Loaded texture: %s \n",fileName.c_str());
 				}else
-					Utils::Logger::Instance()->LogMessage("Can't open file %s \n",fileName.c_str());
+					Utils::g_Logger.LogMessage("Can't open file %s \n",fileName.c_str());
 			}
 		}
 
@@ -281,9 +281,9 @@ namespace Aurealis
 				{
 					Names.push_back(fileName);
 					Images.push_back(image);
-					Utils::Logger::Instance()->LogMessage("Loaded texture: %s \n",fileName.c_str());
+					Utils::g_Logger.LogMessage("Loaded texture: %s \n",fileName.c_str());
 				}else
-					Utils::Logger::Instance()->LogMessage("Can't open file %s \n",fileName.c_str());
+					Utils::g_Logger.LogMessage("Can't open file %s \n",fileName.c_str());
 			}
 		}
         //return testImage->ImageData[(1+(x * 4)) + (y * (testImage->Width*4))] >> 8;

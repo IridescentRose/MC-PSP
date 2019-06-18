@@ -1,5 +1,4 @@
-#ifndef GAMESTATE_H
-#define GAMESTATE_H
+#pragma once
 
 #include <Aurealis/Utils/StateManager.h>
 
@@ -33,5 +32,3 @@ namespace Aurealis
 		};
 	}
 }
-
-#endif

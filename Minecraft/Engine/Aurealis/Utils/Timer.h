@@ -1,5 +1,4 @@
-#ifndef Aurealis_TIMER_H
-#define Aurealis_TIMER_H
+#pragma once
 
 #include <psptypes.h>
 #include <stdio.h>
@@ -9,17 +8,15 @@ namespace Aurealis
 {
 	namespace Utils
 	{
-
 		class Timer
 		{
 			public:
 				Timer();
-				virtual ~Timer();
 
-				double GetDeltaTime( void );	// Returns the delta time
+				float GetDeltaTime( void );	// Returns the delta time
 
 			private:
-				double dt;
+				float dt;
 
 				u64 timeNow;
 				u64 timeLastAsk;
@@ -28,5 +25,3 @@ namespace Aurealis
 
 	}
 }
-
-#endif /* TIMER_H_ */

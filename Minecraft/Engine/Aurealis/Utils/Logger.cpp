@@ -9,8 +9,6 @@ namespace Aurealis
 {
 	namespace Utils
 	{
-		Logger Logger::m_Logger;
-
 		void Logger::LogMessage(const char *message, ...)
 		{
 			va_list argList;
@@ -35,5 +33,7 @@ namespace Aurealis
 				sceIoClose(file);
 			}
 		}
+
+		Logger g_Logger;
 	}
 }

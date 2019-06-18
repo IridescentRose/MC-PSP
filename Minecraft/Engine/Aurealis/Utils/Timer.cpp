@@ -11,15 +11,10 @@ namespace Aurealis
 			tickResolution = sceRtcGetTickResolution();
 		}
 
-		Timer::~Timer()
-		{
-
-		}
-
-		double Timer::GetDeltaTime( void )
+		float Timer::GetDeltaTime( void )
 		{
 			sceRtcGetCurrentTick( &timeNow );
-			double dt = ( timeNow - timeLastAsk ) / ((float) tickResolution );
+			float dt = ( timeNow - timeLastAsk ) / ((float) tickResolution );
 			timeLastAsk = timeNow;
 
 			return dt;

@@ -42,7 +42,7 @@ namespace Aurealis
 			states.back()->Enter();
 		}
 
-		void StateManager::PushState(CGameState* state)
+		void StateManager::AddState(CGameState* state)
 		{
 			// pause current state
 			if ( !states.empty() ) {
@@ -54,7 +54,7 @@ namespace Aurealis
 			states.back()->Enter();
 		}
 
-		void StateManager::PopState()
+		void StateManager::RemoveState()
 		{
 			// cleanup the current state
 			if ( !states.empty() ) {

@@ -633,7 +633,7 @@ namespace Aurealis
 			binaryFile = fopen (FileName, "rb");
 			if (!binaryFile)
 			{
-				Utils::Logger::Instance()->LogMessage( "Error: couldn't open \"%s\"!\n", FileName);
+				Utils::g_Logger.LogMessage( "Error: couldn't open \"%s\"!\n", FileName);
 				return ;
 			}
 

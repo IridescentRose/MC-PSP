@@ -7994,13 +7994,13 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                     mSoundMgr->StopAmbient();
                     mSoundMgr->StopDiskTrack();
                     mWorld->SaveCompressedWorld(saveFileName.c_str());
-                    sManager->PopState();
+                    sManager->RemoveState();
                 }
                 if(selectPos == 5)//exit
                 {
                     mSoundMgr->StopAmbient();
                     mSoundMgr->StopDiskTrack();
-                    sManager->PopState();
+                    sManager->RemoveState();
                 }
             }
         }

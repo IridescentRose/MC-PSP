@@ -132,7 +132,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 			if(mSystemMgr->KeyPressed(PSP_CTRL_CIRCLE))
 			{
 				InputHelper::Instance()->Save();
-				sManager->PopState();
+				sManager->RemoveState();
 			}
 
 			if(mSystemMgr->KeyPressed(PSP_CTRL_CROSS))
@@ -160,7 +160,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				if(selectPos == 2)
 				{
 					InputHelper::Instance()->Save();
-					sManager->PopState();
+					sManager->RemoveState();
 				}
 			}
 		}

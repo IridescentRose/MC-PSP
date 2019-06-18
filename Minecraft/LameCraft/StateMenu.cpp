@@ -476,7 +476,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                 //options
                 StateOptions *stateOptions = new StateOptions();
                 stateOptions->Init();
-                sManager->PushState(stateOptions);
+                sManager->AddState(stateOptions);
             }
             if(selectPos == 2)
             {
@@ -718,14 +718,14 @@ void StateMenu::HandleEvents(StateManager* sManager)
                                 StatePlay *statePlay = new StatePlay();
                                 statePlay->LoadMap(saveFilesList[loadSavePos].fileName,saveFilesList[loadSavePos].compression);
                                 statePlay->InitCamera();
-                                sManager->PushState(statePlay);
+                                sManager->AddState(statePlay);
                             }
                             else
                             {
                                 StatePlayCreative *statePlay = new StatePlayCreative();
                                 statePlay->LoadMap(saveFilesList[loadSavePos].fileName,saveFilesList[loadSavePos].compression);
                                 statePlay->InitCamera();
-                                sManager->PushState(statePlay);
+                                sManager->AddState(statePlay);
                             }
                         }
                     }
@@ -966,7 +966,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                     statePlay->InitParametric(makeTrees,makeWater,makeCaves,seed_1,worldType,gameMode);
                     statePlay->InitCamera();
                     statePlay->SetWorldAndSaveName(newWorldName,nextSaveFileName);
-                    sManager->PushState(statePlay);
+                    sManager->AddState(statePlay);
                 }
                 else
                 {
@@ -974,7 +974,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                     statePlay->InitParametric(makeTrees,makeWater,makeCaves,seed_1,worldType,gameMode);
                     statePlay->InitCamera();
                     statePlay->SetWorldAndSaveName(newWorldName,nextSaveFileName);
-                    sManager->PushState(statePlay);
+                    sManager->AddState(statePlay);
                 }
                 seed_1 = 0;
             }

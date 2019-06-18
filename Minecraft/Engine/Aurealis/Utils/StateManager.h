@@ -1,6 +1,4 @@
-#ifndef GAMEENGINE_H
-#define GAMEENGINE_H
-
+#pragma once
 #include <vector>
 
 namespace Aurealis
@@ -20,8 +18,8 @@ namespace Aurealis
 			void CleanUp();
 
 			void ChangeState(CGameState* state);
-			void PushState(CGameState* state);
-			void PopState();
+			void AddState(CGameState* state);
+			void RemoveState();
 
 			void HandleEvents();
 			void Update();
@@ -39,5 +37,3 @@ namespace Aurealis
 		};
 	}
 }
-
-#endif
