@@ -1,5 +1,4 @@
-#ifndef SPRITE_H_
-#define SPRITE_H_
+#pragma once
 #include <string>
 #include <Aurealis/Graphics/Vertex.h>
 
@@ -41,7 +40,7 @@ namespace Aurealis
 		private:
 			int imageNumber;
 
-			TexturesPSPVertex *vertices;
+			TexturedVertex *vertices;
 
 			float scaleX,scaleY;
 			float posX,posY;
@@ -52,5 +51,3 @@ namespace Aurealis
 	}
 
 }
-
-#endif

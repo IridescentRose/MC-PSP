@@ -1,5 +1,4 @@
-#ifndef INVENTORYPLAYER_H_
-#define INVENTORYPLAYER_H_
+#pragma once
 
 #include <Aurealis/Math/Vector3.h>
 #include <Aurealis/Graphics/Vertex.h>
@@ -35,6 +34,3 @@ namespace Aurealis
 		};
 	}
 }
-
-#endif
-

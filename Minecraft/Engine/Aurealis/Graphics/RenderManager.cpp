@@ -5,42 +5,42 @@ namespace Aurealis
 	namespace Graphics
 	{
         float cubeSize = 0.5075f;
-        SimplePSPVertex2 __attribute__((aligned(16))) top[4] =
+        ColoredVertex2 __attribute__((aligned(16))) top[4] =
 		{
 			{-cubeSize,-cubeSize,cubeSize},	// Top
 			{cubeSize,-cubeSize,cubeSize},
 			{ cubeSize,-cubeSize,-cubeSize},
 			{ -cubeSize,-cubeSize, -cubeSize}
 		};
-		SimplePSPVertex2 __attribute__((aligned(16))) bottom[4] =
+		ColoredVertex2 __attribute__((aligned(16))) bottom[4] =
 		{
 			{-cubeSize, cubeSize, -cubeSize},	// Bottom
 			{ cubeSize, cubeSize, -cubeSize},
 			{ cubeSize, cubeSize, cubeSize},
 			{-cubeSize, cubeSize, cubeSize}
 		};
-		SimplePSPVertex2 __attribute__((aligned(16))) front[4] =
+		ColoredVertex2 __attribute__((aligned(16))) front[4] =
 		{
 			{-cubeSize,-cubeSize, cubeSize},	// Front
 			{ cubeSize,-cubeSize, cubeSize},
 			{ cubeSize, cubeSize, cubeSize},
 			{-cubeSize, cubeSize, cubeSize}
 		};
-		SimplePSPVertex2 __attribute__((aligned(16))) back[4] =
+		ColoredVertex2 __attribute__((aligned(16))) back[4] =
 		{
 			{- cubeSize,cubeSize, -cubeSize},	// Back
 			{ cubeSize,cubeSize,-cubeSize},
 			{ cubeSize, -cubeSize,-cubeSize},
 			{ -cubeSize, -cubeSize, -cubeSize}
 		};
-		SimplePSPVertex2 __attribute__((aligned(16))) left[4] =
+		ColoredVertex2 __attribute__((aligned(16))) left[4] =
 		{
 			{ -cubeSize,-cubeSize,cubeSize},	// Left
 			{-cubeSize,cubeSize,cubeSize},
 			{-cubeSize, cubeSize,-cubeSize},
 			{ -cubeSize, -cubeSize,-cubeSize}
 		};
-		SimplePSPVertex2 __attribute__((aligned(16))) right[4] =
+		ColoredVertex2 __attribute__((aligned(16))) right[4] =
 		{
 			{cubeSize,-cubeSize,-cubeSize},	// Right
 			{cubeSize,cubeSize, -cubeSize},

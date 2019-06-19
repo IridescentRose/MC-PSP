@@ -1,5 +1,4 @@
-#ifndef Aurealis_VERTEX_H
-#define Aurealis_VERTEX_H
+#pragma once
 
 #include <Aurealis/Math/Vector3.h>
 
@@ -46,51 +45,49 @@ namespace Aurealis
 		{
 			unsigned int color;
 			float x,y,z;
-		}__attribute__((packed)) SimplePSPVertex;
+		}__attribute__((packed)) ColoredVertex;
 
         typedef struct
 		{
 			float x,y,z;
-		}__attribute__((packed)) SimplePSPVertex2;
+		}__attribute__((packed)) ColoredVertex2;
 
 		typedef struct
 		{
 			float u,v;
 			unsigned int color;
 			float x,y,z;
-		}__attribute__((packed)) CraftPSPVertex;
+		}__attribute__((packed)) Vertex;
 
 		typedef struct
 		{
 			float u,v;
 			unsigned int color;
 			unsigned char x,y,z;
-		}__attribute__((packed)) CraftPSPVertex2;
+		}__attribute__((packed)) Vertex2;
 
 		typedef struct
 		{
 			float u,v;
 			float x,y,z;
-		}__attribute__((packed)) TexturesPSPVertex;
+		}__attribute__((packed)) TexturedVertex;
 
 		typedef struct
 		{
 			unsigned short u, v;
 			short x, y, z;
-		}__attribute__((packed)) TexturesPSPVertex16;
+		}__attribute__((packed)) TexturedVertex16;
 
 		typedef struct
 		{
 			unsigned char u, v;
 			char x, y, z;
-		}__attribute__((packed)) TexturesPSPVertex8;
+		}__attribute__((packed)) TexturedVertex8;
 
 		struct MorphVertex
 		{
-			TexturesPSPVertex v0;
-			TexturesPSPVertex v1;
+			TexturedVertex v0;
+			TexturedVertex v1;
 		};
 	}
 }
-
-#endif

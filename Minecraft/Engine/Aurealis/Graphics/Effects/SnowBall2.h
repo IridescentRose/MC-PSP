@@ -1,5 +1,4 @@
-#ifndef SNOWBALL2_H_
-#define SNOWBALL2_H_
+#pragma once
 
 #include <Aurealis/Math/Vector3.h>
 #include <Aurealis/Graphics/Vertex.h>
@@ -30,7 +29,7 @@ namespace Aurealis
 
 		private:
 
-			CraftPSPVertex *ballVertices;
+			Vertex *ballVertices;
 			int textureNumber;
 			float snowHScale;
 			float snowVScale;
@@ -39,6 +38,3 @@ namespace Aurealis
 		};
 	}
 }
-
-#endif
-

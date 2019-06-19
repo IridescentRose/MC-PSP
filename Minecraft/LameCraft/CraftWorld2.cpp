@@ -4764,7 +4764,7 @@ void CraftWorld::GetSpecialBlockVerts(int i,BaseBlock* blockType) // Строи�
         BuildGUIBlockPlane(blockType,6,Vector3(0,0,16),Vector3(16,0,16),Vector3(16,8,16),Vector3(0,8,16));
     }
 
-    blockTypes[i].verticesLeftRight = (TexturesPSPVertex*)memalign(16,( mTriangleLeftRight.size() * 3) * sizeof(TexturesPSPVertex));
+    blockTypes[i].verticesLeftRight = (TexturedVertex*)memalign(16,( mTriangleLeftRight.size() * 3) * sizeof(TexturedVertex));
     blockTypes[i].pointsLeftRight = pointsLeftRight;
     //build verts
     //vertices
@@ -4795,7 +4795,7 @@ void CraftWorld::GetSpecialBlockVerts(int i,BaseBlock* blockType) // Строи�
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(blockTypes[i].verticesLeftRight,(mTriangleLeftRight.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(blockTypes[i].verticesLeftRight,(mTriangleLeftRight.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPositionLeftRight.size(); aa++)
@@ -4814,7 +4814,7 @@ void CraftWorld::GetSpecialBlockVerts(int i,BaseBlock* blockType) // Строи�
 
 
 
-    blockTypes[i].verticesBackFront = (TexturesPSPVertex*)memalign(16,(mTriangleBackFront.size() * 3) * sizeof(TexturesPSPVertex));
+    blockTypes[i].verticesBackFront = (TexturedVertex*)memalign(16,(mTriangleBackFront.size() * 3) * sizeof(TexturedVertex));
     blockTypes[i].pointsBackFront = pointsBackFront;
     //build verts
     //vertices
@@ -4845,7 +4845,7 @@ void CraftWorld::GetSpecialBlockVerts(int i,BaseBlock* blockType) // Строи�
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(blockTypes[i].verticesBackFront,(mTriangleBackFront.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(blockTypes[i].verticesBackFront,(mTriangleBackFront.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPositionBackFront.size(); aa++)
@@ -4864,7 +4864,7 @@ void CraftWorld::GetSpecialBlockVerts(int i,BaseBlock* blockType) // Строи�
 
 
 
-    blockTypes[i].verticesBottomTop = (TexturesPSPVertex*)memalign(16,(mTriangleBottomTop.size() * 3) * sizeof(TexturesPSPVertex));
+    blockTypes[i].verticesBottomTop = (TexturedVertex*)memalign(16,(mTriangleBottomTop.size() * 3) * sizeof(TexturedVertex));
     blockTypes[i].pointsBottomTop = pointsBottomTop;
     //build verts
     //vertices
@@ -4895,7 +4895,7 @@ void CraftWorld::GetSpecialBlockVerts(int i,BaseBlock* blockType) // Строи�
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(blockTypes[i].verticesBottomTop,(mTriangleBottomTop.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(blockTypes[i].verticesBottomTop,(mTriangleBottomTop.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPositionBottomTop.size(); aa++)
@@ -4950,7 +4950,7 @@ void CraftWorld::GetCloudsVerts(BaseBlock *blockType)
         }
     }
 
-    blockTypes[141].verticesBottomTop = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    blockTypes[141].verticesBottomTop = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     blockTypes[141].pointsBottomTop = points;
     //build verts
     //vertices
@@ -4981,7 +4981,7 @@ void CraftWorld::GetCloudsVerts(BaseBlock *blockType)
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(blockTypes[141].verticesBottomTop,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(blockTypes[141].verticesBottomTop,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -5016,7 +5016,7 @@ void CraftWorld::GetNormalBlockVerts(int i,BaseBlock *blockType)
     BuildGUIBlockPlane(blockType,5,Vector3(0,16,0),Vector3(16,16,0),Vector3(16,0,0),Vector3(0,0,0));
     BuildGUIBlockPlane(blockType,6,Vector3(0,0,16),Vector3(16,0,16),Vector3(16,16,16),Vector3(0,16,16));
 
-    blockTypes[i].verticesLeftRight = (TexturesPSPVertex*)memalign(16,( mTriangleLeftRight.size() * 3) * sizeof(TexturesPSPVertex));
+    blockTypes[i].verticesLeftRight = (TexturedVertex*)memalign(16,( mTriangleLeftRight.size() * 3) * sizeof(TexturedVertex));
     blockTypes[i].pointsLeftRight = pointsLeftRight;
     //build verts
     //vertices
@@ -5047,7 +5047,7 @@ void CraftWorld::GetNormalBlockVerts(int i,BaseBlock *blockType)
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(blockTypes[i].verticesLeftRight,(mTriangleLeftRight.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(blockTypes[i].verticesLeftRight,(mTriangleLeftRight.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPositionLeftRight.size(); aa++)
@@ -5066,7 +5066,7 @@ void CraftWorld::GetNormalBlockVerts(int i,BaseBlock *blockType)
 
 
 
-    blockTypes[i].verticesBackFront = (TexturesPSPVertex*)memalign(16,(mTriangleBackFront.size() * 3) * sizeof(TexturesPSPVertex));
+    blockTypes[i].verticesBackFront = (TexturedVertex*)memalign(16,(mTriangleBackFront.size() * 3) * sizeof(TexturedVertex));
     blockTypes[i].pointsBackFront = pointsBackFront;
     //build verts
     //vertices
@@ -5097,7 +5097,7 @@ void CraftWorld::GetNormalBlockVerts(int i,BaseBlock *blockType)
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(blockTypes[i].verticesBackFront,(mTriangleBackFront.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(blockTypes[i].verticesBackFront,(mTriangleBackFront.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPositionBackFront.size(); aa++)
@@ -5116,7 +5116,7 @@ void CraftWorld::GetNormalBlockVerts(int i,BaseBlock *blockType)
 
 
 
-    blockTypes[i].verticesBottomTop = (TexturesPSPVertex*)memalign(16,(mTriangleBottomTop.size() * 3) * sizeof(TexturesPSPVertex));
+    blockTypes[i].verticesBottomTop = (TexturedVertex*)memalign(16,(mTriangleBottomTop.size() * 3) * sizeof(TexturedVertex));
     blockTypes[i].pointsBottomTop = pointsBottomTop;
     //build verts
     //vertices
@@ -5147,7 +5147,7 @@ void CraftWorld::GetNormalBlockVerts(int i,BaseBlock *blockType)
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(blockTypes[i].verticesBottomTop,(mTriangleBottomTop.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(blockTypes[i].verticesBottomTop,(mTriangleBottomTop.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPositionBottomTop.size(); aa++)
@@ -5216,7 +5216,7 @@ void CraftWorld::GetItemVerts(int i,BaseItem *itemType)
     iVertex += 4;
     points += 6;
 
-    itemTypes[i].vertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    itemTypes[i].vertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     itemTypes[i].points = points;
     //build verts
     //vertices
@@ -5247,7 +5247,7 @@ void CraftWorld::GetItemVerts(int i,BaseItem *itemType)
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(itemTypes[i].vertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(itemTypes[i].vertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -5282,7 +5282,7 @@ void CraftWorld::GetItemVerts(int i,BaseItem *itemType)
 
     iVertex += 4;
 
-    itemTypes[i].dropVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    itemTypes[i].dropVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     vert = 0;
@@ -5312,7 +5312,7 @@ void CraftWorld::GetItemVerts(int i,BaseItem *itemType)
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(itemTypes[i].dropVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(itemTypes[i].dropVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -5437,7 +5437,7 @@ void CraftWorld::GetItemVerts(int i,BaseItem *itemType)
         }
     }
 
-    itemTypes[i].addVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    itemTypes[i].addVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     itemTypes[i].addPoints = points;
 
 
@@ -5470,7 +5470,7 @@ void CraftWorld::GetItemVerts(int i,BaseItem *itemType)
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(itemTypes[i].addVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(itemTypes[i].addVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -5487,7 +5487,7 @@ void CraftWorld::GetItemVerts(int i,BaseItem *itemType)
     }
     mTriangle.clear();
 
-    itemTypes[i].add2Vertices = (TexturesPSPVertex*)memalign(16,( mTriangle2.size() * 3) * sizeof(TexturesPSPVertex));
+    itemTypes[i].add2Vertices = (TexturedVertex*)memalign(16,( mTriangle2.size() * 3) * sizeof(TexturedVertex));
     itemTypes[i].add2Points = points2;
 
     //build verts for add2Vertices
@@ -5519,7 +5519,7 @@ void CraftWorld::GetItemVerts(int i,BaseItem *itemType)
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(itemTypes[i].add2Vertices,( mTriangle2.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(itemTypes[i].add2Vertices,( mTriangle2.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition2.size(); aa++)
@@ -5720,7 +5720,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    bodyVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    bodyVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
 
@@ -5750,7 +5750,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(bodyVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(bodyVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -5902,7 +5902,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    headVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    headVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -5931,7 +5931,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(headVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(headVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -6085,7 +6085,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    hatVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    hatVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -6114,7 +6114,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(hatVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(hatVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -6271,7 +6271,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    handVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    handVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -6300,7 +6300,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(handVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(handVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -6458,7 +6458,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    legVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    legVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -6487,7 +6487,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(legVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(legVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -6649,7 +6649,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    cowBodyVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    cowBodyVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
 
@@ -6679,7 +6679,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(cowBodyVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(cowBodyVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -6836,7 +6836,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    cowHeadVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    cowHeadVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -6865,7 +6865,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(cowHeadVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(cowHeadVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -7024,7 +7024,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    cowHornsVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    cowHornsVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -7053,7 +7053,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(cowHornsVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(cowHornsVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -7211,7 +7211,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    cowLegVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    cowLegVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -7240,7 +7240,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(cowLegVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(cowLegVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -7377,7 +7377,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    sheepLegOPTVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sheepLegOPTVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -7406,7 +7406,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(sheepLegOPTVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(sheepLegOPTVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -7566,7 +7566,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    creeperLegVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    creeperLegVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -7595,7 +7595,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(creeperLegVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(creeperLegVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -7756,7 +7756,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    sheepBodyVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sheepBodyVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -7785,7 +7785,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(sheepBodyVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(sheepBodyVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -7946,7 +7946,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    sheepHeadFurVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sheepHeadFurVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -7975,7 +7975,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(sheepHeadFurVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(sheepHeadFurVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -8136,7 +8136,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    sheepHeadVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sheepHeadVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -8165,7 +8165,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(sheepHeadVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(sheepHeadVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -8327,7 +8327,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    sheepLegFurVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sheepLegFurVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -8356,7 +8356,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(sheepLegFurVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(sheepLegFurVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -8495,7 +8495,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    helmetVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    helmetVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -8524,7 +8524,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(helmetVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(helmetVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -8663,7 +8663,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    shoulderVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    shoulderVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -8692,7 +8692,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(shoulderVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(shoulderVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -8808,7 +8808,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    chestplateVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    chestplateVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
 
@@ -8838,7 +8838,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(chestplateVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(chestplateVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -8951,7 +8951,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    bellyVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    bellyVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
 
@@ -8981,7 +8981,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(bellyVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(bellyVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -9098,7 +9098,7 @@ void CraftWorld::buildmobVerts()
 
 
 
-    leggingVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    leggingVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -9127,7 +9127,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(leggingVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(leggingVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -9270,7 +9270,7 @@ void CraftWorld::buildmobVerts()
     points += 6;
 
 
-    bootVertices = (TexturesPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    bootVertices = (TexturedVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //build verts
     //vertices
     size =  mTriangle.size();
@@ -9299,7 +9299,7 @@ void CraftWorld::buildmobVerts()
     }
 
     //clear the cache or there will be some errors
-    sceKernelDcacheWritebackInvalidateRange(bootVertices,( mTriangle.size() * 3) * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(bootVertices,( mTriangle.size() * 3) * sizeof(TexturedVertex));
     //sceKernelDcacheWritebackInvalidateAll();
 
     for(unsigned int aa = 0; aa < mPosition.size(); aa++)

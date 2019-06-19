@@ -189,12 +189,12 @@ namespace Aurealis
 
             if(toDestroy == false)
             {
-                particleVertices = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
+                particleVertices = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
             }
             bBox =  BoundingBox(Vector3(position.x-0.33f,position.y-0.33f,position.z-0.33f),Vector3(position.x+0.33f,position.y+0.33f,position.z+0.33f));
 
-			//sceKernelDcacheWritebackInvalidateRange(particleVertices,4 * sizeof(TexturesPSPVertex));
-			//particleVertices = (TexturesPSPVertex*)malloc(14 * sizeof(TexturesPSPVertex));
+			//sceKernelDcacheWritebackInvalidateRange(particleVertices,4 * sizeof(TexturedVertex));
+			//particleVertices = (TexturedVertex*)malloc(14 * sizeof(TexturedVertex));
 		}
 
         Particle::~Particle()
@@ -316,7 +316,7 @@ namespace Aurealis
 			particleVertices[i].u = frame*frameSize+frameSize;// * textureScale;
 			particleVertices[i].v = 1.f;// * textureScale;
 
-            sceKernelDcacheWritebackInvalidateRange(particleVertices,4 * sizeof(TexturesPSPVertex));
+            sceKernelDcacheWritebackInvalidateRange(particleVertices,4 * sizeof(TexturedVertex));
 		}
 
 		void Particle::BuildVerticiesForBlockCrack(CraftWorld* crtf, int blockId)
@@ -393,7 +393,7 @@ namespace Aurealis
 			particleVertices[i].u = texCordX+texScaleX;// * textureScale;
 			particleVertices[i].v = texCordY+texScaleY;// * textureScale;
 
-            //sceKernelDcacheWritebackInvalidateRange(particleVertices,4 * sizeof(TexturesPSPVertex));
+            //sceKernelDcacheWritebackInvalidateRange(particleVertices,4 * sizeof(TexturedVertex));
             sceKernelDcacheWritebackInvalidateAll();
 		}
 
@@ -459,7 +459,7 @@ namespace Aurealis
 			particleVertices[i].u = texCordX+texScaleX;// * textureScale;
 			particleVertices[i].v = texCordY+texScaleY;// * textureScale;
 
-            //sceKernelDcacheWritebackInvalidateRange(particleVertices,4 * sizeof(TexturesPSPVertex));
+            //sceKernelDcacheWritebackInvalidateRange(particleVertices,4 * sizeof(TexturedVertex));
             sceKernelDcacheWritebackInvalidateAll();
 		}
 

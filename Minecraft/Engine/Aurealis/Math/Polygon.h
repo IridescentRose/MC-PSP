@@ -1,5 +1,4 @@
-#ifndef POLYGON_H_
-#define POLYGON_H_
+#pragma once
 
 #include <math.h>
 #include <Aurealis/Math/Vector3.h>
@@ -24,6 +23,3 @@ namespace Aurealis
 		};
 	}
 }
-
-#endif /* POLYGON_H_ */
-

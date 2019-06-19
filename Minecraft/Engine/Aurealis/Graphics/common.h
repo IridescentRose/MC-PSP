@@ -1,5 +1,4 @@
-#ifndef Aurealis_COMMONPSP_H
-#define Aurealis_COMMONPSP_H
+#pragma once
 
 #include <pspkernel.h>
 #include <pspdisplay.h>
@@ -22,6 +21,4 @@ int SetupCallbacks(void);
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif

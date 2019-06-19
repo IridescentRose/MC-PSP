@@ -1,5 +1,4 @@
-#ifndef Aurealis_GURENDERMANAGER_H
-#define Aurealis_GURENDERMANAGER_H
+#pragma once
 
 #include <stdarg.h>
 
@@ -186,5 +185,3 @@ namespace Aurealis
 	}
 
 }
-
-#endif

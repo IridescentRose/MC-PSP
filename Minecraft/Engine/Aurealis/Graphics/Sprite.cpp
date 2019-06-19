@@ -13,9 +13,9 @@ namespace Aurealis
 			red = green = blue = alpha = 255;
 		}
 
-		TexturesPSPVertex getVertex(float u,float v,float x, float y,float z)
+		TexturedVertex getVertex(float u,float v,float x, float y,float z)
 		{
-			TexturesPSPVertex vert;
+			TexturedVertex vert;
 			vert.u = u;
 			vert.v = v;
 			vert.x = x;
@@ -31,7 +31,7 @@ namespace Aurealis
 			imageNumber = TextureManager::Instance()->GetTextureNumber(filename);
 
 			//generate wertices
-			vertices = (TexturesPSPVertex*)memalign(16, 4 * sizeof(TexturesPSPVertex) );
+			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex) );
 
 			Image *img = TextureManager::Instance()->Images[imageNumber];
 
@@ -49,7 +49,7 @@ namespace Aurealis
 				vertices[3] = getVertex(wPercent,hPercent,img->Width/2, img->Height/2,0.0f);
 			}
 
-			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturesPSPVertex));
+			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturedVertex));
 			red = green = blue = alpha = 255;
 		}
 
@@ -62,7 +62,7 @@ namespace Aurealis
                 imageNumber = TextureManager::Instance()->GetConstTextureNumber(filename);
 
                 //generate wertices
-                vertices = (TexturesPSPVertex*)memalign(16, 4 * sizeof(TexturesPSPVertex) );
+                vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex) );
 
                 Image *img = TextureManager::Instance()->ConstImages[imageNumber];
 
@@ -80,7 +80,7 @@ namespace Aurealis
                     vertices[3] = getVertex(wPercent,hPercent,img->Width/2, img->Height/2,0.0f);
                 }
 
-                sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturesPSPVertex));
+                sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturedVertex));
 				red = green = blue = alpha = 255;
             }
 		}
@@ -90,7 +90,7 @@ namespace Aurealis
 			imageNumber = textureNumer;
 
 			//generate wertices
-			vertices = (TexturesPSPVertex*)memalign(16, 4 * sizeof(TexturesPSPVertex) );
+			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex) );
 
 			Image *img = TextureManager::Instance()->Images[imageNumber];
 
@@ -108,7 +108,7 @@ namespace Aurealis
 				vertices[3] = getVertex(wPercent,hPercent,img->Width/2, img->Height/2,0.0f);
 			}
 
-			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturesPSPVertex));
+			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturedVertex));
 				red = green = blue = alpha = 255;
 		}
 
@@ -117,7 +117,7 @@ namespace Aurealis
 			imageNumber = textureNumer;
 
 			//generate wertices
-			vertices = (TexturesPSPVertex*)memalign(16, 4 * sizeof(TexturesPSPVertex));
+			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
             Image *img;
             if(constOne)
             {
@@ -142,7 +142,7 @@ namespace Aurealis
 				vertices[3] = getVertex(wPercent,hPercent,img->Width/2, img->Height/2,0.0f);
 			}
 
-			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturesPSPVertex));
+			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturedVertex));
 			red = green = blue = alpha = 255;
 		}
 
@@ -153,7 +153,7 @@ namespace Aurealis
 			imageNumber = TextureManager::Instance()->GetTextureNumber(filename);
 
 			//generate wertices
-			vertices = (TexturesPSPVertex*)memalign(16, 4 * sizeof(TexturesPSPVertex) );
+			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex) );
 
 			Image *img = TextureManager::Instance()->Images[imageNumber];
 
@@ -174,7 +174,7 @@ namespace Aurealis
 			}
 
 			//sceKernelDcacheWritebackInvalidateAll();
-			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturesPSPVertex));
+			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturedVertex));
 			red = green = blue = alpha = 255;
 		}
 
@@ -183,7 +183,7 @@ namespace Aurealis
 			imageNumber = textureNumer;
 
 			//generate wertices
-			vertices = (TexturesPSPVertex*)memalign(16, 4 * sizeof(TexturesPSPVertex) );
+			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex) );
 
 			Image *img = TextureManager::Instance()->Images[imageNumber];
 
@@ -204,7 +204,7 @@ namespace Aurealis
 			}
 
 			//sceKernelDcacheWritebackInvalidateAll();
-			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturesPSPVertex));
+			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturedVertex));
 			red = green = blue = alpha = 255;
 		}
 
@@ -213,7 +213,7 @@ namespace Aurealis
 			imageNumber = textureNumer;
 
 			//generate wertices
-			vertices = (TexturesPSPVertex*)memalign(16, 4 * sizeof(TexturesPSPVertex) );
+			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex) );
 
 			Image *img = TextureManager::Instance()->Images[imageNumber];
 
@@ -234,7 +234,7 @@ namespace Aurealis
 			}
 
 			//sceKernelDcacheWritebackInvalidateAll();
-			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturesPSPVertex));
+			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturedVertex));
 			red = green = blue = alpha = 255;
 		}
 
@@ -243,7 +243,7 @@ namespace Aurealis
 			imageNumber = textureNumer;
             free(vertices);
 			//generate wertices
-			vertices = (TexturesPSPVertex*)memalign(16, 4 * sizeof(TexturesPSPVertex) );
+			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex) );
 
 			Image *img = TextureManager::Instance()->Images[imageNumber];
 
@@ -264,7 +264,7 @@ namespace Aurealis
 			}
 
 			//sceKernelDcacheWritebackInvalidateAll();
-			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturesPSPVertex));
+			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturedVertex));
 		}
 
 		Sprite::~Sprite()

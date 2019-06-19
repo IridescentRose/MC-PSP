@@ -1,5 +1,4 @@
-#ifndef Aurealis_QUATERNION_H
-#define Aurealis_QUATERNION_H
+#pragma once
 
 #include <Aurealis/Math/MathLib.h>
 #include <Aurealis/Math/Matrix3.h>
@@ -235,5 +234,3 @@ namespace Aurealis
 		}
 	}
 }
-
-#endif

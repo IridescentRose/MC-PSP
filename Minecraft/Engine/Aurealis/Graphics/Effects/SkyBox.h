@@ -1,5 +1,4 @@
-#ifndef SKYBOX_H_
-#define SKYBOX_H_
+#pragma once
 
 #include <Aurealis/Graphics/Vertex.h>
 #include <Aurealis/Graphics/RenderManager.h>
@@ -22,13 +21,10 @@ namespace Aurealis
 
 		private:
 
-			SimplePSPVertex2 *skyBoxVertices;
+			ColoredVertex2 *skyBoxVertices;
 
 			float size;
 			int vertsNum;
 		};
 	}
 }
-
-#endif
-

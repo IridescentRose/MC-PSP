@@ -1,5 +1,4 @@
-#ifndef TNT_H
-#define TNT_H
+#pragma once
 
 #include <Aurealis/Graphics/Vertex.h>
 #include <Aurealis/Graphics/RenderManager.h>
@@ -41,6 +40,3 @@ private:
 
     CraftWorld* myWorld;
 };
-
-#endif
-

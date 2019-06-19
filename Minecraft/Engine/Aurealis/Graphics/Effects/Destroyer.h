@@ -1,5 +1,4 @@
-#ifndef DESTROYER_H_
-#define DESTROYER_H_
+#pragma once
 
 #include <Aurealis/Graphics/Vertex.h>
 #include <Aurealis/Graphics/RenderManager.h>
@@ -23,24 +22,21 @@ namespace Aurealis
 
 		private:
 
-			TexturesPSPVertex *boxVertices;
-			TexturesPSPVertex *boxVertices2;
-			TexturesPSPVertex *boxVertices3;
-			TexturesPSPVertex *boxVertices4;
-			TexturesPSPVertex *boxVertices5;
-			TexturesPSPVertex *boxVertices6;
+			TexturedVertex *boxVertices;
+			TexturedVertex *boxVertices2;
+			TexturedVertex *boxVertices3;
+			TexturedVertex *boxVertices4;
+			TexturedVertex *boxVertices5;
+			TexturedVertex *boxVertices6;
 
-			SimplePSPVertex2 *boxVertices11;
-			SimplePSPVertex2 *boxVertices12;
-			SimplePSPVertex2 *boxVertices13;
-			SimplePSPVertex2 *boxVertices14;
-			SimplePSPVertex2 *boxVertices15;
-			SimplePSPVertex2 *boxVertices16;
+			ColoredVertex2 *boxVertices11;
+			ColoredVertex2 *boxVertices12;
+			ColoredVertex2 *boxVertices13;
+			ColoredVertex2 *boxVertices14;
+			ColoredVertex2 *boxVertices15;
+			ColoredVertex2 *boxVertices16;
 
 			float size;
 		};
 	}
 }
-
-#endif
-

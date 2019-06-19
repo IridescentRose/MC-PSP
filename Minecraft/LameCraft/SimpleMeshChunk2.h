@@ -56,12 +56,12 @@ public:
 
 	std::vector<int> oldXZ;
 
-	CraftPSPVertex *meshVertices;
+	Vertex *meshVertices;
 	bool needsRedraw;
-	CraftPSPVertex *floraVertices;
+	Vertex *floraVertices;
 
 private:
-    std::vector<CraftPSPVertex> mVertices;
+    std::vector<Vertex> mVertices;
 	std::vector<Vector3> mTriangle;
 
 	std::vector<block_t> blockIDs;

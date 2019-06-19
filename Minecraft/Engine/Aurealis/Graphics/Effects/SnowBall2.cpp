@@ -15,7 +15,7 @@ namespace Aurealis
 
 			position = Vector3(pos2x,pos2y,pos2z);
 
-			ballVertices = (CraftPSPVertex*)memalign(16,4 * sizeof(CraftPSPVertex));
+			ballVertices = (Vertex*)memalign(16,4 * sizeof(Vertex));
 
 			startSpeed = 0.35;
 		}
@@ -102,7 +102,7 @@ namespace Aurealis
 			ballVertices[i].v = 1.f;// * textureScale;
 			ballVertices[i].color = GU_COLOR(myLight,myLight,myLight,1);
 
-			sceKernelDcacheWritebackInvalidateRange(ballVertices,4 * sizeof(CraftPSPVertex));
+			sceKernelDcacheWritebackInvalidateRange(ballVertices,4 * sizeof(Vertex));
 		}
 
 		bool SnowBall2::CheckCollision(CraftWorld* crtf)

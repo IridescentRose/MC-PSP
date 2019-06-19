@@ -484,7 +484,7 @@ namespace Aurealis
 				ObjMesh *mesh = mMeshes[i];
 
 				//build mesh vertices
-				mesh->meshVertices =  (TexturesPSPVertex*)memalign(16,( mesh->mFace.size() * 3) * sizeof(TexturesPSPVertex));
+				mesh->meshVertices =  (TexturedVertex*)memalign(16,( mesh->mFace.size() * 3) * sizeof(TexturedVertex));
 				mesh->triangleCount = mesh->mFace.size();
 				mesh->vertexCount = mesh->mFace.size() * 3;
 
@@ -493,13 +493,13 @@ namespace Aurealis
 				for(unsigned int f = 0;f < mesh->mFace.size();f++)
 				{
 					//vertices[j].color = GU_RGBA((int)(material->diffuse[0] * 255),(int)(material->diffuse[1] * 255),(int)(material->diffuse[2] * 255),255);
-					TexturesPSPVertex vert1;
+					TexturedVertex vert1;
 					vert1.u = allUVMap[mesh->mUVFace[f].x].u;// * 32767;//32767 127
 					vert1.v = allUVMap[mesh->mUVFace[f].x].v;// * 32767;;
 					vert1.x = allVertex[mesh->mFace[f].x].x;// * 32767;
 					vert1.y = allVertex[mesh->mFace[f].x].y;// * 32767;
 					vert1.z = allVertex[mesh->mFace[f].x].z;// * 32767;
-					memcpy(&mesh->meshVertices[j],&vert1,sizeof(TexturesPSPVertex));
+					memcpy(&mesh->meshVertices[j],&vert1,sizeof(TexturedVertex));
 
 					/*mesh->meshVertices[j].u = allUVMap[mesh->mUVFace[f].x].u;
 					mesh->meshVertices[j].v = allUVMap[mesh->mUVFace[f].x].v;
@@ -510,13 +510,13 @@ namespace Aurealis
 					j++;
 
 					//vertices[j].color = GU_RGBA((int)(material->diffuse[0] * 255),(int)(material->diffuse[1] * 255),(int)(material->diffuse[2] * 255),255);
-					TexturesPSPVertex vert2;
+					TexturedVertex vert2;
 					vert2.u = allUVMap[mesh->mUVFace[f].y].u;//  * 32767;
 					vert2.v = allUVMap[mesh->mUVFace[f].y].v;//  * 32767;
 					vert2.x = allVertex[mesh->mFace[f].y].x;// * 32767;
 					vert2.y = allVertex[mesh->mFace[f].y].y;// * 32767;
 					vert2.z = allVertex[mesh->mFace[f].y].z;//  * 32767;
-					memcpy(&mesh->meshVertices[j],&vert2,sizeof(TexturesPSPVertex));
+					memcpy(&mesh->meshVertices[j],&vert2,sizeof(TexturedVertex));
 
 					/*mesh->meshVertices[j].u = allUVMap[mesh->mUVFace[f].y].u;
 					mesh->meshVertices[j].v = allUVMap[mesh->mUVFace[f].y].v;
@@ -527,13 +527,13 @@ namespace Aurealis
 					j++;
 
 					//vertices[j].color = GU_RGBA((int)(material->diffuse[0] * 255),(int)(material->diffuse[1] * 255),(int)(material->diffuse[2] * 255),255);
-					TexturesPSPVertex vert3;
+					TexturedVertex vert3;
 					vert3.u = allUVMap[mesh->mUVFace[f].z].u;//  * 32767;
 					vert3.v = allUVMap[mesh->mUVFace[f].z].v;//  * 32767;
 					vert3.x = allVertex[mesh->mFace[f].z].x;//  * 32767;
 					vert3.y = allVertex[mesh->mFace[f].z].y;//  * 32767;
 					vert3.z = allVertex[mesh->mFace[f].z].z;//  * 32767;
-					memcpy(&mesh->meshVertices[j],&vert3,sizeof(TexturesPSPVertex));
+					memcpy(&mesh->meshVertices[j],&vert3,sizeof(TexturedVertex));
 
 					/*mesh->meshVertices[j].u = allUVMap[mesh->mUVFace[f].z].u;
 					mesh->meshVertices[j].v = allUVMap[mesh->mUVFace[f].z].v;
@@ -549,7 +549,7 @@ namespace Aurealis
 				mesh->mNormalFace.clear();
 
 				//clear the cache or there will be some errors
-				sceKernelDcacheWritebackInvalidateRange(mesh->meshVertices,( mesh->mFace.size() * 3) * sizeof(TexturesPSPVertex));
+				sceKernelDcacheWritebackInvalidateRange(mesh->meshVertices,( mesh->mFace.size() * 3) * sizeof(TexturedVertex));
 				//sceKernelDcacheWritebackInvalidateAll();
 			}
 
@@ -737,8 +737,8 @@ namespace Aurealis
 				fread(&mesh->indicesCount,sizeof(int),1,binaryFile);
 
 				//write all vertices
-				mesh->meshVertices = (TexturesPSPVertex*)memalign(16,mesh->indicesCount * sizeof(TexturesPSPVertex));
-				fread(mesh->meshVertices,sizeof(TexturesPSPVertex),mesh->indicesCount,binaryFile);
+				mesh->meshVertices = (TexturedVertex*)memalign(16,mesh->indicesCount * sizeof(TexturedVertex));
+				fread(mesh->meshVertices,sizeof(TexturedVertex),mesh->indicesCount,binaryFile);
 
 				mMeshes.push_back(mesh);
 			}

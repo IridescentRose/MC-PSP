@@ -1,5 +1,4 @@
-#ifndef Aurealis_BOUNDINGSPHERE_H
-#define Aurealis_BOUNDINGSPHERE_H
+#pragma once
 
 #include <Aurealis/Math/Vector3.h>
 #include <Aurealis/Math/BoundingBox.h>
@@ -26,5 +25,3 @@ namespace Aurealis
 		};
 	}
 }
-
-#endif

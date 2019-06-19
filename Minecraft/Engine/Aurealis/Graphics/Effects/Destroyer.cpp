@@ -10,19 +10,19 @@ namespace Aurealis
 	{
 		Destroyer::Destroyer()
 		{
-			boxVertices = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
-			boxVertices2 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
-			boxVertices3 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
-			boxVertices4 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
-			boxVertices5 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
-			boxVertices6 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
+			boxVertices = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
+			boxVertices2 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
+			boxVertices3 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
+			boxVertices4 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
+			boxVertices5 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
+			boxVertices6 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
 
-			boxVertices11 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
-			boxVertices12 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
-			boxVertices13 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
-			boxVertices14 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
-			boxVertices15 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
-			boxVertices16 = (SimplePSPVertex2*)memalign(16,4 * sizeof(SimplePSPVertex2));
+			boxVertices11 = (ColoredVertex2*)memalign(16,4 * sizeof(ColoredVertex2));
+			boxVertices12 = (ColoredVertex2*)memalign(16,4 * sizeof(ColoredVertex2));
+			boxVertices13 = (ColoredVertex2*)memalign(16,4 * sizeof(ColoredVertex2));
+			boxVertices14 = (ColoredVertex2*)memalign(16,4 * sizeof(ColoredVertex2));
+			boxVertices15 = (ColoredVertex2*)memalign(16,4 * sizeof(ColoredVertex2));
+			boxVertices16 = (ColoredVertex2*)memalign(16,4 * sizeof(ColoredVertex2));
 
 			size = 0.0f;
 		}
@@ -88,7 +88,7 @@ namespace Aurealis
             boxVertices[i].v = 1-(0.5+modelBox.min.y)*pixel;
             i++;
 
-            sceKernelDcacheWritebackInvalidateRange(boxVertices,4 * sizeof(TexturesPSPVertex));
+            sceKernelDcacheWritebackInvalidateRange(boxVertices,4 * sizeof(TexturedVertex));
 
             // right
             i = 0;
@@ -121,7 +121,7 @@ namespace Aurealis
             boxVertices2[i].v = 1-(0.5+modelBox.min.y)*pixel;
             i++;
 
-            sceKernelDcacheWritebackInvalidateRange(boxVertices2,4 * sizeof(TexturesPSPVertex));
+            sceKernelDcacheWritebackInvalidateRange(boxVertices2,4 * sizeof(TexturedVertex));
 
             // back
             i = 0;
@@ -154,7 +154,7 @@ namespace Aurealis
             boxVertices3[i].v = 1-(0.5+modelBox.min.y)*pixel;
             i++;
 
-            sceKernelDcacheWritebackInvalidateRange(boxVertices3,4 * sizeof(TexturesPSPVertex));
+            sceKernelDcacheWritebackInvalidateRange(boxVertices3,4 * sizeof(TexturedVertex));
 
             //front
             i = 0;
@@ -187,7 +187,7 @@ namespace Aurealis
             boxVertices4[i].v = 1-(0.5+modelBox.max.y)*pixel;
             i++;
 
-            sceKernelDcacheWritebackInvalidateRange(boxVertices4,4 * sizeof(TexturesPSPVertex));
+            sceKernelDcacheWritebackInvalidateRange(boxVertices4,4 * sizeof(TexturedVertex));
 
             // bot
             i = 0;
@@ -220,7 +220,7 @@ namespace Aurealis
             boxVertices5[i].v = 1-(0.5+modelBox.min.z)*pixel;
             i++;
 
-            sceKernelDcacheWritebackInvalidateRange(boxVertices5,4 * sizeof(TexturesPSPVertex));
+            sceKernelDcacheWritebackInvalidateRange(boxVertices5,4 * sizeof(TexturedVertex));
 
             // top
             i = 0;
@@ -253,7 +253,7 @@ namespace Aurealis
             boxVertices6[i].v = 1-(0.5+modelBox.min.z)*pixel;
             i++;
 
-            sceKernelDcacheWritebackInvalidateRange(boxVertices6,4 * sizeof(TexturesPSPVertex));
+            sceKernelDcacheWritebackInvalidateRange(boxVertices6,4 * sizeof(TexturedVertex));
 
             stad = temp;
 
@@ -281,7 +281,7 @@ namespace Aurealis
                 boxVertices11[i].z = modelBox.min.z -size;
                 i++;
 
-                sceKernelDcacheWritebackInvalidateRange(boxVertices11,4 * sizeof(SimplePSPVertex2));
+                sceKernelDcacheWritebackInvalidateRange(boxVertices11,4 * sizeof(ColoredVertex2));
 
                 // right
                 i = 0;
@@ -306,7 +306,7 @@ namespace Aurealis
                 boxVertices12[i].z = modelBox.max.z +size;
                 i++;
 
-                sceKernelDcacheWritebackInvalidateRange(boxVertices12,4 * sizeof(SimplePSPVertex2));
+                sceKernelDcacheWritebackInvalidateRange(boxVertices12,4 * sizeof(ColoredVertex2));
 
                 // bot
                 i = 0;
@@ -332,7 +332,7 @@ namespace Aurealis
                 i++;
 
 
-                sceKernelDcacheWritebackInvalidateRange(boxVertices15,4 * sizeof(SimplePSPVertex2));
+                sceKernelDcacheWritebackInvalidateRange(boxVertices15,4 * sizeof(ColoredVertex2));
 
                 // top
                 i = 0;
@@ -357,7 +357,7 @@ namespace Aurealis
                 boxVertices16[i].z = modelBox.min.z -size;
                 i++;
 
-                sceKernelDcacheWritebackInvalidateRange(boxVertices16,4 * sizeof(SimplePSPVertex2));
+                sceKernelDcacheWritebackInvalidateRange(boxVertices16,4 * sizeof(ColoredVertex2));
             }*/
 		}
 

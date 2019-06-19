@@ -229,7 +229,7 @@ void pgeVramFree(void* ptr)
 }
 
 
-unsigned long pgeVramAvailable()
+unsigned long pgeVfreeMemory()
 {
 	return __mem_free * __BLOCK_SIZE;
 }

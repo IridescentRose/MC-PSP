@@ -1,5 +1,4 @@
-#ifndef WEATHERSYSTEM_H_
-#define WEATHERSYSTEM_H_
+#pragma once
 
 #include <Aurealis/Graphics/Vertex.h>
 #include <Aurealis/Graphics/RenderManager.h>
@@ -40,7 +39,7 @@ private:
     int weatherType;
     float weatherDuration;
 
-    TexturesPSPVertex *plane;
+    TexturedVertex *plane;
 
     int planeY[28];
 
@@ -58,7 +57,4 @@ private:
     void RenderFrontPlane();
     void RenderDiagonalePlane(int type);
 };
-
-
-#endif
 

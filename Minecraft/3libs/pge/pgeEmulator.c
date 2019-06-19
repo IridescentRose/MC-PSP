@@ -632,7 +632,7 @@ void pgeVramFree(void* ptr)
 	return free(ptr);
 }
 
-unsigned long pgeVramAvailable()
+unsigned long pgeVfreeMemory()
 {
 	return 0;
 }

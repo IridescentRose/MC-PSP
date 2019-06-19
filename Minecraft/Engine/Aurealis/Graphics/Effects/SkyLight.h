@@ -1,5 +1,4 @@
-#ifndef SKYLIGHT_H_
-#define SKYLIGHT_H_
+#pragma once
 
 #include <Aurealis/Math/Vector3.h>
 #include <Aurealis/Graphics/Vertex.h>
@@ -20,12 +19,9 @@ namespace Aurealis
 
 		private:
 
-			TexturesPSPVertex *skyVertices;
+			TexturedVertex *skyVertices;
 
 			float sun_angle;
 		};
 	}
 }
-
-#endif
-

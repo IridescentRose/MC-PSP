@@ -75,7 +75,7 @@ namespace Aurealis
             }
             vertsNum = points;
 
-            skyBoxVertices = (SimplePSPVertex2*)memalign(16,points * sizeof(SimplePSPVertex2));
+            skyBoxVertices = (ColoredVertex2*)memalign(16,points * sizeof(ColoredVertex2));
 
             size =  mTriangle.size();
             for(unsigned int j = 0; j < size; j++)
@@ -96,7 +96,7 @@ namespace Aurealis
                 vert++;
             }
 
-            sceKernelDcacheWritebackInvalidateRange(skyBoxVertices,( mTriangle.size() * 3) * sizeof(SimplePSPVertex2));
+            sceKernelDcacheWritebackInvalidateRange(skyBoxVertices,( mTriangle.size() * 3) * sizeof(ColoredVertex2));
 
             for(unsigned int aa = 0; aa < mPosition.size(); aa++)
             {

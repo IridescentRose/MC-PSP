@@ -1,5 +1,4 @@
-#ifndef Aurealis_SYSTEMMANAGER_H
-#define Aurealis_SYSTEMMANAGER_H
+#pragma once
 
 #include <malloc.h>
 #include <pspkernel.h>
@@ -20,11 +19,10 @@ namespace Aurealis
 		private:
 			//dialog params
 			pspUtilityMsgDialogParams dialog;
-			pspUtilityNetconfData networkData;
 			void ConfigureDialog(pspUtilityMsgDialogParams *dialog, size_t dialog_size);
 
 			//memory
-			u32 ramAvailableLineareMax (void);
+			u32 ramAvailableMax (void);
 
 			//input
 			SceCtrlData oldPadData,newPadData;
@@ -33,15 +31,14 @@ namespace Aurealis
 			void Init();
 
 			//memory
-			u32 ramAvailable (void);
+			u32 freeMemory (void);
 
 			//system dialogs
 			void ShowMessage(const char *message);
 			void ShowMessageError(const char *message,int error);
 			int ShowMessageYesNo(const char *message);
 			int ShowOSK(unsigned short *descritpion,unsigned short *outtext,int maxtextinput);
-			bool ShowNetworkDialog();
-
+			
 			//input
 			void InputUpdate();
 			bool KeyPressed(PspCtrlButtons button);
@@ -54,6 +51,3 @@ namespace Aurealis
 		extern SystemManager g_System;
 	}
 }
-
-#endif
-

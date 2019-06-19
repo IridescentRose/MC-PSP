@@ -1,5 +1,4 @@
-#ifndef PARTICLE_H_
-#define PARTICLE_H_
+#pragma once
 
 #include <Aurealis/Math/Vector3.h>
 #include <Aurealis/Graphics/Vertex.h>
@@ -59,7 +58,7 @@ namespace Aurealis
 
 		private:
 
-		    TexturesPSPVertex *particleVertices;
+		    TexturedVertex *particleVertices;
 
 			float horizontalScale;
 			float verticalScale;
@@ -81,6 +80,3 @@ namespace Aurealis
 		};
 	}
 }
-
-#endif
-

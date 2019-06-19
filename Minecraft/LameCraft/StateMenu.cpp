@@ -2994,7 +2994,7 @@ void StateMenu::Draw(StateManager* sManager)
     //draw debug text at the end
     mRender->DebugPrint(40,30,"cpu: %d%%",mRender->GetCpuUsage());
     mRender->DebugPrint(40,40,"gpu: %d%%",mRender->GetGpuUsage());
-	mRender->DebugPrint(40, 20, "memory: %.3f", ((float)SystemManager::Instance()->ramAvailable() / ((float)(1024 * 1024))) );
+	mRender->DebugPrint(40, 20, "memory: %.3f", ((float)SystemManager::Instance()->freeMemory() / ((float)(1024 * 1024))) );
     */
 
 	if (!IS_SNAPSHOT) {

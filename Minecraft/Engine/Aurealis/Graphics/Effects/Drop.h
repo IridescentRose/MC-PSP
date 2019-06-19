@@ -1,6 +1,4 @@
-#ifndef DROP_H_
-#define DROP_H_
-
+#pragma once
 #include <Aurealis/Graphics/Vertex.h>
 #include <Aurealis/Graphics/RenderManager.h>
 #include <pspmath.h>
@@ -54,6 +52,3 @@ private:
     BoundingBox bBox;
 
 };
-
-#endif
-

@@ -1,5 +1,4 @@
-#ifndef Aurealis_CAMERA_H
-#define Aurealis_CAMERA_H
+#pragma once
 
 #include <Aurealis/Math/Vector3.h>
 #include <Aurealis/Math/Frustum.h>
@@ -85,5 +84,3 @@ namespace Aurealis
 		};
 	}
 }
-
-#endif

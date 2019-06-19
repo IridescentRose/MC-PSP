@@ -10,12 +10,12 @@ namespace Aurealis
 	{
 		StarsBox::StarsBox()
 		{
-			boxVertices = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
-			boxVertices2 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
-			boxVertices3 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
-			boxVertices4 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
-			boxVertices5 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
-			boxVertices6 = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
+			boxVertices = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
+			boxVertices2 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
+			boxVertices3 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
+			boxVertices4 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
+			boxVertices5 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
+			boxVertices6 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
 
 			size = 0.95f;
 
@@ -64,7 +64,7 @@ namespace Aurealis
 			boxVertices[i].v = 1;
 			i++;
 
-			sceKernelDcacheWritebackInvalidateRange(boxVertices,4 * sizeof(TexturesPSPVertex));
+			sceKernelDcacheWritebackInvalidateRange(boxVertices,4 * sizeof(TexturedVertex));
 
             i = 0;
 
@@ -96,7 +96,7 @@ namespace Aurealis
 			boxVertices2[i].v = 1;
 			i++;
 
-			sceKernelDcacheWritebackInvalidateRange(boxVertices2,4 * sizeof(TexturesPSPVertex));
+			sceKernelDcacheWritebackInvalidateRange(boxVertices2,4 * sizeof(TexturedVertex));
 
             i = 0;
 
@@ -128,7 +128,7 @@ namespace Aurealis
 			boxVertices3[i].v = 1;
 			i++;
 
-			sceKernelDcacheWritebackInvalidateRange(boxVertices3,4 * sizeof(TexturesPSPVertex));
+			sceKernelDcacheWritebackInvalidateRange(boxVertices3,4 * sizeof(TexturedVertex));
 
             i = 0;
 
@@ -160,7 +160,7 @@ namespace Aurealis
 			boxVertices4[i].v = 0;
 			i++;
 
-			sceKernelDcacheWritebackInvalidateRange(boxVertices4,4 * sizeof(TexturesPSPVertex));
+			sceKernelDcacheWritebackInvalidateRange(boxVertices4,4 * sizeof(TexturedVertex));
 
             i = 0;
 
@@ -192,7 +192,7 @@ namespace Aurealis
 			boxVertices5[i].v = 1;
 			i++;
 
-			sceKernelDcacheWritebackInvalidateRange(boxVertices5,4 * sizeof(TexturesPSPVertex));
+			sceKernelDcacheWritebackInvalidateRange(boxVertices5,4 * sizeof(TexturedVertex));
 
             i = 0;
 
@@ -224,7 +224,7 @@ namespace Aurealis
 			boxVertices6[i].v = 1;
 			i++;
 
-			sceKernelDcacheWritebackInvalidateRange(boxVertices6,4 * sizeof(TexturesPSPVertex));
+			sceKernelDcacheWritebackInvalidateRange(boxVertices6,4 * sizeof(TexturedVertex));
 		}
 
 		void StarsBox::Update()

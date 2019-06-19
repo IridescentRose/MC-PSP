@@ -1,5 +1,4 @@
-#ifndef Aurealis_PLANE_H
-#define Aurealis_PLANE_H
+#pragma once
 
 #include <Aurealis/Math/Vector3.h>
 #include <pspmath.h>
@@ -35,5 +34,3 @@ namespace Aurealis
 		};
 	}
 }
-
-#endif

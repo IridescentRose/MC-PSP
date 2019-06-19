@@ -1,5 +1,4 @@
-#ifndef Aurealis_RAY_H
-#define Aurealis_RAY_H
+#pragma once
 
 #include <Aurealis/Math/Vector3.h>
 #include <Aurealis/Math/BoundingBox.h>
@@ -31,5 +30,3 @@ namespace Aurealis
 
 	}
 }
-
-#endif

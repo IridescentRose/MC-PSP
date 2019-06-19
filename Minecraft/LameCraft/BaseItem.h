@@ -27,11 +27,11 @@ public:
 
 	char itemType; // "D" - default, "T" - tool, "F" - food, "H" - helmet, "C" - chestplate, "L" - leggings, "B" - boots "Y" - dye
 
-	TexturesPSPVertex *vertices;
-	TexturesPSPVertex *addVertices;
-	TexturesPSPVertex *add2Vertices;
+	TexturedVertex *vertices;
+	TexturedVertex *addVertices;
+	TexturedVertex *add2Vertices;
 
-	TexturesPSPVertex *dropVertices;
+	TexturedVertex *dropVertices;
 
 	BaseItem();
 	virtual ~BaseItem();

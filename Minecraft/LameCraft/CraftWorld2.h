@@ -596,36 +596,36 @@ public:
     std::vector<int> updatingChunks;
 
     // for humanoids
-    TexturesPSPVertex *bodyVertices;
-    TexturesPSPVertex *headVertices;
-    TexturesPSPVertex *hatVertices;
-    TexturesPSPVertex *legVertices;
-    TexturesPSPVertex *handVertices;
+    TexturedVertex *bodyVertices;
+    TexturedVertex *headVertices;
+    TexturedVertex *hatVertices;
+    TexturedVertex *legVertices;
+    TexturedVertex *handVertices;
 
     // for creeper
-    TexturesPSPVertex *creeperLegVertices;
+    TexturedVertex *creeperLegVertices;
 
     // for cows
-    TexturesPSPVertex *cowBodyVertices;
-    TexturesPSPVertex *cowHeadVertices;
-    TexturesPSPVertex *cowLegVertices;
-    TexturesPSPVertex *cowHornsVertices;
+    TexturedVertex *cowBodyVertices;
+    TexturedVertex *cowHeadVertices;
+    TexturedVertex *cowLegVertices;
+    TexturedVertex *cowHornsVertices;
 
     // for sheep
-    TexturesPSPVertex *sheepBodyVertices;
-    TexturesPSPVertex *sheepHeadVertices;
-    TexturesPSPVertex *sheepHeadOPTVertices;
-    TexturesPSPVertex *sheepHeadFurVertices;
-    TexturesPSPVertex *sheepLegOPTVertices;
-    TexturesPSPVertex *sheepLegFurVertices;
+    TexturedVertex *sheepBodyVertices;
+    TexturedVertex *sheepHeadVertices;
+    TexturedVertex *sheepHeadOPTVertices;
+    TexturedVertex *sheepHeadFurVertices;
+    TexturedVertex *sheepLegOPTVertices;
+    TexturedVertex *sheepLegFurVertices;
 
     // for armor
-    TexturesPSPVertex *helmetVertices;
-    TexturesPSPVertex *shoulderVertices;
-    TexturesPSPVertex *chestplateVertices;
-    TexturesPSPVertex *bellyVertices;
-    TexturesPSPVertex *leggingVertices;
-    TexturesPSPVertex *bootVertices;
+    TexturedVertex *helmetVertices;
+    TexturedVertex *shoulderVertices;
+    TexturedVertex *chestplateVertices;
+    TexturedVertex *bellyVertices;
+    TexturedVertex *leggingVertices;
+    TexturedVertex *bootVertices;
 
     Vector3 playerPos;
     bool playerContactLadder;

@@ -1,5 +1,4 @@
-#ifndef Aurealis_VECTOR3_H
-#define Aurealis_VECTOR3_H
+#pragma once
 
 #include <Aurealis/Math/MathLib.h>
 #include <pspmath.h>
@@ -409,5 +408,3 @@ namespace Aurealis
 		}
 	}
 }
-
-#endif

@@ -25,13 +25,13 @@ public:
     char botPlane_x, botPlane_y;
     char forPlane_x, forPlane_y;
 
-	TexturesPSPVertex *verticesLeftRight;
+	TexturedVertex *verticesLeftRight;
 	char pointsLeftRight;
 
-    TexturesPSPVertex *verticesBackFront;
+    TexturedVertex *verticesBackFront;
 	char pointsBackFront;
 
-    TexturesPSPVertex *verticesBottomTop;
+    TexturedVertex *verticesBottomTop;
 	char pointsBottomTop;
 
 	// другие параметры

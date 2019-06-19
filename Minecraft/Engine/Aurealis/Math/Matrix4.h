@@ -1,5 +1,4 @@
-#ifndef Aurealis_MATRIX4_H
-#define Aurealis_MATRIX4_H
+#pragma once
 
 #include <Aurealis/Math/MathLib.h>
 #include <Aurealis/Math/Vector4.h>
@@ -361,4 +360,3 @@ namespace Aurealis
 	}
 }
 
-#endif

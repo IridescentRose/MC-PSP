@@ -1,5 +1,4 @@
-#ifndef STARSBOX_H_
-#define STARSBOX_H_
+#pragma once
 
 #include <Aurealis/Graphics/Vertex.h>
 #include <Aurealis/Graphics/RenderManager.h>
@@ -22,17 +21,14 @@ namespace Aurealis
 
 		private:
 
-			TexturesPSPVertex *boxVertices;
-			TexturesPSPVertex *boxVertices2;
-			TexturesPSPVertex *boxVertices3;
-			TexturesPSPVertex *boxVertices4;
-			TexturesPSPVertex *boxVertices5;
-			TexturesPSPVertex *boxVertices6;
+			TexturedVertex *boxVertices;
+			TexturedVertex *boxVertices2;
+			TexturedVertex *boxVertices3;
+			TexturedVertex *boxVertices4;
+			TexturedVertex *boxVertices5;
+			TexturedVertex *boxVertices6;
 
 			float size;
 		};
 	}
 }
-
-#endif
-

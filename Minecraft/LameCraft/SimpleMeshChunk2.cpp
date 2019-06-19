@@ -56,7 +56,7 @@ SimpleMeshChunk::~SimpleMeshChunk()
 
 void SimpleMeshChunk::vert(float x,float y,float z,float u,float v,float r,float g,float b, block_t id)
 {
-    CraftPSPVertex vertex;
+    Vertex vertex;
 
 	vertex.u = u;
 	vertex.v = v;
@@ -71,7 +71,7 @@ void SimpleMeshChunk::vert(float x,float y,float z,float u,float v,float r,float
 
 void SimpleMeshChunk::position(float x,float y,float z, block_t id)
 {
-	CraftPSPVertex vertex;
+	Vertex vertex;
 
 	vertex.x = x;
 	vertex.y = y;
@@ -120,8 +120,8 @@ void SimpleMeshChunk::end()
 		}
 
 		//optimize here
-		meshVertices = (CraftPSPVertex*)memalign(16,( mTriangle.size() * 3) * sizeof(CraftPSPVertex));
-		//floraVertices = (CraftPSPVertex*)memalign(16, (fVertCount) * sizeof(CraftPSPVertex));
+		meshVertices = (Vertex*)memalign(16,( mTriangle.size() * 3) * sizeof(Vertex));
+		//floraVertices = (Vertex*)memalign(16, (fVertCount) * sizeof(Vertex));
 
 		//vertices
 		int vert = 0;
@@ -156,8 +156,8 @@ void SimpleMeshChunk::end()
 		}
 
 		//clear the cache or there will be some errors
-		sceKernelDcacheWritebackInvalidateRange(meshVertices,( mTriangle.size() * 3) * sizeof(CraftPSPVertex));
-		//sceKernelDcacheWritebackInvalidateRange(floraVertices, (fVertCount) * sizeof(CraftPSPVertex));
+		sceKernelDcacheWritebackInvalidateRange(meshVertices,( mTriangle.size() * 3) * sizeof(Vertex));
+		//sceKernelDcacheWritebackInvalidateRange(floraVertices, (fVertCount) * sizeof(Vertex));
 		//sceKernelDcacheWritebackInvalidateAll();
 
 
@@ -214,7 +214,7 @@ void SimpleMeshChunk::drawChunk(Vector3 camPos, bool transparent)
 					meshVertices[i].z += sinZ*sinZ*sinZ;
 				}
 
-				sceKernelDcacheWritebackInvalidateRange(meshVertices, (trienglesCount) * sizeof(CraftPSPVertex));
+				sceKernelDcacheWritebackInvalidateRange(meshVertices, (trienglesCount) * sizeof(Vertex));
 				sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, trienglesCount, 0, meshVertices);
 			
 			}
@@ -234,7 +234,7 @@ void SimpleMeshChunk::endDrawChunk() {
 		oldXZ.clear();
 	}
 
-	sceKernelDcacheWritebackInvalidateRange(meshVertices, (trienglesCount) * sizeof(CraftPSPVertex));
+	sceKernelDcacheWritebackInvalidateRange(meshVertices, (trienglesCount) * sizeof(Vertex));
 }
 
 void SimpleMeshChunk::reset()

@@ -10,7 +10,7 @@ namespace Aurealis
 	{
 		SkyLight::SkyLight()
 		{
-			skyVertices = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
+			skyVertices = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
 		}
 
 		SkyLight::~SkyLight()
@@ -56,7 +56,7 @@ namespace Aurealis
 			skyVertices[i].u = 1.f;// * textureScale;
 			skyVertices[i].v = 1.f;// * textureScale;
 
-			sceKernelDcacheWritebackInvalidateRange(skyVertices,4 * sizeof(TexturesPSPVertex));
+			sceKernelDcacheWritebackInvalidateRange(skyVertices,4 * sizeof(TexturedVertex));
 		}
 
 		void SkyLight::Render()

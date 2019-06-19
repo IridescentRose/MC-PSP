@@ -76,7 +76,7 @@ void pgeVramFree(void* ptr);
  *
  * @returns Size of remaining VRAM in bytes
  */
-unsigned long pgeVramAvailable();
+unsigned long pgeVfreeMemory();
 
 /**
  * Return largest free memory block in VRAM.

@@ -1,5 +1,4 @@
-#ifndef Aurealis_BOUNDINGBOX_H
-#define Aurealis_BOUNDINGBOX_H
+#pragma once
 
 #include <Aurealis/Math/Vector3.h>
 #include <Aurealis/Math/Plane.h>
@@ -39,5 +38,3 @@ namespace Aurealis
 		};
 	}
 }
-
-#endif

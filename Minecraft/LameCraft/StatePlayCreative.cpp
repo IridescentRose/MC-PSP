@@ -3540,7 +3540,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
     {
         if(freeMemoryTimer > 3.0f)
         {
-            freeMemory = g_System.ramAvailable();
+            freeMemory = g_System.freeMemory();
             freeMemoryTimer = 0.0f;
         }
     }
@@ -3548,7 +3548,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
     {
         if(freeMemoryTimer > 15.0f)
         {
-            freeMemory = g_System.ramAvailable();
+            freeMemory = g_System.freeMemory();
             freeMemoryTimer = 0.0f;
         }
     }
@@ -11208,7 +11208,7 @@ void StatePlayCreative::advancedBlit(int sx, int sy, int sw, int sh, int dx, int
 
     for (start = sx, end = sx+sw; start < end; start += slice, dx += slice)
     {
-        TexturesPSPVertex16* vertices = (TexturesPSPVertex16*)sceGuGetMemory(2 * sizeof(TexturesPSPVertex16));
+        TexturedVertex16* vertices = (TexturedVertex16*)sceGuGetMemory(2 * sizeof(TexturedVertex16));
         int width = (start + slice) < end ? slice : end-start;
 
         vertices[0].u = start;

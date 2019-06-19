@@ -11,7 +11,7 @@
 
 WeatherSystem::WeatherSystem()
 {
-    plane = (TexturesPSPVertex*)memalign(16,4 * sizeof(TexturesPSPVertex));
+    plane = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
 
     size = 0.0f;
 
@@ -76,7 +76,7 @@ void WeatherSystem::BuildPlanesVertex()
     plane[i].v = 0;
     i++;
 
-    sceKernelDcacheWritebackInvalidateRange(plane,4 * sizeof(TexturesPSPVertex));
+    sceKernelDcacheWritebackInvalidateRange(plane,4 * sizeof(TexturedVertex));
 }
 
 void WeatherSystem::SetWeatherDuration(float duration)

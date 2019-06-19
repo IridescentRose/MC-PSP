@@ -38,7 +38,7 @@ private:
     Vector3 colour;
     float alpha;
 
-    CraftPSPVertex *vertices;
+    Vertex *vertices;
 
 };
 

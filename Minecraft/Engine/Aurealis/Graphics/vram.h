@@ -1,5 +1,4 @@
-#ifndef common_vram_h
-#define common_vram_h
+#pragma once
 
 #include <stddef.h>
 #ifdef __cplusplus
@@ -27,6 +26,4 @@ void* getDynamicVramTexture(unsigned int width, unsigned int height, unsigned in
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif

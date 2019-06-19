@@ -1,5 +1,4 @@
-#ifndef Aurealis_FRUSTUM_H
-#define Aurealis_FRUSTUM_H
+#pragma once
 
 #include "psptypes.h"
 
@@ -49,12 +48,10 @@ namespace Aurealis
 			PlaneIntersectionType BoxInFrustum(float minx,float miny,float minz,float maxx,float maxy,float maxz);
 
 			//clipping
-			TexturesPSPVertex buffer[2][10];
-			TexturesPSPVertex vertexIntersection(TexturesPSPVertex& a,float da,TexturesPSPVertex& b,float db);
-			void Clip(int plane,int vertexCount,TexturesPSPVertex * in,int i,TexturesPSPVertex * out,int &outCount);
+			TexturedVertex buffer[2][10];
+			TexturedVertex vertexIntersection(TexturedVertex& a,float da,TexturedVertex& b,float db);
+			void Clip(int plane,int vertexCount,TexturedVertex * in,int i,TexturedVertex * out,int &outCount);
 		};
 
 	}
 }
-
-#endif

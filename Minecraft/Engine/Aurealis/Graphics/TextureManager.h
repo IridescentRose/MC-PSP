@@ -1,5 +1,4 @@
-#ifndef TEXTURE_MANAGER_H
-#define TEXTURE_MANAGER_H
+#pragma once
 
 #include <stdio.h>
 #include <vector>
@@ -197,5 +196,3 @@ namespace Aurealis
 
 	}
 }
-
-#endif

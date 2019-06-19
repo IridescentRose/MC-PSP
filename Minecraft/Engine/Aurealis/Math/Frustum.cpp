@@ -209,11 +209,11 @@ namespace Aurealis
 
 		//clipping
 
-		TexturesPSPVertex Frustum::vertexIntersection(TexturesPSPVertex& a,float da,TexturesPSPVertex& b,float db)
+		TexturedVertex Frustum::vertexIntersection(TexturedVertex& a,float da,TexturedVertex& b,float db)
 		{
 			float s = da/(da-db);   // intersection factor (between 0 and 1)
 
-			TexturesPSPVertex intersectpoint;
+			TexturedVertex intersectpoint;
 
 			intersectpoint.x = a.x + s*(b.x-a.x);
 			intersectpoint.y = a.y + s*(b.y-a.y);
@@ -225,7 +225,7 @@ namespace Aurealis
 			return intersectpoint;
 		}
 
-		void Frustum::Clip(int plane,int vertexCount,TexturesPSPVertex * in,int i,TexturesPSPVertex * out,int &outCount)
+		void Frustum::Clip(int plane,int vertexCount,TexturedVertex * in,int i,TexturedVertex * out,int &outCount)
 		{
 			//for each vertex
 			outCount = 0;

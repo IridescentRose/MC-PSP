@@ -1,5 +1,4 @@
-#ifndef Aurealis_OBJMODEL_H
-#define Aurealis_OBJMODEL_H
+#pragma once
 
 #include <string>
 #include <vector>
@@ -106,7 +105,7 @@ namespace Aurealis
 			std::vector<ObjFace> mUVFace;
 			std::vector<ObjFace> mNormalFace;
 
-			TexturesPSPVertex * meshVertices;
+			TexturedVertex * meshVertices;
 
 			int triangleCount;
 			int vertexCount;
@@ -242,6 +241,3 @@ namespace Aurealis
 
 	}
 }
-
-
-#endif
