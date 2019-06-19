@@ -23,7 +23,6 @@ void StateOptions::Init()
 {
 	//set render manager instance
 	mRender = RenderManager::InstancePtr();
-	mSoundMgr = SoundManager::Instance();
 
 	buttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,0,95,12);
     buttonSprite->SetPosition(240,150);
@@ -116,7 +115,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				if(selectPos < 0)
 					selectPos = 2;
 
-				mSoundMgr->PlayMenuSound();
+				g_SoundManager.PlayMenuSound();
 			}
 
 			if(g_System.KeyPressed(PSP_CTRL_DOWN))
@@ -125,7 +124,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				if(selectPos > 2)
 					selectPos = 0;
 
-				mSoundMgr->PlayMenuSound();
+				g_SoundManager.PlayMenuSound();
 			}
 
 			if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
@@ -217,7 +216,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 					//quit
 					chooseKeyState = false;
 
-					mSoundMgr->PlayMenuSound();
+					g_SoundManager.PlayMenuSound();
 				}
 
 			}else
@@ -247,7 +246,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 							controlStart = 0;
 					}
 
-					mSoundMgr->PlayMenuSound();
+					g_SoundManager.PlayMenuSound();
 				}
 
 				if(g_System.KeyPressed(PSP_CTRL_DOWN))
@@ -272,7 +271,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 						controlEnd = 6;
 					}
 
-					mSoundMgr->PlayMenuSound();
+					g_SoundManager.PlayMenuSound();
 				}
 
 				if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
@@ -307,7 +306,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				if(currentAnalogPos < 0)
 					currentAnalogPos = 4;
 
-				mSoundMgr->PlayMenuSound();
+				g_SoundManager.PlayMenuSound();
 			}
 
 			if(g_System.KeyPressed(PSP_CTRL_DOWN))
@@ -316,7 +315,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				if(currentAnalogPos > 4)
 					currentAnalogPos = 0;
 
-				mSoundMgr->PlayMenuSound();
+				g_SoundManager.PlayMenuSound();
 			}
 
 			if(g_System.KeyPressed(PSP_CTRL_LEFT))
@@ -352,7 +351,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 					}
 				}
 
-				mSoundMgr->PlayMenuSound();
+				g_SoundManager.PlayMenuSound();
 			}
 
 			if(g_System.KeyPressed(PSP_CTRL_RIGHT))
@@ -388,7 +387,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 					}
 				}
 
-				mSoundMgr->PlayMenuSound();
+				g_SoundManager.PlayMenuSound();
 			}
 
 			if(g_System.KeyPressed(PSP_CTRL_CIRCLE))

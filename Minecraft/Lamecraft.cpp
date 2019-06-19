@@ -10,12 +10,13 @@
 
 #include "LameCraft/StateMenu.h"
 #include "LameCraft/SplashScreen.h"
-#include "LameCraft/SoundManager.h"
+#include <Aurealis/Audio/SoundManager.h>
 #include "LameCraft/TextureHelper.h"
 
 using namespace Aurealis::Graphics;
 using namespace Aurealis::Utils;
 using namespace Aurealis::System;
+using namespace Aurealis::Audio;
 using namespace Aurealis;
 
 PSP_MODULE_INFO("LameCraft", 0, 1, 1);
@@ -38,7 +39,7 @@ int main()
 
 	//init and load sounds
 	TextureHelper::Instance()->Init();
-	SoundManager::Instance()->Init();
+	g_SoundManager.Init();
 
 	srand(time(NULL));
 

@@ -6,7 +6,7 @@
 #include <psptypes.h>
 
 #include <algorithm>
-#include "sound_utils/oslib.h"
+#include <Aurealis/Audio/sound_utils/oslib.h>
 #include <Aurealis/Math/Frustum.h>
 #include <Aurealis/Math/Vector4.h>
 #include <Aurealis/Graphics/Effects/Drop.h>

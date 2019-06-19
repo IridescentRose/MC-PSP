@@ -1,6 +1,7 @@
-#ifndef Aurealis_MATHLIB_H
-#define Aurealis_MATHLIB_H
 #pragma once
+#include <cmath>
+#include <cstdlib>
+#include <pspmath.h>
 
 namespace Aurealis
 {

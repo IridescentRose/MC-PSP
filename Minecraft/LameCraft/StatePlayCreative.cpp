@@ -225,7 +225,6 @@ void StatePlayCreative::Init()
 {
     //set render manager instance
     mRender = RenderManager::InstancePtr();
-    mSoundMgr = SoundManager::Instance();
     mIhelper = InputHelper::Instance();
 
     WorldGenerator *mGen = new WorldGenerator();
@@ -270,7 +269,6 @@ void StatePlayCreative::InitParametric(bool makeTrees, bool makeWater,bool makeC
 {
     //set render manager instance
     mRender = RenderManager::InstancePtr();
-    mSoundMgr = SoundManager::Instance();
     mIhelper = InputHelper::Instance();
 
     //then create our perfect world
@@ -334,7 +332,6 @@ void StatePlayCreative::LoadMap(std::string fileName,bool compressed)
 
     //set render manager instance
     mRender = RenderManager::InstancePtr();
-    mSoundMgr = SoundManager::Instance();
     mIhelper = InputHelper::Instance();
 
     //save name
@@ -387,7 +384,7 @@ void StatePlayCreative::LoadMap(std::string fileName,bool compressed)
     walkSoundAccu = 0.0f;
     isWalking = false;
 
-    mSoundMgr->playerSounds = mWorld->mainOptions.sounds;
+    g_SoundManager.playerSounds = mWorld->mainOptions.sounds;
     mWorld->playerZoneSize = Vector3(CHUNK_SIZE*mWorld->mainOptions.horizontalViewDistance,CHUNK_SIZE*mWorld->mainOptions.verticalViewDistance,CHUNK_SIZE*mWorld->mainOptions.horizontalViewDistance);
     mRender->fovv = mWorld->mainOptions.fov;
     RenderManager::InstancePtr()->SetPerspective(0, 480.0f / 272.0f, 0.18f, 1000.f);
@@ -3996,7 +3993,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 {
                     if((int)(mWorld->HG) < 20)
                     {
-                        mSoundMgr->PlayEatSound();
+                        g_SoundManager.PlayEatSound();
                         mWorld->mainStatistics.foodEaten += 1;
                         mWorld->HG += 5;
 
@@ -4019,7 +4016,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 {
                     if((int)(mWorld->HG) < 20)
                     {
-                        mSoundMgr->PlayEatSound();
+                        g_SoundManager.PlayEatSound();
                         mWorld->mainStatistics.foodEaten += 1;
                         mWorld->HG += 4;
 
@@ -4042,7 +4039,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 {
                     if((int)(mWorld->HG) < 20)
                     {
-                        mSoundMgr->PlayEatSound();
+                        g_SoundManager.PlayEatSound();
                         mWorld->mainStatistics.foodEaten += 1;
                         mWorld->HG += 6;
 
@@ -4060,7 +4057,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 {
                     if((int)(mWorld->HG) < 20)
                     {
-                        mSoundMgr->PlayEatSound();
+                        g_SoundManager.PlayEatSound();
                         mWorld->mainStatistics.foodEaten += 1;
                         mWorld->HG = 20;
                         mWorld->HP = 20;
@@ -4077,7 +4074,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
 
                 if (mWorld->invId[27+barPosition] == 299) ///SNOWBALL THROWING
                 {
-                    mSoundMgr->PlayBowSound();
+                    g_SoundManager.PlayBowSound();
 
                     SnowBall2* NewSB = new SnowBall2(playerPosition.x,playerPosition.y,playerPosition.z);
                     NewSB->SetVeloc(fppCam->upDownAngle,(fppCam->horAngle/(float)180)*PI);
@@ -4134,7 +4131,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                             {
                                 mWorld->GetBlock(testPos.x, testPos.y, testPos.z) = Obsidian::getID();
 
-                                mSoundMgr->PlayFissSound();
+                                g_SoundManager.PlayFissSound();
 
                                 int	curchunkTarget = mWorld->getChunkId(testPos);
                                 mWorld->RebuildFullMeshChunk(curchunkTarget);
@@ -4170,7 +4167,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                             {
                                 mWorld->GetBlock(testPos.x, testPos.y, testPos.z) = CobbleStone::getID();
 
-                                mSoundMgr->PlayFissSound();
+                                g_SoundManager.PlayFissSound();
 
                                 int	curchunkTarget = mWorld->getChunkId(testPos);
                                 mWorld->RebuildFullMeshChunk(curchunkTarget);
@@ -4259,14 +4256,14 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                                     mWorld->invId[27+barPosition] = -1;
                                     mWorld->invSt[27+barPosition] = 0;
 
-                                    mSoundMgr->PlayBreakSound();
+                                    g_SoundManager.PlayBreakSound();
                                 }
                                 int	curchunkTarget = mWorld->getChunkId(testPos);
 
                                 fppCam->needUpdate = true;
                                 //Rebuild nearby world
                                 mWorld->RebuildOpaqueMeshChunk(curchunkTarget);
-                                mSoundMgr->PlayWalkSound(1);
+                                g_SoundManager.PlayWalkSound(1);
                                 changeY = -0.16f;
                                 anim[0] = 1;
                                 //mWorld->rebuildTransparentChunk(curchunkTarget);
@@ -4285,7 +4282,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                                     mWorld->invId[27+barPosition] = -1;
                                     mWorld->invSt[27+barPosition] = 0;
 
-                                    mSoundMgr->PlayBreakSound();
+                                    g_SoundManager.PlayBreakSound();
                                 }
 
                                 int	curchunkTarget = mWorld->getChunkId(testPos);
@@ -4293,7 +4290,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                                 fppCam->needUpdate = true;
                                 //Rebuild nearby world
                                 mWorld->RebuildOpaqueMeshChunk(curchunkTarget);
-                                mSoundMgr->PlayWalkSound(1);
+                                g_SoundManager.PlayWalkSound(1);
                                 changeY = -0.16f;
                                 anim[0] = 1;
                                 //mWorld->rebuildTransparentChunk(curchunkTarget);
@@ -4403,7 +4400,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                                     NoteBlockEntity* TestNoteBlock = mWorld->mNoteBlocks[noteBlockId];
 
                                     TestNoteBlock->IncreaseNote();
-                                    mSoundMgr->PlayNoteSound(!(mWorld->BlockMaterial(testPos.x,testPos.y-1,testPos.z) == 1 || mWorld->BlockMaterial(testPos.x,testPos.y-1,testPos.z) == 8),TestNoteBlock->GetPitch());
+                                    g_SoundManager.PlayNoteSound(!(mWorld->BlockMaterial(testPos.x,testPos.y-1,testPos.z) == 1 || mWorld->BlockMaterial(testPos.x,testPos.y-1,testPos.z) == 8),TestNoteBlock->GetPitch());
 
                                     float red, blue, green;
                                     if(TestNoteBlock->GetNote() <= 12)
@@ -4535,9 +4532,9 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                                                 music_number = mWorld->invId[27+barPosition]-Disk4::getID()+3;
                                             }
 
-                                            mSoundMgr->StopAmbient();
-                                            mSoundMgr->StopDiskTrack();
-                                            mSoundMgr->PlayDiskTrack(music_number);
+                                            g_SoundManager.StopAmbient();
+                                            g_SoundManager.StopDiskTrack();
+                                            g_SoundManager.PlayDiskTrack(music_number);
 
                                             switch(music_number)
                                             {
@@ -4572,8 +4569,8 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                                         mWorld->DropThis(TestJukebox->GetRecord(), 1, false, Vector3((int)testPos.x+0.5f,(int)testPos.y+1.0f,(int)testPos.z+0.5f) );
                                         TestJukebox->SetRecord(-1);
 
-                                        mSoundMgr->StopAmbient();
-                                        mSoundMgr->StopDiskTrack();
+                                        g_SoundManager.StopAmbient();
+                                        g_SoundManager.StopDiskTrack();
 
                                         musicTime = 60.0f+rand()%60;
                                     }
@@ -4638,7 +4635,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                                         case 158 : mWorld->GetBlock(testPos.x, testPos.y, testPos.z) = SprucePlanks::getID(); break;
                                     }
 
-                                    mSoundMgr->PlayWalkSound(mWorld->blockTypes[mWorld->invId[27+barPosition]].soundType);
+                                    g_SoundManager.PlayWalkSound(mWorld->blockTypes[mWorld->invId[27+barPosition]].soundType);
 
                                     mWorld->invAm[27+barPosition] -= 1;
                                     if(mWorld->invAm[27+barPosition] == 0)
@@ -4680,7 +4677,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                             if(!doorBox.intersect(playerBox))
                             {
                                 mWorld->GetBlock(testPos.x, testPos.y, testPos.z) = mWorld->GetBlock(testPos.x, testPos.y, testPos.z) - 4;
-                                mSoundMgr->PlayDoorSound(true);
+                                g_SoundManager.PlayDoorSound(true);
 
                                 int	curchunkTarget = mWorld->getChunkId(testPos);
                                 fppCam->needUpdate = true;
@@ -4708,7 +4705,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                             if(!doorBox.intersect(playerBox))
                             {
                                 mWorld->GetBlock(testPos.x, testPos.y, testPos.z) = mWorld->GetBlock(testPos.x, testPos.y, testPos.z) + 4;
-                                mSoundMgr->PlayDoorSound(false);
+                                g_SoundManager.PlayDoorSound(false);
 
                                 int	curchunkTarget = mWorld->getChunkId(testPos);
                                 fppCam->needUpdate = true;
@@ -4737,7 +4734,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                             {
                                 mWorld->GetBlock(testPos.x, testPos.y, testPos.z) = mWorld->GetBlock(testPos.x, testPos.y, testPos.z) + 4;
                                 mWorld->GetBlock(testPos.x, testPos.y+1, testPos.z) = 58;
-                                mSoundMgr->PlayDoorSound(true);
+                                g_SoundManager.PlayDoorSound(true);
 
                                 int	curchunkTarget = mWorld->getChunkId(testPos);
                                 fppCam->needUpdate = true;
@@ -4766,7 +4763,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                             {
                                 mWorld->GetBlock(testPos.x, testPos.y, testPos.z) = mWorld->GetBlock(testPos.x, testPos.y, testPos.z) - 4;
                                 mWorld->GetBlock(testPos.x, testPos.y+1, testPos.z) = 57;
-                                mSoundMgr->PlayDoorSound(false);
+                                g_SoundManager.PlayDoorSound(false);
 
                                 int	curchunkTarget = mWorld->getChunkId(testPos);
                                 fppCam->needUpdate = true;
@@ -4797,7 +4794,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                                 {
                                     mWorld->GetBlock(testPos.x, testPos.y-1, testPos.z) = mWorld->GetBlock(testPos.x, testPos.y-1, testPos.z) + 4;
                                     mWorld->GetBlock(testPos.x, testPos.y, testPos.z) = 58;
-                                    mSoundMgr->PlayDoorSound(true);
+                                    g_SoundManager.PlayDoorSound(true);
 
                                     int	curchunkTarget = mWorld->getChunkId(Vector3(testPos.x,testPos.y-1,testPos.z));
                                     fppCam->needUpdate = true;
@@ -4829,7 +4826,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                                 {
                                     mWorld->GetBlock(testPos.x, testPos.y-1, testPos.z) = mWorld->GetBlock(testPos.x, testPos.y-1, testPos.z) - 4;
                                     mWorld->GetBlock(testPos.x, testPos.y, testPos.z) = 57;
-                                    mSoundMgr->PlayDoorSound(false);
+                                    g_SoundManager.PlayDoorSound(false);
 
                                     int	curchunkTarget = mWorld->getChunkId(Vector3(testPos.x,testPos.y-1,testPos.z));
                                     fppCam->needUpdate = true;
@@ -4843,7 +4840,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                         {
                             mWorld->SpawnTNTentity(((int)testPos.x)+0.5f,((int)testPos.y)+0.5f,((int)testPos.z)+0.5f);
                             mWorld->GetBlock(testPos.x,testPos.y,testPos.z) = 0;
-                            mSoundMgr->PlayFuseSound();
+                            g_SoundManager.PlayFuseSound();
                             mWorld->RebuildOpaqueMeshChunk(mWorld->getChunkId(testPos));
                             fppCam->needUpdate = true;
                             return;
@@ -5978,7 +5975,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
 
                                         if(oldBlock < 250 && oldBlock != -1)
                                         {
-                                            mSoundMgr->PlayWalkSound(mWorld->blockTypes[oldBlock].soundType);
+                                            g_SoundManager.PlayWalkSound(mWorld->blockTypes[oldBlock].soundType);
                                         }
 
                                        /* if(oldBlock == WaterBlock4::getID())
@@ -6186,7 +6183,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
 
                                 delete mWorld->mJukeboxes[jukeboxId];
                                 mWorld->mJukeboxes.erase(mWorld->mJukeboxes.begin()+jukeboxId);
-                                mSoundMgr->StopDiskTrack();
+                                g_SoundManager.StopDiskTrack();
                             }
                         }
 
@@ -6230,7 +6227,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                                 mWorld->invId[27+barPosition] = -1;
                                 mWorld->invAm[27+barPosition] = -1;
                                 mWorld->invSt[27+barPosition] = 0;
-                                mSoundMgr->PlayBreakSound();
+                                g_SoundManager.PlayBreakSound();
                             }
                         }
 
@@ -6345,11 +6342,11 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
 
                         if(oldBlock == GlassBlock::getID() || oldBlock == IceBlock::getID())
                         {
-                            mSoundMgr->PlayGlassSound();
+                            g_SoundManager.PlayGlassSound();
                         }
                         else
                         {
-                            mSoundMgr->PlayEndDigSound(mWorld->blockTypes[oldBlock].soundType);
+                            g_SoundManager.PlayEndDigSound(mWorld->blockTypes[oldBlock].soundType);
                         }
 
                         if(mParticles.size() <= 52)
@@ -7030,7 +7027,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                             mWorld->mAm = -1;
                             mWorld->mSt = 0;
 
-                            mSoundMgr->PlayBreakSound();
+                            g_SoundManager.PlayBreakSound();
                         }
                         return;
                     }
@@ -7690,7 +7687,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                     return;
                 }
                 optionsMenuPos--;
-                mSoundMgr->PlayMenuSound();
+                g_SoundManager.PlayMenuSound();
             }
 
             if(g_System.KeyPressed(PSP_CTRL_DOWN))
@@ -7700,7 +7697,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                     return;
                 }
                 optionsMenuPos++;
-                mSoundMgr->PlayMenuSound();
+                g_SoundManager.PlayMenuSound();
             }
 
             if(g_System.KeyPressed(PSP_CTRL_RTRIGGER))
@@ -7710,7 +7707,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                     return;
                 }
                 optionsMenuPos += 8;
-                mSoundMgr->PlayMenuSound();
+                g_SoundManager.PlayMenuSound();
             }
 
             if(g_System.KeyPressed(PSP_CTRL_LTRIGGER))
@@ -7720,7 +7717,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                     return;
                 }
                 optionsMenuPos -= 8;
-                mSoundMgr->PlayMenuSound();
+                g_SoundManager.PlayMenuSound();
             }
 
             if(g_System.KeyPressed(PSP_CTRL_RIGHT))
@@ -7730,7 +7727,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                     if (mWorld->mainOptions.fov <= 95)
                     {
                         mWorld->mainOptions.fov += 5;
-                        mSoundMgr->PlayMenuSound();
+                        g_SoundManager.PlayMenuSound();
                         mRender->fovv = mWorld->mainOptions.fov;
                         RenderManager::InstancePtr()->SetPerspective(0, 480.0f / 272.0f, 0.18f, 1000.f);
                         skyLight->UpdateLightSource(mWorld->skyTime);
@@ -7742,7 +7739,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                     if (mWorld->mainOptions.horizontalViewDistance != 4)
                     {
                         mWorld->mainOptions.horizontalViewDistance += 1;
-                        mSoundMgr->PlayMenuSound();
+                        g_SoundManager.PlayMenuSound();
                         mWorld->playerZoneSize = Vector3(CHUNK_SIZE*mWorld->mainOptions.horizontalViewDistance,CHUNK_SIZE*mWorld->mainOptions.verticalViewDistance,CHUNK_SIZE*mWorld->mainOptions.horizontalViewDistance);
                         mWorld->UpdatePlayerZoneBB(fppCam->m_vPosition);
                         fppCam->needUpdate = true;
@@ -7753,7 +7750,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                     if (mWorld->mainOptions.verticalViewDistance != 2)
                     {
                         mWorld->mainOptions.verticalViewDistance += 1;
-                        mSoundMgr->PlayMenuSound();
+                        g_SoundManager.PlayMenuSound();
                         mWorld->playerZoneSize = Vector3(CHUNK_SIZE*mWorld->mainOptions.horizontalViewDistance,CHUNK_SIZE*mWorld->mainOptions.verticalViewDistance,CHUNK_SIZE*mWorld->mainOptions.horizontalViewDistance);
                         mWorld->UpdatePlayerZoneBB(fppCam->m_vPosition);
                         fppCam->needUpdate = true;
@@ -7762,7 +7759,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 if(optionsMenuPos == 9)
                 {
                     mWorld->mainOptions.difficult += 1;
-                    mSoundMgr->PlayMenuSound();
+                    g_SoundManager.PlayMenuSound();
 
                     if(mWorld->mainOptions.difficult > 3)
                     {
@@ -7778,7 +7775,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                     if (mWorld->mainOptions.fov >= 45)
                     {
                         mWorld->mainOptions.fov -= 5;
-                        mSoundMgr->PlayMenuSound();
+                        g_SoundManager.PlayMenuSound();
                         mRender->fovv = mWorld->mainOptions.fov;
                         RenderManager::InstancePtr()->SetPerspective(0, 480.0f / 272.0f, 0.18f, 1000.f);
                         skyLight->UpdateLightSource(mWorld->skyTime);
@@ -7790,7 +7787,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                     if (mWorld->mainOptions.horizontalViewDistance != 1)
                     {
                         mWorld->mainOptions.horizontalViewDistance -= 1;
-                        mSoundMgr->PlayMenuSound();
+                        g_SoundManager.PlayMenuSound();
                         mWorld->playerZoneSize = Vector3(CHUNK_SIZE*mWorld->mainOptions.horizontalViewDistance,CHUNK_SIZE*mWorld->mainOptions.verticalViewDistance,CHUNK_SIZE*mWorld->mainOptions.horizontalViewDistance);
                         fppCam->needUpdate = true;
                     }
@@ -7800,7 +7797,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                     if (mWorld->mainOptions.verticalViewDistance != 1)
                     {
                         mWorld->mainOptions.verticalViewDistance -= 1;
-                        mSoundMgr->PlayMenuSound();
+                        g_SoundManager.PlayMenuSound();
                         mWorld->playerZoneSize = Vector3(CHUNK_SIZE*mWorld->mainOptions.horizontalViewDistance,CHUNK_SIZE*mWorld->mainOptions.verticalViewDistance,CHUNK_SIZE*mWorld->mainOptions.horizontalViewDistance);
                         fppCam->needUpdate = true;
                     }
@@ -7808,7 +7805,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 if(optionsMenuPos == 9)
                 {
                     mWorld->mainOptions.difficult -= 1;
-                    mSoundMgr->PlayMenuSound();
+                    g_SoundManager.PlayMenuSound();
 
                     if(mWorld->mainOptions.difficult < 0)
                     {
@@ -7834,21 +7831,21 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 if(optionsMenuPos == 2)
                 {
                      mWorld->mainOptions.fogRendering = !mWorld->mainOptions.fogRendering;
-                     mSoundMgr->PlayMenuSound();
+                     g_SoundManager.PlayMenuSound();
                 }
 
                 //clouds rendering
                 if(optionsMenuPos == 3)
                 {
                      mWorld->mainOptions.detailedSky = !mWorld->mainOptions.detailedSky;
-                     mSoundMgr->PlayMenuSound();
+                     g_SoundManager.PlayMenuSound();
                 }
 
                 //fast rendering
                 if(optionsMenuPos == 4)
                 {
                     mWorld->mainOptions.mipMapTexturing = !mWorld->mainOptions.mipMapTexturing;
-                    mSoundMgr->PlayMenuSound();
+                    g_SoundManager.PlayMenuSound();
 
                     //mWorld->RebuildVisibleChunks();
                 }
@@ -7857,7 +7854,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 if(optionsMenuPos == 5)
                 {
                     mWorld->mainOptions.smoothLighting = !mWorld->mainOptions.smoothLighting;
-                    mSoundMgr->PlayMenuSound();
+                    g_SoundManager.PlayMenuSound();
 
                     mWorld->RebuildVisibleChunks();
                 }
@@ -7866,7 +7863,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 if(optionsMenuPos == 6)
                 {
                     mWorld->mainOptions.worldBlockAnimation = !mWorld->mainOptions.worldBlockAnimation;
-                    mSoundMgr->PlayMenuSound();
+                    g_SoundManager.PlayMenuSound();
                 }
 
                 //auto jump
@@ -7874,34 +7871,34 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 {
                     mWorld->mainOptions.autoJump = !mWorld->mainOptions.autoJump;
                     bobCycle = 0.0f;
-                    mSoundMgr->PlayMenuSound();
+                    g_SoundManager.PlayMenuSound();
                 }
 
                 if(optionsMenuPos == 10)
                 {
                      mWorld->mainOptions.freezeDayTime = !mWorld->mainOptions.freezeDayTime;
-                     mSoundMgr->PlayMenuSound();
+                     g_SoundManager.PlayMenuSound();
                 }
 
                 if(optionsMenuPos == 11)
                 {
                      mWorld->mainOptions.guiDrawing = !mWorld->mainOptions.guiDrawing;
-                     mSoundMgr->PlayMenuSound();
+                     g_SoundManager.PlayMenuSound();
                 }
 
                 if(optionsMenuPos == 12)
                 {
                      mWorld->mainOptions.sounds = !mWorld->mainOptions.sounds;
-                     mSoundMgr->PlayMenuSound();
-                     mSoundMgr->playerSounds = mWorld->mainOptions.sounds;
+                     g_SoundManager.PlayMenuSound();
+                     g_SoundManager.playerSounds = mWorld->mainOptions.sounds;
                 }
 
                 //music
                 if(optionsMenuPos == 13)
                 {
                     mWorld->mainOptions.music = !mWorld->mainOptions.music;
-                    mSoundMgr->PlayMenuSound();
-                    mSoundMgr->StopAmbient();
+                    g_SoundManager.PlayMenuSound();
+                    g_SoundManager.StopAmbient();
                 }
 
 
@@ -7943,7 +7940,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 if(selectPos < 0)
                     selectPos = 5;
 
-                mSoundMgr->PlayMenuSound();
+                g_SoundManager.PlayMenuSound();
             }
 
             if(g_System.KeyPressed(PSP_CTRL_DOWN))
@@ -7952,7 +7949,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 if(selectPos > 5)
                     selectPos = 0;
 
-                mSoundMgr->PlayMenuSound();
+                g_SoundManager.PlayMenuSound();
             }
 
             if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
@@ -7987,15 +7984,15 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 }
                 if(selectPos == 4)//save end exit
                 {
-                    mSoundMgr->StopAmbient();
-                    mSoundMgr->StopDiskTrack();
+                    g_SoundManager.StopAmbient();
+                    g_SoundManager.StopDiskTrack();
                     mWorld->SaveCompressedWorld(saveFileName.c_str());
                     sManager->RemoveState();
                 }
                 if(selectPos == 5)//exit
                 {
-                    mSoundMgr->StopAmbient();
-                    mSoundMgr->StopDiskTrack();
+                    g_SoundManager.StopAmbient();
+                    g_SoundManager.StopDiskTrack();
                     sManager->RemoveState();
                 }
             }
@@ -8265,7 +8262,7 @@ void StatePlayCreative::Update(StateManager* sManager)
                 musicTime = 300.0f;
                 if(mWorld->mainOptions.music)
                 {
-                    musicTime = mSoundMgr->PlayRandomAmbient();
+                    musicTime = g_SoundManager.PlayRandomAmbient();
                 }
             }
 
@@ -8301,7 +8298,7 @@ void StatePlayCreative::Update(StateManager* sManager)
                 {
                     if(footInWater == false)
                     {
-                        mSoundMgr->PlaySplashSound();
+                        g_SoundManager.PlaySplashSound();
                         footInWater = true;
                     }
                 }
@@ -8324,7 +8321,7 @@ void StatePlayCreative::Update(StateManager* sManager)
                     }
                     /*if(headInWater == false)
                     {
-                        mSoundMgr->PlaySplashSound();
+                        g_SoundManager.PlaySplashSound();
 
                     }*/
                     headInWater = true;
@@ -8427,7 +8424,7 @@ void StatePlayCreative::Update(StateManager* sManager)
                             }
                             if(playerVelocity.y < -12.8 && playerVelocity.y > -19)
                             {
-                                mSoundMgr->PlayFallSound(playerVelocity.y);
+                                g_SoundManager.PlayFallSound(playerVelocity.y);
 
                                 if(mWorld->HG > 0.2)
                                 {
@@ -8442,7 +8439,7 @@ void StatePlayCreative::Update(StateManager* sManager)
                             }
                             if(playerVelocity.y < -19)
                             {
-                                mSoundMgr->PlayFallSound(playerVelocity.y);
+                                g_SoundManager.PlayFallSound(playerVelocity.y);
 
                                 if(mWorld->HG > 0.3)
                                 {
@@ -8616,7 +8613,7 @@ void StatePlayCreative::Update(StateManager* sManager)
 
 			if(walkSoundAccu > 0.428f || walkSoundAccu == 0.0f)
 			{
-				mSoundMgr->PlayWalkSound(soundBlockType);
+				g_SoundManager.PlayWalkSound(soundBlockType);
 				walkSoundAccu = 0.0f;
 			}
 
@@ -9005,7 +9002,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
                 if(TestDrop->getMe == true)
                 {
                     mWorld->PutInInventory(TestDrop->GetId(),TestDrop->GetAmount(),TestDrop->GetStackable());
-                    mSoundMgr->PlayPlopSound();
+                    g_SoundManager.PlayPlopSound();
                     mWorld->DestroyDrop(d);
                     d -= 1;
                 }
@@ -9090,7 +9087,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
                     mWorld->DestroyTNTentity(k);
                     if(mWorld->mTNTs.size() <= 16)
                     {
-                        mSoundMgr->TNTSound();
+                        g_SoundManager.TNTSound();
                     }
                 }
             }
@@ -9147,7 +9144,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
                 mWorld->DestroyTNTentity(i);
                 if(mWorld->mTNTs.size() <= 10)
                 {
-                    mSoundMgr->TNTSound();
+                    g_SoundManager.TNTSound();
                 }
             }
             else
@@ -9329,7 +9326,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
                 }
                 if(raindropsCount > 0)
                 {
-                    mSoundMgr->PlayRainSound((raindropsCount/20.0f)*45);
+                    g_SoundManager.PlayRainSound((raindropsCount/20.0f)*45);
                 }
                 rainSoundFrequency = 1.2 + (rand()%6)/10.0f;
             }

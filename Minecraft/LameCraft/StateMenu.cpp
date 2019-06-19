@@ -181,8 +181,7 @@ void StateMenu::Init()
 
     //set render manager instance
     mRender = RenderManager::InstancePtr();
-    mSoundMgr = SoundManager::Instance();
-
+  
     logoSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Logo),0,0,256,64);
     logoSprite->Scale(1.5f,1.5f);
     logoSprite->SetPosition(240,50);
@@ -387,7 +386,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             if(selectPos < 0)
                 selectPos = 1;
 
-            mSoundMgr->PlayMenuSound();
+            g_SoundManager.PlayMenuSound();
         }
 
         if(g_System.KeyPressed(PSP_CTRL_DOWN))
@@ -396,7 +395,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             if(selectPos > 1)
                 selectPos = 0;
 
-            mSoundMgr->PlayMenuSound();
+            g_SoundManager.PlayMenuSound();
         }
 
         if(g_System.KeyPressed(PSP_CTRL_CROSS))
@@ -426,7 +425,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             if(selectPos < 0)
                 selectPos = 3;
 
-            mSoundMgr->PlayMenuSound();
+            g_SoundManager.PlayMenuSound();
         }
 
         if(g_System.KeyPressed(PSP_CTRL_DOWN))
@@ -435,7 +434,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             if(selectPos > 3)
                 selectPos = 0;
 
-            mSoundMgr->PlayMenuSound();
+            g_SoundManager.PlayMenuSound();
         }
 
         if(g_System.KeyPressed(PSP_CTRL_TRIANGLE))
@@ -511,7 +510,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                 if(saveSubMenuSelect < 1)
                     saveSubMenuSelect = 2;
 
-                mSoundMgr->PlayMenuSound();
+                g_SoundManager.PlayMenuSound();
             }
 
             if(g_System.KeyPressed(PSP_CTRL_DOWN))
@@ -520,7 +519,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                 if(saveSubMenuSelect > 2)
                     saveSubMenuSelect = 1;
 
-                mSoundMgr->PlayMenuSound();
+                g_SoundManager.PlayMenuSound();
             }
 
             if(g_System.KeyPressed(PSP_CTRL_CROSS))
@@ -581,12 +580,12 @@ void StateMenu::HandleEvents(StateManager* sManager)
                 if(loadSelectPos == 1 || loadSelectPos == 2)
                 {
                     loadSelectPos = 0;
-                    mSoundMgr->PlayMenuSound();
+                    g_SoundManager.PlayMenuSound();
                 }
                 if(loadSelectPos == 4)
                 {
                     loadSelectPos = 3;
-                    mSoundMgr->PlayMenuSound();
+                    g_SoundManager.PlayMenuSound();
                 }
             }
 
@@ -595,7 +594,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                 if(loadSelectPos == 0 || loadSelectPos == 3)
                 {
                     loadSelectPos++;
-                    mSoundMgr->PlayMenuSound();
+                    g_SoundManager.PlayMenuSound();
                 }
             }
 
@@ -607,15 +606,15 @@ void StateMenu::HandleEvents(StateManager* sManager)
                     {
                         case 2:
                         loadSelectPos = 1;
-                        mSoundMgr->PlayMenuSound();
+                        g_SoundManager.PlayMenuSound();
                         break;
                         case 3:
                         loadSelectPos = 0;
-                        mSoundMgr->PlayMenuSound();
+                        g_SoundManager.PlayMenuSound();
                         break;
                         case 4:
                         loadSelectPos = 2;
-                        mSoundMgr->PlayMenuSound();
+                        g_SoundManager.PlayMenuSound();
                         break;
                     }
                 }
@@ -628,15 +627,15 @@ void StateMenu::HandleEvents(StateManager* sManager)
                 {
                     case 0:
                     loadSelectPos = 3;
-                    mSoundMgr->PlayMenuSound();
+                    g_SoundManager.PlayMenuSound();
                     break;
                     case 1:
                     loadSelectPos = 2;
-                    mSoundMgr->PlayMenuSound();
+                    g_SoundManager.PlayMenuSound();
                     break;
                     case 2:
                     loadSelectPos = 4;
-                    mSoundMgr->PlayMenuSound();
+                    g_SoundManager.PlayMenuSound();
                     break;
                 }
             }
@@ -812,7 +811,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             if(aboutPos < 0)
                 aboutPos = 1;
 
-            mSoundMgr->PlayMenuSound();
+            g_SoundManager.PlayMenuSound();
         }
 
         if(g_System.KeyPressed(PSP_CTRL_DOWN))
@@ -821,7 +820,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             if(aboutPos > 1)
                 aboutPos = 0;
 
-            mSoundMgr->PlayMenuSound();
+            g_SoundManager.PlayMenuSound();
         }
 
         if(g_System.KeyPressed(PSP_CTRL_CROSS))
@@ -851,7 +850,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
         if(g_System.KeyPressed(PSP_CTRL_UP))
         {
-            mSoundMgr->PlayMenuSound();
+            g_SoundManager.PlayMenuSound();
 
             if (generateSelectPose == 0)
             {
@@ -864,7 +863,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
         if(g_System.KeyPressed(PSP_CTRL_DOWN))
         {
-            mSoundMgr->PlayMenuSound();
+            g_SoundManager.PlayMenuSound();
             if (generateSelectPose == 4)
             {
                 generateSelectPose = 0;
@@ -987,7 +986,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             if(converterPos < 0)
                 converterPos = 2;
 
-            mSoundMgr->PlayMenuSound();
+            g_SoundManager.PlayMenuSound();
         }
 
         if(g_System.KeyPressed(PSP_CTRL_DOWN))
@@ -996,7 +995,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             if(converterPos > 2)
                 converterPos = 0;
 
-            mSoundMgr->PlayMenuSound();
+            g_SoundManager.PlayMenuSound();
         }
 
         if(g_System.KeyPressed(PSP_CTRL_CROSS))
@@ -1928,14 +1927,14 @@ void StateMenu::HandleEvents(StateManager* sManager)
         {
             saveSubMenuSelect == 0 ? saveSubMenuSelect = 1 : saveSubMenuSelect = 0;
 
-            mSoundMgr->PlayMenuSound();
+            g_SoundManager.PlayMenuSound();
         }
 
         if(g_System.KeyPressed(PSP_CTRL_DOWN))
         {
             saveSubMenuSelect == 1 ? saveSubMenuSelect = 0 : saveSubMenuSelect = 1;
 
-            mSoundMgr->PlayMenuSound();
+            g_SoundManager.PlayMenuSound();
         }
 
         if(g_System.KeyPressed(PSP_CTRL_CROSS))
@@ -1987,7 +1986,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             {
                 tpSelectPos = 1;
             }
-            mSoundMgr->PlayMenuSound();
+            g_SoundManager.PlayMenuSound();
         }
 
         if(g_System.KeyPressed(PSP_CTRL_RIGHT))
@@ -1997,7 +1996,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             {
                 tpSelectPos = 0;
             }
-            mSoundMgr->PlayMenuSound();
+            g_SoundManager.PlayMenuSound();
         }
 
         if(g_System.KeyPressed(PSP_CTRL_LTRIGGER))

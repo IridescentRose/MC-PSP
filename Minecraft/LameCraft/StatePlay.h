@@ -36,7 +36,7 @@
 
 #include "CraftWorld2.h"
 #include "InputHelper.h"
-#include "SoundManager.h"
+#include <Aurealis/Audio/SoundManager.h>
 #include "Chest2.h"
 #include "Furnace2.h"
 #include "NoteBlockEntity.h"
@@ -49,6 +49,7 @@
 using namespace Aurealis::Graphics;
 using namespace Aurealis::Utils;
 using namespace Aurealis::System;
+using namespace Aurealis::Audio;
 using namespace Aurealis;
 
 

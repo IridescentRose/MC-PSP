@@ -14,11 +14,12 @@
 #include <Aurealis/Graphics/Camera.h>
 #include <Aurealis/Graphics/Sprite.h>
 
-#include "SoundManager.h"
+#include <Aurealis/Audio/SoundManager.h>
 
 using namespace Aurealis::Graphics;
 using namespace Aurealis::Utils;
 using namespace Aurealis::System;
+using namespace Aurealis::Audio;
 using namespace Aurealis;
 
 class StateOptions : public CGameState
@@ -50,7 +51,6 @@ private:
 	Sprite *backSprite;
 
 	RenderManager *mRender;
-	SoundManager *mSoundMgr;
 
 	int selectPos;
 	int menuState;//0 main,1 load,2 options

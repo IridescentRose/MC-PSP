@@ -55,8 +55,8 @@ LameCraft/LoadingScreen.o \
 LameCraft/SplashScreen.o \
 LameCraft/InputHelper.o \
 LameCraft/TextureHelper.o \
-LameCraft/sound_utils/pgeWav.o \
-LameCraft/SoundManager.o \
+Engine/Aurealis/Audio/sound_utils/pgeWav.o \
+Engine/Aurealis/Audio/SoundManager.o \
 Engine/Aurealis/Graphics/Effects/Drop.o \
 Engine/Aurealis/Graphics/Effects/TNT.o \
 Engine/Aurealis/Graphics/Effects/InventoryPlayer.o \
@@ -70,12 +70,12 @@ Engine/Aurealis/Graphics/Effects/WeatherSystem.o \
 LameCraft/mersenne-twister.o \
 LameCraft/SimplexNoise.o \
 LameCraft/WorldGenerator.o \
-LameCraft/sound_utils/vfsFile.o \
-LameCraft/sound_utils/VirtualFile.o \
-LameCraft/sound_utils/audio.o \
-LameCraft/sound_utils/bgm.o \
-LameCraft/sound_utils/media.o \
-LameCraft/sound_utils/mod.o \
+Engine/Aurealis/Audio/sound_utils/vfsFile.o \
+Engine/Aurealis/Audio/sound_utils/VirtualFile.o \
+Engine/Aurealis/Audio/sound_utils/audio.o \
+Engine/Aurealis/Audio/sound_utils/bgm.o \
+Engine/Aurealis/Audio/sound_utils/media.o \
+Engine/Aurealis/Audio/sound_utils/mod.o \
 Lamecraft.o
 
 INCDIR = $(PSPPATH)/include

@@ -35,11 +35,12 @@
 #endif
 
 
-#include "SoundManager.h"
+#include <Aurealis/Audio/SoundManager.h>
 
 using namespace Aurealis::Graphics;
 using namespace Aurealis::Utils;
 using namespace Aurealis::System;
+using namespace Aurealis::Audio;
 using namespace Aurealis;
 
 class SaveFile
@@ -174,7 +175,6 @@ private:
 	Sprite* bg[24];
 
 	RenderManager *mRender;
-	SoundManager *mSoundMgr;
 
     // converter vars
     bool schematicExists;
