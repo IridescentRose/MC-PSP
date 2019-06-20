@@ -22,7 +22,6 @@
 StatePlay::StatePlay()
 {
     time12 = 0.0f;
-    mRender = NULL;
     fppCam = NULL;
     UseChest = NULL;
     UseFurnace = NULL;
@@ -190,7 +189,7 @@ void StatePlay::InitCamera()
 {
     fppCam = new Camera();
     fppCam->PositionCamera(playerPosition.x,playerPosition.y,playerPosition.z, playerPosition.x,playerPosition.y,playerPosition.z-5.0f, 0.0f,1.0f,0.0f);
-    mRender->SetActiveCamera(fppCam);
+    g_RenderManager.SetActiveCamera(fppCam);
 
     mWorld->UpdatePlayerZoneBB(fppCam->m_vPosition);
     mWorld->RebuildVisibleChunks();
@@ -199,7 +198,6 @@ void StatePlay::InitCamera()
 void StatePlay::Init()
 {
     //set render manager instance
-    mRender = RenderManager::InstancePtr();
     mIhelper = InputHelper::Instance();
 
     WorldGenerator *mGen = new WorldGenerator();
@@ -243,7 +241,6 @@ void StatePlay::Init()
 void StatePlay::InitParametric(bool makeTrees,bool makeWater,bool makeCaves,unsigned int seed_1, int worldType, char gameMode)
 {
     //set render manager instance
-    mRender = RenderManager::InstancePtr();
     mIhelper = InputHelper::Instance();
 
     //then create our perfect world
@@ -308,7 +305,6 @@ void StatePlay::LoadMap(std::string fileName,bool compressed)
     loading->stateName = 0;
 
     //set render manager instance
-    mRender = RenderManager::InstancePtr();
     mIhelper = InputHelper::Instance();
 
     //save name
@@ -362,8 +358,8 @@ void StatePlay::LoadMap(std::string fileName,bool compressed)
 
     g_SoundManager.playerSounds = mWorld->mainOptions.sounds;
     mWorld->playerZoneSize = Vector3(CHUNK_SIZE*mWorld->mainOptions.horizontalViewDistance,CHUNK_SIZE*mWorld->mainOptions.verticalViewDistance,CHUNK_SIZE*mWorld->mainOptions.horizontalViewDistance);
-    mRender->fovv = mWorld->mainOptions.fov;
-    RenderManager::InstancePtr()->SetPerspective(0, 480.0f / 272.0f, 0.18f, 1000.f);
+    g_RenderManager.fovv = mWorld->mainOptions.fov;
+    g_RenderManager.SetPerspective(0, 480.0f / 272.0f, 0.18f, 1000.f);
 
     loadReady = true;
 
@@ -579,7 +575,7 @@ void StatePlay::SetDayTimeAfterLoad()
 
 void StatePlay::Enter()
 {
-    RenderManager::InstancePtr()->SetPerspective(55.0f, 480.0f / 272.0f, 0.18f, 1000.0f);//1000
+    g_RenderManager.SetPerspective(55.0f, 480.0f / 272.0f, 0.18f, 1000.0f);//1000
 }
 
 void StatePlay::CleanUp()
@@ -593,8 +589,8 @@ void StatePlay::CleanUp()
         mSnowBalls.clear();
     }
 
-    delete mRender->mCam;
-    mRender->mCam = NULL;
+    delete g_RenderManager.mCam;
+    g_RenderManager.mCam = NULL;
 
     delete invCellSprite;
     delete buttonSprite;
@@ -8535,8 +8531,8 @@ void StatePlay::HandleEvents(StateManager* sManager)
                         {
                             mWorld->mainOptions.fov += 5;
                             g_SoundManager.PlayMenuSound();
-                            mRender->fovv = mWorld->mainOptions.fov;
-                            RenderManager::InstancePtr()->SetPerspective(0, 480.0f / 272.0f, 0.18f, 1000.f);
+                            g_RenderManager.fovv = mWorld->mainOptions.fov;
+                            g_RenderManager.SetPerspective(0, 480.0f / 272.0f, 0.18f, 1000.f);
                             skyLight->UpdateLightSource(mWorld->skyTime);
                             skyMoonLight->UpdateLightSource(mWorld->skyTime);
                         }
@@ -8583,8 +8579,8 @@ void StatePlay::HandleEvents(StateManager* sManager)
                         {
                             mWorld->mainOptions.fov -= 5;
                             g_SoundManager.PlayMenuSound();
-                            mRender->fovv = mWorld->mainOptions.fov;
-                            RenderManager::InstancePtr()->SetPerspective(0, 480.0f / 272.0f, 0.18f, 1000.f);
+                            g_RenderManager.fovv = mWorld->mainOptions.fov;
+                            g_RenderManager.SetPerspective(0, 480.0f / 272.0f, 0.18f, 1000.f);
                             skyLight->UpdateLightSource(mWorld->skyTime);
                             skyMoonLight->UpdateLightSource(mWorld->skyTime);
                         }
@@ -9903,7 +9899,7 @@ void StatePlay::Draw(StateManager* sManager)
     (mWorld->endSkyColor).saturate();
     (mWorld->dawnSunsetSkyColor).saturate();
 
-    mRender->SetFontStyle(0.345f,0xFFFFFFFF,0,0x00000200);
+    g_RenderManager.SetFontStyle(0.345f,0xFFFFFFFF,0,0x00000200);
 
     if (mWorld->skyTime < 180)
     {
@@ -9954,12 +9950,12 @@ void StatePlay::Draw(StateManager* sManager)
     if(playerPosition.y <= 48)
     {
         Vector3 color = ((mWorld->startSkyColor*mWorld->brightFactor)*nullFactor+(mWorld->dawnSunsetSkyColor*mWorld->dawnSunsetFactor*angleFactor))*(playerPosition.y/48.0f)*(playerPosition.y/48.0f);
-        mRender->StartFrame(color.x,color.y,color.z);
+        g_RenderManager.StartFrame(color.x,color.y,color.z);
     }
     else
     {
         Vector3 color = (mWorld->startSkyColor*mWorld->brightFactor)*nullFactor+(mWorld->dawnSunsetSkyColor*mWorld->dawnSunsetFactor*angleFactor);
-        mRender->StartFrame(color.x,color.y,color.z);
+        g_RenderManager.StartFrame(color.x,color.y,color.z);
     }
 
     if(mWorld->mainOptions.smoothLighting == 1)
@@ -10911,7 +10907,7 @@ void StatePlay::Draw(StateManager* sManager)
 	MatrixColor(0xFFFFFFFF);
 
 	/// GUI
-	mRender->SetOrtho(0,0,0,0,0,0);
+	g_RenderManager.SetOrtho(0,0,0,0,0,0);
 
     if(mWorld->HP <= 0)
 	{
@@ -11940,58 +11936,58 @@ void StatePlay::Draw(StateManager* sManager)
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        if(mRender->GetFontLanguage() == ENGLISH)
+        if(g_RenderManager.GetFontLanguage() == ENGLISH)
         {
             if(mWorld->gameModeWorld == 2)
             {
-                mRender->SetFontStyle(default_big_size,GU_COLOR(0.25f,0.25f,0.25f,1),0,0x00000200);
+                g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(0.25f,0.25f,0.25f,1),0,0x00000200);
 
-                mRender->DebugPrint(242,52,"Game over!");
-                mRender->DebugPrint(242,152,"Press X to delete your world!");
+                g_RenderManager.DebugPrint(242,52,"Game over!");
+                g_RenderManager.DebugPrint(242,152,"Press X to delete your world!");
 
-                mRender->SetFontStyle(default_big_size,GU_COLOR(1,0,0,1),0,0x00000200);
+                g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(1,0,0,1),0,0x00000200);
 
-                mRender->DebugPrint(240,50,"Game over!");
-                mRender->DebugPrint(240,150,"Press X to delete your world!");
+                g_RenderManager.DebugPrint(240,50,"Game over!");
+                g_RenderManager.DebugPrint(240,150,"Press X to delete your world!");
             }
             else
             {
-                mRender->SetFontStyle(default_big_size,GU_COLOR(0.25f,0.25f,0.25f,1),0,0x00000200);
+                g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(0.25f,0.25f,0.25f,1),0,0x00000200);
 
-                mRender->DebugPrint(242,52,"You died!");
-                mRender->DebugPrint(242,152,"Press X to respawn!");
+                g_RenderManager.DebugPrint(242,52,"You died!");
+                g_RenderManager.DebugPrint(242,152,"Press X to respawn!");
 
-                mRender->SetFontStyle(default_big_size,GU_COLOR(1,0,0,1),0,0x00000200);
+                g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(1,0,0,1),0,0x00000200);
 
-                mRender->DebugPrint(240,50,"You died!");
-                mRender->DebugPrint(240,150,"Press X to respawn!");
+                g_RenderManager.DebugPrint(240,50,"You died!");
+                g_RenderManager.DebugPrint(240,150,"Press X to respawn!");
             }
         }
-        if(mRender->GetFontLanguage() == RUSSIAN)
+        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
         {
             if(mWorld->gameModeWorld == 2)
             {
-                mRender->SetFontStyle(default_big_size,GU_COLOR(0.25f,0.25f,0.25f,1),0,0x00000200);
+                g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(0.25f,0.25f,0.25f,1),0,0x00000200);
 
-                mRender->DebugPrint(242,52,"Igra okonyena!");
-                mRender->DebugPrint(242,152,"Najmite H, ytob@ udalit$ vaw mir!");
+                g_RenderManager.DebugPrint(242,52,"Igra okonyena!");
+                g_RenderManager.DebugPrint(242,152,"Najmite H, ytob@ udalit$ vaw mir!");
 
-                mRender->SetFontStyle(default_big_size,GU_COLOR(1,0,0,1),0,0x00000200);
+                g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(1,0,0,1),0,0x00000200);
 
-                mRender->DebugPrint(240,50,"Igra okonyena!");
-                mRender->DebugPrint(240,150,"Najmite H, ytob@ udalit$ vaw mir!");
+                g_RenderManager.DebugPrint(240,50,"Igra okonyena!");
+                g_RenderManager.DebugPrint(240,150,"Najmite H, ytob@ udalit$ vaw mir!");
             }
             else
             {
-                mRender->SetFontStyle(default_big_size,GU_COLOR(0.25f,0.25f,0.25f,1),0,0x00000200);
+                g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(0.25f,0.25f,0.25f,1),0,0x00000200);
 
-                mRender->DebugPrint(242,52,"V@ pogibli!");
-                mRender->DebugPrint(242,152,"Najmite H, ytob@ vozrodit$s^!");
+                g_RenderManager.DebugPrint(242,52,"V@ pogibli!");
+                g_RenderManager.DebugPrint(242,152,"Najmite H, ytob@ vozrodit$s^!");
 
-                mRender->SetFontStyle(default_big_size,GU_COLOR(1,0,0,1),0,0x00000200);
+                g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(1,0,0,1),0,0x00000200);
 
-                mRender->DebugPrint(240,50,"V@ pogibli!");
-                mRender->DebugPrint(240,150,"Najmite H, ytob@ vozrodit$s^!");
+                g_RenderManager.DebugPrint(240,50,"V@ pogibli!");
+                g_RenderManager.DebugPrint(240,150,"Najmite H, ytob@ vozrodit$s^!");
             }
         }
     }
@@ -12004,28 +12000,28 @@ void StatePlay::Draw(StateManager* sManager)
 
         if(sleepMessageType == 1)
         {
-            if(mRender->GetFontLanguage() == ENGLISH)
+            if(g_RenderManager.GetFontLanguage() == ENGLISH)
             {
-                mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                mRender->DebugPrint(242,158,"You can only sleep at night!");
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                g_RenderManager.DebugPrint(242,158,"You can only sleep at night!");
             }
-            if(mRender->GetFontLanguage() == RUSSIAN)
+            if(g_RenderManager.GetFontLanguage() == RUSSIAN)
             {
-                mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                mRender->DebugPrint(242,158,"Spat$ mojno tol$ko noy$#!");
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                g_RenderManager.DebugPrint(242,158,"Spat$ mojno tol$ko noy$#!");
             }
         }
         else
         {
-            if(mRender->GetFontLanguage() == ENGLISH)
+            if(g_RenderManager.GetFontLanguage() == ENGLISH)
             {
-                mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                mRender->DebugPrint(242,158,"You can’t sleep yet, there are monsters nearby");
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                g_RenderManager.DebugPrint(242,158,"You can’t sleep yet, there are monsters nearby");
             }
-            if(mRender->GetFontLanguage() == RUSSIAN)
+            if(g_RenderManager.GetFontLanguage() == RUSSIAN)
             {
-                mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                mRender->DebugPrint(242,158,"V@ ne mojete spat$, poka monstr@ r^dom");
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                g_RenderManager.DebugPrint(242,158,"V@ ne mojete spat$, poka monstr@ r^dom");
             }
         }
     }
@@ -12036,19 +12032,19 @@ void StatePlay::Draw(StateManager* sManager)
         sleepMessageTime = 0.0f;
     }
 
-    mRender->SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200);
+    g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200);
 
     if((freeMemory/1024)/1024 <= 3 && mWorld->mainStatistics.minutesPlayed > 2)
     {
         sceGuDisable(GU_DEPTH_TEST);
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
-        mRender->SetFontStyle(default_size,GU_COLOR(1,0,0,1),0,0x00000000);
-        //mRender->DebugPrint(5,15,"You have few free ram! Please, reduce the settings or restart the game!");
-        mRender->SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200);
+        g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,0,0,1),0,0x00000000);
+        //g_RenderManager.DebugPrint(5,15,"You have few free ram! Please, reduce the settings or restart the game!");
+        g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200);
     }
 
-    mRender->SetFontStyle(default_size,0xFFFFFFFF,0xFF000000,0x00000200);
+    g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0xFF000000,0x00000200);
 
     if(invEn == true || craft3xEn == true || chestEn == true || furnaceEn == true)
     {
@@ -12296,14 +12292,14 @@ void StatePlay::Draw(StateManager* sManager)
     if(makeScreen)
 	{
 		//end frame now to update frame buffer
-		mRender->EndFrame();
+		g_RenderManager.EndFrame();
 		//make screenshot
-		mRender->TakeNextScreenshot();
+		g_RenderManager.TakeNextScreenshot();
 		makeScreen = false;
 	}
 
-    int language = mRender->GetFontLanguage();
-    mRender->SetFontStyle(0.345f,0xFFFFFFFF,0,0x00000200);
+    int language = g_RenderManager.GetFontLanguage();
+    g_RenderManager.SetFontStyle(0.345f,0xFFFFFFFF,0,0x00000200);
 
 
     if(invEn == false && craft3xEn == false && chestEn == false && furnaceEn == false && menuState == 0)
@@ -12312,16 +12308,16 @@ void StatePlay::Draw(StateManager* sManager)
         {
             if(tickShowSlotName > 1.0f)
             {
-                mRender->SetFontStyle(0.5f,GU_COLOR(1,1,1,1),GU_COLOR(0.15f,0.15f,0.15f,1),0x00000200);
+                g_RenderManager.SetFontStyle(0.5f,GU_COLOR(1,1,1,1),GU_COLOR(0.15f,0.15f,0.15f,1),0x00000200);
             }
             else
             {
-                mRender->SetFontStyle(0.5f,GU_COLOR(1,1,1,tickShowSlotName),GU_COLOR(0.15f,0.15f,0.15f,tickShowSlotName),0x00000200);
+                g_RenderManager.SetFontStyle(0.5f,GU_COLOR(1,1,1,tickShowSlotName),GU_COLOR(0.15f,0.15f,0.15f,tickShowSlotName),0x00000200);
             }
             if(mWorld->invId[27+barPosition] != -1)
             {
                 std::string slotName = mWorld->NameBlock(mWorld->invId[27+barPosition]);
-                mRender->DebugPrint(240,205,"%s",slotName.c_str());
+                g_RenderManager.DebugPrint(240,205,"%s",slotName.c_str());
             }
         }
 
@@ -12362,11 +12358,11 @@ void StatePlay::Draw(StateManager* sManager)
                 alpha = 0.0f;
             }
 
-            mRender->SetFontStyle(0.5f,GU_COLOR(red,green,blue,alpha),999,0x00000200);
+            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(red,green,blue,alpha),999,0x00000200);
 
-            mRender->SetFont(ENGLISH);
-            mRender->DebugPrint(240,50,"%s",inputDiskName.c_str());
-            mRender->SetDefaultFont();
+            g_RenderManager.SetFont(ENGLISH);
+            g_RenderManager.DebugPrint(240,50,"%s",inputDiskName.c_str());
+            g_RenderManager.SetDefaultFont();
         }
 
         if(tutorialTimer > -1.0f)
@@ -12377,31 +12373,31 @@ void StatePlay::Draw(StateManager* sManager)
         {
             if(tutorialTimer > 9.0f && tutorialTimer <= 10.0f)
             {
-                mRender->SetFontStyle(0.5f,GU_COLOR(1,1,1,10.0f-tutorialTimer),GU_COLOR(1,1,1,10.0f-tutorialTimer),0x00000000);
+                g_RenderManager.SetFontStyle(0.5f,GU_COLOR(1,1,1,10.0f-tutorialTimer),GU_COLOR(1,1,1,10.0f-tutorialTimer),0x00000000);
             }
             if(tutorialTimer > 1.0f && tutorialTimer <= 9.0f)
             {
-                mRender->SetFontStyle(0.5f,GU_COLOR(1,1,1,1),GU_COLOR(1,1,1,1),0x00000000);
+                g_RenderManager.SetFontStyle(0.5f,GU_COLOR(1,1,1,1),GU_COLOR(1,1,1,1),0x00000000);
             }
             if(tutorialTimer <= 1.0f)
             {
-                mRender->SetFontStyle(0.5f,GU_COLOR(1,1,1,tutorialTimer),GU_COLOR(1,1,1,tutorialTimer),0x00000000);
+                g_RenderManager.SetFontStyle(0.5f,GU_COLOR(1,1,1,tutorialTimer),GU_COLOR(1,1,1,tutorialTimer),0x00000000);
             }
 
             if(language == ENGLISH)
             {
-                mRender->DebugPrint(5,40,"Tutorial");
-                mRender->DebugPrint(5,57,"Press R+L to open inventory");
-                mRender->DebugPrint(5,74,"Press R+arrow up to drop item");
+                g_RenderManager.DebugPrint(5,40,"Tutorial");
+                g_RenderManager.DebugPrint(5,57,"Press R+L to open inventory");
+                g_RenderManager.DebugPrint(5,74,"Press R+arrow up to drop item");
             }
             else
             {
-                mRender->DebugPrint(5,40,"Tutorial");
-                mRender->DebugPrint(5,57,"Najmite R+L ytob@ otkr@t$ inventar$");
-                mRender->DebugPrint(5,74,"Najmite R+vverh ytob@ v@brosit$ predmet");
+                g_RenderManager.DebugPrint(5,40,"Tutorial");
+                g_RenderManager.DebugPrint(5,57,"Najmite R+L ytob@ otkr@t$ inventar$");
+                g_RenderManager.DebugPrint(5,74,"Najmite R+vverh ytob@ v@brosit$ predmet");
             }
         }
-        mRender->SetFontStyle(0.345f,0xFFFFFFFF,0,0x00000000);
+        g_RenderManager.SetFontStyle(0.345f,0xFFFFFFFF,0,0x00000000);
     }
 
     //menu buttons
@@ -12520,94 +12516,94 @@ void StatePlay::Draw(StateManager* sManager)
             {
                 if(mWorld->mainOptions.fov == 65)
                 {
-                    optionsMenuPos == 0 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(110,49,"FOV: Normal");
+                    optionsMenuPos == 0 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(110,49,"FOV: Normal");
                 }
                 else
                 {
-                    optionsMenuPos == 0 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(110,49,"FOV: %f",mWorld->mainOptions.fov);
+                    optionsMenuPos == 0 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(110,49,"FOV: %f",mWorld->mainOptions.fov);
                 }
 
                 if(mWorld->mainOptions.horizontalViewDistance == 1)
                 {
-                    optionsMenuPos == 1 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(110,79,"H View Distance: %i ch",mWorld->mainOptions.horizontalViewDistance);
+                    optionsMenuPos == 1 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(110,79,"H View Distance: %i ch",mWorld->mainOptions.horizontalViewDistance);
                 }
                 else
                 {
-                    optionsMenuPos == 1 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(110,79,"H View Distance: %i chs",mWorld->mainOptions.horizontalViewDistance);
+                    optionsMenuPos == 1 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(110,79,"H View Distance: %i chs",mWorld->mainOptions.horizontalViewDistance);
                 }
 
                 if(mWorld->mainOptions.verticalViewDistance == 1)
                 {
-                    optionsMenuPos == 8 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(370,49,"V View Distance: %i ch",mWorld->mainOptions.verticalViewDistance);
+                    optionsMenuPos == 8 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(370,49,"V View Distance: %i ch",mWorld->mainOptions.verticalViewDistance);
                 }
                 else
                 {
-                    optionsMenuPos == 8 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(370,49,"V View Distance: %i chs",mWorld->mainOptions.verticalViewDistance);
+                    optionsMenuPos == 8 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(370,49,"V View Distance: %i chs",mWorld->mainOptions.verticalViewDistance);
                 }
 
 
                 switch(mWorld->mainOptions.difficult)
                 {
                 case 0:
-                    optionsMenuPos == 9 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(370,79,"Difficult: Peaceful");
+                    optionsMenuPos == 9 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(370,79,"Difficult: Peaceful");
                 break;
                 case 1:
-                    optionsMenuPos == 9 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(370,79,"Difficult: Easy");
+                    optionsMenuPos == 9 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(370,79,"Difficult: Easy");
                 break;
                 case 2:
-                    optionsMenuPos == 9 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(370,79,"Difficult: Normal");
+                    optionsMenuPos == 9 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(370,79,"Difficult: Normal");
                 break;
                 case 3:
-                    optionsMenuPos == 9 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(370,79,"Difficult: Hard");
+                    optionsMenuPos == 9 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(370,79,"Difficult: Hard");
                 break;
                 }
 
 
-                optionsMenuPos == 2 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.fogRendering == true ? mRender->DebugPrint(110,109,"Fog Rendering: ON"): mRender->DebugPrint(110,109,"Fog Rendering: OFF");
+                optionsMenuPos == 2 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.fogRendering == true ? g_RenderManager.DebugPrint(110,109,"Fog Rendering: ON"): g_RenderManager.DebugPrint(110,109,"Fog Rendering: OFF");
 
-                optionsMenuPos == 3 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.detailedSky == true ? mRender->DebugPrint(110,139,"Detailed Sky: ON"): mRender->DebugPrint(110,139,"Detailed Sky: OFF");
+                optionsMenuPos == 3 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.detailedSky == true ? g_RenderManager.DebugPrint(110,139,"Detailed Sky: ON"): g_RenderManager.DebugPrint(110,139,"Detailed Sky: OFF");
 
-                optionsMenuPos == 4 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.mipMapTexturing == true ? mRender->DebugPrint(110,169,"MIP mapping: ON"): mRender->DebugPrint(110,169,"MIP mapping: OFF");
+                optionsMenuPos == 4 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.mipMapTexturing == true ? g_RenderManager.DebugPrint(110,169,"MIP mapping: ON"): g_RenderManager.DebugPrint(110,169,"MIP mapping: OFF");
 
-                optionsMenuPos == 5 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.smoothLighting == true ? mRender->DebugPrint(110,199,"Smooth Lighting: ON"): mRender->DebugPrint(110,199,"Smooth Lighting: OFF");
+                optionsMenuPos == 5 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.smoothLighting == true ? g_RenderManager.DebugPrint(110,199,"Smooth Lighting: ON"): g_RenderManager.DebugPrint(110,199,"Smooth Lighting: OFF");
 
-                optionsMenuPos == 6 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.worldBlockAnimation == true ? mRender->DebugPrint(110,229,"Animated Blocks: ON"): mRender->DebugPrint(110,229,"Animated Blocks: OFF");
+                optionsMenuPos == 6 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.worldBlockAnimation == true ? g_RenderManager.DebugPrint(110,229,"Animated Blocks: ON"): g_RenderManager.DebugPrint(110,229,"Animated Blocks: OFF");
 
-                optionsMenuPos == 7 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.autoJump == true ? mRender->DebugPrint(110,259,"Auto-jump: ON"): mRender->DebugPrint(110,259,"Auto-jump: OFF");
+                optionsMenuPos == 7 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.autoJump == true ? g_RenderManager.DebugPrint(110,259,"Auto-jump: ON"): g_RenderManager.DebugPrint(110,259,"Auto-jump: OFF");
 
-                optionsMenuPos == 10 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mRender->DebugPrint(370,109,"Super Secret Settings");
+                optionsMenuPos == 10 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                g_RenderManager.DebugPrint(370,109,"Super Secret Settings");
 
-                optionsMenuPos == 11 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.guiDrawing == true ? mRender->DebugPrint(370,139,"GUI Rendering: ON"): mRender->DebugPrint(370,139,"GUI Rendering: OFF");
+                optionsMenuPos == 11 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.guiDrawing == true ? g_RenderManager.DebugPrint(370,139,"GUI Rendering: ON"): g_RenderManager.DebugPrint(370,139,"GUI Rendering: OFF");
 
-                optionsMenuPos == 12 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.sounds == true ? mRender->DebugPrint(370,169,"Sounds: ON"): mRender->DebugPrint(370,169,"Sounds: OFF");
+                optionsMenuPos == 12 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.sounds == true ? g_RenderManager.DebugPrint(370,169,"Sounds: ON"): g_RenderManager.DebugPrint(370,169,"Sounds: OFF");
 
-                optionsMenuPos == 13 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.music == true ? mRender->DebugPrint(370,199,"Music : ON") : mRender->DebugPrint(370,199,"Music : OFF");
+                optionsMenuPos == 13 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.music == true ? g_RenderManager.DebugPrint(370,199,"Music : ON") : g_RenderManager.DebugPrint(370,199,"Music : OFF");
 
-                optionsMenuPos == 14 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mRender->DebugPrint(370,229,"Take Screenshot");
+                optionsMenuPos == 14 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                g_RenderManager.DebugPrint(370,229,"Take Screenshot");
 
-                optionsMenuPos == 15 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                devMode == true ? mRender->DebugPrint(370,259,"Dev Mode: ON") : mRender->DebugPrint(370,259,"Dev Mode: OFF");
+                optionsMenuPos == 15 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                devMode == true ? g_RenderManager.DebugPrint(370,259,"Dev Mode: ON") : g_RenderManager.DebugPrint(370,259,"Dev Mode: OFF");
 
                 DrawText(240,24,GU_COLOR(1,1,1,1),default_size,"Options");
 
@@ -12618,99 +12614,99 @@ void StatePlay::Draw(StateManager* sManager)
             {
                 if(mWorld->mainOptions.fov == 65)
                 {
-                    optionsMenuPos == 0 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(110,49,"Pole zreni^ : Normal$noe");
+                    optionsMenuPos == 0 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(110,49,"Pole zreni^ : Normal$noe");
                 }
                 else
                 {
-                    optionsMenuPos == 0 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(110,49,"Pole zreni^: %f",mWorld->mainOptions.fov);
+                    optionsMenuPos == 0 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(110,49,"Pole zreni^: %f",mWorld->mainOptions.fov);
                 }
 
                 if(mWorld->mainOptions.horizontalViewDistance == 1)
                 {
-                    optionsMenuPos == 1 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(110,79,"Gorizont. prorisovka : %i y",mWorld->mainOptions.horizontalViewDistance);
+                    optionsMenuPos == 1 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(110,79,"Gorizont. prorisovka : %i y",mWorld->mainOptions.horizontalViewDistance);
                 }
                 else
                 {
-                    optionsMenuPos == 1 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(110,79,"Gorizont. prorisovka : %i y",mWorld->mainOptions.horizontalViewDistance);
+                    optionsMenuPos == 1 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(110,79,"Gorizont. prorisovka : %i y",mWorld->mainOptions.horizontalViewDistance);
                 }
 
                 if(mWorld->mainOptions.verticalViewDistance == 1)
                 {
-                    optionsMenuPos == 8 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(370,49,"Vertik. prorisovka : %i y",mWorld->mainOptions.verticalViewDistance);
+                    optionsMenuPos == 8 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(370,49,"Vertik. prorisovka : %i y",mWorld->mainOptions.verticalViewDistance);
                 }
                 else
                 {
-                    optionsMenuPos == 8 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(370,49,"Vertik.^ prorisovka : %i y",mWorld->mainOptions.verticalViewDistance);
+                    optionsMenuPos == 8 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(370,49,"Vertik.^ prorisovka : %i y",mWorld->mainOptions.verticalViewDistance);
                 }
 
                 switch(mWorld->mainOptions.difficult)
                 {
                 case 0:
-                    optionsMenuPos == 9 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(370,79,"Slojnost$: Mirna^");
+                    optionsMenuPos == 9 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(370,79,"Slojnost$: Mirna^");
                 break;
                 case 1:
-                    optionsMenuPos == 9 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(370,79,"Slojnost$: Legka^");
+                    optionsMenuPos == 9 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(370,79,"Slojnost$: Legka^");
                 break;
                 case 2:
-                    optionsMenuPos == 9 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(370,79,"Slojnost$: Normal$na^");
+                    optionsMenuPos == 9 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(370,79,"Slojnost$: Normal$na^");
                 break;
                 case 3:
-                    optionsMenuPos == 9 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                    mRender->DebugPrint(370,79,"Slojnost$: T^jela^");
+                    optionsMenuPos == 9 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                    g_RenderManager.DebugPrint(370,79,"Slojnost$: T^jela^");
                 break;
                 }
 
-                optionsMenuPos == 2 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.fogRendering == true ? mRender->DebugPrint(110,109,"Tuman: Vkl"): mRender->DebugPrint(110,109,"Tuman: V@kl");
+                optionsMenuPos == 2 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.fogRendering == true ? g_RenderManager.DebugPrint(110,109,"Tuman: Vkl"): g_RenderManager.DebugPrint(110,109,"Tuman: V@kl");
 
-                optionsMenuPos == 3 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.detailedSky == true ? mRender->DebugPrint(110,139,"Detalizirovannoe nebo: Vkl"): mRender->DebugPrint(110,139,"Detalizirovannoe nebo: V@kl");
+                optionsMenuPos == 3 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.detailedSky == true ? g_RenderManager.DebugPrint(110,139,"Detalizirovannoe nebo: Vkl"): g_RenderManager.DebugPrint(110,139,"Detalizirovannoe nebo: V@kl");
 
-                optionsMenuPos == 4 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.mipMapTexturing == true ? mRender->DebugPrint(110,169,"MIP-teksturirovanie: Vkl"): mRender->DebugPrint(110,169,"MIP-teksturirovanie: V@kl");
+                optionsMenuPos == 4 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.mipMapTexturing == true ? g_RenderManager.DebugPrint(110,169,"MIP-teksturirovanie: Vkl"): g_RenderManager.DebugPrint(110,169,"MIP-teksturirovanie: V@kl");
 
-                optionsMenuPos == 5 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.smoothLighting == true ? mRender->DebugPrint(110,199,"M^gkoe osvexenie: Vkl"): mRender->DebugPrint(110,199,"M^gkoe osvexenie: V@kl");
+                optionsMenuPos == 5 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.smoothLighting == true ? g_RenderManager.DebugPrint(110,199,"M^gkoe osvexenie: Vkl"): g_RenderManager.DebugPrint(110,199,"M^gkoe osvexenie: V@kl");
 
-                optionsMenuPos == 6 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.worldBlockAnimation == true ? mRender->DebugPrint(110,229,"Animaci^ blokov : Vkl"): mRender->DebugPrint(110,229,"Animaci^ blokov: V@kl");
+                optionsMenuPos == 6 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.worldBlockAnimation == true ? g_RenderManager.DebugPrint(110,229,"Animaci^ blokov : Vkl"): g_RenderManager.DebugPrint(110,229,"Animaci^ blokov: V@kl");
 
-                optionsMenuPos == 7 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.autoJump == true ? mRender->DebugPrint(110,259,"Avto-pr@jok: Vkl"): mRender->DebugPrint(110,259,"Avto-pr@jok: V@kl");
+                optionsMenuPos == 7 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.autoJump == true ? g_RenderManager.DebugPrint(110,259,"Avto-pr@jok: Vkl"): g_RenderManager.DebugPrint(110,259,"Avto-pr@jok: V@kl");
 
-                optionsMenuPos == 10 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mRender->DebugPrint(370,109,"Sekretn@e nastro~ki");
+                optionsMenuPos == 10 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                g_RenderManager.DebugPrint(370,109,"Sekretn@e nastro~ki");
 
-                optionsMenuPos == 11 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.guiDrawing == true ? mRender->DebugPrint(370,139,"Interfe~s: Vkl"): mRender->DebugPrint(370,139,"Interfe~s: V@kl");
+                optionsMenuPos == 11 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.guiDrawing == true ? g_RenderManager.DebugPrint(370,139,"Interfe~s: Vkl"): g_RenderManager.DebugPrint(370,139,"Interfe~s: V@kl");
 
-                optionsMenuPos == 12 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.sounds == true ? mRender->DebugPrint(370,169,"Zvuk: Vkl"): mRender->DebugPrint(370,169,"Zvuk: V@kl");
+                optionsMenuPos == 12 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.sounds == true ? g_RenderManager.DebugPrint(370,169,"Zvuk: Vkl"): g_RenderManager.DebugPrint(370,169,"Zvuk: V@kl");
 
-                optionsMenuPos == 13 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mWorld->mainOptions.music == true ? mRender->DebugPrint(370,199,"Muz@ka: Vkl") : mRender->DebugPrint(370,199,"Muz@ka: V@kl");
+                optionsMenuPos == 13 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                mWorld->mainOptions.music == true ? g_RenderManager.DebugPrint(370,199,"Muz@ka: Vkl") : g_RenderManager.DebugPrint(370,199,"Muz@ka: V@kl");
 
-                optionsMenuPos == 14 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                mRender->DebugPrint(370,229,"Sdelat$ skrinwot");
+                optionsMenuPos == 14 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                g_RenderManager.DebugPrint(370,229,"Sdelat$ skrinwot");
 
-                optionsMenuPos == 15 ? RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-                devMode == true ? mRender->DebugPrint(370,259,"Rejim razrabotyika: Vkl") : mRender->DebugPrint(370,259,"Rejim razrabotyika: V@kl");
+                optionsMenuPos == 15 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0,1),0,0x00004000|0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+                devMode == true ? g_RenderManager.DebugPrint(370,259,"Rejim razrabotyika: Vkl") : g_RenderManager.DebugPrint(370,259,"Rejim razrabotyika: V@kl");
 
                 DrawText(240,24,GU_COLOR(1,1,1,1),default_size,"Nastro~ki");
 
-                mRender->SetFont(ENGLISH);
+                g_RenderManager.SetFont(ENGLISH);
                 DrawText(110,24,GU_COLOR(1,1,1,1),default_size,"L");
                 DrawText(370,24,GU_COLOR(1,1,1,1),default_size,"R");
-                mRender->SetDefaultFont();
+                g_RenderManager.SetDefaultFont();
             }
         }
         else
@@ -12756,10 +12752,10 @@ void StatePlay::Draw(StateManager* sManager)
             sceGuDisable(GU_BLEND);
             sceGuEnable(GU_DEPTH_TEST);
 
-            mRender->SetFontStyle(default_size ,GU_COLOR(1,1,1,1),0,0x00000000|0x00004000);
+            g_RenderManager.SetFontStyle(default_size ,GU_COLOR(1,1,1,1),0,0x00000000|0x00004000);
             if(language == ENGLISH)
             {
-                //mRender->DebugPrint(2,15,"World seed is: %i",mWorld->worldSeed);
+                //g_RenderManager.DebugPrint(2,15,"World seed is: %i",mWorld->worldSeed);
 
                 selectPos == 0 ? DrawText(240,59,GU_COLOR(1,1,0,1),default_size,"Back to game") : DrawText(240,59,GU_COLOR(1,1,1,1),default_size,"Back to game");
                 selectPos == 1 ? DrawText(240,89,GU_COLOR(1,1,0,1),default_size,"Options...") : DrawText(240,89,GU_COLOR(1,1,1,1),default_size,"Options...");
@@ -12772,7 +12768,7 @@ void StatePlay::Draw(StateManager* sManager)
             }
             if(language == RUSSIAN)
             {
-                //mRender->DebugPrint(2,15,"Sid mira: %i",mWorld->worldSeed);
+                //g_RenderManager.DebugPrint(2,15,"Sid mira: %i",mWorld->worldSeed);
 
                 selectPos == 0 ? DrawText(240,59,GU_COLOR(1,1,0,1),default_size,"Vernut$s^ k igre") : DrawText(240,59,GU_COLOR(1,1,1,1),default_size,"Vernut$s^ k igre");
                 selectPos == 1 ? DrawText(240,89,GU_COLOR(1,1,0,1),default_size,"Nastro~ki...") : DrawText(240,89,GU_COLOR(1,1,1,1),default_size,"Nastro~ki...");
@@ -12791,122 +12787,122 @@ void StatePlay::Draw(StateManager* sManager)
         {
             if(statisticsPage == 0)
             {
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,54,"Blocks Placed: %i",mWorld->mainStatistics.blockPlaced);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,54,"Blocks Placed: %i",mWorld->mainStatistics.blockPlaced);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,74,"Blocks Destroyed: %i",mWorld->mainStatistics.blockDestroyed);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,74,"Blocks Destroyed: %i",mWorld->mainStatistics.blockDestroyed);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,94,"Age Of The World: %i d",mWorld->mainStatistics.daysInGame);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,94,"Age Of The World: %i d",mWorld->mainStatistics.daysInGame);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,114,"Minutes Played: %i m",mWorld->mainStatistics.minutesPlayed);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,114,"Minutes Played: %i m",mWorld->mainStatistics.minutesPlayed);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,134,"Items Crafted: %i",mWorld->mainStatistics.itemsCrafted);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,134,"Items Crafted: %i",mWorld->mainStatistics.itemsCrafted);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,154,"Items Smelted: %i",mWorld->mainStatistics.itemsSmelted);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,154,"Items Smelted: %i",mWorld->mainStatistics.itemsSmelted);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,174,"Soil Plowed: %i",mWorld->mainStatistics.soilPlowed);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,174,"Soil Plowed: %i",mWorld->mainStatistics.soilPlowed);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,194,"Crops Grown: %i",mWorld->mainStatistics.cropsGrowned);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,194,"Crops Grown: %i",mWorld->mainStatistics.cropsGrowned);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,214,"Trees Grown: %i",mWorld->mainStatistics.treesGrowned);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,214,"Trees Grown: %i",mWorld->mainStatistics.treesGrowned);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,234,"Damage Dealt: %i",mWorld->mainStatistics.damageRecieved);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,234,"Damage Dealt: %i",mWorld->mainStatistics.damageRecieved);
             }
             else
             {
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,54,"Badly falls: %i",mWorld->mainStatistics.badlyFalls);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,54,"Badly falls: %i",mWorld->mainStatistics.badlyFalls);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,74,"Food eaten: %i",mWorld->mainStatistics.foodEaten);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,74,"Food eaten: %i",mWorld->mainStatistics.foodEaten);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,94,"Jumps: %i",mWorld->mainStatistics.jumps);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,94,"Jumps: %i",mWorld->mainStatistics.jumps);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,114,"Dies: %i",mWorld->mainStatistics.dies);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,114,"Dies: %i",mWorld->mainStatistics.dies);
             }
             DrawText(240,24,GU_COLOR(1,1,1,1),default_size,"Statistics");
 
-            RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-            RenderManager::InstancePtr()->DebugPrint(240,254,"Page: %i / 2",statisticsPage+1);
+            g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+            g_RenderManager.DebugPrint(240,254,"Page: %i / 2",statisticsPage+1);
         }
         if(language == RUSSIAN)
         {
             if(statisticsPage == 0)
             {
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,54,"Blokov v@stavleno: %i",mWorld->mainStatistics.blockPlaced);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,54,"Blokov v@stavleno: %i",mWorld->mainStatistics.blockPlaced);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,74,"Blokov razruweno: %i",mWorld->mainStatistics.blockDestroyed);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,74,"Blokov razruweno: %i",mWorld->mainStatistics.blockDestroyed);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,94,"Vozrast mira: %i d",mWorld->mainStatistics.daysInGame);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,94,"Vozrast mira: %i d",mWorld->mainStatistics.daysInGame);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,114,"Minut s@grano: %i m",mWorld->mainStatistics.minutesPlayed);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,114,"Minut s@grano: %i m",mWorld->mainStatistics.minutesPlayed);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,134,"Vexe~ sozdano: %i",mWorld->mainStatistics.itemsCrafted);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,134,"Vexe~ sozdano: %i",mWorld->mainStatistics.itemsCrafted);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,154,"Predmetov pereplavleno: %i",mWorld->mainStatistics.itemsSmelted);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,154,"Predmetov pereplavleno: %i",mWorld->mainStatistics.itemsSmelted);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,174,"Zemli vskopano: %i",mWorld->mainStatistics.soilPlowed);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,174,"Zemli vskopano: %i",mWorld->mainStatistics.soilPlowed);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,194,"Kul$tur v@raxeno: %i",mWorld->mainStatistics.cropsGrowned);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,194,"Kul$tur v@raxeno: %i",mWorld->mainStatistics.cropsGrowned);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,214,"Derev$ev v@raxeno: %i",mWorld->mainStatistics.treesGrowned);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,214,"Derev$ev v@raxeno: %i",mWorld->mainStatistics.treesGrowned);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,234,"Urona poluyeno: %i",mWorld->mainStatistics.damageRecieved);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,234,"Urona poluyeno: %i",mWorld->mainStatistics.damageRecieved);
             }
             else
             {
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,54,"Padeni~ s v@sot@: %i",mWorld->mainStatistics.badlyFalls);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,54,"Padeni~ s v@sot@: %i",mWorld->mainStatistics.badlyFalls);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,74,"Pixi s&edeno: %i",mWorld->mainStatistics.foodEaten);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,74,"Pixi s&edeno: %i",mWorld->mainStatistics.foodEaten);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,94,"Pr@jkov: %i",mWorld->mainStatistics.jumps);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,94,"Pr@jkov: %i",mWorld->mainStatistics.jumps);
 
-                RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
-                RenderManager::InstancePtr()->DebugPrint(200,114,"Smerte~: %i",mWorld->mainStatistics.dies);
+                g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.8,0.8,0.8,1),0,0x00004000|0x00000000);
+                g_RenderManager.DebugPrint(200,114,"Smerte~: %i",mWorld->mainStatistics.dies);
             }
             DrawText(240,24,GU_COLOR(1,1,1,1),default_size,"Statistika");
 
-            RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
-            RenderManager::InstancePtr()->DebugPrint(240,254,"Stranica: %i / 2",statisticsPage+1);
+            g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00004000|0x00000200);
+            g_RenderManager.DebugPrint(240,254,"Stranica: %i / 2",statisticsPage+1);
         }
     }
 
     //debug info
     if(devMode)
     {
-        mRender->SetFontStyle(default_size,0xFFFFFFFF,0,0x00000000);
+        g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000000);
 
-       /* mRender->DebugPrint(240,34,"world iron ore %i",mWorld->mainWorldVariables.worldIronOre);
-        mRender->DebugPrint(240,44,"world coal ore %i",mWorld->mainWorldVariables.worldCoalOre);
-        mRender->DebugPrint(240,54,"world golden ore %i",mWorld->mainWorldVariables.worldGoldenOre);
-        mRender->DebugPrint(240,64,"world diamond ore %i",mWorld->mainWorldVariables.worldDiamondOre);
-        mRender->DebugPrint(240,74,"world redstone ore %i",mWorld->mainWorldVariables.worldRedstoneOre);
-        mRender->DebugPrint(240,84,"world lapis ore %i",mWorld->mainWorldVariables.worldLapisOre);
-        mRender->DebugPrint(240,94,"world clay %i",mWorld->mainWorldVariables.worldClay); */
+       /* g_RenderManager.DebugPrint(240,34,"world iron ore %i",mWorld->mainWorldVariables.worldIronOre);
+        g_RenderManager.DebugPrint(240,44,"world coal ore %i",mWorld->mainWorldVariables.worldCoalOre);
+        g_RenderManager.DebugPrint(240,54,"world golden ore %i",mWorld->mainWorldVariables.worldGoldenOre);
+        g_RenderManager.DebugPrint(240,64,"world diamond ore %i",mWorld->mainWorldVariables.worldDiamondOre);
+        g_RenderManager.DebugPrint(240,74,"world redstone ore %i",mWorld->mainWorldVariables.worldRedstoneOre);
+        g_RenderManager.DebugPrint(240,84,"world lapis ore %i",mWorld->mainWorldVariables.worldLapisOre);
+        g_RenderManager.DebugPrint(240,94,"world clay %i",mWorld->mainWorldVariables.worldClay); */
 
         if(dt > 0.0f)
         {
@@ -12926,60 +12922,60 @@ void StatePlay::Draw(StateManager* sManager)
                 ticks = 0;
             }
         }
-        mRender->DebugPrint(20,24,"fps: %d",average_fps+1);
-        mRender->DebugPrint(20,34,"cpu: %d%%",mRender->GetCpuUsage());
-        mRender->DebugPrint(20,44,"gpu: %d%%",mRender->GetGpuUsage());
-        mRender->DebugPrint(20,54,"free memory: %d kb (%d mb)",freeMemory/1024,(freeMemory/1024)/1024);
-        mRender->DebugPrint(20,64,"polygons: %d",(mWorld->GetDrawntTrianglesCount() / 3));
-        mRender->DebugPrint(20,74,"vertices: %d",mWorld->GetDrawntTrianglesCount());
-        mRender->DebugPrint(20,84,"world time: %f",mWorld->worldDayTime);
-        mRender->DebugPrint(20,94,"camera angle: %f",fppCam->horAngle);
+        g_RenderManager.DebugPrint(20,24,"fps: %d",average_fps+1);
+        g_RenderManager.DebugPrint(20,34,"cpu: %d%%",g_RenderManager.GetCpuUsage());
+        g_RenderManager.DebugPrint(20,44,"gpu: %d%%",g_RenderManager.GetGpuUsage());
+        g_RenderManager.DebugPrint(20,54,"free memory: %d kb (%d mb)",freeMemory/1024,(freeMemory/1024)/1024);
+        g_RenderManager.DebugPrint(20,64,"polygons: %d",(mWorld->GetDrawntTrianglesCount() / 3));
+        g_RenderManager.DebugPrint(20,74,"vertices: %d",mWorld->GetDrawntTrianglesCount());
+        g_RenderManager.DebugPrint(20,84,"world time: %f",mWorld->worldDayTime);
+        g_RenderManager.DebugPrint(20,94,"camera angle: %f",fppCam->horAngle);
 
-        mRender->DebugPrint(20,104,"player.x: %f",playerPosition.x);
-        mRender->DebugPrint(20,114,"player.y: %f",playerPosition.y);
-        mRender->DebugPrint(20,124,"player.z: %f",playerPosition.z);
+        g_RenderManager.DebugPrint(20,104,"player.x: %f",playerPosition.x);
+        g_RenderManager.DebugPrint(20,114,"player.y: %f",playerPosition.y);
+        g_RenderManager.DebugPrint(20,124,"player.z: %f",playerPosition.z);
 
-        mRender->DebugPrint(20,134,"walkingonground: %d",walkingOnGround);
-        mRender->DebugPrint(20,144,"veloc.y: %f",playerVelocity.y);
-        //mRender->DebugPrint(20,154,"aim block id: %i",mWorld->GetBlock(cubePos.x,cubePos.y,cubePos.z));
+        g_RenderManager.DebugPrint(20,134,"walkingonground: %d",walkingOnGround);
+        g_RenderManager.DebugPrint(20,144,"veloc.y: %f",playerVelocity.y);
+        //g_RenderManager.DebugPrint(20,154,"aim block id: %i",mWorld->GetBlock(cubePos.x,cubePos.y,cubePos.z));
 
-        mRender->DebugPrint(20,164,"skyTime: %f",mWorld->skyTime);
+        g_RenderManager.DebugPrint(20,164,"skyTime: %f",mWorld->skyTime);
 
-       // mRender->DebugPrint(20,154,"Chunks in process : %d",mWorld->toUpdate.size());
+       // g_RenderManager.DebugPrint(20,154,"Chunks in process : %d",mWorld->toUpdate.size());
 
         if(mWorld->mZombies.size() > 0)
         {
-            mRender->DebugPrint(20,184,"size of vector zombies : %d",mWorld->mZombies.size());
+            g_RenderManager.DebugPrint(20,184,"size of vector zombies : %d",mWorld->mZombies.size());
         }
         if(mWorld->mCows.size() > 0)
         {
-            mRender->DebugPrint(20,194,"size of vector cows : %d",mWorld->mCows.size());
+            g_RenderManager.DebugPrint(20,194,"size of vector cows : %d",mWorld->mCows.size());
         }
 
         if(mWorld->mDrops.size() > 0)
         {
-            mRender->DebugPrint(20,204," size of vector Drops : %i", mWorld->mDrops.size());
+            g_RenderManager.DebugPrint(20,204," size of vector Drops : %i", mWorld->mDrops.size());
         }
         if(mWorld->updatingChunks.size() > 0)
         {
-            mRender->DebugPrint(20,214," size of vector updatingChunks : %i", mWorld->updatingChunks.size());
+            g_RenderManager.DebugPrint(20,214," size of vector updatingChunks : %i", mWorld->updatingChunks.size());
         }
 
-        mRender->SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200);
+        g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200);
     }
 
 
-	mRender->SetFontStyle(default_size, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_RIGHT);
+	g_RenderManager.SetFontStyle(default_size, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_RIGHT);
 
 	if (IS_SNAPSHOT) {
-		mRender->DebugPrint(480, 270, "Snapshot %s", SNAPSHOT_NAME);
+		g_RenderManager.DebugPrint(480, 270, "Snapshot %s", SNAPSHOT_NAME);
 	}
 	else {
-		mRender->DebugPrint(480, 270, "Version %s", VERSION_NAME);
+		g_RenderManager.DebugPrint(480, 270, "Version %s", VERSION_NAME);
 	}
 
     //end frame
-    mRender->EndFrame();
+    g_RenderManager.EndFrame();
 
 	mWorld->endDrawChunk();
 }
@@ -13464,14 +13460,14 @@ void StatePlay::PutInInventory(int id, int num, bool st)
 
 void StatePlay::DrawText(int x,int y, unsigned int color, float size, const char *message, ...)
 {
-    RenderManager::InstancePtr()->SetFontStyle(size,color,0,0x00000200|0x00000000);
-    RenderManager::InstancePtr()->DebugPrint(x,y,message);
+    g_RenderManager.SetFontStyle(size,color,0,0x00000200|0x00000000);
+    g_RenderManager.DebugPrint(x,y,message);
 }
 
 void StatePlay::DrawText2(int x,int y, unsigned int color, float size, const char *message, ...)
 {
-    RenderManager::InstancePtr()->SetFontStyle(size,color,0,0x00004000|0x00000000);
-    RenderManager::InstancePtr()->DebugPrint(x,y,message);
+    g_RenderManager.SetFontStyle(size,color,0,0x00004000|0x00000000);
+    g_RenderManager.DebugPrint(x,y,message);
 }
 
 void StatePlay::DrawAmount(int x,int y, int amount)
@@ -13481,19 +13477,19 @@ void StatePlay::DrawAmount(int x,int y, int amount)
     dozens = floorf(amount / 10.0f);
     units = amount % 10;
 
-    RenderManager::InstancePtr()->SetFont(0);
+    g_RenderManager.SetFont(0);
     if(dozens != 0)
     {
-        RenderManager::InstancePtr()->SetFontStyle(default_big_size,GU_COLOR(0.25f,0.25f,0.25f,1.0f),0,0x00000400|0x00004000);
-        RenderManager::InstancePtr()->DebugPrint(x+2,y+2,"%i",dozens);
-        RenderManager::InstancePtr()->SetFontStyle(default_big_size,GU_COLOR(1.0f,1.0f,1.0f,1.0f),0,0x00000400|0x00004000);
-        RenderManager::InstancePtr()->DebugPrint(x,y,"%i",dozens);
+        g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(0.25f,0.25f,0.25f,1.0f),0,0x00000400|0x00004000);
+        g_RenderManager.DebugPrint(x+2,y+2,"%i",dozens);
+        g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(1.0f,1.0f,1.0f,1.0f),0,0x00000400|0x00004000);
+        g_RenderManager.DebugPrint(x,y,"%i",dozens);
     }
 
-    RenderManager::InstancePtr()->SetFontStyle(default_big_size,GU_COLOR(0.25f,0.25f,0.25f,1.0f),0,0x00000400|0x00004000);
-    RenderManager::InstancePtr()->DebugPrint(x+14,y+2,"%i",units);
-    RenderManager::InstancePtr()->SetFontStyle(default_big_size,GU_COLOR(1.0f,1.0f,1.0f,1.0f),0,0x00000400|0x00004000);
-    RenderManager::InstancePtr()->DebugPrint(x+12,y,"%i",units);
-    RenderManager::InstancePtr()->SetDefaultFont();
+    g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(0.25f,0.25f,0.25f,1.0f),0,0x00000400|0x00004000);
+    g_RenderManager.DebugPrint(x+14,y+2,"%i",units);
+    g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(1.0f,1.0f,1.0f,1.0f),0,0x00000400|0x00004000);
+    g_RenderManager.DebugPrint(x+12,y,"%i",units);
+    g_RenderManager.SetDefaultFont();
 }
 

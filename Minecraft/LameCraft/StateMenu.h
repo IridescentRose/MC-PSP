@@ -174,8 +174,6 @@ private:
 
 	Sprite* bg[24];
 
-	RenderManager *mRender;
-
     // converter vars
     bool schematicExists;
 

@@ -76,6 +76,8 @@ Engine/Aurealis/Audio/sound_utils/audio.o \
 Engine/Aurealis/Audio/sound_utils/bgm.o \
 Engine/Aurealis/Audio/sound_utils/media.o \
 Engine/Aurealis/Audio/sound_utils/mod.o \
+Engine/Aurealis/Graphics/TextureAtlas.o \
+Engine/Aurealis/Graphics/TextureUtil.o \
 Lamecraft.o
 
 INCDIR = $(PSPPATH)/include

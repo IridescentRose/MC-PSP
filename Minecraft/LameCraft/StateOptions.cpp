@@ -21,9 +21,7 @@ StateOptions::~StateOptions()
 
 void StateOptions::Init()
 {
-	//set render manager instance
-	mRender = RenderManager::InstancePtr();
-
+	
 	buttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,0,95,12);
     buttonSprite->SetPosition(240,150);
     buttonSprite->Scale(2,2);
@@ -71,7 +69,7 @@ void StateOptions::Init()
 
 void StateOptions::Enter()
 {
-	mRender->SetOrtho(0,0,0,0,0,0);
+	g_RenderManager.SetOrtho(0,0,0,0,0,0);
 	selectPos = 0;
 }
 
@@ -96,7 +94,7 @@ void StateOptions::Resume()
 {
 
 	menuState = 0;
-	mRender->SetOrtho(0,0,0,0,0,0);
+	g_RenderManager.SetOrtho(0,0,0,0,0,0);
 }
 
 void StateOptions::HandleEvents(StateManager* sManager)
@@ -413,7 +411,7 @@ void StateOptions::Update(StateManager* sManager)
 void StateOptions::Draw(StateManager* sManager)
 {
 	//start rendering
-	mRender->StartFrame(1,1,1);
+	g_RenderManager.StartFrame(1,1,1);
 
 	switch(menuState)
 	{
@@ -454,7 +452,7 @@ void StateOptions::Draw(StateManager* sManager)
 			sceGuEnable(GU_DEPTH_TEST);
 
 			//draw subtitles on buttons
-            if(mRender->GetFontLanguage() == ENGLISH)
+            if(g_RenderManager.GetFontLanguage() == ENGLISH)
             {
                 selectPos == 0 ? DrawText(240,129,GU_COLOR(1,1,0,1) ,default_size,"Controls") : DrawText(240,129,GU_COLOR(1,1,1,1) ,default_size,"Controls");
                 selectPos == 1 ? DrawText(240,169,GU_COLOR(1,1,0,1) ,default_size,"Analog stick") : DrawText(240,169,GU_COLOR(1,1,1,1) ,default_size,"Analog stick");
@@ -462,7 +460,7 @@ void StateOptions::Draw(StateManager* sManager)
 
                 DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Options");
             }
-            if(mRender->GetFontLanguage() == RUSSIAN)
+            if(g_RenderManager.GetFontLanguage() == RUSSIAN)
             {
                 selectPos == 0 ? DrawText(240,129,GU_COLOR(1,1,0,1) ,default_size,"Naznayenie knopok") : DrawText(240,129,GU_COLOR(1,1,1,1) ,default_size,"Naznayenie knopok");
                 selectPos == 1 ? DrawText(240,169,GU_COLOR(1,1,0,1) ,default_size,"Nastro~ki stika") : DrawText(240,169,GU_COLOR(1,1,1,1) ,default_size,"Nastro~ki stika");
@@ -474,7 +472,7 @@ void StateOptions::Draw(StateManager* sManager)
 		break;
 		case 1://controls
 		{
-		    mRender->SetFont(ENGLISH);
+		    g_RenderManager.SetFont(ENGLISH);
 			sceGuDisable(GU_DEPTH_TEST);
 			sceGuEnable(GU_BLEND);
 			sceGuColor(GU_COLOR(1,1,1,1.0f));
@@ -520,33 +518,33 @@ void StateOptions::Draw(StateManager* sManager)
 
 			//write action names
 			starty = 67;
-			mRender->SetFontStyle(default_size,0xFFFFFFFF,0,0x00000000);
+			g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000000);
 			for(int i = controlStart;i < controlEnd;i++)
 			{
 				//action
-				controlPos == i ? mRender->SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000000) : mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000000);
-				mRender->DebugPrint(250,starty + (i * 30) - (controlStart * 30)+4,InputHelper::Instance()->getActionName(i).c_str());
+				controlPos == i ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000000) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000000);
+				g_RenderManager.DebugPrint(250,starty + (i * 30) - (controlStart * 30)+4,InputHelper::Instance()->getActionName(i).c_str());
 			}
 
-			mRender->SetFontStyle(default_big_size,0xFFFFFFFF,0,0x00000200);
+			g_RenderManager.SetFontStyle(default_big_size,0xFFFFFFFF,0,0x00000200);
 			starty = 65;
 			for(int i = controlStart;i < controlEnd;i++)
 			{
 				//button assigned to this action
-				controlPos == i ? mRender->SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+				controlPos == i ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
 				if(controlPos == i && chooseKeyState == true)
-					mRender->DebugPrint(160,starty + (i * 30) - (controlStart * 30)+4,"...");
+					g_RenderManager.DebugPrint(160,starty + (i * 30) - (controlStart * 30)+4,"...");
 				else
-					mRender->DebugPrint(160,starty + (i * 30) - (controlStart * 30)+4,InputHelper::Instance()->getButtonName(InputHelper::Instance()->getConnection(i).button).c_str());
+					g_RenderManager.DebugPrint(160,starty + (i * 30) - (controlStart * 30)+4,InputHelper::Instance()->getButtonName(InputHelper::Instance()->getConnection(i).button).c_str());
 			}
-			mRender->SetDefaultFont();
+			g_RenderManager.SetDefaultFont();
 
-            if(mRender->GetFontLanguage() == ENGLISH)
+            if(g_RenderManager.GetFontLanguage() == ENGLISH)
             {
                 controlPos == 16 ? DrawText(240,269,GU_COLOR(1,1,0,1) ,default_size,"Cancel") : DrawText(240,269,GU_COLOR(1,1,1,1) ,default_size,"Cancel");
                 DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Controls");
             }
-            if(mRender->GetFontLanguage() == RUSSIAN)
+            if(g_RenderManager.GetFontLanguage() == RUSSIAN)
             {
                 controlPos == 16 ? DrawText(240,269,GU_COLOR(1,1,0,1) ,default_size,"Otmena") : DrawText(240,269,GU_COLOR(1,1,1,1) ,default_size,"Otmena");
                 DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Naznayenie knopok");
@@ -610,42 +608,42 @@ void StateOptions::Draw(StateManager* sManager)
 			sceGuDisable(GU_BLEND);
 			sceGuEnable(GU_DEPTH_TEST);
 
-            mRender->SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200);
-            if(mRender->GetFontLanguage() == ENGLISH)
+            g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200);
+            if(g_RenderManager.GetFontLanguage() == ENGLISH)
             {
-                currentAnalogPos == 0 ? mRender->SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                mRender->DebugPrint(240,109,"Analog up : %d%%",(int)(fabs(InputHelper::Instance()->analogYup) * 100.0f));
+                currentAnalogPos == 0 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                g_RenderManager.DebugPrint(240,109,"Analog up : %d%%",(int)(fabs(InputHelper::Instance()->analogYup) * 100.0f));
 
-                currentAnalogPos == 1 ? mRender->SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                mRender->DebugPrint(240,139,"Analog down : %d%%",(int)(fabs(InputHelper::Instance()->analogYdown) * 100.0f));
+                currentAnalogPos == 1 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                g_RenderManager.DebugPrint(240,139,"Analog down : %d%%",(int)(fabs(InputHelper::Instance()->analogYdown) * 100.0f));
 
-                currentAnalogPos == 2 ? mRender->SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                mRender->DebugPrint(240,169,"Analog left : %d%%",(int)(fabs(InputHelper::Instance()->analogXleft) * 100.0f));
+                currentAnalogPos == 2 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                g_RenderManager.DebugPrint(240,169,"Analog left : %d%%",(int)(fabs(InputHelper::Instance()->analogXleft) * 100.0f));
 
-                currentAnalogPos == 3 ? mRender->SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                mRender->DebugPrint(240,199,"Analog right : %d%%",(int)(fabs(InputHelper::Instance()->analogXright) * 100.0f));
+                currentAnalogPos == 3 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                g_RenderManager.DebugPrint(240,199,"Analog right : %d%%",(int)(fabs(InputHelper::Instance()->analogXright) * 100.0f));
 
-                currentAnalogPos >= 4 ? mRender->SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                mRender->DebugPrint(240,269,"Cancel");
+                currentAnalogPos >= 4 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                g_RenderManager.DebugPrint(240,269,"Cancel");
 
                 DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Analog stick");
             }
-            if(mRender->GetFontLanguage() == RUSSIAN)
+            if(g_RenderManager.GetFontLanguage() == RUSSIAN)
             {
-                currentAnalogPos == 0 ? mRender->SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                mRender->DebugPrint(240,109,"Stik vverh : %d%%",(int)(fabs(InputHelper::Instance()->analogYup) * 100.0f));
+                currentAnalogPos == 0 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                g_RenderManager.DebugPrint(240,109,"Stik vverh : %d%%",(int)(fabs(InputHelper::Instance()->analogYup) * 100.0f));
 
-                currentAnalogPos == 1 ? mRender->SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                mRender->DebugPrint(240,139,"Stik vniz : %d%%",(int)(fabs(InputHelper::Instance()->analogYdown) * 100.0f));
+                currentAnalogPos == 1 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                g_RenderManager.DebugPrint(240,139,"Stik vniz : %d%%",(int)(fabs(InputHelper::Instance()->analogYdown) * 100.0f));
 
-                currentAnalogPos == 2 ? mRender->SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                mRender->DebugPrint(240,169,"Stik vlevo : %d%%",(int)(fabs(InputHelper::Instance()->analogXleft) * 100.0f));
+                currentAnalogPos == 2 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                g_RenderManager.DebugPrint(240,169,"Stik vlevo : %d%%",(int)(fabs(InputHelper::Instance()->analogXleft) * 100.0f));
 
-                currentAnalogPos == 3 ? mRender->SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                mRender->DebugPrint(240,199,"Stik vpravo : %d%%",(int)(fabs(InputHelper::Instance()->analogXright) * 100.0f));
+                currentAnalogPos == 3 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                g_RenderManager.DebugPrint(240,199,"Stik vpravo : %d%%",(int)(fabs(InputHelper::Instance()->analogXright) * 100.0f));
 
-                currentAnalogPos >= 4 ? mRender->SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : mRender->SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                mRender->DebugPrint(240,269,"Otmena");
+                currentAnalogPos >= 4 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                g_RenderManager.DebugPrint(240,269,"Otmena");
 
                 DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Nastro~ki stika");
             }
@@ -654,11 +652,11 @@ void StateOptions::Draw(StateManager* sManager)
 	}
 
 	//end frame
-	mRender->EndFrame();
+	g_RenderManager.EndFrame();
 }
 
 void StateOptions::DrawText(int x,int y, unsigned int color, float size, const char *message, ...)
 {
-    mRender->SetFontStyle(size,color,0,0x00000200|0x00000000);
-    mRender->DebugPrint(x,y,message);
+    g_RenderManager.SetFontStyle(size,color,0,0x00000200|0x00000000);
+    g_RenderManager.DebugPrint(x,y,message);
 }

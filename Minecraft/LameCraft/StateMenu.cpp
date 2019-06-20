@@ -180,7 +180,6 @@ void StateMenu::Init()
 
 
     //set render manager instance
-    mRender = RenderManager::InstancePtr();
   
     logoSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Logo),0,0,256,64);
     logoSprite->Scale(1.5f,1.5f);
@@ -307,7 +306,7 @@ void StateMenu::Init()
 
 void StateMenu::Enter()
 {
-    mRender->SetOrtho(0,0,0,0,0,0);
+    g_RenderManager.SetOrtho(0,0,0,0,0,0);
     selectPos = 0;
 }
 
@@ -365,7 +364,7 @@ void StateMenu::Resume()
     menuState = 0;
     loadSelectPos = 0;
     loadSavePos = 0;
-    mRender->SetOrtho(0,0,0,0,0,0);
+    g_RenderManager.SetOrtho(0,0,0,0,0,0);
 }
 
 void StateMenu::HandleEvents(StateManager* sManager)
@@ -400,8 +399,8 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
         if(g_System.KeyPressed(PSP_CTRL_CROSS))
         {
-            RenderManager::InstancePtr()->defaultFontType = selectPos+1;
-            RenderManager::InstancePtr()->SetDefaultFont();
+            g_RenderManager.defaultFontType = selectPos+1;
+            g_RenderManager.SetDefaultFont();
             selectPos = 0;
             menuState = 0;
 
@@ -2089,7 +2088,7 @@ void StateMenu::Draw(StateManager* sManager)
 
 
     //start rendering
-    mRender->StartFrame(1,1,1);
+    g_RenderManager.StartFrame(1,1,1);
 
 
 	sceGuDisable(GU_DEPTH_TEST);
@@ -2233,7 +2232,7 @@ void StateMenu::Draw(StateManager* sManager)
             splashSize = 0.0f;
         }
 
-        if(RenderManager::InstancePtr()->GetFontLanguage() == ENGLISH)
+        if(g_RenderManager.GetFontLanguage() == ENGLISH)
         {
             selectPos == 0 ? DrawText(240,129,GU_COLOR(1,1,0.25,1) ,default_size,"Singleplayer") : DrawText(240,129,GU_COLOR(1,1,1,1) ,default_size,"Singleplayer");
             selectPos == 1 ? DrawText(240,169,GU_COLOR(1,1,0.25,1) ,default_size,"Options") : DrawText(240,169,GU_COLOR(1,1,1,1) ,default_size,"Options");
@@ -2251,7 +2250,7 @@ void StateMenu::Draw(StateManager* sManager)
                 case 5: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Not approved by Mojang"); break;
             }
         }
-        if(RenderManager::InstancePtr()->GetFontLanguage() == RUSSIAN)
+        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
         {
             selectPos == 0 ? DrawText(240,129,GU_COLOR(1,1,0.25,1) ,default_size,"Odinoyna^ igra") : DrawText(240,129,GU_COLOR(1,1,1,1) ,default_size,"Odinoyna^ igra");
             selectPos == 1 ? DrawText(240,169,GU_COLOR(1,1,0.25,1) ,default_size,"Nastro~ki") : DrawText(240,169,GU_COLOR(1,1,1,1) ,default_size,"Nastro~ki");
@@ -2267,9 +2266,9 @@ void StateMenu::Draw(StateManager* sManager)
                 case 4: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"zdes$ net trav@"); break;
                 case 5: {
                             DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Ne odobreno ");
-                            RenderManager::InstancePtr()->SetFont(ENGLISH);
+                            g_RenderManager.SetFont(ENGLISH);
                             DrawText(328,84,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"                Mojang");
-                            RenderManager::InstancePtr()->SetDefaultFont();
+                            g_RenderManager.SetDefaultFont();
                         } break;
             }
         }
@@ -2365,114 +2364,114 @@ void StateMenu::Draw(StateManager* sManager)
             {
                 if(loadSavePos == i)
                 {
-                    mRender->SetFont(ENGLISH);
+                    g_RenderManager.SetFont(ENGLISH);
                     if(saveFilesList[i].worldName[0] != '\0')
                     {
-                        mRender->SetFontStyle(0.8f,GU_COLOR(1,1,0,1),0,0x00000000);
-                        mRender->DebugPrint(30,54 + (i * 41) - (loadSaveStart * 41),"%s",saveFilesList[i].worldName);
+                        g_RenderManager.SetFontStyle(0.8f,GU_COLOR(1,1,0,1),0,0x00000000);
+                        g_RenderManager.DebugPrint(30,54 + (i * 41) - (loadSaveStart * 41),"%s",saveFilesList[i].worldName);
                     }
                     else
                     {
-                        mRender->SetFontStyle(0.8f,GU_COLOR(0.6,0.6,0,1),0,0x00000000);
-                        mRender->DebugPrint(30,54 + (i * 41) - (loadSaveStart * 41),"<no name>");
+                        g_RenderManager.SetFontStyle(0.8f,GU_COLOR(0.6,0.6,0,1),0,0x00000000);
+                        g_RenderManager.DebugPrint(30,54 + (i * 41) - (loadSaveStart * 41),"<no name>");
                     }
 
-                    mRender->SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
-                    mRender->DebugPrint(30,66 + (i * 41) - (loadSaveStart * 41),"%s",saveFilesList[i].fileName.c_str());
+                    g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
+                    g_RenderManager.DebugPrint(30,66 + (i * 41) - (loadSaveStart * 41),"%s",saveFilesList[i].fileName.c_str());
 
-                    mRender->SetDefaultFont();
+                    g_RenderManager.SetDefaultFont();
 
-                    if(mRender->GetFontLanguage() == ENGLISH)
+                    if(g_RenderManager.GetFontLanguage() == ENGLISH)
                     {
                         switch(saveFilesList[i].worldGameMode)
                         {
                             case 0:
-                            mRender->SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
-                            mRender->DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Survival mode (%i KB)",saveFilesList[i].saveSize/1024);
+                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
+                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Survival mode (%i KB)",saveFilesList[i].saveSize/1024);
                             break;
                             case 1:
-                            mRender->SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
-                            mRender->DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Creative mode (%i KB)",saveFilesList[i].saveSize/1024);
+                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
+                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Creative mode (%i KB)",saveFilesList[i].saveSize/1024);
                             break;
                             case 2:
-                            mRender->SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
-                            mRender->DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Hardcore mode (%i KB)",saveFilesList[i].saveSize/1024);
+                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
+                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Hardcore mode (%i KB)",saveFilesList[i].saveSize/1024);
                             break;
                         }
                     }
-                    if(mRender->GetFontLanguage() == RUSSIAN)
+                    if(g_RenderManager.GetFontLanguage() == RUSSIAN)
                     {
                         switch(saveFilesList[i].worldGameMode)
                         {
                             case 0:
-                            mRender->SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
-                            mRender->DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"V@jivanie (%i KB)",saveFilesList[i].saveSize/1024);
+                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
+                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"V@jivanie (%i KB)",saveFilesList[i].saveSize/1024);
                             break;
                             case 1:
-                            mRender->SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
-                            mRender->DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Tvoryeski~ (%i KB)",saveFilesList[i].saveSize/1024);
+                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
+                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Tvoryeski~ (%i KB)",saveFilesList[i].saveSize/1024);
                             break;
                             case 2:
-                            mRender->SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
-                            mRender->DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Hardkor (%i KB)",saveFilesList[i].saveSize/1024);
+                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
+                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Hardkor (%i KB)",saveFilesList[i].saveSize/1024);
                             break;
                         }
                     }
                 }
                 else
                 {
-                    mRender->SetFont(ENGLISH);
+                    g_RenderManager.SetFont(ENGLISH);
 
                     if(saveFilesList[i].worldName[0] != '\0')
                     {
-                        mRender->SetFontStyle(0.8f,GU_COLOR(1,1,1,1),0,0x00000000);
-                        mRender->DebugPrint(30,54 + (i * 41) - (loadSaveStart * 41),"%s",saveFilesList[i].worldName);
+                        g_RenderManager.SetFontStyle(0.8f,GU_COLOR(1,1,1,1),0,0x00000000);
+                        g_RenderManager.DebugPrint(30,54 + (i * 41) - (loadSaveStart * 41),"%s",saveFilesList[i].worldName);
                     }
                     else
                     {
-                        mRender->SetFontStyle(0.8f,GU_COLOR(0.6,0.6,0.6,1),0,0x00000000);
-                        mRender->DebugPrint(30,54 + (i * 41) - (loadSaveStart * 41),"<no name>");
+                        g_RenderManager.SetFontStyle(0.8f,GU_COLOR(0.6,0.6,0.6,1),0,0x00000000);
+                        g_RenderManager.DebugPrint(30,54 + (i * 41) - (loadSaveStart * 41),"<no name>");
                     }
 
-                    mRender->SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
-                    mRender->DebugPrint(30,66 + (i * 41) - (loadSaveStart * 41),"%s",saveFilesList[i].fileName.c_str());
+                    g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
+                    g_RenderManager.DebugPrint(30,66 + (i * 41) - (loadSaveStart * 41),"%s",saveFilesList[i].fileName.c_str());
 
-                    mRender->SetDefaultFont();
+                    g_RenderManager.SetDefaultFont();
 
-                    if(mRender->GetFontLanguage() == ENGLISH)
+                    if(g_RenderManager.GetFontLanguage() == ENGLISH)
                     {
                         switch(saveFilesList[i].worldGameMode)
                         {
                             case 0:
-                            mRender->SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
-                            mRender->DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Survival mode (%i KB)",saveFilesList[i].saveSize/1024);
+                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
+                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Survival mode (%i KB)",saveFilesList[i].saveSize/1024);
                             break;
                             case 1:
-                            mRender->SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
-                            mRender->DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Creative mode (%i KB)",saveFilesList[i].saveSize/1024);
+                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
+                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Creative mode (%i KB)",saveFilesList[i].saveSize/1024);
                             break;
                             case 2:
-                            mRender->SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
-                            mRender->DebugPrint(30,78  + (i * 41) - (loadSaveStart * 41),"Hardcore mode (%i KB)",saveFilesList[i].saveSize/1024);
+                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
+                            g_RenderManager.DebugPrint(30,78  + (i * 41) - (loadSaveStart * 41),"Hardcore mode (%i KB)",saveFilesList[i].saveSize/1024);
                             break;
                         }
                     }
 
-                    if(mRender->GetFontLanguage() == RUSSIAN)
+                    if(g_RenderManager.GetFontLanguage() == RUSSIAN)
                     {
                         switch(saveFilesList[i].worldGameMode)
                         {
                             case 0:
-                            mRender->SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
-                            mRender->DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"V@jivanie (%i KB)",saveFilesList[i].saveSize/1024);
+                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
+                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"V@jivanie (%i KB)",saveFilesList[i].saveSize/1024);
                             break;
                             case 1:
-                            mRender->SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
-                            mRender->DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Tvoryeski~ (%i KB)",saveFilesList[i].saveSize/1024);
+                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
+                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Tvoryeski~ (%i KB)",saveFilesList[i].saveSize/1024);
                             break;
                             case 2:
-                            mRender->SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
-                            mRender->DebugPrint(30,78  + (i * 41) - (loadSaveStart * 41),"Hardkor (%i KB)",saveFilesList[i].saveSize/1024);
+                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
+                            g_RenderManager.DebugPrint(30,78  + (i * 41) - (loadSaveStart * 41),"Hardkor (%i KB)",saveFilesList[i].saveSize/1024);
                             break;
                         }
                     }
@@ -2483,7 +2482,7 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuDisable(GU_BLEND);
         sceGuEnable(GU_DEPTH_TEST);
 
-        if(mRender->GetFontLanguage() == ENGLISH)
+        if(g_RenderManager.GetFontLanguage() == ENGLISH)
         {
             if(saveSubmenu)
             {
@@ -2508,7 +2507,7 @@ void StateMenu::Draw(StateManager* sManager)
             DrawText(240,24,GU_COLOR(1,1,1,1) ,default_size,"Select World");
         }
 
-        if(mRender->GetFontLanguage() == RUSSIAN)
+        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
         {
             if(saveSubmenu)
             {
@@ -2559,30 +2558,30 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuDisable(GU_BLEND);
         sceGuEnable(GU_DEPTH_TEST);
 
-        if(mRender->GetFontLanguage() == ENGLISH)
+        if(g_RenderManager.GetFontLanguage() == ENGLISH)
         {
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            mRender->DebugPrint(40,100-40,"Author:");
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,100-40,"Marcin Ploska(Drakon)");
+            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
+            g_RenderManager.DebugPrint(40,100-40,"Author:");
+            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
+            g_RenderManager.DebugPrint(440,100-40,"Marcin Ploska(Drakon)");
 
-			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
-			mRender->DebugPrint(40, 124 - 40, "Modder:");
-			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
-			mRender->DebugPrint(440, 124 - 40, "Kirill Skibin(Woolio)");
+			g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			g_RenderManager.DebugPrint(40, 124 - 40, "Modder:");
+			g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
+			g_RenderManager.DebugPrint(440, 124 - 40, "Kirill Skibin(Woolio)");
 
-			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
-			mRender->DebugPrint(40, 148 - 40, "Modder 2:");
-			mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
-			mRender->DebugPrint(440, 148 - 40, "Nathan Bourgeois");
+			g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+			g_RenderManager.DebugPrint(40, 148 - 40, "Modder 2:");
+			g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
+			g_RenderManager.DebugPrint(440, 148 - 40, "Nathan Bourgeois");
 
 			if (!IS_SNAPSHOT) {
-				mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, INTRAFONT_ALIGN_RIGHT);
-				mRender->DebugPrint(480, 270, "Version: %s", VERSION_NAME);
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, INTRAFONT_ALIGN_RIGHT);
+				g_RenderManager.DebugPrint(480, 270, "Version: %s", VERSION_NAME);
 			}
 			else {
-				mRender->SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, INTRAFONT_ALIGN_RIGHT);
-				mRender->DebugPrint(480, 270, "Snapshot: %s", SNAPSHOT_NAME);
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, INTRAFONT_ALIGN_RIGHT);
+				g_RenderManager.DebugPrint(480, 270, "Snapshot: %s", SNAPSHOT_NAME);
 			}
 
 
@@ -2590,35 +2589,35 @@ void StateMenu::Draw(StateManager* sManager)
             aboutPos == 1 ? DrawText(240,264,GU_COLOR(1,1,0.25,1) ,default_size,"Cancel") : DrawText(240,264,GU_COLOR(1,1,1,1) ,default_size,"Cancel");
             DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"About");
         }
-        if(mRender->GetFontLanguage() == RUSSIAN)
+        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
         {
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            mRender->DebugPrint(40,100-40,"Dvijok igr@:");
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,100-40,"Marsin Ploska(Drakon)");
+            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
+            g_RenderManager.DebugPrint(40,100-40,"Dvijok igr@:");
+            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
+            g_RenderManager.DebugPrint(440,100-40,"Marsin Ploska(Drakon)");
 
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            mRender->DebugPrint(40,124-40,"Modifikaci^:");
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,124-40,"Kirill Skibin(Volio)");
+            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
+            g_RenderManager.DebugPrint(40,124-40,"Modifikaci^:");
+            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
+            g_RenderManager.DebugPrint(440,124-40,"Kirill Skibin(Volio)");
 
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            mRender->DebugPrint(40,172-40,"Vebsa~t:");
+            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
+            g_RenderManager.DebugPrint(40,172-40,"Vebsa~t:");
 
-            mRender->SetFont(ENGLISH);
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,172-40,"vk.com/mine_psp");
-            mRender->SetDefaultFont();
+            g_RenderManager.SetFont(ENGLISH);
+            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
+            g_RenderManager.DebugPrint(440,172-40,"vk.com/mine_psp");
+            g_RenderManager.SetDefaultFont();
 
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            mRender->DebugPrint(40,196-40,"Versi^:");
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,196-40,"2.0");
+            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
+            g_RenderManager.DebugPrint(40,196-40,"Versi^:");
+            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
+            g_RenderManager.DebugPrint(440,196-40,"2.0");
 
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            mRender->DebugPrint(40,220-40,"Stadi^ razrabotki:");
-            mRender->SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            mRender->DebugPrint(440,220-40,"Reliz");
+            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
+            g_RenderManager.DebugPrint(40,220-40,"Stadi^ razrabotki:");
+            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
+            g_RenderManager.DebugPrint(440,220-40,"Reliz");
 
             aboutPos == 0 ? DrawText(240,234,GU_COLOR(1,1,0.25,1) ,default_size,"Konverter") : DrawText(240,234,GU_COLOR(1,1,1,1) ,default_size,"Konverter");
             aboutPos == 1 ? DrawText(240,264,GU_COLOR(1,1,0.25,1) ,default_size,"Otmena") : DrawText(240,264,GU_COLOR(1,1,1,1) ,default_size,"Otmena");
@@ -2666,7 +2665,7 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuDisable(GU_BLEND);
         sceGuEnable(GU_DEPTH_TEST);
 
-        if(mRender->GetFontLanguage() == ENGLISH)
+        if(g_RenderManager.GetFontLanguage() == ENGLISH)
         {
             DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Create New World");
             DrawText(240,58,GU_COLOR(0.25,0.25,0.25,1) ,default_size,"Name");
@@ -2697,7 +2696,7 @@ void StateMenu::Draw(StateManager* sManager)
 
             generateSelectPose == 4 ? DrawText(240,239,GU_COLOR(1,1,0.25,1) ,default_size,"Create New World") : DrawText(240,239,GU_COLOR(1,1,1,1) ,default_size,"Create New World");
         }
-        if(mRender->GetFontLanguage() == RUSSIAN)
+        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
         {
             DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Sozdat$ nov@~ mir");
             DrawText(240,58,GU_COLOR(0.25,0.25,0.25,1) ,default_size,"Nazvanie Mira");
@@ -2729,26 +2728,26 @@ void StateMenu::Draw(StateManager* sManager)
             generateSelectPose == 4 ? DrawText(240,239,GU_COLOR(1,1,0.25,1) ,default_size,"Sozdat$ nov@~ mir") : DrawText(240,239,GU_COLOR(1,1,1,1) ,default_size,"Sozdat$ nov@~ mir");
         }
 
-        mRender->SetFont(ENGLISH);
-        mRender->SetFontStyle(default_size ,GU_COLOR(1,1,1,1),0,0x00000000|0x00004000);
-        mRender->DebugPrint(159,79,"%s",newWorldName.c_str());
+        g_RenderManager.SetFont(ENGLISH);
+        g_RenderManager.SetFontStyle(default_size ,GU_COLOR(1,1,1,1),0,0x00000000|0x00004000);
+        g_RenderManager.DebugPrint(159,79,"%s",newWorldName.c_str());
         if(seed_1 == 0)
         {
-            mRender->SetFontStyle(default_size ,GU_COLOR(0.65,0.65,0.65,1),999,0x00000200|0x00004000);
-            if(mRender->GetFontLanguage() == ENGLISH)
+            g_RenderManager.SetFontStyle(default_size ,GU_COLOR(0.65,0.65,0.65,1),999,0x00000200|0x00004000);
+            if(g_RenderManager.GetFontLanguage() == ENGLISH)
             {
-                mRender->DebugPrint(240,119,"random");
+                g_RenderManager.DebugPrint(240,119,"random");
             }
-            if(mRender->GetFontLanguage() == RUSSIAN)
+            if(g_RenderManager.GetFontLanguage() == RUSSIAN)
             {
-                mRender->DebugPrint(240,119,"sluya~n@~");
+                g_RenderManager.DebugPrint(240,119,"sluya~n@~");
             }
         }
         else
         {
-            mRender->DebugPrint(159,119,"%s",newWorldSeed.c_str());
+            g_RenderManager.DebugPrint(159,119,"%s",newWorldSeed.c_str());
         }
-        mRender->SetDefaultFont();
+        g_RenderManager.SetDefaultFont();
     }
     break;
     case 6://about
@@ -2786,7 +2785,7 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuDisable(GU_BLEND);
         sceGuEnable(GU_DEPTH_TEST);
 
-        if(mRender->GetFontLanguage() == ENGLISH)
+        if(g_RenderManager.GetFontLanguage() == ENGLISH)
         {
             if(schematicExists)
             {
@@ -2818,9 +2817,9 @@ void StateMenu::Draw(StateManager* sManager)
 
             DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Converter");
         }
-        if(mRender->GetFontLanguage() == RUSSIAN)
+        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
         {
-            mRender->SetFont(ENGLISH);
+            g_RenderManager.SetFont(ENGLISH);
             if(schematicExists)
             {
                 DrawText(240,80,GU_COLOR(0.1,0.9,0.1,1),default_big_size,"world.schematic exists!");
@@ -2837,7 +2836,7 @@ void StateMenu::Draw(StateManager* sManager)
             {
                 DrawText(240,100,GU_COLOR(0.9,0.1,0.1,1),default_size,"process of conversion can take about 1 minute");
             }
-            mRender->SetDefaultFont();
+            g_RenderManager.SetDefaultFont();
 
             if(newW_gameMode == SURVIVAL)
             {
@@ -2873,14 +2872,14 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuDisable(GU_BLEND);
         sceGuEnable(GU_DEPTH_TEST);
 
-        if(mRender->GetFontLanguage() == ENGLISH)
+        if(g_RenderManager.GetFontLanguage() == ENGLISH)
         {
             DrawText(240,64,GU_COLOR(1,1,1,1) ,default_size,"Choose Game Mode");
 
             saveSubMenuSelect == 0 ? DrawText(240,109,GU_COLOR(1,1,0.25,1) ,default_size,"Survival") : DrawText(240,109,GU_COLOR(1,1,1,1) ,default_size,"Survival");
             saveSubMenuSelect == 1 ? DrawText(240,149,GU_COLOR(1,1,0.25,1) ,default_size,"Creative") : DrawText(240,149,GU_COLOR(1,1,1,1) ,default_size,"Creative");
         }
-        if(mRender->GetFontLanguage() == RUSSIAN)
+        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
         {
             DrawText(240,64,GU_COLOR(1,1,1,1) ,default_size,"V@berite Igrovo~ Rejim");
 
@@ -2929,30 +2928,30 @@ void StateMenu::Draw(StateManager* sManager)
 
                 sceGuDisable(GU_BLEND);
 
-                mRender->SetFont(ENGLISH);
+                g_RenderManager.SetFont(ENGLISH);
                 if(i == tpPos)
                 {
-                    mRender->SetFontStyle(default_big_size,GU_COLOR(0.25,0.25,0,1),0,0x00000000);
-                    mRender->DebugPrint(94,52 - 8 + (i * 72) - (tpStart * 72),"%s",texturePackList[i].name.c_str());
+                    g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(0.25,0.25,0,1),0,0x00000000);
+                    g_RenderManager.DebugPrint(94,52 - 8 + (i * 72) - (tpStart * 72),"%s",texturePackList[i].name.c_str());
 
-                    mRender->SetFontStyle(default_big_size,GU_COLOR(1,1,0,1),0,0x00000000);
-                    mRender->DebugPrint(92,50 - 8 + (i * 72) - (tpStart * 72),"%s",texturePackList[i].name.c_str());
+                    g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(1,1,0,1),0,0x00000000);
+                    g_RenderManager.DebugPrint(92,50 - 8 + (i * 72) - (tpStart * 72),"%s",texturePackList[i].name.c_str());
 
-                    mRender->SetFontStyle(default_size,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
-                    mRender->DebugPrint(92,50 - 8 + (i * 72) - (tpStart * 72) + 18,"%s",texturePackList[i].description.c_str());
+                    g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
+                    g_RenderManager.DebugPrint(92,50 - 8 + (i * 72) - (tpStart * 72) + 18,"%s",texturePackList[i].description.c_str());
                 }
                 else
                 {
-                    mRender->SetFontStyle(default_big_size,GU_COLOR(0.25,0.25,0.25,1),0,0x00000000);
-                    mRender->DebugPrint(94,52 - 8 + (i * 72) - (tpStart * 72),"%s",texturePackList[i].name.c_str());
+                    g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(0.25,0.25,0.25,1),0,0x00000000);
+                    g_RenderManager.DebugPrint(94,52 - 8 + (i * 72) - (tpStart * 72),"%s",texturePackList[i].name.c_str());
 
-                    mRender->SetFontStyle(default_big_size,GU_COLOR(1,1,1,1),0,0x00000000);
-                    mRender->DebugPrint(92,50 - 8 + (i * 72) - (tpStart * 72),"%s",texturePackList[i].name.c_str());
+                    g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(1,1,1,1),0,0x00000000);
+                    g_RenderManager.DebugPrint(92,50 - 8 + (i * 72) - (tpStart * 72),"%s",texturePackList[i].name.c_str());
 
-                    mRender->SetFontStyle(default_size,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
-                    mRender->DebugPrint(92,50 - 8 + (i * 72) - (tpStart * 72) + 18,"%s",texturePackList[i].description.c_str());
+                    g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
+                    g_RenderManager.DebugPrint(92,50 - 8 + (i * 72) - (tpStart * 72) + 18,"%s",texturePackList[i].description.c_str());
                 }
-                mRender->SetDefaultFont();
+                g_RenderManager.SetDefaultFont();
             }
         }
 
@@ -2971,12 +2970,12 @@ void StateMenu::Draw(StateManager* sManager)
         sceGuDisable(GU_BLEND);
         sceGuEnable(GU_DEPTH_TEST);
 
-        if(mRender->GetFontLanguage() == ENGLISH)
+        if(g_RenderManager.GetFontLanguage() == ENGLISH)
         {
             tpSelectPos == 0 ? DrawText(120,263,GU_COLOR(1,1,0.25,1),default_size,"Select") : DrawText(120,263,GU_COLOR(1,1,1,1),default_size,"Select");
             tpSelectPos == 1 ? DrawText(360,263,GU_COLOR(1,1,0.25,1) ,default_size,"Cancel") : DrawText(360,263,GU_COLOR(1,1,1,1) ,default_size,"Cancel");
         }
-        if(mRender->GetFontLanguage() == RUSSIAN)
+        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
         {
             tpSelectPos == 0 ? DrawText(120,263,GU_COLOR(1,1,0.25,1),default_size,"V@brat$") : DrawText(120,263,GU_COLOR(1,1,1,1),default_size,"V@brat$");
             tpSelectPos == 1 ? DrawText(360,263,GU_COLOR(1,1,0.25,1) ,default_size,"Otmena") : DrawText(360,263,GU_COLOR(1,1,1,1) ,default_size,"Otmena");
@@ -2985,30 +2984,30 @@ void StateMenu::Draw(StateManager* sManager)
     break;
     }
 
-    mRender->SetFontStyle(0.5f,GU_COLOR(1,1,1,1),0,0x00000000);
+    g_RenderManager.SetFontStyle(0.5f,GU_COLOR(1,1,1,1),0,0x00000000);
 
 	/*
-	mRender->DebugPrint(30,50,"%f",size_f);
+	g_RenderManager.DebugPrint(30,50,"%f",size_f);
 
     //draw debug text at the end
-    mRender->DebugPrint(40,30,"cpu: %d%%",mRender->GetCpuUsage());
-    mRender->DebugPrint(40,40,"gpu: %d%%",mRender->GetGpuUsage());
-	mRender->DebugPrint(40, 20, "memory: %.3f", ((float)SystemManager::Instance()->freeMemory() / ((float)(1024 * 1024))) );
+    g_RenderManager.DebugPrint(40,30,"cpu: %d%%",g_RenderManager.GetCpuUsage());
+    g_RenderManager.DebugPrint(40,40,"gpu: %d%%",g_RenderManager.GetGpuUsage());
+	g_RenderManager.DebugPrint(40, 20, "memory: %.3f", ((float)SystemManager::Instance()->freeMemory() / ((float)(1024 * 1024))) );
     */
 
 	if (!IS_SNAPSHOT) {
-		mRender->SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000400);
-		mRender->DebugPrint(475, 270, "%s", VERSION_NAME);
-		mRender->SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000200);
+		g_RenderManager.SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000400);
+		g_RenderManager.DebugPrint(475, 270, "%s", VERSION_NAME);
+		g_RenderManager.SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000200);
 	}
 	else {
-		mRender->SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000400);
-		mRender->DebugPrint(475, 270, "Snapshot %s", SNAPSHOT_NAME);
-		mRender->SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000200);
+		g_RenderManager.SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000400);
+		g_RenderManager.DebugPrint(475, 270, "Snapshot %s", SNAPSHOT_NAME);
+		g_RenderManager.SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000200);
 	}
 
     //end frame
-    mRender->EndFrame();
+    g_RenderManager.EndFrame();
 }
 
 //additional functions
@@ -3242,6 +3241,6 @@ int StateMenu::fileSize (const std::string& name)
 
 void StateMenu::DrawText(int x,int y, unsigned int color, float size, const char *message, ...)
 {
-    mRender->SetFontStyle(size,color,0,0x00000200|0x00000000);
-    mRender->DebugPrint(x,y,message);
+    g_RenderManager.SetFontStyle(size,color,0,0x00000200|0x00000000);
+    g_RenderManager.DebugPrint(x,y,message);
 }

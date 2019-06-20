@@ -30,12 +30,12 @@ int main()
 	scePowerSetClockFrequency(333, 333, 166);
 
 	//initialize render manager
-	RenderManager::InstancePtr()->Init();
-	RenderManager::InstancePtr()->CollectPerformance(true);
-	RenderManager::InstancePtr()->InitDebugFont();
+	g_RenderManager.Init();
+	g_RenderManager.CollectPerformance(true);
+	g_RenderManager.InitDebugFont();
 
 	//set perspectives
-	RenderManager::InstancePtr()->SetOrtho(0,0,0,0,0,0);
+	g_RenderManager.SetOrtho(0,0,0,0,0,0);
 
 	//init and load sounds
 	TextureHelper::Instance()->Init();
@@ -47,7 +47,7 @@ int main()
 	StateManager stateManager;
 	stateManager.Init();
 
-	RenderManager::InstancePtr()->SetClearColour(0xFF000000);
+	g_RenderManager.SetClearColour(0xFF000000);
 
 	//splash screens
 	
@@ -61,7 +61,7 @@ int main()
 	delete screen2;
 	
 
-	RenderManager::InstancePtr()->SetClearColour(0xFFFFFFFF);
+	g_RenderManager.SetClearColour(0xFFFFFFFF);
 
 	//new active state
 	StateMenu *statePlay = new StateMenu();

@@ -63,7 +63,7 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
 	// start the render loop
 	while(1)
 	{
-		RenderManager::InstancePtr()->StartFrame(0.466,0.72,1);
+		g_RenderManager.StartFrame(0.466,0.72,1);
 
 		sceGuDisable(GU_DEPTH_TEST);
 		sceGuEnable(GU_BLEND);
@@ -112,135 +112,135 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
 		sceGuEnable(GU_DEPTH_TEST);
 
 		//draw subtitles on buttons
-        RenderManager::InstancePtr()->SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200|0x00000000);
+        g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200|0x00000000);
 
-        if(RenderManager::InstancePtr()->GetFontLanguage() == ENGLISH)
+        if(g_RenderManager.GetFontLanguage() == ENGLISH)
         {
             if(stateName == 0)
             {
-                RenderManager::InstancePtr()->DebugPrint(240,103,"Loading level");
+                g_RenderManager.DebugPrint(240,103,"Loading level");
             }
             else
             {
-                RenderManager::InstancePtr()->DebugPrint(240,103,"Generating level");
+                g_RenderManager.DebugPrint(240,103,"Generating level");
                 switch(stateName)
                 {
                     case 1:
-                    RenderManager::InstancePtr()->DebugPrint(240,136,"Building terrain %i %%",readiness);
+                    g_RenderManager.DebugPrint(240,136,"Building terrain %i %%",readiness);
                     break;
                     case 2:
-                    RenderManager::InstancePtr()->DebugPrint(240,136,"Digging caves");
+                    g_RenderManager.DebugPrint(240,136,"Digging caves");
                     break;
                     case 3:
-                    RenderManager::InstancePtr()->DebugPrint(240,136,"Planting pumpkins");
+                    g_RenderManager.DebugPrint(240,136,"Planting pumpkins");
                     break;
                     case 4:
-                    RenderManager::InstancePtr()->DebugPrint(240,136,"Growing trees");
+                    g_RenderManager.DebugPrint(240,136,"Growing trees");
                     break;
                     case 5:
-                    RenderManager::InstancePtr()->DebugPrint(240,136,"Placing ore");
+                    g_RenderManager.DebugPrint(240,136,"Placing ore");
                     break;
                     case 6:
-                    RenderManager::InstancePtr()->DebugPrint(240,136,"Creating shadow map");
+                    g_RenderManager.DebugPrint(240,136,"Creating shadow map");
                     break;
                     case 7:
-                    RenderManager::InstancePtr()->DebugPrint(240,136,"Saving chunks");
+                    g_RenderManager.DebugPrint(240,136,"Saving chunks");
                     break;
                 }
             }
 
-            RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(0.45f,0.45f,0.45f,1.0f),0,0x00000200|0x00000000);
+            g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.45f,0.45f,0.45f,1.0f),0,0x00000200|0x00000000);
             switch(tip)
             {
                 case 0:
-                RenderManager::InstancePtr()->DebugPrint(240,240,"Tip : press R+L to open inventory menu");
+                g_RenderManager.DebugPrint(240,240,"Tip : press R+L to open inventory menu");
                 break;
                 case 1:
-                RenderManager::InstancePtr()->DebugPrint(240,240,"Tip : place items, according to recipe and");
-                RenderManager::InstancePtr()->DebugPrint(240,255,"press R to craft recipe item");
+                g_RenderManager.DebugPrint(240,240,"Tip : place items, according to recipe and");
+                g_RenderManager.DebugPrint(240,255,"press R to craft recipe item");
                 break;
                 case 2:
-                RenderManager::InstancePtr()->DebugPrint(240,240,"Tip : press up button + R trigger to drop item");
+                g_RenderManager.DebugPrint(240,240,"Tip : press up button + R trigger to drop item");
                 break;
                 case 3:
-                RenderManager::InstancePtr()->DebugPrint(240,240,"Tip : aim at crafting table and");
-                RenderManager::InstancePtr()->DebugPrint(240,255,"press R to open crafting table menu");
+                g_RenderManager.DebugPrint(240,240,"Tip : aim at crafting table and");
+                g_RenderManager.DebugPrint(240,255,"press R to open crafting table menu");
                 break;
                 case 4:
-                RenderManager::InstancePtr()->DebugPrint(240,240,"Tip : take food item in your hand and");
-                RenderManager::InstancePtr()->DebugPrint(240,255,"press R trigger to eat it");
+                g_RenderManager.DebugPrint(240,240,"Tip : take food item in your hand and");
+                g_RenderManager.DebugPrint(240,255,"press R trigger to eat it");
                 break;
                 case 5:
-                RenderManager::InstancePtr()->DebugPrint(240,240,"Tip : build a small shelter before the night");
-                RenderManager::InstancePtr()->DebugPrint(240,255,"otherwise zombies will slain you");
+                g_RenderManager.DebugPrint(240,240,"Tip : build a small shelter before the night");
+                g_RenderManager.DebugPrint(240,255,"otherwise zombies will slain you");
                 break;
             }
         }
-        if(RenderManager::InstancePtr()->GetFontLanguage() == RUSSIAN)
+        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
         {
             if(stateName == 0)
             {
-                RenderManager::InstancePtr()->DebugPrint(240,103,"Zagruzka mira");
+                g_RenderManager.DebugPrint(240,103,"Zagruzka mira");
             }
             else
             {
-                RenderManager::InstancePtr()->DebugPrint(240,103,"Generaci^ mira");
+                g_RenderManager.DebugPrint(240,103,"Generaci^ mira");
                 switch(stateName)
                 {
                     case 1:
-                    RenderManager::InstancePtr()->DebugPrint(240,136,"Generaci^ landwafta %i %%",readiness);
+                    g_RenderManager.DebugPrint(240,136,"Generaci^ landwafta %i %%",readiness);
                     break;
                     case 2:
-                    RenderManager::InstancePtr()->DebugPrint(240,136,"Generaci^ pexer");
+                    g_RenderManager.DebugPrint(240,136,"Generaci^ pexer");
                     break;
                     case 3:
-                    RenderManager::InstancePtr()->DebugPrint(240,136,"V@raxivanie t@kov");
+                    g_RenderManager.DebugPrint(240,136,"V@raxivanie t@kov");
                     break;
                     case 4:
-                    RenderManager::InstancePtr()->DebugPrint(240,136,"Pocadka derev$ev");
+                    g_RenderManager.DebugPrint(240,136,"Pocadka derev$ev");
                     break;
                     case 5:
-                    RenderManager::InstancePtr()->DebugPrint(240,136,"Generaci^ rud@");
+                    g_RenderManager.DebugPrint(240,136,"Generaci^ rud@");
                     break;
                     case 6:
-                    RenderManager::InstancePtr()->DebugPrint(240,136,"Rasyet kart@ tene~");
+                    g_RenderManager.DebugPrint(240,136,"Rasyet kart@ tene~");
                     break;
                     case 7:
-                    RenderManager::InstancePtr()->DebugPrint(240,136,"Sohranenie yankov");
+                    g_RenderManager.DebugPrint(240,136,"Sohranenie yankov");
                     break;
                 }
             }
 
-            RenderManager::InstancePtr()->SetFontStyle(default_size,GU_COLOR(0.45f,0.45f,0.45f,1.0f),0,0x00000200|0x00000000);
+            g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.45f,0.45f,0.45f,1.0f),0,0x00000200|0x00000000);
             switch(tip)
             {
                 case 0:
-                RenderManager::InstancePtr()->DebugPrint(240,240,"Najmite prav@~ + lev@~ triger, ytob@ otkr@t$ inventar$");
+                g_RenderManager.DebugPrint(240,240,"Najmite prav@~ + lev@~ triger, ytob@ otkr@t$ inventar$");
                 break;
                 case 1:
-                RenderManager::InstancePtr()->DebugPrint(240,240,"Najmite prav@~ + lev@~ triger, ytob@ otkr@t$ inventar$");
+                g_RenderManager.DebugPrint(240,240,"Najmite prav@~ + lev@~ triger, ytob@ otkr@t$ inventar$");
                 break;
                 case 2:
-                RenderManager::InstancePtr()->DebugPrint(240,240,"Navedite pricel na verstak");
-                RenderManager::InstancePtr()->DebugPrint(240,255,"i najmite prav@~ triger, ytob@ otkr@t$ menq verstaka");
+                g_RenderManager.DebugPrint(240,240,"Navedite pricel na verstak");
+                g_RenderManager.DebugPrint(240,255,"i najmite prav@~ triger, ytob@ otkr@t$ menq verstaka");
                 break;
                 case 3:
-                RenderManager::InstancePtr()->DebugPrint(240,240,"Navedite pricel na verstak");
-                RenderManager::InstancePtr()->DebugPrint(240,255,"i najmite prav@~ triger, ytob@ otkr@t$ menq verstaka");
+                g_RenderManager.DebugPrint(240,240,"Navedite pricel na verstak");
+                g_RenderManager.DebugPrint(240,255,"i najmite prav@~ triger, ytob@ otkr@t$ menq verstaka");
                 break;
                 case 4:
-                RenderManager::InstancePtr()->DebugPrint(240,240,"V@berite edu v inventare ");
-                RenderManager::InstancePtr()->DebugPrint(240,255,"i najmite prav@~ triger, ytob@ s&est$ ee");
+                g_RenderManager.DebugPrint(240,240,"V@berite edu v inventare ");
+                g_RenderManager.DebugPrint(240,255,"i najmite prav@~ triger, ytob@ s&est$ ee");
                 break;
                 case 5:
-                RenderManager::InstancePtr()->DebugPrint(240,240,"V@berite edu v inventare ");
-                RenderManager::InstancePtr()->DebugPrint(240,255,"i najmite prav@~ triger, ytob@ s&est$ ee");
+                g_RenderManager.DebugPrint(240,240,"V@berite edu v inventare ");
+                g_RenderManager.DebugPrint(240,255,"i najmite prav@~ triger, ytob@ s&est$ ee");
                 break;
             }
         }
 
-        RenderManager::InstancePtr()->SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200|0x00000000);
-		RenderManager::InstancePtr()->EndFrame();
+        g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200|0x00000000);
+		g_RenderManager.EndFrame();
 	}
 	return 0;
 }

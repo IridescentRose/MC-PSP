@@ -94,7 +94,6 @@ private:
 
 private:
 
-	RenderManager *mRender;
 	InputHelper *mIhelper;
 	Camera *fppCam;
 

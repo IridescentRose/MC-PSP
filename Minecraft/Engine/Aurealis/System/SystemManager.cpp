@@ -33,7 +33,7 @@ namespace Aurealis
 			for(;;)
 			{
 
-				Graphics::RenderManager::InstancePtr()->StartDialog();
+				Graphics::g_RenderManager.StartDialog();
 
 				switch(sceUtilityMsgDialogGetStatus()) {
 
@@ -50,7 +50,7 @@ namespace Aurealis
 
 				}
 
-				Graphics::RenderManager::InstancePtr()->EndDialog();
+				Graphics::g_RenderManager.EndDialog();
 			}
 		}
 
@@ -69,7 +69,7 @@ namespace Aurealis
 
 			while(done)
 			{
-				Graphics::RenderManager::InstancePtr()->StartDialog();
+				Graphics::g_RenderManager.StartDialog();
 
 				switch(sceUtilityMsgDialogGetStatus()) {
 
@@ -87,7 +87,7 @@ namespace Aurealis
 
 				}
 
-				Graphics::RenderManager::InstancePtr()->EndDialog();
+				Graphics::g_RenderManager.EndDialog();
 			}
 
 			//the return value
@@ -134,7 +134,7 @@ namespace Aurealis
 
 			while(done)
 			{
-				Graphics::RenderManager::InstancePtr()->StartDialog();
+				Graphics::g_RenderManager.StartDialog();
 
 				switch(sceUtilityOskGetStatus())
 				{
@@ -159,7 +159,7 @@ namespace Aurealis
 						break;
 				}
 
-				Graphics::RenderManager::InstancePtr()->EndDialog();
+				Graphics::g_RenderManager.EndDialog();
 			}
 
 			if(oskData.result == PSP_UTILITY_OSK_RESULT_CANCELLED)
@@ -183,7 +183,7 @@ namespace Aurealis
 			while(done)
 			{
 
-				Graphics::RenderManager::InstancePtr()->StartDialog();
+				Graphics::g_RenderManager.StartDialog();
 
 				int test = sceUtilityMsgDialogGetStatus();
 
@@ -204,7 +204,7 @@ namespace Aurealis
 
 				}
 
-				Graphics::RenderManager::InstancePtr()->EndDialog();
+				Graphics::g_RenderManager.EndDialog();
 			}
 		}
 

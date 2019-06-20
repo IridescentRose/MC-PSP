@@ -597,11 +597,6 @@ namespace Aurealis
 			fclose(fp);
 		}
 
-		RenderManager RenderManager::m_RenderManager;
-
-		RenderManager * RenderManager::InstancePtr()
-		{
-			return &m_RenderManager;
-		}
+		RenderManager g_RenderManager;
 	}
 }

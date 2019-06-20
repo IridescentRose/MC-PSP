@@ -129,15 +129,13 @@ namespace Aurealis
 			int GetGpuUsage() {return g_gpu_load;}
 			void CollectPerformance(bool state){performanceCounter = state; }
 
-
-			static RenderManager * InstancePtr();
+			
 			int defaultFontType;
 
 			Camera *mCam;
 
 			protected:
-
-			static RenderManager m_RenderManager;
+				
 
 
 
@@ -182,6 +180,8 @@ namespace Aurealis
 			bool performanceCounter;
 
 		};
+
+		extern RenderManager g_RenderManager;
 	}
 
 }

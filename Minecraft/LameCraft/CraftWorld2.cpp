@@ -745,7 +745,7 @@ void CraftWorld::InitItemVector()
 
 void CraftWorld::UpdateBlocksAndItemsName()
 {
-    if(RenderManager::InstancePtr()->GetFontLanguage() == RUSSIAN)
+    if(g_RenderManager.GetFontLanguage() == RUSSIAN)
     {
         blockTypes[1].name = "Dern";
         blockTypes[2].name = "Zeml^";

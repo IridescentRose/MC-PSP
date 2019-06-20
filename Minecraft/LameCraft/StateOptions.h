@@ -50,7 +50,6 @@ private:
 	Sprite *smoverSprite;
 	Sprite *backSprite;
 
-	RenderManager *mRender;
 
 	int selectPos;
 	int menuState;//0 main,1 load,2 options
