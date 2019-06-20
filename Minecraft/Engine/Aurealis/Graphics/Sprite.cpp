@@ -208,6 +208,33 @@ namespace Aurealis
 			red = green = blue = alpha = 255;
 		}
 
+		Sprite::Sprite(Texture* texture, int startW, int startH, int endW, int endH)
+		{
+			//generate wertices
+			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
+
+			tex = texture;
+			width = endW;
+			height = endH;
+
+			float hstart = (float)startH / (float)tex->pHeight;
+			float wstart = (float)startW / (float)tex->pWidth;
+			float hPercent = (float)(startH + endH) / (float)tex->pHeight;
+			float wPercent = (float)(startW + endW) / (float)tex->pWidth;
+
+			if (vertices)
+			{
+				vertices[0] = getVertex(wstart, hstart, -width / 2, -height / 2, 0.0f);
+				vertices[1] = getVertex(wstart, hPercent, -width / 2, height / 2, 0.0f);
+				vertices[2] = getVertex(wPercent, hstart, width / 2, -height / 2, 0.0f);
+				vertices[3] = getVertex(wPercent, hPercent, width / 2, height / 2, 0.0f);
+			}
+
+			//sceKernelDcacheWritebackInvalidateAll();
+			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturedVertex));
+			red = green = blue = alpha = 255;
+		}
+
 		Sprite::Sprite(int textureNumer,int startW,int startH,int endW,int endH, bool obr)
 		{
 			imageNumber = textureNumer;
@@ -332,7 +359,12 @@ namespace Aurealis
 			sceGuEnable(GU_TEXTURE_2D);
 
 			sceGuColor(GU_RGBA(red, green, blue, alpha));
-			TextureManager::Instance()->SetTextureModeulate(imageNumber, GU_NEAREST, GU_NEAREST);
+			if (tex == NULL) {
+				TextureManager::Instance()->SetTextureModeulate(imageNumber, GU_NEAREST, GU_NEAREST);
+			}
+			else {
+				tex->bindTexture();
+			}
 
 			sceGumDrawArray(GU_TRIANGLE_STRIP,GU_TEXTURE_32BITF|GU_VERTEX_32BITF|GU_TRANSFORM_3D, 4, 0, vertices);
 

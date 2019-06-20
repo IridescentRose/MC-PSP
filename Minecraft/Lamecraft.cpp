@@ -12,7 +12,7 @@
 #include "LameCraft/SplashScreen.h"
 #include <Aurealis/Audio/SoundManager.h>
 #include "LameCraft/TextureHelper.h"
-
+#include <Aurealis/Graphics/TextureUtil.h>
 using namespace Aurealis::Graphics;
 using namespace Aurealis::Utils;
 using namespace Aurealis::System;
@@ -50,16 +50,16 @@ int main()
 	g_RenderManager.SetClearColour(0xFF000000);
 
 	//splash screens
-	
-	SplashScreen* screen = new SplashScreen(TextureHelper::Instance()->GetTexture(TextureHelper::Iridescence), 0, 0, 480, 272, 2);
+	Texture* tex1 = TextureUtil::LoadPng("./Assets/ConstTextures/iridescence.png");
+	Texture* tex2 = TextureUtil::LoadPng("./Assets/ConstTextures/genesis.png");
+	SplashScreen* screen = new SplashScreen(tex1, 0, 0, 480, 272, 2);
 	screen->ShowSplash();
 	delete screen;
-	
-
-	SplashScreen* screen2 = new SplashScreen(TextureHelper::Instance()->GetTexture(TextureHelper::Genesis), 0, 0, 480, 272, 2);
+	SplashScreen* screen2 = new SplashScreen(tex2, 0, 0, 480, 272, 2);
 	screen2->ShowSplash();
 	delete screen2;
-	
+	delete tex1;
+	delete tex2;
 
 	g_RenderManager.SetClearColour(0xFFFFFFFF);
 

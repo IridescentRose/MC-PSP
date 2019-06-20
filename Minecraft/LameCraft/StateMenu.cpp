@@ -180,8 +180,8 @@ void StateMenu::Init()
 
 
     //set render manager instance
-  
-    logoSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Logo),0,0,256,64);
+	texLogo = TextureUtil::LoadPng("./Assets/ConstTextures/logo.png");
+    logoSprite = new Sprite(texLogo,0,0,256,64);
     logoSprite->Scale(1.5f,1.5f);
     logoSprite->SetPosition(240,50);
 
@@ -191,59 +191,61 @@ void StateMenu::Init()
     directionx = rand() % 2;
     directiony = rand() % 2;
 
-    rectFilledSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Rectangles),0,0,230,37);
+	texRectangles = TextureUtil::LoadPng("./Assets/ConstTextures/choose_rectangles.png");
+    rectFilledSprite = new Sprite(texRectangles,0,0,230,37);
     rectFilledSprite->SetPosition(240,150);
     rectFilledSprite->Scale(2,2);
 
-    rectEmptySprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Rectangles),0,37,230,37);
+    rectEmptySprite = new Sprite(texRectangles,0,37,230,37);
     rectEmptySprite->SetPosition(240,150);
     rectEmptySprite->Scale(2,2);
 
-    buttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,0,95,12); // stand
+	texButton = TextureUtil::LoadPng("./Assets/ConstTextures/menu_elements.png");
+    buttonSprite = new Sprite(texButton,0,0,95,12); // stand
     buttonSprite->SetPosition(240,150);
     buttonSprite->Scale(2,2);
 
-    sbuttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,12,95,12); // stand selected
+    sbuttonSprite = new Sprite(texButton,0,12,95,12); // stand selected
     sbuttonSprite->SetPosition(240,150);
     sbuttonSprite->Scale(2,2);
 
-    nbuttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,24,95,12); // dark
+    nbuttonSprite = new Sprite(texButton,0,24,95,12); // dark
     nbuttonSprite->SetPosition(240,150);
     nbuttonSprite->Scale(2,2);
 
     // small buttons
-    buttonSmallSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,0,95,12); // stand
+    buttonSmallSprite = new Sprite(texButton,0,0,95,12); // stand
     buttonSmallSprite->SetPosition(240,150);
     buttonSmallSprite->Scale(0.45f,1.0f);
     buttonSmallSprite->Scale(2,2);
 
-    sbuttonSmallSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,12,95,12); // stand selected
+    sbuttonSmallSprite = new Sprite(texButton,0,12,95,12); // stand selected
     sbuttonSmallSprite->SetPosition(240,150);
     sbuttonSmallSprite->Scale(0.45f,1.0f);
     sbuttonSmallSprite->Scale(2,2);
 
-    nbuttonSmallSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,24,95,12); // dark
+    nbuttonSmallSprite = new Sprite(texButton,0,24,95,12); // dark
     nbuttonSmallSprite->SetPosition(240,150);
     nbuttonSmallSprite->Scale(0.45f,1.0f);
     nbuttonSmallSprite->Scale(2,2);
     //
 
-    mbuttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,36,95,12); // gray
+    mbuttonSprite = new Sprite(texButton,0,36,95,12); // gray
     mbuttonSprite->SetPosition(240,150);
     mbuttonSprite->Scale(2,2);
 
-    smbuttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,48,95,12); // gray selected
+    smbuttonSprite = new Sprite(texButton,0,48,95,12); // gray selected
     smbuttonSprite->SetPosition(240,150);
     smbuttonSprite->Scale(2,2);
 
-
-    lamecraftSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::lameCraft),0,0,320,90);
-    lamecraftSprite->SetPosition(240,50);
-    lamecraftSprite->Scale(1,1);
-
-    blackBackground = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),87,60,8,8);
+    blackBackground = new Sprite(texButton,87,60,8,8);
     blackBackground->SetPosition(240,116);
     blackBackground->Scale(60,22);
+
+
+	lamecraftSprite = new Sprite(texLogo, 0, 0, 320, 90);
+	lamecraftSprite->SetPosition(240, 50);
+	lamecraftSprite->Scale(1, 1);
 
     selectPos = 0;
 
@@ -351,7 +353,9 @@ void StateMenu::CleanUp()
 	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/21.png"));
 	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/22.png"));
 	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/23.png"));
-
+	delete texButton;
+	delete texLogo;
+	delete texRectangles;
 }
 
 void StateMenu::Pause()
@@ -2089,11 +2093,12 @@ void StateMenu::Draw(StateManager* sManager)
 
     //start rendering
     g_RenderManager.StartFrame(1,1,1);
-
+	g_RenderManager.SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	g_RenderManager.CleanBuffers();
 
 	sceGuDisable(GU_DEPTH_TEST);
 	sceGuEnable(GU_BLEND);
-	sceGuColor(GU_COLOR(1, 1, 1, 1.0f));
+	sceGuColor(GU_COLOR(0, 0, 0, 1.0f));
 
 	float dt = timer.GetDeltaTime();
 
@@ -2114,7 +2119,8 @@ void StateMenu::Draw(StateManager* sManager)
 		op1 = 255;
 	}
 
-	bg[currTime]->Draw();
+	bg[currTime]->Alpha(255);
+	bg[currTime]->DrawLinear();
 
 	if (currTime == 23) {
 		bg[0]->Alpha(op1);

@@ -16,7 +16,7 @@
 #include <Aurealis/Graphics/Models/ObjModel.h>
 #include <Aurealis/Graphics/Camera.h>
 #include <Aurealis/Graphics/Sprite.h>
-
+#include <Aurealis/Graphics/TextureUtil.h>
 #include <Aurealis/Graphics/Effects/SkyLight.h>
 #include <Aurealis/Graphics/Effects/SnowBall2.h>
 #include <Aurealis/Graphics/Effects/SkyBox.h>
@@ -110,7 +110,7 @@ private:
     SkyBox *skyBox;
     Destroyer *destroyer;
     StarsBox *starsBox;
-
+	Texture* texButtons;
     float starsAngle;
     bool check;
     bool cycle;

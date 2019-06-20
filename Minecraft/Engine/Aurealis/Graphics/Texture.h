@@ -19,7 +19,7 @@ public:
 
 	unsigned short* data; //32 bit pixel data in (likely) 8888 RGBA
 
-	inline void bindTexture(int minFilter = GU_LINEAR, int maxFilter = GU_LINEAR, bool modulate = false) {
+	inline void bindTexture(int minFilter = GU_NEAREST, int maxFilter = GU_NEAREST, bool modulate = false) {
 		if (modulate) {
 			sceGuTexMode(colorMode, 0, 0, swizzled);
 			sceGuTexFunc(GU_TFX_MODULATE, GU_TCC_RGBA);

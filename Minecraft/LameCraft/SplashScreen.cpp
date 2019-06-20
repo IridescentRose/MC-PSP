@@ -1,20 +1,9 @@
 #include "SplashScreen.h"
 
-SplashScreen::SplashScreen(const char* filename,int startW,int startH,int endW,int endH,float splashTime)
+SplashScreen::SplashScreen(Texture* texture, int startW, int startH, int endW, int endH, float splashTime)
 {
-	// load up the images
-	sprite = new Sprite(filename,startW,startH,endW,endH);
-	sprite->SetPosition(240,136);
-
-	finishTime = splashTime;
-	timer = 0.0f;
-	dt = mTimer.GetDeltaTime();
-}
-
-SplashScreen::SplashScreen(int textureNumber,int startW,int startH,int endW,int endH,float splashTime)
-{
-	sprite = new Sprite(textureNumber,startW,startH,endW,endH);
-	sprite->SetPosition(240,136);
+	sprite = new Sprite(texture, startW, startH, endW, endH);
+	sprite->SetPosition(240, 136);
 
 	finishTime = splashTime;
 	timer = 0.0f;

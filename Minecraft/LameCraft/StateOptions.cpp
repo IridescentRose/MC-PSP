@@ -21,33 +21,34 @@ StateOptions::~StateOptions()
 
 void StateOptions::Init()
 {
-	
-	buttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,0,95,12);
+	texButtons = TextureUtil::LoadPng("./Assets/ConstTextures/menu_elements.png");
+	buttonSprite = new Sprite(texButtons,0,0,95,12);
     buttonSprite->SetPosition(240,150);
     buttonSprite->Scale(2,2);
 
-    nbuttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,24,95,12);
+    nbuttonSprite = new Sprite(texButtons,0,24,95,12);
     nbuttonSprite->SetPosition(240,150);
     nbuttonSprite->Scale(2,2);
 
-	sbuttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,12,95,12);
+	sbuttonSprite = new Sprite(texButtons,0,12,95,12);
     sbuttonSprite->SetPosition(240,150);
     sbuttonSprite->Scale(2,2);
 
-	halfbuttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,0,95,12);
+	halfbuttonSprite = new Sprite(texButtons,0,0,95,12);
 	halfbuttonSprite->Scale(1.5,2);
 	halfbuttonSprite->SetPosition(240,150);
 
-	halfsbuttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,12,95,12);
+	halfsbuttonSprite = new Sprite(texButtons,0,12,95,12);
 	halfsbuttonSprite->Scale(1.5,2);
 	halfsbuttonSprite->SetPosition(240,150);
 
-	backSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Dirt),0,0,32,32);
+	texDirt = TextureUtil::LoadPng("./Assets/ConstTextures/dirt.png");
+	backSprite = new Sprite(texDirt,0,0,32,32);
 	backSprite->Scale(2,2);
 
-	moverSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,60,6,12);
+	moverSprite = new Sprite(texButtons,0,60,6,12);
 	moverSprite->Scale(2,2);
-	smoverSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,60,6,12);
+	smoverSprite = new Sprite(texButtons,0,60,6,12);
 	smoverSprite->Scale(2,2);
 
 	selectPos = 0;
@@ -83,6 +84,8 @@ void StateOptions::CleanUp()
 	delete backSprite;
 	delete moverSprite;
 	delete smoverSprite;
+	delete texButtons;
+	delete texDirt;
 }
 
 void StateOptions::Pause()

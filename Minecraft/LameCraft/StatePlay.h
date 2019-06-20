@@ -16,7 +16,7 @@
 #include <Aurealis/Graphics/Models/ObjModel.h>
 #include <Aurealis/Graphics/Camera.h>
 #include <Aurealis/Graphics/Sprite.h>
-
+#include <Aurealis/Graphics/TextureUtil.h>
 #include <Aurealis/Graphics/Effects/InventoryPlayer.h>
 #include <Aurealis/Graphics/Effects/SkyLight.h>
 #include <Aurealis/Graphics/Effects/SnowBall2.h>
@@ -99,7 +99,7 @@ private:
 
     int FindFurnaceId(int x, int y, int z);
 	int FindChestId(int x, int y, int z);
-
+	Texture* texButtons;
 	void HungerTime();
 	void HealthTime();
 	void OxygenTime();

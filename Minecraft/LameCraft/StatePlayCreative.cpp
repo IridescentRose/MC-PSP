@@ -224,7 +224,7 @@ void StatePlayCreative::Init()
 {
     //set render manager instance
     mIhelper = InputHelper::Instance();
-
+	texButtons = TextureUtil::LoadPng("./Assets/ConstTextures/menu_elements.png");
     WorldGenerator *mGen = new WorldGenerator();
 
 	handAmbient = Timer();
@@ -267,7 +267,7 @@ void StatePlayCreative::InitParametric(bool makeTrees, bool makeWater,bool makeC
 {
     //set render manager instance
     mIhelper = InputHelper::Instance();
-
+	texButtons = TextureUtil::LoadPng("./Assets/ConstTextures/menu_elements.png");
     //then create our perfect world
     mWorld = new CraftWorld();
     mWorld->initWorld(WORLD_SIZE, WORLD_HEIGHT, CHUNK_SIZE);
@@ -434,19 +434,19 @@ void StatePlayCreative::LoadTextures()
     crossSprite->Scale(utilScale,utilScale);
 
     // menu section
-    buttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,0,95,12); // stand
+    buttonSprite = new Sprite(texButtons,0,0,95,12); // stand
     buttonSprite->SetPosition(240,150);
     buttonSprite->Scale(2,2);
 
-    sbuttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,12,95,12); // stand selected
+    sbuttonSprite = new Sprite(texButtons,0,12,95,12); // stand selected
     sbuttonSprite->SetPosition(240,150);
     sbuttonSprite->Scale(2,2);
 
-    nbuttonSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,24,95,12); // dark
+    nbuttonSprite = new Sprite(texButtons,0,24,95,12); // dark
     nbuttonSprite->SetPosition(240,150);
     nbuttonSprite->Scale(2,2);
 
-	moverSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Buttons),0,60,6,12);
+	moverSprite = new Sprite(texButtons,0,60,6,12);
 	moverSprite->Scale(2,2);
 
     // inventory section
@@ -753,6 +753,7 @@ void StatePlayCreative::CleanUp()
     }
 
     delete mWorld;
+	delete texButtons;
 }
 
 void StatePlayCreative::Pause()

@@ -10,6 +10,7 @@
 #include <Aurealis/Utils/Timer.h>
 #include <Aurealis/Utils/pgeZip.h>
 #include <Aurealis/Utils/pgeDir.h>
+#include <Aurealis/Graphics/TextureUtil.h>
 #include <Aurealis/Utils/pge.h>
 
 #include <Aurealis/System/SystemManager.h>
@@ -143,6 +144,8 @@ private:
     float bx, by;
     bool directionx;
     bool directiony;
+
+	Texture *texLogo, *texRectangles, *texButton;
 
     Sprite *buttonSmallSprite;
 	Sprite *sbuttonSmallSprite;

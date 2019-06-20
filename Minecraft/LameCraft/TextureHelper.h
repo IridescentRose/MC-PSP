@@ -19,9 +19,6 @@ public:
 
 	enum Textures
 	{
-		 Iridescence,
-         Genesis,
-		 Logo,
 		 Utils,
 		 Dirt,
 		 Terrain1,
@@ -36,9 +33,6 @@ public:
          SnowBall3,
          zombieTexture,
          Steve,
-		 lameCraft,
-		 Buttons,
-		 Rectangles,
 		 Load,
 		 Red,
 		 Black,
@@ -79,7 +73,6 @@ public:
          creeperTexture,
          sheepTexture,
          sheepFurTexture,
-         background,
 	};
     std::string texturePatch;
     std::string defaultFolder;

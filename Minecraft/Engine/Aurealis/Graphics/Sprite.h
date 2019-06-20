@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <Aurealis/Graphics/Vertex.h>
-
+#include <Aurealis/Graphics/Texture.h>
 namespace Aurealis
 {
 	namespace Graphics
@@ -16,7 +16,9 @@ namespace Aurealis
 			Sprite(const char* filename,int startW,int startH,int endW,int endH);
 			Sprite(int textureNumer, bool constOne);
 			Sprite(int textureNumer);
-			Sprite(int textureNumer,int startW,int startH,int endW,int endH);
+			Sprite(int textureNumer, int startW, int startH, int endW, int endH);
+
+			Sprite(Texture* texture, int startW, int startH, int endW, int endH);
             Sprite(int textureNumer,int startW,int startH,int endW,int endH, bool obr);
 			~Sprite();
 
@@ -39,7 +41,7 @@ namespace Aurealis
 
 		private:
 			int imageNumber;
-
+			Texture* tex;
 			TexturedVertex *vertices;
 
 			float scaleX,scaleY;

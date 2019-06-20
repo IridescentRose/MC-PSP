@@ -4,7 +4,7 @@
 #include <Aurealis/Graphics/RenderManager.h>
 #include <Aurealis/Graphics/Sprite.h>
 #include <Aurealis/Utils/Timer.h>
-#include "TextureHelper.h"
+#include <Aurealis/Graphics/Texture.h>
 
 using namespace Aurealis::Graphics;
 using namespace Aurealis::Utils;
@@ -13,8 +13,7 @@ class SplashScreen
 {
 public:
 
-	SplashScreen(const char* filename,int startW,int startH,int endW,int endH,float splashTime);
-	SplashScreen(int textureNumber,int startW,int startH,int endW,int endH,float splashTime);
+	SplashScreen(Texture* texture,int startW,int startH,int endW,int endH,float splashTime);
 	~SplashScreen();
 
 	void ShowSplash();

@@ -2,7 +2,7 @@
 #define STATEOPTIONS_H_
 
 #include <stdlib.h>
-
+#include <Aurealis/Graphics/TextureUtil.h>
 #include <Aurealis/Utils/StateManager.h>
 #include <Aurealis/Utils/GameState.h>
 
@@ -53,6 +53,8 @@ private:
 
 	int selectPos;
 	int menuState;//0 main,1 load,2 options
+
+	Texture *texButtons, *texDirt;
 
 	//controls
 	int controlPos;

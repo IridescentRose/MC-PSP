@@ -18,17 +18,10 @@ void TextureHelper::Init()
     LoadTexturePackPath();
     texturePatch = defaulPatch+defaultFolder;
 
-	FastLoadTexture("title/iridescence.png");
-    FastLoadTexture("title/genesis.png");
-    FastLoadTexture("environment/moon.png");
+	FastLoadTexture("environment/moon.png");
     FastLoadTexture("hud/utils.png");
-    FastLoadTexture("title/dirt.png");
     FastLoadTexture("hud/blue.png");
-    FastLoadTexture("title/logo.png");
-    FastLoadTexture("title/choose_rectangles.png");
-    FastLoadTexture("title/menu_elements.png");
     FastLoadTexture("title/load.png");
-	FastLoadTexture("title/background.png");
 
 	InitSecondPhase();
 }
@@ -36,7 +29,6 @@ void TextureHelper::Init()
 void TextureHelper::InitSecondPhase() {
 
 	FastLoadTexture("environment/sun.png");
-	FastLoadTexture("environment/moon.png");
 	FastLoadTexture("environment/stars.png");
 	FastLoadTexture("terrain.png");
 	FastLoadTexture("terrain_mips.png");
@@ -91,23 +83,6 @@ int TextureHelper::GetTexture(Textures texture)
 {
 	switch(texture)
 	{
-		case Iridescence:
-		{
-			fileName = texturePatch + "title/iridescence.png";
-			return TextureManager::Instance()->GetTextureNumber(fileName);
-		}
-		break;
-		case Genesis:
-		{
-			fileName = texturePatch + "title/genesis.png";
-			return TextureManager::Instance()->GetTextureNumber(fileName);
-		}
-		break;
-		case Logo:
-		{
-			fileName = texturePatch + "environment/moon.png";
-			return TextureManager::Instance()->GetTextureNumber(fileName);
-		}
 		break;
 		case Utils:
 		{
@@ -190,24 +165,6 @@ int TextureHelper::GetTexture(Textures texture)
         case Steve:
 		{
 			fileName = texturePatch + "entity/steve.png";
-			return TextureManager::Instance()->GetTextureNumber(fileName);
-		}
-		break;
-		case lameCraft:
-		{
-			fileName = texturePatch + "title/logo.png";
-			return TextureManager::Instance()->GetTextureNumber(fileName);
-		}
-		break;
-		case Buttons:
-		{
-			fileName = texturePatch + "title/menu_elements.png";
-			return TextureManager::Instance()->GetTextureNumber(fileName);
-		}
-		break;
-        case Rectangles:
-		{
-			fileName = texturePatch + "title/choose_rectangles.png";
 			return TextureManager::Instance()->GetTextureNumber(fileName);
 		}
 		break;
@@ -451,12 +408,6 @@ int TextureHelper::GetTexture(Textures texture)
 			return TextureManager::Instance()->GetTextureNumber(fileName);
 		}
 		break;
-		case background:
-		{
-			fileName = texturePatch + "title/background.png";
-			return TextureManager::Instance()->GetTextureNumber(fileName);
-		}
-		break;
 	}
 	return 0;
 }
@@ -525,7 +476,6 @@ void TextureHelper::SetTexturePack(std::string name)
     FastLoadTexture("entity/creeper.png");
     FastLoadTexture("entity/sheep.png");
     FastLoadTexture("entity/sheep_fur.png");
-    FastLoadTexture("title/background.png");
 }
 
 void TextureHelper::FastRemoveTexture(std::string name)
