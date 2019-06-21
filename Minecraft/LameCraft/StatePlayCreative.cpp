@@ -329,7 +329,7 @@ void StatePlayCreative::LoadMap(std::string fileName,bool compressed)
 
     //set render manager instance
     mIhelper = InputHelper::Instance();
-
+	texButtons = TextureUtil::LoadPng("./Assets/ConstTextures/menu_elements.png");
     //save name
     saveFileName = fileName;
     //set start position

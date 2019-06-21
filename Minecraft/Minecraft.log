@@ -9,9 +9,8 @@
   [3]          0 bytes | NULL
   [4]     256507 bytes | PIC1.png
   [5]          0 bytes | NULL
-  [6]    3619322 bytes | Minecraft2.prx
+  [6]    3619402 bytes | Minecraft2.prx
   [7]          0 bytes | NULL
   make[1]: Leaving directory `C:/Users/Nathan/Desktop/Minecraft2-PSP/Minecraft'
           1 file(s) moved.
   Press any key to continue . . . 
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.MakeFile.Targets(44,5): error MSB3073: The command "build.bat" exited with code -1073741819.

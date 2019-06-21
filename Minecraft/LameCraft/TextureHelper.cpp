@@ -21,8 +21,6 @@ void TextureHelper::Init()
 	FastLoadTexture("environment/moon.png");
     FastLoadTexture("hud/utils.png");
     FastLoadTexture("hud/blue.png");
-    FastLoadTexture("title/load.png");
-
 	InitSecondPhase();
 }
 
@@ -87,12 +85,6 @@ int TextureHelper::GetTexture(Textures texture)
 		case Utils:
 		{
 			fileName = texturePatch + "hud/utils.png";
-			return TextureManager::Instance()->GetTextureNumber(fileName);
-		}
-		break;
-		case Dirt:
-		{
-			fileName = texturePatch + "title/dirt.png";
 			return TextureManager::Instance()->GetTextureNumber(fileName);
 		}
 		break;
@@ -165,12 +157,6 @@ int TextureHelper::GetTexture(Textures texture)
         case Steve:
 		{
 			fileName = texturePatch + "entity/steve.png";
-			return TextureManager::Instance()->GetTextureNumber(fileName);
-		}
-		break;
-		case Load:
-		{
-			fileName = texturePatch + "title/load.png";
 			return TextureManager::Instance()->GetTextureNumber(fileName);
 		}
 		break;

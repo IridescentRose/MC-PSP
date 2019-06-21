@@ -46,14 +46,16 @@ void LoadingScreen::KillLoadingScreen()
 
 int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
 {
+	Texture* texDirt = TextureUtil::LoadPng("./Assets/ConstTextures/dirt.png");
+	Texture* texLoad = TextureUtil::LoadPng("./Assets/ConstTextures/load.png");
 	// load up the images
-	backSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Dirt),0,0,32,32);
+	backSprite = new Sprite(texDirt,0,0,32,32);
 	backSprite->Scale(2,2);
 
-    loadSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Load),0,0,16,8);
+    loadSprite = new Sprite(texLoad,0,0,16,8);
 	loadSprite->Scale(1,0.5f);
 
-    subLoadSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Load),0,8,16,8);
+    subLoadSprite = new Sprite(texLoad,0,8,16,8);
 	subLoadSprite->Scale(1,0.5f);
 
 
@@ -242,6 +244,9 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
         g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200|0x00000000);
 		g_RenderManager.EndFrame();
 	}
+
+	delete texDirt;
+	delete texLoad;
 	return 0;
 }
 

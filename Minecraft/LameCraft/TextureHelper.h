@@ -20,7 +20,6 @@ public:
 	enum Textures
 	{
 		 Utils,
-		 Dirt,
 		 Terrain1,
 		 Terrain2,
 		 WaterAnimation,
@@ -33,7 +32,6 @@ public:
          SnowBall3,
          zombieTexture,
          Steve,
-		 Load,
 		 Red,
 		 Black,
 		 PumpkinMask,

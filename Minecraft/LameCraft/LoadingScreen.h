@@ -2,7 +2,7 @@
 #define LOADINGSCREEN_H_
 
 #include <pspkerneltypes.h>
-
+#include <Aurealis/Graphics/TextureUtil.h>
 class LoadingScreen
 {
 
