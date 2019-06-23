@@ -1,5 +1,5 @@
 #include <Aurealis/Graphics/Effects/Particle.h>
-#include <Aurealis/Graphics/TextureManager.h>
+#include <LameCraft/SharedTextureData.h>
 
 #define PI 3.1415926535897f
 #define DEG_TO_RAD (PI / 180.0f)
@@ -11,7 +11,7 @@ namespace Aurealis
 		Particle::Particle(CraftWorld* world, std::string _name, Vector3 _position)
 		{
 		    particleVertices = NULL;
-		    texture = -1;
+		    texture = NULL;
 
 			position = _position;
 			name = _name;
@@ -48,7 +48,7 @@ namespace Aurealis
 
 			if(name == "smoke")
             {
-                texture = TextureHelper::Instance()->GetTexture(TextureHelper::smokeTexture);
+                texture = g_TextureData.smokeTexture;
 
                 SetMaxLiveTime(3000);
                 switch(rand() % 8)
@@ -84,7 +84,7 @@ namespace Aurealis
 
 			if(name == "black smoke")
             {
-                texture = TextureHelper::Instance()->GetTexture(TextureHelper::smokeTexture);
+                texture = g_TextureData.smokeTexture;
 
                 SetMaxLiveTime(900);
                 SetLiveTime(600,900);
@@ -101,7 +101,7 @@ namespace Aurealis
             }
             if(name == "note")
             {
-                texture = TextureHelper::Instance()->GetTexture(TextureHelper::noteTexture);
+                texture = g_TextureData.noteTexture;
 
                 SetMaxLiveTime(370);
                 SetLiveTime(370);
@@ -117,7 +117,7 @@ namespace Aurealis
             }
 			if(name == "explosion")
             {
-                texture = TextureHelper::Instance()->GetTexture(TextureHelper::explosionTexture);
+                texture = g_TextureData.explosionTexture;
 
                 SetMaxLiveTime(600);
                 SetLiveTime(500,600);
@@ -131,7 +131,7 @@ namespace Aurealis
             }
             if(name == "flame")
             {
-                texture = TextureHelper::Instance()->GetTexture(TextureHelper::flameTexture);
+                texture = g_TextureData.flameTexture;
 
                 SetMaxLiveTime(900);
                 SetLiveTime(700,900);
@@ -146,14 +146,14 @@ namespace Aurealis
             }
             if(name == "bubble")
             {
-                texture = TextureHelper::Instance()->GetTexture(TextureHelper::bubbleTexture);
+                texture = g_TextureData.bubbleTexture;
                 timeToLive = 0.6f + (rand() % 6) / 10.0f;
                 gravity = 0.1f;
                 totalFrames = 1;
             }
             if(name == "block crack")
             {
-                texture = TextureHelper::Instance()->GetTexture(TextureHelper::Terrain1);
+                texture = g_TextureData.Terrain1;
 
                 SetLiveTime(600,1200);
                 SetScale(0.05f, 0.11f);
@@ -168,7 +168,7 @@ namespace Aurealis
 
             if(name == "item crack")
             {
-                texture = TextureHelper::Instance()->GetTexture(TextureHelper::Items1);
+                texture = g_TextureData.Items1;
 
                 SetLiveTime(600,1200);
                 SetScale(0.04f, 0.09f);
@@ -649,7 +649,7 @@ namespace Aurealis
                 {
                     sceGuColor(GU_COLOR(1,1,1,1));
                 }
-                TextureManager::Instance()->SetTextureModeulate(texture);
+                texture->bindTexture(0, 0, true);
 
                 sceGuEnable(GU_TEXTURE_2D);
                 sceGuEnable(GU_DEPTH_TEST);

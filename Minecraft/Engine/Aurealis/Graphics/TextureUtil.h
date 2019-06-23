@@ -109,5 +109,5 @@ public:
 
 	static Texture* LoadPng(std::string fileName);
 	static Texture* LoadPng(const char* filename, int ColorMode, int Swizzle, int Vram);
-	
+	static Texture* LoadPngTexturePack(std::string texPackName, std::string filename);
 };

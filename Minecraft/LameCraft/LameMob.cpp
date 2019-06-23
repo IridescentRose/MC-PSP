@@ -84,7 +84,7 @@ LameMob::LameMob(Vector3 mobPosition, int mobNumber)
     myLight = 1.0f;
 
     lastKickType = -1;
-    mainTexture = -1;
+    mainTexture = NULL;
 }
 
 LameMob::~LameMob()

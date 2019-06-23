@@ -1,5 +1,5 @@
 #include <Aurealis/Graphics/Sprite.h>
-#include <Aurealis/Graphics/TextureManager.h>
+#include <Aurealis/Graphics/TextureUtil.h>
 
 namespace Aurealis
 {
@@ -9,7 +9,6 @@ namespace Aurealis
 
 		Sprite::Sprite()
 		{
-			imageNumber = 0;
 			red = green = blue = alpha = 255;
 		}
 
@@ -26,194 +25,61 @@ namespace Aurealis
 
 		Sprite::Sprite(const char* filename)
 		{
-			TextureManager::Instance()->LoadTexture(filename);
-
-			imageNumber = TextureManager::Instance()->GetTextureNumber(filename);
+			tex = TextureUtil::LoadPng(filename);
 
 			//generate wertices
 			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex) );
 
-			Image *img = TextureManager::Instance()->Images[imageNumber];
+			width = tex->width;
+			height = tex->height;
 
-			width = img->Width;
-			height = img->Height;
-
-			float hPercent = (float)img->Height / (float)img->power2Height;
-			float wPercent = (float)img->Width / (float)img->power2Width;
+			float hPercent = (float)tex->height / (float)tex->pHeight;
+			float wPercent = (float)tex->width / (float)tex->pWidth;
 
 			if( vertices )
 			{
-				vertices[0] = getVertex(0.0f,0.0f,-img->Width/2,-img->Height/2,0.0f);
-				vertices[1] = getVertex(0.0f,hPercent,-img->Width/2, img->Height/2,0.0f);
-				vertices[2] = getVertex(wPercent,0.0f,img->Width/2,-img->Height/2,0.0f);
-				vertices[3] = getVertex(wPercent,hPercent,img->Width/2, img->Height/2,0.0f);
+				vertices[0] = getVertex(0.0f,0.0f,-tex->width/2,-tex->height/2,0.0f);
+				vertices[1] = getVertex(0.0f,hPercent,-tex->width/2, tex->height/2,0.0f);
+				vertices[2] = getVertex(wPercent,0.0f,tex->width/2,-tex->height/2,0.0f);
+				vertices[3] = getVertex(wPercent,hPercent,tex->width/2, tex->height/2,0.0f);
 			}
 
 			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturedVertex));
 			red = green = blue = alpha = 255;
 		}
 
-		Sprite::Sprite(std::string filename, bool constOne)
+		Sprite::Sprite(Texture* texture)
 		{
-		    if(constOne)
-            {
-                TextureManager::Instance()->LoadConstTexture(filename);
-
-                imageNumber = TextureManager::Instance()->GetConstTextureNumber(filename);
-
-                //generate wertices
-                vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex) );
-
-                Image *img = TextureManager::Instance()->ConstImages[imageNumber];
-
-                width = img->Width;
-                height = img->Height;
-
-                float hPercent = (float)img->Height / (float)img->power2Height;
-                float wPercent = (float)img->Width / (float)img->power2Width;
-
-                if( vertices )
-                {
-                    vertices[0] = getVertex(0.0f,0.0f,-img->Width/2,-img->Height/2,0.0f);
-                    vertices[1] = getVertex(0.0f,hPercent,-img->Width/2, img->Height/2,0.0f);
-                    vertices[2] = getVertex(wPercent,0.0f,img->Width/2,-img->Height/2,0.0f);
-                    vertices[3] = getVertex(wPercent,hPercent,img->Width/2, img->Height/2,0.0f);
-                }
-
-                sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturedVertex));
-				red = green = blue = alpha = 255;
-            }
-		}
-
-		Sprite::Sprite(int textureNumer)
-		{
-			imageNumber = textureNumer;
+			tex = texture;
 
 			//generate wertices
 			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex) );
 
-			Image *img = TextureManager::Instance()->Images[imageNumber];
+			width = tex->width;
+			height = tex->height;
 
-			width = img->Width;
-			height = img->Height;
-
-			float hPercent = (float)img->Height / (float)img->power2Height;
-			float wPercent = (float)img->Width / (float)img->power2Width;
+			float hPercent = (float)tex->height / (float)tex->pHeight;
+			float wPercent = (float)tex->width / (float)tex->pWidth;
 
 			if( vertices )
 			{
-				vertices[0] = getVertex(0.0f,0.0f,-img->Width/2,-img->Height/2,0.0f);
-				vertices[1] = getVertex(0.0f,hPercent,-img->Width/2, img->Height/2,0.0f);
-				vertices[2] = getVertex(wPercent,0.0f,img->Width/2,-img->Height/2,0.0f);
-				vertices[3] = getVertex(wPercent,hPercent,img->Width/2, img->Height/2,0.0f);
+				vertices[0] = getVertex(0.0f,0.0f,-tex->width/2,-tex->height/2,0.0f);
+				vertices[1] = getVertex(0.0f,hPercent,-tex->width/2, tex->height/2,0.0f);
+				vertices[2] = getVertex(wPercent,0.0f,tex->width/2,-tex->height/2,0.0f);
+				vertices[3] = getVertex(wPercent,hPercent,tex->width/2, tex->height/2,0.0f);
 			}
 
 			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturedVertex));
 				red = green = blue = alpha = 255;
-		}
-
-		Sprite::Sprite(int textureNumer, bool constOne)
-		{
-			imageNumber = textureNumer;
-
-			//generate wertices
-			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
-            Image *img;
-            if(constOne)
-            {
-                img = TextureManager::Instance()->ConstImages[imageNumber];
-            }
-			else
-            {
-                img = TextureManager::Instance()->Images[imageNumber];
-            }
-
-			width = img->Width;
-			height = img->Height;
-
-			float hPercent = (float)img->Height / (float)img->power2Height;
-			float wPercent = (float)img->Width / (float)img->power2Width;
-
-			if( vertices )
-			{
-				vertices[0] = getVertex(0.0f,0.0f,-img->Width/2,-img->Height/2,0.0f);
-				vertices[1] = getVertex(0.0f,hPercent,-img->Width/2, img->Height/2,0.0f);
-				vertices[2] = getVertex(wPercent,0.0f,img->Width/2,-img->Height/2,0.0f);
-				vertices[3] = getVertex(wPercent,hPercent,img->Width/2, img->Height/2,0.0f);
-			}
-
-			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturedVertex));
-			red = green = blue = alpha = 255;
 		}
 
 		Sprite::Sprite(const char* filename,int startW,int startH,int endW,int endH)
 		{
-			TextureManager::Instance()->LoadTexture(filename);
-
-			imageNumber = TextureManager::Instance()->GetTextureNumber(filename);
+			tex = TextureUtil::LoadPng(filename);
 
 			//generate wertices
 			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex) );
 
-			Image *img = TextureManager::Instance()->Images[imageNumber];
-
-			width = endW;
-			height = endH;
-
-			float hstart = (float)startH / (float)img->power2Height;
-			float wstart = (float)startW / (float)img->power2Width;
-			float hPercent = (float)(startH + endH) / (float)img->power2Height;
-			float wPercent = (float)(startW + endW) / (float)img->power2Width;
-
-			if( vertices )
-			{
-				vertices[0] = getVertex(wstart,hstart,-width/2,-height/2,0.0f);
-				vertices[1] = getVertex(wstart,hPercent,-width/2, height/2,0.0f);
-				vertices[2] = getVertex(wPercent,hstart,width/2,-height/2,0.0f);
-				vertices[3] = getVertex(wPercent,hPercent,width/2, height/2,0.0f);
-			}
-
-			//sceKernelDcacheWritebackInvalidateAll();
-			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturedVertex));
-			red = green = blue = alpha = 255;
-		}
-
-		Sprite::Sprite(int textureNumer,int startW,int startH,int endW,int endH)
-		{
-			imageNumber = textureNumer;
-
-			//generate wertices
-			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex) );
-
-			Image *img = TextureManager::Instance()->Images[imageNumber];
-
-			width = endW;
-			height = endH;
-
-			float hstart = (float)startH / (float)img->power2Height;
-			float wstart = (float)startW / (float)img->power2Width;
-			float hPercent = (float)(startH + endH) / (float)img->power2Height;
-			float wPercent = (float)(startW + endW) / (float)img->power2Width;
-
-			if( vertices )
-			{
-				vertices[0] = getVertex(wstart,hstart,-width/2,-height/2,0.0f);
-				vertices[1] = getVertex(wstart,hPercent,-width/2, height/2,0.0f);
-				vertices[2] = getVertex(wPercent,hstart,width/2,-height/2,0.0f);
-				vertices[3] = getVertex(wPercent,hPercent,width/2, height/2,0.0f);
-			}
-
-			//sceKernelDcacheWritebackInvalidateAll();
-			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturedVertex));
-			red = green = blue = alpha = 255;
-		}
-
-		Sprite::Sprite(Texture* texture, int startW, int startH, int endW, int endH)
-		{
-			//generate wertices
-			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
-
-			tex = texture;
 			width = endW;
 			height = endH;
 
@@ -222,12 +88,12 @@ namespace Aurealis
 			float hPercent = (float)(startH + endH) / (float)tex->pHeight;
 			float wPercent = (float)(startW + endW) / (float)tex->pWidth;
 
-			if (vertices)
+			if( vertices )
 			{
-				vertices[0] = getVertex(wstart, hstart, -width / 2, -height / 2, 0.0f);
-				vertices[1] = getVertex(wstart, hPercent, -width / 2, height / 2, 0.0f);
-				vertices[2] = getVertex(wPercent, hstart, width / 2, -height / 2, 0.0f);
-				vertices[3] = getVertex(wPercent, hPercent, width / 2, height / 2, 0.0f);
+				vertices[0] = getVertex(wstart,hstart,-width/2,-height/2,0.0f);
+				vertices[1] = getVertex(wstart,hPercent,-width/2, height/2,0.0f);
+				vertices[2] = getVertex(wPercent,hstart,width/2,-height/2,0.0f);
+				vertices[3] = getVertex(wPercent,hPercent,width/2, height/2,0.0f);
 			}
 
 			//sceKernelDcacheWritebackInvalidateAll();
@@ -235,29 +101,27 @@ namespace Aurealis
 			red = green = blue = alpha = 255;
 		}
 
-		Sprite::Sprite(int textureNumer,int startW,int startH,int endW,int endH, bool obr)
+		Sprite::Sprite(Texture* texture,int startW,int startH,int endW,int endH)
 		{
-			imageNumber = textureNumer;
+			tex = texture;
 
 			//generate wertices
 			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex) );
 
-			Image *img = TextureManager::Instance()->Images[imageNumber];
-
 			width = endW;
 			height = endH;
 
-			float hstart = (float)startH / (float)img->power2Height;
-			float wstart = (float)startW / (float)img->power2Width;
-			float hPercent = (float)(startH + endH) / (float)img->power2Height;
-			float wPercent = (float)(startW + endW) / (float)img->power2Width;
+			float hstart = (float)startH / (float)tex->pHeight;
+			float wstart = (float)startW / (float)tex->pWidth;
+			float hPercent = (float)(startH + endH) / (float)tex->pHeight;
+			float wPercent = (float)(startW + endW) / (float)tex->pWidth;
 
 			if( vertices )
 			{
-				vertices[0] = getVertex(wstart,hstart,0,0,0.0f);
-				vertices[1] = getVertex(wstart,hPercent,0,height,0.0f);
-				vertices[2] = getVertex(wPercent,hstart,width,0,0.0f);
-				vertices[3] = getVertex(wPercent,hPercent,width, height,0.0f);
+				vertices[0] = getVertex(wstart,hstart,-width/2,-height/2,0.0f);
+				vertices[1] = getVertex(wstart,hPercent,-width/2, height/2,0.0f);
+				vertices[2] = getVertex(wPercent,hstart,width/2,-height/2,0.0f);
+				vertices[3] = getVertex(wPercent,hPercent,width/2, height/2,0.0f);
 			}
 
 			//sceKernelDcacheWritebackInvalidateAll();
@@ -265,22 +129,48 @@ namespace Aurealis
 			red = green = blue = alpha = 255;
 		}
 
-        void Sprite::SetMapPos(int textureNumer,int startW,int startH,int endW,int endH)
+		Sprite::Sprite(Texture* texture, int startW, int startH, int endW, int endH, bool obr)
 		{
-			imageNumber = textureNumer;
+			tex = texture;
+
+			//generate wertices
+			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
+
+			width = tex->width;
+			height = tex->height;
+
+			float hstart = (float)startH / (float)tex->pHeight;
+			float wstart = (float)startW / (float)tex->pWidth;
+			float hPercent = (float)(startH + endH) / (float)tex->pHeight;
+			float wPercent = (float)(startW + endW) / (float)tex->pWidth;
+
+			if (vertices)
+			{
+				vertices[0] = getVertex(wstart, hstart, 0, 0, 0.0f);
+				vertices[1] = getVertex(wstart, hPercent, 0, height, 0.0f);
+				vertices[2] = getVertex(wPercent, hstart, width, 0, 0.0f);
+				vertices[3] = getVertex(wPercent, hPercent, width, height, 0.0f);
+			}
+
+			//sceKernelDcacheWritebackInvalidateAll();
+			sceKernelDcacheWritebackInvalidateRange(vertices, 4 * sizeof(TexturedVertex));
+			red = green = blue = alpha = 255;
+		}
+
+        void Sprite::SetMapPos(Texture* texture,int startW,int startH,int endW,int endH)
+		{
+			tex = texture;
             free(vertices);
 			//generate wertices
 			vertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex) );
 
-			Image *img = TextureManager::Instance()->Images[imageNumber];
-
 			width = endW;
 			height = endH;
 
-			float hstart = (float)startH / (float)img->power2Height;
-			float wstart = (float)startW / (float)img->power2Width;
-			float hPercent = (float)(startH + endH) / (float)img->power2Height;
-			float wPercent = (float)(startW + endW) / (float)img->power2Width;
+			float hstart = (float)startH / (float)tex->pHeight;
+			float wstart = (float)startW / (float)tex->pWidth;
+			float hPercent = (float)(startH + endH) / (float)tex->pHeight;
+			float wPercent = (float)(startW + endW) / (float)tex->pWidth;
 
 			if( vertices )
 			{
@@ -353,20 +243,32 @@ namespace Aurealis
 		{
 			sceGumPushMatrix();
 
-			ScePspFVector3 loc = {posX,posY,0.0f};
+			ScePspFVector3 loc = { posX,posY,0.0f };
 			sceGumTranslate(&loc);
 
 			sceGuEnable(GU_TEXTURE_2D);
 
 			sceGuColor(GU_RGBA(red, green, blue, alpha));
-			if (tex == NULL) {
-				TextureManager::Instance()->SetTextureModeulate(imageNumber, GU_NEAREST, GU_NEAREST);
-			}
-			else {
-				tex->bindTexture();
-			}
+			tex->bindTexture(GU_NEAREST, GU_NEAREST, true);
 
-			sceGumDrawArray(GU_TRIANGLE_STRIP,GU_TEXTURE_32BITF|GU_VERTEX_32BITF|GU_TRANSFORM_3D, 4, 0, vertices);
+			sceGumDrawArray(GU_TRIANGLE_STRIP, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, 4, 0, vertices);
+
+			sceGuDisable(GU_TEXTURE_2D);
+			sceGumPopMatrix();
+		}
+
+		void Sprite::DrawNoModSet()
+		{
+			sceGumPushMatrix();
+
+			ScePspFVector3 loc = { posX,posY,0.0f };
+			sceGumTranslate(&loc);
+
+			sceGuEnable(GU_TEXTURE_2D);
+
+			tex->bindTexture(GU_NEAREST, GU_NEAREST, true);
+
+			sceGumDrawArray(GU_TRIANGLE_STRIP, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, 4, 0, vertices);
 
 			sceGuDisable(GU_TEXTURE_2D);
 			sceGumPopMatrix();
@@ -382,24 +284,7 @@ namespace Aurealis
 			sceGuEnable(GU_TEXTURE_2D);
 
 			sceGuColor(GU_RGBA(red, green, blue, alpha));
-			TextureManager::Instance()->SetTextureModeulate(imageNumber, GU_LINEAR, GU_LINEAR);
-
-			sceGumDrawArray(GU_TRIANGLE_STRIP,GU_TEXTURE_32BITF|GU_VERTEX_32BITF|GU_TRANSFORM_3D, 4, 0, vertices);
-
-			sceGuDisable(GU_TEXTURE_2D);
-			sceGumPopMatrix();
-		}
-
-        void Sprite::ConstDraw()
-		{
-			sceGumPushMatrix();
-
-			ScePspFVector3 loc = {posX,posY,0.0f};
-			sceGumTranslate(&loc);
-
-			sceGuEnable(GU_TEXTURE_2D);
-			TextureManager::Instance()->SetConstTexture(imageNumber,GU_NEAREST,GU_NEAREST);
-
+			tex->bindTexture(GU_LINEAR, GU_LINEAR, true);
 			sceGumDrawArray(GU_TRIANGLE_STRIP,GU_TEXTURE_32BITF|GU_VERTEX_32BITF|GU_TRANSFORM_3D, 4, 0, vertices);
 
 			sceGuDisable(GU_TEXTURE_2D);
@@ -408,7 +293,7 @@ namespace Aurealis
 
 		void Sprite::RemoveImage()
 		{
-			TextureManager::Instance()->RemoveTexture(imageNumber);
+			delete tex;
 		}
 
 	}

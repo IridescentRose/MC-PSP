@@ -1,6 +1,4 @@
 #include "Creeper2.h"
-#include <Aurealis/Graphics/TextureManager.h>
-
 #define PI 3.14159f
 #define DEG_TO_RAD (PI / 180.0f)
 #define PIXEL 1.0f / 16.0f
@@ -50,7 +48,7 @@ Creeper::Creeper(Vector3 position1, int number1) : LameMob(position1, number1)
 
     UpdateBBox();
 
-    mainTexture = TextureHelper::Instance()->GetTexture(TextureHelper::creeperTexture);
+    mainTexture = g_TextureData.creeperTexture;
 
     playFuseSound = false;
 
@@ -735,7 +733,7 @@ void Creeper::Render(Frustum &camFrustum, float dt)
                 sceGuColor(GU_COLOR(myLight,myLight,myLight,1.0f));
             }
 
-            TextureManager::Instance()->SetTextureModeulate(mainTexture);
+            (mainTexture)->bindTexture(0, 0, true);
 
 
             if(startExplosion == false)

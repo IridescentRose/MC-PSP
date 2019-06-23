@@ -1,5 +1,4 @@
 #include "Sheep2.h"
-#include <Aurealis/Graphics/TextureManager.h>
 
 #define PI 3.14159f
 #define DEG_TO_RAD (PI / 180.0f)
@@ -64,8 +63,8 @@ Sheep::Sheep(Vector3 position1, int number1) : LameMob(position1, number1)
     lastCommand = 0;
     freezedTimerMax = 600.0f;
 
-    mainTexture = TextureHelper::Instance()->GetTexture(TextureHelper::sheepTexture);
-    furTexture = TextureHelper::Instance()->GetTexture(TextureHelper::sheepFurTexture);
+    mainTexture = g_TextureData.sheepTexture;
+    furTexture = g_TextureData.sheepFurTexture;
 }
 
 Sheep::~Sheep()
@@ -698,7 +697,7 @@ void Sheep::Render(Frustum &camFrustum, float dt)
                 sceGuColor(GU_COLOR(myLight*furColor.x,myLight*furColor.y,myLight*furColor.z,1.0f));
             }
 
-            TextureManager::Instance()->SetTextureModeulate(mainTexture);
+			mainTexture->bindTexture(0, 0, true);
 
             sceGuEnable(GU_TEXTURE_2D);
             sceGuEnable(GU_DEPTH_TEST);
@@ -745,7 +744,7 @@ void Sheep::Render(Frustum &camFrustum, float dt)
                     sceGuColor(GU_COLOR(myLight*furColor.x,myLight*furColor.y,myLight*furColor.z,1.0f));
                 }
 
-                TextureManager::Instance()->SetTextureModeulate(furTexture);
+                (furTexture)->bindTexture(0, 0, true);
                 // body fur
                 sceGumPushMatrix();
 
@@ -791,7 +790,7 @@ void Sheep::Render(Frustum &camFrustum, float dt)
                 sceGuColor(GU_COLOR(myLight,myLight,myLight,1.0f));
             }
 
-            TextureManager::Instance()->SetTextureModeulate(mainTexture);
+            (mainTexture)->bindTexture(0, 0, true);
 
             sceGumPushMatrix();
             ScePspFVector3 loc2 = {PIXEL*10,PIXEL*4,0};
@@ -807,7 +806,7 @@ void Sheep::Render(Frustum &camFrustum, float dt)
 
             if(!sheared)
             {
-                TextureManager::Instance()->SetTextureModeulate(furTexture);
+                (furTexture)->bindTexture(0, 0, true);
                 if((damaged == true && damagedTimer > 0.25f) || killed == true)
                 {
                     sceGuColor(GU_COLOR(myLight*furColor.x*0.8f,myLight*furColor.y*0.1,myLight*furColor.z*0.1,1.0f));
@@ -888,7 +887,7 @@ void Sheep::Render(Frustum &camFrustum, float dt)
             {
                 sceGuColor(GU_COLOR(myLight,myLight,myLight,1.0f));
             }
-            TextureManager::Instance()->SetTextureModeulate(mainTexture);
+            (mainTexture)->bindTexture(0, 0, true);
 
             sceGumPushMatrix();
             ScePspFVector3 loc3 = {-PIXEL*7,-PIXEL*5,PIXEL*3};

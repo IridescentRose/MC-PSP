@@ -1,5 +1,101 @@
 ﻿  make -f MakefileGame all
   make[1]: Entering directory `C:/Users/Nathan/Desktop/Minecraft2-PSP/Minecraft'
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/StatePlay.o LameCraft/StatePlay.cpp
+LameCraft/StatePlay.cpp(6,1): warning G2C167E3C: "PI" redefined
+  In file included from ./Engine/Aurealis/Graphics/Effects/WeatherSystem.h:8,
+                   from ./Lamecraft/CraftWorld2.h:15,
+                   from ./Engine/Aurealis/Graphics/Effects/InventoryPlayer.h:7,
+                   from LameCraft/StatePlay.h:19,
+                   from LameCraft/StatePlay.cpp:1:
+./LameCraft/LameFunctions.h(4,1): warning GEE513BF5: this is the location of the previous definition
+  In file included from ./3libs/noisepp/Noise.h:40,
+                   from LameCraft/WorldGenerator.h:8,
+                   from LameCraft/StatePlay.cpp:3:
+  ./3libs/noisepp/NoiseCheckerboard.h: In member function 'virtual noisepp::Real noisepp::CheckerboardElement2D::getValue(noisepp::Real, noisepp::Real, noisepp::Cache*) const':
+  ./3libs/noisepp/NoiseCheckerboard.h:51: warning: suggest parentheses around arithmetic in operand of ^
+  ./3libs/noisepp/NoiseCheckerboard.h: In member function 'virtual noisepp::Real noisepp::CheckerboardElement3D::getValue(noisepp::Real, noisepp::Real, noisepp::Real, noisepp::Cache*) const':
+  ./3libs/noisepp/NoiseCheckerboard.h:63: warning: suggest parentheses around arithmetic in operand of ^
+  ./3libs/noisepp/NoiseCheckerboard.h:63: warning: suggest parentheses around arithmetic in operand of ^
+  LameCraft/StatePlay.cpp: In member function 'virtual void StatePlay::Init()':
+  LameCraft/StatePlay.cpp:219: warning: unused variable 'curchunkTarget'
+  LameCraft/StatePlay.cpp: In member function 'void StatePlay::InitParametric(bool, bool, bool, unsigned int, int, char)':
+  LameCraft/StatePlay.cpp:261: warning: unused variable 'curchunkTarget'
+  LameCraft/StatePlay.cpp: In member function 'void StatePlay::LoadMap(std::string, bool)':
+  LameCraft/StatePlay.cpp:339: warning: unused variable 'curchunkTarget'
+  LameCraft/StatePlay.cpp: In member function 'void StatePlay::CraftItem3x3()':
+  LameCraft/StatePlay.cpp:3396: warning: suggest parentheses around && within ||
+  LameCraft/StatePlay.cpp: In member function 'virtual void StatePlay::HandleEvents(Aurealis::Utils::StateManager*)':
+  LameCraft/StatePlay.cpp:3934: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:4311: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:4344: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:4849: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:6037: warning: unused variable 'chunkTarget'
+  LameCraft/StatePlay.cpp:6275: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:6322: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:6366: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:6410: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:6459: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:7230: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:8041: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8043: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8044: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8045: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8046: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8047: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8048: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8053: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8055: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8056: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8057: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8063: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8065: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8067: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8069: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8076: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8077: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8388: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8392: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8394: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8413: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8415: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8416: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8417: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8435: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8435: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8437: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8439: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8441: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8443: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8444: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8445: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8447: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8449: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8450: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8451: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8453: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp:8453: warning: array subscript has type 'char'
+  LameCraft/StatePlay.cpp: In member function 'virtual void StatePlay::Update(Aurealis::Utils::StateManager*)':
+  LameCraft/StatePlay.cpp:9102: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:9126: warning: unused variable 'spawn_y'
+  LameCraft/StatePlay.cpp: In member function 'virtual void StatePlay::Draw(Aurealis::Utils::StateManager*)':
+  LameCraft/StatePlay.cpp:10182: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10184: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10313: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10315: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10418: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10420: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10468: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10470: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10517: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10519: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:10698: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StatePlay.cpp:11837: warning: suggest parentheses around comparison in operand of !=
+  LameCraft/StatePlay.cpp:11848: warning: suggest parentheses around comparison in operand of !=
+  LameCraft/StatePlay.cpp:12908: warning: statement has no effect
+  LameCraft/StatePlay.cpp:12322: warning: 'green' may be used uninitialized in this function
+  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371  -L./3libs/noisepp -L./3libs/libpspmath -L. -Lc:/pspsdk/psp/sdk/lib -specs=c:/pspsdk/psp/sdk/lib/prxspecs -Wl,-q,-Tc:/pspsdk/psp/sdk/lib/linkfile.prx   Engine/Aurealis/Math/MathLib.o Engine/Aurealis/Math/Matrix3.o Engine/Aurealis/Math/Matrix4.o Engine/Aurealis/Math/Quaternion.o Engine/Aurealis/Math/BoundingBox.o Engine/Aurealis/Math/BoundingSphere.o Engine/Aurealis/Math/Plane.o Engine/Aurealis/Math/Ray.o Engine/Aurealis/Math/Frustum.o Engine/Aurealis/Math/Polygon.o Engine/Aurealis/Graphics/common.o Engine/Aurealis/Graphics/vfram.o Engine/Aurealis/Graphics/vram.o Engine/Aurealis/Graphics/RenderManager.o Engine/Aurealis/Graphics/TextureManager.o Engine/Aurealis/Graphics/Camera.o Engine/Aurealis/Graphics/Sprite.o Engine/Aurealis/Graphics/intraFont/libccc.o Engine/Aurealis/Graphics/intraFont/intraFont.o Engine/Aurealis/Utils/Logger.o Engine/Aurealis/Utils/Timer.o Engine/Aurealis/Utils/StateManager.o Engine/Aurealis/Utils/pgeZip.o Engine/Aurealis/Utils/pge.o Engine/Aurealis/Utils/pgeDir.o Engine/Aurealis/System/SystemManager.o LameCraft/BaseBlock.o LameCraft/Blocks.o LameCraft/BaseItem.o LameCraft/Items.o LameCraft/SimpleMeshChunk2.o LameCraft/ChunkDataProvider.o LameCraft/BlockEntity.o LameCraft/NoteBlockEntity.o LameCraft/JukeboxEntity.o LameCraft/MonsterSpawnerEntity.o LameCraft/ItemFrameEntity.o LameCraft/Chest2.o LameCraft/DirectionBlock.o LameCraft/Furnace2.o LameCraft/CraftWorld2.o LameCraft/LameMob.o LameCraft/Zombie2.o LameCraft/Cow2.o LameCraft/Creeper2.o LameCraft/Sheep2.o LameCraft/StateMenu.o LameCraft/StateOptions.o LameCraft/StatePlayCreative.o LameCraft/StatePlay.o LameCraft/LoadingScreen.o LameCraft/SplashScreen.o LameCraft/InputHelper.o LameCraft/SharedTextureData.o Engine/Aurealis/Audio/sound_utils/pgeWav.o Engine/Aurealis/Audio/SoundManager.o Engine/Aurealis/Graphics/Effects/Drop.o Engine/Aurealis/Graphics/Effects/TNT.o Engine/Aurealis/Graphics/Effects/InventoryPlayer.o Engine/Aurealis/Graphics/Effects/SnowBall2.o Engine/Aurealis/Graphics/Effects/SkyLight.o Engine/Aurealis/Graphics/Effects/SkyBox.o Engine/Aurealis/Graphics/Effects/Destroyer.o Engine/Aurealis/Graphics/Effects/StarsBox.o Engine/Aurealis/Graphics/Effects/Particle.o Engine/Aurealis/Graphics/Effects/WeatherSystem.o LameCraft/mersenne-twister.o LameCraft/SimplexNoise.o LameCraft/WorldGenerator.o Engine/Aurealis/Audio/sound_utils/vfsFile.o Engine/Aurealis/Audio/sound_utils/VirtualFile.o Engine/Aurealis/Audio/sound_utils/audio.o Engine/Aurealis/Audio/sound_utils/bgm.o Engine/Aurealis/Audio/sound_utils/media.o Engine/Aurealis/Audio/sound_utils/mod.o Engine/Aurealis/Graphics/TextureAtlas.o Engine/Aurealis/Graphics/TextureUtil.o Lamecraft.o c:/pspsdk/psp/sdk/lib/prxexports.o -lNoisepp -lpspaudiolib -lpspaudio -lmikmod -lmmio -lpspaudiocodec -lpng -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath  -lpspdebug -lpspdisplay -lpspge -lpspctrl -lpspsdk -lc -lpspnet -lpspnet_inet -lpspnet_apctl -lpspnet_resolver -lpsputility -lpspuser -lpspkernel -o Minecraft2.elf
+  psp-fixup-imports Minecraft2.elf
+  psp-prxgen Minecraft2.elf Minecraft2.prx
   pack-pbp EBOOT.PBP PARAM.SFO ICON0.png  \
   	NULL NULL PIC1.png  \
   	NULL  Minecraft2.prx NULL
@@ -9,7 +105,7 @@
   [3]          0 bytes | NULL
   [4]     256507 bytes | PIC1.png
   [5]          0 bytes | NULL
-  [6]    3619402 bytes | Minecraft2.prx
+  [6]    3574154 bytes | Minecraft2.prx
   [7]          0 bytes | NULL
   make[1]: Leaving directory `C:/Users/Nathan/Desktop/Minecraft2-PSP/Minecraft'
           1 file(s) moved.

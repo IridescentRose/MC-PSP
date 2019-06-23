@@ -16,8 +16,6 @@ Engine/Aurealis/Graphics/RenderManager.o \
 Engine/Aurealis/Graphics/TextureManager.o \
 Engine/Aurealis/Graphics/Camera.o \
 Engine/Aurealis/Graphics/Sprite.o \
-Engine/Aurealis/Graphics/Models/ObjModel.o \
-Engine/Aurealis/Graphics/Models/ObjModel.o \
 Engine/Aurealis/Graphics/intraFont/libccc.o \
 Engine/Aurealis/Graphics/intraFont/intraFont.o \
 Engine/Aurealis/Utils/Logger.o \
@@ -54,7 +52,7 @@ LameCraft/StatePlay.o \
 LameCraft/LoadingScreen.o \
 LameCraft/SplashScreen.o \
 LameCraft/InputHelper.o \
-LameCraft/TextureHelper.o \
+LameCraft/SharedTextureData.o \
 Engine/Aurealis/Audio/sound_utils/pgeWav.o \
 Engine/Aurealis/Audio/SoundManager.o \
 Engine/Aurealis/Graphics/Effects/Drop.o \

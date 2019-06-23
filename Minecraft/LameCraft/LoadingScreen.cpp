@@ -1,5 +1,4 @@
 #include "LoadingScreen.h"
-#include "TextureHelper.h"
 #include <pspthreadman.h>
 #include <pspgu.h>
 #include <pspgum.h>
@@ -35,9 +34,11 @@ LoadingScreen::LoadingScreen()
 
 void LoadingScreen::KillLoadingScreen()
 {
+
 	// shut down the loading screen again.
 	sceKernelTerminateDeleteThread(thid_);
 	// free the mem space of the images
+
 	delete backSprite;
 	delete loadSprite;
 	delete subLoadSprite;
@@ -244,9 +245,6 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
         g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200|0x00000000);
 		g_RenderManager.EndFrame();
 	}
-
-	delete texDirt;
-	delete texLoad;
 	return 0;
 }
 

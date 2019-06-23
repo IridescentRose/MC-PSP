@@ -42,7 +42,7 @@ private:
 
     float furTime;
 
-    int furTexture;
+    Texture* furTexture;
     int color;
     Vector3 furColor;
 

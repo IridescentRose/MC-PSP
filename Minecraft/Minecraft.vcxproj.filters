@@ -114,9 +114,6 @@
     <ClCompile Include="LameCraft\StatePlayCreative.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LameCraft\TextureHelper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LameCraft\WorldGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -390,9 +387,6 @@
     <ClCompile Include="Engine\Aurealis\Graphics\intraFont\libccc.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Aurealis\Graphics\Models\ObjModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Aurealis\Graphics\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -498,6 +492,9 @@
     <ClCompile Include="Engine\Aurealis\Graphics\TextureAtlas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LameCraft\SharedTextureData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LameCraft\BaseBlock.h">
@@ -597,9 +594,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LameCraft\StatePlayCreative.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\TextureHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LameCraft\WorldGenerator.h">
@@ -854,9 +848,6 @@
     <ClInclude Include="Engine\Aurealis\Graphics\intraFont\libccc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Aurealis\Graphics\Models\ObjModel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Aurealis\Graphics\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -975,6 +966,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Aurealis\Graphics\TextureAtlas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\SharedTextureData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

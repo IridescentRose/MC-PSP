@@ -8,7 +8,7 @@
 #include <psptypes.h>
 #include <Aurealis/Graphics/Vertex.h>
 #include <Aurealis/Math/BoundingBox.h>
-#include <Lamecraft/TextureHelper.h>
+#include <Aurealis/Graphics/TextureUtil.h>
 
 class CraftWorld;
 

@@ -456,45 +456,6 @@ namespace Aurealis
 			CleanBuffers();
 		}
 
-		void RenderManager::Draw(ObjModel *model)
-		{
-			sceGuEnable(GU_TEXTURE_2D);
-
-			unsigned int count = model->mMeshes.size();
-
-			for(unsigned int i = 0;i < count;i++)
-			{
-				ObjMesh *mesh = model->mMeshes[i];
-
-				if(mesh->mMaterial != -1)
-				{
-					ObjMaterial *material = model->mMaterials[mesh->mMaterial];
-
-					if(material->mipmapping)
-					{
-						TextureManager::Instance()->SetMipMapsTextures(material->texturID,material->mipmap1,material->mipmap2,material->mipmap3);
-
-					}else
-					{
-						TextureManager::Instance()->SetTexture(material->texturID,GU_NEAREST,GU_NEAREST);
-					}
-				}
-
-				if (mesh->mMaterial != -1 && model->mMaterials[mesh->mMaterial]->lightmapping)
-				{
-					ObjMaterial *material = model->mMaterials[mesh->mMaterial];
-					TextureManager::Instance()->SetTexture(material->lightMapID);
-				}
-
-				if(mesh->triangles)
-
-					sceGumDrawArray(GU_TRIANGLES,GU_TEXTURE_32BITF|GU_VERTEX_32BITF|GU_TRANSFORM_3D,mesh->vertexCount,0,mesh->meshVertices);
-				else
-					sceGumDrawArray(GU_TRIANGLE_STRIP,GU_TEXTURE_32BITF|GU_VERTEX_32BITF|GU_TRANSFORM_3D,mesh->indicesCount,0,mesh->meshVertices);
-			}
-
-			sceGuDisable(GU_TEXTURE_2D);
-		}
 
 		void RenderManager::SetActiveCamera(Camera *camera)
 		{

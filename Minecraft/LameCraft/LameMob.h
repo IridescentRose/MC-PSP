@@ -8,8 +8,8 @@
 #include <Aurealis/Utils/Logger.h>
 #include <Aurealis/Utils/Timer.h>
 #include <Aurealis/System/SystemManager.h>
-#include "TextureHelper.h"
-
+#include <Aurealis/Graphics/TextureUtil.h>
+#include "SharedTextureData.h"
 class CraftWorld;
 
 class LameMob
@@ -107,7 +107,7 @@ public:
 
     float myLight;
 
-    int mainTexture;
+    Texture* mainTexture;
 
     bool friendly;
 

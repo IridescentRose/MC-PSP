@@ -11,7 +11,6 @@
 #include "LameCraft/StateMenu.h"
 #include "LameCraft/SplashScreen.h"
 #include <Aurealis/Audio/SoundManager.h>
-#include "LameCraft/TextureHelper.h"
 #include <Aurealis/Graphics/TextureUtil.h>
 using namespace Aurealis::Graphics;
 using namespace Aurealis::Utils;
@@ -38,7 +37,6 @@ int main()
 	g_RenderManager.SetOrtho(0,0,0,0,0,0);
 
 	//init and load sounds
-	TextureHelper::Instance()->Init();
 	g_SoundManager.Init();
 
 	srand(time(NULL));
@@ -57,6 +55,7 @@ int main()
 	delete screen;
 	SplashScreen* screen2 = new SplashScreen(tex2, 0, 0, 480, 272, 2);
 	screen2->ShowSplash();
+
 	delete screen2;
 	delete tex1;
 	delete tex2;

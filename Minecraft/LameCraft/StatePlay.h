@@ -13,11 +13,11 @@
 #include <Aurealis/Utils/Logger.h>
 #include <Aurealis/Utils/Timer.h>
 #include <Aurealis/System/SystemManager.h>
-#include <Aurealis/Graphics/Models/ObjModel.h>
 #include <Aurealis/Graphics/Camera.h>
 #include <Aurealis/Graphics/Sprite.h>
 #include <Aurealis/Graphics/TextureUtil.h>
 #include <Aurealis/Graphics/Effects/InventoryPlayer.h>
+#include <Aurealis/Math/Ray.h>
 #include <Aurealis/Graphics/Effects/SkyLight.h>
 #include <Aurealis/Graphics/Effects/SnowBall2.h>
 #include <Aurealis/Graphics/Effects/SkyBox.h>
@@ -99,7 +99,6 @@ private:
 
     int FindFurnaceId(int x, int y, int z);
 	int FindChestId(int x, int y, int z);
-	Texture* texButtons;
 	void HungerTime();
 	void HealthTime();
 	void OxygenTime();
@@ -236,24 +235,24 @@ private:
 	float dt;
 
 	//int texture[16];
-	int barItems;
-	int texture;
-	int texture_mips;
-	int waterAnimation;
-
-	unsigned char blue;
-	unsigned char red;
-	unsigned char black;
-	unsigned char stars;
-
-    int invPlayerTex;
-    int zombieTex;
-    int cowTex;
-    int snowBall4;
-	int cloudsTex;
-	int suntex;
-	int moontex;
-	int rainTex;
+	Texture* barItems;
+	Texture* texture;
+	Texture* texture_mips;
+	Texture* waterAnimation;
+	
+	Texture* blue;
+	Texture* red;
+	Texture* black;
+	Texture* stars;
+	
+	Texture* invPlayerTex;
+    Texture* zombieTex;
+    Texture* cowTex;
+    Texture* snowBall4;
+	Texture* cloudsTex;
+	Texture* suntex;
+	Texture* moontex;
+	Texture* rainTex;
 
 	unsigned char currentTexture;
 	unsigned char timeTexture;

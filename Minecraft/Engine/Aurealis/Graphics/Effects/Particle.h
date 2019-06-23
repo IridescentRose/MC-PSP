@@ -4,10 +4,10 @@
 #include <Aurealis/Graphics/Vertex.h>
 #include <pspmath.h>
 #include <LameCraft/CraftWorld2.h>
-#include <LameCraft/TextureHelper.h>
 #include <math.h>
 #include <psptypes.h>
 #include <string>
+#include <Aurealis/Graphics/TextureUtil.h>
 
 namespace Aurealis
 {
@@ -62,7 +62,7 @@ namespace Aurealis
 
 			float horizontalScale;
 			float verticalScale;
-			int texture;
+			Texture* texture;
 
 			float timeToLive;
 			float maxTimeToLive;

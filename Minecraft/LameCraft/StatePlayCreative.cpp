@@ -1,5 +1,4 @@
 #include "StatePlayCreative.h"
-#include "TextureHelper.h"
 
 #include "WorldGenerator.h"
 #include "LoadingScreen.h"
@@ -224,7 +223,7 @@ void StatePlayCreative::Init()
 {
     //set render manager instance
     mIhelper = InputHelper::Instance();
-	texButtons = TextureUtil::LoadPng("./Assets/ConstTextures/menu_elements.png");
+	g_TextureData.Init();
     WorldGenerator *mGen = new WorldGenerator();
 
 	handAmbient = Timer();
@@ -267,7 +266,7 @@ void StatePlayCreative::InitParametric(bool makeTrees, bool makeWater,bool makeC
 {
     //set render manager instance
     mIhelper = InputHelper::Instance();
-	texButtons = TextureUtil::LoadPng("./Assets/ConstTextures/menu_elements.png");
+	g_TextureData.Init();
     //then create our perfect world
     mWorld = new CraftWorld();
     mWorld->initWorld(WORLD_SIZE, WORLD_HEIGHT, CHUNK_SIZE);
@@ -323,13 +322,13 @@ void StatePlayCreative::LoadMap(std::string fileName,bool compressed)
 {
     //enter loading screen
     LoadingScreen* loading = new LoadingScreen();
-
+	g_TextureData.Init();
     loading->readiness = 0;
     loading->stateName = 0;
 
     //set render manager instance
     mIhelper = InputHelper::Instance();
-	texButtons = TextureUtil::LoadPng("./Assets/ConstTextures/menu_elements.png");
+	
     //save name
     saveFileName = fileName;
     //set start position
@@ -397,118 +396,119 @@ void StatePlayCreative::LoadMap(std::string fileName,bool compressed)
 void StatePlayCreative::LoadTextures()
 {
     //terrain texure
-    barItems = TextureHelper::Instance()->GetTexture(TextureHelper::Items1);
-    texture = TextureHelper::Instance()->GetTexture(TextureHelper::Terrain1);
-    texture_mips = TextureHelper::Instance()->GetTexture(TextureHelper::Terrain2);
-    waterAnimation = TextureHelper::Instance()->GetTexture(TextureHelper::WaterAnimation);
-    cloudsTex = TextureHelper::Instance()->GetTexture(TextureHelper::clouds1);
-    blue = TextureHelper::Instance()->GetTexture(TextureHelper::Blue);
-    red = TextureHelper::Instance()->GetTexture(TextureHelper::Red);
-    black = TextureHelper::Instance()->GetTexture(TextureHelper::Black);
-    stars = TextureHelper::Instance()->GetTexture(TextureHelper::Stars);
-    snowBall4 = TextureHelper::Instance()->GetTexture(TextureHelper::SnowBall3);
-    suntex = TextureHelper::Instance()->GetTexture(TextureHelper::Sun);
-    moontex = TextureHelper::Instance()->GetTexture(TextureHelper::Moon);
-    grassColorTex = TextureHelper::Instance()->GetTexture(TextureHelper::vegetationColorMap);
+    barItems = g_TextureData.Items1;
+    texture = g_TextureData.Terrain1;
+    texture_mips = g_TextureData.Terrain2;
+    waterAnimation = g_TextureData.WaterAnimation;
+    cloudsTex = g_TextureData.clouds1;
+    blue = g_TextureData.Blue;
+    red = g_TextureData.Red;
+    black = g_TextureData.Black;
+    stars = g_TextureData.Stars;
+    snowBall4 = g_TextureData.SnowBall3;
+    suntex = g_TextureData.Sun;
+    moontex = g_TextureData.Moon;
+    grassColorTex = g_TextureData.vegetationColorMap;
 
     // sprites
-    waterScreen = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Blue));
+    waterScreen = new Sprite(g_TextureData.Blue);
     waterScreen->SetPosition(240,136);
     waterScreen->Scale(30,17);
 
     // hud section
 
-    float utilsSize = TextureManager::Instance()->getWidth(TextureHelper::Instance()->GetTexture(TextureHelper::Utils));
+	float utilsSize = g_TextureData.Utils->width;
+;
     int utilScale = 364.0f/utilsSize;
 
-    barSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Utils),0,0,182*utilsSize/182,22*utilsSize/182);
+    barSprite = new Sprite(g_TextureData.Utils,0,0,182*utilsSize/182,22*utilsSize/182);
     barSprite->SetPosition(240,250);
     barSprite->Scale(utilScale,utilScale);
 
-    selectSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Utils),0,22*utilsSize/182,24*utilsSize/182,24*utilsSize/182);
+    selectSprite = new Sprite(g_TextureData.Utils,0,22*utilsSize/182,24*utilsSize/182,24*utilsSize/182);
     selectSprite->SetPosition(80,250);
     selectSprite->Scale(utilScale,utilScale);
 
-    crossSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Utils),24*utilsSize/182,22*utilsSize/182,9*utilsSize/182,9*utilsSize/182);
+    crossSprite = new Sprite(g_TextureData.Utils,24*utilsSize/182,22*utilsSize/182,9*utilsSize/182,9*utilsSize/182);
     crossSprite->SetPosition(240,136);
     crossSprite->Scale(utilScale,utilScale);
 
     // menu section
-    buttonSprite = new Sprite(texButtons,0,0,95,12); // stand
+    buttonSprite = new Sprite(g_TextureData.buttons,0,0,95,12); // stand
     buttonSprite->SetPosition(240,150);
     buttonSprite->Scale(2,2);
 
-    sbuttonSprite = new Sprite(texButtons,0,12,95,12); // stand selected
+    sbuttonSprite = new Sprite(g_TextureData.buttons,0,12,95,12); // stand selected
     sbuttonSprite->SetPosition(240,150);
     sbuttonSprite->Scale(2,2);
 
-    nbuttonSprite = new Sprite(texButtons,0,24,95,12); // dark
+    nbuttonSprite = new Sprite(g_TextureData.buttons,0,24,95,12); // dark
     nbuttonSprite->SetPosition(240,150);
     nbuttonSprite->Scale(2,2);
 
-	moverSprite = new Sprite(texButtons,0,60,6,12);
+	moverSprite = new Sprite(g_TextureData.buttons,0,60,6,12);
 	moverSprite->Scale(2,2);
 
     // inventory section
 
-    float invGuiSize = TextureManager::Instance()->getWidth(TextureHelper::Instance()->GetTexture(TextureHelper::inv));
+    float invGuiSize = g_TextureData.inv->width;
     float invGuiScale = 352.0f/(float)invGuiSize;
 
-    invSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::invCreative));//200
+    invSprite = new Sprite(g_TextureData.invCreative);//200
     invSprite->SetPosition(240,136);
     invSprite->Scale(invGuiScale,invGuiScale);
 
-    crtSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::crt));//200
+    crtSprite = new Sprite(g_TextureData.crt);//200
     crtSprite->SetPosition(240,136);
     crtSprite->Scale(invGuiScale,invGuiScale);
 
-    chtSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::cht));//200
+    chtSprite = new Sprite(g_TextureData.cht);//200
     chtSprite->SetPosition(240,136);
     chtSprite->Scale(invGuiScale,invGuiScale);
 
-    furSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::fur));//200
+    furSprite = new Sprite(g_TextureData.fur);//200
     furSprite->SetPosition(240,136);
     furSprite->Scale(invGuiScale,invGuiScale);
 
-    sliderSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::invSlider),0,0,12,15);//200
+    sliderSprite = new Sprite(g_TextureData.invSlider,0,0,12,15);//200
     sliderSprite->SetPosition(240,136);
     sliderSprite->Scale(invGuiScale,invGuiScale);
 
-    sliderLightedSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::invSlider),12,0,12,15);//200
+    sliderLightedSprite = new Sprite(g_TextureData.invSlider,12,0,12,15);//200
     sliderLightedSprite->SetPosition(240,136);
     sliderLightedSprite->Scale(invGuiScale,invGuiScale);
 
-    float invArrowSize = TextureManager::Instance()->getWidth(TextureHelper::Instance()->GetTexture(TextureHelper::furArrow));
+    float invArrowSize = g_TextureData.furArrow->width;
     float invArrowScale = 44.0f/invArrowSize;
 
     for(int j = 13; j >= 0; j--)
     {
-        toolPointSprite[j] = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::Utils),169*utilsSize/182,(49+(13-j)*2)*utilsSize/182,13*utilsSize/182,2*utilsSize/182,true);//200
+        toolPointSprite[j] = new Sprite(g_TextureData.Utils,169*utilsSize/182,(49+(13-j)*2)*utilsSize/182,13*utilsSize/182,2*utilsSize/182,true);//200
         toolPointSprite[j]->SetPosition(240,136);
         toolPointSprite[j]->Scale(utilScale,utilScale);
     }
 
     for(int j = 0; j <= 21; j++)
     {
-        furArrowSprite[j] = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::furArrow),0,0,(1*j)*invArrowSize/22.0f,16*invArrowSize/22.0f,true);//200
+        furArrowSprite[j] = new Sprite(g_TextureData.furArrow,0,0,(1*j)*invArrowSize/22.0f,16*invArrowSize/22.0f,true);//200
         furArrowSprite[j]->SetPosition(240,136);
         furArrowSprite[j]->Scale(invArrowScale,invArrowScale);
     }
 
-    int invFireSize = TextureManager::Instance()->getWidth(TextureHelper::Instance()->GetTexture(TextureHelper::furFire));
+    int invFireSize = g_TextureData.furFire->width;
     float invFireScale = 28.0f/(float)invFireSize;
 
     for(int j = 0; j <= 13; j++)
     {
-        furFireSprite[13-j] = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::furFire),0,j*invFireSize/14.0f,14*invFireSize/14.0f,(14-j)*invFireSize/14.0f,true);//200
+        furFireSprite[13-j] = new Sprite(g_TextureData.furFire,0,j*invFireSize/14.0f,14*invFireSize/14.0f,(14-j)*invFireSize/14.0f,true);//200
         furFireSprite[13-j]->SetPosition(240,136);
         furFireSprite[13-j]->Scale(invFireScale,invFireScale);
     }
 
-    selectInvSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::cursor));//200
+    selectInvSprite = new Sprite(g_TextureData.cursor);//200
     selectInvSprite->SetPosition(96+(invXPosition*36),28+(invYPosition*36));
 
-    invCellSprite = new Sprite(TextureHelper::Instance()->GetTexture(TextureHelper::invCell));//200
+    invCellSprite = new Sprite(g_TextureData.invCell);//200
     invCellSprite->SetPosition(240,136);
     invCellSprite->Scale(2,2);
 
@@ -753,7 +753,6 @@ void StatePlayCreative::CleanUp()
     }
 
     delete mWorld;
-	delete texButtons;
 }
 
 void StatePlayCreative::Pause()
@@ -8841,7 +8840,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
             MatrixPush();
             MatrixTranslation(Vector3(fppCam->m_vPosition.x,fppCam->m_vPosition.y,fppCam->m_vPosition.z));
 
-            TextureManager::Instance()->SetTextureModeulate(suntex);
+            suntex->bindTexture(0, 0, true);
 
             skyLight->Render();
             MatrixPop();
@@ -8850,7 +8849,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
             MatrixPush();
             MatrixTranslation(Vector3(fppCam->m_vPosition.x,fppCam->m_vPosition.y,fppCam->m_vPosition.z));
 
-            TextureManager::Instance()->SetTextureModeulate(moontex);
+            (moontex)->bindTexture(0, 0, true);
 
             skyMoonLight->UpdateLightSource(mWorld->skyTime+180.0f);
             skyMoonLight->Render();
@@ -8896,7 +8895,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
             MatrixTranslation(Vector3(-114,116,-114));
 
-            TextureManager::Instance()->SetTextureModeulate(cloudsTex);
+            (cloudsTex)->bindTexture(0, 0, true);
 
             sceGuTexWrap(GU_REPEAT,GU_REPEAT);
             sceGuTexOffset(cloudsOffset,0.0f); // fake movement
@@ -8951,11 +8950,11 @@ void StatePlayCreative::Draw(StateManager* sManager)
         sceGuEnable(GU_TEXTURE_2D);
         if(mWorld->mainOptions.mipMapTexturing)
         {
-            TextureManager::Instance()->SetMipMaps2Textures(texture, texture_mips);
+            texture->bindMipMaps(texture_mips);
         }
         else
         {
-            TextureManager::Instance()->SetTextureModeulate(texture);
+            texture->bindTexture(0, 0, true);
         }
 
         sceGumPushMatrix();
@@ -8980,11 +8979,11 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
                 if(TestDrop->GetId() < 250)
                 {
-                    TextureManager::Instance()->SetTextureModeulate(texture);
+                    (texture)->bindTexture(0, 0, true);
                 }
                 else
                 {
-                    mWorld->ItemHaveTerrainTexture(TestDrop->GetId()) ? TextureManager::Instance()->SetTextureModeulate(texture) : TextureManager::Instance()->SetTextureModeulate(barItems);
+                    mWorld->ItemHaveTerrainTexture(TestDrop->GetId()) ? (texture)->bindTexture(0, 0, true) : (barItems)->bindTexture(0, 0, true);
                 }
 
                 TestDrop->Render(fppCam->mFrustum, playerPosition, fppCam->horAngle/180.0f*PI);
@@ -9011,7 +9010,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
     /// TNT entity rendering
     if(mWorld->mTNTs.empty() == false)
     {
-        TextureManager::Instance()->SetTextureModeulate(texture);
+        (texture)->bindTexture(0, 0, true);
         for(int k = mWorld->mTNTs.size()-1; k >= 0; k--)
         {
             if(mWorld->mTNTs.empty() == true)
@@ -9239,7 +9238,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
         {
             if(i < mSnowBalls.size() && mSnowBalls.empty() == false)
             {
-                TextureManager::Instance()->SetTextureModeulate(snowBall4);
+                (snowBall4)->bindTexture(0, 0, true);
                 SnowBall2* UseSnowBall = mSnowBalls[i];
 
                 if(menuState == 0)//game state
@@ -9343,7 +9342,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
         mWorld->worldWeather->Render(mWorld, fppCam->mFrustum, fppCam->upDownAngle, playerPosition, dt);
     }
 
-    TextureManager::Instance()->SetTextureModeulate(texture);
+    (texture)->bindTexture(0, 0, true);
 
     /// RENDER DESTROY MODEL
     if (((startDt == 1 && dStd >= 0 && dStd <= 9) || showCube == true) && makeScreen == false)
@@ -9359,7 +9358,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
 		MatrixTranslation(Vector3(cubePos.x,cubePos.y,cubePos.z));
 		MatrixColor(0xFFFFFFFF);
 
-        TextureManager::Instance()->SetTextureModeulate(texture);
+        (texture)->bindTexture(0, 0, true);
 
 		destroyer->Update(dStd, mWorld, mWorld->GetBlock(cubePos.x,cubePos.y,cubePos.z));
 		destroyer->Render(dStd);
@@ -9401,7 +9400,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
             if(mWorld->invId[27+barPosition] == -1)
             {
-                TextureManager::Instance()->SetTextureModeulate(TextureHelper::Instance()->GetTexture(TextureHelper::Steve));
+				g_TextureData.Steve->bindTexture(0, 0, true);
                 sceGumPushMatrix();
 
                 //set view matrix to identity
@@ -9430,7 +9429,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
             if(mWorld->invId[27+barPosition] < 250 && mWorld->invId[27+barPosition] != -1)
             {
-                TextureManager::Instance()->SetTextureModeulate(texture);
+				texture->bindTexture(0, 0, true);
                 sceGumPushMatrix();
 
                 //set view matrix to identity
@@ -9458,7 +9457,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
             if(mWorld->invId[27+barPosition] >= 250)
             {
-                mWorld->ItemHaveTerrainTexture(mWorld->invId[27+barPosition]) ? TextureManager::Instance()->SetTextureModeulate(texture) : TextureManager::Instance()->SetTextureModeulate(barItems);
+                mWorld->ItemHaveTerrainTexture(mWorld->invId[27+barPosition]) ? (texture)->bindTexture(0, 0, true) : (barItems)->bindTexture(0, 0, true);
                 sceGumPushMatrix();
 
                 //set view matrix to identity
@@ -9503,7 +9502,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
         MatrixColor(GU_COLOR(1,1,1,0.7));
 
-		TextureManager::Instance()->SetTextureModeulate(red);
+		(red)->bindTexture(0, 0, true);
 		advancedBlit(0,0,SCR_WIDTH,SCR_HEIGHT,0,0,32);
 
         DrawPlaceTexture(false);
@@ -9521,7 +9520,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
         MatrixColor(GU_COLOR(1,1,1,0.7));
 
-        TextureManager::Instance()->SetTextureModeulate(black);
+        (black)->bindTexture(0, 0, true);
         advancedBlit(0,0,SCR_WIDTH,SCR_HEIGHT,0,0,32);
 
         DrawPlaceTexture(false);
@@ -9540,7 +9539,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
         MatrixColor(GU_COLOR(1,1,1,(3.1-sleepTime)/3.2f));
 
-        TextureManager::Instance()->SetTextureModeulate(black);
+        (black)->bindTexture(0, 0, true);
         advancedBlit(0,0,SCR_WIDTH,SCR_HEIGHT,0,0,32);
 
         DrawPlaceTexture(false);
@@ -9559,7 +9558,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
         MatrixColor(GU_COLOR(1,1,1,0.9));
 
-        TextureManager::Instance()->SetTextureModeulate(black);
+        (black)->bindTexture(0, 0, true);
         advancedBlit(0,0,SCR_WIDTH,SCR_HEIGHT,0,0,32);
 
         DrawPlaceTexture(false);
@@ -9690,14 +9689,14 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
                 if(mWorld->invId[27+k] < 250)
                 {
-                    TextureManager::Instance()->SetTextureModeulate(texture);
+                    (texture)->bindTexture(0, 0, true);
 
                     mWorld->drawHudCubes(mWorld->invId[27+k]);
                 }
 
                 if(mWorld->invId[27+k] >= 250)
                 {
-                    mWorld->ItemHaveTerrainTexture(mWorld->invId[27+k]) ? TextureManager::Instance()->SetTextureModeulate(texture) : TextureManager::Instance()->SetTextureModeulate(barItems);
+                    mWorld->ItemHaveTerrainTexture(mWorld->invId[27+k]) ? (texture)->bindTexture(0, 0, true) : (barItems)->bindTexture(0, 0, true);
 
                     mWorld->drawHudItems(mWorld->invId[27+k]);
                 }
@@ -9724,14 +9723,14 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
                         if(inventoryItems[creativePage*27 + i*9 + j] < 250)
                         {
-                            TextureManager::Instance()->SetTextureModeulate(texture);
+                            (texture)->bindTexture(0, 0, true);
 
                             mWorld->drawHudCubes(inventoryItems[creativePage*27 + i*9 + j]);
                         }
 
                         if(inventoryItems[creativePage*27 + i*9 + j] >= 250)
                         {
-                            mWorld->ItemHaveTerrainTexture(inventoryItems[creativePage*27+i*9+j]) ? TextureManager::Instance()->SetTextureModeulate(texture) : TextureManager::Instance()->SetTextureModeulate(barItems);
+                            mWorld->ItemHaveTerrainTexture(inventoryItems[creativePage*27+i*9+j]) ? (texture)->bindTexture(0, 0, true) : (barItems)->bindTexture(0, 0, true);
 
                             mWorld->drawHudItems(inventoryItems[creativePage*27 + i*9 + j]);
                         }
@@ -9758,14 +9757,14 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
                     if(craftSlotId3[i*3+j] < 250)
                     {
-                        TextureManager::Instance()->SetTextureModeulate(texture);
+                        (texture)->bindTexture(0, 0, true);
 
                         mWorld->drawHudCubes(craftSlotId3[i*3+j]);
                     }
 
                     if(craftSlotId3[i*3+j] >= 250)
                     {
-                        mWorld->ItemHaveTerrainTexture(craftSlotId3[i*3+j]) ? TextureManager::Instance()->SetTextureModeulate(texture) : TextureManager::Instance()->SetTextureModeulate(barItems);
+                        mWorld->ItemHaveTerrainTexture(craftSlotId3[i*3+j]) ? texture->bindTexture(0, 0, true) : barItems->bindTexture(0, 0, true);
 
                         mWorld->drawHudItems(craftSlotId3[i*3+j]);
                     }
@@ -9784,14 +9783,14 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
             if(craftItemId3 < 250)
             {
-                TextureManager::Instance()->SetTextureModeulate(texture);
+                texture->bindTexture(0, 0, true);
 
                 mWorld->drawHudCubes(craftItemId3);
             }
 
             if(craftItemId3 >= 250)
             {
-                TextureManager::Instance()->SetTextureModeulate(barItems);
+                barItems->bindTexture(0, 0, true);
 
                 mWorld->drawHudItems(craftItemId3);
             }
@@ -9814,14 +9813,14 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
                     if(UseChest->chestSlotId[i*9+j] < 250)
                     {
-                        TextureManager::Instance()->SetTextureModeulate(texture);
+                        texture->bindTexture(0, 0, true);
 
                         mWorld->drawHudCubes(UseChest->chestSlotId[i*9+j]);
                     }
 
                     if(UseChest->chestSlotId[i*9+j] >= 250)
                     {
-                        mWorld->ItemHaveTerrainTexture(UseChest->chestSlotId[i*9+j]) ? TextureManager::Instance()->SetTextureModeulate(texture) : TextureManager::Instance()->SetTextureModeulate(barItems);
+                        mWorld->ItemHaveTerrainTexture(UseChest->chestSlotId[i*9+j]) ? texture->bindTexture(0, 0, true) : barItems->bindTexture(0, 0, true);
 
                         mWorld->drawHudItems(UseChest->chestSlotId[i*9+j]);
                     }
@@ -9843,14 +9842,14 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
             if(UseFurnace->furnaceSlotId[0] < 250)
             {
-                TextureManager::Instance()->SetTextureModeulate(texture);
+                texture->bindTexture(0, 0, true);
 
                 mWorld->drawHudCubes(UseFurnace->furnaceSlotId[0]);
             }
 
             if(UseFurnace->furnaceSlotId[0] >= 250)
             {
-                mWorld->ItemHaveTerrainTexture(UseFurnace->furnaceSlotId[0]) ? TextureManager::Instance()->SetTextureModeulate(texture) : TextureManager::Instance()->SetTextureModeulate(barItems);
+                mWorld->ItemHaveTerrainTexture(UseFurnace->furnaceSlotId[0]) ? texture->bindTexture(0, 0, true) : barItems->bindTexture(0, 0, true);
 
                 mWorld->drawHudItems(UseFurnace->furnaceSlotId[0]);
             }
@@ -9865,14 +9864,14 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
             if(UseFurnace->furnaceSlotId[1] < 250)
             {
-                TextureManager::Instance()->SetTextureModeulate(texture);
+                texture->bindTexture(0, 0, true);
 
                 mWorld->drawHudCubes(UseFurnace->furnaceSlotId[1]);
             }
 
             if(UseFurnace->furnaceSlotId[1] >= 250)
             {
-                mWorld->ItemHaveTerrainTexture(UseFurnace->furnaceSlotId[1]) ? TextureManager::Instance()->SetTextureModeulate(texture) : TextureManager::Instance()->SetTextureModeulate(barItems);
+                mWorld->ItemHaveTerrainTexture(UseFurnace->furnaceSlotId[1]) ? texture->bindTexture(0, 0, true) : barItems->bindTexture(0, 0, true);
 
                 mWorld->drawHudItems(UseFurnace->furnaceSlotId[1]);
             }
@@ -9887,14 +9886,14 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
             if(UseFurnace->furnaceSlotId[2] < 250)
             {
-                TextureManager::Instance()->SetTextureModeulate(texture);
+                texture->bindTexture(0, 0, true);
 
                 mWorld->drawHudCubes(UseFurnace->furnaceSlotId[2]);
             }
 
             if(UseFurnace->furnaceSlotId[2] >= 250)
             {
-                mWorld->ItemHaveTerrainTexture(UseFurnace->furnaceSlotId[2]) ? TextureManager::Instance()->SetTextureModeulate(texture) : TextureManager::Instance()->SetTextureModeulate(barItems);
+                mWorld->ItemHaveTerrainTexture(UseFurnace->furnaceSlotId[2]) ? texture->bindTexture(0, 0, true) : barItems->bindTexture(0, 0, true);
 
                 mWorld->drawHudItems(UseFurnace->furnaceSlotId[2]);
             }
@@ -9925,14 +9924,14 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
                 if(mWorld->invId[27+k] < 250)
                 {
-                    TextureManager::Instance()->SetTextureModeulate(texture);
+                    texture->bindTexture(0, 0, true);
 
                     mWorld->drawHudCubes(mWorld->invId[27+k]);
                 }
 
                 if(mWorld->invId[27+k] >= 250)
                 {
-                    mWorld->ItemHaveTerrainTexture(mWorld->invId[27+k]) ? TextureManager::Instance()->SetTextureModeulate(texture) : TextureManager::Instance()->SetTextureModeulate(barItems);
+                    mWorld->ItemHaveTerrainTexture(mWorld->invId[27+k]) ? texture->bindTexture(0, 0, true) : barItems->bindTexture(0, 0, true);
 
                     mWorld->drawHudItems(mWorld->invId[27+k]);
                 }
@@ -9956,14 +9955,14 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
                         if(mWorld->invId[i*9+j] < 250)
                         {
-                            TextureManager::Instance()->SetTextureModeulate(texture);
+                            texture->bindTexture(0, 0, true);
 
                             mWorld->drawHudCubes(mWorld->invId[i*9+j]);
                         }
 
                         if(mWorld->invId[i*9+j] >= 250)
                         {
-                            mWorld->ItemHaveTerrainTexture(mWorld->invId[i*9+j]) ? TextureManager::Instance()->SetTextureModeulate(texture) : TextureManager::Instance()->SetTextureModeulate(barItems);
+                            mWorld->ItemHaveTerrainTexture(mWorld->invId[i*9+j]) ? texture->bindTexture(0, 0, true) : barItems->bindTexture(0, 0, true);
 
                             mWorld->drawHudItems(mWorld->invId[i*9+j]);
                         }
@@ -10026,14 +10025,14 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
             if (mWorld->mId < 250)
             {
-                TextureManager::Instance()->SetTextureModeulate(texture);
+                texture->bindTexture(0, 0, true);
 
                 mWorld->drawHudCubes(mWorld->mId);
             }
 
             if (mWorld->mId >= 250)
             {
-                mWorld->ItemHaveTerrainTexture(mWorld->mId) ? TextureManager::Instance()->SetTextureModeulate(texture) : TextureManager::Instance()->SetTextureModeulate(barItems);
+                mWorld->ItemHaveTerrainTexture(mWorld->mId) ? texture->bindTexture(0, 0, true) : barItems->bindTexture(0, 0, true);
 
                 mWorld->drawHudItems(mWorld->mId);
             }

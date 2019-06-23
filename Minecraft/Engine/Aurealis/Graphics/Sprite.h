@@ -12,25 +12,21 @@ namespace Aurealis
 		public:
 			Sprite();
 			Sprite(const char* filename);
-			Sprite(std::string filename, bool constOne);
 			Sprite(const char* filename,int startW,int startH,int endW,int endH);
-			Sprite(int textureNumer, bool constOne);
-			Sprite(int textureNumer);
-			Sprite(int textureNumer, int startW, int startH, int endW, int endH);
-
+			Sprite(Texture* texture);
 			Sprite(Texture* texture, int startW, int startH, int endW, int endH);
-            Sprite(int textureNumer,int startW,int startH,int endW,int endH, bool obr);
+			Sprite(Texture* texture, int startW, int startH, int endW, int endH, bool obr);
 			~Sprite();
 
 
-            void SetMapPos(int textureNumer,int startW,int startH,int endW,int endH);
+            void SetMapPos(Texture* texture,int startW,int startH,int endW,int endH);
 			void SetPosition(float x,float y);
 			void Scale(float x,float y);
 			void NewScale(float x);
 			void RemoveImage();
 			void Draw();
+			void DrawNoModSet();
 			void DrawLinear();
-			void ConstDraw();
 
 			void Alpha(float _alpha);
 			void RGB(float _red, float _green, float _blue);
@@ -40,7 +36,6 @@ namespace Aurealis
 
 
 		private:
-			int imageNumber;
 			Texture* tex;
 			TexturedVertex *vertices;
 

@@ -3,8 +3,8 @@
 #include <Aurealis/Math/Vector3.h>
 #include <Aurealis/Graphics/Vertex.h>
 #include <pspmath.h>
+#include <Lamecraft/SharedTextureData.h>
 #include <Lamecraft/CraftWorld2.h>
-#include <Lamecraft/TextureHelper.h>
 
 namespace Aurealis
 {
@@ -17,7 +17,7 @@ namespace Aurealis
 			~InventoryPlayer();
 
 			void Update();
-			void Render(CraftWorld *world, float dt, float angle, int texNum, int handItemId);
+			void Render(CraftWorld *world, float dt, float angle, Texture* tex, int handItemId);
 
 			float mainAngle;
 			float scale;

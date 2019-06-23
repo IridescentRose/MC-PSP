@@ -13,7 +13,6 @@
 #include <Aurealis/Utils/Logger.h>
 #include <Aurealis/Utils/Timer.h>
 #include <Aurealis/System/SystemManager.h>
-#include <Aurealis/Graphics/Models/ObjModel.h>
 #include <Aurealis/Graphics/Camera.h>
 #include <Aurealis/Graphics/Sprite.h>
 #include <Aurealis/Graphics/TextureUtil.h>
@@ -25,7 +24,7 @@
 #include <Aurealis/Graphics/Effects/Drop.h>
 #include <Aurealis/Graphics/Effects/TNT.h>
 #include <Aurealis/Graphics/Effects/Particle.h>
-
+#include <Aurealis/Math/Ray.h>
 #include "LameMob.h"
 #include "CraftWorld2.h"
 #include "InputHelper.h"
@@ -110,7 +109,6 @@ private:
     SkyBox *skyBox;
     Destroyer *destroyer;
     StarsBox *starsBox;
-	Texture* texButtons;
     float starsAngle;
     bool check;
     bool cycle;
@@ -240,21 +238,21 @@ private:
 	float dt;
 
 	//int texture[16];
-	int barItems;
-	int texture;
-	int texture_mips;
-	int waterAnimation;
-
-	unsigned char blue;
-	unsigned char red;
-	unsigned char black;
-	unsigned char stars;
-
-    int snowBall4;
-	int cloudsTex;
-	int suntex;
-	int moontex;
-	int grassColorTex;
+	Texture* barItems;
+	Texture* texture;
+	Texture* texture_mips;
+	Texture* waterAnimation;
+	
+	Texture* blue;
+	Texture* red;
+	Texture* black;
+	Texture* stars;
+	
+    Texture* snowBall4;
+	Texture* cloudsTex;
+	Texture* suntex;
+	Texture* moontex;
+	Texture* grassColorTex;
 
 	unsigned char currentTexture;
 	unsigned char timeTexture;

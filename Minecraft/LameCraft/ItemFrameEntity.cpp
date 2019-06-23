@@ -72,7 +72,7 @@ void ItemFrameEntity::Render(CraftWorld *mWorld, Frustum &camFrustum, float dt)
 
         if(GetItem() < 250) // block
         {
-            TextureManager::Instance()->SetTextureModeulate(mWorld->textureTerrainId);
+            (mWorld->textureTerrainId)->bindTexture(0, 0, true);
 
             switch(GetFacing())
             {
@@ -102,11 +102,11 @@ void ItemFrameEntity::Render(CraftWorld *mWorld, Frustum &camFrustum, float dt)
         {
             if(mWorld->ItemHaveTerrainTexture(GetItem()))
             {
-                TextureManager::Instance()->SetTextureModeulate(mWorld->textureTerrainId);
+                (mWorld->textureTerrainId)->bindTexture(0, 0, true);
             }
             else
             {
-                TextureManager::Instance()->SetTextureModeulate(mWorld->textureItemsId);
+                (mWorld->textureItemsId)->bindTexture(0, 0, true);
             }
 
 

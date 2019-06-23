@@ -6,7 +6,6 @@
 #include <Aurealis/Graphics/vram.h>
 #include <Aurealis/Graphics/common.h>
 
-#include <Aurealis/Graphics/Models/ObjModel.h>
 #include <Aurealis/Graphics/Vertex.h>
 #include <Aurealis/Graphics/Camera.h>
 #include <Aurealis/Graphics/TextureManager.h>
@@ -115,7 +114,6 @@ namespace Aurealis
 			void DrawToTexture(Image* offscreenTexture );
 			void SetRTT();
 
-			void Draw(ObjModel *model);
 
 			void SetActiveCamera(Camera *camera);
 			void UpdateFrustumMatrix();

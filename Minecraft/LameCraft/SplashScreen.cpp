@@ -12,7 +12,6 @@ SplashScreen::SplashScreen(Texture* texture, int startW, int startH, int endW, i
 
 SplashScreen::~SplashScreen()
 {
-	sprite->RemoveImage();
 	delete sprite;
 }
 

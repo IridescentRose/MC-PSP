@@ -1,5 +1,4 @@
 #include "Zombie2.h"
-#include <Aurealis/Graphics/TextureManager.h>
 
 #define PI 3.14159f
 #define DEG_TO_RAD (PI / 180.0f)
@@ -151,7 +150,7 @@ Zombie::Zombie(Vector3 position1, int number1) : LameMob(position1, number1)
     }
     UpdateBBox();
 
-    mainTexture = TextureHelper::Instance()->GetTexture(TextureHelper::zombieTexture);
+    mainTexture = g_TextureData.zombieTexture;
 }
 
 Zombie::~Zombie()
@@ -803,7 +802,7 @@ void Zombie::Render(Frustum &camFrustum, float dt)
                 sceGuColor(GU_COLOR(myLight,myLight,myLight,1.0f));
             }
 
-            TextureManager::Instance()->SetTextureModeulate(mainTexture);
+            (mainTexture)->bindTexture(GU_NEAREST, GU_NEAREST, true);
 
             sceGuEnable(GU_TEXTURE_2D);
             sceGuEnable(GU_DEPTH_TEST);

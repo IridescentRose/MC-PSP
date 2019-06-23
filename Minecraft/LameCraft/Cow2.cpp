@@ -1,5 +1,4 @@
 #include "Cow2.h"
-#include <Aurealis/Graphics/TextureManager.h>
 
 #define PI 3.14159f
 #define DEG_TO_RAD (PI / 180.0f)
@@ -41,7 +40,7 @@ Cow::Cow(Vector3 position1, int number1) : LameMob(position1, number1)
     lastCommand = 0;
     freezedTimerMax = 500.0f;
 
-    mainTexture = TextureHelper::Instance()->GetTexture(TextureHelper::cowTexture);
+    mainTexture = g_TextureData.cowTexture;
 }
 
 Cow::~Cow()
@@ -623,7 +622,7 @@ void Cow::Render(Frustum &camFrustum, float dt)
                 sceGuColor(GU_COLOR(myLight,myLight,myLight,1.0f));
             }
 
-            TextureManager::Instance()->SetTextureModeulate(mainTexture);
+            (mainTexture)->bindTexture(0, 0, true);
 
             sceGuEnable(GU_TEXTURE_2D);
             sceGuEnable(GU_DEPTH_TEST);

@@ -14,7 +14,6 @@
 #include <Aurealis/Utils/pge.h>
 
 #include <Aurealis/System/SystemManager.h>
-#include <Aurealis/Graphics/Models/ObjModel.h>
 #include <Aurealis/Graphics/Camera.h>
 #include <Aurealis/Graphics/Sprite.h>
 
@@ -167,7 +166,7 @@ private:
 
 	Sprite *blackBackground;
 
-
+	Texture* bgTex[24];
 	float op1;
 	float animTime;
 	Timer timer;

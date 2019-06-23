@@ -4,7 +4,6 @@
 #include "StatePlayCreative.h"
 #include "LoadingScreen.h"
 #include "InputHelper.h"
-#include "TextureHelper.h"
 #include <zlib.h>
 #include <string>
 #include <Aurealis/System/SystemManager.h>
@@ -65,6 +64,7 @@ StateMenu::~StateMenu()
 
 void StateMenu::Init()
 {
+
     newW_width = 0;
     newW_height = 0;
     newW_length = 0;
@@ -83,59 +83,32 @@ void StateMenu::Init()
     schematicExists = false;
 
     lol = "";
-
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/0.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/1.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/2.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/3.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/4.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/5.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/6.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/7.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/8.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/9.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/10.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/11.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/12.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/13.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/14.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/15.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/16.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/17.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/18.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/19.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/20.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/21.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/22.png");
-	TextureManager::Instance()->LoadTexture("Assets/Textures/Default/background/23.png");
-
-
-	bg[0] =  new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/0.png"), 0, 0, 480, 272);
-	bg[1] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/1.png"), 0, 0, 480, 272);
-	bg[2] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/2.png"), 0, 0, 480, 272);
-	bg[3] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/3.png"), 0, 0, 480, 272);
-	bg[4] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/4.png"), 0, 0, 480, 272);
-	bg[5] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/5.png"), 0, 0, 480, 272);
-	bg[6] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/6.png"), 0, 0, 480, 272);
-	bg[7] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/7.png"), 0, 0, 480, 272);
-	bg[8] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/8.png"), 0, 0, 480, 272);
-	bg[9] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/9.png"), 0, 0, 480, 272);
-	bg[10] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/10.png"), 0, 0, 480, 272);
-	bg[11] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/11.png"), 0, 0, 480, 272);
-	bg[12] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/12.png"), 0, 0, 480, 272);
-	bg[13] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/13.png"), 0, 0, 480, 272);
-	bg[14] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/14.png"), 0, 0, 480, 272);
-	bg[15] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/15.png"), 0, 0, 480, 272);
-	bg[16] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/16.png"), 0, 0, 480, 272);
-	bg[17] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/17.png"), 0, 0, 480, 272);
-	bg[18] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/18.png"), 0, 0, 480, 272);
-	bg[19] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/19.png"), 0, 0, 480, 272);
-	bg[20] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/20.png"), 0, 0, 480, 272);
-	bg[21] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/21.png"), 0, 0, 480, 272);
-	bg[22] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/22.png"), 0, 0, 480, 272);
-	bg[23] = new Sprite(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/23.png"), 0, 0, 480, 272);
-
+	bgTex[0] = TextureUtil::LoadPng("./Assets/ConstTextures/background/0.png");
+	bgTex[1] = TextureUtil::LoadPng("./Assets/ConstTextures/background/1.png");
+	bgTex[2] = TextureUtil::LoadPng("./Assets/ConstTextures/background/2.png");
+	bgTex[3] = TextureUtil::LoadPng("./Assets/ConstTextures/background/3.png");
+	bgTex[4] = TextureUtil::LoadPng("./Assets/ConstTextures/background/4.png");
+	bgTex[5] = TextureUtil::LoadPng("./Assets/ConstTextures/background/5.png");
+	bgTex[6] = TextureUtil::LoadPng("./Assets/ConstTextures/background/6.png");
+	bgTex[7] = TextureUtil::LoadPng("./Assets/ConstTextures/background/7.png");
+	bgTex[8] = TextureUtil::LoadPng("./Assets/ConstTextures/background/8.png");
+	bgTex[9] = TextureUtil::LoadPng("./Assets/ConstTextures/background/9.png");
+	bgTex[10] = TextureUtil::LoadPng("./Assets/ConstTextures/background/10.png");
+	bgTex[11] = TextureUtil::LoadPng("./Assets/ConstTextures/background/11.png");
+	bgTex[12] = TextureUtil::LoadPng("./Assets/ConstTextures/background/12.png");
+	bgTex[13] = TextureUtil::LoadPng("./Assets/ConstTextures/background/13.png");
+	bgTex[14] = TextureUtil::LoadPng("./Assets/ConstTextures/background/14.png");
+	bgTex[15] = TextureUtil::LoadPng("./Assets/ConstTextures/background/15.png");
+	bgTex[16] = TextureUtil::LoadPng("./Assets/ConstTextures/background/16.png");
+	bgTex[17] = TextureUtil::LoadPng("./Assets/ConstTextures/background/17.png");
+	bgTex[18] = TextureUtil::LoadPng("./Assets/ConstTextures/background/18.png");
+	bgTex[19] = TextureUtil::LoadPng("./Assets/ConstTextures/background/19.png");
+	bgTex[20] = TextureUtil::LoadPng("./Assets/ConstTextures/background/20.png");
+	bgTex[21] = TextureUtil::LoadPng("./Assets/ConstTextures/background/21.png");
+	bgTex[22] = TextureUtil::LoadPng("./Assets/ConstTextures/background/22.png");
+	bgTex[23] = TextureUtil::LoadPng("./Assets/ConstTextures/background/23.png");
 	for (int i = 0; i < 24; i++) {
+		bg[i] = new Sprite(bgTex[i], 0, 0, 480, 272);
 		bg[i]->Scale(2, 2);
 		bg[i]->SetPosition(480, 272);
 	}
@@ -329,30 +302,8 @@ void StateMenu::CleanUp()
     delete blackBackground;
 	delete[] bg;
 
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/0.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/1.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/2.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/3.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/4.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/5.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/6.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/7.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/8.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/9.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/10.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/11.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/12.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/13.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/14.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/15.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/16.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/17.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/18.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/19.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/20.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/21.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/22.png"));
-	TextureManager::Instance()->RemoveTexture(TextureManager::Instance()->GetTextureNumber("Assets/Textures/Default/background/23.png"));
+	delete[] bgTex;
+
 	delete texButton;
 	delete texLogo;
 	delete texRectangles;
@@ -2065,7 +2016,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
             {
                 if(texturePackList.empty() == false)
                 {
-                    TextureHelper::Instance()->SetTexturePack(texturePackList[tpPos].name);
+                    g_TextureData.texturePackName = (texturePackList[tpPos].name);
                     tpCurrent = tpPos;
                 }
             }
@@ -2930,7 +2881,7 @@ void StateMenu::Draw(StateManager* sManager)
 
                 Sprite* DrawSprite = texturePackList[i].packSprite;
                 DrawSprite->SetPosition(46,56 - 8 + (i * 72) - (tpStart * 72));
-                DrawSprite->ConstDraw();
+                DrawSprite->Draw();
 
                 sceGuDisable(GU_BLEND);
 
@@ -3109,7 +3060,6 @@ void StateMenu::ScanTexturePacks(const char* dirName)
 {
     if(texturePackList.empty() != false)
     {
-        TextureHelper::Instance()->RemoveConstTextures();
         for(int j = 0; j < texturePackList.size(); j++)
         {
             if (texturePackList[j].packSprite != NULL)
@@ -3144,7 +3094,7 @@ void StateMenu::ScanTexturePacks(const char* dirName)
                 TP newTP;
 
                 std::string plik2 = plik + "/";
-                if(plik2 == TextureHelper::Instance()->defaultFolder)
+                if(plik2 == "Default/")
                 {
                     tpCurrent = TPcheck;
                 }
@@ -3162,15 +3112,15 @@ void StateMenu::ScanTexturePacks(const char* dirName)
     for(int j = 0; j < texturePackList.size(); j++)
     {
         std::string packPath = "Assets/Textures/"+texturePackList[j].name+"/pack.png";
-
-        if(fileExists(packPath) == true) // if we have pack sprite
+		Texture* texPack;
+		if(fileExists(packPath) == true) // if we have pack sprite
         {
-            TextureManager::Instance()->LoadConstTexture(packPath);
-            texturePackList[j].packSprite = new Sprite(TextureManager::Instance()->GetConstTextureNumber(packPath),true);
+			texPack = TextureUtil::LoadPng(packPath);
+            texturePackList[j].packSprite = new Sprite(texPack);
         }
         else
         {
-            texturePackList[j].packSprite = new Sprite(TextureManager::Instance()->GetConstTextureNumber("Assets/unknown_pack.png"),true);
+            texturePackList[j].packSprite = new Sprite(TextureUtil::LoadPng("Assets/unknown_pack.png"));
         }
 
         std::string packDescriptionPath = "Assets/Textures/"+texturePackList[j].name+"/pack.txt";

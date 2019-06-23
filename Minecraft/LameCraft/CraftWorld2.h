@@ -4,7 +4,8 @@
 #include <string>
 #include <math.h>
 #include <psptypes.h>
-
+#include <Aurealis/Graphics/TextureUtil.h>
+#include "SharedTextureData.h"
 #include <algorithm>
 #include <Aurealis/Audio/sound_utils/oslib.h>
 #include <Aurealis/Math/Frustum.h>
@@ -465,25 +466,25 @@ public:
     float spawnCreeperTimer;
     float spawnSheepTimer;
 
-    int textureWaterAnimationId;
-    int textureLavaAnimationId;
-    int textureItemsId;
-    int textureTerrainId;
-    int textureTerrainMipsId;
-    int textureLeatherArmor1Id;
-    int textureLeatherArmor2Id;
-    int textureChainArmor1Id;
-    int textureChainArmor2Id;
-    int textureIronArmor1Id;
-    int textureIronArmor2Id;
-    int textureDiamondArmor1Id;
-    int textureDiamondArmor2Id;
-    int textureGoldenArmor1Id;
-    int textureGoldenArmor2Id;
-    int textureVegetationColorMapId;
-    int textureClockId;
-    int textureCompassId;
-    int textureSkyColorId;
+    Texture* textureWaterAnimationId;
+    Texture* textureLavaAnimationId;
+    Texture* textureItemsId;
+    Texture* textureTerrainId;
+    Texture* textureTerrainMipsId;
+    Texture* textureLeatherArmor1Id;
+    Texture* textureLeatherArmor2Id;
+    Texture* textureChainArmor1Id;
+    Texture* textureChainArmor2Id;
+    Texture* textureIronArmor1Id;
+    Texture* textureIronArmor2Id;
+    Texture* textureDiamondArmor1Id;
+    Texture* textureDiamondArmor2Id;
+    Texture* textureGoldenArmor1Id;
+    Texture* textureGoldenArmor2Id;
+    Texture* textureVegetationColorMapId;
+    Texture* textureClockId;
+    Texture* textureCompassId;
+    Texture* textureSkyColorId;
 
 	char worldName[50];
 	int createdChunksCount;

@@ -35,7 +35,7 @@ namespace Aurealis
 
 		}
 
-		void InventoryPlayer::Render(CraftWorld *world, float dt, float angle, int texNum, int handItemId)
+		void InventoryPlayer::Render(CraftWorld *world, float dt, float angle, Texture* texNum, int handItemId)
 		{
             animT += PI*dt*0.5f;
             if(animT >= 2*PI)
@@ -57,7 +57,7 @@ namespace Aurealis
 
 
             // right hand
-            TextureManager::Instance()->SetTextureModeulate(texNum);
+            (texNum)->bindTexture(0, 0, true);
             sceGumPushMatrix();
             ScePspFVector3 loc3 = {0,PIXEL*4,PIXEL*6};
             sceGumTranslate(&loc3);
@@ -96,7 +96,7 @@ namespace Aurealis
             {
                 if(handItemId >= 250)
                 {
-                    world->ItemHaveTerrainTexture(handItemId) == true ? TextureManager::Instance()->SetTextureModeulate(world->textureTerrainId) : TextureManager::Instance()->SetTextureModeulate(world->textureItemsId);
+                    world->ItemHaveTerrainTexture(handItemId) == true ? (world->textureTerrainId)->bindTexture(0, 0, true) : (world->textureItemsId)->bindTexture(0, 0, true);
 
                     ScePspFVector3 loc40 = {-PIXEL*5.0f,PIXEL*7.3,0};
                     sceGumTranslate(&loc40);
@@ -116,7 +116,7 @@ namespace Aurealis
                 }
                 else
                 {
-                    TextureManager::Instance()->SetTextureModeulate(world->textureTerrainId);
+                    (world->textureTerrainId)->bindTexture(0, 0, true);
 
                     ScePspFVector3 loc40 = {-PIXEL*2.4,PIXEL*8.4,0.0};
                     sceGumTranslate(&loc40);
@@ -139,7 +139,7 @@ namespace Aurealis
 
             sceGuEnable(GU_TEXTURE_2D);
             // right leg
-            TextureManager::Instance()->SetTextureModeulate(texNum);
+            (texNum)->bindTexture(0, 0, true);
             sceGumPushMatrix();
             ScePspFVector3 loc5 = {0,-PIXEL*8,PIXEL*2};
             sceGumTranslate(&loc5);
@@ -153,7 +153,7 @@ namespace Aurealis
 
 
             // left leg
-            TextureManager::Instance()->SetTextureModeulate(texNum);
+            (texNum)->bindTexture(0, 0, true);
             sceGumPushMatrix();
             ScePspFVector3 loc6 = {0,-PIXEL*8,-PIXEL*2};
             sceGumTranslate(&loc6);
@@ -167,7 +167,7 @@ namespace Aurealis
 
 
             // body
-            TextureManager::Instance()->SetTextureModeulate(texNum);
+            (texNum)->bindTexture(0, 0, true);
             sceGumPushMatrix();
             ScePspFVector3 loc = {0,0,0};
             sceGumTranslate(&loc);
@@ -182,7 +182,7 @@ namespace Aurealis
 
 
             // head
-            TextureManager::Instance()->SetTextureModeulate(texNum);
+            (texNum)->bindTexture(0, 0, true);
             sceGumPushMatrix();
             ScePspFVector3 loc2 = {0,PIXEL*10,0};
             sceGumTranslate(&loc2);
@@ -302,7 +302,7 @@ namespace Aurealis
                 {
                     ScePspFVector3 sca = {0.6f,0.6f,0.6f};
                     sceGumScale(&sca);
-                    TextureManager::Instance()->SetTextureModeulate(TextureHelper::Instance()->GetTexture(TextureHelper::Terrain1));
+					g_TextureData.Terrain1->bindTexture(0, 0, true);
                     world->drawCubes(Pumpkin2::getID(),1.0f);
                 }
                 else

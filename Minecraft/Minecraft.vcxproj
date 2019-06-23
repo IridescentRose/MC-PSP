@@ -34,7 +34,7 @@
     <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <OutDir />
     <IntDir />
-    <IncludePath>$(SolutionDir)Engine\;C:\pspsdk\psp\sdk\include\libc;C:\pspsdk\psp\sdk\include;C:\pspsdk\psp\include;C:\pspsdk\include</IncludePath>
+    <IncludePath>$(SolutionDir)Engine\;C:\pspsdk\psp\sdk\include\libc;C:\pspsdk\psp\sdk\include;C:\pspsdk\psp\include;C:\pspsdk\include;$(SolutionDir)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <BuildLog>
@@ -133,7 +133,6 @@
     <ClCompile Include="Engine\Aurealis\Graphics\Effects\WeatherSystem.cpp" />
     <ClCompile Include="Engine\Aurealis\Graphics\intraFont\intraFont.c" />
     <ClCompile Include="Engine\Aurealis\Graphics\intraFont\libccc.c" />
-    <ClCompile Include="Engine\Aurealis\Graphics\Models\ObjModel.cpp" />
     <ClCompile Include="Engine\Aurealis\Graphics\RenderManager.cpp" />
     <ClCompile Include="Engine\Aurealis\Graphics\Sprite.cpp" />
     <ClCompile Include="Engine\Aurealis\Graphics\TextureAtlas.cpp" />
@@ -184,6 +183,7 @@
     <ClCompile Include="LameCraft\Mobs.cpp" />
     <ClCompile Include="LameCraft\MonsterSpawnerEntity.cpp" />
     <ClCompile Include="LameCraft\NoteBlockEntity.cpp" />
+    <ClCompile Include="LameCraft\SharedTextureData.cpp" />
     <ClCompile Include="LameCraft\Sheep2.cpp" />
     <ClCompile Include="LameCraft\SimpleMeshChunk2.cpp" />
     <ClCompile Include="LameCraft\SimplexNoise.cpp" />
@@ -200,7 +200,6 @@
     <ClCompile Include="LameCraft\StateOptions.cpp" />
     <ClCompile Include="LameCraft\StatePlay.cpp" />
     <ClCompile Include="LameCraft\StatePlayCreative.cpp" />
-    <ClCompile Include="LameCraft\TextureHelper.cpp" />
     <ClCompile Include="LameCraft\WorldGenerator.cpp" />
     <ClCompile Include="LameCraft\Zombie2.cpp" />
   </ItemGroup>
@@ -288,7 +287,6 @@
     <ClInclude Include="Engine\Aurealis\Graphics\Effects\WeatherSystem.h" />
     <ClInclude Include="Engine\Aurealis\Graphics\intraFont\intraFont.h" />
     <ClInclude Include="Engine\Aurealis\Graphics\intraFont\libccc.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\Models\ObjModel.h" />
     <ClInclude Include="Engine\Aurealis\Graphics\RenderManager.h" />
     <ClInclude Include="Engine\Aurealis\Graphics\Sprite.h" />
     <ClInclude Include="Engine\Aurealis\Graphics\Texture.h" />
@@ -345,6 +343,7 @@
     <ClInclude Include="LameCraft\Mobs.h" />
     <ClInclude Include="LameCraft\MonsterSpawnerEntity.h" />
     <ClInclude Include="LameCraft\NoteBlockEntity.h" />
+    <ClInclude Include="LameCraft\SharedTextureData.h" />
     <ClInclude Include="LameCraft\Sheep2.h" />
     <ClInclude Include="LameCraft\SimpleMeshChunk2.h" />
     <ClInclude Include="LameCraft\SimplexNoise.h" />
@@ -360,7 +359,6 @@
     <ClInclude Include="LameCraft\StateOptions.h" />
     <ClInclude Include="LameCraft\StatePlay.h" />
     <ClInclude Include="LameCraft\StatePlayCreative.h" />
-    <ClInclude Include="LameCraft\TextureHelper.h" />
     <ClInclude Include="LameCraft\Version.h" />
     <ClInclude Include="LameCraft\WorldGenerator.h" />
     <ClInclude Include="LameCraft\Zombie2.h" />

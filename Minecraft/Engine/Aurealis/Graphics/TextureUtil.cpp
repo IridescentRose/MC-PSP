@@ -1,5 +1,5 @@
 #include "TextureUtil.h"
-
+#include <pspkernel.h>
 bool FileExist(std::string fileName)
 {
 	FILE *fp;
@@ -19,6 +19,22 @@ Texture* TextureUtil::LoadPng(std::string fileName)
 	return LoadPng(fileName.c_str(), GU_PSM_8888, 1, 0);
 }
 
+Texture* TextureUtil::LoadPngTexturePack(std::string texPackName, std::string filename) {
+	Texture* res = LoadPng("./Assets/Textures/" + texPackName + "/" + filename);
+	if (res == NULL) {
+		res = LoadPng("./Assets/Textures/Default/" + filename);
+		if (res == NULL) {
+			//CRASH IT
+			res->setColour(1, 1, 32, 32, 32, 255);
+		}
+		else {
+			return res;
+		}
+	}
+	else {
+		return res;
+	}
+}
 
 Texture* TextureUtil::LoadPng(const char* filename, int ColorMode, int Swizzle, int Vram)
 {

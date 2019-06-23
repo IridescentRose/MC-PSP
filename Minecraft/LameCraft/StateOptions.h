@@ -10,7 +10,6 @@
 #include <Aurealis/Utils/Logger.h>
 #include <Aurealis/Utils/Timer.h>
 #include <Aurealis/System/SystemManager.h>
-#include <Aurealis/Graphics/Models/ObjModel.h>
 #include <Aurealis/Graphics/Camera.h>
 #include <Aurealis/Graphics/Sprite.h>
 

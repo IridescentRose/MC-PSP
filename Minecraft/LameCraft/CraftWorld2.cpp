@@ -1,7 +1,6 @@
 #include "CraftWorld2.h"
 #include <Aurealis/Graphics/RenderManager.h>
 #include <Aurealis/Utils/Logger.h>
-#include "TextureHelper.h"
 
 
 #include <string.h>
@@ -3048,25 +3047,25 @@ void CraftWorld::InitLightValues()
 
 void CraftWorld::GetTexturesIds()
 {
-    textureTerrainId = TextureHelper::Instance()->GetTexture(TextureHelper::Terrain1);
-    textureTerrainMipsId = TextureHelper::Instance()->GetTexture(TextureHelper::Terrain2);
-    textureItemsId = TextureHelper::Instance()->GetTexture(TextureHelper::Items1);
-    textureWaterAnimationId = TextureHelper::Instance()->GetTexture(TextureHelper::WaterAnimation);
-    textureLavaAnimationId = TextureHelper::Instance()->GetTexture(TextureHelper::LavaAnimation);
-    textureLeatherArmor1Id = TextureHelper::Instance()->GetTexture(TextureHelper::leatherArmor1);
-    textureLeatherArmor2Id = TextureHelper::Instance()->GetTexture(TextureHelper::leatherArmor2);
-    textureChainArmor1Id = TextureHelper::Instance()->GetTexture(TextureHelper::chainmailArmor1);
-    textureChainArmor2Id = TextureHelper::Instance()->GetTexture(TextureHelper::chainmailArmor2);
-    textureIronArmor1Id = TextureHelper::Instance()->GetTexture(TextureHelper::ironArmor1);
-    textureIronArmor2Id = TextureHelper::Instance()->GetTexture(TextureHelper::ironArmor2);
-    textureDiamondArmor1Id = TextureHelper::Instance()->GetTexture(TextureHelper::diamondArmor1);
-    textureDiamondArmor2Id = TextureHelper::Instance()->GetTexture(TextureHelper::diamondArmor2);
-    textureGoldenArmor1Id = TextureHelper::Instance()->GetTexture(TextureHelper::goldenArmor1);
-    textureGoldenArmor2Id = TextureHelper::Instance()->GetTexture(TextureHelper::goldenArmor2);
-    textureVegetationColorMapId = TextureHelper::Instance()->GetTexture(TextureHelper::vegetationColorMap);
-    textureClockId = TextureHelper::Instance()->GetTexture(TextureHelper::clockTexture);
-    textureCompassId = TextureHelper::Instance()->GetTexture(TextureHelper::compassTexture);
-    textureSkyColorId = TextureHelper::Instance()->GetTexture(TextureHelper::skyColorTexture);
+    textureTerrainId = g_TextureData.Terrain1;
+    textureTerrainMipsId = g_TextureData.Terrain2;
+    textureItemsId = g_TextureData.Items1;
+    textureWaterAnimationId = g_TextureData.WaterAnimation;
+    textureLavaAnimationId = g_TextureData.LavaAnimation;
+    textureLeatherArmor1Id = g_TextureData.leatherArmor1;
+    textureLeatherArmor2Id = g_TextureData.leatherArmor2;
+    textureChainArmor1Id = g_TextureData.chainmailArmor1;
+    textureChainArmor2Id = g_TextureData.chainmailArmor2;
+    textureIronArmor1Id = g_TextureData.ironArmor1;
+    textureIronArmor2Id = g_TextureData.ironArmor2;
+    textureDiamondArmor1Id = g_TextureData.diamondArmor1;
+    textureDiamondArmor2Id = g_TextureData.diamondArmor2;
+    textureGoldenArmor1Id = g_TextureData.goldenArmor1;
+    textureGoldenArmor2Id = g_TextureData.goldenArmor2;
+    textureVegetationColorMapId = g_TextureData.vegetationColorMap;
+    textureClockId = g_TextureData.clockTexture;
+    textureCompassId = g_TextureData.compassTexture;
+    textureSkyColorId = g_TextureData.skyColorTexture;
 
     GetSkyColor();
 }
@@ -3076,9 +3075,9 @@ void CraftWorld::GetSkyColor()
     unsigned int r,g,b,r2,g2,b2;
 
     //clear sky colors
-    r2 = TextureManager::Instance()->getRed(0,2,textureSkyColorId) << 24; // there is some shit
-    g2 = TextureManager::Instance()->getGreen(0,2,textureSkyColorId);
-    b2 = TextureManager::Instance()->getBlue(0,2,textureSkyColorId) << 24;
+    r2 = textureSkyColorId->getRed(0, 2) << 24; // there is some shit
+    g2 = textureSkyColorId->getGreen(0, 2);
+    b2 = textureSkyColorId->getBlue(0, 2) << 24;
 
     r = r2 >> 24;
     g = g2;
@@ -3086,9 +3085,9 @@ void CraftWorld::GetSkyColor()
 
     dawnSunsetClearSkyColor = Vector3(r,g,b);
 
-    r2 = TextureManager::Instance()->getRed(0,0,textureSkyColorId) << 24; // there is some shit
-    g2 = TextureManager::Instance()->getGreen(0,0,textureSkyColorId);
-    b2 = TextureManager::Instance()->getBlue(0,0,textureSkyColorId) << 24;
+    r2 = textureSkyColorId->getRed(0,0) << 24; // there is some shit
+    g2 = textureSkyColorId->getGreen(0,0);
+    b2 = textureSkyColorId->getBlue(0,0) << 24;
 
     r = r2 >> 24;
     g = g2;
@@ -3096,9 +3095,9 @@ void CraftWorld::GetSkyColor()
 
     startClearSkyColor = Vector3(r,g,b);
 
-    r2 = TextureManager::Instance()->getRed(0,1,textureSkyColorId) << 24; // there is some shit
-    g2 = TextureManager::Instance()->getGreen(0,1,textureSkyColorId);
-    b2 = TextureManager::Instance()->getBlue(0,1,textureSkyColorId) << 24;
+    r2 = textureSkyColorId->getRed(0,1) << 24; // there is some shit
+    g2 = textureSkyColorId->getGreen(0,1);
+    b2 = textureSkyColorId->getBlue(0,1) << 24;
 
     r = r2 >> 24;
     g = g2;
@@ -3107,9 +3106,9 @@ void CraftWorld::GetSkyColor()
     endClearSkyColor = Vector3(r,g,b);
 
     // rainy sky colors
-    r2 = TextureManager::Instance()->getRed(0,5,textureSkyColorId) << 24; // there is some shit
-    g2 = TextureManager::Instance()->getGreen(0,5,textureSkyColorId);
-    b2 = TextureManager::Instance()->getBlue(0,5,textureSkyColorId) << 24;
+    r2 = textureSkyColorId->getRed(0,5) << 24; // there is some shit
+    g2 = textureSkyColorId->getGreen(0,5);
+    b2 = textureSkyColorId->getBlue(0,5) << 24;
 
     r = r2 >> 24;
     g = g2;
@@ -3117,9 +3116,9 @@ void CraftWorld::GetSkyColor()
 
     dawnSunsetRainySkyColor = Vector3(r,g,b);
 
-    r2 = TextureManager::Instance()->getRed(0,3,textureSkyColorId) << 24; // there is some shit
-    g2 = TextureManager::Instance()->getGreen(0,3,textureSkyColorId);
-    b2 = TextureManager::Instance()->getBlue(0,3,textureSkyColorId) << 24;
+    r2 = textureSkyColorId->getRed(0,3) << 24; // there is some shit
+    g2 = textureSkyColorId->getGreen(0,3);
+    b2 = textureSkyColorId->getBlue(0,3) << 24;
 
     r = r2 >> 24;
     g = g2;
@@ -3127,9 +3126,9 @@ void CraftWorld::GetSkyColor()
 
     startRainySkyColor = Vector3(r,g,b);
 
-    r2 = TextureManager::Instance()->getRed(0,4,textureSkyColorId) << 24; // there is some shit
-    g2 = TextureManager::Instance()->getGreen(0,4,textureSkyColorId);
-    b2 = TextureManager::Instance()->getBlue(0,4,textureSkyColorId) << 24;
+    r2 = textureSkyColorId->getRed(0,4) << 24; // there is some shit
+    g2 = textureSkyColorId->getGreen(0,4);
+    b2 = textureSkyColorId->getBlue(0,4) << 24;
 
     r = r2 >> 24;
     g = g2;
@@ -5336,10 +5335,10 @@ void CraftWorld::GetItemVerts(int i,BaseItem *itemType)
     points2 = 0;
     iVertex2 = 0;
 
-    int texture;
+    Texture* texture;
     itemTypes[i].terrainTexture == true ? texture = textureTerrainId : texture = textureItemsId;
 
-    if(TextureManager::Instance()->Images[texture]->Width == 256)
+    if(texture->width == 256)
     {
         for(int i = 15; i >= 0; i--)
         {
@@ -5347,7 +5346,7 @@ void CraftWorld::GetItemVerts(int i,BaseItem *itemType)
             {
                 int xx = startPixelsX+i;
                 int yy = startPixelsY+j;
-                if(TextureManager::Instance()->getAlpha(xx,yy,texture) == 255)
+                if(texture->getAlpha(xx,yy) == 255)
                 {
                    /* if( (i == 0) || (i != 0 && TextureManager::Instance()->getAlpha(xx-1,yy,texture) == 0))
                     {
@@ -5370,7 +5369,7 @@ void CraftWorld::GetItemVerts(int i,BaseItem *itemType)
                         points += 6;
                     } */
 
-                    if( (j == 255) || (j != 255 && TextureManager::Instance()->getAlpha(xx,yy+1,texture) == 0) )
+                    if( (j == 255) || (j != 255 && texture->getAlpha(xx,yy+1) == 0) )
                     {
                         mPosition.push_back(new Vector3(x+i*pixel,y+(j+1)*pixel,   z+pixel*17));
                         mtextures.push_back(new Vector2(left+texturepixel*i, down+texturepixel*j));
@@ -5391,7 +5390,7 @@ void CraftWorld::GetItemVerts(int i,BaseItem *itemType)
                         points += 6;
                     }
 
-                    if( (i == 255) || (i != 255 && TextureManager::Instance()->getAlpha(xx+1,yy,texture) == 0))
+                    if( (i == 255) || (i != 255 && texture->getAlpha(xx+1,yy) == 0))
                     {
                         mPosition2.push_back(new Vector3(x+(i+1)*pixel,y+j*pixel,   z+pixel*17));
                         mtextures2.push_back(new Vector2(left+texturepixel*(i+1), down+texturepixel*(j+1)));
@@ -5412,7 +5411,7 @@ void CraftWorld::GetItemVerts(int i,BaseItem *itemType)
                         points2 += 6;
                     }
 
-                    if( (j == 0) || (j != 0 && TextureManager::Instance()->getAlpha(xx,yy-1,texture) == 0) )
+                    if( (j == 0) || (j != 0 && texture->getAlpha(xx,yy-1) == 0) )
                     {
                         mPosition2.push_back(new Vector3(x+i*pixel,y+j*pixel,   z+pixel*17));
                         mtextures2.push_back(new Vector2(left+texturepixel*i, down+texturepixel*j));
@@ -14999,46 +14998,46 @@ void CraftWorld::drawArmor(int i, float light)
 {
     if(i >= 328 && i <= 331) // leather
     {
-        TextureManager::Instance()->SetTextureModeulate(textureLeatherArmor1Id);
+        (textureLeatherArmor1Id)->bindTexture(GU_NEAREST, GU_NEAREST, true);
         if(i == 330)
         {
-            TextureManager::Instance()->SetTextureModeulate(textureLeatherArmor2Id);
+            (textureLeatherArmor2Id)->bindTexture(GU_NEAREST, GU_NEAREST, true);
         }
     }
 
     if(i >= 332 && i <= 335) // chain
     {
-        TextureManager::Instance()->SetTextureModeulate(textureChainArmor1Id);
+        (textureChainArmor1Id)->bindTexture(GU_NEAREST, GU_NEAREST, true);
         if(i == 334)
         {
-            TextureManager::Instance()->SetTextureModeulate(textureChainArmor2Id);
+            (textureChainArmor2Id)->bindTexture(GU_NEAREST, GU_NEAREST, true);
         }
     }
 
     if(i >= 336 && i <= 339) // iron
     {
-        TextureManager::Instance()->SetTextureModeulate(textureIronArmor1Id);
+        (textureIronArmor1Id)->bindTexture(GU_NEAREST, GU_NEAREST, true);
         if(i == 338)
         {
-            TextureManager::Instance()->SetTextureModeulate(textureIronArmor2Id);
+            (textureIronArmor2Id)->bindTexture(GU_NEAREST, GU_NEAREST, true);
         }
     }
 
     if(i >= 340 && i <= 343) // diamond
     {
-        TextureManager::Instance()->SetTextureModeulate(textureDiamondArmor1Id);
+        (textureDiamondArmor1Id);
         if(i == 342)
         {
-            TextureManager::Instance()->SetTextureModeulate(textureDiamondArmor2Id);
+            (textureDiamondArmor2Id);
         }
     }
 
     if(i >= 344 && i <= 347) // diamond
     {
-        TextureManager::Instance()->SetTextureModeulate(textureGoldenArmor1Id);
+        (textureGoldenArmor1Id);
         if(i == 346)
         {
-            TextureManager::Instance()->SetTextureModeulate(textureGoldenArmor2Id);
+            (textureGoldenArmor2Id);
         }
     }
 
@@ -15078,27 +15077,27 @@ void CraftWorld::drawShoulder(int chestplateId, float light)
 {
     if(chestplateId >= 328 && chestplateId <= 331) // leather
     {
-        TextureManager::Instance()->SetTextureModeulate(textureLeatherArmor1Id);
+        (textureLeatherArmor1Id);
     }
 
     if(chestplateId >= 332 && chestplateId <= 335) // chain
     {
-        TextureManager::Instance()->SetTextureModeulate(textureChainArmor1Id);
+        (textureChainArmor1Id);
     }
 
     if(chestplateId >= 336 && chestplateId <= 339) // iron
     {
-        TextureManager::Instance()->SetTextureModeulate(textureIronArmor1Id);
+        (textureIronArmor1Id);
     }
 
     if(chestplateId >= 340 && chestplateId <= 343) // diamond
     {
-        TextureManager::Instance()->SetTextureModeulate(textureDiamondArmor1Id);
+        (textureDiamondArmor1Id);
     }
 
     if(chestplateId >= 344 && chestplateId <= 347) // diamond
     {
-        TextureManager::Instance()->SetTextureModeulate(textureGoldenArmor1Id);
+        (textureGoldenArmor1Id);
     }
 
     float points = 0;
@@ -15129,27 +15128,27 @@ void CraftWorld::drawBelly(int leggingsId, float light)
 {
     if(leggingsId >= 328 && leggingsId <= 331) // leather
     {
-        TextureManager::Instance()->SetTextureModeulate(textureLeatherArmor2Id);
+        (textureLeatherArmor2Id)->bindTexture(GU_NEAREST, GU_NEAREST, true);
     }
 
     if(leggingsId >= 332 && leggingsId <= 335) // chain
     {
-        TextureManager::Instance()->SetTextureModeulate(textureChainArmor2Id);
+        (textureChainArmor2Id)->bindTexture(GU_NEAREST, GU_NEAREST, true);
     }
 
     if(leggingsId >= 336 && leggingsId <= 339) // iron
     {
-        TextureManager::Instance()->SetTextureModeulate(textureIronArmor2Id);
+        (textureIronArmor2Id)->bindTexture(GU_NEAREST, GU_NEAREST, true);
     }
 
     if(leggingsId >= 340 && leggingsId <= 343) // diamond
     {
-        TextureManager::Instance()->SetTextureModeulate(textureDiamondArmor2Id);
+        (textureDiamondArmor2Id)->bindTexture(GU_NEAREST, GU_NEAREST, true);
     }
 
     if(leggingsId >= 344 && leggingsId <= 347) // diamond
     {
-        TextureManager::Instance()->SetTextureModeulate(textureGoldenArmor2Id);
+        (textureGoldenArmor2Id)->bindTexture(GU_NEAREST, GU_NEAREST, true);
     }
 
     float points = 0;
@@ -15498,19 +15497,18 @@ void CraftWorld::UpdateClockTexture()
     if(lastClockFrame != clockFrame)
     {
         lastClockFrame = clockFrame;
-        int frameSize = TextureManager::Instance()->getWidth(textureItemsId)/16;
+        int frameSize = textureItemsId->width/16;
 
         for(int i = 0; i < frameSize; i++)
         {
             for(int j = 0; j < frameSize; j++)
             {
-                TextureManager::Instance()->setColour(frameSize*6+i,
+				textureItemsId->setColour(frameSize*6+i,
                                                       frameSize*4+j,
-                                                      TextureManager::Instance()->getRed(i,lastClockFrame*frameSize+j,textureClockId),
-                                                      TextureManager::Instance()->getGreen(i,lastClockFrame*frameSize+j,textureClockId),
-                                                      TextureManager::Instance()->getBlue(i,lastClockFrame*frameSize+j,textureClockId),
-                                                      TextureManager::Instance()->getAlpha(i,lastClockFrame*frameSize+j,textureClockId),
-                                                      textureItemsId);
+                                                      textureClockId->getRed(i,lastClockFrame*frameSize+j),
+                                                      textureClockId->getGreen(i,lastClockFrame*frameSize+j),
+                                                      textureClockId->getBlue(i,lastClockFrame*frameSize+j),
+                                                      textureClockId->getAlpha(i,lastClockFrame*frameSize+j));
             }
         }
     }
@@ -15539,19 +15537,19 @@ void CraftWorld::UpdateCompassTexture(float cameraAngle)
     {
         lastCompassFrame = (int)compassFrame;
 
-        int frameSize = TextureManager::Instance()->getWidth(textureItemsId)/16;
+        int frameSize = textureItemsId->width/16;
 
         for(int i = 0; i < frameSize; i++)
         {
             for(int j = 0; j < frameSize; j++)
             {
-                TextureManager::Instance()->setColour(frameSize*6+i,
+                textureItemsId->setColour(frameSize*6+i,
                                                       frameSize*3+j,
-                                                      TextureManager::Instance()->getRed(i,lastCompassFrame*frameSize+j,textureCompassId),
-                                                      TextureManager::Instance()->getGreen(i,lastCompassFrame*frameSize+j,textureCompassId),
-                                                      TextureManager::Instance()->getBlue(i,lastCompassFrame*frameSize+j,textureCompassId),
-                                                      TextureManager::Instance()->getAlpha(i,lastCompassFrame*frameSize+j,textureCompassId),
-                                                      textureItemsId);
+                                                      textureCompassId->getRed(i,lastCompassFrame*frameSize+j),
+                                                      textureCompassId->getGreen(i,lastCompassFrame*frameSize+j),
+                                                      textureCompassId->getBlue(i,lastCompassFrame*frameSize+j),
+                                                      textureCompassId->getAlpha(i,lastCompassFrame*frameSize+j)
+                                                      );
             }
         }
     }
@@ -15565,18 +15563,18 @@ void CraftWorld::UpdateWorldAnimation(float dt)
 
         if(animationTimer >= animationTimerEnd) // every 0.075 secs
         {
-            int waterFrameSize = TextureManager::Instance()->getWidth(textureWaterAnimationId);
+            int waterFrameSize = textureWaterAnimationId->width;
             if(waterFrameSize > 16)
                 return;
 
             animationTimer = 0.0f; // zeroize timer
             animationWaterFrame += 1; // go to the next water frame
-            if(animationWaterFrame >= TextureManager::Instance()->getHeight(textureWaterAnimationId)/TextureManager::Instance()->getWidth(textureWaterAnimationId)) // if all frames passed
+            if(animationWaterFrame >= (textureWaterAnimationId)->height/(textureWaterAnimationId)->width) // if all frames passed
             {
                 animationWaterFrame = 0; // zeroize frames
             }
 
-            if(animationLavaFrame >= TextureManager::Instance()->getHeight(textureLavaAnimationId)/TextureManager::Instance()->getWidth(textureLavaAnimationId)-1)
+            if(animationLavaFrame >= (textureLavaAnimationId)->height/(textureLavaAnimationId)->width - 1)
             {
                 animationLavaStep = false;
             }
@@ -15599,41 +15597,39 @@ void CraftWorld::UpdateWorldAnimation(float dt)
                 for(int j = 0; j < waterFrameSize; j++)
                 {
                     // copy each water pixel from water_still.png to terrain.png
-                    TextureManager::Instance()->setColour(waterFrameSize*14+i,
+                    textureTerrainId->setColour(waterFrameSize*14+i,
                                                           waterFrameSize*15+j,
-                                                          TextureManager::Instance()->getRed(i,animationWaterFrame*waterFrameSize+j,textureWaterAnimationId),
-                                                          TextureManager::Instance()->getGreen(i,animationWaterFrame*waterFrameSize+j,textureWaterAnimationId),
-                                                          TextureManager::Instance()->getBlue(i,animationWaterFrame*waterFrameSize+j,textureWaterAnimationId),
-                                                          184,
-                                                          textureTerrainId);
+                                                          textureWaterAnimationId->getRed(i,animationWaterFrame*waterFrameSize+j),
+                                                          textureWaterAnimationId->getGreen(i,animationWaterFrame*waterFrameSize+j),
+                                                          textureWaterAnimationId->getBlue(i,animationWaterFrame*waterFrameSize+j),
+                                                          184);
                     // same to lava
-                    TextureManager::Instance()->setColour(waterFrameSize*15+i,
+					textureTerrainId->setColour(waterFrameSize*15+i,
                                                           waterFrameSize*15+j,
-                                                          TextureManager::Instance()->getRed(i,animationLavaFrame*waterFrameSize+j,textureLavaAnimationId),
-                                                          TextureManager::Instance()->getGreen(i,animationLavaFrame*waterFrameSize+j,textureLavaAnimationId),
-                                                          TextureManager::Instance()->getBlue(i,animationLavaFrame*waterFrameSize+j,textureLavaAnimationId),
-                                                          255,
-                                                          textureTerrainId);
+                                                          textureLavaAnimationId->getRed(i,animationLavaFrame*waterFrameSize+j),
+                                                          textureLavaAnimationId->getGreen(i,animationLavaFrame*waterFrameSize+j),
+                                                          textureLavaAnimationId->getBlue(i,animationLavaFrame*waterFrameSize+j),
+                                                          255);
 
 
                     // for mips texture
                     if(i < 8 && j < 8)
                     {
-                        TextureManager::Instance()->setColour(8*14+i,
+						textureTerrainMipsId->setColour(8*14+i,
                                                               8*15+j,
-                                                              TextureManager::Instance()->getRed(i,animationWaterFrame*waterFrameSize+j,textureWaterAnimationId),
-                                                              TextureManager::Instance()->getGreen(i,animationWaterFrame*waterFrameSize+j,textureWaterAnimationId),
-                                                              TextureManager::Instance()->getBlue(i,animationWaterFrame*waterFrameSize+j,textureWaterAnimationId),
-                                                              184,
-                                                              textureTerrainMipsId);
+                                                              textureWaterAnimationId->getRed(i,animationWaterFrame*waterFrameSize+j),
+                                                              textureWaterAnimationId->getGreen(i,animationWaterFrame*waterFrameSize+j),
+                                                              textureWaterAnimationId->getBlue(i,animationWaterFrame*waterFrameSize+j),
+                                                              184
+                                                              );
 
-                        TextureManager::Instance()->setColour(8*15+i,
+						textureTerrainMipsId->setColour(8*15+i,
                                                               8*15+j,
-                                                              TextureManager::Instance()->getRed(i,animationLavaFrame*waterFrameSize+j,textureLavaAnimationId),
-                                                              TextureManager::Instance()->getGreen(i,animationLavaFrame*waterFrameSize+j,textureLavaAnimationId),
-                                                              TextureManager::Instance()->getBlue(i,animationLavaFrame*waterFrameSize+j,textureLavaAnimationId),
-                                                              255,
-                                                              textureTerrainMipsId);
+                                                              textureLavaAnimationId->getRed(i,animationLavaFrame*waterFrameSize+j),
+                                                              textureLavaAnimationId->getGreen(i,animationLavaFrame*waterFrameSize+j),
+                                                              textureLavaAnimationId->getBlue(i,animationLavaFrame*waterFrameSize+j),
+                                                              255
+                                                              );
                     }
                 }
             }

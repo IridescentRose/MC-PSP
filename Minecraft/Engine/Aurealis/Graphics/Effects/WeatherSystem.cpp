@@ -1,7 +1,6 @@
 #include <Aurealis/Graphics/Effects/WeatherSystem.h>
 #include <Aurealis/Graphics/TextureManager.h>
 #include <LameCraft/CraftWorld2.h>
-#include <Aurealis/Graphics/TextureManager.h>
 
 #define PI 3.1415926535897f
 #define DEG_TO_RAD (PI / 180.0f)
@@ -202,14 +201,14 @@ void WeatherSystem::Render(CraftWorld* mWorld, Frustum &camFrustum, float camera
             raindrop = itIsRaining = false;
             snowflake = itIsSnowing = true;
 
-            TextureManager::Instance()->SetTextureModeulate(TextureHelper::Instance()->GetTexture(TextureHelper::snowTexture));
+            g_TextureData.snowTexture->bindTexture(0, 0, true);
         }
         else
         {
             raindrop = itIsRaining = true;
             snowflake = itIsSnowing = false;
 
-            TextureManager::Instance()->SetTextureModeulate(TextureHelper::Instance()->GetTexture(TextureHelper::rainTexture));
+            g_TextureData.rainTexture->bindTexture(0, 0, true);
         }
 
         for(int i = 0; i <= 27; i++)
@@ -268,7 +267,7 @@ void WeatherSystem::Render(CraftWorld* mWorld, Frustum &camFrustum, float camera
                     }
                     if(snowflake)
                     {
-                        TextureManager::Instance()->SetTextureModeulate(TextureHelper::Instance()->GetTexture(TextureHelper::snowTexture));
+                        g_TextureData.snowTexture->bindTexture(0, 0, true);
                         if(i%2 == 0 || shiftX == 0 || shiftZ == 0)
                         {
                             sceGuTexOffset(snowTextureOffset,snowTextureOffset*0.5f);
