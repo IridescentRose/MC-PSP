@@ -396,14 +396,14 @@ void StatePlay::LoadTextures()
     waterScreen->Scale(30,17);
 
     // hud section
-    int utilsSize = g_TextureData.Utils->width;
-    float utilScale = 364.0f/(float)utilsSize;
+    int utilsSize = 182;
+    float utilScale = 2.0f;
 
     barSprite = new Sprite((g_TextureData.Utils),0*utilsSize/182,0*utilsSize/182,182*utilsSize/182,22*utilsSize/182);
     barSprite->SetPosition(240,250);
     barSprite->Scale(utilScale,utilScale);
 
-    selectSprite = new Sprite((g_TextureData.Utils),0*utilsSize/182,22*utilsSize/182,24*utilsSize/182,24*utilsSize/182);
+    selectSprite = new Sprite((g_TextureData.Utils),0,22,24,24);
     selectSprite->SetPosition(80,250);
     selectSprite->Scale(utilScale,utilScale);
 
@@ -504,7 +504,7 @@ void StatePlay::LoadTextures()
 
     // inventory section
 
-    int invGuiSize = ((g_TextureData.inv))->width;
+    int invGuiSize = g_TextureData.inv->width;
     float invGuiScale = 352.0f/(float)invGuiSize;
 
     invSprite = new Sprite((g_TextureData.inv));//200
@@ -3483,7 +3483,7 @@ void StatePlay::HandleEvents(StateManager* sManager)
                     }
                     barPosition != 0 ? barPosition -- : barPosition = 8;
 
-                    selectSprite->SetPosition(80 + (barPosition * 40),250);
+					selectSprite->SetPosition(80 + (barPosition * 40), 250);
 
                     tickShowSlotName = 1.25f;
 
@@ -12933,8 +12933,7 @@ void StatePlay::Draw(StateManager* sManager)
         g_RenderManager.DebugPrint(20,134,"walkingonground: %d",walkingOnGround);
         g_RenderManager.DebugPrint(20,144,"veloc.y: %f",playerVelocity.y);
         //g_RenderManager.DebugPrint(20,154,"aim block id: %i",mWorld->GetBlock(cubePos.x,cubePos.y,cubePos.z));
-
-        g_RenderManager.DebugPrint(20,164,"skyTime: %f",mWorld->skyTime);
+		g_RenderManager.DebugPrint(20,164,"skyTime: %f",mWorld->skyTime);
 
        // g_RenderManager.DebugPrint(20,154,"Chunks in process : %d",mWorld->toUpdate.size());
 

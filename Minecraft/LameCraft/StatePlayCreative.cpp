@@ -417,9 +417,9 @@ void StatePlayCreative::LoadTextures()
 
     // hud section
 
-	float utilsSize = g_TextureData.Utils->width;
+	int utilsSize = g_TextureData.Utils->width;
 ;
-    int utilScale = 364.0f/utilsSize;
+    float utilScale = 364.0f/(float)utilsSize;
 
     barSprite = new Sprite(g_TextureData.Utils,0,0,182*utilsSize/182,22*utilsSize/182);
     barSprite->SetPosition(240,250);
@@ -451,7 +451,7 @@ void StatePlayCreative::LoadTextures()
 
     // inventory section
 
-    float invGuiSize = g_TextureData.inv->width;
+    int invGuiSize = g_TextureData.inv->width;
     float invGuiScale = 352.0f/(float)invGuiSize;
 
     invSprite = new Sprite(g_TextureData.invCreative);//200
@@ -478,8 +478,8 @@ void StatePlayCreative::LoadTextures()
     sliderLightedSprite->SetPosition(240,136);
     sliderLightedSprite->Scale(invGuiScale,invGuiScale);
 
-    float invArrowSize = g_TextureData.furArrow->width;
-    float invArrowScale = 44.0f/invArrowSize;
+    float invArrowSize = 22;
+    float invArrowScale = 2.0f;
 
     for(int j = 13; j >= 0; j--)
     {
@@ -490,13 +490,13 @@ void StatePlayCreative::LoadTextures()
 
     for(int j = 0; j <= 21; j++)
     {
-        furArrowSprite[j] = new Sprite(g_TextureData.furArrow,0,0,(1*j)*invArrowSize/22.0f,16*invArrowSize/22.0f,true);//200
+        furArrowSprite[j] = new Sprite(g_TextureData.furArrow,0,0,j,16,true);//200
         furArrowSprite[j]->SetPosition(240,136);
-        furArrowSprite[j]->Scale(invArrowScale,invArrowScale);
+        furArrowSprite[j]->Scale(2.0f, 2.0f);
     }
 
-    int invFireSize = g_TextureData.furFire->width;
-    float invFireScale = 28.0f/(float)invFireSize;
+    int invFireSize = 14.0f;
+    float invFireScale = 2.0f;
 
     for(int j = 0; j <= 13; j++)
     {
@@ -8023,6 +8023,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
 
 void StatePlayCreative::Update(StateManager* sManager)
 {
+	fppCam->update(isWalking);
     if(menuState == 0)//game state
     {
         furnaceTimes += dt;

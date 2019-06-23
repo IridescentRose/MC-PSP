@@ -35,7 +35,6 @@ namespace Aurealis
 			float GetPositionY();
 
 
-		private:
 			Texture* tex;
 			TexturedVertex *vertices;
 
