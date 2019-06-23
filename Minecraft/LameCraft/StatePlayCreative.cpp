@@ -478,8 +478,8 @@ void StatePlayCreative::LoadTextures()
     sliderLightedSprite->SetPosition(240,136);
     sliderLightedSprite->Scale(invGuiScale,invGuiScale);
 
-    float invArrowSize = 22;
-    float invArrowScale = 2.0f;
+    float invArrowSize = g_TextureData.furArrow->width;
+	float invArrowScale = 44.0f / invArrowSize;
 
     for(int j = 13; j >= 0; j--)
     {

@@ -396,8 +396,8 @@ void StatePlay::LoadTextures()
     waterScreen->Scale(30,17);
 
     // hud section
-    int utilsSize = 182;
-    float utilScale = 2.0f;
+    int utilsSize = g_TextureData.Utils->width;
+    float utilScale = 364.0f/(float)utilsSize;
 
     barSprite = new Sprite((g_TextureData.Utils),0*utilsSize/182,0*utilsSize/182,182*utilsSize/182,22*utilsSize/182);
     barSprite->SetPosition(240,250);
@@ -11477,7 +11477,7 @@ void StatePlay::Draw(StateManager* sManager)
 
         DrawSetDepthMask(false);
         DrawSetCulling(true);
-        invPlayer->Render(mWorld, dt, invSteveAngle, invPlayerTex, mWorld->invId[27+barPosition]);
+        invPlayer->Render(mWorld, dt, invSteveAngle, g_TextureData.Steve, mWorld->invId[27+barPosition]);
         DrawSetCulling(false);
         DrawSetDepthMask(true);
 

@@ -195,7 +195,7 @@ private:
 
     int SplashNumber;
     float splashSize;
-
+	bool isPaused;
     unsigned int seed_1;
 	int selectPos;
 	int loadSelectPos;

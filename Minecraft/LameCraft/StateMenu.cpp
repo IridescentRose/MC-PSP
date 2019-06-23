@@ -64,7 +64,7 @@ StateMenu::~StateMenu()
 
 void StateMenu::Init()
 {
-
+	isPaused = false;
     newW_width = 0;
     newW_height = 0;
     newW_length = 0;
@@ -300,9 +300,11 @@ void StateMenu::CleanUp()
     delete nbuttonSmallSprite;
 
     delete blackBackground;
-	delete[] bg;
 
-	delete[] bgTex;
+	for (int i = 0; i < 24; i++) {
+		delete bg[i];
+		delete bgTex[i];
+	}
 
 	delete texButton;
 	delete texLogo;
@@ -311,19 +313,58 @@ void StateMenu::CleanUp()
 
 void StateMenu::Pause()
 {
+	if (!isPaused) {
 
+		for (int i = 0; i < 24; i++) {
+			delete bg[i];
+			delete bgTex[i];
+		}
+	}
+	isPaused = true;
 }
 
 void StateMenu::Resume()
 {
+	isPaused = false;
     menuState = 0;
     loadSelectPos = 0;
     loadSavePos = 0;
     g_RenderManager.SetOrtho(0,0,0,0,0,0);
+
+	bgTex[0] = TextureUtil::LoadPng("./Assets/ConstTextures/background/0.png");
+	bgTex[1] = TextureUtil::LoadPng("./Assets/ConstTextures/background/1.png");
+	bgTex[2] = TextureUtil::LoadPng("./Assets/ConstTextures/background/2.png");
+	bgTex[3] = TextureUtil::LoadPng("./Assets/ConstTextures/background/3.png");
+	bgTex[4] = TextureUtil::LoadPng("./Assets/ConstTextures/background/4.png");
+	bgTex[5] = TextureUtil::LoadPng("./Assets/ConstTextures/background/5.png");
+	bgTex[6] = TextureUtil::LoadPng("./Assets/ConstTextures/background/6.png");
+	bgTex[7] = TextureUtil::LoadPng("./Assets/ConstTextures/background/7.png");
+	bgTex[8] = TextureUtil::LoadPng("./Assets/ConstTextures/background/8.png");
+	bgTex[9] = TextureUtil::LoadPng("./Assets/ConstTextures/background/9.png");
+	bgTex[10] = TextureUtil::LoadPng("./Assets/ConstTextures/background/10.png");
+	bgTex[11] = TextureUtil::LoadPng("./Assets/ConstTextures/background/11.png");
+	bgTex[12] = TextureUtil::LoadPng("./Assets/ConstTextures/background/12.png");
+	bgTex[13] = TextureUtil::LoadPng("./Assets/ConstTextures/background/13.png");
+	bgTex[14] = TextureUtil::LoadPng("./Assets/ConstTextures/background/14.png");
+	bgTex[15] = TextureUtil::LoadPng("./Assets/ConstTextures/background/15.png");
+	bgTex[16] = TextureUtil::LoadPng("./Assets/ConstTextures/background/16.png");
+	bgTex[17] = TextureUtil::LoadPng("./Assets/ConstTextures/background/17.png");
+	bgTex[18] = TextureUtil::LoadPng("./Assets/ConstTextures/background/18.png");
+	bgTex[19] = TextureUtil::LoadPng("./Assets/ConstTextures/background/19.png");
+	bgTex[20] = TextureUtil::LoadPng("./Assets/ConstTextures/background/20.png");
+	bgTex[21] = TextureUtil::LoadPng("./Assets/ConstTextures/background/21.png");
+	bgTex[22] = TextureUtil::LoadPng("./Assets/ConstTextures/background/22.png");
+	bgTex[23] = TextureUtil::LoadPng("./Assets/ConstTextures/background/23.png");
+	for (int i = 0; i < 24; i++) {
+		bg[i] = new Sprite(bgTex[i], 0, 0, 480, 272);
+		bg[i]->Scale(2, 2);
+		bg[i]->SetPosition(480, 272);
+	}
 }
 
 void StateMenu::HandleEvents(StateManager* sManager)
 {
+	if(!isPaused){
     //update input
     g_System.InputUpdate();
 
@@ -677,6 +718,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
                                 statePlay->LoadMap(saveFilesList[loadSavePos].fileName,saveFilesList[loadSavePos].compression);
                                 statePlay->InitCamera();
                                 sManager->AddState(statePlay);
+								return; //BREAK IT OUT
                             }
                         }
                     }
@@ -2028,6 +2070,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
     }
     break;
     }
+	}
 }
 
 void StateMenu::Update(StateManager* sManager)
@@ -2040,931 +2083,932 @@ void StateMenu::Update(StateManager* sManager)
 
 void StateMenu::Draw(StateManager* sManager)
 {
-
-
-    //start rendering
-    g_RenderManager.StartFrame(1,1,1);
-	g_RenderManager.SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	g_RenderManager.CleanBuffers();
-
-	sceGuDisable(GU_DEPTH_TEST);
-	sceGuEnable(GU_BLEND);
-	sceGuColor(GU_COLOR(0, 0, 0, 1.0f));
-
-	float dt = timer.GetDeltaTime();
-
-	animTime += dt * 3.124;
-	op1 += (dt) * 20;
-
-	if (op1 >= 255) {
-		currTime++;
-		op1 = 0;
-	}
-
-	if (currTime == 24) {
-		currTime = 0;
-	}
-
-
-	if (op1 > 255) {
-		op1 = 255;
-	}
-
-	bg[currTime]->Alpha(255);
-	bg[currTime]->DrawLinear();
-
-	if (currTime == 23) {
-		bg[0]->Alpha(op1);
-		bg[0]->DrawLinear();
-	}
-	else {
-		bg[currTime + 1]->Alpha(op1);
-		bg[currTime + 1]->DrawLinear();
-	}
-
-
-    switch(menuState)
-    {
-    case -1://language menu
-    {
-        sceGuDisable(GU_DEPTH_TEST);
-        sceGuEnable(GU_BLEND);
-        sceGuColor(GU_COLOR(1,1,1,1.0f));
-
-        // english
-        buttonSprite->SetPosition(240,120);
-        buttonSprite->Draw();
-
-        // russian
-        buttonSprite->SetPosition(240,160);
-        buttonSprite->Draw();
-
-        //selected button
-        sbuttonSprite->SetPosition(240,(selectPos * 40) + 120);
-        sbuttonSprite->Draw();
-
-        sceGuDisable(GU_BLEND);
-        sceGuEnable(GU_DEPTH_TEST);
-
-        selectPos == 0 ? DrawText(240,129,GU_COLOR(1,1,0.25,1) ,default_size,"English") : DrawText(240,129,GU_COLOR(1,1,1,1) ,default_size,"English");
-        selectPos == 1 ? DrawText(240,169,GU_COLOR(1,1,0.25,1) ,default_size,"Russian") : DrawText(240,169,GU_COLOR(1,1,1,1) ,default_size,"Russian");
-
-        DrawText(240,24,GU_COLOR(1,1,1,1) ,default_size,"Choose your language");
-    }
-    break;
-    case 0://main menu
-    {
-        sceGuDisable(GU_DEPTH_TEST);
-        sceGuEnable(GU_BLEND);
-        sceGuColor(GU_COLOR(1,1,1,1.0f));
-
-
-        if(bx >= 360)
-        {
-            directionx = false;
-        }
-        if(bx <= 120)
-        {
-            directionx = true;
-        }
-
-        if(by >= 272-68)
-        {
-            directiony = false;
-        }
-        if(by <= 68)
-        {
-            directiony = true;
-        }
-
-        if(directionx == true)
-        {
-            bx += 1/6.0f;
-        }
-        else
-        {
-            bx -= 1/6.0f;
-        }
-
-        if(directiony == true)
-        {
-            by += 272.0f/960.0f/6.0f;
-        }
-        else
-        {
-            by -= 272.0f/960.0f/6.0f;
-        }
-
-
-        
-        //logo
-        lamecraftSprite->Draw();
-
-        //singlePlayer
-        buttonSprite->SetPosition(240,120);
-        buttonSprite->Draw();
-
-        //options
-        buttonSprite->SetPosition(240,160);
-        buttonSprite->Draw();
-
-        //about
-        buttonSprite->SetPosition(240,200);
-        buttonSprite->Draw();
-
-        //texture pack
-        buttonSprite->SetPosition(240,240);
-        buttonSprite->Draw();
-
-        //selected button
-        sbuttonSprite->SetPosition(240,(selectPos * 40) + 120);
-        sbuttonSprite->Draw();
-
-        sceGuDisable(GU_BLEND);
-        sceGuEnable(GU_DEPTH_TEST);
-
-        splashSize += 0.08f;
-        if(splashSize > 2*PI)
-        {
-            splashSize = 0.0f;
-        }
-
-        if(g_RenderManager.GetFontLanguage() == ENGLISH)
-        {
-            selectPos == 0 ? DrawText(240,129,GU_COLOR(1,1,0.25,1) ,default_size,"Singleplayer") : DrawText(240,129,GU_COLOR(1,1,1,1) ,default_size,"Singleplayer");
-            selectPos == 1 ? DrawText(240,169,GU_COLOR(1,1,0.25,1) ,default_size,"Options") : DrawText(240,169,GU_COLOR(1,1,1,1) ,default_size,"Options");
-            selectPos == 2 ? DrawText(240,209,GU_COLOR(1,1,0.25,1) ,default_size,"About & Converter") : DrawText(240,209,GU_COLOR(1,1,1,1) ,default_size,"About & Converter");
-            selectPos == 3 ? DrawText(240,249,GU_COLOR(1,1,0.25,1) ,default_size,"Texture Packs") : DrawText(240,249,GU_COLOR(1,1,1,1) ,default_size,"Texture Packs");
-
-
-            switch(SplashNumber)
-            {
-                case 0: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Uses C++!"); break;
-                case 1: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Fan fiction!"); break;
-                case 2: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Made on Lamecraft op-30!"); break;
-                case 3: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"More polygons!"); break;
-                case 4: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"there is no grass"); break;
-                case 5: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Not approved by Mojang"); break;
-            }
-        }
-        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-        {
-            selectPos == 0 ? DrawText(240,129,GU_COLOR(1,1,0.25,1) ,default_size,"Odinoyna^ igra") : DrawText(240,129,GU_COLOR(1,1,1,1) ,default_size,"Odinoyna^ igra");
-            selectPos == 1 ? DrawText(240,169,GU_COLOR(1,1,0.25,1) ,default_size,"Nastro~ki") : DrawText(240,169,GU_COLOR(1,1,1,1) ,default_size,"Nastro~ki");
-            selectPos == 2 ? DrawText(240,209,GU_COLOR(1,1,0.25,1) ,default_size,"Ob igre i Konverter") : DrawText(240,209,GU_COLOR(1,1,1,1) ,default_size,"Ob igre i Konverter");
-            selectPos == 3 ? DrawText(240,249,GU_COLOR(1,1,0.25,1) ,default_size,"Tekstur@") : DrawText(240,249,GU_COLOR(1,1,1,1) ,default_size,"Tekstur@");
-
-            switch(SplashNumber)
-            {
-                case 0: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Na S++!"); break;
-                case 1: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Fanatska^ rabota!"); break;
-                case 2: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Uje 3 goda s vami!"); break;
-                case 3: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Bol$we poligonov!"); break;
-                case 4: DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"zdes$ net trav@"); break;
-                case 5: {
-                            DrawText(328,86,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"Ne odobreno ");
-                            g_RenderManager.SetFont(ENGLISH);
-                            DrawText(328,84,GU_COLOR(1,1,0,1) ,0.6+sinf(splashSize)*0.04f,"                Mojang");
-                            g_RenderManager.SetDefaultFont();
-                        } break;
-            }
-        }
-    }
-    break;
-    case 1://select world
-    {
-        sceGuDisable(GU_DEPTH_TEST);
-        sceGuEnable(GU_BLEND);
-        sceGuColor(GU_COLOR(1,1,1,1.0f));
-
-
-        if(saveSubmenu) // delete world
-        {
-            buttonSprite->SetPosition(240,235);
-            buttonSprite->Draw();
-
-            buttonSprite->SetPosition(240,260);
-            buttonSprite->Draw();
-        }
-        else
-        {
-            /// left part
-            if(saveFilesList.empty() == false)
-            {
-                buttonSprite->SetPosition(120,222); // play selected world
-                buttonSprite->Draw();
-
-                buttonSmallSprite->SetPosition(67.75,255); // rename
-                buttonSmallSprite->Draw();
-
-                buttonSmallSprite->SetPosition(172.25,255); // delete
-                buttonSmallSprite->Draw();
-            }
-            else
-            {
-                nbuttonSprite->SetPosition(120,222); // play selected world
-                nbuttonSprite->Draw();
-
-                nbuttonSmallSprite->SetPosition(67.75,255); // rename
-                nbuttonSmallSprite->Draw();
-
-                nbuttonSmallSprite->SetPosition(172.25,255); // delete
-                nbuttonSmallSprite->Draw();
-            }
-
-            ///right part
-            buttonSprite->SetPosition(360,222); // create new world
-            buttonSprite->Draw();
-
-            buttonSprite->SetPosition(360,255); // cancel
-            buttonSprite->Draw();
-        }
-
-
-        bool smallButton = false;
-        if(saveSubmenu)
-        {
-            sbuttonSprite->SetPosition(240,(saveSubMenuSelect * 25) + 210);
-        }
-        else
-        {
-            switch(loadSelectPos)
-            {
-                case 0:
-                sbuttonSprite->SetPosition(120,222);
-                break;
-                case 1:
-                sbuttonSmallSprite->SetPosition(67.75,255);
-                smallButton = true;
-                break;
-                case 2:
-                sbuttonSmallSprite->SetPosition(172.25,255);
-                smallButton = true;
-                break;
-                case 3:
-                sbuttonSprite->SetPosition(360,222);
-                break;
-                case 4:
-                sbuttonSprite->SetPosition(360,255);
-                break;
-            }
-        }
-        smallButton == true ? sbuttonSmallSprite->Draw() : sbuttonSprite->Draw();
-
-        blackBackground->Draw();
-
-        //select sprite
-        if(saveFilesList.size() > 0)
-        {
-            //save files
-            for(int i = loadSaveStart; i <loadSaveMax; i++)
-            {
-                if(loadSavePos == i)
-                {
-                    g_RenderManager.SetFont(ENGLISH);
-                    if(saveFilesList[i].worldName[0] != '\0')
-                    {
-                        g_RenderManager.SetFontStyle(0.8f,GU_COLOR(1,1,0,1),0,0x00000000);
-                        g_RenderManager.DebugPrint(30,54 + (i * 41) - (loadSaveStart * 41),"%s",saveFilesList[i].worldName);
-                    }
-                    else
-                    {
-                        g_RenderManager.SetFontStyle(0.8f,GU_COLOR(0.6,0.6,0,1),0,0x00000000);
-                        g_RenderManager.DebugPrint(30,54 + (i * 41) - (loadSaveStart * 41),"<no name>");
-                    }
-
-                    g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
-                    g_RenderManager.DebugPrint(30,66 + (i * 41) - (loadSaveStart * 41),"%s",saveFilesList[i].fileName.c_str());
-
-                    g_RenderManager.SetDefaultFont();
-
-                    if(g_RenderManager.GetFontLanguage() == ENGLISH)
-                    {
-                        switch(saveFilesList[i].worldGameMode)
-                        {
-                            case 0:
-                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
-                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Survival mode (%i KB)",saveFilesList[i].saveSize/1024);
-                            break;
-                            case 1:
-                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
-                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Creative mode (%i KB)",saveFilesList[i].saveSize/1024);
-                            break;
-                            case 2:
-                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
-                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Hardcore mode (%i KB)",saveFilesList[i].saveSize/1024);
-                            break;
-                        }
-                    }
-                    if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-                    {
-                        switch(saveFilesList[i].worldGameMode)
-                        {
-                            case 0:
-                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
-                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"V@jivanie (%i KB)",saveFilesList[i].saveSize/1024);
-                            break;
-                            case 1:
-                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
-                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Tvoryeski~ (%i KB)",saveFilesList[i].saveSize/1024);
-                            break;
-                            case 2:
-                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
-                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Hardkor (%i KB)",saveFilesList[i].saveSize/1024);
-                            break;
-                        }
-                    }
-                }
-                else
-                {
-                    g_RenderManager.SetFont(ENGLISH);
-
-                    if(saveFilesList[i].worldName[0] != '\0')
-                    {
-                        g_RenderManager.SetFontStyle(0.8f,GU_COLOR(1,1,1,1),0,0x00000000);
-                        g_RenderManager.DebugPrint(30,54 + (i * 41) - (loadSaveStart * 41),"%s",saveFilesList[i].worldName);
-                    }
-                    else
-                    {
-                        g_RenderManager.SetFontStyle(0.8f,GU_COLOR(0.6,0.6,0.6,1),0,0x00000000);
-                        g_RenderManager.DebugPrint(30,54 + (i * 41) - (loadSaveStart * 41),"<no name>");
-                    }
-
-                    g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
-                    g_RenderManager.DebugPrint(30,66 + (i * 41) - (loadSaveStart * 41),"%s",saveFilesList[i].fileName.c_str());
-
-                    g_RenderManager.SetDefaultFont();
-
-                    if(g_RenderManager.GetFontLanguage() == ENGLISH)
-                    {
-                        switch(saveFilesList[i].worldGameMode)
-                        {
-                            case 0:
-                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
-                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Survival mode (%i KB)",saveFilesList[i].saveSize/1024);
-                            break;
-                            case 1:
-                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
-                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Creative mode (%i KB)",saveFilesList[i].saveSize/1024);
-                            break;
-                            case 2:
-                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
-                            g_RenderManager.DebugPrint(30,78  + (i * 41) - (loadSaveStart * 41),"Hardcore mode (%i KB)",saveFilesList[i].saveSize/1024);
-                            break;
-                        }
-                    }
-
-                    if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-                    {
-                        switch(saveFilesList[i].worldGameMode)
-                        {
-                            case 0:
-                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
-                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"V@jivanie (%i KB)",saveFilesList[i].saveSize/1024);
-                            break;
-                            case 1:
-                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
-                            g_RenderManager.DebugPrint(30,78 + (i * 41) - (loadSaveStart * 41),"Tvoryeski~ (%i KB)",saveFilesList[i].saveSize/1024);
-                            break;
-                            case 2:
-                            g_RenderManager.SetFontStyle(0.5f,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
-                            g_RenderManager.DebugPrint(30,78  + (i * 41) - (loadSaveStart * 41),"Hardkor (%i KB)",saveFilesList[i].saveSize/1024);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        sceGuDisable(GU_BLEND);
-        sceGuEnable(GU_DEPTH_TEST);
-
-        if(g_RenderManager.GetFontLanguage() == ENGLISH)
-        {
-            if(saveSubmenu)
-            {
-                saveSubMenuSelect == 0 ? DrawText(240,219,GU_COLOR(1,1,0.25,1) ,default_size,"Are you sure?") : DrawText(240,219,GU_COLOR(1,1,1,1) ,default_size,"Are you sure?");
-                saveSubMenuSelect == 1 ? DrawText(240,244,GU_COLOR(1,1,0.25,1) ,default_size,"Yes") : DrawText(240,244,GU_COLOR(1,1,1,1) ,default_size,"Yes");
-                saveSubMenuSelect == 2 ? DrawText(240,269,GU_COLOR(1,1,0.25,1) ,default_size,"No") : DrawText(240,269,GU_COLOR(1,1,1,1) ,default_size,"No");
-            }
-            else
-            {
-                float buttonTextColor = 1.0f; // for left part
-                if(saveFilesList.empty() == true)
-                {
-                    buttonTextColor = 0.5f;
-                }
-
-                loadSelectPos == 0 ? DrawText(120,231,GU_COLOR(1,1,0.25,1),default_size,"Play Selected World") : DrawText(120,231,GU_COLOR(buttonTextColor,buttonTextColor,buttonTextColor,1),default_size,"Play Selected World");
-                loadSelectPos == 1 ? DrawText(67.75f,264,GU_COLOR(1,1,0.25,1) ,default_size,"Rename") : DrawText(67.75f,264,GU_COLOR(buttonTextColor,buttonTextColor,buttonTextColor,1) ,default_size,"Rename");
-                loadSelectPos == 2 ? DrawText(172.25f,264,GU_COLOR(1,1,0.25,1) ,default_size,"Delete") : DrawText(172.25f,264,GU_COLOR(buttonTextColor,buttonTextColor,buttonTextColor,1) ,default_size,"Delete");
-                loadSelectPos == 3 ? DrawText(360,231,GU_COLOR(1,1,0.25,1) ,default_size,"Create New World") : DrawText(360,231,GU_COLOR(1.0f,1.0f,1.0f,1) ,default_size,"Create New World");
-                loadSelectPos == 4 ? DrawText(360,264,GU_COLOR(1,1,0.25,1) ,default_size,"Cancel") : DrawText(360,264,GU_COLOR(1.0f,1.0f,1.0f,1) ,default_size,"Cancel");
-            }
-            DrawText(240,24,GU_COLOR(1,1,1,1) ,default_size,"Select World");
-        }
-
-        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-        {
-            if(saveSubmenu)
-            {
-                saveSubMenuSelect == 0 ? DrawText(240,219,GU_COLOR(1,1,0.25,1) ,default_size,"V@ uveren@?") : DrawText(240,219,GU_COLOR(1,1,1,1) ,default_size,"V@ uveren@?");
-                saveSubMenuSelect == 1 ? DrawText(240,244,GU_COLOR(1,1,0.25,1) ,default_size,"Da") : DrawText(240,244,GU_COLOR(1,1,1,1) ,default_size,"Da");
-                saveSubMenuSelect == 2 ? DrawText(240,269,GU_COLOR(1,1,0.25,1) ,default_size,"Net") : DrawText(240,269,GU_COLOR(1,1,1,1) ,default_size,"Net");
-            }
-            else
-            {
-                float buttonTextColor = 1.0f; // for left part
-                if(saveFilesList.empty() == true)
-                {
-                    buttonTextColor = 0.5f;
-                }
-
-                loadSelectPos == 0 ? DrawText(120,231,GU_COLOR(1,1,0.25,1),default_size,"Igrat$ v v@brannom mire") : DrawText(120,231,GU_COLOR(buttonTextColor,buttonTextColor,buttonTextColor,1),default_size,"Igrat$ v v@brannom mire");
-                loadSelectPos == 1 ? DrawText(67.75f,264,GU_COLOR(1,1,0.25,1) ,default_size,"Pereimenovat$") : DrawText(67.75f,264,GU_COLOR(buttonTextColor,buttonTextColor,buttonTextColor,1) ,default_size,"Pereimenovat$");
-                loadSelectPos == 2 ? DrawText(172.25f,264,GU_COLOR(1,1,0.25,1) ,default_size,"Udalit$") : DrawText(172.25f,264,GU_COLOR(buttonTextColor,buttonTextColor,buttonTextColor,1) ,default_size,"Udalit$");
-                loadSelectPos == 3 ? DrawText(360,231,GU_COLOR(1,1,0.25,1) ,default_size,"Sozdat$ nov@~ mir") : DrawText(360,231,GU_COLOR(1.0f,1.0f,1.0f,1) ,default_size,"Sozdat$ nov@~ mir");
-                loadSelectPos == 4 ? DrawText(360,264,GU_COLOR(1,1,0.25,1) ,default_size,"Otmena") : DrawText(360,264,GU_COLOR(1.0f,1.0f,1.0f,1) ,default_size,"Otmena");
-            }
-            DrawText(240,24,GU_COLOR(1,1,1,1) ,default_size,"V@bor mira");
-        }
-    }
-    break;
-    case 3://about
-    {
-
-
-        sceGuDisable(GU_DEPTH_TEST);
-        sceGuEnable(GU_BLEND);
-        sceGuColor(GU_COLOR(1,1,1,1.0f));
-
-
-        //check for update
-        buttonSprite->SetPosition(240,225);
-        buttonSprite->Draw();
-
-        buttonSprite->SetPosition(240,255);
-        buttonSprite->Draw();
-
-        //back
-        sbuttonSprite->SetPosition(240,(aboutPos * 30) + 225);
-        sbuttonSprite->Draw();
-
-        blackBackground->Draw();
-
-        sceGuDisable(GU_BLEND);
-        sceGuEnable(GU_DEPTH_TEST);
-
-        if(g_RenderManager.GetFontLanguage() == ENGLISH)
-        {
-            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            g_RenderManager.DebugPrint(40,100-40,"Author:");
-            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            g_RenderManager.DebugPrint(440,100-40,"Marcin Ploska(Drakon)");
-
-			g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
-			g_RenderManager.DebugPrint(40, 124 - 40, "Modder:");
-			g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
-			g_RenderManager.DebugPrint(440, 124 - 40, "Kirill Skibin(Woolio)");
-
-			g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
-			g_RenderManager.DebugPrint(40, 148 - 40, "Modder 2:");
-			g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
-			g_RenderManager.DebugPrint(440, 148 - 40, "Nathan Bourgeois");
-
-			if (!IS_SNAPSHOT) {
-				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, INTRAFONT_ALIGN_RIGHT);
-				g_RenderManager.DebugPrint(480, 270, "Version: %s", VERSION_NAME);
+	if (!isPaused) {
+
+		//start rendering
+		g_RenderManager.StartFrame(1, 1, 1);
+		g_RenderManager.SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		g_RenderManager.CleanBuffers();
+
+		sceGuDisable(GU_DEPTH_TEST);
+		sceGuEnable(GU_BLEND);
+		sceGuColor(GU_COLOR(0, 0, 0, 1.0f));
+
+		float dt = timer.GetDeltaTime();
+
+		animTime += dt * 3.124;
+		op1 += (dt) * 20;
+
+		if (op1 >= 255) {
+			currTime++;
+			op1 = 0;
+		}
+
+		if (currTime == 24) {
+			currTime = 0;
+		}
+
+
+		if (op1 > 255) {
+			op1 = 255;
+		}
+
+		bg[currTime]->Alpha(255);
+		bg[currTime]->DrawLinear();
+
+		if (currTime == 23) {
+			bg[0]->Alpha(op1);
+			bg[0]->DrawLinear();
+		}
+		else {
+			bg[currTime + 1]->Alpha(op1);
+			bg[currTime + 1]->DrawLinear();
+		}
+
+
+		switch (menuState)
+		{
+		case -1://language menu
+		{
+			sceGuDisable(GU_DEPTH_TEST);
+			sceGuEnable(GU_BLEND);
+			sceGuColor(GU_COLOR(1, 1, 1, 1.0f));
+
+			// english
+			buttonSprite->SetPosition(240, 120);
+			buttonSprite->Draw();
+
+			// russian
+			buttonSprite->SetPosition(240, 160);
+			buttonSprite->Draw();
+
+			//selected button
+			sbuttonSprite->SetPosition(240, (selectPos * 40) + 120);
+			sbuttonSprite->Draw();
+
+			sceGuDisable(GU_BLEND);
+			sceGuEnable(GU_DEPTH_TEST);
+
+			selectPos == 0 ? DrawText(240, 129, GU_COLOR(1, 1, 0.25, 1), default_size, "English") : DrawText(240, 129, GU_COLOR(1, 1, 1, 1), default_size, "English");
+			selectPos == 1 ? DrawText(240, 169, GU_COLOR(1, 1, 0.25, 1), default_size, "Russian") : DrawText(240, 169, GU_COLOR(1, 1, 1, 1), default_size, "Russian");
+
+			DrawText(240, 24, GU_COLOR(1, 1, 1, 1), default_size, "Choose your language");
+		}
+		break;
+		case 0://main menu
+		{
+			sceGuDisable(GU_DEPTH_TEST);
+			sceGuEnable(GU_BLEND);
+			sceGuColor(GU_COLOR(1, 1, 1, 1.0f));
+
+
+			if (bx >= 360)
+			{
+				directionx = false;
 			}
-			else {
-				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, INTRAFONT_ALIGN_RIGHT);
-				g_RenderManager.DebugPrint(480, 270, "Snapshot: %s", SNAPSHOT_NAME);
+			if (bx <= 120)
+			{
+				directionx = true;
+			}
+
+			if (by >= 272 - 68)
+			{
+				directiony = false;
+			}
+			if (by <= 68)
+			{
+				directiony = true;
+			}
+
+			if (directionx == true)
+			{
+				bx += 1 / 6.0f;
+			}
+			else
+			{
+				bx -= 1 / 6.0f;
+			}
+
+			if (directiony == true)
+			{
+				by += 272.0f / 960.0f / 6.0f;
+			}
+			else
+			{
+				by -= 272.0f / 960.0f / 6.0f;
 			}
 
 
-            aboutPos == 0 ? DrawText(240,234,GU_COLOR(1,1,0.25,1) ,default_size,"Converter") : DrawText(240,234,GU_COLOR(1,1,1,1) ,default_size,"Converter");
-            aboutPos == 1 ? DrawText(240,264,GU_COLOR(1,1,0.25,1) ,default_size,"Cancel") : DrawText(240,264,GU_COLOR(1,1,1,1) ,default_size,"Cancel");
-            DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"About");
-        }
-        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-        {
-            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            g_RenderManager.DebugPrint(40,100-40,"Dvijok igr@:");
-            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            g_RenderManager.DebugPrint(440,100-40,"Marsin Ploska(Drakon)");
-
-            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            g_RenderManager.DebugPrint(40,124-40,"Modifikaci^:");
-            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            g_RenderManager.DebugPrint(440,124-40,"Kirill Skibin(Volio)");
-
-            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            g_RenderManager.DebugPrint(40,172-40,"Vebsa~t:");
-
-            g_RenderManager.SetFont(ENGLISH);
-            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            g_RenderManager.DebugPrint(440,172-40,"vk.com/mine_psp");
-            g_RenderManager.SetDefaultFont();
-
-            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            g_RenderManager.DebugPrint(40,196-40,"Versi^:");
-            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            g_RenderManager.DebugPrint(440,196-40,"2.0");
-
-            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000000);
-            g_RenderManager.DebugPrint(40,220-40,"Stadi^ razrabotki:");
-            g_RenderManager.SetFontStyle(0.687,GU_COLOR(1,1,1,1),2,0x00000400);
-            g_RenderManager.DebugPrint(440,220-40,"Reliz");
-
-            aboutPos == 0 ? DrawText(240,234,GU_COLOR(1,1,0.25,1) ,default_size,"Konverter") : DrawText(240,234,GU_COLOR(1,1,1,1) ,default_size,"Konverter");
-            aboutPos == 1 ? DrawText(240,264,GU_COLOR(1,1,0.25,1) ,default_size,"Otmena") : DrawText(240,264,GU_COLOR(1,1,1,1) ,default_size,"Otmena");
-            DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Ob igre");
-        }
-    }
-    break;
-    case 5://paramateric view
-    {
-
-
-        sceGuDisable(GU_DEPTH_TEST);
-        sceGuEnable(GU_BLEND);
-        sceGuColor(GU_COLOR(1,1,1,1.0f));
-
-
-
-        //name
-        mbuttonSprite->SetPosition(240,70);
-        mbuttonSprite->Draw();
-        //seed
-        mbuttonSprite->SetPosition(240,110);
-        mbuttonSprite->Draw();
-
-        buttonSprite->SetPosition(240,150);
-        buttonSprite->Draw();
-
-        buttonSprite->SetPosition(240,190);
-        buttonSprite->Draw();
-
-        buttonSprite->SetPosition(240,230);
-        buttonSprite->Draw();
-
-        if(generateSelectPose > 1)
-        {
-            sbuttonSprite->SetPosition(240,150+(generateSelectPose-2)*40);
-            sbuttonSprite->Draw();
-        }
-        if(generateSelectPose <= 1)
-        {
-            smbuttonSprite->SetPosition(240,70+generateSelectPose*40);
-            smbuttonSprite->Draw();
-        }
-
-        sceGuDisable(GU_BLEND);
-        sceGuEnable(GU_DEPTH_TEST);
-
-        if(g_RenderManager.GetFontLanguage() == ENGLISH)
-        {
-            DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Create New World");
-            DrawText(240,58,GU_COLOR(0.25,0.25,0.25,1) ,default_size,"Name");
-            DrawText(240,98,GU_COLOR(0.25,0.25,0.25,1) ,default_size,"Seed");
-
-            //draw subtitles on buttons
-            if(gameMode == SURVIVAL)
-            {
-                generateSelectPose == 2 ? DrawText(240,159,GU_COLOR(1,1,0.25,1) ,default_size,"Game Mode: Survival") : DrawText(240,159,GU_COLOR(1,1,1,1) ,default_size,"Game Mode: Survival");
-            }
-            if(gameMode == CREATIVE)
-            {
-                generateSelectPose == 2 ? DrawText(240,159,GU_COLOR(1,1,0.25,1) ,default_size,"Game Mode: Creative") : DrawText(240,159,GU_COLOR(1,1,1,1) ,default_size,"Game Mode: Creative");
-            }
-            if(gameMode == HARDCORE)
-            {
-                generateSelectPose == 2 ? DrawText(240,159,GU_COLOR(1,1,0.25,1) ,default_size,"Game Mode: Hardcore") : DrawText(240,159,GU_COLOR(1,1,1,1) ,default_size,"Game Mode: Hardcore");
-            }
-
-            if(worldType == 0)
-            {
-                generateSelectPose == 3 ? DrawText(240,199,GU_COLOR(1,1,0.25,1) ,default_size,"World Type : Default") : DrawText(240,199,GU_COLOR(1,1,1,1) ,default_size,"World Type : Default");
-            }
-            if(worldType == 1)
-            {
-                generateSelectPose == 3 ? DrawText(240,199,GU_COLOR(1,1,0.25,1) ,default_size,"World Type : Flat") : DrawText(240,199,GU_COLOR(1,1,1,1) ,default_size,"World Type : Flat");
-            }
-
-            generateSelectPose == 4 ? DrawText(240,239,GU_COLOR(1,1,0.25,1) ,default_size,"Create New World") : DrawText(240,239,GU_COLOR(1,1,1,1) ,default_size,"Create New World");
-        }
-        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-        {
-            DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Sozdat$ nov@~ mir");
-            DrawText(240,58,GU_COLOR(0.25,0.25,0.25,1) ,default_size,"Nazvanie Mira");
-            DrawText(240,98,GU_COLOR(0.25,0.25,0.25,1) ,default_size,"Sid Mira");
-
-            //draw subtitles on buttons
-            if(gameMode == SURVIVAL)
-            {
-                generateSelectPose == 2 ? DrawText(240,159,GU_COLOR(1,1,0.25,1) ,default_size,"Igrovo~ rejim : V@jivanie") : DrawText(240,159,GU_COLOR(1,1,1,1) ,default_size,"Igrovo~ rejim : V@jivanie");
-            }
-            if(gameMode == CREATIVE)
-            {
-                generateSelectPose == 2 ? DrawText(240,159,GU_COLOR(1,1,0.25,1) ,default_size,"Igrovo~ rejim : Tvoryeski~") : DrawText(240,159,GU_COLOR(1,1,1,1) ,default_size,"Igrovo~ rejim : Tvoryeski~");
-            }
-            if(gameMode == HARDCORE)
-            {
-                generateSelectPose == 2 ? DrawText(240,159,GU_COLOR(1,1,0.25,1) ,default_size,"Igrovo~ rejim : Hardkor") : DrawText(240,159,GU_COLOR(1,1,1,1) ,default_size,"Igrovo~ rejim : Hardkor");
-            }
-
-            if(worldType == 0)
-            {
-                generateSelectPose == 3 ? DrawText(240,199,GU_COLOR(1,1,0.25,1) ,default_size,"Tip mira : Standartn@~") : DrawText(240,199,GU_COLOR(1,1,1,1) ,default_size,"Tip mira : Standartn@~");
-            }
-            if(worldType == 1)
-            {
-                generateSelectPose == 3 ? DrawText(240,199,GU_COLOR(1,1,0.25,1) ,default_size,"Tip mira : Super-ploski~") : DrawText(240,199,GU_COLOR(1,1,1,1) ,default_size,"Tip mira : Super-ploski~");
-            }
-
-            generateSelectPose == 4 ? DrawText(240,239,GU_COLOR(1,1,0.25,1) ,default_size,"Sozdat$ nov@~ mir") : DrawText(240,239,GU_COLOR(1,1,1,1) ,default_size,"Sozdat$ nov@~ mir");
-        }
-
-        g_RenderManager.SetFont(ENGLISH);
-        g_RenderManager.SetFontStyle(default_size ,GU_COLOR(1,1,1,1),0,0x00000000|0x00004000);
-        g_RenderManager.DebugPrint(159,79,"%s",newWorldName.c_str());
-        if(seed_1 == 0)
-        {
-            g_RenderManager.SetFontStyle(default_size ,GU_COLOR(0.65,0.65,0.65,1),999,0x00000200|0x00004000);
-            if(g_RenderManager.GetFontLanguage() == ENGLISH)
-            {
-                g_RenderManager.DebugPrint(240,119,"random");
-            }
-            if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-            {
-                g_RenderManager.DebugPrint(240,119,"sluya~n@~");
-            }
-        }
-        else
-        {
-            g_RenderManager.DebugPrint(159,119,"%s",newWorldSeed.c_str());
-        }
-        g_RenderManager.SetDefaultFont();
-    }
-    break;
-    case 6://about
-    {
-
-
-        sceGuDisable(GU_DEPTH_TEST);
-        sceGuEnable(GU_BLEND);
-        sceGuColor(GU_COLOR(1,1,1,1.0f));
-
-
-        //check for update
-        buttonSprite->SetPosition(240,165);
-        buttonSprite->Draw();
-
-        buttonSprite->SetPosition(240,200);
-        buttonSprite->Draw();
-
-        buttonSprite->SetPosition(240,245);
-        buttonSprite->Draw();
-
-        //back
-        int y_pos = 165;
-        if(converterPos == 1)
-        {
-            y_pos = 200;
-        }
-        if(converterPos == 2)
-        {
-            y_pos = 245;
-        }
-        sbuttonSprite->SetPosition(240,y_pos);
-        sbuttonSprite->Draw();
-
-        sceGuDisable(GU_BLEND);
-        sceGuEnable(GU_DEPTH_TEST);
-
-        if(g_RenderManager.GetFontLanguage() == ENGLISH)
-        {
-            if(schematicExists)
-            {
-                DrawText(240,80,GU_COLOR(0.1,0.9,0.1,1),default_big_size,"world.schematic exists!");
-            }
-            else
-            {
-                DrawText(240,80,GU_COLOR(0.9,0.1,0.1,1),default_big_size,"world.schematic doesn't exist!");
-            }
-            if(errorType == 1)
-            {
-                DrawText(240,100,GU_COLOR(0.9,0.1,0.1,1),default_big_size,"invalid schematic size");
-            }
-            else
-            {
-                DrawText(240,100,GU_COLOR(0.9,0.1,0.1,1),default_size,"process of conversion can take about 1 minute");
-            }
-
-            if(newW_gameMode == SURVIVAL)
-            {
-                converterPos == 0 ? DrawText(240,174,GU_COLOR(1,1,0.25,1) ,default_size,"Game Mode: Survival") : DrawText(240,174,GU_COLOR(1,1,1,1) ,default_size,"Game Mode: Survival");
-            }
-            if(newW_gameMode == CREATIVE)
-            {
-                converterPos == 0 ? DrawText(240,174,GU_COLOR(1,1,0.25,1) ,default_size,"Game Mode: Creative") : DrawText(240,174,GU_COLOR(1,1,1,1) ,default_size,"Game Mode: Creative");
-            }
-            converterPos == 1 ? DrawText(240,209,GU_COLOR(1,1,0.25,1) ,default_size,"Try to convert") : DrawText(240,209,GU_COLOR(1,1,1,1) ,default_size,"Try to convert");
-            converterPos == 2 ? DrawText(240,254,GU_COLOR(1,1,0.25,1) ,default_size,"Cancel") : DrawText(240,254,GU_COLOR(1,1,1,1) ,default_size,"Cancel");
-
-            DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Converter");
-        }
-        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-        {
-            g_RenderManager.SetFont(ENGLISH);
-            if(schematicExists)
-            {
-                DrawText(240,80,GU_COLOR(0.1,0.9,0.1,1),default_big_size,"world.schematic exists!");
-            }
-            else
-            {
-                DrawText(240,80,GU_COLOR(0.9,0.1,0.1,1),default_big_size,"world.schematic doesn't exist!");
-            }
-            if(errorType == 1)
-            {
-                DrawText(240,100,GU_COLOR(0.9,0.1,0.1,1),default_big_size,"invalid schematic size");
-            }
-            else
-            {
-                DrawText(240,100,GU_COLOR(0.9,0.1,0.1,1),default_size,"process of conversion can take about 1 minute");
-            }
-            g_RenderManager.SetDefaultFont();
-
-            if(newW_gameMode == SURVIVAL)
-            {
-                converterPos == 0 ? DrawText(240,174,GU_COLOR(1,1,0.25,1) ,default_size,"Igrovo~ rejim : V@jivanie") : DrawText(240,174,GU_COLOR(1,1,1,1) ,default_size,"Igrovo~ rejim : V@jivanie");
-            }
-            if(newW_gameMode == CREATIVE)
-            {
-                converterPos == 0 ? DrawText(240,174,GU_COLOR(1,1,0.25,1) ,default_size,"Igrovo~ rejim : Tvoryeski~") : DrawText(240,174,GU_COLOR(1,1,1,1) ,default_size,"Igrovo~ rejim : Tvoryeski~");
-            }
-            converterPos == 1 ? DrawText(240,209,GU_COLOR(1,1,0.25,1) ,default_size,"Konvertirovat$") : DrawText(240,209,GU_COLOR(1,1,1,1) ,default_size,"Konvertirovat$");
-            converterPos == 2 ? DrawText(240,254,GU_COLOR(1,1,0.25,1) ,default_size,"Otmena") : DrawText(240,254,GU_COLOR(1,1,1,1) ,default_size,"Otmena");
-
-            DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Konverter");
-        }
-    }
-    break;
-    case 10://New or load map
-    {
-        sceGuDisable(GU_DEPTH_TEST);
-        sceGuEnable(GU_BLEND);
-        sceGuColor(GU_COLOR(1,1,1,1.0f));
-
-
-        buttonSprite->SetPosition(240,100);
-        buttonSprite->Draw();
-
-        buttonSprite->SetPosition(240,140);
-        buttonSprite->Draw();
-
-        sbuttonSprite->SetPosition(240,100+saveSubMenuSelect*40);
-        sbuttonSprite->Draw();
-
-        sceGuDisable(GU_BLEND);
-        sceGuEnable(GU_DEPTH_TEST);
-
-        if(g_RenderManager.GetFontLanguage() == ENGLISH)
-        {
-            DrawText(240,64,GU_COLOR(1,1,1,1) ,default_size,"Choose Game Mode");
-
-            saveSubMenuSelect == 0 ? DrawText(240,109,GU_COLOR(1,1,0.25,1) ,default_size,"Survival") : DrawText(240,109,GU_COLOR(1,1,1,1) ,default_size,"Survival");
-            saveSubMenuSelect == 1 ? DrawText(240,149,GU_COLOR(1,1,0.25,1) ,default_size,"Creative") : DrawText(240,149,GU_COLOR(1,1,1,1) ,default_size,"Creative");
-        }
-        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-        {
-            DrawText(240,64,GU_COLOR(1,1,1,1) ,default_size,"V@berite Igrovo~ Rejim");
-
-            saveSubMenuSelect == 0 ? DrawText(240,109,GU_COLOR(1,1,0.25,1) ,default_size,"V@jivanie") : DrawText(240,109,GU_COLOR(1,1,1,1) ,default_size,"V@jivanie");
-            saveSubMenuSelect == 1 ? DrawText(240,149,GU_COLOR(1,1,0.25,1) ,default_size,"Tvoryeski~") : DrawText(240,149,GU_COLOR(1,1,1,1) ,default_size,"Tvoryeski~");
-        }
-    }
-    break;
-    case 11://textures
-    {
-        sceGuDisable(GU_DEPTH_TEST);
-        sceGuEnable(GU_BLEND);
-        sceGuColor(GU_COLOR(1,1,1,1.0f));
-
-
-        //select sprite
-        if(texturePackList.size() > 0)
-        {
-
-        }
-
-        for(int i = tpStart; i < tpMax; i++)
-        {
-            if(i < texturePackList.size())
-            {
-                sceGuEnable(GU_BLEND);
-
-                rectFilledSprite->SetPosition(240,56 - 8 + (tpCurrent * 72) - (tpStart * 72));
-
-                if(i == tpCurrent)
-                {
-                    rectFilledSprite->Draw();
-                }
-
-                rectEmptySprite->SetPosition(240,56 - 8 + (tpPos * 72) - (tpStart * 72));
-                if(i == tpPos)
-                {
-                    sceGuBlendFunc(GU_ADD, GU_FIX,GU_FIX, 0xFFFFFFFF, 0xFFFFFFFF);
-                    rectEmptySprite->Draw();
-                    sceGuBlendFunc(GU_ADD, GU_SRC_ALPHA, GU_ONE_MINUS_SRC_ALPHA, 0, 0);
-                }
-
-                Sprite* DrawSprite = texturePackList[i].packSprite;
-                DrawSprite->SetPosition(46,56 - 8 + (i * 72) - (tpStart * 72));
-                DrawSprite->Draw();
-
-                sceGuDisable(GU_BLEND);
-
-                g_RenderManager.SetFont(ENGLISH);
-                if(i == tpPos)
-                {
-                    g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(0.25,0.25,0,1),0,0x00000000);
-                    g_RenderManager.DebugPrint(94,52 - 8 + (i * 72) - (tpStart * 72),"%s",texturePackList[i].name.c_str());
-
-                    g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(1,1,0,1),0,0x00000000);
-                    g_RenderManager.DebugPrint(92,50 - 8 + (i * 72) - (tpStart * 72),"%s",texturePackList[i].name.c_str());
-
-                    g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.5,0.5,0,1),0,0x00000000);
-                    g_RenderManager.DebugPrint(92,50 - 8 + (i * 72) - (tpStart * 72) + 18,"%s",texturePackList[i].description.c_str());
-                }
-                else
-                {
-                    g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(0.25,0.25,0.25,1),0,0x00000000);
-                    g_RenderManager.DebugPrint(94,52 - 8 + (i * 72) - (tpStart * 72),"%s",texturePackList[i].name.c_str());
-
-                    g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(1,1,1,1),0,0x00000000);
-                    g_RenderManager.DebugPrint(92,50 - 8 + (i * 72) - (tpStart * 72),"%s",texturePackList[i].name.c_str());
-
-                    g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.5,0.5,0.5,1),0,0x00000000);
-                    g_RenderManager.DebugPrint(92,50 - 8 + (i * 72) - (tpStart * 72) + 18,"%s",texturePackList[i].description.c_str());
-                }
-                g_RenderManager.SetDefaultFont();
-            }
-        }
-
-
-
-        buttonSprite->SetPosition(120,254);
-        buttonSprite->Draw();
-
-        buttonSprite->SetPosition(360,254);
-        buttonSprite->Draw();
-
-
-        sbuttonSprite->SetPosition(120+(tpSelectPos * 240),254);
-        sbuttonSprite->Draw();
-
-        sceGuDisable(GU_BLEND);
-        sceGuEnable(GU_DEPTH_TEST);
-
-        if(g_RenderManager.GetFontLanguage() == ENGLISH)
-        {
-            tpSelectPos == 0 ? DrawText(120,263,GU_COLOR(1,1,0.25,1),default_size,"Select") : DrawText(120,263,GU_COLOR(1,1,1,1),default_size,"Select");
-            tpSelectPos == 1 ? DrawText(360,263,GU_COLOR(1,1,0.25,1) ,default_size,"Cancel") : DrawText(360,263,GU_COLOR(1,1,1,1) ,default_size,"Cancel");
-        }
-        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-        {
-            tpSelectPos == 0 ? DrawText(120,263,GU_COLOR(1,1,0.25,1),default_size,"V@brat$") : DrawText(120,263,GU_COLOR(1,1,1,1),default_size,"V@brat$");
-            tpSelectPos == 1 ? DrawText(360,263,GU_COLOR(1,1,0.25,1) ,default_size,"Otmena") : DrawText(360,263,GU_COLOR(1,1,1,1) ,default_size,"Otmena");
-        }
-    }
-    break;
-    }
-
-    g_RenderManager.SetFontStyle(0.5f,GU_COLOR(1,1,1,1),0,0x00000000);
-
-	/*
-	g_RenderManager.DebugPrint(30,50,"%f",size_f);
-
-    //draw debug text at the end
-    g_RenderManager.DebugPrint(40,30,"cpu: %d%%",g_RenderManager.GetCpuUsage());
-    g_RenderManager.DebugPrint(40,40,"gpu: %d%%",g_RenderManager.GetGpuUsage());
-	g_RenderManager.DebugPrint(40, 20, "memory: %.3f", ((float)SystemManager::Instance()->freeMemory() / ((float)(1024 * 1024))) );
-    */
-
-	if (!IS_SNAPSHOT) {
-		g_RenderManager.SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000400);
-		g_RenderManager.DebugPrint(475, 270, "%s", VERSION_NAME);
-		g_RenderManager.SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000200);
+
+			//logo
+			lamecraftSprite->Draw();
+
+			//singlePlayer
+			buttonSprite->SetPosition(240, 120);
+			buttonSprite->Draw();
+
+			//options
+			buttonSprite->SetPosition(240, 160);
+			buttonSprite->Draw();
+
+			//about
+			buttonSprite->SetPosition(240, 200);
+			buttonSprite->Draw();
+
+			//texture pack
+			buttonSprite->SetPosition(240, 240);
+			buttonSprite->Draw();
+
+			//selected button
+			sbuttonSprite->SetPosition(240, (selectPos * 40) + 120);
+			sbuttonSprite->Draw();
+
+			sceGuDisable(GU_BLEND);
+			sceGuEnable(GU_DEPTH_TEST);
+
+			splashSize += 0.08f;
+			if (splashSize > 2 * PI)
+			{
+				splashSize = 0.0f;
+			}
+
+			if (g_RenderManager.GetFontLanguage() == ENGLISH)
+			{
+				selectPos == 0 ? DrawText(240, 129, GU_COLOR(1, 1, 0.25, 1), default_size, "Singleplayer") : DrawText(240, 129, GU_COLOR(1, 1, 1, 1), default_size, "Singleplayer");
+				selectPos == 1 ? DrawText(240, 169, GU_COLOR(1, 1, 0.25, 1), default_size, "Options") : DrawText(240, 169, GU_COLOR(1, 1, 1, 1), default_size, "Options");
+				selectPos == 2 ? DrawText(240, 209, GU_COLOR(1, 1, 0.25, 1), default_size, "About & Converter") : DrawText(240, 209, GU_COLOR(1, 1, 1, 1), default_size, "About & Converter");
+				selectPos == 3 ? DrawText(240, 249, GU_COLOR(1, 1, 0.25, 1), default_size, "Texture Packs") : DrawText(240, 249, GU_COLOR(1, 1, 1, 1), default_size, "Texture Packs");
+
+
+				switch (SplashNumber)
+				{
+				case 0: DrawText(328, 86, GU_COLOR(1, 1, 0, 1), 0.6 + sinf(splashSize) * 0.04f, "Uses C++!"); break;
+				case 1: DrawText(328, 86, GU_COLOR(1, 1, 0, 1), 0.6 + sinf(splashSize) * 0.04f, "Fan fiction!"); break;
+				case 2: DrawText(328, 86, GU_COLOR(1, 1, 0, 1), 0.6 + sinf(splashSize) * 0.04f, "Made on Lamecraft op-30!"); break;
+				case 3: DrawText(328, 86, GU_COLOR(1, 1, 0, 1), 0.6 + sinf(splashSize) * 0.04f, "More polygons!"); break;
+				case 4: DrawText(328, 86, GU_COLOR(1, 1, 0, 1), 0.6 + sinf(splashSize) * 0.04f, "there is no grass"); break;
+				case 5: DrawText(328, 86, GU_COLOR(1, 1, 0, 1), 0.6 + sinf(splashSize) * 0.04f, "Not approved by Mojang"); break;
+				}
+			}
+			if (g_RenderManager.GetFontLanguage() == RUSSIAN)
+			{
+				selectPos == 0 ? DrawText(240, 129, GU_COLOR(1, 1, 0.25, 1), default_size, "Odinoyna^ igra") : DrawText(240, 129, GU_COLOR(1, 1, 1, 1), default_size, "Odinoyna^ igra");
+				selectPos == 1 ? DrawText(240, 169, GU_COLOR(1, 1, 0.25, 1), default_size, "Nastro~ki") : DrawText(240, 169, GU_COLOR(1, 1, 1, 1), default_size, "Nastro~ki");
+				selectPos == 2 ? DrawText(240, 209, GU_COLOR(1, 1, 0.25, 1), default_size, "Ob igre i Konverter") : DrawText(240, 209, GU_COLOR(1, 1, 1, 1), default_size, "Ob igre i Konverter");
+				selectPos == 3 ? DrawText(240, 249, GU_COLOR(1, 1, 0.25, 1), default_size, "Tekstur@") : DrawText(240, 249, GU_COLOR(1, 1, 1, 1), default_size, "Tekstur@");
+
+				switch (SplashNumber)
+				{
+				case 0: DrawText(328, 86, GU_COLOR(1, 1, 0, 1), 0.6 + sinf(splashSize) * 0.04f, "Na S++!"); break;
+				case 1: DrawText(328, 86, GU_COLOR(1, 1, 0, 1), 0.6 + sinf(splashSize) * 0.04f, "Fanatska^ rabota!"); break;
+				case 2: DrawText(328, 86, GU_COLOR(1, 1, 0, 1), 0.6 + sinf(splashSize) * 0.04f, "Uje 3 goda s vami!"); break;
+				case 3: DrawText(328, 86, GU_COLOR(1, 1, 0, 1), 0.6 + sinf(splashSize) * 0.04f, "Bol$we poligonov!"); break;
+				case 4: DrawText(328, 86, GU_COLOR(1, 1, 0, 1), 0.6 + sinf(splashSize) * 0.04f, "zdes$ net trav@"); break;
+				case 5: {
+					DrawText(328, 86, GU_COLOR(1, 1, 0, 1), 0.6 + sinf(splashSize) * 0.04f, "Ne odobreno ");
+					g_RenderManager.SetFont(ENGLISH);
+					DrawText(328, 84, GU_COLOR(1, 1, 0, 1), 0.6 + sinf(splashSize) * 0.04f, "                Mojang");
+					g_RenderManager.SetDefaultFont();
+				} break;
+				}
+			}
+		}
+		break;
+		case 1://select world
+		{
+			sceGuDisable(GU_DEPTH_TEST);
+			sceGuEnable(GU_BLEND);
+			sceGuColor(GU_COLOR(1, 1, 1, 1.0f));
+
+
+			if (saveSubmenu) // delete world
+			{
+				buttonSprite->SetPosition(240, 235);
+				buttonSprite->Draw();
+
+				buttonSprite->SetPosition(240, 260);
+				buttonSprite->Draw();
+			}
+			else
+			{
+				/// left part
+				if (saveFilesList.empty() == false)
+				{
+					buttonSprite->SetPosition(120, 222); // play selected world
+					buttonSprite->Draw();
+
+					buttonSmallSprite->SetPosition(67.75, 255); // rename
+					buttonSmallSprite->Draw();
+
+					buttonSmallSprite->SetPosition(172.25, 255); // delete
+					buttonSmallSprite->Draw();
+				}
+				else
+				{
+					nbuttonSprite->SetPosition(120, 222); // play selected world
+					nbuttonSprite->Draw();
+
+					nbuttonSmallSprite->SetPosition(67.75, 255); // rename
+					nbuttonSmallSprite->Draw();
+
+					nbuttonSmallSprite->SetPosition(172.25, 255); // delete
+					nbuttonSmallSprite->Draw();
+				}
+
+				///right part
+				buttonSprite->SetPosition(360, 222); // create new world
+				buttonSprite->Draw();
+
+				buttonSprite->SetPosition(360, 255); // cancel
+				buttonSprite->Draw();
+			}
+
+
+			bool smallButton = false;
+			if (saveSubmenu)
+			{
+				sbuttonSprite->SetPosition(240, (saveSubMenuSelect * 25) + 210);
+			}
+			else
+			{
+				switch (loadSelectPos)
+				{
+				case 0:
+					sbuttonSprite->SetPosition(120, 222);
+					break;
+				case 1:
+					sbuttonSmallSprite->SetPosition(67.75, 255);
+					smallButton = true;
+					break;
+				case 2:
+					sbuttonSmallSprite->SetPosition(172.25, 255);
+					smallButton = true;
+					break;
+				case 3:
+					sbuttonSprite->SetPosition(360, 222);
+					break;
+				case 4:
+					sbuttonSprite->SetPosition(360, 255);
+					break;
+				}
+			}
+			smallButton == true ? sbuttonSmallSprite->Draw() : sbuttonSprite->Draw();
+
+			blackBackground->Draw();
+
+			//select sprite
+			if (saveFilesList.size() > 0)
+			{
+				//save files
+				for (int i = loadSaveStart; i < loadSaveMax; i++)
+				{
+					if (loadSavePos == i)
+					{
+						g_RenderManager.SetFont(ENGLISH);
+						if (saveFilesList[i].worldName[0] != '\0')
+						{
+							g_RenderManager.SetFontStyle(0.8f, GU_COLOR(1, 1, 0, 1), 0, 0x00000000);
+							g_RenderManager.DebugPrint(30, 54 + (i * 41) - (loadSaveStart * 41), "%s", saveFilesList[i].worldName);
+						}
+						else
+						{
+							g_RenderManager.SetFontStyle(0.8f, GU_COLOR(0.6, 0.6, 0, 1), 0, 0x00000000);
+							g_RenderManager.DebugPrint(30, 54 + (i * 41) - (loadSaveStart * 41), "<no name>");
+						}
+
+						g_RenderManager.SetFontStyle(0.5f, GU_COLOR(0.5, 0.5, 0, 1), 0, 0x00000000);
+						g_RenderManager.DebugPrint(30, 66 + (i * 41) - (loadSaveStart * 41), "%s", saveFilesList[i].fileName.c_str());
+
+						g_RenderManager.SetDefaultFont();
+
+						if (g_RenderManager.GetFontLanguage() == ENGLISH)
+						{
+							switch (saveFilesList[i].worldGameMode)
+							{
+							case 0:
+								g_RenderManager.SetFontStyle(0.5f, GU_COLOR(0.5, 0.5, 0, 1), 0, 0x00000000);
+								g_RenderManager.DebugPrint(30, 78 + (i * 41) - (loadSaveStart * 41), "Survival mode (%i KB)", saveFilesList[i].saveSize / 1024);
+								break;
+							case 1:
+								g_RenderManager.SetFontStyle(0.5f, GU_COLOR(0.5, 0.5, 0, 1), 0, 0x00000000);
+								g_RenderManager.DebugPrint(30, 78 + (i * 41) - (loadSaveStart * 41), "Creative mode (%i KB)", saveFilesList[i].saveSize / 1024);
+								break;
+							case 2:
+								g_RenderManager.SetFontStyle(0.5f, GU_COLOR(0.5, 0.5, 0, 1), 0, 0x00000000);
+								g_RenderManager.DebugPrint(30, 78 + (i * 41) - (loadSaveStart * 41), "Hardcore mode (%i KB)", saveFilesList[i].saveSize / 1024);
+								break;
+							}
+						}
+						if (g_RenderManager.GetFontLanguage() == RUSSIAN)
+						{
+							switch (saveFilesList[i].worldGameMode)
+							{
+							case 0:
+								g_RenderManager.SetFontStyle(0.5f, GU_COLOR(0.5, 0.5, 0, 1), 0, 0x00000000);
+								g_RenderManager.DebugPrint(30, 78 + (i * 41) - (loadSaveStart * 41), "V@jivanie (%i KB)", saveFilesList[i].saveSize / 1024);
+								break;
+							case 1:
+								g_RenderManager.SetFontStyle(0.5f, GU_COLOR(0.5, 0.5, 0, 1), 0, 0x00000000);
+								g_RenderManager.DebugPrint(30, 78 + (i * 41) - (loadSaveStart * 41), "Tvoryeski~ (%i KB)", saveFilesList[i].saveSize / 1024);
+								break;
+							case 2:
+								g_RenderManager.SetFontStyle(0.5f, GU_COLOR(0.5, 0.5, 0, 1), 0, 0x00000000);
+								g_RenderManager.DebugPrint(30, 78 + (i * 41) - (loadSaveStart * 41), "Hardkor (%i KB)", saveFilesList[i].saveSize / 1024);
+								break;
+							}
+						}
+					}
+					else
+					{
+						g_RenderManager.SetFont(ENGLISH);
+
+						if (saveFilesList[i].worldName[0] != '\0')
+						{
+							g_RenderManager.SetFontStyle(0.8f, GU_COLOR(1, 1, 1, 1), 0, 0x00000000);
+							g_RenderManager.DebugPrint(30, 54 + (i * 41) - (loadSaveStart * 41), "%s", saveFilesList[i].worldName);
+						}
+						else
+						{
+							g_RenderManager.SetFontStyle(0.8f, GU_COLOR(0.6, 0.6, 0.6, 1), 0, 0x00000000);
+							g_RenderManager.DebugPrint(30, 54 + (i * 41) - (loadSaveStart * 41), "<no name>");
+						}
+
+						g_RenderManager.SetFontStyle(0.5f, GU_COLOR(0.5, 0.5, 0.5, 1), 0, 0x00000000);
+						g_RenderManager.DebugPrint(30, 66 + (i * 41) - (loadSaveStart * 41), "%s", saveFilesList[i].fileName.c_str());
+
+						g_RenderManager.SetDefaultFont();
+
+						if (g_RenderManager.GetFontLanguage() == ENGLISH)
+						{
+							switch (saveFilesList[i].worldGameMode)
+							{
+							case 0:
+								g_RenderManager.SetFontStyle(0.5f, GU_COLOR(0.5, 0.5, 0.5, 1), 0, 0x00000000);
+								g_RenderManager.DebugPrint(30, 78 + (i * 41) - (loadSaveStart * 41), "Survival mode (%i KB)", saveFilesList[i].saveSize / 1024);
+								break;
+							case 1:
+								g_RenderManager.SetFontStyle(0.5f, GU_COLOR(0.5, 0.5, 0.5, 1), 0, 0x00000000);
+								g_RenderManager.DebugPrint(30, 78 + (i * 41) - (loadSaveStart * 41), "Creative mode (%i KB)", saveFilesList[i].saveSize / 1024);
+								break;
+							case 2:
+								g_RenderManager.SetFontStyle(0.5f, GU_COLOR(0.5, 0.5, 0.5, 1), 0, 0x00000000);
+								g_RenderManager.DebugPrint(30, 78 + (i * 41) - (loadSaveStart * 41), "Hardcore mode (%i KB)", saveFilesList[i].saveSize / 1024);
+								break;
+							}
+						}
+
+						if (g_RenderManager.GetFontLanguage() == RUSSIAN)
+						{
+							switch (saveFilesList[i].worldGameMode)
+							{
+							case 0:
+								g_RenderManager.SetFontStyle(0.5f, GU_COLOR(0.5, 0.5, 0.5, 1), 0, 0x00000000);
+								g_RenderManager.DebugPrint(30, 78 + (i * 41) - (loadSaveStart * 41), "V@jivanie (%i KB)", saveFilesList[i].saveSize / 1024);
+								break;
+							case 1:
+								g_RenderManager.SetFontStyle(0.5f, GU_COLOR(0.5, 0.5, 0.5, 1), 0, 0x00000000);
+								g_RenderManager.DebugPrint(30, 78 + (i * 41) - (loadSaveStart * 41), "Tvoryeski~ (%i KB)", saveFilesList[i].saveSize / 1024);
+								break;
+							case 2:
+								g_RenderManager.SetFontStyle(0.5f, GU_COLOR(0.5, 0.5, 0.5, 1), 0, 0x00000000);
+								g_RenderManager.DebugPrint(30, 78 + (i * 41) - (loadSaveStart * 41), "Hardkor (%i KB)", saveFilesList[i].saveSize / 1024);
+								break;
+							}
+						}
+					}
+				}
+			}
+
+			sceGuDisable(GU_BLEND);
+			sceGuEnable(GU_DEPTH_TEST);
+
+			if (g_RenderManager.GetFontLanguage() == ENGLISH)
+			{
+				if (saveSubmenu)
+				{
+					saveSubMenuSelect == 0 ? DrawText(240, 219, GU_COLOR(1, 1, 0.25, 1), default_size, "Are you sure?") : DrawText(240, 219, GU_COLOR(1, 1, 1, 1), default_size, "Are you sure?");
+					saveSubMenuSelect == 1 ? DrawText(240, 244, GU_COLOR(1, 1, 0.25, 1), default_size, "Yes") : DrawText(240, 244, GU_COLOR(1, 1, 1, 1), default_size, "Yes");
+					saveSubMenuSelect == 2 ? DrawText(240, 269, GU_COLOR(1, 1, 0.25, 1), default_size, "No") : DrawText(240, 269, GU_COLOR(1, 1, 1, 1), default_size, "No");
+				}
+				else
+				{
+					float buttonTextColor = 1.0f; // for left part
+					if (saveFilesList.empty() == true)
+					{
+						buttonTextColor = 0.5f;
+					}
+
+					loadSelectPos == 0 ? DrawText(120, 231, GU_COLOR(1, 1, 0.25, 1), default_size, "Play Selected World") : DrawText(120, 231, GU_COLOR(buttonTextColor, buttonTextColor, buttonTextColor, 1), default_size, "Play Selected World");
+					loadSelectPos == 1 ? DrawText(67.75f, 264, GU_COLOR(1, 1, 0.25, 1), default_size, "Rename") : DrawText(67.75f, 264, GU_COLOR(buttonTextColor, buttonTextColor, buttonTextColor, 1), default_size, "Rename");
+					loadSelectPos == 2 ? DrawText(172.25f, 264, GU_COLOR(1, 1, 0.25, 1), default_size, "Delete") : DrawText(172.25f, 264, GU_COLOR(buttonTextColor, buttonTextColor, buttonTextColor, 1), default_size, "Delete");
+					loadSelectPos == 3 ? DrawText(360, 231, GU_COLOR(1, 1, 0.25, 1), default_size, "Create New World") : DrawText(360, 231, GU_COLOR(1.0f, 1.0f, 1.0f, 1), default_size, "Create New World");
+					loadSelectPos == 4 ? DrawText(360, 264, GU_COLOR(1, 1, 0.25, 1), default_size, "Cancel") : DrawText(360, 264, GU_COLOR(1.0f, 1.0f, 1.0f, 1), default_size, "Cancel");
+				}
+				DrawText(240, 24, GU_COLOR(1, 1, 1, 1), default_size, "Select World");
+			}
+
+			if (g_RenderManager.GetFontLanguage() == RUSSIAN)
+			{
+				if (saveSubmenu)
+				{
+					saveSubMenuSelect == 0 ? DrawText(240, 219, GU_COLOR(1, 1, 0.25, 1), default_size, "V@ uveren@?") : DrawText(240, 219, GU_COLOR(1, 1, 1, 1), default_size, "V@ uveren@?");
+					saveSubMenuSelect == 1 ? DrawText(240, 244, GU_COLOR(1, 1, 0.25, 1), default_size, "Da") : DrawText(240, 244, GU_COLOR(1, 1, 1, 1), default_size, "Da");
+					saveSubMenuSelect == 2 ? DrawText(240, 269, GU_COLOR(1, 1, 0.25, 1), default_size, "Net") : DrawText(240, 269, GU_COLOR(1, 1, 1, 1), default_size, "Net");
+				}
+				else
+				{
+					float buttonTextColor = 1.0f; // for left part
+					if (saveFilesList.empty() == true)
+					{
+						buttonTextColor = 0.5f;
+					}
+
+					loadSelectPos == 0 ? DrawText(120, 231, GU_COLOR(1, 1, 0.25, 1), default_size, "Igrat$ v v@brannom mire") : DrawText(120, 231, GU_COLOR(buttonTextColor, buttonTextColor, buttonTextColor, 1), default_size, "Igrat$ v v@brannom mire");
+					loadSelectPos == 1 ? DrawText(67.75f, 264, GU_COLOR(1, 1, 0.25, 1), default_size, "Pereimenovat$") : DrawText(67.75f, 264, GU_COLOR(buttonTextColor, buttonTextColor, buttonTextColor, 1), default_size, "Pereimenovat$");
+					loadSelectPos == 2 ? DrawText(172.25f, 264, GU_COLOR(1, 1, 0.25, 1), default_size, "Udalit$") : DrawText(172.25f, 264, GU_COLOR(buttonTextColor, buttonTextColor, buttonTextColor, 1), default_size, "Udalit$");
+					loadSelectPos == 3 ? DrawText(360, 231, GU_COLOR(1, 1, 0.25, 1), default_size, "Sozdat$ nov@~ mir") : DrawText(360, 231, GU_COLOR(1.0f, 1.0f, 1.0f, 1), default_size, "Sozdat$ nov@~ mir");
+					loadSelectPos == 4 ? DrawText(360, 264, GU_COLOR(1, 1, 0.25, 1), default_size, "Otmena") : DrawText(360, 264, GU_COLOR(1.0f, 1.0f, 1.0f, 1), default_size, "Otmena");
+				}
+				DrawText(240, 24, GU_COLOR(1, 1, 1, 1), default_size, "V@bor mira");
+			}
+		}
+		break;
+		case 3://about
+		{
+
+
+			sceGuDisable(GU_DEPTH_TEST);
+			sceGuEnable(GU_BLEND);
+			sceGuColor(GU_COLOR(1, 1, 1, 1.0f));
+
+
+			//check for update
+			buttonSprite->SetPosition(240, 225);
+			buttonSprite->Draw();
+
+			buttonSprite->SetPosition(240, 255);
+			buttonSprite->Draw();
+
+			//back
+			sbuttonSprite->SetPosition(240, (aboutPos * 30) + 225);
+			sbuttonSprite->Draw();
+
+			blackBackground->Draw();
+
+			sceGuDisable(GU_BLEND);
+			sceGuEnable(GU_DEPTH_TEST);
+
+			if (g_RenderManager.GetFontLanguage() == ENGLISH)
+			{
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+				g_RenderManager.DebugPrint(40, 100 - 40, "Author:");
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
+				g_RenderManager.DebugPrint(440, 100 - 40, "Marcin Ploska(Drakon)");
+
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+				g_RenderManager.DebugPrint(40, 124 - 40, "Modder:");
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
+				g_RenderManager.DebugPrint(440, 124 - 40, "Kirill Skibin(Woolio)");
+
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+				g_RenderManager.DebugPrint(40, 148 - 40, "Modder 2:");
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
+				g_RenderManager.DebugPrint(440, 148 - 40, "Nathan Bourgeois");
+
+				if (!IS_SNAPSHOT) {
+					g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, INTRAFONT_ALIGN_RIGHT);
+					g_RenderManager.DebugPrint(480, 270, "Version: %s", VERSION_NAME);
+				}
+				else {
+					g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, INTRAFONT_ALIGN_RIGHT);
+					g_RenderManager.DebugPrint(480, 270, "Snapshot: %s", SNAPSHOT_NAME);
+				}
+
+
+				aboutPos == 0 ? DrawText(240, 234, GU_COLOR(1, 1, 0.25, 1), default_size, "Converter") : DrawText(240, 234, GU_COLOR(1, 1, 1, 1), default_size, "Converter");
+				aboutPos == 1 ? DrawText(240, 264, GU_COLOR(1, 1, 0.25, 1), default_size, "Cancel") : DrawText(240, 264, GU_COLOR(1, 1, 1, 1), default_size, "Cancel");
+				DrawText(240, 29, GU_COLOR(1, 1, 1, 1), default_size, "About");
+			}
+			if (g_RenderManager.GetFontLanguage() == RUSSIAN)
+			{
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+				g_RenderManager.DebugPrint(40, 100 - 40, "Dvijok igr@:");
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
+				g_RenderManager.DebugPrint(440, 100 - 40, "Marsin Ploska(Drakon)");
+
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+				g_RenderManager.DebugPrint(40, 124 - 40, "Modifikaci^:");
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
+				g_RenderManager.DebugPrint(440, 124 - 40, "Kirill Skibin(Volio)");
+
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+				g_RenderManager.DebugPrint(40, 172 - 40, "Vebsa~t:");
+
+				g_RenderManager.SetFont(ENGLISH);
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
+				g_RenderManager.DebugPrint(440, 172 - 40, "vk.com/mine_psp");
+				g_RenderManager.SetDefaultFont();
+
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+				g_RenderManager.DebugPrint(40, 196 - 40, "Versi^:");
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
+				g_RenderManager.DebugPrint(440, 196 - 40, "2.0");
+
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000000);
+				g_RenderManager.DebugPrint(40, 220 - 40, "Stadi^ razrabotki:");
+				g_RenderManager.SetFontStyle(0.687, GU_COLOR(1, 1, 1, 1), 2, 0x00000400);
+				g_RenderManager.DebugPrint(440, 220 - 40, "Reliz");
+
+				aboutPos == 0 ? DrawText(240, 234, GU_COLOR(1, 1, 0.25, 1), default_size, "Konverter") : DrawText(240, 234, GU_COLOR(1, 1, 1, 1), default_size, "Konverter");
+				aboutPos == 1 ? DrawText(240, 264, GU_COLOR(1, 1, 0.25, 1), default_size, "Otmena") : DrawText(240, 264, GU_COLOR(1, 1, 1, 1), default_size, "Otmena");
+				DrawText(240, 29, GU_COLOR(1, 1, 1, 1), default_size, "Ob igre");
+			}
+		}
+		break;
+		case 5://paramateric view
+		{
+
+
+			sceGuDisable(GU_DEPTH_TEST);
+			sceGuEnable(GU_BLEND);
+			sceGuColor(GU_COLOR(1, 1, 1, 1.0f));
+
+
+
+			//name
+			mbuttonSprite->SetPosition(240, 70);
+			mbuttonSprite->Draw();
+			//seed
+			mbuttonSprite->SetPosition(240, 110);
+			mbuttonSprite->Draw();
+
+			buttonSprite->SetPosition(240, 150);
+			buttonSprite->Draw();
+
+			buttonSprite->SetPosition(240, 190);
+			buttonSprite->Draw();
+
+			buttonSprite->SetPosition(240, 230);
+			buttonSprite->Draw();
+
+			if (generateSelectPose > 1)
+			{
+				sbuttonSprite->SetPosition(240, 150 + (generateSelectPose - 2) * 40);
+				sbuttonSprite->Draw();
+			}
+			if (generateSelectPose <= 1)
+			{
+				smbuttonSprite->SetPosition(240, 70 + generateSelectPose * 40);
+				smbuttonSprite->Draw();
+			}
+
+			sceGuDisable(GU_BLEND);
+			sceGuEnable(GU_DEPTH_TEST);
+
+			if (g_RenderManager.GetFontLanguage() == ENGLISH)
+			{
+				DrawText(240, 29, GU_COLOR(1, 1, 1, 1), default_size, "Create New World");
+				DrawText(240, 58, GU_COLOR(0.25, 0.25, 0.25, 1), default_size, "Name");
+				DrawText(240, 98, GU_COLOR(0.25, 0.25, 0.25, 1), default_size, "Seed");
+
+				//draw subtitles on buttons
+				if (gameMode == SURVIVAL)
+				{
+					generateSelectPose == 2 ? DrawText(240, 159, GU_COLOR(1, 1, 0.25, 1), default_size, "Game Mode: Survival") : DrawText(240, 159, GU_COLOR(1, 1, 1, 1), default_size, "Game Mode: Survival");
+				}
+				if (gameMode == CREATIVE)
+				{
+					generateSelectPose == 2 ? DrawText(240, 159, GU_COLOR(1, 1, 0.25, 1), default_size, "Game Mode: Creative") : DrawText(240, 159, GU_COLOR(1, 1, 1, 1), default_size, "Game Mode: Creative");
+				}
+				if (gameMode == HARDCORE)
+				{
+					generateSelectPose == 2 ? DrawText(240, 159, GU_COLOR(1, 1, 0.25, 1), default_size, "Game Mode: Hardcore") : DrawText(240, 159, GU_COLOR(1, 1, 1, 1), default_size, "Game Mode: Hardcore");
+				}
+
+				if (worldType == 0)
+				{
+					generateSelectPose == 3 ? DrawText(240, 199, GU_COLOR(1, 1, 0.25, 1), default_size, "World Type : Default") : DrawText(240, 199, GU_COLOR(1, 1, 1, 1), default_size, "World Type : Default");
+				}
+				if (worldType == 1)
+				{
+					generateSelectPose == 3 ? DrawText(240, 199, GU_COLOR(1, 1, 0.25, 1), default_size, "World Type : Flat") : DrawText(240, 199, GU_COLOR(1, 1, 1, 1), default_size, "World Type : Flat");
+				}
+
+				generateSelectPose == 4 ? DrawText(240, 239, GU_COLOR(1, 1, 0.25, 1), default_size, "Create New World") : DrawText(240, 239, GU_COLOR(1, 1, 1, 1), default_size, "Create New World");
+			}
+			if (g_RenderManager.GetFontLanguage() == RUSSIAN)
+			{
+				DrawText(240, 29, GU_COLOR(1, 1, 1, 1), default_size, "Sozdat$ nov@~ mir");
+				DrawText(240, 58, GU_COLOR(0.25, 0.25, 0.25, 1), default_size, "Nazvanie Mira");
+				DrawText(240, 98, GU_COLOR(0.25, 0.25, 0.25, 1), default_size, "Sid Mira");
+
+				//draw subtitles on buttons
+				if (gameMode == SURVIVAL)
+				{
+					generateSelectPose == 2 ? DrawText(240, 159, GU_COLOR(1, 1, 0.25, 1), default_size, "Igrovo~ rejim : V@jivanie") : DrawText(240, 159, GU_COLOR(1, 1, 1, 1), default_size, "Igrovo~ rejim : V@jivanie");
+				}
+				if (gameMode == CREATIVE)
+				{
+					generateSelectPose == 2 ? DrawText(240, 159, GU_COLOR(1, 1, 0.25, 1), default_size, "Igrovo~ rejim : Tvoryeski~") : DrawText(240, 159, GU_COLOR(1, 1, 1, 1), default_size, "Igrovo~ rejim : Tvoryeski~");
+				}
+				if (gameMode == HARDCORE)
+				{
+					generateSelectPose == 2 ? DrawText(240, 159, GU_COLOR(1, 1, 0.25, 1), default_size, "Igrovo~ rejim : Hardkor") : DrawText(240, 159, GU_COLOR(1, 1, 1, 1), default_size, "Igrovo~ rejim : Hardkor");
+				}
+
+				if (worldType == 0)
+				{
+					generateSelectPose == 3 ? DrawText(240, 199, GU_COLOR(1, 1, 0.25, 1), default_size, "Tip mira : Standartn@~") : DrawText(240, 199, GU_COLOR(1, 1, 1, 1), default_size, "Tip mira : Standartn@~");
+				}
+				if (worldType == 1)
+				{
+					generateSelectPose == 3 ? DrawText(240, 199, GU_COLOR(1, 1, 0.25, 1), default_size, "Tip mira : Super-ploski~") : DrawText(240, 199, GU_COLOR(1, 1, 1, 1), default_size, "Tip mira : Super-ploski~");
+				}
+
+				generateSelectPose == 4 ? DrawText(240, 239, GU_COLOR(1, 1, 0.25, 1), default_size, "Sozdat$ nov@~ mir") : DrawText(240, 239, GU_COLOR(1, 1, 1, 1), default_size, "Sozdat$ nov@~ mir");
+			}
+
+			g_RenderManager.SetFont(ENGLISH);
+			g_RenderManager.SetFontStyle(default_size, GU_COLOR(1, 1, 1, 1), 0, 0x00000000 | 0x00004000);
+			g_RenderManager.DebugPrint(159, 79, "%s", newWorldName.c_str());
+			if (seed_1 == 0)
+			{
+				g_RenderManager.SetFontStyle(default_size, GU_COLOR(0.65, 0.65, 0.65, 1), 999, 0x00000200 | 0x00004000);
+				if (g_RenderManager.GetFontLanguage() == ENGLISH)
+				{
+					g_RenderManager.DebugPrint(240, 119, "random");
+				}
+				if (g_RenderManager.GetFontLanguage() == RUSSIAN)
+				{
+					g_RenderManager.DebugPrint(240, 119, "sluya~n@~");
+				}
+			}
+			else
+			{
+				g_RenderManager.DebugPrint(159, 119, "%s", newWorldSeed.c_str());
+			}
+			g_RenderManager.SetDefaultFont();
+		}
+		break;
+		case 6://about
+		{
+
+
+			sceGuDisable(GU_DEPTH_TEST);
+			sceGuEnable(GU_BLEND);
+			sceGuColor(GU_COLOR(1, 1, 1, 1.0f));
+
+
+			//check for update
+			buttonSprite->SetPosition(240, 165);
+			buttonSprite->Draw();
+
+			buttonSprite->SetPosition(240, 200);
+			buttonSprite->Draw();
+
+			buttonSprite->SetPosition(240, 245);
+			buttonSprite->Draw();
+
+			//back
+			int y_pos = 165;
+			if (converterPos == 1)
+			{
+				y_pos = 200;
+			}
+			if (converterPos == 2)
+			{
+				y_pos = 245;
+			}
+			sbuttonSprite->SetPosition(240, y_pos);
+			sbuttonSprite->Draw();
+
+			sceGuDisable(GU_BLEND);
+			sceGuEnable(GU_DEPTH_TEST);
+
+			if (g_RenderManager.GetFontLanguage() == ENGLISH)
+			{
+				if (schematicExists)
+				{
+					DrawText(240, 80, GU_COLOR(0.1, 0.9, 0.1, 1), default_big_size, "world.schematic exists!");
+				}
+				else
+				{
+					DrawText(240, 80, GU_COLOR(0.9, 0.1, 0.1, 1), default_big_size, "world.schematic doesn't exist!");
+				}
+				if (errorType == 1)
+				{
+					DrawText(240, 100, GU_COLOR(0.9, 0.1, 0.1, 1), default_big_size, "invalid schematic size");
+				}
+				else
+				{
+					DrawText(240, 100, GU_COLOR(0.9, 0.1, 0.1, 1), default_size, "process of conversion can take about 1 minute");
+				}
+
+				if (newW_gameMode == SURVIVAL)
+				{
+					converterPos == 0 ? DrawText(240, 174, GU_COLOR(1, 1, 0.25, 1), default_size, "Game Mode: Survival") : DrawText(240, 174, GU_COLOR(1, 1, 1, 1), default_size, "Game Mode: Survival");
+				}
+				if (newW_gameMode == CREATIVE)
+				{
+					converterPos == 0 ? DrawText(240, 174, GU_COLOR(1, 1, 0.25, 1), default_size, "Game Mode: Creative") : DrawText(240, 174, GU_COLOR(1, 1, 1, 1), default_size, "Game Mode: Creative");
+				}
+				converterPos == 1 ? DrawText(240, 209, GU_COLOR(1, 1, 0.25, 1), default_size, "Try to convert") : DrawText(240, 209, GU_COLOR(1, 1, 1, 1), default_size, "Try to convert");
+				converterPos == 2 ? DrawText(240, 254, GU_COLOR(1, 1, 0.25, 1), default_size, "Cancel") : DrawText(240, 254, GU_COLOR(1, 1, 1, 1), default_size, "Cancel");
+
+				DrawText(240, 29, GU_COLOR(1, 1, 1, 1), default_size, "Converter");
+			}
+			if (g_RenderManager.GetFontLanguage() == RUSSIAN)
+			{
+				g_RenderManager.SetFont(ENGLISH);
+				if (schematicExists)
+				{
+					DrawText(240, 80, GU_COLOR(0.1, 0.9, 0.1, 1), default_big_size, "world.schematic exists!");
+				}
+				else
+				{
+					DrawText(240, 80, GU_COLOR(0.9, 0.1, 0.1, 1), default_big_size, "world.schematic doesn't exist!");
+				}
+				if (errorType == 1)
+				{
+					DrawText(240, 100, GU_COLOR(0.9, 0.1, 0.1, 1), default_big_size, "invalid schematic size");
+				}
+				else
+				{
+					DrawText(240, 100, GU_COLOR(0.9, 0.1, 0.1, 1), default_size, "process of conversion can take about 1 minute");
+				}
+				g_RenderManager.SetDefaultFont();
+
+				if (newW_gameMode == SURVIVAL)
+				{
+					converterPos == 0 ? DrawText(240, 174, GU_COLOR(1, 1, 0.25, 1), default_size, "Igrovo~ rejim : V@jivanie") : DrawText(240, 174, GU_COLOR(1, 1, 1, 1), default_size, "Igrovo~ rejim : V@jivanie");
+				}
+				if (newW_gameMode == CREATIVE)
+				{
+					converterPos == 0 ? DrawText(240, 174, GU_COLOR(1, 1, 0.25, 1), default_size, "Igrovo~ rejim : Tvoryeski~") : DrawText(240, 174, GU_COLOR(1, 1, 1, 1), default_size, "Igrovo~ rejim : Tvoryeski~");
+				}
+				converterPos == 1 ? DrawText(240, 209, GU_COLOR(1, 1, 0.25, 1), default_size, "Konvertirovat$") : DrawText(240, 209, GU_COLOR(1, 1, 1, 1), default_size, "Konvertirovat$");
+				converterPos == 2 ? DrawText(240, 254, GU_COLOR(1, 1, 0.25, 1), default_size, "Otmena") : DrawText(240, 254, GU_COLOR(1, 1, 1, 1), default_size, "Otmena");
+
+				DrawText(240, 29, GU_COLOR(1, 1, 1, 1), default_size, "Konverter");
+			}
+		}
+		break;
+		case 10://New or load map
+		{
+			sceGuDisable(GU_DEPTH_TEST);
+			sceGuEnable(GU_BLEND);
+			sceGuColor(GU_COLOR(1, 1, 1, 1.0f));
+
+
+			buttonSprite->SetPosition(240, 100);
+			buttonSprite->Draw();
+
+			buttonSprite->SetPosition(240, 140);
+			buttonSprite->Draw();
+
+			sbuttonSprite->SetPosition(240, 100 + saveSubMenuSelect * 40);
+			sbuttonSprite->Draw();
+
+			sceGuDisable(GU_BLEND);
+			sceGuEnable(GU_DEPTH_TEST);
+
+			if (g_RenderManager.GetFontLanguage() == ENGLISH)
+			{
+				DrawText(240, 64, GU_COLOR(1, 1, 1, 1), default_size, "Choose Game Mode");
+
+				saveSubMenuSelect == 0 ? DrawText(240, 109, GU_COLOR(1, 1, 0.25, 1), default_size, "Survival") : DrawText(240, 109, GU_COLOR(1, 1, 1, 1), default_size, "Survival");
+				saveSubMenuSelect == 1 ? DrawText(240, 149, GU_COLOR(1, 1, 0.25, 1), default_size, "Creative") : DrawText(240, 149, GU_COLOR(1, 1, 1, 1), default_size, "Creative");
+			}
+			if (g_RenderManager.GetFontLanguage() == RUSSIAN)
+			{
+				DrawText(240, 64, GU_COLOR(1, 1, 1, 1), default_size, "V@berite Igrovo~ Rejim");
+
+				saveSubMenuSelect == 0 ? DrawText(240, 109, GU_COLOR(1, 1, 0.25, 1), default_size, "V@jivanie") : DrawText(240, 109, GU_COLOR(1, 1, 1, 1), default_size, "V@jivanie");
+				saveSubMenuSelect == 1 ? DrawText(240, 149, GU_COLOR(1, 1, 0.25, 1), default_size, "Tvoryeski~") : DrawText(240, 149, GU_COLOR(1, 1, 1, 1), default_size, "Tvoryeski~");
+			}
+		}
+		break;
+		case 11://textures
+		{
+			sceGuDisable(GU_DEPTH_TEST);
+			sceGuEnable(GU_BLEND);
+			sceGuColor(GU_COLOR(1, 1, 1, 1.0f));
+
+
+			//select sprite
+			if (texturePackList.size() > 0)
+			{
+
+			}
+
+			for (int i = tpStart; i < tpMax; i++)
+			{
+				if (i < texturePackList.size())
+				{
+					sceGuEnable(GU_BLEND);
+
+					rectFilledSprite->SetPosition(240, 56 - 8 + (tpCurrent * 72) - (tpStart * 72));
+
+					if (i == tpCurrent)
+					{
+						rectFilledSprite->Draw();
+					}
+
+					rectEmptySprite->SetPosition(240, 56 - 8 + (tpPos * 72) - (tpStart * 72));
+					if (i == tpPos)
+					{
+						sceGuBlendFunc(GU_ADD, GU_FIX, GU_FIX, 0xFFFFFFFF, 0xFFFFFFFF);
+						rectEmptySprite->Draw();
+						sceGuBlendFunc(GU_ADD, GU_SRC_ALPHA, GU_ONE_MINUS_SRC_ALPHA, 0, 0);
+					}
+
+					Sprite* DrawSprite = texturePackList[i].packSprite;
+					DrawSprite->SetPosition(46, 56 - 8 + (i * 72) - (tpStart * 72));
+					DrawSprite->Draw();
+
+					sceGuDisable(GU_BLEND);
+
+					g_RenderManager.SetFont(ENGLISH);
+					if (i == tpPos)
+					{
+						g_RenderManager.SetFontStyle(default_big_size, GU_COLOR(0.25, 0.25, 0, 1), 0, 0x00000000);
+						g_RenderManager.DebugPrint(94, 52 - 8 + (i * 72) - (tpStart * 72), "%s", texturePackList[i].name.c_str());
+
+						g_RenderManager.SetFontStyle(default_big_size, GU_COLOR(1, 1, 0, 1), 0, 0x00000000);
+						g_RenderManager.DebugPrint(92, 50 - 8 + (i * 72) - (tpStart * 72), "%s", texturePackList[i].name.c_str());
+
+						g_RenderManager.SetFontStyle(default_size, GU_COLOR(0.5, 0.5, 0, 1), 0, 0x00000000);
+						g_RenderManager.DebugPrint(92, 50 - 8 + (i * 72) - (tpStart * 72) + 18, "%s", texturePackList[i].description.c_str());
+					}
+					else
+					{
+						g_RenderManager.SetFontStyle(default_big_size, GU_COLOR(0.25, 0.25, 0.25, 1), 0, 0x00000000);
+						g_RenderManager.DebugPrint(94, 52 - 8 + (i * 72) - (tpStart * 72), "%s", texturePackList[i].name.c_str());
+
+						g_RenderManager.SetFontStyle(default_big_size, GU_COLOR(1, 1, 1, 1), 0, 0x00000000);
+						g_RenderManager.DebugPrint(92, 50 - 8 + (i * 72) - (tpStart * 72), "%s", texturePackList[i].name.c_str());
+
+						g_RenderManager.SetFontStyle(default_size, GU_COLOR(0.5, 0.5, 0.5, 1), 0, 0x00000000);
+						g_RenderManager.DebugPrint(92, 50 - 8 + (i * 72) - (tpStart * 72) + 18, "%s", texturePackList[i].description.c_str());
+					}
+					g_RenderManager.SetDefaultFont();
+				}
+			}
+
+
+
+			buttonSprite->SetPosition(120, 254);
+			buttonSprite->Draw();
+
+			buttonSprite->SetPosition(360, 254);
+			buttonSprite->Draw();
+
+
+			sbuttonSprite->SetPosition(120 + (tpSelectPos * 240), 254);
+			sbuttonSprite->Draw();
+
+			sceGuDisable(GU_BLEND);
+			sceGuEnable(GU_DEPTH_TEST);
+
+			if (g_RenderManager.GetFontLanguage() == ENGLISH)
+			{
+				tpSelectPos == 0 ? DrawText(120, 263, GU_COLOR(1, 1, 0.25, 1), default_size, "Select") : DrawText(120, 263, GU_COLOR(1, 1, 1, 1), default_size, "Select");
+				tpSelectPos == 1 ? DrawText(360, 263, GU_COLOR(1, 1, 0.25, 1), default_size, "Cancel") : DrawText(360, 263, GU_COLOR(1, 1, 1, 1), default_size, "Cancel");
+			}
+			if (g_RenderManager.GetFontLanguage() == RUSSIAN)
+			{
+				tpSelectPos == 0 ? DrawText(120, 263, GU_COLOR(1, 1, 0.25, 1), default_size, "V@brat$") : DrawText(120, 263, GU_COLOR(1, 1, 1, 1), default_size, "V@brat$");
+				tpSelectPos == 1 ? DrawText(360, 263, GU_COLOR(1, 1, 0.25, 1), default_size, "Otmena") : DrawText(360, 263, GU_COLOR(1, 1, 1, 1), default_size, "Otmena");
+			}
+		}
+		break;
+		}
+
+		g_RenderManager.SetFontStyle(0.5f, GU_COLOR(1, 1, 1, 1), 0, 0x00000000);
+
+		/*
+		g_RenderManager.DebugPrint(30,50,"%f",size_f);
+
+		//draw debug text at the end
+		g_RenderManager.DebugPrint(40,30,"cpu: %d%%",g_RenderManager.GetCpuUsage());
+		g_RenderManager.DebugPrint(40,40,"gpu: %d%%",g_RenderManager.GetGpuUsage());
+		g_RenderManager.DebugPrint(40, 20, "memory: %.3f", ((float)SystemManager::Instance()->freeMemory() / ((float)(1024 * 1024))) );
+		*/
+
+		if (!IS_SNAPSHOT) {
+			g_RenderManager.SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000400);
+			g_RenderManager.DebugPrint(475, 270, "%s", VERSION_NAME);
+			g_RenderManager.SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000200);
+		}
+		else {
+			g_RenderManager.SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000400);
+			g_RenderManager.DebugPrint(475, 270, "Snapshot %s", SNAPSHOT_NAME);
+			g_RenderManager.SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000200);
+		}
+
+		//end frame
+		g_RenderManager.EndFrame();
 	}
-	else {
-		g_RenderManager.SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000400);
-		g_RenderManager.DebugPrint(475, 270, "Snapshot %s", SNAPSHOT_NAME);
-		g_RenderManager.SetFontStyle(0.5f, 0xFFFFFFFF, 0xFF000000, 0x00000200);
-	}
-
-    //end frame
-    g_RenderManager.EndFrame();
 }
 
 //additional functions
