@@ -91,19 +91,20 @@ namespace Aurealis
 			int GetFontLanguage();
 
 			void DebugPrint(int x,int y, const char *message, ...);
+			
 			void Start();
-			void CleanBuffers();
+			void clear();
+			
 			void DrawCube(float x, float y, float z);
 
 
-			void StartFrame(float a, float b, float c);
-			void EndFrame();
+			void recordCommands(float a, float b, float c);
+			void finishCommands();
 
 			//dialogs rendering
-			void StartDialog();
-			void EndDialog();
+			void recordDialog();
+			void finishDialog();
 
-			void UseVerticalSync(bool Enabled);
 			void SetClearColor(float r,float g,float b,float a);
 
 			void SetOrtho(float left, float right, float bottom, float top, float zNear, float zFar);
@@ -113,7 +114,6 @@ namespace Aurealis
 
 			void DrawToTexture(Texture* offscreenTexture );
 			void SetRTT();
-
 
 			void SetActiveCamera(Camera *camera);
 			void UpdateFrustumMatrix();
@@ -129,11 +129,6 @@ namespace Aurealis
 
 			Camera *mCam;
 
-			protected:
-				
-
-
-
 		private:
 			unsigned int cleanColor;
 
@@ -144,8 +139,6 @@ namespace Aurealis
 
 			char list[0x20000] __attribute__((aligned(64)));//__attribute__((aligned(16))) list[262144]
 			int listNum;
-
-			bool mVerticalSync;
 
 			ScePspFMatrix4 proj;
 			ScePspFMatrix4 view;

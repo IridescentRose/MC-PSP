@@ -66,7 +66,7 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
 	// start the render loop
 	while(1)
 	{
-		g_RenderManager.StartFrame(0.466,0.72,1);
+		g_RenderManager.recordCommands(0.466,0.72,1);
 
 		sceGuDisable(GU_DEPTH_TEST);
 		sceGuEnable(GU_BLEND);
@@ -243,7 +243,7 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
         }
 
         g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200|0x00000000);
-		g_RenderManager.EndFrame();
+		g_RenderManager.finishCommands();
 	}
 	return 0;
 }

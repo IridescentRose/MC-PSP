@@ -24,23 +24,23 @@ namespace Aurealis
 			m_vVelocity = Vector3(0.0f, 0.0f, 0.0f);
 
 			bobTimer = Timer();
-			offAngleX = 0.0f;
-			offAngleY = 0.0f;
-			tiltAngle = 0.0f;
-			passiveElapsed = 0.0f;
+			offAngleX = 0.0;
+			offAngleY = 0.0;
+			tiltAngle = 0.0;
+			passiveElapsed = 0.0;
 			passiveTimer = Timer();
 		}
 
 		void Camera::update(bool isWalking) {
 			if (isWalking) {
 				bobElapsed += bobTimer.GetDeltaTime();
-				bobY = vfpu_sinf(-bobElapsed * 2.86 * PI)/48.0f;
-				tiltAngle = vfpu_sinf(bobElapsed * 2.86 * PI) * 1.0f * PI / 180.0f / 4.0f;
+				bobY = vfpu_sinf(-bobElapsed * 2.86 * PI)/48.0;
+				tiltAngle = vfpu_sinf(bobElapsed * 2.86 * PI) * 1.0 * PI / 180.0 / 4.0;
 
-				passiveElapsed = 0.0f;
+				passiveElapsed = 0.0;
 				passiveTimer.GetDeltaTime();
-				offAngleX = 0.0f;
-				offAngleY = 0.0f;
+				offAngleX = 0.0;
+				offAngleY = 0.0;
 			}
 			else {
 				bobY = 0;
@@ -50,8 +50,8 @@ namespace Aurealis
 
 				//AMBIENT EFFECTS HERE
 				passiveElapsed += passiveTimer.GetDeltaTime();
-				offAngleX = vfpu_sinf(passiveElapsed * 0.523f) / 24.0f;
-				offAngleY = vfpu_sinf(passiveElapsed * 0.238f) / 24.0f;
+				offAngleX = vfpu_sinf(passiveElapsed * 0.523) / 24.0;
+				offAngleY = vfpu_sinf(passiveElapsed * 0.238) / 24.0;
 				
 			}
 		}
@@ -108,7 +108,7 @@ namespace Aurealis
 		void Camera::MovePhysicNoY(float speed)
 		{
 			vVector = m_vView - (m_vPosition + m_vOffset);
-			vVector.y = 0.0f;
+			vVector.y = 0.0;
 			vVector.normalize();
 
 			m_vVelocity += vVector * speed;
@@ -157,7 +157,7 @@ namespace Aurealis
 		{
 			m_vStrafe = Vector3::cross(m_vView - m_vPosition, m_vUpVector);
 
-			m_vStrafe.y = 0.0f;
+			m_vStrafe.y = 0.0;
 
 			// Normalize the strafe vector
 			m_vStrafe.normalize();

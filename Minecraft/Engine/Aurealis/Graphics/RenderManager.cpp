@@ -73,7 +73,6 @@ namespace Aurealis
 		    defaultFontType = 1;
 
 		    SetFont(1);
-			mVerticalSync = false;
 			listNum = 0;
 			cleanColor = 0xFF00FF00; //0xFFF5B783
 			fov = 65.0f;//54
@@ -217,7 +216,7 @@ namespace Aurealis
 			sceGuStart(GU_DIRECT,list);
 		}
 
-		void RenderManager::CleanBuffers()
+		void RenderManager::clear()
 		{
 			sceGuClearColor(cleanColor);
 			sceGuClearStencil(0);
@@ -225,7 +224,7 @@ namespace Aurealis
 			sceGuClear(GU_COLOR_BUFFER_BIT | GU_STENCIL_BUFFER_BIT | GU_DEPTH_BUFFER_BIT);
 		}
 
-		void RenderManager::StartFrame(float a, float b, float c)
+		void RenderManager::recordCommands(float a, float b, float c)
 		{
 			sceGuStart(GU_DIRECT,list);
 
@@ -297,6 +296,9 @@ namespace Aurealis
 				ScePspFVector3 eye = {mCam->m_vView.x,mCam->m_vView.y,mCam->m_vView.z};
 				ScePspFVector3 up = {mCam->m_vUpVector.x,mCam->m_vUpVector.y,mCam->m_vUpVector.z};
 
+				ScePspFVector3 rotVec = { mCam->offAngleX, mCam->offAngleY, mCam->tiltAngle };
+				sceGumRotateXYZ(&rotVec);
+
 				sceGumLookAt(&pos, &eye, &up);
 				sceGumUpdateMatrix();
 
@@ -314,7 +316,7 @@ namespace Aurealis
 			}
 		}
 
-		void RenderManager::EndFrame()
+		void RenderManager::finishCommands()
 		{
 			if(!performanceCounter)
 			{
@@ -352,7 +354,7 @@ namespace Aurealis
 			}
 		}
 
-		void RenderManager::StartDialog()
+		void RenderManager::recordDialog()
 		{
 			sceGuStart(GU_DIRECT,list);
 			sceGuClear(GU_COLOR_BUFFER_BIT|GU_DEPTH_BUFFER_BIT);
@@ -360,15 +362,10 @@ namespace Aurealis
 			sceGuSync(0,0);
 		}
 
-		void RenderManager::EndDialog()
+		void RenderManager::finishDialog()
 		{
 			sceDisplayWaitVblankStart();
 			sceGuSwapBuffers();
-		}
-
-		void RenderManager::UseVerticalSync(bool Enabled)
-		{
-			mVerticalSync = Enabled;
 		}
 
 		void RenderManager::SetClearColor(float r,float g,float b,float a)
@@ -438,7 +435,7 @@ namespace Aurealis
 			sceGuOffset(2048 - (offscreenTexture->width/2),2048 - (offscreenTexture->height/2));
 			sceGuViewport(2048,2048,offscreenTexture->width,offscreenTexture->height);
 
-			//CleanBuffers();
+			//clear();
 		}
 
 		void RenderManager::SetRTT()
@@ -450,7 +447,7 @@ namespace Aurealis
 			sceGuOffset(2048 - (SCR_WIDTH/2),2048 - (SCR_HEIGHT/2));
 			sceGuViewport(2048,2048,SCR_WIDTH,SCR_HEIGHT);
 
-			CleanBuffers();
+			clear();
 		}
 
 

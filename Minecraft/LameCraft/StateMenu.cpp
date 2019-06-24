@@ -395,8 +395,11 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
         if(g_System.KeyPressed(PSP_CTRL_CROSS))
         {
+
+			g_SoundManager.PlayMenuSound();
             g_RenderManager.defaultFontType = selectPos+1;
             g_RenderManager.SetDefaultFont();
+			g_SoundManager.PlayMenuSound();
             selectPos = 0;
             menuState = 0;
 
@@ -442,6 +445,8 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
         if(g_System.KeyPressed(PSP_CTRL_CROSS))
         {
+
+			g_SoundManager.PlayMenuSound();
             if(selectPos == 0)//play state
             {
                 ScanSaveFiles("Save/");
@@ -519,6 +524,8 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
             if(g_System.KeyPressed(PSP_CTRL_CROSS))
             {
+
+				g_SoundManager.PlayMenuSound();
                 if(saveSubMenuSelect == 1)//remove file
                 {
                     //remove file
@@ -699,6 +706,8 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
             if(g_System.KeyPressed(PSP_CTRL_CROSS))
             {
+
+				g_SoundManager.PlayMenuSound();
                 if(loadSelectPos == 0)//play selected world
                 {
                     if(saveFilesList.size() > 0)
@@ -821,6 +830,8 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
         if(g_System.KeyPressed(PSP_CTRL_CROSS))
         {
+
+			g_SoundManager.PlayMenuSound();
             if(aboutPos == 1)
             {
                 menuState = 0;
@@ -888,6 +899,8 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
         if(g_System.KeyPressed(PSP_CTRL_CROSS))
         {
+
+			g_SoundManager.PlayMenuSound();
             if(generateSelectPose == 0)
             {
                 newWorldName = "";
@@ -996,6 +1009,8 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
         if(g_System.KeyPressed(PSP_CTRL_CROSS))
         {
+
+			g_SoundManager.PlayMenuSound();
             if(converterPos == 0)
             {
                 newW_gameMode == SURVIVAL ? newW_gameMode = CREATIVE : newW_gameMode = SURVIVAL;
@@ -1935,6 +1950,8 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
         if(g_System.KeyPressed(PSP_CTRL_CROSS))
         {
+
+			g_SoundManager.PlayMenuSound();
             char worldNameTemp[50];
             for(char i = 0; i <= 49; i++)
             {
@@ -2054,6 +2071,8 @@ void StateMenu::HandleEvents(StateManager* sManager)
 
         if(g_System.KeyPressed(PSP_CTRL_CROSS))
         {
+
+			g_SoundManager.PlayMenuSound();
             if(tpSelectPos == 0)//play state
             {
                 if(texturePackList.empty() == false)
@@ -2086,9 +2105,9 @@ void StateMenu::Draw(StateManager* sManager)
 	if (!isPaused) {
 
 		//start rendering
-		g_RenderManager.StartFrame(1, 1, 1);
+		g_RenderManager.recordCommands(1, 1, 1);
 		g_RenderManager.SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		g_RenderManager.CleanBuffers();
+		g_RenderManager.clear();
 
 		sceGuDisable(GU_DEPTH_TEST);
 		sceGuEnable(GU_BLEND);
@@ -3007,7 +3026,7 @@ void StateMenu::Draw(StateManager* sManager)
 		}
 
 		//end frame
-		g_RenderManager.EndFrame();
+		g_RenderManager.finishCommands();
 	}
 }
 
