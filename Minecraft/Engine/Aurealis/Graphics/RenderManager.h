@@ -8,7 +8,7 @@
 
 #include <Aurealis/Graphics/Vertex.h>
 #include <Aurealis/Graphics/Camera.h>
-#include <Aurealis/Graphics/TextureManager.h>
+#include <Aurealis/Graphics/TextureUtil.h>
 
 #include <Aurealis/Graphics/intraFont/intraFont.h>
 
@@ -111,7 +111,7 @@ namespace Aurealis
 			void SetPerspective(float _fov,float _aspect,float _znear,float _zfar);
 			void LookAt();
 
-			void DrawToTexture(Image* offscreenTexture );
+			void DrawToTexture(Texture* offscreenTexture );
 			void SetRTT();
 
 
@@ -119,9 +119,6 @@ namespace Aurealis
 			void UpdateFrustumMatrix();
 
 			void SetClearColour(unsigned int color);
-
-			void TakeScreenshot(const char* filename);
-			void TakeNextScreenshot();
 
 			int GetCpuUsage() {return g_cpu_load;}
 			int GetGpuUsage() {return g_gpu_load;}

@@ -399,9 +399,6 @@
     <ClCompile Include="Engine\Aurealis\Graphics\Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Aurealis\Graphics\TextureManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Aurealis\Graphics\vfram.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -858,9 +855,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Aurealis\Graphics\Sprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Aurealis\Graphics\TextureManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Aurealis\Graphics\Vertex.h">

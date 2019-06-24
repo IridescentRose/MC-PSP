@@ -1,5 +1,4 @@
 #include <Aurealis/Graphics/Effects/WeatherSystem.h>
-#include <Aurealis/Graphics/TextureManager.h>
 #include <LameCraft/CraftWorld2.h>
 
 #define PI 3.1415926535897f

@@ -3115,7 +3115,8 @@ void StateMenu::ScanTexturePacks(const char* dirName)
     }
     texturePackList.clear();
 
-    TextureManager::Instance()->LoadConstTexture("Assets/unknown_pack.png");
+    
+	Texture* unknown_pack = TextureUtil::LoadPng("Assets/unknown_pack.png");
 
     int TPcheck = 0;
 

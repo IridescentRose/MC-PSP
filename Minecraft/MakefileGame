@@ -13,7 +13,6 @@ Engine/Aurealis/Graphics/common.o \
 Engine/Aurealis/Graphics/vfram.o \
 Engine/Aurealis/Graphics/vram.o \
 Engine/Aurealis/Graphics/RenderManager.o \
-Engine/Aurealis/Graphics/TextureManager.o \
 Engine/Aurealis/Graphics/Camera.o \
 Engine/Aurealis/Graphics/Sprite.o \
 Engine/Aurealis/Graphics/intraFont/libccc.o \

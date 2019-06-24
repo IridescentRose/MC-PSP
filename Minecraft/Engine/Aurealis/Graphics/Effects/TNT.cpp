@@ -1,5 +1,4 @@
 #include <Aurealis/Graphics/Effects/TNT.h>
-#include <Aurealis/Graphics/TextureManager.h>
 
 #define PI 3.1415926535897f
 #define DEG_TO_RAD (PI / 180.0f)

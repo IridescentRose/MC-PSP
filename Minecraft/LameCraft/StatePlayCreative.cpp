@@ -10503,15 +10503,6 @@ void StatePlayCreative::Draw(StateManager* sManager)
     sceGuDisable(GU_BLEND);
     sceGuEnable(GU_DEPTH_TEST);
 
-    if(makeScreen)
-	{
-		//end frame now to update frame buffer
-		g_RenderManager.EndFrame();
-		//make screenshot
-		g_RenderManager.TakeNextScreenshot();
-		makeScreen = false;
-	}
-
     int language = g_RenderManager.GetFontLanguage();
     g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),GU_COLOR(0.0f,0.0f,0.0f,1),0x00000200);
 

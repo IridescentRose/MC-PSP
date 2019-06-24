@@ -12282,16 +12282,7 @@ void StatePlay::Draw(StateManager* sManager)
         }
     }
     sceGuDisable(GU_BLEND);
-    sceGuEnable(GU_DEPTH_TEST);
-
-    if(makeScreen)
-	{
-		//end frame now to update frame buffer
-		g_RenderManager.EndFrame();
-		//make screenshot
-		g_RenderManager.TakeNextScreenshot();
-		makeScreen = false;
-	}
+	sceGuEnable(GU_DEPTH_TEST);
 
     int language = g_RenderManager.GetFontLanguage();
     g_RenderManager.SetFontStyle(0.345f,0xFFFFFFFF,0,0x00000200);

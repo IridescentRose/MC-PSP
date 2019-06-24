@@ -136,7 +136,6 @@
     <ClCompile Include="Engine\Aurealis\Graphics\RenderManager.cpp" />
     <ClCompile Include="Engine\Aurealis\Graphics\Sprite.cpp" />
     <ClCompile Include="Engine\Aurealis\Graphics\TextureAtlas.cpp" />
-    <ClCompile Include="Engine\Aurealis\Graphics\TextureManager.cpp" />
     <ClCompile Include="Engine\Aurealis\Graphics\TextureUtil.cpp" />
     <ClCompile Include="Engine\Aurealis\Graphics\vfram.c" />
     <ClCompile Include="Engine\Aurealis\Graphics\vram.c" />
@@ -291,7 +290,6 @@
     <ClInclude Include="Engine\Aurealis\Graphics\Sprite.h" />
     <ClInclude Include="Engine\Aurealis\Graphics\Texture.h" />
     <ClInclude Include="Engine\Aurealis\Graphics\TextureAtlas.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\TextureManager.h" />
     <ClInclude Include="Engine\Aurealis\Graphics\TextureUtil.h" />
     <ClInclude Include="Engine\Aurealis\Graphics\Vertex.h" />
     <ClInclude Include="Engine\Aurealis\Graphics\vfram.h" />
