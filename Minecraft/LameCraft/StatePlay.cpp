@@ -97,7 +97,7 @@ StatePlay::StatePlay()
     chestId = -1;
     furnaceId = -1;
 
-    cameraSpeed = 2.0f / 60.0f;
+    cameraSpeed = 4.0f / 60.0f;
     cameraMoveSpeed = 0.0f;
 
     menuState = 0;
@@ -914,235 +914,6 @@ void StatePlay::ReadyFurnSmelting(Furnace* Fur)
         }
     }
 }
-
-/*
-void StatePlay::CraftItem2x2()
-{
-    craftItemId = -1;
-    craftItemAm = -1;
-    craftItemSt = 0;
-
-    int result = 0;
-    for(int i = 0; i <= 3; i ++)
-    {
-        if(craftSlotId[i] != -1)
-        {
-            result += craftSlotId[i];
-        }
-    }
-
-    switch(result)
-    {
-    // wood to planks
-    case 8:
-        if(craftSlotId[0] == 8 || craftSlotId[1] == 8 || craftSlotId[2] == 8 || craftSlotId[3] == 8)
-        {
-            craftItemId = 34;
-            craftItemSt = 1;
-            craftItemAm = 4;
-        }
-    break;
-
-    // bone to bone meals
-    case 321:
-        if(craftSlotId[0] == 321 || craftSlotId[1] == 321 || craftSlotId[2] == 321 || craftSlotId[3] == 321)
-        {
-            craftItemId = 322;
-            craftItemSt = 1;
-            craftItemAm = 3;
-        }
-    break;
-
-    // snowballs to snow block
-    case 1196:
-        if(craftSlotId[0] == 299 && craftSlotId[1] == 299 && craftSlotId[2] == 299 && craftSlotId[3] == 299)
-        {
-            craftItemId = 47;
-            craftItemSt = 1;
-            craftItemAm = 1;
-        }
-    break;
-
-    // birch wood to planks
-    case 31:
-        if(craftSlotId[0] == 31 || craftSlotId[1] == 31 || craftSlotId[2] == 31 || craftSlotId[3] == 31)
-        {
-            craftItemId = 34;
-            craftItemSt = 1;
-            craftItemAm = 4;
-        }
-    break;
-
-    // dark wood to planks
-    case 30:
-        if(craftSlotId[0] == 30 || craftSlotId[1] == 30 || craftSlotId[2] == 30 || craftSlotId[3] == 30)
-        {
-            craftItemId = 34;
-            craftItemSt = 1;
-            craftItemAm = 4;
-        }
-    break;
-
-    // melon to seeds
-    case 311:
-        if(craftSlotId[0] == 311 || craftSlotId[1] == 311 || craftSlotId[2] == 311 || craftSlotId[3] == 311)
-        {
-            craftItemId = 312;
-            craftItemSt = 1;
-            craftItemAm = 1;
-        }
-    break;
-
-    // melon to seeds
-    case 293:
-        if(craftSlotId[0] == 293 || craftSlotId[1] == 293 || craftSlotId[2] == 293 || craftSlotId[3] == 293)
-        {
-            craftItemId = 313;
-            craftItemSt = 1;
-            craftItemAm = 1;
-        }
-    break;
-
-    // diamond block to diamonds
-    case 64:
-        if(craftSlotId[0] == 64 || craftSlotId[1] == 64 || craftSlotId[2] == 64 || craftSlotId[3] == 64)
-        {
-            craftItemId = 279;
-            craftItemSt = 1;
-            craftItemAm = 9;
-        }
-    break;
-
-    // iron block to bars
-    case 66:
-        if(craftSlotId[0] == 66 || craftSlotId[1] == 66 || craftSlotId[2] == 66 || craftSlotId[3] == 66)
-        {
-            craftItemId = 278;
-            craftItemSt = 1;
-            craftItemAm = 9;
-        }
-    break;
-
-    // golden block to bard
-    case 65:
-        if(craftSlotId[0] == 65 || craftSlotId[1] == 65 || craftSlotId[2] == 65 || craftSlotId[3] == 65)
-        {
-            craftItemId = 280;
-            craftItemSt = 1;
-            craftItemAm = 9;
-        }
-    break;
-
-
-    // bricks to brick block
-    case 1156:
-        if(craftSlotId[0] == 289 && craftSlotId[1] == 289 && craftSlotId[2] == 289 && craftSlotId[3] == 289)
-        {
-            craftItemId = 27;
-            craftItemSt = 1;
-            craftItemAm = 1;
-        }
-    break;
-
-    // clay pieces to clay block
-    case 1132:
-        if(craftSlotId[0] == 283 && craftSlotId[1] == 283 && craftSlotId[2] == 283 && craftSlotId[3] == 283)
-        {
-            craftItemId = 99;
-            craftItemSt = 1;
-            craftItemAm = 1;
-        }
-    break;
-
-    // sand blocks to sandstone
-    case 28:
-        if(craftSlotId[0] == 7 && craftSlotId[1] == 7 && craftSlotId[2] == 7 && craftSlotId[3] == 7)
-        {
-            craftItemId = 26;
-            craftItemSt = 1;
-            craftItemAm = 1;
-        }
-    break;
-
-    // stones to stone bricks
-    case 12:
-        if(craftSlotId[0] == 3 && craftSlotId[1] == 3 && craftSlotId[2] == 3 && craftSlotId[3] == 3)
-        {
-            craftItemId = 102;
-            craftItemSt = 1;
-            craftItemAm = 4;
-        }
-    break;
-
-
-    // half to carved stone brick
-    case 216:
-        if((craftSlotId[0] == 108 && craftSlotId[2] == 108) || (craftSlotId[1] == 108 && craftSlotId[3] == 108))
-        {
-            craftItemId = 104;
-            craftItemSt = 1;
-            craftItemAm = 1;
-        }
-    break;
-
-
-    // planks to crafting table
-    case 136:
-        if(craftSlotId[0] == 34)
-        {
-            craftItemId = 105;
-            craftItemSt = 1;
-            craftItemAm = 1;
-        }
-    break;
-
-    // planks to sticks
-    case 68:
-        if((craftSlotId[0] == 34 && craftSlotId[2] == 34)  || (craftSlotId[1] == 34 && craftSlotId[3] == 34))
-        {
-            craftItemId = 276;
-            craftItemSt = 1;
-            craftItemAm = 4;
-        }
-    break;
-
-    // torch
-    case 553:
-        if((craftSlotId[0] == 277 && craftSlotId[2] == 276) || (craftSlotId[1] == 277 && craftSlotId[3] == 276))
-        {
-            craftItemId = 308;
-            craftItemSt = 1;
-            craftItemAm = 4;
-        }
-    break;
-
-    // jack o'lantern
-    case 383:
-        if((craftSlotId[0] == Pumpkin3::getID() && craftSlotId[2] == TorchItem::getID()) || (craftSlotId[1] == Pumpkin3::getID() && craftSlotId[3] == TorchItem::getID()))
-        {
-            craftItemId = JackOLantern3::getID();
-            craftItemSt = 1;
-            craftItemAm = 1;
-        }
-    break;
-
-    case 556: //scissors
-        if((craftSlotId[2] == 278 && craftSlotId[1] == 278))
-        {
-            craftItemId = 275;
-            craftItemSt = 0;
-            craftItemAm = 239;
-        }
-    break;
-
-    default:
-        craftItemId = -1;
-        craftItemAm = -1;
-        craftItemSt = 0;
-    break;
-
-    }
-} */
 
 void StatePlay::CraftItem2x2()
 {
@@ -3858,16 +3629,6 @@ void StatePlay::HandleEvents(StateManager* sManager)
                         }
                     }
                 }
-
-
-           /* if (g_System.KeyPressed(PSP_CTRL_RTRIGGER)) //open inventory
-            {
-                if(g_System.KeyPressed(PSP_CTRL_LTRIGGER))
-                {
-
-                }
-            } */
-
             //add cube
             if(keyPressed(InputHelper::Instance()->getButtonToAction(14)))
             {
@@ -8697,28 +8458,6 @@ void StatePlay::HandleEvents(StateManager* sManager)
                         g_SoundManager.StopAmbient();
                     }
 
-
-                    //take screen
-                    if(optionsMenuPos == 14)
-                    {
-                        makeScreen = true;
-                        /*unsigned short test[128];
-                        unsigned short opis[10] = {'W','o','r','l','d',' ','n','a','m','e'};
-                        if(g_System.ShowOSK(opis,test,128) != -1)
-                        {
-                            std::string newWorldName = "";
-                            for(int j = 0; test[j]; j++)
-                            {
-                                unsigned c = test[j];
-
-                                if(32 <= c && c <= 127) // print ascii only
-                                    newWorldName += c;
-                            }
-
-                            sprintf(mWorld->worldName,"%s",newWorldName.c_str());
-                        }*/
-                    }
-
                     if(optionsMenuPos == 15)
                     {
                         devMode = !devMode;
@@ -9436,11 +9175,6 @@ void StatePlay::Update(StateManager* sManager)
                     {
                         playerVelocity.y = -3;
                     }
-                    /*if(headInWater == false)
-                    {
-                        g_SoundManager.PlaySplashSound();
-                        headInWater = true;
-                    }*/
                     headInWater = true;
                 }
                 else
@@ -9961,20 +9695,8 @@ void StatePlay::Draw(StateManager* sManager)
         sceGuShadeModel(GU_FLAT);
     }
 
-    /* /// Stars renderingsceGuDisable(GU_DEPTH_TEST);
-    if(mWorld->brightFactor < 0.6f)
-	{
-	    MatrixColor(0xFFFFFFFF);
-
-        MatrixPush();
-		MatrixTranslation(Vector3(fppCam->m_vPosition.x,fppCam->m_vPosition.y,fppCam->m_vPosition.z));
-
-		TextureManager::Instance()->SetTextureModeulate(stars);
-
-        starsBox->Update(1.0f-(mWorld->brightFactor*2));
-		starsBox->Render();
-		MatrixPop();
-	}*/
+    /// Stars rendering
+	
     if(mWorld->mainOptions.detailedSky == 1)
     {
         if(playerPosition.y <= 48)
@@ -10008,11 +9730,11 @@ void StatePlay::Draw(StateManager* sManager)
         sceGuDisable(GU_FOG);
 
         /// StarsBox rendering
-        /*if(mWorld->rainyColorAlpha != 1.0f)
+        if(mWorld->rainyColorAlpha != 1.0f)
         {
             if(mWorld->worldDayTime < 10 || mWorld->worldDayTime >= 21)
             {
-                TextureManager::Instance()->SetTextureModeulate(stars);
+				g_TextureData.Stars->bindTexture(0, 0, true);
 
                 MatrixPush();
                 MatrixTranslation(Vector3(fppCam->m_vPosition.x,fppCam->m_vPosition.y+fppCam->m_vOffset.y,fppCam->m_vPosition.z));
@@ -10046,7 +9768,7 @@ void StatePlay::Draw(StateManager* sManager)
 
                 MatrixPop();
             }
-        }*/
+        }
 
 
         /// Sun/moon rendering
