@@ -413,7 +413,7 @@ void StateOptions::Update(StateManager* sManager)
 void StateOptions::Draw(StateManager* sManager)
 {
 	//start rendering
-	g_RenderManager.recordCommands(1,1,1);
+	g_RenderManager.StartFrame(1,1,1);
 
 	switch(menuState)
 	{
@@ -654,7 +654,7 @@ void StateOptions::Draw(StateManager* sManager)
 	}
 
 	//end frame
-	g_RenderManager.finishCommands();
+	g_RenderManager.EndFrame();
 }
 
 void StateOptions::DrawText(int x,int y, unsigned int color, float size, const char *message, ...)

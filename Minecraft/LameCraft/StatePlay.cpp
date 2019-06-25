@@ -9944,12 +9944,12 @@ void StatePlay::Draw(StateManager* sManager)
     if(playerPosition.y <= 48)
     {
         Vector3 color = ((mWorld->startSkyColor*mWorld->brightFactor)*nullFactor+(mWorld->dawnSunsetSkyColor*mWorld->dawnSunsetFactor*angleFactor))*(playerPosition.y/48.0f)*(playerPosition.y/48.0f);
-        g_RenderManager.recordCommands(color.x,color.y,color.z);
+        g_RenderManager.StartFrame(color.x,color.y,color.z);
     }
     else
     {
         Vector3 color = (mWorld->startSkyColor*mWorld->brightFactor)*nullFactor+(mWorld->dawnSunsetSkyColor*mWorld->dawnSunsetFactor*angleFactor);
-        g_RenderManager.recordCommands(color.x,color.y,color.z);
+        g_RenderManager.StartFrame(color.x,color.y,color.z);
     }
 
     if(mWorld->mainOptions.smoothLighting == 1)
@@ -12960,7 +12960,7 @@ void StatePlay::Draw(StateManager* sManager)
 	}
 
     //end frame
-    g_RenderManager.finishCommands();
+    g_RenderManager.EndFrame();
 
 	mWorld->endDrawChunk();
 

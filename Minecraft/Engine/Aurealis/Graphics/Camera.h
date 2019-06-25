@@ -48,12 +48,12 @@ namespace Aurealis
 			Timer passiveTimer;
 
 			float tiltAngle;
-			double bobY;
-			double bobElapsed;
+			float bobY;
+			float bobElapsed;
 			void update(bool isWalking);
 
 			float passiveElapsed;
-			double offAngleX, offAngleY;
+			float offAngleX, offAngleY;
 
 		//private:
 

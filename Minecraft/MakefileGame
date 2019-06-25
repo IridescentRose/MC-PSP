@@ -79,7 +79,7 @@ Lamecraft.o
 
 INCDIR = $(PSPPATH)/include
 INCDIR += ./include ./Engine ./3libs
-CFLAGS = -O3 -pipe -ffast-math -mpreferred-stack-boundary=4 #-enable-newlib-hw-fp
+CFLAGS = -O3 -G0 -Wall -mpreferred-stack-boundary=4 #-enable-newlib-hw-fp -ffast-math
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
