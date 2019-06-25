@@ -17,7 +17,7 @@ namespace Aurealis
 
             void Build();
 			void Update();
-			void Render(float alpha, float angle);
+			void Render(float alpha);
 
 		private:
 

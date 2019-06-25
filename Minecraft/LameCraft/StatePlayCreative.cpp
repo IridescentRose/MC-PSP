@@ -8795,7 +8795,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
         {
             if(mWorld->worldDayTime < 10 || mWorld->worldDayTime >= 21)
             {
-				stars->bindTexture(0, 0, true, GU_REPEAT);
+				stars->bindTexture(0, 0, true);
 
                 MatrixPush();
                 MatrixTranslation(Vector3(fppCam->m_vPosition.x,fppCam->m_vPosition.y+fppCam->m_vOffset.y,fppCam->m_vPosition.z));
@@ -8824,7 +8824,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
                     }
                 }
 
-                starsBox->Render((1.0f-mWorld->brightFactor-0.4+mWorld->starsFactor)*(1-mWorld->rainyColorAlpha), mWorld->skyTime + 180.0f);
+                starsBox->Render((1.0f-mWorld->brightFactor-0.4+mWorld->starsFactor)*(1-mWorld->rainyColorAlpha));
 
 
                 MatrixPop();

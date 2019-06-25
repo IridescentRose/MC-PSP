@@ -9734,7 +9734,7 @@ void StatePlay::Draw(StateManager* sManager)
         {
             if(mWorld->worldDayTime < 10 || mWorld->worldDayTime >= 21)
             {
-				g_TextureData.Stars->bindTexture(0, 0, true, GU_REPEAT);
+				g_TextureData.Stars->bindTexture(0, 0, true);
 
                 MatrixPush();
                 MatrixTranslation(Vector3(fppCam->m_vPosition.x,fppCam->m_vPosition.y+fppCam->m_vOffset.y,fppCam->m_vPosition.z));
@@ -9763,7 +9763,7 @@ void StatePlay::Draw(StateManager* sManager)
                     }
                 }
 
-                starsBox->Render((1.0f-mWorld->brightFactor-0.4+mWorld->starsFactor)*(1-mWorld->rainyColorAlpha), mWorld->skyTime + 180.0f);
+                starsBox->Render((1.0f-mWorld->brightFactor-0.4+mWorld->starsFactor)*(1-mWorld->rainyColorAlpha));
 
 
                 MatrixPop();
@@ -9826,11 +9826,11 @@ void StatePlay::Draw(StateManager* sManager)
 
             if(playerPosition.y <= 48)
             {
-                MatrixColor(GU_COLOR(mWorld->brightFactor*(playerPosition.y/48.0f),mWorld->brightFactor*(playerPosition.y/48.0f),mWorld->brightFactor*(playerPosition.y/48.0f), (1-mWorld->rainyColorAlpha) * 0.7f));
+                MatrixColor(GU_COLOR(mWorld->brightFactor*(playerPosition.y/48.0f),mWorld->brightFactor*(playerPosition.y/48.0f),mWorld->brightFactor*(playerPosition.y/48.0f),1-mWorld->rainyColorAlpha));
             }
             else
             {
-                MatrixColor(GU_COLOR(mWorld->brightFactor,mWorld->brightFactor,mWorld->brightFactor,(1-mWorld->rainyColorAlpha) * 0.7f ));
+                MatrixColor(GU_COLOR(mWorld->brightFactor,mWorld->brightFactor,mWorld->brightFactor,1-mWorld->rainyColorAlpha));
             }
 
             MatrixTranslation(Vector3(-114,116,-114));
