@@ -20,7 +20,7 @@ void SharedTextureData::Init()
 	
 	Blue = TextureUtil::LoadPngTexturePack(texturePackName, "hud/blue.png");
 	Sun = TextureUtil::LoadPngTexturePack(texturePackName, "environment/sun.png");
-	Moon = TextureUtil::LoadPngTexturePack(texturePackName, "environment/moon.png");
+	Moon = TextureUtil::LoadPngTexturePack(texturePackName, "environment/moon_phases.png");
 	Stars = TextureUtil::LoadPngTexturePack(texturePackName, "environment/stars.png");
 	SnowBall3 = TextureUtil::LoadPngTexturePack(texturePackName, "entity/snowball.png");
 	
