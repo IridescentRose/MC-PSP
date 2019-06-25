@@ -1,5 +1,5 @@
 #include <Aurealis/Graphics/Effects/StarsBox.h>
-
+#include <Aurealis/Graphics/RenderManager.h>
 #define PI 3.1415926535897f
 #define DEG_TO_RAD (PI / 180.0f)
 
@@ -16,7 +16,7 @@ namespace Aurealis
 			boxVertices5 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
 			boxVertices6 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
 
-			size = 0.95f;
+			size = 3.6f;
 
 			Build();
 		}
@@ -231,7 +231,7 @@ namespace Aurealis
 
 		}
 
-		void StarsBox::Render(float alpha)
+		void StarsBox::Render(float alpha, float angle)
 		{
 		    if(alpha > 1.0f)
             {
@@ -244,12 +244,14 @@ namespace Aurealis
 			sceGumPushMatrix();
 		    sceGuColor(GU_COLOR(alpha,alpha,alpha,alpha));
 			sceGuEnable(GU_TEXTURE_2D);
-			sceGuTexScale(0.85f,0.85f);
+			sceGuTexScale(3.0f, 3.0f);
             sceGuEnable(GU_BLEND);
 			sceGuDisable(GU_DEPTH_TEST);
 			sceGuDepthMask(GU_TRUE);
             sceGuBlendFunc(GU_ADD, GU_FIX,GU_FIX, 0xFFFFFFFF, 0xFFFFFFFF);
             sceGuEnable(GU_ALPHA_TEST);
+			sceGumRotateX(40.0f / 180.0f * 3.14159f);
+			sceGumRotateZ(((angle*2 - 45 * 0.9f) / 180) * PI);
 
 			sceGumDrawArray(GU_TRIANGLE_FAN, GU_TEXTURE_32BITF|GU_VERTEX_32BITF|GU_TRANSFORM_3D, 4, 0, boxVertices);
 			sceGumDrawArray(GU_TRIANGLE_FAN, GU_TEXTURE_32BITF|GU_VERTEX_32BITF|GU_TRANSFORM_3D, 4, 0, boxVertices2);

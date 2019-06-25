@@ -20,13 +20,13 @@ public:
 
 	unsigned short* data; //32 bit pixel data in (likely) 8888 RGBA
 
-	inline void bindTexture(int minFilter = GU_NEAREST, int maxFilter = GU_NEAREST, bool modulate = false) {
+	inline void bindTexture(int minFilter = GU_NEAREST, int maxFilter = GU_NEAREST, bool modulate = false, int repeat = GU_CLAMP) {
 		if (modulate) {
 			sceGuTexMode(colorMode, 0, 0, swizzled);
 			sceGuTexFunc(GU_TFX_MODULATE, GU_TCC_RGBA);
 			sceGuTexFilter(minFilter, maxFilter);
 			sceGuTexOffset(0.0f, 0.0f);
-			sceGuTexWrap(GU_CLAMP, GU_CLAMP);
+			sceGuTexWrap(repeat, repeat);
 			sceGuTexImage(0, pWidth, pHeight, pWidth, data);
 		}
 		else {
@@ -34,7 +34,7 @@ public:
 			sceGuTexFunc(GU_TFX_REPLACE, GU_TCC_RGBA);
 			sceGuTexFilter(minFilter, maxFilter);
 			sceGuTexOffset(0.0f, 0.0f);
-			sceGuTexWrap(GU_REPEAT, GU_REPEAT);
+			sceGuTexWrap(repeat, repeat);
 			sceGuTexImage(0, pWidth, pHeight, pWidth, data);
 		}
 	}
