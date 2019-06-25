@@ -21,13 +21,13 @@ namespace Aurealis
 			SkyLight();
 			~SkyLight();
 
-			void UpdateLightSource(float sun_angle, int day = -1, bool moon = false);
+			void UpdateLightSource(float sun_angle);
 			void Render();
 
 		private:
 
 			TexturedVertex *skyVertices;
-			bool isMoon;
+
 			float sun_angle;
 		};
 	}

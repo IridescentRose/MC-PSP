@@ -382,7 +382,7 @@ void StatePlayCreative::LoadMap(std::string fileName,bool compressed)
     g_SoundManager.playerSounds = mWorld->mainOptions.sounds;
     mWorld->playerZoneSize = Vector3(CHUNK_SIZE*mWorld->mainOptions.horizontalViewDistance,CHUNK_SIZE*mWorld->mainOptions.verticalViewDistance,CHUNK_SIZE*mWorld->mainOptions.horizontalViewDistance);
     g_RenderManager.fovv = mWorld->mainOptions.fov;
-    g_RenderManager.SetPerspective(0, 480.0f / 272.0f, 0.18f, 5000.f);
+    g_RenderManager.SetPerspective(0, 480.0f / 272.0f, 0.18f, 1000.f);
 
     InitCreativeInventory();
 
@@ -694,7 +694,7 @@ void StatePlayCreative::SetDayTimeAfterLoad()
 
 void StatePlayCreative::Enter()
 {
-    g_RenderManager.SetPerspective(55.0f, 480.0f / 272.0f, 0.18f, 5000.0f);
+    g_RenderManager.SetPerspective(55.0f, 480.0f / 272.0f, 0.18f, 1000.0f);
 }
 
 void StatePlayCreative::CleanUp()
@@ -7725,9 +7725,9 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                         mWorld->mainOptions.fov += 5;
                         g_SoundManager.PlayMenuSound();
                         g_RenderManager.fovv = mWorld->mainOptions.fov;
-                        g_RenderManager.SetPerspective(0, 480.0f / 272.0f, 0.18f, 5000.f);
+                        g_RenderManager.SetPerspective(0, 480.0f / 272.0f, 0.18f, 1000.f);
                         skyLight->UpdateLightSource(mWorld->skyTime);
-						skyMoonLight->UpdateLightSource(mWorld->skyTime, mWorld->mainStatistics.daysInGame, true);
+                        skyMoonLight->UpdateLightSource(mWorld->skyTime);
                     }
                 }
                 if(optionsMenuPos == 1)
@@ -7773,9 +7773,9 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                         mWorld->mainOptions.fov -= 5;
                         g_SoundManager.PlayMenuSound();
                         g_RenderManager.fovv = mWorld->mainOptions.fov;
-                        g_RenderManager.SetPerspective(0, 480.0f / 272.0f, 0.18f, 5000.f);
+                        g_RenderManager.SetPerspective(0, 480.0f / 272.0f, 0.18f, 1000.f);
                         skyLight->UpdateLightSource(mWorld->skyTime);
-                        skyMoonLight->UpdateLightSource(mWorld->skyTime, mWorld->mainStatistics.daysInGame, true);
+                        skyMoonLight->UpdateLightSource(mWorld->skyTime);
                     }
                 }
                 if(optionsMenuPos == 1)
@@ -8791,11 +8791,11 @@ void StatePlayCreative::Draw(StateManager* sManager)
         sceGuDisable(GU_FOG);
 
         /// StarsBox rendering
-        if(mWorld->rainyColorAlpha != 1.0f)
+        /*if(mWorld->rainyColorAlpha != 1.0f)
         {
             if(mWorld->worldDayTime < 10 || mWorld->worldDayTime >= 21)
             {
-				stars->bindTexture(0, 0, true);
+                TextureManager::Instance()->SetTextureModeulate(stars);
 
                 MatrixPush();
                 MatrixTranslation(Vector3(fppCam->m_vPosition.x,fppCam->m_vPosition.y+fppCam->m_vOffset.y,fppCam->m_vPosition.z));
@@ -8829,7 +8829,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
                 MatrixPop();
             }
-        }
+        }*/
 
 
         /// Sun/moon rendering
@@ -8852,7 +8852,7 @@ void StatePlayCreative::Draw(StateManager* sManager)
 
             (moontex)->bindTexture(0, 0, true);
 
-            skyMoonLight->UpdateLightSource(mWorld->skyTime+180.0f, mWorld->mainStatistics.daysInGame, true);
+            skyMoonLight->UpdateLightSource(mWorld->skyTime+180.0f);
             skyMoonLight->Render();
             MatrixPop();
         }
