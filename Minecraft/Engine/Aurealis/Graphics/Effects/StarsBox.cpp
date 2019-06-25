@@ -241,7 +241,7 @@ namespace Aurealis
             {
                 alpha = 0.0f;
             }
-			sceGumPushMatrix();
+
 		    sceGuColor(GU_COLOR(alpha,alpha,alpha,alpha));
 			sceGuEnable(GU_TEXTURE_2D);
 			sceGuTexScale(0.85f,0.85f);
@@ -267,7 +267,6 @@ namespace Aurealis
 			sceGuTexScale(1.0f,1.0f);
 			sceGuDisable(GU_TEXTURE_2D);
 			sceGuColor(GU_COLOR(1.0,1.0,1.0,1.0));
-			sceGumPopMatrix();
 		}
 	}
 }
