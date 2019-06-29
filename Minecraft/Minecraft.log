@@ -1,73 +1,29 @@
 ﻿  make -f MakefileGame all
   make[1]: Entering directory `C:/Users/Nathan/Desktop/Minecraft2-PSP/Minecraft'
-  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurealis/Graphics/Effects/WeatherSystem.o Engine/Aurealis/Graphics/Effects/WeatherSystem.cpp
-  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/mersenne-twister.o LameCraft/mersenne-twister.cpp
-  LameCraft/mersenne-twister.cpp: In function 'void mt::generate_numbers()':
-  LameCraft/mersenne-twister.cpp:108: warning: array subscript is above array bounds
-  LameCraft/mersenne-twister.cpp: In function 'uint32_t mt::rand_u32()':
-  LameCraft/mersenne-twister.cpp:108: warning: array subscript is above array bounds
-  LameCraft/mersenne-twister.cpp: In function 'int mt::rand()':
-  LameCraft/mersenne-twister.cpp:108: warning: array subscript is above array bounds
-  LameCraft/mersenne-twister.cpp: In function 'float mt::randf_cc()':
-  LameCraft/mersenne-twister.cpp:108: warning: array subscript is above array bounds
-  LameCraft/mersenne-twister.cpp: In function 'float mt::randf_oo()':
-  LameCraft/mersenne-twister.cpp:108: warning: array subscript is above array bounds
-  LameCraft/mersenne-twister.cpp: In function 'float mt::randf_co()':
-  LameCraft/mersenne-twister.cpp:108: warning: array subscript is above array bounds
-  LameCraft/mersenne-twister.cpp: In function 'uint64_t mt::rand_u64()':
-  LameCraft/mersenne-twister.cpp:108: warning: array subscript is above array bounds
-  LameCraft/mersenne-twister.cpp:108: warning: array subscript is above array bounds
-  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/SimplexNoise.o LameCraft/SimplexNoise.cpp
-  LameCraft/SimplexNoise.cpp: In member function 'float SimplexNoise::sdnoise2(float, float, float*, float*)':
-  LameCraft/SimplexNoise.cpp:243: warning: unused variable 'aa'
-  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/WorldGenerator.o LameCraft/WorldGenerator.cpp
-LameCraft/WorldGenerator.cpp(837,18): warning G10BCEF52: "/*" within comment
-LameCraft/WorldGenerator.cpp(942,18): warning G10BCEF52: "/*" within comment
-LameCraft/WorldGenerator.cpp(987,20): warning G10BCEF52: "/*" within comment
-LameCraft/WorldGenerator.cpp(999,18): warning G10BCEF52: "/*" within comment
-  In file included from ./3libs/noisepp/Noise.h:40,
-                   from LameCraft/WorldGenerator.h:8,
-                   from LameCraft/WorldGenerator.cpp:1:
-  ./3libs/noisepp/NoiseCheckerboard.h: In member function 'virtual noisepp::Real noisepp::CheckerboardElement2D::getValue(noisepp::Real, noisepp::Real, noisepp::Cache*) const':
-  ./3libs/noisepp/NoiseCheckerboard.h:51: warning: suggest parentheses around arithmetic in operand of ^
-  ./3libs/noisepp/NoiseCheckerboard.h: In member function 'virtual noisepp::Real noisepp::CheckerboardElement3D::getValue(noisepp::Real, noisepp::Real, noisepp::Real, noisepp::Cache*) const':
-  ./3libs/noisepp/NoiseCheckerboard.h:63: warning: suggest parentheses around arithmetic in operand of ^
-  ./3libs/noisepp/NoiseCheckerboard.h:63: warning: suggest parentheses around arithmetic in operand of ^
-  LameCraft/WorldGenerator.cpp: In member function 'void WorldGenerator::initRandompMap(int, int, int, CraftWorld*, bool, bool, bool, unsigned int, int)':
-  LameCraft/WorldGenerator.cpp:41: warning: unused variable 'octave_count'
-  LameCraft/WorldGenerator.cpp:43: warning: unused variable 'middleHeight'
-  LameCraft/WorldGenerator.cpp:45: warning: unused variable 'persistence'
-  LameCraft/WorldGenerator.cpp:46: warning: unused variable 'frequency'
-  LameCraft/WorldGenerator.cpp:47: warning: unused variable 'scale'
-  LameCraft/WorldGenerator.cpp:48: warning: unused variable 'lacunarity'
-  LameCraft/WorldGenerator.cpp:23: warning: unused variable 'CHUNK_SIZE'
-  LameCraft/WorldGenerator.cpp:24: warning: unused variable 'WORLD_HEIGHT'
-  LameCraft/WorldGenerator.cpp: In member function 'void WorldGenerator::initBiome(int, CraftWorld*, noisepp::PerlinModule*, int)':
-  LameCraft/WorldGenerator.cpp:1573: warning: comparison between signed and unsigned integer expressions
-  LameCraft/WorldGenerator.cpp:1624: warning: comparison between signed and unsigned integer expressions
-  LameCraft/WorldGenerator.cpp: In member function 'void WorldGenerator::initTrees(int, CraftWorld*, noisepp::PerlinModule*, int)':
-  LameCraft/WorldGenerator.cpp:2356: warning: unused variable 'woodBlock'
-  LameCraft/WorldGenerator.cpp:2357: warning: unused variable 'leavesBlock'
-  LameCraft/WorldGenerator.cpp:2358: warning: unused variable 'snowTree'
-  LameCraft/WorldGenerator.cpp: In member function 'void WorldGenerator::initRandompMap(int, int, int, CraftWorld*, bool, bool, bool, unsigned int, int)':
-  LameCraft/WorldGenerator.cpp:36: warning: 'grass_' may be used uninitialized in this function
-  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o Engine/Aurealis/Audio/sound_utils/vfsFile.o Engine/Aurealis/Audio/sound_utils/vfsFile.c
-  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o Engine/Aurealis/Audio/sound_utils/VirtualFile.o Engine/Aurealis/Audio/sound_utils/VirtualFile.c
-  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o Engine/Aurealis/Audio/sound_utils/audio.o Engine/Aurealis/Audio/sound_utils/audio.c
-  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o Engine/Aurealis/Audio/sound_utils/bgm.o Engine/Aurealis/Audio/sound_utils/bgm.c
-  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o Engine/Aurealis/Audio/sound_utils/media.o Engine/Aurealis/Audio/sound_utils/media.c
-  psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371   -c -o Engine/Aurealis/Audio/sound_utils/mod.o Engine/Aurealis/Audio/sound_utils/mod.c
-  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurealis/Graphics/TextureAtlas.o Engine/Aurealis/Graphics/TextureAtlas.cpp
-  Engine/Aurealis/Graphics/TextureAtlas.cpp: In member function 'TextureCoords TextureAtlas::getTexture(int)':
-  Engine/Aurealis/Graphics/TextureAtlas.cpp:15: warning: unused variable 'PIXEL_SIZE'
-  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Engine/Aurealis/Graphics/TextureUtil.o Engine/Aurealis/Graphics/TextureUtil.cpp
-  Engine/Aurealis/Graphics/TextureUtil.cpp: In static member function 'static Texture* TextureUtil::LoadPngTexturePack(std::string, std::string)':
-  Engine/Aurealis/Graphics/TextureUtil.cpp:37: warning: control reaches end of non-void function
-  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o Lamecraft.o Lamecraft.cpp
+  psp-g++ -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -fno-exceptions -fno-rtti -D_PSP_FW_VERSION=371   -c -o LameCraft/StateMenu.o LameCraft/StateMenu.cpp
+LameCraft/StateMenu.cpp(1127,39): warning GD807C594: multi-character character constant
+LameCraft/StateMenu.cpp(1382,35): warning GD807C594: multi-character character constant
+LameCraft/StateMenu.cpp(1431,39): warning GD807C594: multi-character character constant
+  LameCraft/StateMenu.cpp: In member function 'virtual void StateMenu::HandleEvents(Aurealis::Utils::StateManager*)':
+  LameCraft/StateMenu.cpp:684: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:1127: warning: overflow in implicit constant conversion
+  LameCraft/StateMenu.cpp:1307: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:1382: warning: overflow in implicit constant conversion
+  LameCraft/StateMenu.cpp:1431: warning: overflow in implicit constant conversion
+  LameCraft/StateMenu.cpp:1659: warning: value computed is not used
+  LameCraft/StateMenu.cpp:1008: warning: unused variable 'buffer'
+  LameCraft/StateMenu.cpp:1941: warning: array subscript has type 'char'
+  LameCraft/StateMenu.cpp:1941: warning: array subscript has type 'char'
+  LameCraft/StateMenu.cpp:2040: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp: In member function 'virtual void StateMenu::Draw(Aurealis::Utils::StateManager*)':
+  LameCraft/StateMenu.cpp:2906: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp: In member function 'void StateMenu::ScanTexturePacks(const char*)':
+  LameCraft/StateMenu.cpp:3107: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:3157: warning: comparison between signed and unsigned integer expressions
+  LameCraft/StateMenu.cpp:3119: warning: unused variable 'unknown_pack'
   psp-gcc -I/include -I./include -I./Engine -I./3libs -I. -Ic:/pspsdk/psp/sdk/include -O3 -G0 -Wall -mpreferred-stack-boundary=4  -D_PSP_FW_VERSION=371  -L./3libs/noisepp -L./3libs/libpspmath -L. -Lc:/pspsdk/psp/sdk/lib -specs=c:/pspsdk/psp/sdk/lib/prxspecs -Wl,-q,-Tc:/pspsdk/psp/sdk/lib/linkfile.prx   Engine/Aurealis/Math/MathLib.o Engine/Aurealis/Math/Matrix3.o Engine/Aurealis/Math/Matrix4.o Engine/Aurealis/Math/Quaternion.o Engine/Aurealis/Math/BoundingBox.o Engine/Aurealis/Math/BoundingSphere.o Engine/Aurealis/Math/Plane.o Engine/Aurealis/Math/Ray.o Engine/Aurealis/Math/Frustum.o Engine/Aurealis/Math/Polygon.o Engine/Aurealis/Graphics/common.o Engine/Aurealis/Graphics/vfram.o Engine/Aurealis/Graphics/vram.o Engine/Aurealis/Graphics/RenderManager.o Engine/Aurealis/Graphics/Camera.o Engine/Aurealis/Graphics/Sprite.o Engine/Aurealis/Graphics/intraFont/libccc.o Engine/Aurealis/Graphics/intraFont/intraFont.o Engine/Aurealis/Utils/Logger.o Engine/Aurealis/Utils/Timer.o Engine/Aurealis/Utils/StateManager.o Engine/Aurealis/Utils/pgeZip.o Engine/Aurealis/Utils/pge.o Engine/Aurealis/Utils/pgeDir.o Engine/Aurealis/System/SystemManager.o LameCraft/BaseBlock.o LameCraft/Blocks.o LameCraft/BaseItem.o LameCraft/Items.o LameCraft/SimpleMeshChunk2.o LameCraft/ChunkDataProvider.o LameCraft/BlockEntity.o LameCraft/NoteBlockEntity.o LameCraft/JukeboxEntity.o LameCraft/MonsterSpawnerEntity.o LameCraft/ItemFrameEntity.o LameCraft/Chest2.o LameCraft/DirectionBlock.o LameCraft/Furnace2.o LameCraft/CraftWorld2.o LameCraft/LameMob.o LameCraft/Zombie2.o LameCraft/Cow2.o LameCraft/Creeper2.o LameCraft/Sheep2.o LameCraft/StateMenu.o LameCraft/StateOptions.o LameCraft/StatePlayCreative.o LameCraft/StatePlay.o LameCraft/LoadingScreen.o LameCraft/SplashScreen.o LameCraft/InputHelper.o LameCraft/SharedTextureData.o Engine/Aurealis/Audio/sound_utils/pgeWav.o Engine/Aurealis/Audio/SoundManager.o Engine/Aurealis/Graphics/Effects/Drop.o Engine/Aurealis/Graphics/Effects/TNT.o Engine/Aurealis/Graphics/Effects/InventoryPlayer.o Engine/Aurealis/Graphics/Effects/SnowBall2.o Engine/Aurealis/Graphics/Effects/SkyLight.o Engine/Aurealis/Graphics/Effects/SkyBox.o Engine/Aurealis/Graphics/Effects/Destroyer.o Engine/Aurealis/Graphics/Effects/StarsBox.o Engine/Aurealis/Graphics/Effects/Particle.o Engine/Aurealis/Graphics/Effects/WeatherSystem.o LameCraft/mersenne-twister.o LameCraft/SimplexNoise.o LameCraft/WorldGenerator.o Engine/Aurealis/Audio/sound_utils/vfsFile.o Engine/Aurealis/Audio/sound_utils/VirtualFile.o Engine/Aurealis/Audio/sound_utils/audio.o Engine/Aurealis/Audio/sound_utils/bgm.o Engine/Aurealis/Audio/sound_utils/media.o Engine/Aurealis/Audio/sound_utils/mod.o Engine/Aurealis/Graphics/TextureAtlas.o Engine/Aurealis/Graphics/TextureUtil.o Lamecraft.o c:/pspsdk/psp/sdk/lib/prxexports.o -lNoisepp -lpspaudiolib -lpspaudio -lmikmod -lmmio -lpspaudiocodec -lpng -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath  -lpspdebug -lpspdisplay -lpspge -lpspctrl -lpspsdk -lc -lpspnet -lpspnet_inet -lpspnet_apctl -lpspnet_resolver -lpsputility -lpspuser -lpspkernel -o Minecraft2.elf
   psp-fixup-imports Minecraft2.elf
   psp-prxgen Minecraft2.elf Minecraft2.prx
-  mksfoex -d MEMSIZE=1 'MineCraft PSP 2' PARAM.SFO
   pack-pbp EBOOT.PBP PARAM.SFO ICON0.png  \
   	NULL NULL PIC1.png  \
   	NULL  Minecraft2.prx NULL
@@ -77,7 +33,7 @@ LameCraft/WorldGenerator.cpp(999,18): warning G10BCEF52: "/*" within comment
   [3]          0 bytes | NULL
   [4]     256507 bytes | PIC1.png
   [5]          0 bytes | NULL
-  [6]    3529018 bytes | Minecraft2.prx
+  [6]    3529058 bytes | Minecraft2.prx
   [7]          0 bytes | NULL
   make[1]: Leaving directory `C:/Users/Nathan/Desktop/Minecraft2-PSP/Minecraft'
           1 file(s) moved.

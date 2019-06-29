@@ -68,7 +68,7 @@ void StateMenu::Init()
     newW_width = 0;
     newW_height = 0;
     newW_length = 0;
-
+	g_TextureData.texturePackName = "Default";
     newW_gameMode = SURVIVAL;
     newW_deleteCaves = true;
     conversionStage = 0;
