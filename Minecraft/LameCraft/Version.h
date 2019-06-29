@@ -11,7 +11,7 @@
 
 #define IS_SNAPSHOT true
 
-#define SNAPSHOT_NAME "19w25a"
+#define SNAPSHOT_NAME "19w26a"
 
 #define SNAPSHOT_YEAR	19
 #define SNAPSHOT_WEEK	25
