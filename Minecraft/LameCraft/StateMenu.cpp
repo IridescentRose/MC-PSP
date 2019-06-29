@@ -225,7 +225,7 @@ void StateMenu::Init()
     //load save info
     ScanSaveFiles("Save/");
     ScanTexturePacks("Assets/Textures/");
-
+	g_TextureData.texturePackName = (texturePackList[0].name);
     menuState = 0;
     loadSelectPos = 0;
     loadSavePos = 0;
@@ -277,6 +277,143 @@ void StateMenu::Init()
 	{
 	    worldName[i] = ' ';
 	}
+
+	//CODE EQUIVALENT OF THE ACTIONS TO FIX SOFTWARE
+	//textures
+	tpCurrent = 0;
+	tpMax = 0;
+	tpEnd = 0;
+	tpStart = 0;
+	tpPos = 0;
+	tpSelectPos = 0;
+
+	menuState = 11;
+	tpSelectPos = 0;
+	tpEnd = texturePackList.size();
+	tpMax = 3;
+	ScanTexturePacks("Assets/Textures/");
+
+	//RIGHT
+	tpPos++;
+	if (tpPos == tpMax)
+	{
+		tpStart++;
+		tpMax++;
+		if (tpMax > tpEnd)
+		{
+			tpStart = tpEnd - 3;
+			if (tpStart < 0)
+			{
+				tpStart = 0;
+			}
+			tpMax = tpEnd;
+		}
+	}
+	if (tpPos >= texturePackList.size())
+	{
+		tpPos = 0;
+		tpStart = 0;
+		tpMax = 3;
+		if (tpMax > tpEnd)
+			tpMax = tpEnd;
+	}
+
+	//SELECT
+
+	if (tpSelectPos == 0)//play state
+	{
+		if (texturePackList.empty() == false)
+		{
+			g_TextureData.texturePackName = (texturePackList[tpPos].name);
+			tpCurrent = tpPos;
+		}
+	}
+	if (tpSelectPos == 1)//delete save
+	{
+		menuState = 0;
+	}
+
+	//LEFT
+	if (tpPos < tpStart)
+	{
+		tpStart--;
+		tpMax--;
+
+		if (tpMax < 3)
+		{
+			tpStart = 0;
+			tpMax = 3;
+		}
+	}
+
+	if (tpPos < 0)
+	{
+		tpPos = texturePackList.size() - 1;
+		tpMax = tpEnd;
+		tpStart = tpEnd - 3;
+		if (tpStart < 0)
+			tpStart = 0;
+	}
+
+	//SELECT
+			
+	if (tpSelectPos == 0)//play state
+	{
+		if (texturePackList.empty() == false)
+		{
+			g_TextureData.texturePackName = (texturePackList[tpPos].name);
+			tpCurrent = tpPos;
+		}
+	}
+	if (tpSelectPos == 1)//delete save
+	{
+		menuState = 0;
+	}
+
+	//RIGHT
+	tpPos++;
+	if (tpPos == tpMax)
+	{
+		tpStart++;
+		tpMax++;
+		if (tpMax > tpEnd)
+		{
+			tpStart = tpEnd - 3;
+			if (tpStart < 0)
+			{
+				tpStart = 0;
+			}
+			tpMax = tpEnd;
+		}
+	}
+	if (tpPos >= texturePackList.size())
+	{
+		tpPos = 0;
+		tpStart = 0;
+		tpMax = 3;
+		if (tpMax > tpEnd)
+			tpMax = tpEnd;
+	}
+
+	//SELECT
+
+	if (tpSelectPos == 0)//play state
+	{
+		if (texturePackList.empty() == false)
+		{
+			g_TextureData.texturePackName = (texturePackList[tpPos].name);
+			tpCurrent = tpPos;
+		}
+	}
+	if (tpSelectPos == 1)//delete save
+	{
+		menuState = 0;
+	}
+
+
+
+	menuState = 0;
+
 }
 
 void StateMenu::Enter()
