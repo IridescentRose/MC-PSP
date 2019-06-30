@@ -3,8 +3,8 @@
 #include <Aurealis/Math/Vector3.h>
 #include <Aurealis/Graphics/Vertex.h>
 #include <pspmath.h>
-#include <Lamecraft/SharedTextureData.h>
-#include <Lamecraft/CraftWorld2.h>
+#include <Lamecraft/World/Data/SharedTextureData.h>
+#include <Lamecraft/World/CraftWorld2.h>
 
 namespace Aurealis
 {

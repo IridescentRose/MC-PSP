@@ -1,5 +1,5 @@
 #include <Aurealis/Graphics/Effects/WeatherSystem.h>
-#include <LameCraft/CraftWorld2.h>
+#include <LameCraft/World/CraftWorld2.h>
 
 #define PI 3.1415926535897f
 #define DEG_TO_RAD (PI / 180.0f)

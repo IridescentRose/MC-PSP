@@ -3,7 +3,7 @@
 #include <Aurealis/Math/Vector3.h>
 #include <Aurealis/Graphics/Vertex.h>
 #include <pspmath.h>
-#include <LameCraft/CraftWorld2.h>
+#include <LameCraft/World/CraftWorld2.h>
 #include <math.h>
 #include <psptypes.h>
 #include <string>

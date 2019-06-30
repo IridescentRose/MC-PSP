@@ -4,7 +4,7 @@
 #include <Aurealis/Graphics/RenderManager.h>
 #include <pspmath.h>
 #include <Aurealis/Math/Frustum.h>
-#include <LameCraft/CraftWorld2.h>
+#include <LameCraft/World/CraftWorld2.h>
 #include <Aurealis/Math/BoundingBox.h>
 
 class CraftWorld;

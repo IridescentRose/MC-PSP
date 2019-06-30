@@ -4,11 +4,11 @@
 #include <Aurealis/Graphics/RenderManager.h>
 #include <pspmath.h>
 #include <Aurealis/Math/Frustum.h>
-#include <LameCraft/CraftWorld2.h>
-#include <LameCraft/LameFunctions.h>
+#include <LameCraft/World/CraftWorld2.h>
+#include <Aurealis/Utils/LameFunctions.h>
 #include <Aurealis/Math/BoundingBox.h>
 #include <Aurealis/Graphics/TextureUtil.h>
-#include <LameCraft/SharedTextureData.h>
+#include <LameCraft/World/Data/SharedTextureData.h>
 
 class CraftWorld;
 

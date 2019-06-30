@@ -18,99 +18,6 @@
     <ClCompile Include="Lamecraft.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LameCraft\BaseBlock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\BaseEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\BaseItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\BlockEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\Blocks.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\Chest2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\ChunkDataProvider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\Cow2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\CraftWorld2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\Creeper2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\DirectionBlock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\Furnace2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\InputHelper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\ItemFrameEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\Items.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\JukeboxEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\LameMob.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\LoadingScreen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\mersenne-twister.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\MonsterSpawnerEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\NoteBlockEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\Sheep2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\SimpleMeshChunk2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\SimplexNoise.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\SplashScreen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\StateMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\StateOptions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\StatePlay.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\StatePlayCreative.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\WorldGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\Zombie2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="3libs\libpspmath\printMatrixFloat.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -480,107 +387,104 @@
     <ClCompile Include="Engine\Aurealis\Graphics\TextureAtlas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LameCraft\SharedTextureData.cpp">
+    <ClCompile Include="LameCraft\Menu\StateOptions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\Menu\StateMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\Menu\SplashScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\Menu\LoadingScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Chunk\ChunkDataProvider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Chunk\SimpleMeshChunk2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Data\blocks\BaseBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Data\blocks\Blocks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Data\blocks\Chest2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Data\blocks\DirectionBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Data\blocks\Furnace2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Data\entity\BaseEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Data\entity\BlockEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Data\entity\ItemFrameEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Data\entity\JukeboxEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Data\entity\MonsterSpawnerEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Data\entity\NoteBlockEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Data\items\BaseItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Data\items\Items.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Data\SharedTextureData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Mob\Cow2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Mob\Creeper2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Mob\LameMob.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Mob\Sheep2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Mob\Zombie2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Terrain\mersenne-twister.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Terrain\SimplexNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\Terrain\WorldGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\CraftWorld2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\StatePlay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\World\StatePlayCreative.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Aurealis\Utils\InputHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LameCraft\BaseBlock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\BaseEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\BaseItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\BlockEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\Blocks.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\Chest2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\ChunkDataProvider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\Cow2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\CraftWorld2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\Creeper2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\DirectionBlock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\Furnace2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\InputHelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\ItemFrameEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\Items.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\JukeboxEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\LameFunctions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\LameMob.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\LoadingScreen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\mersenne-twister.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\MonsterSpawnerEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\NoteBlockEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\Sheep2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\SimpleMeshChunk2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\SimplexNoise.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\SplashScreen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\StateMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\StateOptions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\StatePlay.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\StatePlayCreative.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\WorldGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\Zombie2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="3libs\libpspmath\pspmath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -788,9 +692,6 @@
     <ClInclude Include="3libs\pge\pgeZip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LameCraft\Version.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Aurealis\Graphics\Effects\Destroyer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -944,7 +845,106 @@
     <ClInclude Include="Engine\Aurealis\Graphics\TextureAtlas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LameCraft\SharedTextureData.h">
+    <ClInclude Include="LameCraft\Menu\StateOptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Menu\StateMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Menu\SplashScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Menu\LoadingScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Menu\Version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Chunk\ChunkDataProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Chunk\SimpleMeshChunk2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Data\blocks\BaseBlock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Data\blocks\Blocks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Data\blocks\Chest2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Data\blocks\DirectionBlock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Data\blocks\Furnace2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Data\entity\BaseEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Data\entity\BlockEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Data\entity\ItemFrameEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Data\entity\JukeboxEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Data\entity\MonsterSpawnerEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Data\entity\NoteBlockEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Data\items\BaseItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Data\items\Items.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Data\SharedTextureData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Mob\Cow2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Mob\Creeper2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Mob\LameMob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Mob\Sheep2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Mob\Zombie2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Terrain\mersenne-twister.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Terrain\SimplexNoise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\Terrain\WorldGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\CraftWorld2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\StatePlay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\World\StatePlayCreative.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurealis\Utils\LameFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Aurealis\Utils\InputHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

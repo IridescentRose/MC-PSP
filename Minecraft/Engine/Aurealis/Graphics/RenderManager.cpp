@@ -365,7 +365,7 @@ namespace Aurealis
 			sceDisplayWaitVblankStart();
 			sceGuSwapBuffers();
 		}
-
+		
 		void RenderManager::UseVerticalSync(bool Enabled)
 		{
 			mVerticalSync = Enabled;
