@@ -69,19 +69,10 @@
     <ClCompile Include="LameCraft\LameMob.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LameCraft\LamePlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LameCraft\LoadingScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LameCraft\mersenne-twister.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\MineCart.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LameCraft\Mobs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LameCraft\MonsterSpawnerEntity.cpp">
@@ -548,19 +539,10 @@
     <ClInclude Include="LameCraft\LameMob.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LameCraft\LamePlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LameCraft\LoadingScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LameCraft\mersenne-twister.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\MineCart.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LameCraft\Mobs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LameCraft\MonsterSpawnerEntity.h">

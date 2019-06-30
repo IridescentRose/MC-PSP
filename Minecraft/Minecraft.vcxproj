@@ -175,11 +175,8 @@
     <ClCompile Include="LameCraft\Items.cpp" />
     <ClCompile Include="LameCraft\JukeboxEntity.cpp" />
     <ClCompile Include="LameCraft\LameMob.cpp" />
-    <ClCompile Include="LameCraft\LamePlayer.cpp" />
     <ClCompile Include="LameCraft\LoadingScreen.cpp" />
     <ClCompile Include="LameCraft\mersenne-twister.cpp" />
-    <ClCompile Include="LameCraft\MineCart.cpp" />
-    <ClCompile Include="LameCraft\Mobs.cpp" />
     <ClCompile Include="LameCraft\MonsterSpawnerEntity.cpp" />
     <ClCompile Include="LameCraft\NoteBlockEntity.cpp" />
     <ClCompile Include="LameCraft\SharedTextureData.cpp" />
@@ -334,11 +331,8 @@
     <ClInclude Include="LameCraft\JukeboxEntity.h" />
     <ClInclude Include="LameCraft\LameFunctions.h" />
     <ClInclude Include="LameCraft\LameMob.h" />
-    <ClInclude Include="LameCraft\LamePlayer.h" />
     <ClInclude Include="LameCraft\LoadingScreen.h" />
     <ClInclude Include="LameCraft\mersenne-twister.h" />
-    <ClInclude Include="LameCraft\MineCart.h" />
-    <ClInclude Include="LameCraft\Mobs.h" />
     <ClInclude Include="LameCraft\MonsterSpawnerEntity.h" />
     <ClInclude Include="LameCraft\NoteBlockEntity.h" />
     <ClInclude Include="LameCraft\SharedTextureData.h" />

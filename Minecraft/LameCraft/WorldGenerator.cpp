@@ -14,7 +14,7 @@ using namespace noisepp;
 void WorldGenerator::initRandompMap(int worldSize, int worldHeight, int chunkSize, CraftWorld *world, bool makeTrees,bool makeWater,bool makeCaves, unsigned int seedII, int worldType)
 {
     LoadingScreen* loading = new LoadingScreen();
-
+	
     loading->readiness = 1;
     loading->stateName = 1;
 
@@ -38,7 +38,6 @@ void WorldGenerator::initRandompMap(int worldSize, int worldHeight, int chunkSiz
 
     if(worldType == DEFAULT)
     {
-        int octave_count = 6;
         int waterLevel = 62;
         int middleHeight = 68;
 

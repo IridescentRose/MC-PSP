@@ -25,7 +25,6 @@ PSP_HEAP_SIZE_KB(-1024);
 int main()
 {
 	SetupCallbacks();
-
 	scePowerSetClockFrequency(333, 333, 166);
 
 	//initialize render manager
@@ -67,7 +66,7 @@ int main()
 	statePlay->Init();
 	stateManager.ChangeState(statePlay);
 
-	//trun
+	//true
 	while ( stateManager.Running() )
 	{
 		stateManager.HandleEvents();
