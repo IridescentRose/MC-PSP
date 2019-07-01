@@ -222,7 +222,6 @@ void StatePlayCreative::InitCamera()
 void StatePlayCreative::Init()
 {
     //set render manager instance
-    mIhelper = InputHelper::Instance();
 	g_TextureData.Init();
     WorldGenerator *mGen = new WorldGenerator();
 
@@ -265,7 +264,6 @@ void StatePlayCreative::Init()
 void StatePlayCreative::InitParametric(bool makeTrees, bool makeWater,bool makeCaves,unsigned int seed_1,int worldType, char gameMode)
 {
     //set render manager instance
-    mIhelper = InputHelper::Instance();
 	g_TextureData.Init();
     //then create our perfect world
     mWorld = new CraftWorld();
@@ -327,7 +325,6 @@ void StatePlayCreative::LoadMap(std::string fileName,bool compressed)
     loading->stateName = 0;
 
     //set render manager instance
-    mIhelper = InputHelper::Instance();
 	
     //save name
     saveFileName = fileName;
@@ -3555,7 +3552,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
         {
             //camera rotating
             //camera rotate up
-            if(keyHold(InputHelper::Instance()->getButtonToAction(4)))
+            if(keyHold(g_InputHelper.getButtonToAction(4)))
             {
                 if (startDt == true)
                 {
@@ -3579,7 +3576,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
             }
 
             //camera rotate down
-            if(keyHold(InputHelper::Instance()->getButtonToAction(5)))
+            if(keyHold(g_InputHelper.getButtonToAction(5)))
             {
                 if (startDt == true)
                 {
@@ -3603,7 +3600,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
             }
 
             //camera rotate right
-            if(keyHold(InputHelper::Instance()->getButtonToAction(7)))
+            if(keyHold(g_InputHelper.getButtonToAction(7)))
             {
                 if (startDt == true)
                 {
@@ -3626,7 +3623,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
             }
 
             //camera rotate left
-            if(keyHold(InputHelper::Instance()->getButtonToAction(6)))
+            if(keyHold(g_InputHelper.getButtonToAction(6)))
             {
                 if (startDt == true)
                 {
@@ -3656,7 +3653,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
             if(sleepTime == 0.0f)
             {
                 //move forward
-                if(keyHold(InputHelper::Instance()->getButtonToAction(0)))
+                if(keyHold(g_InputHelper.getButtonToAction(0)))
                 {
                     float slowdown = 0.8f;
                     float slowdown2 = 1.0f;
@@ -3679,7 +3676,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                     }
 
                     //move right at the same time
-                    if(keyHold(InputHelper::Instance()->getButtonToAction(3)))
+                    if(keyHold(g_InputHelper.getButtonToAction(3)))
                     {
                         diagonleMoving = true;
                         fppCam->StrafePhysic(cameraMoveSpeed*slowdown);
@@ -3691,7 +3688,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                     }
 
                     //move left at the same time
-                    if(keyHold(InputHelper::Instance()->getButtonToAction(2)))
+                    if(keyHold(g_InputHelper.getButtonToAction(2)))
                     {
                         diagonleMoving = true;
                         fppCam->StrafePhysic(-cameraMoveSpeed*slowdown);
@@ -3712,7 +3709,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 }
 
                 //move back
-                if(keyHold(InputHelper::Instance()->getButtonToAction(1)))
+                if(keyHold(g_InputHelper.getButtonToAction(1)))
                 {
                     float slowdown = 0.8f;
                     float slowdown2 = 1.0f;
@@ -3735,7 +3732,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                     }
 
                     //move right at the same time
-                    if(keyHold(InputHelper::Instance()->getButtonToAction(3)))
+                    if(keyHold(g_InputHelper.getButtonToAction(3)))
                     {
                         diagonleMoving = true;
                         fppCam->StrafePhysic(cameraMoveSpeed*slowdown);
@@ -3747,7 +3744,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                     }
 
                     //move left at the same time
-                    if(keyHold(InputHelper::Instance()->getButtonToAction(2)))
+                    if(keyHold(g_InputHelper.getButtonToAction(2)))
                     {
                         diagonleMoving = true;
                         fppCam->StrafePhysic(-cameraMoveSpeed*slowdown);
@@ -3768,7 +3765,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 }
 
                 //move right
-                if(keyHold(InputHelper::Instance()->getButtonToAction(3)))
+                if(keyHold(g_InputHelper.getButtonToAction(3)))
                 {
                     float slowdown = 1.0f;
 
@@ -3790,7 +3787,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 }
 
                 //move left
-                if(keyHold(InputHelper::Instance()->getButtonToAction(2)))
+                if(keyHold(g_InputHelper.getButtonToAction(2)))
                 {
                     float slowdown = 1.0f;
 
@@ -3812,7 +3809,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 }
 
                 // jumping/swiming
-                if(keyHold(InputHelper::Instance()->getButtonToAction(12)))
+                if(keyHold(g_InputHelper.getButtonToAction(12)))
                 {
                     dStd = -1;
                     if (headInWater || headInLava|| mWorld->BlockAtPoint(Vector3(playerPosition.x,playerPosition.y-0.65f,playerPosition.z)) == WaterBlock::getID() || mWorld->BlockAtPoint(Vector3(playerPosition.x,playerPosition.y-0.65f,playerPosition.z)) == Lava::getID())	//Legit swimming
@@ -3847,7 +3844,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
             {
                 tickShowSlotName -= dt;
             }
-            if(keyPressed(InputHelper::Instance()->getButtonToAction(9)))
+            if(keyPressed(g_InputHelper.getButtonToAction(9)))
             {
                 if (mWorld->invId[27+barPosition] != -1)
                 {
@@ -3868,7 +3865,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
             }
 
             //switch right
-            if(keyPressed(InputHelper::Instance()->getButtonToAction(8)))
+            if(keyPressed(g_InputHelper.getButtonToAction(8)))
             {
                 if (mWorld->invId[27+barPosition] != -1)
                 {
@@ -3891,7 +3888,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
             //menu
             if(sleepTime == 0.0f)
             {
-                if(keyPressed(InputHelper::Instance()->getButtonToAction(15)))
+                if(keyPressed(g_InputHelper.getButtonToAction(15)))
                 {
                     menuState = 1;
                     menuOptions = false;
@@ -3902,7 +3899,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
             // drop 1 item
             if(g_System.KeyPressed(PSP_CTRL_UP))
             {
-                if(keyPressed(InputHelper::Instance()->getButtonToAction(14)))
+                if(keyPressed(g_InputHelper.getButtonToAction(14)))
                 {
                     if(mWorld->invId[27+barPosition] > 0)
                     {
@@ -3964,11 +3961,11 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
             }*/
 
             //add cube
-            if(keyPressed(InputHelper::Instance()->getButtonToAction(14)))
+            if(keyPressed(g_InputHelper.getButtonToAction(14)))
             {
                 if(sleepTime == 0.0f)
                 {
-                    if(keyPressed(InputHelper::Instance()->getButtonToAction(13))) //open inventory
+                    if(keyPressed(g_InputHelper.getButtonToAction(13))) //open inventory
                     {
                         invEn = true;
 
@@ -6051,7 +6048,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 }
             }
 
-            if(keyPressed(InputHelper::Instance()->getButtonToAction(13))) //remove cube
+            if(keyPressed(g_InputHelper.getButtonToAction(13))) //remove cube
             {
                 mWorld->GetBlock(testPos1.x,testPos1.y,testPos1.z) = 0;
                 int chunkTarget = mWorld->getChunkId(testPos1);
@@ -6512,7 +6509,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
                 return;
             }
 
-        if(keyHold(InputHelper::Instance()->getButtonToAction(14))) // if you press R
+        if(keyHold(g_InputHelper.getButtonToAction(14))) // if you press R
         {
             if(invEn == true)
             {
@@ -6530,7 +6527,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
             }
         }
 
-        if(keyPressed(InputHelper::Instance()->getButtonToAction(14))) // if you press R
+        if(keyPressed(g_InputHelper.getButtonToAction(14))) // if you press R
         {
             if(furnaceEn == true)
             {
@@ -6619,7 +6616,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
         }
 
         //switch right
-        if(keyPressed(InputHelper::Instance()->getButtonToAction(9)))
+        if(keyPressed(g_InputHelper.getButtonToAction(9)))
         {
             if (upEn == 0) // if your mouse in neither of craft menus
             {
@@ -6663,7 +6660,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
         }
 
         //switch left
-        if(keyPressed(InputHelper::Instance()->getButtonToAction(8)))
+        if(keyPressed(g_InputHelper.getButtonToAction(8)))
         {
             if (upEn == 0) // not only craft but chest too
             {
@@ -6701,7 +6698,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
         }
 
         //switch down
-        if(keyPressed(InputHelper::Instance()->getButtonToAction(11)))
+        if(keyPressed(g_InputHelper.getButtonToAction(11)))
         {
             if(usingSlider)
             {
@@ -6775,7 +6772,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
         }
 
         //switch up
-        if(keyPressed(InputHelper::Instance()->getButtonToAction(10)))
+        if(keyPressed(g_InputHelper.getButtonToAction(10)))
         {
             if(usingSlider)
             {
@@ -7664,7 +7661,7 @@ void StatePlayCreative::HandleEvents(StateManager* sManager)
     else if(menuState == 1) //menu state
     {
         //turn off menu with the same key
-        if(keyPressed(InputHelper::Instance()->getButtonToAction(15)))
+        if(keyPressed(g_InputHelper.getButtonToAction(15)))
         {
             menuState = 0;
             menuOptions = false;
@@ -11353,22 +11350,22 @@ bool StatePlayCreative::keyPressed(int currentKey)
     //analog reset
     if(analogUp)
     {
-        if(g_System.GetAnalogY() < InputHelper::Instance()->analogYup)
+        if(g_System.GetAnalogY() < g_InputHelper.analogYup)
             analogUp = false;
     }
     if(analogDown)
     {
-        if(g_System.GetAnalogY() > InputHelper::Instance()->analogYdown)
+        if(g_System.GetAnalogY() > g_InputHelper.analogYdown)
             analogDown = false;
     }
     if(analogLeft)
     {
-        if(g_System.GetAnalogX() > InputHelper::Instance()->analogXleft)
+        if(g_System.GetAnalogX() > g_InputHelper.analogXleft)
             analogLeft = false;
     }
     if(analogRight)
     {
-        if(g_System.GetAnalogX() < InputHelper::Instance()->analogXright)
+        if(g_System.GetAnalogX() < g_InputHelper.analogXright)
             analogRight = false;
     }
 
@@ -11405,7 +11402,7 @@ bool StatePlayCreative::keyPressed(int currentKey)
     {
         if(!analogUp)
         {
-            if(g_System.GetAnalogY() > InputHelper::Instance()->analogYup)
+            if(g_System.GetAnalogY() > g_InputHelper.analogYup)
             {
                 analogUp = true;
                 return true;//analog up
@@ -11416,7 +11413,7 @@ bool StatePlayCreative::keyPressed(int currentKey)
     {
         if(!analogDown)
         {
-            if(g_System.GetAnalogY() < InputHelper::Instance()->analogYdown)
+            if(g_System.GetAnalogY() < g_InputHelper.analogYdown)
             {
                 analogDown = true;
                 return true;//analog down
@@ -11427,7 +11424,7 @@ bool StatePlayCreative::keyPressed(int currentKey)
     {
         if(!analogLeft)
         {
-            if(g_System.GetAnalogX() < InputHelper::Instance()->analogXleft)
+            if(g_System.GetAnalogX() < g_InputHelper.analogXleft)
             {
                 analogLeft = true;
                 return true;//analog left
@@ -11438,7 +11435,7 @@ bool StatePlayCreative::keyPressed(int currentKey)
     {
         if(!analogRight)
         {
-            if(g_System.GetAnalogX() > InputHelper::Instance()->analogXright)
+            if(g_System.GetAnalogX() > g_InputHelper.analogXright)
             {
                 analogRight = true;
                 return true;//analog right
@@ -11480,13 +11477,13 @@ bool StatePlayCreative::keyHold(int currentKey)
 
     //analog stick....
     if(currentKey == 12)//cross
-        return (g_System.GetAnalogY() > InputHelper::Instance()->analogYup);//analog up
+        return (g_System.GetAnalogY() > g_InputHelper.analogYup);//analog up
     if(currentKey == 11)//cross
-        return (g_System.GetAnalogY() < InputHelper::Instance()->analogYdown);//analog down
+        return (g_System.GetAnalogY() < g_InputHelper.analogYdown);//analog down
     if(currentKey == 13)//cross
-        return (g_System.GetAnalogX() < InputHelper::Instance()->analogXleft);//analog left
+        return (g_System.GetAnalogX() < g_InputHelper.analogXleft);//analog left
     if(currentKey == 14)//cross
-        return (g_System.GetAnalogX() > InputHelper::Instance()->analogXright);//analog right
+        return (g_System.GetAnalogX() > g_InputHelper.analogXright);//analog right
 
     return false;
 }

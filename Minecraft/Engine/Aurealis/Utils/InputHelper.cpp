@@ -171,9 +171,4 @@ void InputHelper::Load()
 	fclose(pFile);
 }
 
-InputHelper InputHelper::m_InputHelper;
-
-InputHelper* InputHelper::Instance()
-{
-	return &m_InputHelper;
-}
+InputHelper g_InputHelper;

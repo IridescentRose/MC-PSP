@@ -93,7 +93,6 @@ private:
 
 private:
 
-	InputHelper *mIhelper;
 	Camera *fppCam;
 
 	std::string saveFileName;

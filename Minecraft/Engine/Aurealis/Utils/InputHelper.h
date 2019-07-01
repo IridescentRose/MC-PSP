@@ -31,9 +31,6 @@ public:
 	InputHelper();
 	~InputHelper();
 
-	static InputHelper m_InputHelper;
-	static InputHelper* Instance();
-
 	void Init();
 
 	std::string getActionName(int number);
@@ -55,5 +52,7 @@ private:
 	std::string buttonNames[16];
 	InputConection connections[16];
 };
+
+extern InputHelper g_InputHelper;
 
 #endif

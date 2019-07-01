@@ -129,7 +129,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 
 			if(g_System.KeyPressed(PSP_CTRL_CIRCLE))
 			{
-				InputHelper::Instance()->Save();
+				g_InputHelper.Save();
 				sManager->RemoveState();
 			}
 
@@ -157,7 +157,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				}
 				if(selectPos == 2)
 				{
-					InputHelper::Instance()->Save();
+					g_InputHelper.Save();
 					sManager->RemoveState();
 				}
 			}
@@ -195,23 +195,23 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				if(g_System.KeyPressed(PSP_CTRL_START))
 					currentKey = 15;//cross
 
-				if(g_System.GetAnalogY() > InputHelper::Instance()->analogYup)//analog up
+				if(g_System.GetAnalogY() > g_InputHelper.analogYup)//analog up
 					currentKey = 12;//cross
-				if(g_System.GetAnalogY() < InputHelper::Instance()->analogYdown)//analog down
+				if(g_System.GetAnalogY() < g_InputHelper.analogYdown)//analog down
 					currentKey = 11;//cross
-				if(g_System.GetAnalogX() < InputHelper::Instance()->analogXleft)//analog left
+				if(g_System.GetAnalogX() < g_InputHelper.analogXleft)//analog left
 					currentKey = 13;//cross
-				if(g_System.GetAnalogX() > InputHelper::Instance()->analogXright)//analog right
+				if(g_System.GetAnalogX() > g_InputHelper.analogXright)//analog right
 					currentKey = 14;//cross
 
 				if(currentKey != -1)
 				{
 					//chek if it the same key
-					if(InputHelper::Instance()->getButtonToAction(controlPos) != currentKey)
+					if(g_InputHelper.getButtonToAction(controlPos) != currentKey)
 						configChanged = true;
 
 					//set key
-					InputHelper::Instance()->setButtonToAction(controlPos,currentKey);
+					g_InputHelper.setButtonToAction(controlPos,currentKey);
 
 					//quit
 					chooseKeyState = false;
@@ -285,7 +285,7 @@ void StateOptions::HandleEvents(StateManager* sManager)
 					{
 						//save if any key changed
 						//if(configChanged)
-						//	InputHelper::Instance()->Save();
+						//	g_InputHelper.Save();
 
 						menuState = 0;
 					}else//start key choosing
@@ -325,14 +325,14 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				{
 					if(currentAnalogPos == 0)
 					{
-						InputHelper::Instance()->analogYup -= 0.1f;
-						if(InputHelper::Instance()->analogYup < 0.1f)
-							InputHelper::Instance()->analogYup = 0.1f;
+						g_InputHelper.analogYup -= 0.1f;
+						if(g_InputHelper.analogYup < 0.1f)
+							g_InputHelper.analogYup = 0.1f;
 					}else
 					{
-						InputHelper::Instance()->analogXright -= 0.1f;
-						if(InputHelper::Instance()->analogXright < 0.1f)
-							InputHelper::Instance()->analogXright = 0.1f;
+						g_InputHelper.analogXright -= 0.1f;
+						if(g_InputHelper.analogXright < 0.1f)
+							g_InputHelper.analogXright = 0.1f;
 					}
 				}
 				//ujemne
@@ -340,14 +340,14 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				{
 					if(currentAnalogPos == 1)
 					{
-						InputHelper::Instance()->analogYdown += 0.1f;
-						if(InputHelper::Instance()->analogYdown > -0.1f)
-							InputHelper::Instance()->analogYdown = -0.1f;
+						g_InputHelper.analogYdown += 0.1f;
+						if(g_InputHelper.analogYdown > -0.1f)
+							g_InputHelper.analogYdown = -0.1f;
 					}else
 					{
-						InputHelper::Instance()->analogXleft += 0.1f;
-						if(InputHelper::Instance()->analogXleft > -0.1f)
-							InputHelper::Instance()->analogXleft = -0.1f;
+						g_InputHelper.analogXleft += 0.1f;
+						if(g_InputHelper.analogXleft > -0.1f)
+							g_InputHelper.analogXleft = -0.1f;
 					}
 				}
 
@@ -361,14 +361,14 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				{
 					if(currentAnalogPos == 0)
 					{
-						InputHelper::Instance()->analogYup += 0.1f;
-						if(InputHelper::Instance()->analogYup > 0.9f)
-							InputHelper::Instance()->analogYup = 0.9f;
+						g_InputHelper.analogYup += 0.1f;
+						if(g_InputHelper.analogYup > 0.9f)
+							g_InputHelper.analogYup = 0.9f;
 					}else
 					{
-						InputHelper::Instance()->analogXright += 0.1f;
-						if(InputHelper::Instance()->analogXright > 0.9f)
-							InputHelper::Instance()->analogXright = 0.9f;
+						g_InputHelper.analogXright += 0.1f;
+						if(g_InputHelper.analogXright > 0.9f)
+							g_InputHelper.analogXright = 0.9f;
 					}
 				}
 				//ujemne
@@ -376,14 +376,14 @@ void StateOptions::HandleEvents(StateManager* sManager)
 				{
 					if(currentAnalogPos == 1)
 					{
-						InputHelper::Instance()->analogYdown -= 0.1f;
-						if(InputHelper::Instance()->analogYdown < -0.9f)
-							InputHelper::Instance()->analogYdown = -0.9f;
+						g_InputHelper.analogYdown -= 0.1f;
+						if(g_InputHelper.analogYdown < -0.9f)
+							g_InputHelper.analogYdown = -0.9f;
 					}else
 					{
-						InputHelper::Instance()->analogXleft -= 0.1f;
-						if(InputHelper::Instance()->analogXleft < -0.9f)
-							InputHelper::Instance()->analogXleft = -0.9f;
+						g_InputHelper.analogXleft -= 0.1f;
+						if(g_InputHelper.analogXleft < -0.9f)
+							g_InputHelper.analogXleft = -0.9f;
 					}
 				}
 
@@ -525,7 +525,7 @@ void StateOptions::Draw(StateManager* sManager)
 			{
 				//action
 				controlPos == i ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000000) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000000);
-				g_RenderManager.DebugPrint(250,starty + (i * 30) - (controlStart * 30)+4,InputHelper::Instance()->getActionName(i).c_str());
+				g_RenderManager.DebugPrint(250,starty + (i * 30) - (controlStart * 30)+4,g_InputHelper.getActionName(i).c_str());
 			}
 
 			g_RenderManager.SetFontStyle(default_big_size,0xFFFFFFFF,0,0x00000200);
@@ -537,7 +537,7 @@ void StateOptions::Draw(StateManager* sManager)
 				if(controlPos == i && chooseKeyState == true)
 					g_RenderManager.DebugPrint(160,starty + (i * 30) - (controlStart * 30)+4,"...");
 				else
-					g_RenderManager.DebugPrint(160,starty + (i * 30) - (controlStart * 30)+4,InputHelper::Instance()->getButtonName(InputHelper::Instance()->getConnection(i).button).c_str());
+					g_RenderManager.DebugPrint(160,starty + (i * 30) - (controlStart * 30)+4,g_InputHelper.getButtonName(g_InputHelper.getConnection(i).button).c_str());
 			}
 			g_RenderManager.SetDefaultFont();
 
@@ -595,16 +595,16 @@ void StateOptions::Draw(StateManager* sManager)
 				sbuttonSprite->Draw();
 			}
 
-			moverSprite->SetPosition(144 +((fabs(InputHelper::Instance()->analogYup) * 10) * 20),100);
+			moverSprite->SetPosition(144 +((fabs(g_InputHelper.analogYup) * 10) * 20),100);
 			moverSprite->Draw();
 
-			moverSprite->SetPosition(144 +((fabs(InputHelper::Instance()->analogYdown) * 10) * 20),130);
+			moverSprite->SetPosition(144 +((fabs(g_InputHelper.analogYdown) * 10) * 20),130);
 			moverSprite->Draw();
 
-			moverSprite->SetPosition(144 +((fabs(InputHelper::Instance()->analogXleft) * 10) * 20),160);
+			moverSprite->SetPosition(144 +((fabs(g_InputHelper.analogXleft) * 10) * 20),160);
 			moverSprite->Draw();
 
-			moverSprite->SetPosition(144 +((fabs(InputHelper::Instance()->analogXright) * 10) * 20),190);
+			moverSprite->SetPosition(144 +((fabs(g_InputHelper.analogXright) * 10) * 20),190);
 			moverSprite->Draw();
 
 			sceGuDisable(GU_BLEND);
@@ -614,16 +614,16 @@ void StateOptions::Draw(StateManager* sManager)
             if(g_RenderManager.GetFontLanguage() == ENGLISH)
             {
                 currentAnalogPos == 0 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                g_RenderManager.DebugPrint(240,109,"Analog up : %d%%",(int)(fabs(InputHelper::Instance()->analogYup) * 100.0f));
+                g_RenderManager.DebugPrint(240,109,"Analog up : %d%%",(int)(fabs(g_InputHelper.analogYup) * 100.0f));
 
                 currentAnalogPos == 1 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                g_RenderManager.DebugPrint(240,139,"Analog down : %d%%",(int)(fabs(InputHelper::Instance()->analogYdown) * 100.0f));
+                g_RenderManager.DebugPrint(240,139,"Analog down : %d%%",(int)(fabs(g_InputHelper.analogYdown) * 100.0f));
 
                 currentAnalogPos == 2 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                g_RenderManager.DebugPrint(240,169,"Analog left : %d%%",(int)(fabs(InputHelper::Instance()->analogXleft) * 100.0f));
+                g_RenderManager.DebugPrint(240,169,"Analog left : %d%%",(int)(fabs(g_InputHelper.analogXleft) * 100.0f));
 
                 currentAnalogPos == 3 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                g_RenderManager.DebugPrint(240,199,"Analog right : %d%%",(int)(fabs(InputHelper::Instance()->analogXright) * 100.0f));
+                g_RenderManager.DebugPrint(240,199,"Analog right : %d%%",(int)(fabs(g_InputHelper.analogXright) * 100.0f));
 
                 currentAnalogPos >= 4 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
                 g_RenderManager.DebugPrint(240,269,"Cancel");
@@ -633,16 +633,16 @@ void StateOptions::Draw(StateManager* sManager)
             if(g_RenderManager.GetFontLanguage() == RUSSIAN)
             {
                 currentAnalogPos == 0 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                g_RenderManager.DebugPrint(240,109,"Stik vverh : %d%%",(int)(fabs(InputHelper::Instance()->analogYup) * 100.0f));
+                g_RenderManager.DebugPrint(240,109,"Stik vverh : %d%%",(int)(fabs(g_InputHelper.analogYup) * 100.0f));
 
                 currentAnalogPos == 1 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                g_RenderManager.DebugPrint(240,139,"Stik vniz : %d%%",(int)(fabs(InputHelper::Instance()->analogYdown) * 100.0f));
+                g_RenderManager.DebugPrint(240,139,"Stik vniz : %d%%",(int)(fabs(g_InputHelper.analogYdown) * 100.0f));
 
                 currentAnalogPos == 2 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                g_RenderManager.DebugPrint(240,169,"Stik vlevo : %d%%",(int)(fabs(InputHelper::Instance()->analogXleft) * 100.0f));
+                g_RenderManager.DebugPrint(240,169,"Stik vlevo : %d%%",(int)(fabs(g_InputHelper.analogXleft) * 100.0f));
 
                 currentAnalogPos == 3 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                g_RenderManager.DebugPrint(240,199,"Stik vpravo : %d%%",(int)(fabs(InputHelper::Instance()->analogXright) * 100.0f));
+                g_RenderManager.DebugPrint(240,199,"Stik vpravo : %d%%",(int)(fabs(g_InputHelper.analogXright) * 100.0f));
 
                 currentAnalogPos >= 4 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
                 g_RenderManager.DebugPrint(240,269,"Otmena");

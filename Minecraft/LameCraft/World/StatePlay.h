@@ -109,7 +109,6 @@ private:
 
     double time12;
 
-	InputHelper *mIhelper;
 	Camera *fppCam;
 
 	std::string saveFileName;

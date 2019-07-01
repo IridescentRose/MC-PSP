@@ -258,8 +258,8 @@ void StateMenu::Init()
     currentVersion = 140;
 
     //input helper
-    InputHelper::Instance()->Init();
-    InputHelper::Instance()->Load();
+    g_InputHelper.Init();
+    g_InputHelper.Load();
 
 	animationscreen = 1;
 	fontcoloroption = 0;
