@@ -9,10 +9,10 @@
 
 #define VERSION_STAGE "a"
 
-#define IS_SNAPSHOT true
+#define IS_SNAPSHOT false
 
-#define SNAPSHOT_NAME "19w26a"
+#define SNAPSHOT_NAME "19w27a"
 
 #define SNAPSHOT_YEAR	19
-#define SNAPSHOT_WEEK	25
+#define SNAPSHOT_WEEK	27
 #define SNAPSHOT_VER	"a"
