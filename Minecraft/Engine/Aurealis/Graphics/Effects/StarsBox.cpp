@@ -16,7 +16,7 @@ namespace Aurealis
 			boxVertices5 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
 			boxVertices6 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
 
-			size = 0.95f;
+			size = 0.95f * 5;
 
 			Build();
 		}
@@ -244,7 +244,7 @@ namespace Aurealis
 
 		    sceGuColor(GU_COLOR(alpha,alpha,alpha,alpha));
 			sceGuEnable(GU_TEXTURE_2D);
-			sceGuTexScale(0.85f,0.85f);
+			sceGuTexScale(1.25f, 1.25f);
             sceGuEnable(GU_BLEND);
 			sceGuDisable(GU_DEPTH_TEST);
 			sceGuDepthMask(GU_TRUE);

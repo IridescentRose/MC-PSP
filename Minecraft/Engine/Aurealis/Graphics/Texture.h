@@ -34,10 +34,30 @@ public:
 			sceGuTexFunc(GU_TFX_REPLACE, GU_TCC_RGBA);
 			sceGuTexFilter(minFilter, maxFilter);
 			sceGuTexOffset(0.0f, 0.0f);
+			sceGuTexWrap(GU_CLAMP, GU_CLAMP);
+			sceGuTexImage(0, pWidth, pHeight, pWidth, data);
+		}
+	}
+
+	inline void bindTextureRepeat(int minFilter = GU_NEAREST, int maxFilter = GU_NEAREST, bool modulate = false) {
+		if (modulate) {
+			sceGuTexMode(colorMode, 0, 0, swizzled);
+			sceGuTexFunc(GU_TFX_MODULATE, GU_TCC_RGBA);
+			sceGuTexFilter(minFilter, maxFilter);
+			sceGuTexOffset(0.0f, 0.0f);
+			sceGuTexWrap(GU_REPEAT, GU_REPEAT);
+			sceGuTexImage(0, pWidth, pHeight, pWidth, data);
+		}
+		else {
+			sceGuTexMode(colorMode, 0, 0, 1);
+			sceGuTexFunc(GU_TFX_REPLACE, GU_TCC_RGBA);
+			sceGuTexFilter(minFilter, maxFilter);
+			sceGuTexOffset(0.0f, 0.0f);
 			sceGuTexWrap(GU_REPEAT, GU_REPEAT);
 			sceGuTexImage(0, pWidth, pHeight, pWidth, data);
 		}
 	}
+
 	inline void bindMipMaps(Texture* mipmap) {
 		sceGuTexMode(colorMode, 2, 0, swizzled);
 		sceGuTexFunc(GU_TFX_MODULATE, GU_TCC_RGBA);

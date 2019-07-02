@@ -10005,15 +10005,17 @@ void StatePlay::Draw(StateManager* sManager)
         sceGuDisable(GU_FOG);
 
         /// StarsBox rendering
-        /*if(mWorld->rainyColorAlpha != 1.0f)
+        if(mWorld->rainyColorAlpha != 1.0f)
         {
             if(mWorld->worldDayTime < 10 || mWorld->worldDayTime >= 21)
             {
-                TextureManager::Instance()->SetTextureModeulate(stars);
+				stars->bindTextureRepeat(0, 0, true);
 
-                MatrixPush();
-                MatrixTranslation(Vector3(fppCam->m_vPosition.x,fppCam->m_vPosition.y+fppCam->m_vOffset.y,fppCam->m_vPosition.z));
+				MatrixPush();
+
+				MatrixTranslation(Vector3(fppCam->m_vPosition.x,fppCam->m_vPosition.y+fppCam->m_vOffset.y,fppCam->m_vPosition.z));
                 MatrixScale(Vector3(1.0f,1.0f,1.0f));
+				MatrixAngle(Vector3(0.0f, 0.0f, mWorld->skyTime * 2.0f));
 
                 if(mWorld->brightFactor <= 0.05f)
                 {
@@ -10037,13 +10039,11 @@ void StatePlay::Draw(StateManager* sManager)
                         mWorld->starsFactor = 0.0f;
                     }
                 }
-
-                starsBox->Render((1.0f-mWorld->brightFactor-0.4+mWorld->starsFactor)*(1-mWorld->rainyColorAlpha));
-
+                starsBox->Render((1.0f-mWorld->brightFactor-0.4+mWorld->starsFactor)*(1-mWorld->rainyColorAlpha) * 0.7f);
 
                 MatrixPop();
             }
-        }*/
+        }
 
 
         /// Sun/moon rendering
@@ -10053,6 +10053,8 @@ void StatePlay::Draw(StateManager* sManager)
 
             // sun
             MatrixPush();
+
+			MatrixAngle(Vector3(40.0f, 0.0f, 0.0f));
             MatrixTranslation(Vector3(fppCam->m_vPosition.x,fppCam->m_vPosition.y,fppCam->m_vPosition.z));
 
             (suntex)->bindTexture(0, 0, true);
@@ -10062,6 +10064,8 @@ void StatePlay::Draw(StateManager* sManager)
 
             // moon
             MatrixPush();
+
+			MatrixAngle(Vector3(40.0f, 0.0f, 0.0f));
             MatrixTranslation(Vector3(fppCam->m_vPosition.x,fppCam->m_vPosition.y,fppCam->m_vPosition.z));
 
             (moontex)->bindTexture(0, 0, true);
@@ -10101,11 +10105,11 @@ void StatePlay::Draw(StateManager* sManager)
 
             if(playerPosition.y <= 48)
             {
-                MatrixColor(GU_COLOR(mWorld->brightFactor*(playerPosition.y/48.0f),mWorld->brightFactor*(playerPosition.y/48.0f),mWorld->brightFactor*(playerPosition.y/48.0f),1-mWorld->rainyColorAlpha));
+                MatrixColor(GU_COLOR(mWorld->brightFactor*(playerPosition.y/48.0f),mWorld->brightFactor*(playerPosition.y/48.0f),mWorld->brightFactor*(playerPosition.y/48.0f), (1-mWorld->rainyColorAlpha)*0.7f ));
             }
             else
             {
-                MatrixColor(GU_COLOR(mWorld->brightFactor,mWorld->brightFactor,mWorld->brightFactor,1-mWorld->rainyColorAlpha));
+                MatrixColor(GU_COLOR(mWorld->brightFactor,mWorld->brightFactor,mWorld->brightFactor, (1-mWorld->rainyColorAlpha) * 0.7f ));
             }
 
             MatrixTranslation(Vector3(-114,116,-114));
