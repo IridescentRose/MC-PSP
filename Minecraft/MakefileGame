@@ -75,6 +75,11 @@ LameCraft/Menu/SplashScreen.o \
 LameCraft/World/Terrain/mersenne-twister.o \
 LameCraft/World/Terrain/SimplexNoise.o \
 LameCraft/World/Terrain/WorldGenerator.o \
+LameCraft/Carnation/StateClient.o \
+LameCraft/Carnation/NetworkSystem.o \
+LameCraft/Carnation/Networking/VarInt.o \
+LameCraft/Carnation/Networking/ByteUtil.o \
+LameCraft/Carnation/Networking/Packets.o \
 Lamecraft.o
 
 INCDIR = $(PSPPATH)/include

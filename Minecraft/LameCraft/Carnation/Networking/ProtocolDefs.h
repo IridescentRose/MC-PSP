@@ -1,0 +1,4 @@
+#pragma once
+
+#define MINECRAFT_PROTOCOL_VERSION 340 //This is 1.12.2 Protocol
+#define MINECRAFT_DEFAULT_PORT 25565

@@ -158,6 +158,8 @@
     <ClCompile Include="Engine\Aurealis\Utils\StateManager.cpp" />
     <ClCompile Include="Engine\Aurealis\Utils\Timer.cpp" />
     <ClCompile Include="Lamecraft.cpp" />
+    <ClCompile Include="LameCraft\Carnation\NetworkSystem.cpp" />
+    <ClCompile Include="LameCraft\Carnation\StateClient.cpp" />
     <ClCompile Include="LameCraft\World\Data\blocks\BaseBlock.cpp" />
     <ClCompile Include="LameCraft\World\Data\entity\BaseEntity.cpp" />
     <ClCompile Include="LameCraft\World\Data\items\BaseItem.cpp" />
@@ -313,6 +315,8 @@
     <ClInclude Include="Engine\Aurealis\Utils\pgeZip.h" />
     <ClInclude Include="Engine\Aurealis\Utils\StateManager.h" />
     <ClInclude Include="Engine\Aurealis\Utils\Timer.h" />
+    <ClInclude Include="LameCraft\Carnation\NetworkSystem.h" />
+    <ClInclude Include="LameCraft\Carnation\StateClient.h" />
     <ClInclude Include="LameCraft\World\Data\blocks\BaseBlock.h" />
     <ClInclude Include="LameCraft\World\Data\entity\BaseEntity.h" />
     <ClInclude Include="LameCraft\World\Data\items\BaseItem.h" />

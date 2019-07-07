@@ -483,6 +483,12 @@
     <ClCompile Include="Engine\Aurealis\Utils\InputHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LameCraft\Carnation\StateClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\Carnation\NetworkSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3libs\libpspmath\pspmath.h">
@@ -945,6 +951,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Aurealis\Utils\InputHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Carnation\StateClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Carnation\NetworkSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

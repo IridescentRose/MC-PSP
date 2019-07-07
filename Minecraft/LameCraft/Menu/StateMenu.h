@@ -12,7 +12,7 @@
 #include <Aurealis/Utils/pgeDir.h>
 #include <Aurealis/Graphics/TextureUtil.h>
 #include <Aurealis/Utils/pge.h>
-
+#include "..//Carnation/StateClient.h"
 #include <Aurealis/System/SystemManager.h>
 #include <Aurealis/Graphics/Camera.h>
 #include <Aurealis/Graphics/Sprite.h>

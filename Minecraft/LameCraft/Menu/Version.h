@@ -9,7 +9,7 @@
 
 #define VERSION_STAGE "a"
 
-#define IS_SNAPSHOT false
+#define IS_SNAPSHOT true
 
 #define SNAPSHOT_NAME "19w27a"
 

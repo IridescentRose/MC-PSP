@@ -555,7 +555,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
         {
             selectPos--;
             if(selectPos < 0)
-                selectPos = 3;
+                selectPos = 4;
 
             g_SoundManager.PlayMenuSound();
         }
@@ -563,7 +563,7 @@ void StateMenu::HandleEvents(StateManager* sManager)
         if(g_System.KeyPressed(PSP_CTRL_DOWN))
         {
             selectPos++;
-            if(selectPos > 3)
+            if(selectPos > 4)
                 selectPos = 0;
 
             g_SoundManager.PlayMenuSound();
@@ -629,6 +629,14 @@ void StateMenu::HandleEvents(StateManager* sManager)
                 tpMax = 3;
                 ScanTexturePacks("Assets/Textures/");
             }
+			if (selectPos == 4)
+			{
+				//MULTIPLAYER SETUP!
+				using namespace Minecraft;
+				StateClient* client = new StateClient();
+				client->Init();
+				sManager->AddState(client);
+			}
         }
     }
     break;
@@ -2341,23 +2349,27 @@ void StateMenu::Draw(StateManager* sManager)
 			lamecraftSprite->Draw();
 
 			//singlePlayer
-			buttonSprite->SetPosition(240, 120);
+			buttonSprite->SetPosition(240, 100);
 			buttonSprite->Draw();
 
 			//options
-			buttonSprite->SetPosition(240, 160);
+			buttonSprite->SetPosition(240, 140);
 			buttonSprite->Draw();
 
 			//about
-			buttonSprite->SetPosition(240, 200);
+			buttonSprite->SetPosition(240, 180);
 			buttonSprite->Draw();
 
 			//texture pack
-			buttonSprite->SetPosition(240, 240);
+			buttonSprite->SetPosition(240, 220);
+			buttonSprite->Draw();
+
+
+			buttonSprite->SetPosition(240, 260);
 			buttonSprite->Draw();
 
 			//selected button
-			sbuttonSprite->SetPosition(240, (selectPos * 40) + 120);
+			sbuttonSprite->SetPosition(240, (selectPos * 40) + 100);
 			sbuttonSprite->Draw();
 
 			sceGuDisable(GU_BLEND);
@@ -2371,10 +2383,11 @@ void StateMenu::Draw(StateManager* sManager)
 
 			if (g_RenderManager.GetFontLanguage() == ENGLISH)
 			{
-				selectPos == 0 ? DrawText(240, 129, GU_COLOR(1, 1, 0.25, 1), default_size, "Singleplayer") : DrawText(240, 129, GU_COLOR(1, 1, 1, 1), default_size, "Singleplayer");
-				selectPos == 1 ? DrawText(240, 169, GU_COLOR(1, 1, 0.25, 1), default_size, "Options") : DrawText(240, 169, GU_COLOR(1, 1, 1, 1), default_size, "Options");
-				selectPos == 2 ? DrawText(240, 209, GU_COLOR(1, 1, 0.25, 1), default_size, "About & Converter") : DrawText(240, 209, GU_COLOR(1, 1, 1, 1), default_size, "About & Converter");
-				selectPos == 3 ? DrawText(240, 249, GU_COLOR(1, 1, 0.25, 1), default_size, "Texture Packs") : DrawText(240, 249, GU_COLOR(1, 1, 1, 1), default_size, "Texture Packs");
+				selectPos == 0 ? DrawText(240, 109, GU_COLOR(1, 1, 0.25, 1), default_size, "Singleplayer") : DrawText(240, 109, GU_COLOR(1, 1, 1, 1), default_size, "Singleplayer");
+				selectPos == 1 ? DrawText(240, 149, GU_COLOR(1, 1, 0.25, 1), default_size, "Options") : DrawText(240, 149, GU_COLOR(1, 1, 1, 1), default_size, "Options");
+				selectPos == 2 ? DrawText(240, 189, GU_COLOR(1, 1, 0.25, 1), default_size, "About & Converter") : DrawText(240, 189, GU_COLOR(1, 1, 1, 1), default_size, "About & Converter");
+				selectPos == 3 ? DrawText(240, 229, GU_COLOR(1, 1, 0.25, 1), default_size, "Texture Packs") : DrawText(240, 229, GU_COLOR(1, 1, 1, 1), default_size, "Texture Packs");
+				selectPos == 4 ? DrawText(240, 269, GU_COLOR(1, 1, 0.25, 1), default_size, "Multiplayer") : DrawText(240, 269, GU_COLOR(1, 1, 1, 1), default_size, "Multiplayer");
 
 
 				switch (SplashNumber)
