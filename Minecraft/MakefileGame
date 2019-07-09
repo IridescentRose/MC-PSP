@@ -77,9 +77,9 @@ LameCraft/World/Terrain/SimplexNoise.o \
 LameCraft/World/Terrain/WorldGenerator.o \
 LameCraft/Carnation/StateClient.o \
 LameCraft/Carnation/NetworkSystem.o \
-LameCraft/Carnation/Networking/VarInt.o \
-LameCraft/Carnation/Networking/ByteUtil.o \
-LameCraft/Carnation/Networking/Packets.o \
+LameCraft/Carnation/Protocol/VarInt.o \
+LameCraft/Carnation/Protocol/ByteUtil.o \
+LameCraft/Carnation/Protocol/Packets.o \
 Lamecraft.o
 
 INCDIR = $(PSPPATH)/include

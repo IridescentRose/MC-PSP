@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Release|x64">
@@ -34,7 +34,7 @@
     <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <OutDir />
     <IntDir />
-    <IncludePath>$(SolutionDir)Engine\;C:\pspsdk\psp\sdk\include\libc;C:\pspsdk\psp\sdk\include;C:\pspsdk\psp\include;C:\pspsdk\include;$(SolutionDir)</IncludePath>
+    <IncludePath>$(SolutionDir)Engine\;C:\pspsdk\psp\sdk\include\libc;C:\pspsdk\psp\sdk\include;C:\pspsdk\psp\include;C:\pspsdk\include;$(SolutionDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <BuildLog>
@@ -159,6 +159,9 @@
     <ClCompile Include="Engine\Aurealis\Utils\Timer.cpp" />
     <ClCompile Include="Lamecraft.cpp" />
     <ClCompile Include="LameCraft\Carnation\NetworkSystem.cpp" />
+    <ClCompile Include="LameCraft\Carnation\Protocol\ByteUtil.cpp" />
+    <ClCompile Include="LameCraft\Carnation\Protocol\Packets.cpp" />
+    <ClCompile Include="LameCraft\Carnation\Protocol\VarInt.cpp" />
     <ClCompile Include="LameCraft\Carnation\StateClient.cpp" />
     <ClCompile Include="LameCraft\World\Data\blocks\BaseBlock.cpp" />
     <ClCompile Include="LameCraft\World\Data\entity\BaseEntity.cpp" />
@@ -316,7 +319,12 @@
     <ClInclude Include="Engine\Aurealis\Utils\StateManager.h" />
     <ClInclude Include="Engine\Aurealis\Utils\Timer.h" />
     <ClInclude Include="LameCraft\Carnation\NetworkSystem.h" />
+    <ClInclude Include="LameCraft\Carnation\Protocol\ByteUtil.h" />
+    <ClInclude Include="LameCraft\Carnation\Protocol\Packets.h" />
+    <ClInclude Include="LameCraft\Carnation\Protocol\ProtocolDef.h" />
+    <ClInclude Include="LameCraft\Carnation\Protocol\VarInt.h" />
     <ClInclude Include="LameCraft\Carnation\StateClient.h" />
+    <ClInclude Include="LameCraft\Carnation\World\Entities\Entity.h" />
     <ClInclude Include="LameCraft\World\Data\blocks\BaseBlock.h" />
     <ClInclude Include="LameCraft\World\Data\entity\BaseEntity.h" />
     <ClInclude Include="LameCraft\World\Data\items\BaseItem.h" />

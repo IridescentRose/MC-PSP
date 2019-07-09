@@ -1,5 +1,5 @@
 #include "NetworkSystem.h"
-
+#include "Protocol/VarInt.h"
 namespace Minecraft {
 	NetworkSystem::NetworkSystem()
 	{
@@ -75,4 +75,51 @@ namespace Minecraft {
 		send(sock, buffer, size, 0);
 	}
 
+	int NetworkSystem::read(unsigned char* buffer, unsigned short buffLen) {
+		short totalReceived = 0;
+		while (buffLen > totalReceived) {
+			int received = recv(sock, (char*)(buffer + totalReceived), (buffLen - totalReceived), 0);
+			if (received <= 0)
+				return -1; //ERROR
+			totalReceived += received;
+		}
+		return 0;
+	}
+
+	long int NetworkSystem::readVarInt() {
+		unsigned char data[MAX_VARINT_LENGTH];
+
+		int dataLen = 0;
+		do {
+			read(&data[dataLen], 1);
+		} while ((data[dataLen++] & 0x80) != 0);
+
+		return decode_unsigned_varint(data, dataLen);
+	}
+
+	long long int NetworkSystem::readVarLong() {
+		unsigned char data[MAX_VARLONG_LENGTH];
+
+		int dataLen = 0;
+		do {
+			read(&data[dataLen], 1);
+		} while ((data[dataLen++] & 0x80) != 0);
+
+		return decode_unsigned_varlong(data, dataLen);
+	}
+
+	void NetworkSystem::ReceivePacket()
+	{
+		unsigned short length = readVarInt(); //Our length
+		unsigned char* buffer = new unsigned char[length];
+		int res = read(buffer, length);
+		UnparsedPacket* packet = new UnparsedPacket();
+		packet->size = length;
+		packet->buffer = buffer;
+		if (res == 0) {
+			unparsed_packets.push(packet);
+		}
+	}
+
+	NetworkSystem* g_NetworkManager;
 }

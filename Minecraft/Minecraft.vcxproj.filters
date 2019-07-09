@@ -489,6 +489,15 @@
     <ClCompile Include="LameCraft\Carnation\NetworkSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LameCraft\Carnation\Protocol\ByteUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\Carnation\Protocol\Packets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LameCraft\Carnation\Protocol\VarInt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3libs\libpspmath\pspmath.h">
@@ -957,6 +966,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LameCraft\Carnation\NetworkSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Carnation\World\Entities\Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Carnation\Protocol\ByteUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Carnation\Protocol\Packets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Carnation\Protocol\ProtocolDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LameCraft\Carnation\Protocol\VarInt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

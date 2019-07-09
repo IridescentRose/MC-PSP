@@ -17,17 +17,35 @@
 #include <pspwlan.h>
 #include <sys/socket.h>
 #include <unistd.h> 
+#include <queue>
 
 namespace Minecraft {
+	
+	struct UnparsedPacket {
+		unsigned short size;
+		unsigned char* buffer;
+	};
+
 	class NetworkSystem {
 	public:
 		NetworkSystem();
+
 		void Init();
-		void Connect(const char* address);
+		void Connect(const char* ip_address);
 		void Disconnect();
 
 		void SendPacket(unsigned char* buffer, unsigned short size);
+
+		int read(unsigned char* buffer, unsigned short size);
+
+		long int readVarInt();
+		long long int readVarLong();
+
+		void ReceivePacket();
+		std::queue<UnparsedPacket*> unparsed_packets;
 	private:
 		int sock;
 	};
+
+	extern NetworkSystem* g_NetworkManager;
 }

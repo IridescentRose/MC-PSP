@@ -5,20 +5,20 @@
 #include <Aurealis/System/SystemManager.h>
 #include "../World/Data/SharedTextureData.h"
 #include <Aurealis/System/SystemManager.h>
-#include "Networking/Packets.h"
-#include "Networking/ProtocolDefs.h"
+#include "Protocol/Packets.h"
+#include "Protocol/ProtocolDef.h"
 using namespace Aurealis::System;
 
 namespace Minecraft {
 	StateClient::StateClient()
 	{
-		nw_man = 0;
+		g_NetworkManager = 0;
 	}
 	void StateClient::Init()
 	{
 		g_TextureData.Init();
-		nw_man = new NetworkSystem();
-		nw_man->Init();
+		g_NetworkManager = new NetworkSystem();
+		g_NetworkManager->Init();
 
 
 		//GET ADDRESS
@@ -63,18 +63,18 @@ namespace Minecraft {
 
 		user_length = strlen(username);
 
-		nw_man->Connect(ipAddr);
+		g_NetworkManager->Connect(ipAddr);
 
 
 		//HANDSHAKE
 		unsigned char size;
-		unsigned char* buffer = handshake_packet(MINECRAFT_PROTOCOL_VERSION, ipAddr, MINECRAFT_DEFAULT_PORT, CONNECTION_STATE_LOGIN, size);
+		unsigned char* buffer = handshake_packet(MINECRAFT_PROTOCOL_VERSION_NUMBER, ipAddr, MINECRAFT_DEFAULT_PORT, CONNECTION_STATE_LOGIN, size);
 
-		nw_man->SendPacket(buffer, size);
+		g_NetworkManager->SendPacket(buffer, size);
 		delete[] buffer;
 
 		buffer = login_start(username, size);
-		nw_man->SendPacket(buffer, size);
+		g_NetworkManager->SendPacket(buffer, size);
 		delete[] buffer;
 		
 	}
@@ -92,6 +92,7 @@ namespace Minecraft {
 	}
 	void StateClient::HandleEvents(StateManager* sManager)
 	{
+		//HANDLE PACKETS HERE
 	}
 	void StateClient::Update(StateManager* sManager)
 	{
@@ -103,21 +104,20 @@ namespace Minecraft {
 		g_RenderManager.CleanBuffers();
 
 		//RENDER STUFF
-
-
+		g_NetworkManager->ReceivePacket();
 
 		//DEVMODE
 		if (true) {
 			g_RenderManager.SetFontStyle(0.5, 0xFFFFFFFF, 0, 0x00000000);
 			/*DEBUG STATS*/
 			
+
 			u32 freeMemory = Aurealis::System::g_System.freeMemory();
 			//FPS HERE!
 			g_RenderManager.DebugPrint(4, 14, "cpu: %d%%", g_RenderManager.GetCpuUsage());
 			g_RenderManager.DebugPrint(4, 24, "gpu: %d%%", g_RenderManager.GetGpuUsage());
 			g_RenderManager.DebugPrint(4, 34, "free memory: %.3f kb (%.3f mb)", (float)freeMemory / 1024.0f, ((float)freeMemory / 1024.0f) / 1024.0f);
-			g_RenderManager.DebugPrint(4, 44, "username: %d", user_length);
-			g_RenderManager.DebugPrint(4, 54, "ip: %d", ip_length);
+			g_RenderManager.DebugPrint(4, 44, "packets received: %d", g_NetworkManager->unparsed_packets.size());
 		}
 		g_RenderManager.EndFrame();
 	}
