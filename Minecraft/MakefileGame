@@ -6,8 +6,6 @@ Engine/Aurealis/Audio/sound_utils/vfsFile.o \
 Engine/Aurealis/Audio/sound_utils/VirtualFile.o \
 Engine/Aurealis/Audio/sound_utils/audio.o \
 Engine/Aurealis/Audio/sound_utils/bgm.o \
-Engine/Aurealis/Audio/sound_utils/media.o \
-Engine/Aurealis/Audio/sound_utils/mod.o \
 Engine/Aurealis/Graphics/common.o \
 Engine/Aurealis/Graphics/vfram.o \
 Engine/Aurealis/Graphics/vram.o \
@@ -83,18 +81,18 @@ LameCraft/Carnation/Protocol/Packets.o \
 Lamecraft.o
 
 INCDIR = $(PSPPATH)/include
-INCDIR += ./include ./Engine ./3libs
+INCDIR += ./LameCraft ./include ./Engine ./3libs ./3libs/libpspmath /usr/local/pspdev/psp/include
 CFLAGS = -O3 -G0 -Wall -mpreferred-stack-boundary=4 #-enable-newlib-hw-fp -ffast-math
-CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
+CXXFLAGS = -std=gnu++17 -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
 BUILD_PRX = 1
 PSP_FW_VERSION=371
 PSP_LARGE_MEMORY = 1
 
-LIBDIR += ./3libs/noisepp ./3libs/libpspmath
+LIBDIR += ./3libs/noisepp ./3libs/libpspmath 
 LDFLAGS =
-LIBS=  -lNoisepp -lpspaudiolib -lpspaudio -lmikmod -lmmio -lpspaudiocodec -lpng -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath #-lpsp_req -lcurl -lTiny
+LIBS=  -lNoisepp -lpspaudiolib -lpspaudio -lpspaudiocodec -lpng -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath #-lpsp_req -lcurl -lTiny
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = MineCraft PSP 2
