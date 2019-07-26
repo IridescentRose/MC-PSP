@@ -24,27 +24,27 @@
 #define HARDCORE 2
 
 /*
-q = э
-w = ш
-e = е
-y = ч
+q = пїЅ
+w = пїЅ
+e = пїЅ
+y = пїЅ
 u = y
-i = и
+i = пїЅ
 o = o
-p = п
-g = г
-j = ж
-z = з
-x = щ
-c = ц
-v = в
-~ = й
+p = пїЅ
+g = пїЅ
+j = пїЅ
+z = пїЅ
+x = пїЅ
+c = пїЅ
+v = пїЅ
+~ = пїЅ
 
-$ = ь
-& = ъ
-^ = я
-@ = ы
-# = ю
+$ = пїЅ
+& = пїЅ
+^ = пїЅ
+@ = пїЅ
+# = пїЅ
 */
 
 using namespace Aurealis::Graphics;
@@ -132,7 +132,7 @@ void StateMenu::Init()
     mainStatistics.damageRecieved = 0;
     // end
 
-    // Инициализируем переменные опций
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     mainOptions.detailedSky = 1;
     mainOptions.smoothLighting = true;
     mainOptions.sounds = 1;
@@ -1968,11 +1968,11 @@ void StateMenu::HandleEvents(StateManager* sManager)
                     short armorAm[4];
                     bool armorSt[4];
 
-                    for(int o = 0; o <= 35; o += 1) // Инициализация инвентаря
+                    for(int o = 0; o <= 35; o += 1) // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                     {
-                        invAm[o] = -1; // Количество вещей в ячейки = -1 (0)
-                        invId[o] = -1; // Id вещей в ячейке = -1 (ячейка пуста)
-                        invSt[o] = false; // Вещь в ячейке не стакается (по умолчанию)
+                        invAm[o] = -1; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ = -1 (0)
+                        invId[o] = -1; // Id пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ = -1 (пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ)
+                        invSt[o] = false; // пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
                     }
 
                     for(int o = 0; o <= 3; o += 1)
@@ -3284,7 +3284,7 @@ void StateMenu::ScanTexturePacks(const char* dirName)
             size_t found2 = plik.find("..");
             size_t found3 = plik.find(".svn");
 
-            if(found==std::string::npos && found2==std::string::npos && found3==std::string::npos)//не найдено
+            if(found==std::string::npos && found2==std::string::npos && found3==std::string::npos)//пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             {
                 TP newTP;
 
@@ -3392,6 +3392,9 @@ int StateMenu::fileSize (const std::string& name)
 
 void StateMenu::DrawText(int x,int y, unsigned int color, float size, const char *message, ...)
 {
-    g_RenderManager.SetFontStyle(size,color,0,0x00000200|0x00000000);
+    
+	sceGuDisable(GU_BLEND);
+	sceGuEnable(GU_DEPTH_TEST);
+    g_RenderManager.SetFontStyle(size,color,0,0x00000200|0x00004000);
     g_RenderManager.DebugPrint(x,y,message);
 }

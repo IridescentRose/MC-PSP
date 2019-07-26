@@ -8,6 +8,7 @@
 #include <Aurealis/Graphics/Sprite.h>
 
 // font vars
+#define default_small_size 0.428
 #define default_size 0.5
 #define default_big_size 0.687
 
@@ -72,6 +73,7 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
 		sceGuEnable(GU_BLEND);
 		sceGuColor(GU_COLOR(1,1,1,1.0f));
 
+
         for(int x = 0; x < 8; x++)
         {
             for(int y = 0; y < 5; y++)
@@ -115,10 +117,9 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
 		sceGuEnable(GU_DEPTH_TEST);
 
 		//draw subtitles on buttons
-        g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200|0x00000000);
+	g_RenderManager.SetFont(0);
+        g_RenderManager.SetFontStyle(default_small_size,0xFFFFFFFF,0,0x00000200|INTRAFONT_CACHE_ALL);
 
-        if(g_RenderManager.GetFontLanguage() == ENGLISH)
-        {
             if(stateName == 0)
             {
                 g_RenderManager.DebugPrint(240,103,"Loading level");
@@ -152,7 +153,7 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
                 }
             }
 
-            g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.45f,0.45f,0.45f,1.0f),0,0x00000200|0x00000000);
+            g_RenderManager.SetFontStyle(default_small_size,GU_COLOR(0.45f,0.45f,0.45f,1.0f),0,0x00000200|INTRAFONT_CACHE_ALL);
             switch(tip)
             {
                 case 0:
@@ -178,71 +179,9 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
                 g_RenderManager.DebugPrint(240,255,"otherwise zombies will slain you");
                 break;
             }
-        }
-        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-        {
-            if(stateName == 0)
-            {
-                g_RenderManager.DebugPrint(240,103,"Zagruzka mira");
-            }
-            else
-            {
-                g_RenderManager.DebugPrint(240,103,"Generaci^ mira");
-                switch(stateName)
-                {
-                    case 1:
-                    g_RenderManager.DebugPrint(240,136,"Generaci^ landwafta %i %%",readiness);
-                    break;
-                    case 2:
-                    g_RenderManager.DebugPrint(240,136,"Generaci^ pexer");
-                    break;
-                    case 3:
-                    g_RenderManager.DebugPrint(240,136,"V@raxivanie t@kov");
-                    break;
-                    case 4:
-                    g_RenderManager.DebugPrint(240,136,"Pocadka derev$ev");
-                    break;
-                    case 5:
-                    g_RenderManager.DebugPrint(240,136,"Generaci^ rud@");
-                    break;
-                    case 6:
-                    g_RenderManager.DebugPrint(240,136,"Rasyet kart@ tene~");
-                    break;
-                    case 7:
-                    g_RenderManager.DebugPrint(240,136,"Sohranenie yankov");
-                    break;
-                }
-            }
+ 
 
-            g_RenderManager.SetFontStyle(default_size,GU_COLOR(0.45f,0.45f,0.45f,1.0f),0,0x00000200|0x00000000);
-            switch(tip)
-            {
-                case 0:
-                g_RenderManager.DebugPrint(240,240,"Najmite prav@~ + lev@~ triger, ytob@ otkr@t$ inventar$");
-                break;
-                case 1:
-                g_RenderManager.DebugPrint(240,240,"Najmite prav@~ + lev@~ triger, ytob@ otkr@t$ inventar$");
-                break;
-                case 2:
-                g_RenderManager.DebugPrint(240,240,"Navedite pricel na verstak");
-                g_RenderManager.DebugPrint(240,255,"i najmite prav@~ triger, ytob@ otkr@t$ menq verstaka");
-                break;
-                case 3:
-                g_RenderManager.DebugPrint(240,240,"Navedite pricel na verstak");
-                g_RenderManager.DebugPrint(240,255,"i najmite prav@~ triger, ytob@ otkr@t$ menq verstaka");
-                break;
-                case 4:
-                g_RenderManager.DebugPrint(240,240,"V@berite edu v inventare ");
-                g_RenderManager.DebugPrint(240,255,"i najmite prav@~ triger, ytob@ s&est$ ee");
-                break;
-                case 5:
-                g_RenderManager.DebugPrint(240,240,"V@berite edu v inventare ");
-                g_RenderManager.DebugPrint(240,255,"i najmite prav@~ triger, ytob@ s&est$ ee");
-                break;
-            }
-        }
-
-        g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200|0x00000000);
+        	g_RenderManager.SetFontStyle(default_small_size,0xFFFFFFFF,0,0x00000200|INTRAFONT_CACHE_ALL);
 		g_RenderManager.EndFrame();
 	}
 	return 0;

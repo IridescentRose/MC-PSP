@@ -1147,6 +1147,7 @@ CraftWorld::~CraftWorld()
 
 void CraftWorld::initWorld(int worldSize, int worldHeight, int chunkSize)
 {
+    g_RenderManager.defaultFontType = 0;
     //inicjuj mape
     WORLD_SIZE = worldSize;
     CHUNK_SIZE = chunkSize;

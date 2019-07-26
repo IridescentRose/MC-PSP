@@ -72,7 +72,7 @@ namespace Aurealis
 		    fontType = 0;
 		    defaultFontType = 1;
 
-		    SetFont(1);
+		    SetFont(0);
 			mVerticalSync = false;
 			listNum = 0;
 			cleanColor = 0xFF00FF00; //0xFFF5B783
@@ -144,34 +144,45 @@ namespace Aurealis
 		{
 			intraFontInit();
 
-			numFont = intraFontLoad("Assets/Fonts/numerals.pgf",INTRAFONT_CACHE_ASCII);
-			engFont = intraFontLoad("Assets/Fonts/eng_letters.pgf",INTRAFONT_CACHE_ASCII);
-			rusFont = intraFontLoad("Assets/Fonts/rus_letters.pgf",INTRAFONT_CACHE_ASCII);
-
+			numFont = intraFontLoad("Assets/Fonts/numerals.pgf",INTRAFONT_CACHE_ALL);
+			engFont = intraFontLoad("Assets/Fonts/eng_letters.pgf",INTRAFONT_CACHE_ALL);
+			rusFont = intraFontLoad("Assets/Fonts/rus_letters.pgf",INTRAFONT_CACHE_ALL);
+			numFont = intraFontLoad("Assets/Fonts/numerals.pgf",INTRAFONT_CACHE_ALL);
+			
 			intraFontSetStyle(numFont,0.5f,WHITE,BLACK,INTRAFONT_ALIGN_CENTER);
 			intraFontSetStyle(engFont,0.5f,WHITE,BLACK,INTRAFONT_ALIGN_CENTER);
 			intraFontSetStyle(rusFont,0.5f,WHITE,BLACK,INTRAFONT_ALIGN_CENTER);
 
-			debugFont = engFont;
+			debugFont = numFont;
+			defaultFontType = 1;
 		}
 
 		void RenderManager::SetFontStyle(float size, unsigned int color, unsigned int shadowColor, unsigned int options)
 		{
+					sceGuDisable(GU_BLEND);
+		sceGuEnable(GU_DEPTH_TEST);
+			SetDefaultFont();
+			unsigned int options2 = options |INTRAFONT_CACHE_ALL;
 		    if(fontType != 0)
 		    {
 		        if(shadowColor == 999)
                 {
-                    intraFontSetStyle(debugFont, size, color, 0, options);
+                    intraFontSetStyle(debugFont, size, color, 0, options2);
                 }
                 else
                 {
-                    intraFontSetStyle(debugFont, size, color, BLACK, options);
+                    intraFontSetStyle(debugFont, size, color, BLACK, options2);
                 }
 		    }
 		    else
             {
-                intraFontSetStyle(debugFont, size, color, shadowColor, options);
+                intraFontSetStyle(debugFont, size, color, shadowColor, options2);
             }
+
+		sceGuDisable(GU_DEPTH_TEST);
+		sceGuEnable(GU_BLEND);
+		sceGuColor(GU_COLOR(1,1,1,1.0f));
+
 		}
 
         void RenderManager::SetFont(int type)

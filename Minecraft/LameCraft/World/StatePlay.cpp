@@ -15,11 +15,12 @@
 #define default_size 0.5
 #define default_big_size 0.687
 
-#define ENGLISH 1
+#define ENGLISH 0
 #define RUSSIAN 2
 
 StatePlay::StatePlay()
 {
+    g_RenderManager.defaultFontType = 0;
     time12 = 0.0f;
     fppCam = NULL;
     UseChest = NULL;
@@ -11932,8 +11933,6 @@ void StatePlay::Draw(StateManager* sManager)
         sceGuEnable(GU_BLEND);
         sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-        if(g_RenderManager.GetFontLanguage() == ENGLISH)
-        {
             if(mWorld->gameModeWorld == 2)
             {
                 g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(0.25f,0.25f,0.25f,1),0,0x00000200);
@@ -11959,34 +11958,6 @@ void StatePlay::Draw(StateManager* sManager)
                 g_RenderManager.DebugPrint(240,150,"Press X to respawn!");
             }
         }
-        if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-        {
-            if(mWorld->gameModeWorld == 2)
-            {
-                g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(0.25f,0.25f,0.25f,1),0,0x00000200);
-
-                g_RenderManager.DebugPrint(242,52,"Igra okonyena!");
-                g_RenderManager.DebugPrint(242,152,"Najmite H, ytob@ udalit$ vaw mir!");
-
-                g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(1,0,0,1),0,0x00000200);
-
-                g_RenderManager.DebugPrint(240,50,"Igra okonyena!");
-                g_RenderManager.DebugPrint(240,150,"Najmite H, ytob@ udalit$ vaw mir!");
-            }
-            else
-            {
-                g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(0.25f,0.25f,0.25f,1),0,0x00000200);
-
-                g_RenderManager.DebugPrint(242,52,"V@ pogibli!");
-                g_RenderManager.DebugPrint(242,152,"Najmite H, ytob@ vozrodit$s^!");
-
-                g_RenderManager.SetFontStyle(default_big_size,GU_COLOR(1,0,0,1),0,0x00000200);
-
-                g_RenderManager.DebugPrint(240,50,"V@ pogibli!");
-                g_RenderManager.DebugPrint(240,150,"Najmite H, ytob@ vozrodit$s^!");
-            }
-        }
-    }
 
     if(sleepMessageTime > 0.0f)
     {
@@ -12001,11 +11972,6 @@ void StatePlay::Draw(StateManager* sManager)
                 g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
                 g_RenderManager.DebugPrint(242,158,"You can only sleep at night!");
             }
-            if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-            {
-                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                g_RenderManager.DebugPrint(242,158,"Spat$ mojno tol$ko noy$#!");
-            }
         }
         else
         {
@@ -12013,11 +11979,6 @@ void StatePlay::Draw(StateManager* sManager)
             {
                 g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
                 g_RenderManager.DebugPrint(242,158,"You can’t sleep yet, there are monsters nearby");
-            }
-            if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-            {
-                g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                g_RenderManager.DebugPrint(242,158,"V@ ne mojete spat$, poka monstr@ r^dom");
             }
         }
     }
@@ -12347,7 +12308,7 @@ void StatePlay::Draw(StateManager* sManager)
 
             g_RenderManager.SetFontStyle(0.5f,GU_COLOR(red,green,blue,alpha),999,0x00000200);
 
-            g_RenderManager.SetFont(ENGLISH);
+            g_RenderManager.SetFont(0);
             g_RenderManager.DebugPrint(240,50,"%s",inputDiskName.c_str());
             g_RenderManager.SetDefaultFont();
         }
@@ -12368,7 +12329,7 @@ void StatePlay::Draw(StateManager* sManager)
             }
             if(tutorialTimer <= 1.0f)
             {
-                g_RenderManager.SetFontStyle(0.5f,GU_COLOR(1,1,1,tutorialTimer),GU_COLOR(1,1,1,tutorialTimer),0x00000000);
+                g_RenderManager.SetFontStyle(0.5f,GU_COLOR(1,1,1,tutorialTimer),GU_COLOR(1,1,1,tutorialTimer),0x00000000|0x00004000);
             }
 
             if(language == ENGLISH)
@@ -12376,14 +12337,7 @@ void StatePlay::Draw(StateManager* sManager)
                 g_RenderManager.DebugPrint(5,40,"Tutorial");
                 g_RenderManager.DebugPrint(5,57,"Press R+L to open inventory");
                 g_RenderManager.DebugPrint(5,74,"Press R+arrow up to drop item");
-            }
-            else
-            {
-                g_RenderManager.DebugPrint(5,40,"Tutorial");
-                g_RenderManager.DebugPrint(5,57,"Najmite R+L ytob@ otkr@t$ inventar$");
-                g_RenderManager.DebugPrint(5,74,"Najmite R+vverh ytob@ v@brosit$ predmet");
-            }
-        }
+            }        }
         g_RenderManager.SetFontStyle(0.345f,0xFFFFFFFF,0,0x00000000);
     }
 
@@ -12690,7 +12644,7 @@ void StatePlay::Draw(StateManager* sManager)
 
                 DrawText(240,24,GU_COLOR(1,1,1,1),default_size,"Nastro~ki");
 
-                g_RenderManager.SetFont(ENGLISH);
+                g_RenderManager.SetFont(0);
                 DrawText(110,24,GU_COLOR(1,1,1,1),default_size,"L");
                 DrawText(370,24,GU_COLOR(1,1,1,1),default_size,"R");
                 g_RenderManager.SetDefaultFont();

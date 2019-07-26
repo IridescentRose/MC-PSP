@@ -414,14 +414,13 @@ void StateOptions::Draw(StateManager* sManager)
 {
 	//start rendering
 	g_RenderManager.StartFrame(1,1,1);
-
+			sceGuDisable(GU_DEPTH_TEST);
+			sceGuEnable(GU_BLEND);
+			sceGuColor(GU_COLOR(1,1,1,1.0f));
 	switch(menuState)
 	{
 		case 0:
 		{
-			sceGuDisable(GU_DEPTH_TEST);
-			sceGuEnable(GU_BLEND);
-			sceGuColor(GU_COLOR(1,1,1,1.0f));
 
             for(int x = 0; x < 8; x++)
             {
@@ -456,19 +455,12 @@ void StateOptions::Draw(StateManager* sManager)
 			//draw subtitles on buttons
             if(g_RenderManager.GetFontLanguage() == ENGLISH)
             {
-                selectPos == 0 ? DrawText(240,129,GU_COLOR(1,1,0,1) ,default_size,"Controls") : DrawText(240,129,GU_COLOR(1,1,1,1) ,default_size,"Controls");
-                selectPos == 1 ? DrawText(240,169,GU_COLOR(1,1,0,1) ,default_size,"Analog stick") : DrawText(240,169,GU_COLOR(1,1,1,1) ,default_size,"Analog stick");
-                selectPos == 2 ? DrawText(240,209,GU_COLOR(1,1,0,1) ,default_size,"Cancel") : DrawText(240,209,GU_COLOR(1,1,1,1) ,default_size,"Cancel");
+				g_RenderManager.SetFontStyle(default_size, GU_COLOR(1,1,0,1),0, 0x00000200 | 0x00004000);
+                selectPos == 0 ? g_RenderManager.DebugPrint(240,129, "Controls") : g_RenderManager.DebugPrint(240,129,"Controls");
+                selectPos == 1 ? g_RenderManager.DebugPrint(240,169,"Analog stick") : g_RenderManager.DebugPrint(240,169,"Analog stick");
+                selectPos == 2 ? g_RenderManager.DebugPrint(240,209,"Cancel") : g_RenderManager.DebugPrint(240,209,"Cancel");
 
-                DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Options");
-            }
-            if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-            {
-                selectPos == 0 ? DrawText(240,129,GU_COLOR(1,1,0,1) ,default_size,"Naznayenie knopok") : DrawText(240,129,GU_COLOR(1,1,1,1) ,default_size,"Naznayenie knopok");
-                selectPos == 1 ? DrawText(240,169,GU_COLOR(1,1,0,1) ,default_size,"Nastro~ki stika") : DrawText(240,169,GU_COLOR(1,1,1,1) ,default_size,"Nastro~ki stika");
-                selectPos == 2 ? DrawText(240,209,GU_COLOR(1,1,0,1) ,default_size,"Otmena") : DrawText(240,209,GU_COLOR(1,1,1,1) ,default_size,"Otmena");
-
-                DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Nastro~ki");
+                g_RenderManager.DebugPrint(240,29,"Options");
             }
 		}
 		break;
@@ -520,20 +512,20 @@ void StateOptions::Draw(StateManager* sManager)
 
 			//write action names
 			starty = 67;
-			g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000000);
+			g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000000|0x00004000);
 			for(int i = controlStart;i < controlEnd;i++)
 			{
 				//action
-				controlPos == i ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000000) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000000);
+				controlPos == i ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000000|0x00004000) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000000|0x00004000);
 				g_RenderManager.DebugPrint(250,starty + (i * 30) - (controlStart * 30)+4,g_InputHelper.getActionName(i).c_str());
 			}
 
-			g_RenderManager.SetFontStyle(default_big_size,0xFFFFFFFF,0,0x00000200);
+			g_RenderManager.SetFontStyle(default_big_size,0xFFFFFFFF,0,0x00000200|0x00004000);
 			starty = 65;
 			for(int i = controlStart;i < controlEnd;i++)
 			{
 				//button assigned to this action
-				controlPos == i ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+				controlPos == i ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200|0x00004000) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200|0x00004000);
 				if(controlPos == i && chooseKeyState == true)
 					g_RenderManager.DebugPrint(160,starty + (i * 30) - (controlStart * 30)+4,"...");
 				else
@@ -545,11 +537,6 @@ void StateOptions::Draw(StateManager* sManager)
             {
                 controlPos == 16 ? DrawText(240,269,GU_COLOR(1,1,0,1) ,default_size,"Cancel") : DrawText(240,269,GU_COLOR(1,1,1,1) ,default_size,"Cancel");
                 DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Controls");
-            }
-            if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-            {
-                controlPos == 16 ? DrawText(240,269,GU_COLOR(1,1,0,1) ,default_size,"Otmena") : DrawText(240,269,GU_COLOR(1,1,1,1) ,default_size,"Otmena");
-                DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Naznayenie knopok");
             }
 		}
 		break;
@@ -610,44 +597,25 @@ void StateOptions::Draw(StateManager* sManager)
 			sceGuDisable(GU_BLEND);
 			sceGuEnable(GU_DEPTH_TEST);
 
-            g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200);
+            g_RenderManager.SetFontStyle(default_size,0xFFFFFFFF,0,0x00000200|0x00004000);
             if(g_RenderManager.GetFontLanguage() == ENGLISH)
             {
-                currentAnalogPos == 0 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                currentAnalogPos == 0 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200|0x00004000) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200|0x00004000);
                 g_RenderManager.DebugPrint(240,109,"Analog up : %d%%",(int)(fabs(g_InputHelper.analogYup) * 100.0f));
 
-                currentAnalogPos == 1 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                currentAnalogPos == 1 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200|0x00004000) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200|0x00004000);
                 g_RenderManager.DebugPrint(240,139,"Analog down : %d%%",(int)(fabs(g_InputHelper.analogYdown) * 100.0f));
 
-                currentAnalogPos == 2 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                currentAnalogPos == 2 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200|0x00004000) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200|0x00004000);
                 g_RenderManager.DebugPrint(240,169,"Analog left : %d%%",(int)(fabs(g_InputHelper.analogXleft) * 100.0f));
 
-                currentAnalogPos == 3 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                currentAnalogPos == 3 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200|0x00004000) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200|0x00004000);
                 g_RenderManager.DebugPrint(240,199,"Analog right : %d%%",(int)(fabs(g_InputHelper.analogXright) * 100.0f));
 
-                currentAnalogPos >= 4 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
+                currentAnalogPos >= 4 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200|0x00004000) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200|0x00004000);
                 g_RenderManager.DebugPrint(240,269,"Cancel");
 
                 DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Analog stick");
-            }
-            if(g_RenderManager.GetFontLanguage() == RUSSIAN)
-            {
-                currentAnalogPos == 0 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                g_RenderManager.DebugPrint(240,109,"Stik vverh : %d%%",(int)(fabs(g_InputHelper.analogYup) * 100.0f));
-
-                currentAnalogPos == 1 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                g_RenderManager.DebugPrint(240,139,"Stik vniz : %d%%",(int)(fabs(g_InputHelper.analogYdown) * 100.0f));
-
-                currentAnalogPos == 2 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                g_RenderManager.DebugPrint(240,169,"Stik vlevo : %d%%",(int)(fabs(g_InputHelper.analogXleft) * 100.0f));
-
-                currentAnalogPos == 3 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                g_RenderManager.DebugPrint(240,199,"Stik vpravo : %d%%",(int)(fabs(g_InputHelper.analogXright) * 100.0f));
-
-                currentAnalogPos >= 4 ? g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,0.25f,1),0,0x00000200) : g_RenderManager.SetFontStyle(default_size,GU_COLOR(1,1,1,1),0,0x00000200);
-                g_RenderManager.DebugPrint(240,269,"Otmena");
-
-                DrawText(240,29,GU_COLOR(1,1,1,1) ,default_size,"Nastro~ki stika");
             }
 		}
 		break;
@@ -659,6 +627,10 @@ void StateOptions::Draw(StateManager* sManager)
 
 void StateOptions::DrawText(int x,int y, unsigned int color, float size, const char *message, ...)
 {
-    g_RenderManager.SetFontStyle(size,color,0,0x00000200|0x00000000);
+
+
+	sceGuDisable(GU_BLEND);
+	sceGuEnable(GU_DEPTH_TEST);
+    g_RenderManager.SetFontStyle(size,color,0,0x00000200|0x00004000);
     g_RenderManager.DebugPrint(x,y,message);
 }
