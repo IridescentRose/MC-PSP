@@ -1,11 +1,11 @@
 TARGET = Minecraft2
 OBJS = Engine/Aurealis/Math/MathLib.o \
-Engine/Aurealis/Audio/sound_utils/pgeWav.o \
-Engine/Aurealis/Audio/SoundManager.o \
-Engine/Aurealis/Audio/sound_utils/vfsFile.o \
-Engine/Aurealis/Audio/sound_utils/VirtualFile.o \
-Engine/Aurealis/Audio/sound_utils/audio.o \
-Engine/Aurealis/Audio/sound_utils/bgm.o \
+Engine/Shadow/Audio/sound_utils/pgeWav.o \
+Engine/Shadow/Audio/sound_utils/vfsFile.o \
+Engine/Shadow/Audio/sound_utils/VirtualFile.o \
+Engine/Shadow/Audio/sound_utils/audio.o \
+Engine/Shadow/Audio/sound_utils/bgm.o \
+Engine/Shadow/Audio/AudioManager.o \
 Engine/Aurealis/Graphics/common.o \
 Engine/Aurealis/Graphics/vfram.o \
 Engine/Aurealis/Graphics/vram.o \
@@ -16,16 +16,6 @@ Engine/Aurealis/Graphics/TextureAtlas.o \
 Engine/Aurealis/Graphics/TextureUtil.o \
 Engine/Aurealis/Graphics/intraFont/libccc.o \
 Engine/Aurealis/Graphics/intraFont/intraFont.o \
-Engine/Aurealis/Graphics/Effects/Drop.o \
-Engine/Aurealis/Graphics/Effects/TNT.o \
-Engine/Aurealis/Graphics/Effects/InventoryPlayer.o \
-Engine/Aurealis/Graphics/Effects/SnowBall2.o \
-Engine/Aurealis/Graphics/Effects/SkyLight.o \
-Engine/Aurealis/Graphics/Effects/SkyBox.o \
-Engine/Aurealis/Graphics/Effects/Destroyer.o \
-Engine/Aurealis/Graphics/Effects/StarsBox.o \
-Engine/Aurealis/Graphics/Effects/Particle.o \
-Engine/Aurealis/Graphics/Effects/WeatherSystem.o \
 Engine/Aurealis/Math/Matrix3.o \
 Engine/Aurealis/Math/Matrix4.o \
 Engine/Aurealis/Math/Quaternion.o \
@@ -43,42 +33,9 @@ Engine/Aurealis/Utils/pgeZip.o \
 Engine/Aurealis/Utils/pge.o \
 Engine/Aurealis/Utils/pgeDir.o \
 Engine/Aurealis/Utils/InputHelper.o \
-LameCraft/World/Data/blocks/BaseBlock.o \
-LameCraft/World/Data/blocks/Blocks.o \
-LameCraft/World/Data/items/BaseItem.o \
-LameCraft/World/Data/items/Items.o \
-LameCraft/World/Data/entity/BlockEntity.o \
-LameCraft/World/Data/entity/NoteBlockEntity.o \
-LameCraft/World/Data/entity/JukeboxEntity.o \
-LameCraft/World/Data/entity/MonsterSpawnerEntity.o \
-LameCraft/World/Data/entity/ItemFrameEntity.o \
-LameCraft/World/Data/blocks/Chest2.o \
-LameCraft/World/Data/blocks/DirectionBlock.o \
-LameCraft/World/Data/blocks/Furnace2.o \
-LameCraft/World/Chunk/SimpleMeshChunk2.o \
-LameCraft/World/Chunk/ChunkDataProvider.o \
-LameCraft/World/CraftWorld2.o \
-LameCraft/World/Mob/LameMob.o \
-LameCraft/World/Mob/Zombie2.o \
-LameCraft/World/Mob/Cow2.o \
-LameCraft/World/Mob/Creeper2.o \
-LameCraft/World/Mob/Sheep2.o \
-LameCraft/World/StatePlay.o \
-LameCraft/World/StatePlayCreative.o \
-LameCraft/World/Data/SharedTextureData.o \
-LameCraft/Menu/StateMenu.o \
-LameCraft/Menu/StateOptions.o \
-LameCraft/Menu/LoadingScreen.o \
-LameCraft/World/Terrain/mersenne-twister.o \
-LameCraft/World/Terrain/SimplexNoise.o \
-LameCraft/World/Terrain/WorldGenerator.o \
-LameCraft/Carnation/StateClient.o \
-LameCraft/Carnation/NetworkSystem.o \
-LameCraft/Carnation/Protocol/VarInt.o \
-LameCraft/Carnation/Protocol/ByteUtil.o \
-LameCraft/Carnation/Protocol/Packets.o \
 Minecraft.o \
-Minecraft/Menu/Logo.o
+Minecraft/Menu/Logo.o \
+Minecraft/Menu/MenuState.o
 
 INCDIR = $(PSPPATH)/include
 INCDIR += ./LameCraft ./include ./Engine ./3libs ./3libs/libpspmath /usr/local/pspdev/psp/include

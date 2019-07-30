@@ -2,24 +2,20 @@
 #include <psptypes.h>
 
 #include <Aurealis/Graphics/RenderManager.h>
-#include <Aurealis/Utils/Logger.h>
-#include <Aurealis/Utils/Timer.h>
 #include <Aurealis/System/SystemManager.h>
-#include <Aurealis/Graphics/Camera.h>
 #include <Aurealis/Utils/StateManager.h>
-#include "LameCraft/Menu/Version.h"
-#include "LameCraft/Menu/StateMenu.h"
-#include <Aurealis/Audio/SoundManager.h>
+#include <Shadow/Audio/AudioManager.hpp>
 #include <Aurealis/Graphics/TextureUtil.h>
 
 #include "Minecraft/Menu/Logo.hpp"
+#include "Minecraft/Version.hpp"
+#include "Minecraft/Menu/MenuState.hpp"
 using namespace Minecraft::Menus;
 
-
+using namespace Shadow::Audio;
 using namespace Aurealis::Graphics;
 using namespace Aurealis::Utils;
 using namespace Aurealis::System;
-using namespace Aurealis::Audio;
 using namespace Aurealis;
 
 PSP_MODULE_INFO("Minecraft", 0, VERSION_MAJOR, VERSION_MINOR);
@@ -52,7 +48,7 @@ SetupCallbacks();
 	}
 
 	//init and load sounds
-	g_SoundManager.Init();
+	g_AudioManager.init();
 }
 
 void doSplash(){
@@ -75,9 +71,9 @@ void mainLoop(){
 	StateManager stateManager;
 	stateManager.Init();
 	
-	StateMenu *statePlay = new StateMenu();
-	statePlay->Init();
-	stateManager.ChangeState(statePlay);
+	MenuState *state = new MenuState();
+	state->Init();
+	stateManager.ChangeState(state);
 
 	while ( stateManager.Running() )
 	{

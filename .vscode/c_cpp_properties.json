@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/local/pspdev/psp/include/**",
+                "/usr/local/pspdev/psp/sdk/include/**",
+                "${workspaceFolder}/Minecraft/Engine/**",
+                "/usr/local/pspdev/psp/sdk/include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/local/pspdev/bin/psp-gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}
