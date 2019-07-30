@@ -69,7 +69,6 @@ LameCraft/World/Data/SharedTextureData.o \
 LameCraft/Menu/StateMenu.o \
 LameCraft/Menu/StateOptions.o \
 LameCraft/Menu/LoadingScreen.o \
-LameCraft/Menu/SplashScreen.o \
 LameCraft/World/Terrain/mersenne-twister.o \
 LameCraft/World/Terrain/SimplexNoise.o \
 LameCraft/World/Terrain/WorldGenerator.o \
@@ -78,11 +77,12 @@ LameCraft/Carnation/NetworkSystem.o \
 LameCraft/Carnation/Protocol/VarInt.o \
 LameCraft/Carnation/Protocol/ByteUtil.o \
 LameCraft/Carnation/Protocol/Packets.o \
-Lamecraft.o
+Minecraft.o \
+Minecraft/Menu/Logo.o
 
 INCDIR = $(PSPPATH)/include
 INCDIR += ./LameCraft ./include ./Engine ./3libs ./3libs/libpspmath /usr/local/pspdev/psp/include
-CFLAGS = -O3 -G0 -Wall -mpreferred-stack-boundary=4 -enable-newlib-hw-fp -ffast-math
+CFLAGS = -O3 -Wall -mpreferred-stack-boundary=4 -ffast-math
 CXXFLAGS = -std=gnu++17 -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
