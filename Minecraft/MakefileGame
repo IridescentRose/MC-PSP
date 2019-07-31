@@ -35,7 +35,8 @@ Engine/Aurealis/Utils/pgeDir.o \
 Engine/Aurealis/Utils/InputHelper.o \
 Minecraft.o \
 Minecraft/Menu/Logo.o \
-Minecraft/Menu/MenuState.o
+Minecraft/Menu/MenuState.o \
+Minecraft/Menu/Panorama.o \
 
 INCDIR = $(PSPPATH)/include
 INCDIR += ./LameCraft ./include ./Engine ./3libs ./3libs/libpspmath /usr/local/pspdev/psp/include

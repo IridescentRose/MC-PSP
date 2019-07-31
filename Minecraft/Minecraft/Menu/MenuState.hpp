@@ -1,8 +1,9 @@
 #pragma once
 
 #include <Aurealis/Utils/GameState.h>
-
+#include "Panorama.hpp"
 #include <Shadow/Audio/AudioManager.hpp>
+#include <Aurealis/Utils/Timer.h>
 using namespace Shadow::Audio;
 using namespace Aurealis::Utils;
 
@@ -27,5 +28,7 @@ namespace Minecraft::Menus{
         void panoramaPass();
 
         OSL_SOUND* bgm;
+		Panorama* panorama;
+		Timer t;
     };
 }

@@ -15,7 +15,7 @@ namespace Minecraft::Menus{
     }
 
 	void MenuState::Init(){
-
+        t = Timer();
         //BGM!!!
         srand(time(0));
 	    int musicChoice = rand() % 4 + 1; //1 - 4
@@ -26,11 +26,15 @@ namespace Minecraft::Menus{
 
 	    bgm = oslLoadSoundFile(ss.str().c_str(),0);
 	    g_AudioManager.PlayMusic(bgm);
+
+        panorama = new Panorama();
     }
 	void MenuState::Enter(){
 
     }
 	void MenuState::CleanUp(){
+
+        delete panorama;
 
         //BGM!!!
         oslDeleteSound(bgm);
@@ -71,8 +75,7 @@ namespace Minecraft::Menus{
 
 
     void MenuState::panoramaPass(){
-        //Create a cube map
-        //Rotate
-        //Render    
+        panorama->update(t.GetDeltaTime());
+        panorama->render();
     }
 }
