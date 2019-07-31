@@ -2,6 +2,7 @@
 
 #include <Aurealis/Graphics/RenderManager.h>
 #include <string>
+#include <fstream>
 #include <sstream>
 
 namespace Minecraft::Menus{
@@ -34,7 +35,22 @@ namespace Minecraft::Menus{
         logo = TextureUtil::LoadPng("./assets/minecraft/textures/gui/title/logo.png");
         Logo = new Sprite(logo);
         Logo->Scale(0.9375f, 0.9375f);
+
+        std::ifstream infile("./assets/minecraft/texts/splashes.txt");
+
+        std::vector<std::string> splashes;
+
+        std::string temp;
+	    while(std::getline(infile, temp)){
+		    splashes.push_back(temp);
+	    }
+	
+	    srand(time(0));
+	    int chosen = rand() % splashes.size();
+	
+	    splashText = splashes[chosen];
     }
+
 	void MenuState::Enter(){
 
     }

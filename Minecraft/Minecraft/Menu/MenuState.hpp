@@ -40,6 +40,8 @@ namespace Minecraft::Menus{
 		Texture* logo;
 		Sprite* Logo;
 
+		std::string splashText;
+
 		MenuStates menu_states;
     };
 }

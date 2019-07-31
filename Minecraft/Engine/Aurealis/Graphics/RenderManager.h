@@ -85,7 +85,7 @@ namespace Aurealis
 			void Init();
 
 			void InitDebugFont();
-			void SetFontStyle(float size, unsigned int color, unsigned int shadowColor, unsigned int options);
+			void SetFontStyle(float size, unsigned int color, unsigned int shadowColor, unsigned int options, float angle);
 			void SetFont(int type);
 			void SetDefaultFont();
 			int GetFontLanguage();

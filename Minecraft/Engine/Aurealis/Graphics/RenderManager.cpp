@@ -149,15 +149,15 @@ namespace Aurealis
 			rusFont = intraFontLoad("Assets/Fonts/rus_letters.pgf",INTRAFONT_CACHE_ALL);
 			numFont = intraFontLoad("Assets/Fonts/numerals.pgf",INTRAFONT_CACHE_ALL);
 			
-			intraFontSetStyle(numFont,0.5f,WHITE,BLACK,INTRAFONT_ALIGN_CENTER);
-			intraFontSetStyle(engFont,0.5f,WHITE,BLACK,INTRAFONT_ALIGN_CENTER);
-			intraFontSetStyle(rusFont,0.5f,WHITE,BLACK,INTRAFONT_ALIGN_CENTER);
+			intraFontSetStyle(numFont,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER);
+			intraFontSetStyle(engFont,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER);
+			intraFontSetStyle(rusFont,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER);
 
 			debugFont = numFont;
 			defaultFontType = 1;
 		}
 
-		void RenderManager::SetFontStyle(float size, unsigned int color, unsigned int shadowColor, unsigned int options)
+		void RenderManager::SetFontStyle(float size, unsigned int color, unsigned int shadowColor, unsigned int options, float angle)
 		{
 					sceGuDisable(GU_BLEND);
 		sceGuEnable(GU_DEPTH_TEST);
@@ -167,16 +167,16 @@ namespace Aurealis
 		    {
 		        if(shadowColor == 999)
                 {
-                    intraFontSetStyle(debugFont, size, color, 0, options2);
+                    intraFontSetStyle(debugFont, size, color, 0, angle, options2);
                 }
                 else
                 {
-                    intraFontSetStyle(debugFont, size, color, BLACK, options2);
+                    intraFontSetStyle(debugFont, size, color, BLACK, angle, options2);
                 }
 		    }
 		    else
             {
-                intraFontSetStyle(debugFont, size, color, shadowColor, options2);
+                intraFontSetStyle(debugFont, size, color, shadowColor, angle, options2);
             }
 
 		sceGuDisable(GU_DEPTH_TEST);
