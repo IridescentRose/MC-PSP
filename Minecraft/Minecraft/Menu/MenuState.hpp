@@ -4,10 +4,16 @@
 #include "Panorama.hpp"
 #include <Shadow/Audio/AudioManager.hpp>
 #include <Aurealis/Utils/Timer.h>
+#include <Aurealis/Graphics/Sprite.h>
 using namespace Shadow::Audio;
 using namespace Aurealis::Utils;
 
 namespace Minecraft::Menus{
+
+	enum MenuStates{
+		MENU_STATE_TITLE = 0
+	};
+
     class MenuState : public CGameState {
     public:
 	    MenuState();
@@ -30,5 +36,10 @@ namespace Minecraft::Menus{
         OSL_SOUND* bgm;
 		Panorama* panorama;
 		Timer t;
+
+		Texture* logo;
+		Sprite* Logo;
+
+		MenuStates menu_states;
     };
 }

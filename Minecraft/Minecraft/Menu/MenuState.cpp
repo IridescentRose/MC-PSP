@@ -20,7 +20,7 @@ namespace Minecraft::Menus{
         srand(time(0));
 	    int musicChoice = rand() % 4 + 1; //1 - 4
         std::stringstream ss;
-        ss << "./Assets/Sounds/ambient/menu/menu";
+        ss << "./assets/sounds/ambient/menu/menu";
         ss << musicChoice;
         ss << ".bgm";
 
@@ -28,6 +28,12 @@ namespace Minecraft::Menus{
 	    g_AudioManager.PlayMusic(bgm);
 
         panorama = new Panorama();
+
+        menu_states = MENU_STATE_TITLE;
+
+        logo = TextureUtil::LoadPng("./assets/minecraft/textures/gui/title/logo.png");
+        Logo = new Sprite(logo);
+        Logo->Scale(0.9375f, 0.9375f);
     }
 	void MenuState::Enter(){
 
@@ -51,7 +57,9 @@ namespace Minecraft::Menus{
 
     }
 	void MenuState::Update(StateManager* sManager){
+        switch(menu_states){
 
+        }
     }
     
 
@@ -69,8 +77,18 @@ namespace Minecraft::Menus{
         g_RenderManager.EndFrame();
     }
     
+
+
     void MenuState::menuPass(){
-        
+        switch(menu_states){
+            case MENU_STATE_TITLE:{
+
+                Logo->SetPosition(240, 60);
+                Logo->Draw();
+
+                break;
+            }
+        }   
     }
 
 

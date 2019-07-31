@@ -12,12 +12,12 @@ namespace Minecraft::Menus{
 		box4 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
 		box5 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
 
-        tex0 = TextureUtil::LoadPng("./Assets/ConstTextures/panorama/panorama_1.png");
-        tex1 = TextureUtil::LoadPng("./Assets/ConstTextures/panorama/panorama_3.png");
-        tex2 = TextureUtil::LoadPng("./Assets/ConstTextures/panorama/panorama_2.png");
-        tex3 = TextureUtil::LoadPng("./Assets/ConstTextures/panorama/panorama_0.png");
-        tex4 = TextureUtil::LoadPng("./Assets/ConstTextures/panorama/panorama_4.png");
-        tex5 = TextureUtil::LoadPng("./Assets/ConstTextures/panorama/panorama_5.png");
+        tex0 = TextureUtil::LoadPng("./assets/minecraft/textures/gui/title/background/panorama_1.png");
+        tex1 = TextureUtil::LoadPng("./assets/minecraft/textures/gui/title/background/panorama_3.png");
+        tex2 = TextureUtil::LoadPng("./assets/minecraft/textures/gui/title/background/panorama_2.png");
+        tex3 = TextureUtil::LoadPng("./assets/minecraft/textures/gui/title/background/panorama_0.png");
+        tex4 = TextureUtil::LoadPng("./assets/minecraft/textures/gui/title/background/panorama_4.png");
+        tex5 = TextureUtil::LoadPng("./assets/minecraft/textures/gui/title/background/panorama_5.png");
 
         size = 1.0f;
 

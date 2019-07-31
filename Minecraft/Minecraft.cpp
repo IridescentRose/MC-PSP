@@ -54,7 +54,7 @@ SetupCallbacks();
 void doSplash(){
 	//splash screen!
 	{
-		Texture* tex = TextureUtil::LoadPng("./Assets/ConstTextures/mojang.png");
+		Texture* tex = TextureUtil::LoadPng("./assets/minecraft/textures/gui/title/mojang.png");
 		Logo* logo = new Logo();
 		logo->render(tex, GU_COLOR(1.0f, 1.0f, 1.0f, 1.0f), 4.0f);
 		delete logo;
