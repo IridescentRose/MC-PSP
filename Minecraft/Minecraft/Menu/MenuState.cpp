@@ -6,6 +6,7 @@
 #include "../Version.hpp"
 #include <sstream>
 
+#define PSP_MENU_SIZE 0.8
 namespace Minecraft::Menus{
 
 	MenuState::MenuState(){
@@ -161,7 +162,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        splashSize = vfpu_sinf(elapsed * 3.14159f) * (0.618f - (1.0f - 0.618f))/4.0f + (1.0f - 0.687f) ;
+        splashSize = vfpu_sinf(elapsed * 3.14159f) * (0.618f - (1.0f - 0.618f))/4.0f + (1.0f - 0.687f)*2 ;
     }
     
 
@@ -235,37 +236,37 @@ namespace Minecraft::Menus{
 
                 //Labels
                 if(selectPosY == 0){
-                    g_RenderManager.SetFontStyle(0.2875f, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
-                    g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
                 g_RenderManager.DebugPrint(240, 136 + 7, "Singleplayer");
 
                 if(selectPosY == 1){
-                    g_RenderManager.SetFontStyle(0.2875f, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
-                    g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
                 g_RenderManager.DebugPrint(240, 162 + 7, "Multiplayer");
 
                 if(selectPosY == 2){
-                    g_RenderManager.SetFontStyle(0.2875f, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
-                    g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
                 g_RenderManager.DebugPrint(240, 188 + 7, "Minecraft Realms");
 
                 if(selectPosY == 3 && selectPosX == 1){
-                    g_RenderManager.SetFontStyle(0.2875f, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
-                    g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
                 g_RenderManager.DebugPrint(188, 224 + 7, "Options");
 
                 if(selectPosY == 3 && selectPosX == 2){
-                    g_RenderManager.SetFontStyle(0.2875f, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
-                    g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
                 g_RenderManager.DebugPrint(292, 224 + 7, "Quit Game");
 
@@ -276,10 +277,10 @@ namespace Minecraft::Menus{
                 g_RenderManager.SetFontStyle(splashSize, 0xFF00FFFF, 0, INTRAFONT_ALIGN_CENTER, -20.0f);
                 g_RenderManager.DebugPrint(344, 72, "%s", splashText.c_str());
 
-                g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_LEFT, 0.0f);
+                g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_LEFT, 0.0f);
                 g_RenderManager.DebugPrint(0, 272, " %s %s", GAME_NAME, EMULATED_VERSION);
 
-                g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_RIGHT, 0.0f);
+                g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_RIGHT, 0.0f);
                 g_RenderManager.DebugPrint(480, 272, "Copyright Mojang AB. Do not distribute! ");
 
                 break;
