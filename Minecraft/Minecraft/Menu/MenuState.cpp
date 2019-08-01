@@ -234,20 +234,39 @@ namespace Minecraft::Menus{
 
 
                 //Labels
-                
-                g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                if(selectPosY == 0){
+                    g_RenderManager.SetFontStyle(0.2875f, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                }else{
+                    g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                }
                 g_RenderManager.DebugPrint(240, 136 + 7, "Singleplayer");
 
-                g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                if(selectPosY == 1){
+                    g_RenderManager.SetFontStyle(0.2875f, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                }else{
+                    g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                }
                 g_RenderManager.DebugPrint(240, 162 + 7, "Multiplayer");
 
-                g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                if(selectPosY == 2){
+                    g_RenderManager.SetFontStyle(0.2875f, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                }else{
+                    g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                }
                 g_RenderManager.DebugPrint(240, 188 + 7, "Minecraft Realms");
 
-                g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                if(selectPosY == 3 && selectPosX == 1){
+                    g_RenderManager.SetFontStyle(0.2875f, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                }else{
+                    g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                }
                 g_RenderManager.DebugPrint(188, 224 + 7, "Options");
 
-                g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                if(selectPosY == 3 && selectPosX == 2){
+                    g_RenderManager.SetFontStyle(0.2875f, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                }else{
+                    g_RenderManager.SetFontStyle(0.2875f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                }
                 g_RenderManager.DebugPrint(292, 224 + 7, "Quit Game");
 
 
