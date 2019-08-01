@@ -40,7 +40,15 @@ namespace Minecraft::Menus{
 		Texture* logo;
 		Sprite* Logo;
 
+		Texture* widgets;
+
 		std::string splashText;
+
+		float splashSize, dt, elapsed;
+
+		Sprite *selected, *unselected, *disabled, *lang, *hlang;
+
+		int selectPosY;
 
 		MenuStates menu_states;
     };

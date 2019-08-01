@@ -1,6 +1,6 @@
 #pragma once
 
-#define GAME_NAME = "Minecraft"
+#define GAME_NAME "Minecraft"
 #define EMULATED_VERSION "1.12.2"
 
 #define INTERNAL_VERSION "0.3"

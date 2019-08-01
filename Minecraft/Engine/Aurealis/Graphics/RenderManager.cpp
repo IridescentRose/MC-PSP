@@ -72,7 +72,6 @@ namespace Aurealis
 		    fontType = 0;
 		    defaultFontType = 1;
 
-		    SetFont(0);
 			mVerticalSync = false;
 			listNum = 0;
 			cleanColor = 0xFF00FF00; //0xFFF5B783
@@ -143,25 +142,14 @@ namespace Aurealis
 		void RenderManager::InitDebugFont()
 		{
 			intraFontInit();
-
-			numFont = intraFontLoad("Assets/Fonts/numerals.pgf",INTRAFONT_CACHE_ALL);
-			engFont = intraFontLoad("Assets/Fonts/eng_letters.pgf",INTRAFONT_CACHE_ALL);
-			rusFont = intraFontLoad("Assets/Fonts/rus_letters.pgf",INTRAFONT_CACHE_ALL);
-			numFont = intraFontLoad("Assets/Fonts/numerals.pgf",INTRAFONT_CACHE_ALL);
-			
-			intraFontSetStyle(numFont,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER);
-			intraFontSetStyle(engFont,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER);
-			intraFontSetStyle(rusFont,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER);
-
-			debugFont = numFont;
-			defaultFontType = 1;
+			debugFont = intraFontLoad("./assets/font.pgf",INTRAFONT_CACHE_ALL);	
+			intraFontSetStyle(debugFont,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER);
 		}
 
 		void RenderManager::SetFontStyle(float size, unsigned int color, unsigned int shadowColor, unsigned int options, float angle)
 		{
 					sceGuDisable(GU_BLEND);
 		sceGuEnable(GU_DEPTH_TEST);
-			SetDefaultFont();
 			unsigned int options2 = options |INTRAFONT_CACHE_ALL;
 		    if(fontType != 0)
 		    {
@@ -183,28 +171,6 @@ namespace Aurealis
 		sceGuEnable(GU_BLEND);
 		sceGuColor(GU_COLOR(1,1,1,1.0f));
 
-		}
-
-        void RenderManager::SetFont(int type)
-		{
-		    fontType = type;
-			switch(type)
-			{
-			    case 0: debugFont = numFont; fontVerticalShift = 0; break;
-			    case 1: debugFont = engFont; fontVerticalShift = -4; break;
-			    case 2: debugFont = rusFont; fontVerticalShift = -4; break;
-			}
-		}
-
-        void RenderManager::SetDefaultFont()
-		{
-		    SetFont(defaultFontType);
-		}
-
-
-        int RenderManager::GetFontLanguage()
-		{
-		    return fontType;
 		}
 
 		void RenderManager::DebugPrint(int x,int y, const char *message, ...)
