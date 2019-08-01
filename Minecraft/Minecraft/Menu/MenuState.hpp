@@ -5,6 +5,9 @@
 #include <Shadow/Audio/AudioManager.hpp>
 #include <Aurealis/Utils/Timer.h>
 #include <Aurealis/Graphics/Sprite.h>
+
+#include <Aurealis/System/SystemManager.h>
+using namespace Aurealis::System;
 using namespace Shadow::Audio;
 using namespace Aurealis::Utils;
 
@@ -33,7 +36,7 @@ namespace Minecraft::Menus{
         void menuPass();
         void panoramaPass();
 
-        OSL_SOUND* bgm;
+        OSL_SOUND* bgm, *button;
 		Panorama* panorama;
 		Timer t;
 
@@ -48,7 +51,7 @@ namespace Minecraft::Menus{
 
 		Sprite *selected, *unselected, *disabled, *lang, *hlang;
 
-		int selectPosY;
+		int selectPosY, selectPosX;
 
 		MenuStates menu_states;
     };

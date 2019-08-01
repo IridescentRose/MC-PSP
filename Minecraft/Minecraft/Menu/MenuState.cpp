@@ -11,6 +11,7 @@ namespace Minecraft::Menus{
 	MenuState::MenuState(){
         elapsed = 0;
         dt = 0;
+        selectPosY = selectPosX = 0;
     }
 
     MenuState::~MenuState(){
@@ -27,7 +28,8 @@ namespace Minecraft::Menus{
         ss << musicChoice;
         ss << ".bgm";
 
-	    bgm = oslLoadSoundFile(ss.str().c_str(),0);
+	    bgm = oslLoadSoundFile(ss.str().c_str(),OSL_FMT_STREAM);
+        button = oslLoadSoundFile("./assets/sounds/other/button1.wav", 0);
 	    g_AudioManager.PlayMusic(bgm);
 
         panorama = new Panorama();
@@ -53,6 +55,7 @@ namespace Minecraft::Menus{
 	    splashText = splashes[chosen];
 
         selectPosY = 0;
+        selectPosX = 1;
 
         widgets = TextureUtil::LoadPng("./assets/minecraft/textures/gui/widgets.png");
         disabled = new Sprite(widgets, 0, 46, 200, 20);
@@ -87,8 +90,72 @@ namespace Minecraft::Menus{
 	void MenuState::Update(StateManager* sManager){
         dt = t.GetDeltaTime();
         elapsed += dt;
+
+        g_System.InputUpdate();
         switch(menu_states){
             case MENU_STATE_TITLE:{
+                if(g_System.KeyPressed(PSP_CTRL_UP)){
+                    selectPosY--;
+
+                    if(selectPosY < 0){
+                        selectPosY = 0;
+                    }
+                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+                }
+                if(g_System.KeyPressed(PSP_CTRL_DOWN)){
+                    selectPosY++;
+
+                    if(selectPosY > 3){
+                        selectPosY = 3;
+                    }
+                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+                }
+                if(g_System.KeyPressed(PSP_CTRL_LEFT)){
+                    selectPosX--;
+
+                    if(selectPosX < 0){
+                        selectPosX = 0;
+                    }
+                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+                }
+                if(g_System.KeyPressed(PSP_CTRL_RIGHT)){
+                    selectPosX++;
+
+                    if(selectPosX > 2){
+                        selectPosX = 2;
+                    }
+                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+                }
+
+                if(g_System.KeyPressed(PSP_CTRL_START)){
+                    sceKernelExitGame();
+                }
+
+                if(g_System.KeyPressed(PSP_CTRL_CROSS)){
+                    if(selectPosY == 0){
+                        //SINGLE PLAYER MENU
+                    }
+                    if(selectPosY == 1){
+                        //MULTI PLAYER MENU
+                    }
+                    if(selectPosY == 2){
+                        //MINECRAFT REALMS MENU
+                    }
+
+                    if(selectPosY == 3){
+                        if(selectPosX == 0){
+                            //LANGUAGE MENU
+                        }
+                        if(selectPosX == 1){
+                            //OPTIONS MENU
+                        }
+                        if(selectPosX == 2){
+                            //QUIT
+                            sceKernelExitGame();
+                        }
+                    }
+                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+                }
 
                 break;
             }
@@ -146,6 +213,22 @@ namespace Minecraft::Menus{
                 unselected->SetPosition(292, 224);
                 unselected->Draw();
                 unselected->Scale(1/ 0.48f, 1.0f);
+
+                if(selectPosY >= 0 && selectPosY <= 2){
+                    selected->SetPosition(240, 136 + 26 * selectPosY);
+                    selected->Draw();
+                }else{
+                    //Special select!
+                    if(selectPosX == 0){
+                        hlang->SetPosition(124, 224);
+                        hlang->Draw();
+                    }else{
+                        selected->Scale(0.48f, 1.0f);
+                        selected->SetPosition(188 + (selectPosX-1) * (292 - 188), 224);
+                        selected->Draw();
+                        selected->Scale(1.0f / 0.48f, 1.0f);
+                    }
+                }
 
                 //SELECTED SYSTEM
 
