@@ -63,6 +63,12 @@ namespace Minecraft::Menus{
         unselected = new Sprite(widgets, 0, 66, 200, 20);
         selected = new Sprite(widgets, 0, 86, 200, 20);
 
+        miniSel = new Sprite(widgets, 0, 86, 200, 20);
+        miniSel->Scale(0.48f, 1.0f);
+        miniUnSel = new Sprite(widgets, 0, 66, 200, 20);
+        miniUnSel->Scale(0.48f, 1.0f);
+        
+
         lang = new Sprite(widgets, 0, 106, 20, 20);
         hlang = new Sprite(widgets, 0, 126, 20, 20);
     }
@@ -207,13 +213,11 @@ namespace Minecraft::Menus{
                 lang->SetPosition(124, 224);
                 lang->Draw();
 
-                unselected->Scale(0.48f, 1.0f);
-                unselected->SetPosition(188, 224);
-                unselected->Draw();
+                miniUnSel->SetPosition(188, 224);
+                miniUnSel->Draw();
 
-                unselected->SetPosition(292, 224);
-                unselected->Draw();
-                unselected->Scale(1/ 0.48f, 1.0f);
+                miniUnSel->SetPosition(292, 224);
+                miniUnSel->Draw();
 
                 if(selectPosY >= 0 && selectPosY <= 2){
                     selected->SetPosition(240, 136 + 26 * selectPosY);
@@ -224,10 +228,8 @@ namespace Minecraft::Menus{
                         hlang->SetPosition(124, 224);
                         hlang->Draw();
                     }else{
-                        selected->Scale(0.48f, 1.0f);
-                        selected->SetPosition(188 + (selectPosX-1) * (292 - 188), 224);
-                        selected->Draw();
-                        selected->Scale(1.0f / 0.48f, 1.0f);
+                        miniSel->SetPosition(188 + (selectPosX-1) * (292 - 188), 224);
+                        miniSel->Draw();
                     }
                 }
 

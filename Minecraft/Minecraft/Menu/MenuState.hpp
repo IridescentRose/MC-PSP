@@ -51,7 +51,7 @@ namespace Minecraft::Menus{
 		float splashSize, dt, elapsed;
 
 		Sprite *selected, *unselected, *disabled, *lang, *hlang;
-
+		Sprite *miniSel, *miniUnSel;
 		int selectPosY, selectPosX;
 
 		MenuStates menu_states;
