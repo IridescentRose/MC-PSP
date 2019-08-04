@@ -7,7 +7,8 @@
                 "/usr/local/pspdev/psp/include/**",
                 "/usr/local/pspdev/psp/sdk/include/**",
                 "${workspaceFolder}/Minecraft/Engine/**",
-                "/usr/local/pspdev/psp/sdk/include"
+                "/usr/local/pspdev/psp/sdk/include",
+                "${workspaceFolder}/Minecraft/libs/**"
             ],
             "defines": [],
             "compilerPath": "/usr/local/pspdev/bin/psp-gcc",

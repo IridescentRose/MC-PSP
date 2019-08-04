@@ -33,13 +33,16 @@ Engine/Aurealis/Utils/pgeZip.o \
 Engine/Aurealis/Utils/pge.o \
 Engine/Aurealis/Utils/pgeDir.o \
 Engine/Aurealis/Utils/InputHelper.o \
+libs/json/src/json_reader.o \
+libs/json/src/json_value.o \
+libs/json/src/json_writer.o \
 Minecraft.o \
 Minecraft/Menu/Logo.o \
 Minecraft/Menu/MenuState.o \
 Minecraft/Menu/Panorama.o \
 
 INCDIR = $(PSPPATH)/include
-INCDIR += ./LameCraft ./include ./Engine ./3libs ./3libs/libpspmath /usr/local/pspdev/psp/include
+INCDIR += ./LameCraft ./include ./Engine ./libs ./libs/libpspmath /usr/local/pspdev/psp/include
 CFLAGS = -O3 -Wall -mpreferred-stack-boundary=4 -ffast-math
 CXXFLAGS = -std=gnu++17 -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
@@ -48,7 +51,7 @@ BUILD_PRX = 1
 PSP_FW_VERSION=371
 PSP_LARGE_MEMORY = 1
 
-LIBDIR += ./3libs/noisepp ./3libs/libpspmath 
+LIBDIR += ./libs/noisepp ./libs/libpspmath 
 LDFLAGS =
 LIBS=  -lNoisepp -lpspaudiolib -lpspaudio -lpspaudiocodec -lpng -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath #-lpsp_req -lcurl -lTiny
 
