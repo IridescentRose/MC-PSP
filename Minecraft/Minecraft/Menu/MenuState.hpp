@@ -42,7 +42,7 @@ namespace Minecraft::Menus{
 		Timer t;
 
 		Texture* logo;
-		Sprite* Logo;
+		Sprite* Minecraft1, *Minecraft2;
 
 		Texture* widgets;
 

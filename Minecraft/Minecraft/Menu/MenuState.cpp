@@ -37,9 +37,9 @@ namespace Minecraft::Menus{
 
         menu_states = MENU_STATE_TITLE;
 
-        logo = TextureUtil::LoadPng("./assets/minecraft/textures/gui/title/logo.png");
-        Logo = new Sprite(logo);
-        Logo->Scale(0.9375f, 0.9375f);
+        logo = TextureUtil::LoadPng("./assets/minecraft/textures/gui/title/minecraft.png");
+        Minecraft1 = new Sprite(logo, 0, 0, 155, 45);
+        Minecraft2 = new Sprite(logo, 0, 45, 120, 45);
 
         std::ifstream infile("./assets/minecraft/texts/splashes.txt");
 
@@ -195,8 +195,16 @@ namespace Minecraft::Menus{
 			    sceGuDisable(GU_DEPTH_TEST);
 			    sceGuEnable(GU_BLEND);
 
-                Logo->SetPosition(240, 60);
-                Logo->Draw();
+                //275 total
+                //Centre = 142
+                //Cetnre should be at 240
+                //First is 155 - 142
+
+                Minecraft1->SetPosition( 240 - (142 - 84), 60);
+                Minecraft1->Draw();
+
+                Minecraft2->SetPosition(240 + (142 - 64), 60);
+                Minecraft2->Draw();
 
 
 
