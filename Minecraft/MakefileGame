@@ -37,6 +37,7 @@ libs/json/src/json_reader.o \
 libs/json/src/json_value.o \
 libs/json/src/json_writer.o \
 Minecraft.o \
+Minecraft/Common/Translations.o \
 Minecraft/Menu/Logo.o \
 Minecraft/Menu/MenuState.o \
 Minecraft/Menu/Panorama.o \

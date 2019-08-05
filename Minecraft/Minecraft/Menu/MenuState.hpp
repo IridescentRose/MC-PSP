@@ -8,6 +8,7 @@
 #include <json/json.h>
 
 #include <Aurealis/System/SystemManager.h>
+#include "../Common/Translations.hpp"
 using namespace Aurealis::System;
 using namespace Shadow::Audio;
 using namespace Aurealis::Utils;

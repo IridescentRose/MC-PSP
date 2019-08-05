@@ -71,6 +71,8 @@ namespace Minecraft::Menus{
 
         lang = new Sprite(widgets, 0, 106, 20, 20);
         hlang = new Sprite(widgets, 0, 126, 20, 20);
+
+        Common::g_TranslationOBJ.init();
     }
 
 	void MenuState::Enter(){

@@ -41,6 +41,8 @@
         "tuple": "cpp",
         "typeinfo": "cpp",
         "utility": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "ctime": "cpp",
+        "iomanip": "cpp"
     }
 }
