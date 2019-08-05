@@ -142,14 +142,19 @@ namespace Aurealis
 		void RenderManager::InitDebugFont()
 		{
 			intraFontInit();
-			debugFont = intraFontLoad("flash0:/font/ltn8.pgf",INTRAFONT_STRING_UTF8);	
+			debugFont = intraFontLoad("flash0:/font/ltn8.pgf",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);	
+			intraFont* jpn0 = intraFontLoad("flash0:/font/jpn0.pgf",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);
+  			intraFont* kr0 = intraFontLoad("flash0:/font/kr0.pgf",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);  //Korean font (not available on all systems) with UTF-8 encoding
+			intraFont* arib = intraFontLoad("flash0:/font/arib.pgf",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);                     //Symbols (not available on all systems)
+  			intraFont* chn = intraFontLoad("flash0:/font/gb3s1518.bwfon",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);               //chinese font
+ 			
 			intraFontSetStyle(debugFont,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER);
-
-			intraFont* jpn0 = intraFontLoad("flash0:/font/jpn0.pgf",INTRAFONT_STRING_UTF8);
-  			intraFont* kr0 = intraFontLoad("flash0:/font/kr0.pgf",INTRAFONT_STRING_UTF8);  //Korean font (not available on all systems) with UTF-8 encoding
-			intraFont* arib = intraFontLoad("flash0:/font/arib.pgf",INTRAFONT_STRING_UTF8);                     //Symbols (not available on all systems)
-  			intraFont* chn = intraFontLoad("flash0:/font/gb3s1518.bwfon",INTRAFONT_STRING_UTF8);               //chinese font
- 			intraFontSetAltFont(debugFont,jpn0);                     //japanese font is used for chars that don't exist in latin
+			intraFontSetStyle(jpn0,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER);
+			intraFontSetStyle(kr0,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER); 
+			intraFontSetStyle(chn,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER);
+			intraFontSetStyle(arib,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER);
+			 
+			intraFontSetAltFont(debugFont,jpn0);                     //japanese font is used for chars that don't exist in latin
   			intraFontSetAltFont(jpn0,chn);                        //chinese font (bwfon) is used for chars that don't exist in japanese (and latin)
   			intraFontSetAltFont(chn,kr0);                         //korean font is used for chars that don't exist in chinese (and jap and ltn)
   			intraFontSetAltFont(kr0,arib);                        //symbol font is used for chars that don't exist in korean (and chn,jap & ltn)

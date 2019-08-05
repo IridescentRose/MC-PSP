@@ -16,7 +16,7 @@ namespace Minecraft::Common{
         void init();
 
         void setTranslation(std::string region_code);
-        const char* getText(std::string key); //Find our text
+        std::string getText(std::string key); //Find our text
 
         inline std::vector<TranslationInfo> availableTranslations(){
             return available;

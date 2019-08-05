@@ -73,6 +73,7 @@ namespace Minecraft::Menus{
         hlang = new Sprite(widgets, 0, 126, 20, 20);
 
         Common::g_TranslationOBJ.init();
+        Common::g_TranslationOBJ.setTranslation("de_de");
     }
 
 	void MenuState::Enter(){
@@ -252,35 +253,35 @@ namespace Minecraft::Menus{
                 }else{
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
-                g_RenderManager.DebugPrint(240, 136 + 7, "Singleplayer");
+                g_RenderManager.DebugPrint(240, 136 + 7, Common::g_TranslationOBJ.getText("menu.singleplayer").c_str());
 
                 if(selectPosY == 1){
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
-                g_RenderManager.DebugPrint(240, 162 + 7, "Multiplayer");
+                g_RenderManager.DebugPrint(240, 162 + 7, Common::g_TranslationOBJ.getText("menu.multiplayer").c_str());
 
                 if(selectPosY == 2){
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
-                g_RenderManager.DebugPrint(240, 188 + 7, "Minecraft Realms");
+                g_RenderManager.DebugPrint(240, 188 + 7, Common::g_TranslationOBJ.getText("menu.online").c_str());
 
                 if(selectPosY == 3 && selectPosX == 1){
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
-                g_RenderManager.DebugPrint(188, 224 + 7, "Options");
+                g_RenderManager.DebugPrint(188, 224 + 7, Common::g_TranslationOBJ.getText("menu.options").c_str());
 
                 if(selectPosY == 3 && selectPosX == 2){
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
-                g_RenderManager.DebugPrint(292, 224 + 7, "Quit Game");
+                g_RenderManager.DebugPrint(292, 224 + 7, Common::g_TranslationOBJ.getText("menu.quit").c_str());
 
 
                 //FOOT NOTES!

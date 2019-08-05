@@ -65,15 +65,15 @@ namespace Minecraft::Common{
         }
     }
 
-    const char* TranslationObj::getText(std::string key){
+    std::string TranslationObj::getText(std::string key){
         if(not_en){ //TODO: And key exists!
             Json::Value string = translated_Root[key.c_str()]; //Get from key
             if(string){
-                return string.asString().c_str(); //Return key if it exists
+                return string.asString(); //Return key if it exists
             }else{
                 string = en_US_Root[key.c_str()];
                 if(string){
-                    return string.asString().c_str();
+                    return string.asString();
                 }else{
                     return "ERROR!";
                 }
@@ -81,7 +81,7 @@ namespace Minecraft::Common{
         }else{
             Json::Value string = en_US_Root[key.c_str()];
             if(string){
-                return string.asString().c_str();
+                return string.asString();
             }else{
                 return "ERROR!";
             }
