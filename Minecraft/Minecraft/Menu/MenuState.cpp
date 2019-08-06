@@ -1,12 +1,5 @@
 #include "MenuState.hpp"
 
-#include <Aurealis/Graphics/RenderManager.h>
-#include <string>
-#include <fstream>
-#include "../Version.hpp"
-#include <sstream>
-
-#define PSP_MENU_SIZE 0.8
 namespace Minecraft::Menus{
 
 	MenuState::MenuState(){
@@ -104,68 +97,11 @@ namespace Minecraft::Menus{
         g_System.InputUpdate();
         switch(menu_states){
             case MENU_STATE_TITLE:{
-                if(g_System.KeyPressed(PSP_CTRL_UP)){
-                    selectPosY--;
+                titleScreenUpdate();
+                break;
+            }
 
-                    if(selectPosY < 0){
-                        selectPosY = 0;
-                    }
-                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
-                }
-                if(g_System.KeyPressed(PSP_CTRL_DOWN)){
-                    selectPosY++;
-
-                    if(selectPosY > 3){
-                        selectPosY = 3;
-                    }
-                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
-                }
-                if(g_System.KeyPressed(PSP_CTRL_LEFT)){
-                    selectPosX--;
-
-                    if(selectPosX < 0){
-                        selectPosX = 0;
-                    }
-                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
-                }
-                if(g_System.KeyPressed(PSP_CTRL_RIGHT)){
-                    selectPosX++;
-
-                    if(selectPosX > 2){
-                        selectPosX = 2;
-                    }
-                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
-                }
-
-                if(g_System.KeyPressed(PSP_CTRL_START)){
-                    sceKernelExitGame();
-                }
-
-                if(g_System.KeyPressed(PSP_CTRL_CROSS)){
-                    if(selectPosY == 0){
-                        //SINGLE PLAYER MENU
-                    }
-                    if(selectPosY == 1){
-                        //MULTI PLAYER MENU
-                    }
-                    if(selectPosY == 2){
-                        //MINECRAFT REALMS MENU
-                    }
-
-                    if(selectPosY == 3){
-                        if(selectPosX == 0){
-                            //LANGUAGE MENU
-                        }
-                        if(selectPosX == 1){
-                            //OPTIONS MENU
-                        }
-                        if(selectPosX == 2){
-                            //QUIT
-                            sceKernelExitGame();
-                        }
-                    }
-                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
-                }
+            case MENU_STATE_LANGUAGE:{
 
                 break;
             }
@@ -178,123 +114,25 @@ namespace Minecraft::Menus{
 	void MenuState::Draw(StateManager* sManager){
         g_RenderManager.StartFrame(0, 0, 0);
 
-        g_RenderManager.SetPerspective(75, 480.0f / 272.0f, 0.3f, 1000.0f); //Into 3D Mode for panorama
-
-        panoramaPass();
+        if(menu_states == MENU_STATE_TITLE){
+            g_RenderManager.SetPerspective(75, 480.0f / 272.0f, 0.3f, 1000.0f); //Into 3D Mode for panorama
+            panoramaPass();
+        }
 
         g_RenderManager.SetOrtho(0,0,0,0,0,0); //Into 2D Mode for menu pass
-
         menuPass();
-
         g_RenderManager.EndFrame();
     }
-    
-
 
     void MenuState::menuPass(){
         switch(menu_states){
             case MENU_STATE_TITLE:{
+                titleScreenDraw();
+			    
+                break;
+            }
 
-			    sceGuDisable(GU_DEPTH_TEST);
-			    sceGuEnable(GU_BLEND);
-
-                //275 total
-                //Centre = 142
-                //Cetnre should be at 240
-                //First is 155 - 142
-
-                Minecraft1->SetPosition( 240 - (142 - 84), 60);
-                Minecraft1->Draw();
-
-                Minecraft2->SetPosition(240 + (142 - 64), 60);
-                Minecraft2->Draw();
-
-
-
-
-                unselected->SetPosition(240, 136);
-                unselected->Draw();
-
-                unselected->SetPosition(240, 156 + 6);
-                unselected->Draw();
-
-                unselected->SetPosition(240, 176 + 12);
-                unselected->Draw();
-
-                lang->SetPosition(124, 224);
-                lang->Draw();
-
-                miniUnSel->SetPosition(188, 224);
-                miniUnSel->Draw();
-
-                miniUnSel->SetPosition(292, 224);
-                miniUnSel->Draw();
-
-                if(selectPosY >= 0 && selectPosY <= 2){
-                    selected->SetPosition(240, 136 + 26 * selectPosY);
-                    selected->Draw();
-                }else{
-                    //Special select!
-                    if(selectPosX == 0){
-                        hlang->SetPosition(124, 224);
-                        hlang->Draw();
-                    }else{
-                        miniSel->SetPosition(188 + (selectPosX-1) * (292 - 188), 224);
-                        miniSel->Draw();
-                    }
-                }
-
-                //SELECTED SYSTEM
-
-
-                //Labels
-                if(selectPosY == 0){
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-                }else{
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-                }
-                g_RenderManager.DebugPrint(240, 136 + 7, Common::g_TranslationOBJ.getText("menu.singleplayer").c_str());
-
-                if(selectPosY == 1){
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-                }else{
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-                }
-                g_RenderManager.DebugPrint(240, 162 + 7, Common::g_TranslationOBJ.getText("menu.multiplayer").c_str());
-
-                if(selectPosY == 2){
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-                }else{
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-                }
-                g_RenderManager.DebugPrint(240, 188 + 7, Common::g_TranslationOBJ.getText("menu.online").c_str());
-
-                if(selectPosY == 3 && selectPosX == 1){
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-                }else{
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-                }
-                g_RenderManager.DebugPrint(188, 224 + 7, Common::g_TranslationOBJ.getText("menu.options").c_str());
-
-                if(selectPosY == 3 && selectPosX == 2){
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-                }else{
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-                }
-                g_RenderManager.DebugPrint(292, 224 + 7, Common::g_TranslationOBJ.getText("menu.quit").c_str());
-
-
-                //FOOT NOTES!
-
-
-                g_RenderManager.SetFontStyle(splashSize, 0xFF00FFFF, 0, INTRAFONT_ALIGN_CENTER, -20.0f);
-                g_RenderManager.DebugPrint(344, 72, "%s", splashText.c_str());
-
-                g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_LEFT, 0.0f);
-                g_RenderManager.DebugPrint(0, 272, " %s %s", GAME_NAME, EMULATED_VERSION);
-
-                g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_RIGHT, 0.0f);
-                g_RenderManager.DebugPrint(480, 272, "Copyright Mojang AB. Do not distribute! ");
+            case MENU_STATE_LANGUAGE:{
 
                 break;
             }

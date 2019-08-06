@@ -1,14 +1,22 @@
 #pragma once
 
 #include <Aurealis/Utils/GameState.h>
-#include "Panorama.hpp"
+#include "components/Panorama.hpp"
 #include <Shadow/Audio/AudioManager.hpp>
 #include <Aurealis/Utils/Timer.h>
 #include <Aurealis/Graphics/Sprite.h>
 #include <json/json.h>
 
+#include <Aurealis/Graphics/RenderManager.h>
+#include <string>
+#include <fstream>
+#include "../Version.hpp"
+#include <sstream>
+
 #include <Aurealis/System/SystemManager.h>
 #include "../Common/Translations.hpp"
+
+#define PSP_MENU_SIZE 0.8
 using namespace Aurealis::System;
 using namespace Shadow::Audio;
 using namespace Aurealis::Utils;
@@ -16,7 +24,8 @@ using namespace Aurealis::Utils;
 namespace Minecraft::Menus{
 
 	enum MenuStates{
-		MENU_STATE_TITLE = 0
+		MENU_STATE_TITLE = 0,
+		MENU_STATE_LANGUAGE = 1,
 	};
 
     class MenuState : public CGameState {
@@ -38,6 +47,9 @@ namespace Minecraft::Menus{
         void menuPass();
         void panoramaPass();
 
+		void titleScreenDraw();
+		void titleScreenUpdate();
+
         OSL_SOUND* bgm, *button;
 		Panorama* panorama;
 		Timer t;
@@ -55,7 +67,7 @@ namespace Minecraft::Menus{
 		Sprite *miniSel, *miniUnSel;
 		int selectPosY, selectPosX;
 
-		MenuStates menu_states;
+		MenuStates menu_states, previous_states;
 
     };
 }

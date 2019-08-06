@@ -40,7 +40,8 @@ Minecraft.o \
 Minecraft/Common/Translations.o \
 Minecraft/Menu/Logo.o \
 Minecraft/Menu/MenuState.o \
-Minecraft/Menu/Panorama.o \
+Minecraft/Menu/components/TitleScreen.o \
+Minecraft/Menu/components/Panorama.o \
 
 INCDIR = $(PSPPATH)/include
 INCDIR += ./LameCraft ./include ./Engine ./libs ./libs/libpspmath /usr/local/pspdev/psp/include
