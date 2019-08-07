@@ -50,6 +50,9 @@ namespace Minecraft::Menus{
 		void titleScreenDraw();
 		void titleScreenUpdate();
 
+		void languageScreenDraw();
+		void languageScreenUpdate();
+
         OSL_SOUND* bgm, *button;
 		Panorama* panorama;
 		Timer t;
@@ -57,7 +60,7 @@ namespace Minecraft::Menus{
 		Texture* logo;
 		Sprite* Minecraft1, *Minecraft2;
 
-		Texture* widgets;
+		Texture *widgets, *options_bg;
 
 		std::string splashText;
 
@@ -65,7 +68,11 @@ namespace Minecraft::Menus{
 
 		Sprite *selected, *unselected, *disabled, *lang, *hlang;
 		Sprite *miniSel, *miniUnSel;
+		Sprite *options_tile;
+
 		int selectPosY, selectPosX;
+
+		int selectRegion, langPos, langPosSel, langPosMax;
 
 		MenuStates menu_states, previous_states;
 

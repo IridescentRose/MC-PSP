@@ -5,7 +5,8 @@ namespace Minecraft::Menus{
 	MenuState::MenuState(){
         elapsed = 0;
         dt = 0;
-        selectPosY = selectPosX = 0;
+        selectRegion = selectPosY = selectPosX = 0;
+        langPos = langPosMax = langPosSel = 0;
     }
 
     MenuState::~MenuState(){
@@ -65,6 +66,10 @@ namespace Minecraft::Menus{
         lang = new Sprite(widgets, 0, 106, 20, 20);
         hlang = new Sprite(widgets, 0, 126, 20, 20);
 
+        options_bg = TextureUtil::LoadPng("assets/minecraft/textures/gui/options_background.png");
+        options_tile = new Sprite(options_bg);
+        options_tile->Scale(2.0f, 2.0f);
+
         Common::g_TranslationOBJ.init();
         Common::g_TranslationOBJ.setTranslation("de_de");
     }
@@ -73,6 +78,8 @@ namespace Minecraft::Menus{
 
     }
 	void MenuState::CleanUp(){
+        //Sprites
+
 
         delete panorama;
 
@@ -102,7 +109,7 @@ namespace Minecraft::Menus{
             }
 
             case MENU_STATE_LANGUAGE:{
-
+                languageScreenUpdate();
                 break;
             }
         }
@@ -128,12 +135,11 @@ namespace Minecraft::Menus{
         switch(menu_states){
             case MENU_STATE_TITLE:{
                 titleScreenDraw();
-			    
                 break;
             }
 
             case MENU_STATE_LANGUAGE:{
-
+                languageScreenDraw();
                 break;
             }
         }   

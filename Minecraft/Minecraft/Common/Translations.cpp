@@ -2,6 +2,8 @@
 #include <fstream>
 #include <dirent.h>
 #include <pspkernel.h>
+#include <algorithm>
+
 namespace Minecraft::Common{
     TranslationObj::TranslationObj(){
         not_en = false;
@@ -9,6 +11,10 @@ namespace Minecraft::Common{
 
     TranslationObj::~TranslationObj(){
 
+    }
+
+    bool alphaSort(const TranslationInfo& a, const TranslationInfo& b){
+        return a.code.at(0) < b.code.at(0);
     }
 
     void TranslationObj::init(){
@@ -52,6 +58,7 @@ namespace Minecraft::Common{
             file >> en_US_Root;
             file.close();
 
+        std::sort(available.begin(), available.end(), alphaSort);
     }
 
     void TranslationObj::setTranslation(std::string region_code){
