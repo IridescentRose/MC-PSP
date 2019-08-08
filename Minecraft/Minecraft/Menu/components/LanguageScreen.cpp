@@ -36,7 +36,7 @@ namespace Minecraft::Menus{
         }
 
         disabled->RGB(150.0f, 150.0f, 150.0f);
-        disabled->SetPosition(240, 41 + langPosSel * 20);
+        disabled->SetPosition(240, 42 + langPosSel * 20);
         disabled->Draw();
 
         //Done button
