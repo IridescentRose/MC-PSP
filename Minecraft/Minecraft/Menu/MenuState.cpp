@@ -71,7 +71,7 @@ namespace Minecraft::Menus{
         options_tile->Scale(2.0f, 2.0f);
 
         Common::g_TranslationOBJ.init();
-        Common::g_TranslationOBJ.setTranslation("tr_tr");
+        Common::g_TranslationOBJ.setTranslation("en_us");
 
         langPosMax = Common::g_TranslationOBJ.availableTranslations().size();
     }
