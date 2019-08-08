@@ -30,8 +30,21 @@ namespace Minecraft::Menus{
         unselected->SetPosition(240, 232);
         unselected->Draw();
 
+        if(selectRegion == 1){
+            selected->SetPosition(240, 232);
+            selected->Draw();
+        }
+
+        disabled->RGB(150.0f, 150.0f, 150.0f);
+        disabled->SetPosition(240, 41 + langPosSel * 20);
+        disabled->Draw();
+
         //Done button
-        g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        if(selectRegion != 1){
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }else{
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }
         g_RenderManager.DebugPrint(240, 240, Common::g_TranslationOBJ.getText("gui.done").c_str());
 
         g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
@@ -43,5 +56,58 @@ namespace Minecraft::Menus{
     }
 	void MenuState::languageScreenUpdate(){
 
+        if(g_System.KeyPressed(PSP_CTRL_RTRIGGER)){
+            selectRegion++;
+        }
+        if(g_System.KeyPressed(PSP_CTRL_LTRIGGER)){
+            selectRegion--;
+        }
+        if(selectRegion > 1){
+            selectRegion = 1;
+        }
+        if(selectRegion < 0){
+            selectRegion = 0;
+        }
+
+        if(selectRegion == 0){
+            if(g_System.KeyPressed(PSP_CTRL_DOWN)){
+                if(langPosSel == 7){
+                    //Then we scroll down the actual pos
+                    langPos++;
+                    if(langPos > (langPosMax - 8)){
+                        langPos = langPosMax - 8;
+                    }
+                }
+                if(langPosSel != 7){
+                    langPosSel++;
+                }
+            }
+            if(g_System.KeyPressed(PSP_CTRL_UP)){
+                if(langPosSel == 0){
+                    langPos--;
+                    if(langPos < 0){
+                        langPos = 0;
+                    }
+                }
+
+                if(langPosSel != 0){
+                    langPosSel--;
+                }
+            }
+
+            if(g_System.KeyPressed(PSP_CTRL_CROSS)){
+                Common::g_TranslationOBJ.setTranslation(Common::g_TranslationOBJ.availableTranslations()[langPosSel + langPos].code.c_str());
+            }
+
+        }else{
+            if(g_System.KeyPressed(PSP_CTRL_CROSS)){
+                menu_states = previous_states;
+                previous_states = MENU_STATE_LANGUAGE;
+
+                g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+
+                selectRegion = 0;
+            }
+        }
     }
 }

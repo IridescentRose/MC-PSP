@@ -71,7 +71,9 @@ namespace Minecraft::Menus{
         options_tile->Scale(2.0f, 2.0f);
 
         Common::g_TranslationOBJ.init();
-        Common::g_TranslationOBJ.setTranslation("de_de");
+        Common::g_TranslationOBJ.setTranslation("tr_tr");
+
+        langPosMax = Common::g_TranslationOBJ.availableTranslations().size();
     }
 
 	void MenuState::Enter(){
@@ -128,6 +130,13 @@ namespace Minecraft::Menus{
 
         g_RenderManager.SetOrtho(0,0,0,0,0,0); //Into 2D Mode for menu pass
         menuPass();
+
+        g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        
+        u32 ramFree = g_System.freeMemory();
+        
+        g_RenderManager.DebugPrint(240, 15, "RAM: %.3f MB", ((float)ramFree) / 1024.0f / 1024.0f );
+
         g_RenderManager.EndFrame();
     }
 
