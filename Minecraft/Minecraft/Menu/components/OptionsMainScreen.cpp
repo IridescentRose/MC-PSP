@@ -15,6 +15,13 @@ namespace Minecraft::Menus{
             opt_unsel->SetPosition(168 + 160, 48);
             opt_unsel->Draw();
 
+            if(selectRegion == 1 && selectPosY == 0){
+                opt_sel->SetPosition(168 + 160, 48);
+                opt_sel->Draw();
+            }
+
+            //Main render region
+
             for(int i = 0; i < 4; i++){
                 opt_unsel->SetPosition(168 + 160, 108 + i * 24);
                 opt_unsel->Draw();
@@ -25,26 +32,88 @@ namespace Minecraft::Menus{
                 opt_unsel->Draw();
             }
 
+            //Selected Main Region.
+
+            if(selectPosY > 0 && selectPosY < 5){
+                opt_sel->SetPosition(152 + 176 * selectRegion, 108 + (selectPosY-1) * 24);
+                opt_sel->Draw();
+            }
+
             unselected->SetPosition(240, 272 - 24);
             unselected->Draw();
+
+            if(selectPosY == 5){
+                selected->SetPosition(240, 272 - 24);
+                selected->Draw();
+            }
 
                         
         }
 
         g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         g_RenderManager.DebugPrint(240, 32, Common::g_TranslationOBJ.getText("options.title").c_str());
-
+        
+        if(selectRegion == 0 && selectPosY == 1){
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }else{
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }
         g_RenderManager.DebugPrint(152, 108, Common::g_TranslationOBJ.getText("options.skinCustomisation").c_str());
+        
+        if(selectRegion == 0 && selectPosY == 2){
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }else{
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }
         g_RenderManager.DebugPrint(152, 108 + 24, Common::g_TranslationOBJ.getText("options.video").c_str());
+        
+        if(selectRegion == 0 && selectPosY == 3){
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }else{
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }
         g_RenderManager.DebugPrint(152, 108 + 48, Common::g_TranslationOBJ.getText("options.language").c_str());
+        
+        if(selectRegion == 0 && selectPosY == 4){
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }else{
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }
         g_RenderManager.DebugPrint(152, 108 + 72, Common::g_TranslationOBJ.getText("options.resourcepack").c_str());
 
-
+        if(selectRegion == 1 && selectPosY == 1){
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }else{
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }
         g_RenderManager.DebugPrint(168 + 160, 108, Common::g_TranslationOBJ.getText("options.sounds").c_str());
+        
+        if(selectRegion == 1 && selectPosY == 2){
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }else{
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }
         g_RenderManager.DebugPrint(168 + 160, 108 + 24, Common::g_TranslationOBJ.getText("options.controls").c_str());
+        
+        if(selectRegion == 1 && selectPosY == 3){
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }else{
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }
         g_RenderManager.DebugPrint(168 + 160, 108 + 48, Common::g_TranslationOBJ.getText("options.chat.title").c_str());
+        
+        if(selectRegion == 1 && selectPosY == 4){
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }else{
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }
         g_RenderManager.DebugPrint(168 + 160, 108 + 72, Common::g_TranslationOBJ.getText("options.accessibility.title").c_str());
 
+        if(selectPosY == 5){
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }else{
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }
         g_RenderManager.DebugPrint(240, 272 - 24, Common::g_TranslationOBJ.getText("gui.done").c_str());
     }
 	void MenuState::optionsMainScreenUpdate(){
