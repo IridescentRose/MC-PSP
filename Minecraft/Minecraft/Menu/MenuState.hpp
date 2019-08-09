@@ -26,6 +26,7 @@ namespace Minecraft::Menus{
 	enum MenuStates{
 		MENU_STATE_TITLE = 0,
 		MENU_STATE_LANGUAGE = 1,
+		MENU_STATE_OPTIONS_MAIN = 2,
 	};
 
     class MenuState : public CGameState {
@@ -53,6 +54,9 @@ namespace Minecraft::Menus{
 		void languageScreenDraw();
 		void languageScreenUpdate();
 
+		void optionsMainScreenDraw();
+		void optionsMainScreenUpdate();
+
         OSL_SOUND* bgm, *button;
 		Panorama* panorama;
 		Timer t;
@@ -67,6 +71,7 @@ namespace Minecraft::Menus{
 		float splashSize, dt, elapsed;
 
 		Sprite *selected, *unselected, *disabled, *lang, *hlang;
+		Sprite *opt_sel, *opt_unsel, *opt_dis;
 		Sprite *miniSel, *miniUnSel;
 		Sprite *options_tile;
 

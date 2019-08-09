@@ -68,7 +68,7 @@ namespace Aurealis
 
 		void RenderManager::Init()
 		{
-		    fontVerticalShift = -4;
+		    fontVerticalShift = 3;
 		    fontType = 0;
 		    defaultFontType = 1;
 

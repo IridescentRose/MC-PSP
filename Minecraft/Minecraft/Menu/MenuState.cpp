@@ -57,6 +57,15 @@ namespace Minecraft::Menus{
         unselected = new Sprite(widgets, 0, 66, 200, 20);
         selected = new Sprite(widgets, 0, 86, 200, 20);
 
+        opt_dis = new Sprite(widgets, 0, 46, 200, 20);
+        opt_dis->Scale(0.8f, 1.0f);
+
+        opt_unsel = new Sprite(widgets, 0, 66, 200, 20);
+        opt_unsel->Scale(0.8f, 1.0f);
+
+        opt_sel = new Sprite(widgets, 0, 86, 200, 20);
+        opt_sel->Scale(0.8f, 1.0f);
+
         miniSel = new Sprite(widgets, 0, 86, 200, 20);
         miniSel->Scale(0.48f, 1.0f);
         miniUnSel = new Sprite(widgets, 0, 66, 200, 20);
@@ -114,6 +123,11 @@ namespace Minecraft::Menus{
                 languageScreenUpdate();
                 break;
             }
+
+            case MENU_STATE_OPTIONS_MAIN:{
+                optionsMainScreenUpdate();
+                break;
+            }
         }
 
         splashSize = vfpu_sinf(elapsed * 3.14159f) * (0.618f - (1.0f - 0.618f))/4.0f + (1.0f - 0.687f)*2 ;
@@ -131,11 +145,14 @@ namespace Minecraft::Menus{
         g_RenderManager.SetOrtho(0,0,0,0,0,0); //Into 2D Mode for menu pass
         menuPass();
 
+        
+        #ifdef DEBUG
         g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         
         u32 ramFree = g_System.freeMemory();
         
         g_RenderManager.DebugPrint(240, 15, "RAM: %.3f MB", ((float)ramFree) / 1024.0f / 1024.0f );
+        #endif
 
         g_RenderManager.EndFrame();
     }
@@ -149,6 +166,11 @@ namespace Minecraft::Menus{
 
             case MENU_STATE_LANGUAGE:{
                 languageScreenDraw();
+                break;
+            }
+
+            case MENU_STATE_OPTIONS_MAIN:{
+                optionsMainScreenDraw();
                 break;
             }
         }   

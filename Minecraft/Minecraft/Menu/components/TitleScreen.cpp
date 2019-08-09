@@ -61,47 +61,47 @@ namespace Minecraft::Menus{
                 }else{
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
-                g_RenderManager.DebugPrint(240, 136 + 7, Common::g_TranslationOBJ.getText("menu.singleplayer").c_str());
+                g_RenderManager.DebugPrint(240, 136, Common::g_TranslationOBJ.getText("menu.singleplayer").c_str());
 
                 if(selectPosY == 1){
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
-                g_RenderManager.DebugPrint(240, 162 + 7, Common::g_TranslationOBJ.getText("menu.multiplayer").c_str());
+                g_RenderManager.DebugPrint(240, 162, Common::g_TranslationOBJ.getText("menu.multiplayer").c_str());
 
                 if(selectPosY == 2){
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
-                g_RenderManager.DebugPrint(240, 188 + 7, Common::g_TranslationOBJ.getText("menu.online").c_str());
+                g_RenderManager.DebugPrint(240, 188, Common::g_TranslationOBJ.getText("menu.online").c_str());
 
                 if(selectPosY == 3 && selectPosX == 1){
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
-                g_RenderManager.DebugPrint(188, 224 + 7, Common::g_TranslationOBJ.getText("menu.options").c_str());
+                g_RenderManager.DebugPrint(188, 224, Common::g_TranslationOBJ.getText("menu.options").c_str());
 
                 if(selectPosY == 3 && selectPosX == 2){
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
                     g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
-                g_RenderManager.DebugPrint(292, 224 + 7, Common::g_TranslationOBJ.getText("menu.quit").c_str());
+                g_RenderManager.DebugPrint(292, 224, Common::g_TranslationOBJ.getText("menu.quit").c_str());
 
 
                 //FOOT NOTES!
 
                 g_RenderManager.SetFontStyle(splashSize, 0xFF00FFFF, 0, INTRAFONT_ALIGN_CENTER, -20.0f);
-                g_RenderManager.DebugPrint(344, 72, "%s", splashText.c_str());
+                g_RenderManager.DebugPrint(344, 72 - 7, "%s", splashText.c_str());
 
                 g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_LEFT, 0.0f);
-                g_RenderManager.DebugPrint(0, 272, " %s %s", GAME_NAME, EMULATED_VERSION);
+                g_RenderManager.DebugPrint(0, 272 - 7, " %s %s", GAME_NAME, EMULATED_VERSION);
 
                 g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_RIGHT, 0.0f);
-                g_RenderManager.DebugPrint(480, 272, "Copyright Mojang AB. Do not distribute! ");
+                g_RenderManager.DebugPrint(480, 272 - 7, "Copyright Mojang AB. Do not distribute! ");
 
     }
 
@@ -165,6 +165,10 @@ namespace Minecraft::Menus{
                         }
                         if(selectPosX == 1){
                             //OPTIONS MENU
+                            selectPosX = 0;
+                            selectPosY = 0;
+                            previous_states = menu_states;
+                            menu_states = MENU_STATE_OPTIONS_MAIN;
                         }
                         if(selectPosX == 2){
                             //QUIT
