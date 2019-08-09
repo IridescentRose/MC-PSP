@@ -48,6 +48,83 @@ namespace Minecraft::Menus{
         g_RenderManager.DebugPrint(240, 272 - 24, Common::g_TranslationOBJ.getText("gui.done").c_str());
     }
 	void MenuState::optionsMainScreenUpdate(){
+        if(g_System.KeyPressed(PSP_CTRL_RTRIGGER)){
+            selectRegion++;
+            if(selectRegion > 1){
+                selectRegion = 1;
+            }
+        }
 
+        if(g_System.KeyPressed(PSP_CTRL_LTRIGGER)){
+            selectRegion--;
+            if(selectRegion < 0){
+                selectRegion = 0;
+            }
+        }
+
+        if(g_System.KeyPressed(PSP_CTRL_DOWN)){
+            selectPosY++;
+            if(selectPosY > 5){
+                selectPosY = 5;
+            }
+        }
+        
+        if(g_System.KeyPressed(PSP_CTRL_UP)){
+            selectPosY--;
+            if(selectPosY < 0){
+                selectPosY = 0;
+            }
+        }
+    
+
+        if(g_System.KeyPressed(PSP_CTRL_CROSS)){
+            if(selectRegion == 0){ //LEFT SIDE
+                if(selectPosY == 0){} //NOTHING, this is modified by L/R
+                if(selectPosY == 1){
+                    //SKIN CUSTOMIZATION
+                }
+                if(selectPosY == 2){
+                    //VIDEO SETTINGS!
+                }
+                if(selectPosY == 3){
+                    //LANGUAGE!
+                    selectPosX = 0;
+                    selectPosY = 0;
+                    selectRegion = 0;
+                    previous_states = menu_states;
+                    menu_states = MENU_STATE_LANGUAGE;
+                }
+                if(selectPosY == 4){
+                    //RESOURCE PACKS
+                    //TODO: ASK DARTH!
+                }
+            }
+            if(selectRegion == 1){ //RIGHT SIDE
+                if(selectPosY == 0){
+                    //REALMS NOTIFICATIONS
+                } 
+                if(selectPosY == 1){
+                    //MUSIC & SOUNDS
+                }
+                if(selectPosY == 2){
+                    //CONTROLS
+                }
+                if(selectPosY == 3){
+                    //CHAT SETTINGS
+                }
+                if(selectPosY == 4){
+                    //ACCESSIBILITY SETTINGS
+                }
+            }
+            if(selectPosY == 5){
+                selectPosX = 0;
+                selectPosY = 0;
+                selectRegion = 0;
+                menu_states = MENU_STATE_TITLE;
+                previous_states = MENU_STATE_OPTIONS_MAIN;
+
+                //CLOSE OPTIONS STREAMING!
+            }
+        }
     }
 }
