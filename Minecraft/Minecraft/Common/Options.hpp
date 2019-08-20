@@ -6,63 +6,82 @@ namespace Minecraft::Common{
     //STRUCT OPTIONS
 
     struct Options{
-        uint16_t data_version;
-        bool invertY;
-        float sensitivity;
+        uint16_t version;
+        bool invertYMouse;
+        float mouseSensitivity;
         float fov;
         float gamma;
-        uint8_t render_distance;
+        float saturation;
+        uint8_t renderDistance;
+        uint8_t guiScale;
         uint8_t particles;
-        bool bob_view;
+        bool bobView;
+        uint8_t maxFPS;
+        bool fboEnable;
         uint8_t difficulty;
-        bool fancy_graphics;
+        bool fancyGraphics;
         uint8_t ao;
-        uint8_t biome_blend_radius;
-        bool render_clouds;
-        //std::string resource_packs- TODO: Discuss with Darth
-        std::string last_server_ip;
+        uint8_t biomeBlendRadius;
+        uint8_t renderClouds;
+        std::string resourcePacks;
+        std::string incompatibleResourcePacks;
+        std::string lastServer;
         std::string lang;
-        uint8_t chat_visibility;
-        bool chat_colors;
-        float chat_opacity;
-        bool hide_server_address;
-        bool held_item_tooltips;
-        float chat_height_focused;
-        float chat_height_unfocused;
-        float chat_scale;
-        float chat_width;
-        uint8_t mipmap_levels; //USEFUL!
-        bool unicode_font; //Look into this!
-        bool reduced_debug_info;
-        bool entity_shadows;
-        uint8_t attack_indicator;
-        bool auto_jump;
-        bool auto_suggestions;
-        /*
-            CONTROLS ARE STILL SEPARATED!!!
-        */
+        uint8_t chatVisibility;
+        bool chatColors;
+        bool chatLinks;
+        bool chatLinksPrompt;
+        float chatOpacity;
+        bool snooperEnabled;
+        bool fullscreen;
+        bool enableVsync;
+        bool useVbo;
+        bool hideServerAddress;
+        bool advancedItemTooltips;
+        bool pauseOnLostFocus;
+        bool touchscreen;
+        uint16_t overrideWidth;
+        uint16_t overrideHeight;
+        bool heldItemTooltips;
+        float chatHeightFocused;
+        float chatHeightUnfocused;
+        float chatScale;
+        float chatWidth;
+        uint8_t mipmapLevels;
+        bool forceUnicodeFont;
+        bool reducedDebugInfo;
+        bool useNativeTransport;
+        bool entityShadows;
+        bool mainHand;
+        uint8_t attackIndicator;
+        bool showSubtitles;
+        bool realmsNotifications;
+        bool autoJump;
+        uint8_t narrator;
+        std::string tutorialStep;
+        bool autoSuggestions;
+        float mouseWheelSensitivity;
 
-       //SOUND
-       float sound_category_master; //GUI
+        //SKIP CONTROLS!!!
 
-       float sound_category_music; //MUSIC
-       float sound_category_record; //RECORD
-       float sound_category_weather; //WEATHER
-       float sound_category_block; //BLOCK
-       float sound_category_hostile; //MOB
-       float sound_category_neutral; //MOB
-       float sound_category_player; //PLAYER
-       float sound_category_ambient; //MISC
+        float soundCategory_master;
+        float soundCategory_music;
+        float soundCategory_record;
+        float soundCategory_weather;
+        float soundCategory_block;
+        float soundCategory_hostile;
+        float soundCategory_neutral;
+        float soundCategory_player;
+        float soundCategory_ambient;
+        float soundCategory_voice;
 
-       //SKIN CUSTOMIZATIONS
-
-       bool model_part_cape;
-       bool model_part_jacket;
-       bool model_part_left_sleeve;
-       bool model_part_right_sleeve;
-       bool model_part_left_pants_leg;
-       bool model_part_right_pants_leg;
-       bool model_part_hat;
+        bool modelPart_cape; 	
+        bool modelPart_jacket; //	Whether the "Jacket" skin layer is shown (true/false) 	true 	
+        bool modelPart_left_sleeve; //	Whether the "Left Sleeve" skin layer is shown (true/false) 	true 	
+        bool modelPart_right_sleeve; //	Whether the "Right Sleeve" skin layer is shown (true/false) 	true 	
+        bool modelPart_left_pants_leg; // 	Whether the "Left Pants Leg" skin layer is shown (true/false) 	true 	
+        bool modelPart_right_pants_leg; // 	Whether the "Right Pants Leg" skin lauer is shown (true/false) 	true 	
+        bool modelPart_hat; // 	Whether the "Hat" skin layer is shown (true/false) 	true 	
     };
 
     class OptionsManager{
@@ -83,6 +102,8 @@ namespace Minecraft::Common{
 
         std::fstream option_file;
     };
+
+    extern Options g_DefaultOptions;
 
     extern OptionsManager g_OptionsManager;
 }

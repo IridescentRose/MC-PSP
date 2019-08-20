@@ -1,4 +1,4 @@
-TARGET = Minecraft2
+TARGET = Minecraft
 OBJS = Engine/Aurealis/Math/MathLib.o \
 Engine/Shadow/Audio/sound_utils/pgeWav.o \
 Engine/Shadow/Audio/sound_utils/vfsFile.o \
@@ -38,6 +38,7 @@ libs/json/src/json_value.o \
 libs/json/src/json_writer.o \
 Minecraft.o \
 Minecraft/Common/Translations.o \
+Minecraft/Common/Options.o \
 Minecraft/Menu/Logo.o \
 Minecraft/Menu/MenuState.o \
 Minecraft/Menu/components/TitleScreen.o \
@@ -60,7 +61,7 @@ LDFLAGS =
 LIBS=  -lNoisepp -lpspaudiolib -lpspaudio -lpspaudiocodec -lpng -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath #-lpsp_req -lcurl -lTiny
 
 EXTRA_TARGETS = EBOOT.PBP
-PSP_EBOOT_TITLE = MineCraft PSP 2
+PSP_EBOOT_TITLE = Minecraft
 PSP_EBOOT_ICON = ICON0.png
 PSP_EBOOT_PIC1 = PIC1.png
 
