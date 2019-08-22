@@ -1,4 +1,5 @@
 #include "MenuState.hpp"
+#include <Aurealis/Utils/Logger.h>
 
 namespace Minecraft::Menus{
 
@@ -15,6 +16,7 @@ namespace Minecraft::Menus{
 
 	void MenuState::Init(){
         t = Timer();
+        Common::g_OptionsManager.init();
         //BGM!!!
         srand(time(0));
 	    int musicChoice = rand() % 4 + 1; //1 - 4
@@ -80,7 +82,7 @@ namespace Minecraft::Menus{
         options_tile->Scale(2.0f, 2.0f);
 
         Common::g_TranslationOBJ.init();
-        Common::g_TranslationOBJ.setTranslation("en_us");
+        Common::g_TranslationOBJ.setTranslation(Common::g_OptionsManager.options.lang);
 
         langPosMax = Common::g_TranslationOBJ.availableTranslations().size();
     }

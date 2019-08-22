@@ -15,6 +15,7 @@
 
 #include <Aurealis/System/SystemManager.h>
 #include "../Common/Translations.hpp"
+#include "../Common/Options.hpp"
 
 #define PSP_MENU_SIZE 0.8
 using namespace Aurealis::System;

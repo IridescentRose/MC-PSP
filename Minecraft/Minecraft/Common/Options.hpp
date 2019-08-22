@@ -12,22 +12,22 @@ namespace Minecraft::Common{
         float fov;
         float gamma;
         float saturation;
-        uint8_t renderDistance;
-        uint8_t guiScale;
-        uint8_t particles;
+        int renderDistance;
+        int guiScale;
+        int particles;
         bool bobView;
-        uint8_t maxFPS;
+        int maxFPS;
         bool fboEnable;
-        uint8_t difficulty;
+        int difficulty;
         bool fancyGraphics;
-        uint8_t ao;
-        uint8_t biomeBlendRadius;
-        uint8_t renderClouds;
+        int ao;
+        int biomeBlendRadius;
+        int renderClouds;
         std::string resourcePacks;
         std::string incompatibleResourcePacks;
         std::string lastServer;
         std::string lang;
-        uint8_t chatVisibility;
+        int chatVisibility;
         bool chatColors;
         bool chatLinks;
         bool chatLinksPrompt;
@@ -47,17 +47,17 @@ namespace Minecraft::Common{
         float chatHeightUnfocused;
         float chatScale;
         float chatWidth;
-        uint8_t mipmapLevels;
+        int mipmapLevels;
         bool forceUnicodeFont;
         bool reducedDebugInfo;
         bool useNativeTransport;
         bool entityShadows;
         bool mainHand;
-        uint8_t attackIndicator;
+        int attackIndicator;
         bool showSubtitles;
         bool realmsNotifications;
         bool autoJump;
-        uint8_t narrator;
+        int narrator;
         std::string tutorialStep;
         bool autoSuggestions;
         float mouseWheelSensitivity;
@@ -76,12 +76,12 @@ namespace Minecraft::Common{
         float soundCategory_voice;
 
         bool modelPart_cape; 	
-        bool modelPart_jacket; //	Whether the "Jacket" skin layer is shown (true/false) 	true 	
-        bool modelPart_left_sleeve; //	Whether the "Left Sleeve" skin layer is shown (true/false) 	true 	
-        bool modelPart_right_sleeve; //	Whether the "Right Sleeve" skin layer is shown (true/false) 	true 	
-        bool modelPart_left_pants_leg; // 	Whether the "Left Pants Leg" skin layer is shown (true/false) 	true 	
+        bool modelPart_jacket;
+        bool modelPart_left_sleeve;
+        bool modelPart_right_sleeve;
+        bool modelPart_left_pants_leg;	
         bool modelPart_right_pants_leg; // 	Whether the "Right Pants Leg" skin lauer is shown (true/false) 	true 	
-        bool modelPart_hat; // 	Whether the "Hat" skin layer is shown (true/false) 	true 	
+        bool modelPart_hat; 	
     };
 
     class OptionsManager{

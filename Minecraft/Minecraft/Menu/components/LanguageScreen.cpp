@@ -97,6 +97,11 @@ namespace Minecraft::Menus{
 
             if(g_System.KeyPressed(PSP_CTRL_CROSS)){
                 Common::g_TranslationOBJ.setTranslation(Common::g_TranslationOBJ.availableTranslations()[langPosSel + langPos].code.c_str());
+                
+                Common::g_OptionsManager.open();
+                Common::g_OptionsManager.options.lang = Common::g_TranslationOBJ.availableTranslations()[langPosSel + langPos].code;
+                Common::g_OptionsManager.close();
+    
             }
 
         }else{
