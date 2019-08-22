@@ -1,7 +1,7 @@
 version:1344
 invertYMouse:false
 mouseSensitivity:0.5
-fov:0
+fov:-7.82311e-08
 gamma:0
 saturation:0
 renderDistance:4
@@ -18,7 +18,7 @@ renderClouds:true
 resourcePacks:[]
 incompatibleResourcePacks:[]
 lastServer:[]
-lang:de_de
+lang:en_us
 chatVisibility:false
 chatColors:true
 chatLinks:true
@@ -51,7 +51,7 @@ realmsNotifications:true
 autoJump:true
 narrator:0
 tutorialStep:movement
-autoSuggestions:1
+autoSuggestions:0
 mouseWheelSensitivity:1
 soundCategory_master:1
 soundCategory_music:1

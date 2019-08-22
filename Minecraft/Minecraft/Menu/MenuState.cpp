@@ -73,6 +73,10 @@ namespace Minecraft::Menus{
         miniUnSel = new Sprite(widgets, 0, 66, 200, 20);
         miniUnSel->Scale(0.48f, 1.0f);
         
+        slider = new Sprite(widgets, 0, 66, 200, 20);
+        slider->Scale(0.025f, 1.0f);
+        slider_sel = new Sprite(widgets, 0, 86, 200, 20);
+        slider_sel->Scale(0.025f, 1.0f);
 
         lang = new Sprite(widgets, 0, 106, 20, 20);
         hlang = new Sprite(widgets, 0, 126, 20, 20);

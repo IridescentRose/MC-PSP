@@ -12,6 +12,14 @@ namespace Minecraft::Menus{
             opt_dis->SetPosition(152, 48);
             opt_dis->Draw();
 
+            slider->SetPosition(152 + (Common::g_OptionsManager.options.fov * 40)*2, 48);
+            slider_sel->SetPosition(152 + (Common::g_OptionsManager.options.fov * 40)*2, 48);
+            slider->Draw();
+            if(selectRegion == 0 && selectPosY == 0){
+                slider_sel->Draw();
+            }
+
+
             opt_unsel->SetPosition(168 + 160, 48);
             opt_unsel->Draw();
 
@@ -53,6 +61,20 @@ namespace Minecraft::Menus{
         g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         g_RenderManager.DebugPrint(240, 32, Common::g_TranslationOBJ.getText("options.title").c_str());
         
+        if(selectRegion == 0 && selectPosY == 0){
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }else{
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }
+        g_RenderManager.DebugPrint(152, 48, "%s: %.1f", Common::g_TranslationOBJ.getText("options.fov").c_str(), Common::g_OptionsManager.options.fov * 40 + 70);
+        
+        if(selectRegion == 1 && selectPosY == 0){
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }else{
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }
+        g_RenderManager.DebugPrint(168  + 160, 48, "%s: %s", Common::g_TranslationOBJ.getText("options.realmsNotifications").c_str(), (Common::g_OptionsManager.options.realmsNotifications) ? Common::g_TranslationOBJ.getText("options.on").c_str() : Common::g_TranslationOBJ.getText("options.off").c_str());
+
         if(selectRegion == 0 && selectPosY == 1){
             g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
@@ -118,6 +140,7 @@ namespace Minecraft::Menus{
     }
 	void MenuState::optionsMainScreenUpdate(){
         if(g_System.KeyPressed(PSP_CTRL_RTRIGGER)){
+            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             selectRegion++;
             if(selectRegion > 1){
                 selectRegion = 1;
@@ -125,6 +148,7 @@ namespace Minecraft::Menus{
         }
 
         if(g_System.KeyPressed(PSP_CTRL_LTRIGGER)){
+            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             selectRegion--;
             if(selectRegion < 0){
                 selectRegion = 0;
@@ -132,6 +156,7 @@ namespace Minecraft::Menus{
         }
 
         if(g_System.KeyPressed(PSP_CTRL_DOWN)){
+            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             selectPosY++;
             if(selectPosY > 5){
                 selectPosY = 5;
@@ -139,14 +164,33 @@ namespace Minecraft::Menus{
         }
         
         if(g_System.KeyPressed(PSP_CTRL_UP)){
+            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             selectPosY--;
             if(selectPosY < 0){
                 selectPosY = 0;
             }
         }
+
+        if(g_System.KeyPressed(PSP_CTRL_LEFT)){
+            if(selectPosY == 0 && selectRegion == 0){
+                Common::g_OptionsManager.options.fov -= 1 / 40.0f;
+            }
+            if(Common::g_OptionsManager.options.fov < -1){
+                Common::g_OptionsManager.options.fov = -1.0f;
+            }
+        }
+        if(g_System.KeyPressed(PSP_CTRL_RIGHT)){
+            if(selectPosY == 0 && selectRegion == 0){
+                Common::g_OptionsManager.options.fov += 1 / 40.0f;
+            }
+            if(Common::g_OptionsManager.options.fov > 1){
+                Common::g_OptionsManager.options.fov = 1.0f;
+            }
+        }
     
 
         if(g_System.KeyPressed(PSP_CTRL_CROSS)){
+            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             if(selectRegion == 0){ //LEFT SIDE
                 if(selectPosY == 0){} //NOTHING, this is modified by L/R
                 if(selectPosY == 1){
@@ -171,9 +215,11 @@ namespace Minecraft::Menus{
             if(selectRegion == 1){ //RIGHT SIDE
                 if(selectPosY == 0){
                     //REALMS NOTIFICATIONS
+                    Common::g_OptionsManager.options.realmsNotifications = !Common::g_OptionsManager.options.realmsNotifications;
                 } 
                 if(selectPosY == 1){
                     //MUSIC & SOUNDS
+                    
                 }
                 if(selectPosY == 2){
                     //CONTROLS
@@ -193,6 +239,7 @@ namespace Minecraft::Menus{
                 previous_states = MENU_STATE_OPTIONS_MAIN;
 
                 //CLOSE OPTIONS STREAMING!
+                Common::g_OptionsManager.close();
             }
         }
     }

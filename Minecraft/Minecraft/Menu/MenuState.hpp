@@ -76,6 +76,8 @@ namespace Minecraft::Menus{
 		Sprite *miniSel, *miniUnSel;
 		Sprite *options_tile;
 
+		Sprite *slider, *slider_sel;
+
 		int selectPosY, selectPosX;
 
 		int selectRegion, langPos, langPosSel, langPosMax;
