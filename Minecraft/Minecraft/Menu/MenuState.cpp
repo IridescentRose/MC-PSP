@@ -134,6 +134,11 @@ namespace Minecraft::Menus{
                 optionsMainScreenUpdate();
                 break;
             }
+
+            case MENU_STATE_SKIN_CUSTOMIZATION:{
+                optionsSkinScreenUpdate();
+                break;
+            }
         }
 
         splashSize = vfpu_sinf(elapsed * 3.14159f) * (0.618f - (1.0f - 0.618f))/4.0f + (1.0f - 0.687f)*2 ;
@@ -177,6 +182,11 @@ namespace Minecraft::Menus{
 
             case MENU_STATE_OPTIONS_MAIN:{
                 optionsMainScreenDraw();
+                break;
+            }
+
+            case MENU_STATE_SKIN_CUSTOMIZATION:{
+                optionsSkinScreenDraw();
                 break;
             }
         }   

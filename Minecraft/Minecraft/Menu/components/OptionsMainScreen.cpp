@@ -8,7 +8,7 @@ namespace Minecraft::Menus{
                 options_tile->SetPosition(x * 32, y * 32);
                 options_tile->Draw();
             }
-
+        }
             opt_dis->SetPosition(152, 48);
             opt_dis->Draw();
 
@@ -56,7 +56,7 @@ namespace Minecraft::Menus{
             }
 
                         
-        }
+        
 
         g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         g_RenderManager.DebugPrint(240, 32, Common::g_TranslationOBJ.getText("options.title").c_str());
@@ -129,7 +129,7 @@ namespace Minecraft::Menus{
         }else{
             g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(168 + 160, 108 + 72, Common::g_TranslationOBJ.getText("options.accessibility.title").c_str());
+        g_RenderManager.DebugPrint(168 + 160, 108 + 72, Common::g_TranslationOBJ.getText("options.snooper.view").c_str());
 
         if(selectPosY == 5){
             g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
@@ -195,6 +195,11 @@ namespace Minecraft::Menus{
                 if(selectPosY == 0){} //NOTHING, this is modified by L/R
                 if(selectPosY == 1){
                     //SKIN CUSTOMIZATION
+                    selectPosX = 0;
+                    selectPosY = 0;
+                    selectRegion = 0;
+                    previous_states = menu_states;
+                    menu_states = MENU_STATE_SKIN_CUSTOMIZATION;
                 }
                 if(selectPosY == 2){
                     //VIDEO SETTINGS!

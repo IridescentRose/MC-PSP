@@ -28,6 +28,7 @@ namespace Minecraft::Menus{
 		MENU_STATE_TITLE = 0,
 		MENU_STATE_LANGUAGE = 1,
 		MENU_STATE_OPTIONS_MAIN = 2,
+		MENU_STATE_SKIN_CUSTOMIZATION = 3
 	};
 
     class MenuState : public CGameState {
@@ -57,6 +58,9 @@ namespace Minecraft::Menus{
 
 		void optionsMainScreenDraw();
 		void optionsMainScreenUpdate();
+
+		void optionsSkinScreenDraw();
+		void optionsSkinScreenUpdate();
 
         OSL_SOUND* bgm, *button;
 		Panorama* panorama;
