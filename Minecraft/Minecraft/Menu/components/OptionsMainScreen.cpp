@@ -203,6 +203,7 @@ namespace Minecraft::Menus{
                 }
                 if(selectPosY == 2){
                     //VIDEO SETTINGS!
+                    
                 }
                 if(selectPosY == 3){
                     //LANGUAGE!
@@ -224,7 +225,11 @@ namespace Minecraft::Menus{
                 } 
                 if(selectPosY == 1){
                     //MUSIC & SOUNDS
-                    
+                    selectPosX = 0;
+                    selectPosY = 0;
+                    selectRegion = 0;
+                    previous_states = menu_states;
+                    menu_states = MENU_STATE_MUSIC;
                 }
                 if(selectPosY == 2){
                     //CONTROLS

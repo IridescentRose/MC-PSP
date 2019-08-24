@@ -62,6 +62,9 @@ namespace Minecraft::Menus{
         opt_dis = new Sprite(widgets, 0, 46, 200, 20);
         opt_dis->Scale(0.8f, 1.0f);
 
+        mega_slider = new Sprite(widgets, 0, 46, 200, 20);
+        mega_slider->Scale(336.0f / 200.0f, 1.0f);
+
         opt_unsel = new Sprite(widgets, 0, 66, 200, 20);
         opt_unsel->Scale(0.8f, 1.0f);
 
@@ -139,6 +142,10 @@ namespace Minecraft::Menus{
                 optionsSkinScreenUpdate();
                 break;
             }
+            case MENU_STATE_MUSIC:{
+                optionsMusicScreenUpdate();
+                break;
+            }
         }
 
         splashSize = vfpu_sinf(elapsed * 3.14159f) * (0.618f - (1.0f - 0.618f))/4.0f + (1.0f - 0.687f)*2 ;
@@ -188,6 +195,9 @@ namespace Minecraft::Menus{
             case MENU_STATE_SKIN_CUSTOMIZATION:{
                 optionsSkinScreenDraw();
                 break;
+            }
+            case MENU_STATE_MUSIC:{
+                optionsMusicScreenDraw();
             }
         }   
     }
