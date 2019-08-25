@@ -108,6 +108,7 @@ namespace Minecraft::Common{
     void OptionsManager::open(){
         std::ifstream file("options.txt");
         if(file.good()){
+
             std::string key, value;
             while(!file.eof()){
                 std::getline(file, key, ':');
@@ -270,16 +271,14 @@ namespace Minecraft::Common{
             writeFile(g_DefaultOptions);
             options = g_DefaultOptions;
         }
+        
+        //Write out the options
+        remove("options.txt");
+        writeFile(options);
     }
 
     void OptionsManager::close(){
-
-        option_file.close();
         remove("options.txt");
-        std::ofstream correct("options.txt");
-        correct.close();
-
-        option_file.open("options.txt");
         writeFile(options);
     }
 
