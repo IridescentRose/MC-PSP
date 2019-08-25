@@ -21,79 +21,80 @@ namespace Minecraft::Common{
         
     }
 
-    void writeFile(const Options& options, std::fstream& output){
-        output << "version" << ":" << options.version << std::endl;
-        output << "invertYMouse" << ":" << BTS(options.invertYMouse) << std::endl;
-        output << "mouseSensitivity" << ":" << options.mouseSensitivity  << std::endl;
-        output << "fov" << ":" << options.fov << std::endl;
-        output << "gamma" << ":" << options.gamma << std::endl;
-        output << "saturation" << ":" << options.saturation  << std::endl;
-        output << "renderDistance" << ":" << options.renderDistance  << std::endl;
-        output << "guiScale" << ":" << options.guiScale  << std::endl;
-        output << "particles" << ":" << options.particles  << std::endl;
-        output << "bobView" << ":" << BTS(options.bobView) << std::endl;
-        output << "maxFPS" << ":" << options.maxFPS  << std::endl;
-        output << "fboEnable" << ":" << BTS(options.fboEnable) << std::endl;
-        output << "difficulty" << ":" << options.difficulty  << std::endl;
-        output << "fancyGraphics" << ":" << BTS(options.fancyGraphics) << std::endl;
-        output << "ao" << ":" << options.ao  << std::endl;
-        output << "biomeBlendRadius" << ":" << options.biomeBlendRadius  << std::endl;
-        output << "renderClouds" << ":" << BTS(options.renderClouds) << std::endl;
-        output << "resourcePacks" << ":" << options.resourcePacks  << std::endl;
-        output << "incompatibleResourcePacks" << ":" << options.incompatibleResourcePacks  << std::endl;
-        output << "lastServer" << ":" << options.lastServer  << std::endl;
-        output << "lang" << ":" << options.lang  << std::endl;
-        output << "chatVisibility" << ":" << BTS(options.chatVisibility) << std::endl;
-        output << "chatColors" << ":" << BTS(options.chatColors) << std::endl;
-        output << "chatLinks" << ":" << BTS(options.chatLinks) << std::endl;
-        output << "chatLinksPrompt" << ":" << BTS(options.chatLinksPrompt) << std::endl;
-        output << "chatOpacity" << ":" << options.chatOpacity  << std::endl;
-        output << "snooperEnabled" << ":" << BTS(options.snooperEnabled) << std::endl;
-        output << "fullscreen" << ":" << BTS(options.fullscreen) << std::endl;
-        output << "enableVsync" << ":" << BTS(options.enableVsync) << std::endl;
-        output << "useVbo" << ":" << BTS(options.useVbo) << std::endl;
-        output << "hideServerAddress" << ":" << BTS(options.hideServerAddress) << std::endl;
-        output << "advancedItemTooltips" << ":" << BTS(options.advancedItemTooltips) << std::endl;
-        output << "pauseOnLostFocus" << ":" << BTS(options.pauseOnLostFocus) << std::endl;
-        output << "touchscreen" << ":" << BTS(options.touchscreen) << std::endl;
-        output << "overrideWidth" << ":" << options.overrideWidth  << std::endl;
-        output << "overrideHeight" << ":" << options.overrideHeight  << std::endl;
-        output << "heldItemTooltips" << ":" << BTS(options.heldItemTooltips) << std::endl;
-        output << "chatHeightFocused" << ":" << options.chatHeightFocused  << std::endl;
-        output << "chatHeightUnfocused" << ":" << options.chatHeightUnfocused  << std::endl;
-        output << "chatScale" << ":" << options.chatScale  << std::endl;
-        output << "chatWidth" << ":" << options.chatWidth  << std::endl;
-        output << "mipmapLevels" << ":" << options.mipmapLevels  << std::endl;
-        output << "forceUnicodeFont" << ":" << BTS(options.forceUnicodeFont) << std::endl;
-        output << "reducedDebugInfo" << ":" << BTS(options.reducedDebugInfo) << std::endl;
-        output << "useNativeTransport" << ":" << BTS(options.useNativeTransport) << std::endl;
-        output << "entityShadows" << ":" << BTS(options.entityShadows) << std::endl;
-        output << "mainHand" << ":" << ((options.mainHand) ? "right": "left") << std::endl;
-        output << "attackIndicator" << ":" << options.attackIndicator  << std::endl;
-        output << "showSubtitles" << ":" << BTS(options.showSubtitles) << std::endl;
-        output << "realmsNotifications" << ":" << BTS(options.realmsNotifications) << std::endl;
-        output << "autoJump" << ":" << BTS(options.autoJump) << std::endl;
-        output << "narrator" << ":" << options.narrator  << std::endl;
-        output << "tutorialStep" << ":" << options.tutorialStep  << std::endl;
-        output << "autoSuggestions" << ":" << options.autoSuggestions  << std::endl;
-        output << "mouseWheelSensitivity" << ":" << options.mouseWheelSensitivity  << std::endl;
-        output << "soundCategory_master" << ":" << options.soundCategory_master  << std::endl;
-        output << "soundCategory_music" << ":" << options.soundCategory_music  << std::endl;
-        output << "soundCategory_record" << ":" << options.soundCategory_record  << std::endl;
-        output << "soundCategory_weather" << ":" << options.soundCategory_weather  << std::endl;
-        output << "soundCategory_block" << ":" << options.soundCategory_block  << std::endl;
-        output << "soundCategory_hostile" << ":" << options.soundCategory_hostile << std::endl;
-        output << "soundCategory_neutral" << ":" << options.soundCategory_neutral  << std::endl;
-        output << "soundCategory_player" << ":" << options.soundCategory_player << std::endl;
-        output << "soundCategory_ambient" << ":" << options.soundCategory_ambient  << std::endl;
-        output << "soundCategory_voice" << ":" << options.soundCategory_voice  << std::endl;
-        output << "modelPart_cape" << ":" << BTS(options.modelPart_cape) << std::endl;
-        output << "modelPart_jacket" << ":" << BTS(options.modelPart_jacket) << std::endl;
-        output << "modelPart_left_sleeve" << ":" << BTS(options.modelPart_left_sleeve) << std::endl;
-        output << "modelPart_right_sleeve" << ":" << BTS(options.modelPart_right_sleeve) << std::endl;
-        output << "modelPart_left_pants_leg" << ":" << BTS(options.modelPart_left_pants_leg) << std::endl;
-        output << "modelPart_right_pants_leg" << ":" << BTS(options.modelPart_right_pants_leg) << std::endl;
-        output << "modelPart_hat" << ":" << BTS(options.modelPart_hat) << std::endl;
+    void writeFile(const Options& options){
+        std::ofstream output("options.txt");
+        output << "version" << ":" << options.version << "\n";
+        output << "invertYMouse" << ":" << BTS(options.invertYMouse) << "\n";
+        output << "mouseSensitivity" << ":" << options.mouseSensitivity  << "\n";
+        output << "fov" << ":" << options.fov << "\n";
+        output << "gamma" << ":" << options.gamma << "\n";
+        output << "saturation" << ":" << options.saturation  << "\n";
+        output << "renderDistance" << ":" << options.renderDistance  << "\n";
+        output << "guiScale" << ":" << options.guiScale  << "\n";
+        output << "particles" << ":" << options.particles  << "\n";
+        output << "bobView" << ":" << BTS(options.bobView) << "\n";
+        output << "maxFPS" << ":" << options.maxFPS  << "\n";
+        output << "fboEnable" << ":" << BTS(options.fboEnable) << "\n";
+        output << "difficulty" << ":" << options.difficulty  << "\n";
+        output << "fancyGraphics" << ":" << BTS(options.fancyGraphics) << "\n";
+        output << "ao" << ":" << options.ao  << "\n";
+        output << "biomeBlendRadius" << ":" << options.biomeBlendRadius  << "\n";
+        output << "renderClouds" << ":" << BTS(options.renderClouds) << "\n";
+        output << "resourcePacks" << ":" << options.resourcePacks  << "\n";
+        output << "incompatibleResourcePacks" << ":" << options.incompatibleResourcePacks  << "\n";
+        output << "lastServer" << ":" << options.lastServer  << "\n";
+        output << "lang" << ":" << options.lang  << "\n";
+        output << "chatVisibility" << ":" << BTS(options.chatVisibility) << "\n";
+        output << "chatColors" << ":" << BTS(options.chatColors) << "\n";
+        output << "chatLinks" << ":" << BTS(options.chatLinks) << "\n";
+        output << "chatLinksPrompt" << ":" << BTS(options.chatLinksPrompt) << "\n";
+        output << "chatOpacity" << ":" << options.chatOpacity  << "\n";
+        output << "snooperEnabled" << ":" << BTS(options.snooperEnabled) << "\n";
+        output << "fullscreen" << ":" << BTS(options.fullscreen) << "\n";
+        output << "enableVsync" << ":" << BTS(options.enableVsync) << "\n";
+        output << "useVbo" << ":" << BTS(options.useVbo) << "\n";
+        output << "hideServerAddress" << ":" << BTS(options.hideServerAddress) << "\n";
+        output << "advancedItemTooltips" << ":" << BTS(options.advancedItemTooltips) << "\n";
+        output << "pauseOnLostFocus" << ":" << BTS(options.pauseOnLostFocus) << "\n";
+        output << "touchscreen" << ":" << BTS(options.touchscreen) << "\n";
+        output << "overrideWidth" << ":" << options.overrideWidth  << "\n";
+        output << "overrideHeight" << ":" << options.overrideHeight  << "\n";
+        output << "heldItemTooltips" << ":" << BTS(options.heldItemTooltips) << "\n";
+        output << "chatHeightFocused" << ":" << options.chatHeightFocused  << "\n";
+        output << "chatHeightUnfocused" << ":" << options.chatHeightUnfocused  << "\n";
+        output << "chatScale" << ":" << options.chatScale  << "\n";
+        output << "chatWidth" << ":" << options.chatWidth  << "\n";
+        output << "mipmapLevels" << ":" << options.mipmapLevels  << "\n";
+        output << "forceUnicodeFont" << ":" << BTS(options.forceUnicodeFont) << "\n";
+        output << "reducedDebugInfo" << ":" << BTS(options.reducedDebugInfo) << "\n";
+        output << "useNativeTransport" << ":" << BTS(options.useNativeTransport) << "\n";
+        output << "entityShadows" << ":" << BTS(options.entityShadows) << "\n";
+        output << "mainHand" << ":" << ((options.mainHand) ? "right": "left") << "\n";
+        output << "attackIndicator" << ":" << options.attackIndicator  << "\n";
+        output << "showSubtitles" << ":" << BTS(options.showSubtitles) << "\n";
+        output << "realmsNotifications" << ":" << BTS(options.realmsNotifications) << "\n";
+        output << "autoJump" << ":" << BTS(options.autoJump) << "\n";
+        output << "narrator" << ":" << options.narrator  << "\n";
+        output << "tutorialStep" << ":" << options.tutorialStep  << "\n";
+        output << "autoSuggestions" << ":" << options.autoSuggestions  << "\n";
+        output << "mouseWheelSensitivity" << ":" << options.mouseWheelSensitivity  << "\n";
+        output << "soundCategory_master" << ":" << options.soundCategory_master  << "\n";
+        output << "soundCategory_music" << ":" << options.soundCategory_music  << "\n";
+        output << "soundCategory_record" << ":" << options.soundCategory_record  << "\n";
+        output << "soundCategory_weather" << ":" << options.soundCategory_weather  << "\n";
+        output << "soundCategory_block" << ":" << options.soundCategory_block  << "\n";
+        output << "soundCategory_hostile" << ":" << options.soundCategory_hostile << "\n";
+        output << "soundCategory_neutral" << ":" << options.soundCategory_neutral  << "\n";
+        output << "soundCategory_player" << ":" << options.soundCategory_player << "\n";
+        output << "soundCategory_ambient" << ":" << options.soundCategory_ambient  << "\n";
+        output << "soundCategory_voice" << ":" << options.soundCategory_voice  << "\n";
+        output << "modelPart_cape" << ":" << BTS(options.modelPart_cape) << "\n";
+        output << "modelPart_jacket" << ":" << BTS(options.modelPart_jacket) << "\n";
+        output << "modelPart_left_sleeve" << ":" << BTS(options.modelPart_left_sleeve) << "\n";
+        output << "modelPart_right_sleeve" << ":" << BTS(options.modelPart_right_sleeve) << "\n";
+        output << "modelPart_left_pants_leg" << ":" << BTS(options.modelPart_left_pants_leg) << "\n";
+        output << "modelPart_right_pants_leg" << ":" << BTS(options.modelPart_right_pants_leg) << "\n";
+        output << "modelPart_hat" << ":" << BTS(options.modelPart_hat) << "\n";
     }
     void OptionsManager::init(){
         open();
@@ -265,10 +266,9 @@ namespace Minecraft::Common{
         }else{
             std::ofstream correct("options.txt");
             correct.close(); //Creates file
-            option_file.open("options.txt");
             //Write out the options
+            writeFile(g_DefaultOptions);
             options = g_DefaultOptions;
-            writeFile(options, option_file);
         }
     }
 
@@ -280,8 +280,7 @@ namespace Minecraft::Common{
         correct.close();
 
         option_file.open("options.txt");
-
-        writeFile(options, option_file);
+        writeFile(options);
     }
 
     Options g_DefaultOptions = {1343, false, 0.5f, 0.0f, 0.0f, 0.0f, 4, 0, 0, true, 60, false, 2, true, 2, 2, true, "[]", "[]", "[]", "en_us", 0, true, true, true, 1.0f, true, false, false, false, false, false, true, false, 0, 0, true, 1.0f, 0.44366196f, 1.0f, 1.0f, 4, false, false, true, true, true, 1, false, true, true, 0, "movement", true, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, true, true, true, true, true, true, true};
