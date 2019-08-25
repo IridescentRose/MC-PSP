@@ -203,7 +203,11 @@ namespace Minecraft::Menus{
                 }
                 if(selectPosY == 2){
                     //VIDEO SETTINGS!
-                    
+                    selectPosX = 0;
+                    selectPosY = 0;
+                    selectRegion = 0;
+                    previous_states = menu_states;
+                    menu_states = MENU_STATE_VIDEO;
                 }
                 if(selectPosY == 3){
                     //LANGUAGE!
@@ -236,9 +240,14 @@ namespace Minecraft::Menus{
                 }
                 if(selectPosY == 3){
                     //CHAT SETTINGS
+                    selectPosX = 0;
+                    selectPosY = 0;
+                    selectRegion = 0;
+                    previous_states = menu_states;
+                    menu_states = MENU_STATE_CHAT_SETTINGS;
                 }
                 if(selectPosY == 4){
-                    //ACCESSIBILITY SETTINGS
+                    //SNOOPER
                 }
             }
             if(selectPosY == 5){

@@ -46,6 +46,8 @@ Minecraft/Menu/components/LanguageScreen.o \
 Minecraft/Menu/components/OptionsMainScreen.o \
 Minecraft/Menu/components/OptionsSkinCustomization.o \
 Minecraft/Menu/components/OptionsMusicScreen.o\
+Minecraft/Menu/components/ChatScreen.o\
+Minecraft/Menu/components/VideoScreen.o\
 Minecraft/Menu/components/Panorama.o \
 
 INCDIR = $(PSPPATH)/include
