@@ -51,7 +51,7 @@ realmsNotifications:true
 autoJump:true
 narrator:0
 tutorialStep:movement
-autoSuggestions:1
+autoSuggestions:0
 mouseWheelSensitivity:1
 soundCategory_master:1
 soundCategory_music:1

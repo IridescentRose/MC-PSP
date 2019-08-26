@@ -207,6 +207,7 @@ namespace Minecraft::Menus{
             }
             case MENU_STATE_MUSIC:{
                 optionsMusicScreenDraw();
+                break;
             }
 
             case MENU_STATE_CHAT_SETTINGS:{
