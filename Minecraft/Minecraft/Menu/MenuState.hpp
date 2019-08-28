@@ -3,7 +3,7 @@
 #include <Aurealis/Utils/GameState.h>
 #include "components/Panorama.hpp"
 #include <Shadow/Audio/AudioManager.hpp>
-#include <Aurealis/Utils/Timer.h>
+#include <Shadow/Utils/Timer.hpp>
 #include <Aurealis/Graphics/Sprite.h>
 #include <json/json.h>
 
@@ -21,6 +21,7 @@
 using namespace Aurealis::System;
 using namespace Shadow::Audio;
 using namespace Aurealis::Utils;
+using namespace Shadow::Utils;
 
 namespace Minecraft::Menus{
 

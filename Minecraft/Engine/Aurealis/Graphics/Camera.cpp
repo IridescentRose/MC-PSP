@@ -33,12 +33,12 @@ namespace Aurealis
 
 		void Camera::update(bool isWalking) {
 			if (isWalking) {
-				bobElapsed += bobTimer.GetDeltaTime();
+				bobElapsed += bobTimer.deltaTime();
 				bobY = vfpu_sinf(-bobElapsed * 2.86 * PI)/48.0f;
 				tiltAngle = vfpu_sinf(bobElapsed * 2.86 * PI) * 1.0f * PI / 180.0f / 4.0f;
 
 				passiveElapsed = 0.0f;
-				passiveTimer.GetDeltaTime();
+				passiveTimer.deltaTime();
 				offAngleX = 0.0f;
 				offAngleY = 0.0f;
 			}
@@ -46,10 +46,10 @@ namespace Aurealis
 				bobY = 0;
 				tiltAngle = 0;
 				bobElapsed = 0;
-				bobTimer.GetDeltaTime();
+				bobTimer.deltaTime();
 
 				//AMBIENT EFFECTS HERE
-				passiveElapsed += passiveTimer.GetDeltaTime();
+				passiveElapsed += passiveTimer.deltaTime();
 				offAngleX = vfpu_sinf(passiveElapsed * 0.523f) / 24.0f;
 				offAngleY = vfpu_sinf(passiveElapsed * 0.238f) / 24.0f;
 				

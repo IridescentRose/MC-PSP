@@ -118,7 +118,7 @@ namespace Minecraft::Menus{
 
     }
 	void MenuState::Update(StateManager* sManager){
-        dt = t.GetDeltaTime();
+        dt = t.deltaTime();
         elapsed += dt;
 
         g_System.InputUpdate();

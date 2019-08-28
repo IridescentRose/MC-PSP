@@ -16,7 +16,7 @@ namespace Minecraft::Menus{
         float timer = 0.0f;
 
         while(timer < t){
-            timer += time.GetDeltaTime();
+            timer += time.deltaTime();
 
             g_RenderManager.StartFrame(1,1,1);
 

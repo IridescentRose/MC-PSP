@@ -2,11 +2,11 @@
 
 #include <Aurealis/Math/Vector3.h>
 #include <Aurealis/Math/Frustum.h>
-#include <Aurealis/Utils/Timer.h>
+#include <Shadow/Utils/Timer.hpp>
 #include <pspmath.h>
 
 using namespace Aurealis::Math;
-using namespace Aurealis::Utils;
+using namespace Shadow::Utils;
 
 namespace Aurealis
 {

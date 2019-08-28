@@ -15,6 +15,7 @@ using namespace Minecraft::Menus;
 using namespace Shadow::Audio;
 using namespace Aurealis::Graphics;
 using namespace Aurealis::Utils;
+using namespace Shadow::Utils;
 using namespace Aurealis::System;
 using namespace Aurealis;
 
