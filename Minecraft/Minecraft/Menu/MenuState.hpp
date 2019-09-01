@@ -33,7 +33,8 @@ namespace Minecraft::Menus{
 		MENU_STATE_MUSIC = 4,
 		MENU_STATE_VIDEO = 5,
 		MENU_STATE_CHAT_SETTINGS = 6,
-		MENU_STATE_SNOOPER = 7
+		MENU_STATE_SNOOPER = 7,
+		MENU_STATE_MULTIPLAYER = 8,
 	};
 
     class MenuState : public CGameState {
@@ -79,6 +80,9 @@ namespace Minecraft::Menus{
 		void optionsSnooperScreenDraw();
 		void optionsSnooperScreenUpdate();
 
+		void optionsMultiplayerScreenDraw();
+		void optionsMultiplayerScreenUpdate();
+
         OSL_SOUND* bgm, *button;
 		Panorama* panorama;
 		Timer t;
@@ -94,7 +98,8 @@ namespace Minecraft::Menus{
 
 		Sprite *selected, *unselected, *disabled, *lang, *hlang;
 		Sprite *opt_sel, *opt_unsel, *opt_dis;
-		Sprite *miniSel, *miniUnSel;
+		Sprite *miniSel, *miniUnSel, *miniDis;
+		Sprite *tinySel, *tinyUnSel, *tinyDis;
 		Sprite *options_tile;
 
 		Sprite *slider, *slider_sel;

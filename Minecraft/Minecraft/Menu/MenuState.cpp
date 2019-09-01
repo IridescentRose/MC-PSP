@@ -75,6 +75,15 @@ namespace Minecraft::Menus{
         miniSel->Scale(0.48f, 1.0f);
         miniUnSel = new Sprite(widgets, 0, 66, 200, 20);
         miniUnSel->Scale(0.48f, 1.0f);
+        miniDis = new Sprite(widgets, 0, 46, 200, 20);
+        miniDis->Scale(0.48f, 1.0f);
+
+        tinySel = new Sprite(widgets, 0, 86, 200, 20);
+        tinySel->Scale(0.36f, 1.0f);
+        tinyUnSel = new Sprite(widgets, 0, 66, 200, 20);
+        tinyUnSel->Scale(0.36f, 1.0f);
+        tinyDis = new Sprite(widgets, 0, 46, 200, 20);
+        tinyDis->Scale(0.36f, 1.0f);
         
         slider = new Sprite(widgets, 0, 66, 200, 20);
         slider->Scale(0.025f, 1.0f);
@@ -160,6 +169,10 @@ namespace Minecraft::Menus{
                 optionsSnooperScreenUpdate();
                 break;
             }
+            case MENU_STATE_MULTIPLAYER:{
+               optionsMultiplayerScreenUpdate();
+               break;
+            }
         }
 
         splashSize = vfpu_sinf(elapsed * 3.14159f) * (0.618f - (1.0f - 0.618f))/4.0f + (1.0f - 0.687f)*2 ;
@@ -226,6 +239,11 @@ namespace Minecraft::Menus{
 
             case MENU_STATE_SNOOPER:{
                 optionsSnooperScreenDraw();
+                break;
+            }
+
+            case MENU_STATE_MULTIPLAYER:{
+                optionsMultiplayerScreenDraw();
                 break;
             }
         }   

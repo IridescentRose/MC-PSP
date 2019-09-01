@@ -148,7 +148,11 @@ namespace Minecraft::Menus{
                         //SINGLE PLAYER MENU
                     }
                     if(selectPosY == 1){
-                        //MULTI PLAYER MENU
+                        //MP MENU
+                        selectPosX = 0;
+                        selectPosY = 0;
+                        previous_states = menu_states;
+                        menu_states = MENU_STATE_MULTIPLAYER;
                     }
                     if(selectPosY == 2){
                         //MINECRAFT REALMS MENU
