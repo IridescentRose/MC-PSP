@@ -39,8 +39,6 @@ libs/json/src/json_writer.o \
 Minecraft.o \
 Minecraft/Common/Translations.o \
 Minecraft/Common/Options.o \
-Minecraft/Common/Controls.o \
-Minecraft/Common/ActionConverter.o \
 Minecraft/Menu/Logo.o \
 Minecraft/Menu/MenuState.o \
 Minecraft/Menu/components/TitleScreen.o \
