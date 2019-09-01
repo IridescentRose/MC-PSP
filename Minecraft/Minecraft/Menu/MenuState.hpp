@@ -33,6 +33,7 @@ namespace Minecraft::Menus{
 		MENU_STATE_MUSIC = 4,
 		MENU_STATE_VIDEO = 5,
 		MENU_STATE_CHAT_SETTINGS = 6,
+		MENU_STATE_SNOOPER = 7
 	};
 
     class MenuState : public CGameState {
@@ -74,6 +75,9 @@ namespace Minecraft::Menus{
 
 		void optionsChatScreenDraw();
 		void optionsChatScreenUpdate();
+
+		void optionsSnooperScreenDraw();
+		void optionsSnooperScreenUpdate();
 
         OSL_SOUND* bgm, *button;
 		Panorama* panorama;

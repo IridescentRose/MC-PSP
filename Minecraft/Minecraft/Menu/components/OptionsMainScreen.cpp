@@ -248,6 +248,11 @@ namespace Minecraft::Menus{
                 }
                 if(selectPosY == 4){
                     //SNOOPER
+                    selectPosX = 0;
+                    selectPosY = 0;
+                    selectRegion = 0;
+                    previous_states = menu_states;
+                    menu_states = MENU_STATE_SNOOPER;
                 }
             }
             if(selectPosY == 5){

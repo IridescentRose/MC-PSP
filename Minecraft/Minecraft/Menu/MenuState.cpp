@@ -155,6 +155,11 @@ namespace Minecraft::Menus{
                 optionsVideoScreenUpdate();
                 break;
             }
+
+            case MENU_STATE_SNOOPER:{
+                optionsSnooperScreenUpdate();
+                break;
+            }
         }
 
         splashSize = vfpu_sinf(elapsed * 3.14159f) * (0.618f - (1.0f - 0.618f))/4.0f + (1.0f - 0.687f)*2 ;
@@ -216,6 +221,11 @@ namespace Minecraft::Menus{
             }
             case MENU_STATE_VIDEO:{
                 optionsVideoScreenDraw();
+                break;
+            }
+
+            case MENU_STATE_SNOOPER:{
+                optionsSnooperScreenDraw();
                 break;
             }
         }   
