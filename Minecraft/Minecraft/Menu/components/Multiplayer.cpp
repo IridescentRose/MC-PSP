@@ -106,59 +106,15 @@ namespace Minecraft::Menus{
 	void MenuState::optionsMultiplayerScreenUpdate(){
 
 		if (!tryConnect) {
-			tryConnect = true;
 			Network::Init();
 
 			char username[16]; //Max length
-
-
-			if (!Network::autoConnect()) {
-				if (!Network::dialogConnect()) {
-					return;
-				}
-				else {
-					//GET USER
-					unsigned short test2[16];
-					unsigned short opis2[8] = { 'U', 's', 'e', 'r', 'n', 'a', 'm', 'e' };
-					if (Dialogs::ShowOSK(opis2, test2, 16) != -1)
-					{
-						std::string usernew = "";
-						for (int j = 0; test2[j]; j++)
-						{
-							unsigned c = test2[j];
-
-							if (32 <= c && c <= 127) // print ascii only
-								usernew += c;
-						}
-
-						sprintf(username, "%s", usernew.c_str());
-					}
-				}
-			}
-			else {
-				//GET USER
-				unsigned short test2[16];
-				unsigned short opis2[8] = { 'U', 's', 'e', 'r', 'n', 'a', 'm', 'e' };
-				if (Dialogs::ShowOSK(opis2, test2, 16) != -1)
-				{
-					std::string usernew = "";
-					for (int j = 0; test2[j]; j++)
-					{
-						unsigned c = test2[j];
-
-						if (32 <= c && c <= 127) // print ascii only
-							usernew += c;
-					}
-
-					sprintf(username, "%s", usernew.c_str());
-				}
-			}
-
+			bool res = Network::dialogConnect();
 			//STORE USERNAME
 
 			//TODO: STORE USERNAME
 
-
+			
 		}
 
 if(Input::KeyPressed(PSP_CTRL_UP)){
