@@ -6,8 +6,8 @@
 #include <pspdisplay.h>
 
 //gamestate/engine includes
-#include <Aurealis/Utils/StateManager.h>
-#include <Aurealis/Utils/GameState.h>
+#include <Shadow/Utils/StateManager.h>
+#include <Shadow/Utils/GameState.h>
 
 namespace Aurealis
 {
