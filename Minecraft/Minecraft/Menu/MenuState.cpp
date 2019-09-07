@@ -123,9 +123,6 @@ namespace Minecraft::Menus{
 
     }
 
-	void MenuState::HandleEvents(StateManager* sManager){
-
-    }
 	void MenuState::Update(StateManager* sManager){
         dt = t.deltaTime();
         elapsed += dt;

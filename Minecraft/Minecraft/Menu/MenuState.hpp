@@ -1,6 +1,7 @@
 #pragma once
 
-#include <Aurealis/Utils/GameState.h>
+#include <Shadow/Utils/StateManager.h>
+#include <Shadow/Utils/GameState.h>
 #include "components/Panorama.hpp"
 #include <Shadow/Audio/AudioManager.hpp>
 #include <Shadow/Utils/Timer.hpp>
@@ -37,7 +38,7 @@ namespace Minecraft::Menus{
 		MENU_STATE_MULTIPLAYER = 8,
 	};
 
-    class MenuState : public CGameState {
+    class MenuState : public GameState{
     public:
 	    MenuState();
 	    virtual ~MenuState();
@@ -49,7 +50,6 @@ namespace Minecraft::Menus{
 	    void Pause();
 	    void Resume();
 
-	    void HandleEvents(StateManager* sManager);
 	    void Update(StateManager* sManager);
 	    void Draw(StateManager* sManager);
     private:

@@ -3,7 +3,7 @@
 
 #include <Aurealis/Graphics/RenderManager.h>
 #include <Aurealis/System/SystemManager.h>
-#include <Aurealis/Utils/StateManager.h>
+#include <Shadow/Utils/StateManager.h>
 #include <Shadow/Audio/AudioManager.hpp>
 #include <Aurealis/Graphics/TextureUtil.h>
 
@@ -14,7 +14,6 @@ using namespace Minecraft::Menus;
 
 using namespace Shadow::Audio;
 using namespace Aurealis::Graphics;
-using namespace Aurealis::Utils;
 using namespace Shadow::Utils;
 using namespace Aurealis::System;
 using namespace Aurealis;
@@ -70,15 +69,13 @@ void exitGame(){
 
 void mainLoop(){
 	StateManager stateManager;
-	stateManager.Init();
 	
 	MenuState *state = new MenuState();
 	state->Init();
 	stateManager.ChangeState(state);
 
-	while ( stateManager.Running() )
+	while ( true )
 	{
-		stateManager.HandleEvents();
 		stateManager.Update();
 		stateManager.Draw();
 	}

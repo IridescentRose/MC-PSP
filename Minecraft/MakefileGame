@@ -8,6 +8,7 @@ Engine/Shadow/Audio/sound_utils/bgm.o \
 Engine/Shadow/Audio/AudioManager.o \
 Engine/Shadow/Utils/Timer.o \
 Engine/Shadow/Utils/Input.o \
+Engine/Shadow/Utils/StateManager.o \
 Engine/Aurealis/Graphics/common.o \
 Engine/Aurealis/Graphics/vfram.o \
 Engine/Aurealis/Graphics/vram.o \
@@ -29,10 +30,6 @@ Engine/Aurealis/Math/Frustum.o \
 Engine/Aurealis/Math/Polygon.o \
 Engine/Aurealis/System/SystemManager.o \
 Engine/Aurealis/Utils/Logger.o \
-Engine/Aurealis/Utils/StateManager.o \
-Engine/Aurealis/Utils/pgeZip.o \
-Engine/Aurealis/Utils/pge.o \
-Engine/Aurealis/Utils/pgeDir.o \
 libs/json/src/json_reader.o \
 libs/json/src/json_value.o \
 libs/json/src/json_writer.o \

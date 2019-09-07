@@ -13,26 +13,10 @@ namespace Aurealis
 {
 	namespace Utils
 	{
-
-		void StateManager::Init()
-		{
-			m_running = true;
-		}
-
-		void StateManager::Enter()
-		{
-
-		}
-
-		void StateManager::CleanUp()
-		{
-
-		}
-
 		void StateManager::ChangeState(CGameState* state)
 		{
-			// cleanup the current state
-			if ( !states.empty() ) {
+			// cleanup the state chain
+			while ( !states.empty() ) {
 				states.back()->CleanUp();
 				states.pop_back();
 			}
@@ -66,12 +50,6 @@ namespace Aurealis
 			if ( !states.empty() ) {
 				states.back()->Resume();
 			}
-		}
-
-
-		void StateManager::HandleEvents()
-		{
-			states.back()->HandleEvents(this);
 		}
 
 		void StateManager::Update()
