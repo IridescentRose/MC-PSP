@@ -16,7 +16,7 @@
 # To install in $HOME instead of /usr/local, use:
 #    make install prefix=$HOME
 
-CC=gcc
+CC=psp-gcc
 
 CFLAGS=-O3 -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
 #CFLAGS=-O -DMAX_WBITS=14 -DMAX_MEM_LEVEL=7
@@ -27,8 +27,8 @@ CFLAGS=-O3 -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
 SFLAGS=-O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
 LDFLAGS=
 TEST_LDFLAGS=-L. libz.a
-LDSHARED=gcc -shared -Wl,-soname,libz.so.1,--version-script,zlib.map
-CPP=gcc -E
+LDSHARED=psp-gcc -shared -Wl,-soname,libz.so.1,--version-script,zlib.map
+CPP=psp-gcc -E
 
 STATICLIB=libz.a
 SHAREDLIB=libz.so
@@ -36,16 +36,16 @@ SHAREDLIBV=libz.so.1.2.11
 SHAREDLIBM=libz.so.1
 LIBS=$(STATICLIB) $(SHAREDLIBV)
 
-AR=ar
-ARFLAGS=rc
-RANLIB=ranlib
-LDCONFIG=ldconfig
+AR=psp-ar
+ARFLAGS=psp-rc
+RANLIB=psp-ranlib
+LDCONFIG=psp-ldconfig
 LDSHAREDLIBC=-lc
 TAR=tar
 SHELL=/bin/sh
 EXE=
 
-prefix =/usr/local
+prefix =./build/
 exec_prefix =${prefix}
 libdir =${exec_prefix}/lib
 sharedlibdir =${libdir}
