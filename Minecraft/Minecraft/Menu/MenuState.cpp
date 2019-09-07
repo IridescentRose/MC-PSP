@@ -8,6 +8,7 @@ namespace Minecraft::Menus{
         dt = 0;
         selectRegion = selectPosY = selectPosX = 0;
         langPos = langPosMax = langPosSel = 0;
+		tryConnect = false;
     }
 
     MenuState::~MenuState(){
@@ -103,7 +104,7 @@ namespace Minecraft::Menus{
         langPosMax = Common::g_TranslationOBJ.availableTranslations().size();
 		Logging::debug("Hello world!");
 		
-		u32 ramFree = g_System.freeMemory();
+		u32 ramFree = freeMemory();
 		float ram = ((float)ramFree) / 1024.0f / 1024.0f;
 
 		std::ostringstream os;
@@ -136,7 +137,7 @@ namespace Minecraft::Menus{
         dt = t.deltaTime();
         elapsed += dt;
 
-        g_System.InputUpdate();
+        Input::InputUpdate();
         switch(menu_states){
             case MENU_STATE_TITLE:{
                 titleScreenUpdate();
@@ -200,7 +201,7 @@ namespace Minecraft::Menus{
         #ifdef DEBUG
         g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         
-        u32 ramFree = g_System.freeMemory();
+        u32 ramFree = Input::freeMemory();
         
         g_RenderManager.DebugPrint(240, 15, "RAM: %.3f MB", ((float)ramFree) / 1024.0f / 1024.0f );
         #endif

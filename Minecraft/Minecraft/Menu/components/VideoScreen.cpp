@@ -226,7 +226,7 @@ namespace Minecraft::Menus{
 
     }
     void MenuState::optionsVideoScreenUpdate(){
-        if(g_System.KeyPressed(PSP_CTRL_RTRIGGER)){
+        if(Input::KeyPressed(PSP_CTRL_RTRIGGER)){
             g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             selectRegion++;
             if(selectRegion > 1){
@@ -234,7 +234,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(g_System.KeyPressed(PSP_CTRL_LTRIGGER)){
+        if(Input::KeyPressed(PSP_CTRL_LTRIGGER)){
             g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             selectRegion--;
             if(selectRegion < 0){
@@ -242,7 +242,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(g_System.KeyPressed(PSP_CTRL_DOWN)){
+        if(Input::KeyPressed(PSP_CTRL_DOWN)){
             g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             selectPosY++;
             if(selectPosY > 8){
@@ -250,7 +250,7 @@ namespace Minecraft::Menus{
             }
         }
         
-        if(g_System.KeyPressed(PSP_CTRL_UP)){
+        if(Input::KeyPressed(PSP_CTRL_UP)){
             g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             selectPosY--;
             if(selectPosY < 0){
@@ -259,7 +259,7 @@ namespace Minecraft::Menus{
         }
 
 
-        if(g_System.KeyPressed(PSP_CTRL_LEFT)){
+        if(Input::KeyPressed(PSP_CTRL_LEFT)){
             if(selectPosY == 4 && selectRegion == 0){
                 Common::g_OptionsManager.options.gamma -= 1 / 100.0f;
             }
@@ -273,7 +273,7 @@ namespace Minecraft::Menus{
                 Common::g_OptionsManager.options.renderDistance = 1;
             }
         }
-        if(g_System.KeyPressed(PSP_CTRL_RIGHT)){
+        if(Input::KeyPressed(PSP_CTRL_RIGHT)){
             if(selectPosY == 4 && selectRegion == 0){
                 Common::g_OptionsManager.options.gamma += 1 / 100.0f;
             }
@@ -288,7 +288,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(g_System.KeyPressed(PSP_CTRL_CROSS)){
+        if(Input::KeyPressed(PSP_CTRL_CROSS)){
             g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
 
             if(selectPosY == 0 && selectRegion == 0){

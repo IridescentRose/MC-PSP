@@ -106,7 +106,7 @@ namespace Minecraft::Menus{
     }
 
     void MenuState::titleScreenUpdate(){
-                if(g_System.KeyPressed(PSP_CTRL_UP)){
+                if(Input::KeyPressed(PSP_CTRL_UP)){
                     selectPosY--;
 
                     if(selectPosY < 0){
@@ -114,7 +114,7 @@ namespace Minecraft::Menus{
                     }
                     g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
                 }
-                if(g_System.KeyPressed(PSP_CTRL_DOWN)){
+                if(Input::KeyPressed(PSP_CTRL_DOWN)){
                     selectPosY++;
 
                     if(selectPosY > 3){
@@ -122,7 +122,7 @@ namespace Minecraft::Menus{
                     }
                     g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
                 }
-                if(g_System.KeyPressed(PSP_CTRL_LEFT)){
+                if(Input::KeyPressed(PSP_CTRL_LEFT)){
                     selectPosX--;
 
                     if(selectPosX < 0){
@@ -130,7 +130,7 @@ namespace Minecraft::Menus{
                     }
                     g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
                 }
-                if(g_System.KeyPressed(PSP_CTRL_RIGHT)){
+                if(Input::KeyPressed(PSP_CTRL_RIGHT)){
                     selectPosX++;
 
                     if(selectPosX > 2){
@@ -139,11 +139,11 @@ namespace Minecraft::Menus{
                     g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
                 }
 
-                if(g_System.KeyPressed(PSP_CTRL_START)){
+                if(Input::KeyPressed(PSP_CTRL_START)){
                     sceKernelExitGame();
                 }
 
-                if(g_System.KeyPressed(PSP_CTRL_CROSS)){
+                if(Input::KeyPressed(PSP_CTRL_CROSS)){
                     if(selectPosY == 0){
                         //SINGLE PLAYER MENU
                     }

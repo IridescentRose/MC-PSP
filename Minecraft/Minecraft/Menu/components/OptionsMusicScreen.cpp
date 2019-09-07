@@ -181,7 +181,7 @@ namespace Minecraft::Menus{
     }
 
     void MenuState::optionsMusicScreenUpdate(){
-        if(g_System.KeyPressed(PSP_CTRL_RTRIGGER)){
+        if(Input::KeyPressed(PSP_CTRL_RTRIGGER)){
             g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             selectRegion++;
             if(selectRegion > 1){
@@ -189,7 +189,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(g_System.KeyPressed(PSP_CTRL_LTRIGGER)){
+        if(Input::KeyPressed(PSP_CTRL_LTRIGGER)){
             g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             selectRegion--;
             if(selectRegion < 0){
@@ -197,7 +197,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(g_System.KeyPressed(PSP_CTRL_DOWN)){
+        if(Input::KeyPressed(PSP_CTRL_DOWN)){
             g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             selectPosY++;
             if(selectPosY > 7){
@@ -205,7 +205,7 @@ namespace Minecraft::Menus{
             }
         }
         
-        if(g_System.KeyPressed(PSP_CTRL_UP)){
+        if(Input::KeyPressed(PSP_CTRL_UP)){
             g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             selectPosY--;
             if(selectPosY < 0){
@@ -213,7 +213,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(g_System.KeyPressed(PSP_CTRL_LEFT)){
+        if(Input::KeyPressed(PSP_CTRL_LEFT)){
 
             if(selectPosY == 0){
                 Common::g_OptionsManager.options.soundCategory_master -= 0.01f;
@@ -316,7 +316,7 @@ namespace Minecraft::Menus{
             }
 
         }
-        if(g_System.KeyPressed(PSP_CTRL_RIGHT)){
+        if(Input::KeyPressed(PSP_CTRL_RIGHT)){
             if(selectPosY == 0){
                 Common::g_OptionsManager.options.soundCategory_master += 0.01f;
                 if(Common::g_OptionsManager.options.soundCategory_master < 0){
@@ -418,7 +418,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(g_System.KeyPressed(PSP_CTRL_CROSS)){
+        if(Input::KeyPressed(PSP_CTRL_CROSS)){
             if(selectPosY == 6){
                 Common::g_OptionsManager.options.showSubtitles = !Common::g_OptionsManager.options.showSubtitles;
             }

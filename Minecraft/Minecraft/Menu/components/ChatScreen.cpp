@@ -180,7 +180,7 @@ namespace Minecraft::Menus{
         g_RenderManager.DebugPrint(240, 48 + 144, "%s", Common::g_TranslationOBJ.getText("gui.done").c_str());
     }
     void MenuState::optionsChatScreenUpdate(){
-        if(g_System.KeyPressed(PSP_CTRL_RTRIGGER)){
+        if(Input::KeyPressed(PSP_CTRL_RTRIGGER)){
             g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             selectRegion++;
             if(selectRegion > 1){
@@ -188,7 +188,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(g_System.KeyPressed(PSP_CTRL_LTRIGGER)){
+        if(Input::KeyPressed(PSP_CTRL_LTRIGGER)){
             g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             selectRegion--;
             if(selectRegion < 0){
@@ -196,7 +196,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(g_System.KeyPressed(PSP_CTRL_DOWN)){
+        if(Input::KeyPressed(PSP_CTRL_DOWN)){
             g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             selectPosY++;
             if(selectPosY > 6){
@@ -204,7 +204,7 @@ namespace Minecraft::Menus{
             }
         }
         
-        if(g_System.KeyPressed(PSP_CTRL_UP)){
+        if(Input::KeyPressed(PSP_CTRL_UP)){
             g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             selectPosY--;
             if(selectPosY < 0){
@@ -212,7 +212,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(g_System.KeyPressed(PSP_CTRL_LEFT)){
+        if(Input::KeyPressed(PSP_CTRL_LEFT)){
             if(selectPosY == 3 && selectRegion == 0){
                 Common::g_OptionsManager.options.chatHeightFocused -= 1/180.0f;
             }
@@ -267,7 +267,7 @@ namespace Minecraft::Menus{
 
         }
 
-        if(g_System.KeyPressed(PSP_CTRL_RIGHT)){
+        if(Input::KeyPressed(PSP_CTRL_RIGHT)){
             if(selectPosY == 3 && selectRegion == 0){
                 Common::g_OptionsManager.options.chatHeightFocused += 1/180.0f;
             }
@@ -321,7 +321,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(g_System.KeyPressed(PSP_CTRL_CROSS)){
+        if(Input::KeyPressed(PSP_CTRL_CROSS)){
             g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             if(selectRegion == 1 && selectPosY == 0){
                 Common::g_OptionsManager.options.chatColors = !Common::g_OptionsManager.options.chatColors;

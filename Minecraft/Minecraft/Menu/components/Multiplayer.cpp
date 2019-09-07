@@ -1,5 +1,9 @@
 #include "../MenuState.hpp"
 
+#include <Shadow/System/NetworkDriver.h>
+#include <Shadow/System/Dialogs.h>
+using namespace Shadow::System;
+
 namespace Minecraft::Menus{
     
 	void MenuState::optionsMultiplayerScreenDraw(){
@@ -100,7 +104,64 @@ namespace Minecraft::Menus{
 
     }
 	void MenuState::optionsMultiplayerScreenUpdate(){
-if(g_System.KeyPressed(PSP_CTRL_UP)){
+
+		if (!tryConnect) {
+			tryConnect = true;
+			Network::Init();
+
+			char username[16]; //Max length
+
+
+			if (!Network::autoConnect()) {
+				if (!Network::dialogConnect()) {
+					return;
+				}
+				else {
+					//GET USER
+					unsigned short test2[16];
+					unsigned short opis2[8] = { 'U', 's', 'e', 'r', 'n', 'a', 'm', 'e' };
+					if (Dialogs::ShowOSK(opis2, test2, 16) != -1)
+					{
+						std::string usernew = "";
+						for (int j = 0; test2[j]; j++)
+						{
+							unsigned c = test2[j];
+
+							if (32 <= c && c <= 127) // print ascii only
+								usernew += c;
+						}
+
+						sprintf(username, "%s", usernew.c_str());
+					}
+				}
+			}
+			else {
+				//GET USER
+				unsigned short test2[16];
+				unsigned short opis2[8] = { 'U', 's', 'e', 'r', 'n', 'a', 'm', 'e' };
+				if (Dialogs::ShowOSK(opis2, test2, 16) != -1)
+				{
+					std::string usernew = "";
+					for (int j = 0; test2[j]; j++)
+					{
+						unsigned c = test2[j];
+
+						if (32 <= c && c <= 127) // print ascii only
+							usernew += c;
+					}
+
+					sprintf(username, "%s", usernew.c_str());
+				}
+			}
+
+			//STORE USERNAME
+
+			//TODO: STORE USERNAME
+
+
+		}
+
+if(Input::KeyPressed(PSP_CTRL_UP)){
                     selectPosY--;
 
                     if(selectPosY < 0){
@@ -112,7 +173,7 @@ if(g_System.KeyPressed(PSP_CTRL_UP)){
                         }
                     g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
                 }
-                if(g_System.KeyPressed(PSP_CTRL_DOWN)){
+                if(Input::KeyPressed(PSP_CTRL_DOWN)){
                     selectPosY++;
 
                     if(selectPosY > 1){
@@ -120,7 +181,7 @@ if(g_System.KeyPressed(PSP_CTRL_UP)){
                     }
                     g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
                 }
-                if(g_System.KeyPressed(PSP_CTRL_LEFT)){
+                if(Input::KeyPressed(PSP_CTRL_LEFT)){
                     selectPosX--;
 
                     if(selectPosX < 0){
@@ -128,7 +189,7 @@ if(g_System.KeyPressed(PSP_CTRL_UP)){
                     }
                     g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
                 }
-                if(g_System.KeyPressed(PSP_CTRL_RIGHT)){
+                if(Input::KeyPressed(PSP_CTRL_RIGHT)){
                     selectPosX++;
 
                     if(selectPosX > 3){
@@ -139,7 +200,7 @@ if(g_System.KeyPressed(PSP_CTRL_UP)){
                     }
                     g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
                 }
-        if(g_System.KeyPressed(PSP_CTRL_CROSS)){
+        if(Input::KeyPressed(PSP_CTRL_CROSS)){
 
             g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
             if(selectPosX == 3){

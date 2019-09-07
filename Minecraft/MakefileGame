@@ -9,6 +9,10 @@ Engine/Shadow/Audio/AudioManager.o \
 Engine/Shadow/Utils/Timer.o \
 Engine/Shadow/Utils/StateManager.o \
 Engine/Shadow/Utils/Logger.o \
+Engine/Shadow/System/Input.o \
+Engine/Shadow/System/Ram.o \
+Engine/Shadow/System/Dialogs.o \
+Engine/Shadow/System/NetworkDriver.o \
 Engine/Aurealis/Graphics/common.o \
 Engine/Aurealis/Graphics/vfram.o \
 Engine/Aurealis/Graphics/vram.o \
@@ -28,7 +32,6 @@ Engine/Aurealis/Math/Plane.o \
 Engine/Aurealis/Math/Ray.o \
 Engine/Aurealis/Math/Frustum.o \
 Engine/Aurealis/Math/Polygon.o \
-Engine/Aurealis/System/SystemManager.o \
 libs/json/src/json_reader.o \
 libs/json/src/json_value.o \
 libs/json/src/json_writer.o \

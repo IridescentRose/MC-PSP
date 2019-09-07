@@ -56,10 +56,10 @@ namespace Minecraft::Menus{
     }
 	void MenuState::languageScreenUpdate(){
 
-        if(g_System.KeyPressed(PSP_CTRL_RTRIGGER)){
+        if(Input::KeyPressed(PSP_CTRL_RTRIGGER)){
             selectRegion++;
         }
-        if(g_System.KeyPressed(PSP_CTRL_LTRIGGER)){
+        if(Input::KeyPressed(PSP_CTRL_LTRIGGER)){
             selectRegion--;
         }
         if(selectRegion > 1){
@@ -70,7 +70,7 @@ namespace Minecraft::Menus{
         }
 
         if(selectRegion == 0){
-            if(g_System.KeyPressed(PSP_CTRL_DOWN)){
+            if(Input::KeyPressed(PSP_CTRL_DOWN)){
                 if(langPosSel == 7){
                     //Then we scroll down the actual pos
                     langPos++;
@@ -82,7 +82,7 @@ namespace Minecraft::Menus{
                     langPosSel++;
                 }
             }
-            if(g_System.KeyPressed(PSP_CTRL_UP)){
+            if(Input::KeyPressed(PSP_CTRL_UP)){
                 if(langPosSel == 0){
                     langPos--;
                     if(langPos < 0){
@@ -95,7 +95,7 @@ namespace Minecraft::Menus{
                 }
             }
 
-            if(g_System.KeyPressed(PSP_CTRL_CROSS)){
+            if(Input::KeyPressed(PSP_CTRL_CROSS)){
                 Common::g_TranslationOBJ.setTranslation(Common::g_TranslationOBJ.availableTranslations()[langPosSel + langPos].code.c_str());
                 
                 Common::g_OptionsManager.open();
@@ -105,7 +105,7 @@ namespace Minecraft::Menus{
             }
 
         }else{
-            if(g_System.KeyPressed(PSP_CTRL_CROSS)){
+            if(Input::KeyPressed(PSP_CTRL_CROSS)){
                 menu_states = previous_states;
                 previous_states = MENU_STATE_LANGUAGE;
 

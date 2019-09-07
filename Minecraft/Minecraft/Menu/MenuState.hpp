@@ -14,13 +14,15 @@
 #include "../Version.hpp"
 #include <sstream>
 
-#include <Aurealis/System/SystemManager.h>
+#include <Shadow/System/Input.h>
+#include <Shadow/System/Ram.h>
 #include "../Common/Translations.hpp"
 #include "../Common/Options.hpp"
 #include <Shadow/Utils/Logger.h>
 
 #define PSP_MENU_SIZE 0.8
-using namespace Aurealis::System;
+
+using namespace Shadow::System;
 using namespace Shadow::Audio;
 using namespace Shadow::Utils;
 
@@ -93,6 +95,8 @@ namespace Minecraft::Menus{
 		Texture *widgets, *options_bg;
 
 		std::string splashText;
+
+		bool tryConnect;
 
 		float splashSize, dt, elapsed;
 

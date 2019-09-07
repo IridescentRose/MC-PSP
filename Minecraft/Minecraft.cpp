@@ -2,7 +2,6 @@
 #include <psptypes.h>
 
 #include <Aurealis/Graphics/RenderManager.h>
-#include <Aurealis/System/SystemManager.h>
 #include <Shadow/Utils/StateManager.h>
 #include <Shadow/Audio/AudioManager.hpp>
 #include <Aurealis/Graphics/TextureUtil.h>
@@ -15,7 +14,6 @@ using namespace Minecraft::Menus;
 using namespace Shadow::Audio;
 using namespace Aurealis::Graphics;
 using namespace Shadow::Utils;
-using namespace Aurealis::System;
 using namespace Aurealis;
 
 PSP_MODULE_INFO("Minecraft", 0, VERSION_MAJOR, VERSION_MINOR);
