@@ -13,7 +13,7 @@ namespace Aurealis
 {
 	namespace Utils
 	{
-		void StateManager::ChangeState(CGameState* state)
+		void StateManager::ChangeState(GameState* state)
 		{
 			// cleanup the state chain
 			while ( !states.empty() ) {
@@ -26,7 +26,7 @@ namespace Aurealis
 			states.back()->Enter();
 		}
 
-		void StateManager::AddState(CGameState* state)
+		void StateManager::AddState(GameState* state)
 		{
 			// pause current state
 			if ( !states.empty() ) {
