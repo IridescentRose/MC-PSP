@@ -7,7 +7,6 @@ Engine/Shadow/Audio/sound_utils/audio.o \
 Engine/Shadow/Audio/sound_utils/bgm.o \
 Engine/Shadow/Audio/AudioManager.o \
 Engine/Shadow/Utils/Timer.o \
-Engine/Shadow/Utils/Input.o \
 Engine/Shadow/Utils/StateManager.o \
 Engine/Aurealis/Graphics/common.o \
 Engine/Aurealis/Graphics/vfram.o \
