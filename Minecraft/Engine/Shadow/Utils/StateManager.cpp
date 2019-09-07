@@ -26,7 +26,7 @@ namespace Shadow
 			states.back()->Enter();
 		}
 
-		void StateManager::AddState(GameState* state)
+		void StateManager::PushState(GameState* state)
 		{
 			// pause current state
 			if ( !states.empty() ) {
@@ -38,7 +38,7 @@ namespace Shadow
 			states.back()->Enter();
 		}
 
-		void StateManager::RemoveState()
+		void StateManager::PopState()
 		{
 			// cleanup the current state
 			if ( !states.empty() ) {
