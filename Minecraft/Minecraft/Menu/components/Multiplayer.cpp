@@ -105,18 +105,38 @@ namespace Minecraft::Menus{
     }
 	void MenuState::optionsMultiplayerScreenUpdate(){
 
-		if (!tryConnect) {
+		if (!tryConnect && !connected) {
 			Network::Init();
 
+			bool res = Network::dialogConnect();
+			connected = res;
+			tryConnect = true;
+			
+
 			char username[16]; //Max length
-			bool res = Network::autoConnect();
-			if (res) {
-				sceKernelExitGame();
+			if (connected) {
+				//Ask for username
+				//GET USER
+				char username[16]; //Max length
+
+				unsigned short test2[16];
+				unsigned short opis2[8] = { 'U', 's', 'e', 'r', 'n', 'a', 'm', 'e' };
+				if (Dialogs::ShowOSK(opis2, test2, 16) != -1)
+				{
+					std::string usernew = "";
+					for (int j = 0; test2[j]; j++)
+					{
+						unsigned c = test2[j];
+
+						if (32 <= c && c <= 127) // print ascii only
+							usernew += c;
+					}
+
+					sprintf(username, "%s", usernew.c_str());
+				}
+
+				//TODO: STORE USERNAME!!!
 			}
-			//STORE USERNAME
-
-			//TODO: STORE USERNAME
-
 			
 		}
 
@@ -168,6 +188,7 @@ if(Input::KeyPressed(PSP_CTRL_UP)){
                 selectRegion = 0;
                 menu_states = previous_states;
                 previous_states = MENU_STATE_MULTIPLAYER;
+				tryConnect = false;
             }
         }
     }

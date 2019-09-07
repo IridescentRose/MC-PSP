@@ -96,7 +96,7 @@ namespace Minecraft::Menus{
 
 		std::string splashText;
 
-		bool tryConnect;
+		bool tryConnect, connected;
 
 		float splashSize, dt, elapsed;
 

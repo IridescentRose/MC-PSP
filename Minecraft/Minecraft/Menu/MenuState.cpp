@@ -9,6 +9,7 @@ namespace Minecraft::Menus{
         selectRegion = selectPosY = selectPosX = 0;
         langPos = langPosMax = langPosSel = 0;
 		tryConnect = false;
+		connected = false;
     }
 
     MenuState::~MenuState(){
