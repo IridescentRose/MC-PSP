@@ -109,7 +109,10 @@ namespace Minecraft::Menus{
 			Network::Init();
 
 			char username[16]; //Max length
-			bool res = Network::dialogConnect();
+			bool res = Network::autoConnect();
+			if (res) {
+				sceKernelExitGame();
+			}
 			//STORE USERNAME
 
 			//TODO: STORE USERNAME
