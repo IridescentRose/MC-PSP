@@ -1,5 +1,5 @@
 #include "MenuState.hpp"
-#include <Aurealis/Utils/Logger.h>
+#include <Shadow/Utils/Logger.h>
 
 namespace Minecraft::Menus{
 
@@ -101,6 +101,15 @@ namespace Minecraft::Menus{
         Common::g_TranslationOBJ.setTranslation(Common::g_OptionsManager.options.lang);
 
         langPosMax = Common::g_TranslationOBJ.availableTranslations().size();
+		Logging::debug("Hello world!");
+		
+		u32 ramFree = g_System.freeMemory();
+		float ram = ((float)ramFree) / 1024.0f / 1024.0f;
+
+		std::ostringstream os;
+		os << ram;
+		std::string s(os.str());
+		Logging::debug("RAM: " + s);
     }
 
 	void MenuState::Enter(){
@@ -195,7 +204,7 @@ namespace Minecraft::Menus{
         
         g_RenderManager.DebugPrint(240, 15, "RAM: %.3f MB", ((float)ramFree) / 1024.0f / 1024.0f );
         #endif
-
+		
         g_RenderManager.EndFrame();
     }
 
