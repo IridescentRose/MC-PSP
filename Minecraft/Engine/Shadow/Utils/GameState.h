@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Aurealis/Utils/StateManager.h>
+#include <Shadow/Utils/StateManager.h>
 
 namespace Aurealis
 {
@@ -20,7 +20,7 @@ namespace Aurealis
 			virtual void Update(StateManager* sManager) = 0;
 			virtual void Draw(StateManager* sManager) = 0;
 
-			void ChangeState(StateManager* sManager, CGameState* state)
+			void ChangeState(StateManager* sManager, GameState* state)
 			{
 				sManager->ChangeState(state);
 			}
