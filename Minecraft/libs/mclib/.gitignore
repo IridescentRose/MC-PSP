@@ -1,0 +1,10 @@
+Debug
+Release
+*.opensdf
+*.sdf
+*.suo
+lib
+*.so
+*.o
+.vs
+
