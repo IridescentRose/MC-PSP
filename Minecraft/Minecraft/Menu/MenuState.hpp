@@ -21,7 +21,6 @@
 #define PSP_MENU_SIZE 0.8
 using namespace Aurealis::System;
 using namespace Shadow::Audio;
-using namespace Aurealis::Utils;
 using namespace Shadow::Utils;
 
 namespace Minecraft::Menus{
