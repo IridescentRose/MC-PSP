@@ -62,9 +62,9 @@ BUILD_PRX = 1
 PSP_FW_VERSION=371
 PSP_LARGE_MEMORY = 1
 
-LIBDIR += ./libs/noisepp ./libs/libpspmath 
+LIBDIR += ./libs/libpspmath 
 LDFLAGS =
-LIBS=  -lNoisepp -lpspaudiolib -lpspaudio -lpspaudiocodec -lpng -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath #-lpsp_req -lcurl -lTiny
+LIBS=  -lpspaudiolib -lpspaudio -lpspaudiocodec -lpng -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Minecraft
