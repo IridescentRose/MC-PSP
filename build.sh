@@ -1,3 +1,4 @@
+./path.sh
 git pull
 cd Minecraft
 make
