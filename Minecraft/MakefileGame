@@ -52,7 +52,7 @@ Minecraft/Menu/components/VideoScreen.o\
 Minecraft/Menu/components/Panorama.o \
 
 INCDIR = $(PSPPATH)/include
-INCDIR += ./LameCraft ./include ./Engine ./libs/zlib/lib ./libs/libpspmath /usr/local/pspdev/psp/include
+INCDIR += ./LameCraft ./include ./Engine ./lib ./libs/zlib/lib ./libs/libpspmath /usr/local/pspdev/psp/include
 CFLAGS = -O3 -Wall -mpreferred-stack-boundary=4 -ffast-math
 CXXFLAGS = -std=gnu++17 -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
