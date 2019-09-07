@@ -128,7 +128,7 @@ cover: infcover
 	gcov inf*.c
 
 libz.a: $(OBJS)
-	$(AR) $(ARFLAGS) $@ $(OBJS)
+	$(AR) rcs $@ $(OBJS)
 	-@ ($(RANLIB) $@ || true) >/dev/null 2>&1
 
 match.o: match.S
