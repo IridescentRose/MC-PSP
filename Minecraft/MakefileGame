@@ -35,7 +35,6 @@ Engine/Aurealis/Math/Polygon.o \
 libs/json/src/json_reader.o \
 libs/json/src/json_value.o \
 libs/json/src/json_writer.o \
-libs/
 Minecraft.o \
 Minecraft/Common/Translations.o \
 Minecraft/Common/Options.o \
