@@ -1,6 +1,6 @@
 git pull
 cd Minecraft
-make
-mv EBOOT.PBP ../Game/
+make clean
+rm -f ../Game/*.PBP
 rm -f *.prx *.elf
 cd ..
