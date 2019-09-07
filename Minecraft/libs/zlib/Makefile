@@ -25,7 +25,7 @@ CFLAGS=-O3 -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
 #           -Wstrict-prototypes -Wmissing-prototypes
 
 SFLAGS=-O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN
-LDFLAGS=
+LDFLAGS= -lstdc++ -lm -lc
 TEST_LDFLAGS=-L. libz.a
 LDSHARED=psp-gcc -shared -Wl,-soname,libz.so.1,--version-script,zlib.map
 CPP=psp-gcc -E
@@ -34,13 +34,13 @@ STATICLIB=libz.a
 SHAREDLIB=libz.so
 SHAREDLIBV=libz.so.1.2.11
 SHAREDLIBM=libz.so.1
-LIBS=$(STATICLIB) $(SHAREDLIBV)
+LIBS=$(STATICLIB)
 
 AR=psp-ar
 ARFLAGS=psp-rc
 RANLIB=psp-ranlib
 LDCONFIG=psp-ldconfig
-LDSHAREDLIBC=-lc
+LDSHAREDLIBC=
 TAR=tar
 SHELL=/bin/sh
 EXE=
