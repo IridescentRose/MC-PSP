@@ -2,7 +2,7 @@
 
 #include <Shadow/Utils/StateManager.h>
 
-namespace Aurealis
+namespace Shadow
 {
 	namespace Utils
 	{

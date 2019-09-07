@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 
-namespace Aurealis
+namespace Shadow
 {
 	namespace Utils
 	{

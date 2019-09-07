@@ -9,7 +9,7 @@
 #include <Shadow/Utils/StateManager.h>
 #include <Shadow/Utils/GameState.h>
 
-namespace Aurealis
+namespace Shadow
 {
 	namespace Utils
 	{
