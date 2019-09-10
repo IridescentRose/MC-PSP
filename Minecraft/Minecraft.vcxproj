@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -85,36 +85,14 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Engine\Aurealis\Graphics\Camera.cpp" />
-    <ClCompile Include="Engine\Aurealis\Graphics\common.c" />
-    <ClCompile Include="Engine\Aurealis\Graphics\Effects\Destroyer.cpp" />
-    <ClCompile Include="Engine\Aurealis\Graphics\Effects\Drop.cpp" />
-    <ClCompile Include="Engine\Aurealis\Graphics\Effects\InventoryPlayer.cpp" />
-    <ClCompile Include="Engine\Aurealis\Graphics\Effects\Particle.cpp" />
-    <ClCompile Include="Engine\Aurealis\Graphics\Effects\SkyBox.cpp" />
-    <ClCompile Include="Engine\Aurealis\Graphics\Effects\SkyLight.cpp" />
-    <ClCompile Include="Engine\Aurealis\Graphics\Effects\SnowBall2.cpp" />
-    <ClCompile Include="Engine\Aurealis\Graphics\Effects\StarsBox.cpp" />
-    <ClCompile Include="Engine\Aurealis\Graphics\Effects\TNT.cpp" />
-    <ClCompile Include="Engine\Aurealis\Graphics\Effects\WeatherSystem.cpp" />
-    <ClCompile Include="Engine\Aurealis\Graphics\intraFont\intraFont.c" />
-    <ClCompile Include="Engine\Aurealis\Graphics\intraFont\libccc.c" />
-    <ClCompile Include="Engine\Aurealis\Graphics\RenderManager.cpp" />
-    <ClCompile Include="Engine\Aurealis\Graphics\Sprite.cpp" />
-    <ClCompile Include="Engine\Aurealis\Graphics\TextureAtlas.cpp" />
-    <ClCompile Include="Engine\Aurealis\Graphics\TextureUtil.cpp" />
-    <ClCompile Include="Engine\Aurealis\Graphics\vfram.c" />
-    <ClCompile Include="Engine\Aurealis\Graphics\vram.c" />
-    <ClCompile Include="Engine\Aurealis\Math\BoundingBox.cpp" />
-    <ClCompile Include="Engine\Aurealis\Math\BoundingSphere.cpp" />
-    <ClCompile Include="Engine\Aurealis\Math\Frustum.cpp" />
-    <ClCompile Include="Engine\Aurealis\Math\MathLib.cpp" />
-    <ClCompile Include="Engine\Aurealis\Math\Matrix3.cpp" />
-    <ClCompile Include="Engine\Aurealis\Math\Matrix4.cpp" />
-    <ClCompile Include="Engine\Aurealis\Math\Plane.cpp" />
-    <ClCompile Include="Engine\Aurealis\Math\Polygon.cpp" />
-    <ClCompile Include="Engine\Aurealis\Math\Quaternion.cpp" />
-    <ClCompile Include="Engine\Aurealis\Math\Ray.cpp" />
+    <ClCompile Include="Engine\Shadow\Utils\common.c" />
+    <ClCompile Include="libs\intraFont\intraFont.c" />
+    <ClCompile Include="libs\intraFont\libccc.c" />
+    <ClCompile Include="Engine\Shadow\Graphics\RenderManager.cpp" />
+    <ClCompile Include="Engine\Shadow\Graphics\Sprite.cpp" />
+    <ClCompile Include="Engine\Shadow\Graphics\TextureUtil.cpp" />
+    <ClCompile Include="Engine\Shadow\Utils\vfram.c" />
+    <ClCompile Include="Engine\Shadow\Utils\vram.c" />
     <ClCompile Include="Engine\Shadow\System\Dialogs.cpp" />
     <ClCompile Include="Engine\Shadow\System\Input.cpp" />
     <ClCompile Include="Engine\Shadow\System\NetworkDriver.cpp" />
@@ -195,41 +173,16 @@
     <ClCompile Include="Minecraft\Menu\MenuState.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine\Aurealis\Graphics\Camera.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\common.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\Effects\Destroyer.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\Effects\Drop.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\Effects\InventoryPlayer.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\Effects\Particle.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\Effects\SkyBox.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\Effects\SkyLight.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\Effects\SnowBall2.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\Effects\StarsBox.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\Effects\TNT.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\Effects\WeatherSystem.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\intraFont\intraFont.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\intraFont\libccc.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\RenderManager.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\Sprite.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\Texture.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\TextureAtlas.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\TextureUtil.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\Vertex.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\vfram.h" />
-    <ClInclude Include="Engine\Aurealis\Graphics\vram.h" />
-    <ClInclude Include="Engine\Aurealis\Math\BoundingBox.h" />
-    <ClInclude Include="Engine\Aurealis\Math\BoundingSphere.h" />
-    <ClInclude Include="Engine\Aurealis\Math\Frustum.h" />
-    <ClInclude Include="Engine\Aurealis\Math\MathLib.h" />
-    <ClInclude Include="Engine\Aurealis\Math\Matrix3.h" />
-    <ClInclude Include="Engine\Aurealis\Math\Matrix4.h" />
-    <ClInclude Include="Engine\Aurealis\Math\Plane.h" />
-    <ClInclude Include="Engine\Aurealis\Math\Polygon.h" />
-    <ClInclude Include="Engine\Aurealis\Math\Quaternion.h" />
-    <ClInclude Include="Engine\Aurealis\Math\Ray.h" />
-    <ClInclude Include="Engine\Aurealis\Math\Vector2.h" />
-    <ClInclude Include="Engine\Aurealis\Math\Vector3.h" />
-    <ClInclude Include="Engine\Aurealis\Math\Vector4.h" />
+    <ClInclude Include="Engine\Shadow\Utils\common.h" />
+    <ClInclude Include="libs\intraFont\intraFont.h" />
+    <ClInclude Include="libs\intraFont\libccc.h" />
+    <ClInclude Include="Engine\Shadow\Graphics\RenderManager.h" />
+    <ClInclude Include="Engine\Shadow\Graphics\Sprite.h" />
+    <ClInclude Include="Engine\Shadow\Graphics\Texture.h" />
+    <ClInclude Include="Engine\Shadow\Graphics\TextureUtil.h" />
+    <ClInclude Include="Engine\Shadow\Graphics\Vertex.h" />
+    <ClInclude Include="Engine\Shadow\Utils\vfram.h" />
+    <ClInclude Include="Engine\Shadow\Utils\vram.h" />
     <ClInclude Include="Engine\Shadow\System\Dialogs.h" />
     <ClInclude Include="Engine\Shadow\System\Input.h" />
     <ClInclude Include="Engine\Shadow\System\NetworkDriver.h" />
