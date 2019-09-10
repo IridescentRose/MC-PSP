@@ -50,7 +50,7 @@ PSP_LARGE_MEMORY = 1
 
 LIBDIR += ./libs/lib/
 LDFLAGS =
-LIBS=  -lpspaudiolib -lpspaudio -lpspaudiocodec -lpng -ljson -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath
+LIBS=  -lpspaudiolib -lpspaudio -lpspaudiocodec -lpng -lintraFont -ljson -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Minecraft
