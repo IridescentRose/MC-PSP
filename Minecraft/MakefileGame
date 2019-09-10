@@ -23,15 +23,6 @@ Engine/Aurealis/Graphics/TextureAtlas.o \
 Engine/Aurealis/Graphics/TextureUtil.o \
 Engine/Aurealis/Graphics/intraFont/libccc.o \
 Engine/Aurealis/Graphics/intraFont/intraFont.o \
-Engine/Aurealis/Math/Matrix3.o \
-Engine/Aurealis/Math/Matrix4.o \
-Engine/Aurealis/Math/Quaternion.o \
-Engine/Aurealis/Math/BoundingBox.o \
-Engine/Aurealis/Math/BoundingSphere.o \
-Engine/Aurealis/Math/Plane.o \
-Engine/Aurealis/Math/Ray.o \
-Engine/Aurealis/Math/Frustum.o \
-Engine/Aurealis/Math/Polygon.o \
 Minecraft.o \
 Minecraft/Common/Translations.o \
 Minecraft/Common/Options.o \
