@@ -98,6 +98,7 @@ namespace Minecraft::Menus{
 
 		bool tryConnect, connected;
 
+		std::string username, ipaddr;
 		float splashSize, dt, elapsed;
 
 		Sprite *selected, *unselected, *disabled, *lang, *hlang;

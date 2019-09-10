@@ -94,8 +94,8 @@ namespace Minecraft::Menus{
 
                 //FOOT NOTES!
 
-                g_RenderManager.SetFontStyle(splashSize, 0xFF00FFFF, 0, INTRAFONT_ALIGN_CENTER, -20.0f);
-                g_RenderManager.DebugPrint(344, 72 - 7, "%s", splashText.c_str());
+                g_RenderManager.SetFontStyle(splashSize, 0xFF00FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                g_RenderManager.DebugPrint(344, 72, "%s", splashText.c_str());
 
                 g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_LEFT, 0.0f);
                 g_RenderManager.DebugPrint(0, 272 - 7, " %s %s", GAME_NAME, EMULATED_VERSION);
@@ -106,6 +106,8 @@ namespace Minecraft::Menus{
     }
 
     void MenuState::titleScreenUpdate(){
+
+		splashSize = vfpu_sinf(elapsed * 2 * 2 * 3.14159f) * (0.618f - (1.0f - 0.618f)) / 8 + (1.0f - 0.687f) * 2;
                 if(Input::KeyPressed(PSP_CTRL_UP)){
                     selectPosY--;
 

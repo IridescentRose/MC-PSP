@@ -112,27 +112,22 @@ namespace Minecraft::Menus{
 			connected = res;
 			tryConnect = true;
 			
-
-			char username[16]; //Max length
 			if (connected) {
 				//Ask for username
 				//GET USER
-				char username[16]; //Max length
 
 				unsigned short test2[16];
 				unsigned short opis2[8] = { 'U', 's', 'e', 'r', 'n', 'a', 'm', 'e' };
 				if (Dialogs::ShowOSK(opis2, test2, 16) != -1)
 				{
-					std::string usernew = "";
 					for (int j = 0; test2[j]; j++)
 					{
 						unsigned c = test2[j];
 
 						if (32 <= c && c <= 127) // print ascii only
-							usernew += c;
+							username += c;
 					}
 
-					sprintf(username, "%s", usernew.c_str());
 				}
 
 				//TODO: STORE USERNAME!!!
@@ -190,6 +185,24 @@ if(Input::KeyPressed(PSP_CTRL_UP)){
                 previous_states = MENU_STATE_MULTIPLAYER;
 				tryConnect = false;
             }
+			if (selectPosX == 1 && selectPosY == 0) {
+
+				//TODO: CONNECT AND CHANGE STATE
+				unsigned short test2[15];
+				unsigned short opis2[10] = { 'I', 'P', ' ', 'A', 'd', 'd', 'r', 'e', 's', 's' };
+				if (Dialogs::ShowOSK(opis2, test2, 15) != -1)
+				{
+					for (int j = 0; test2[j]; j++)
+					{
+						unsigned c = test2[j];
+
+						if (32 <= c && c <= 127) // print ascii only
+							ipaddr += c;
+					}
+
+				}
+
+			}
         }
     }
 }
