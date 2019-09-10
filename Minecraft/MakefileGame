@@ -41,7 +41,7 @@ Minecraft/Menu/components/Panorama.o \
 
 INCDIR = $(PSPPATH)/include
 INCDIR += ./LameCraft ./include ./Engine ./libs ./libs/include
-CFLAGS = -O3 -Wall -mpreferred-stack-boundary=4 -ffast-math
+CFLAGS = -O3 -mpreferred-stack-boundary=4 -ffast-math
 CXXFLAGS = -std=gnu++17 -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
