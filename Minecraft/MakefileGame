@@ -1,6 +1,5 @@
 TARGET = Minecraft
-OBJS = Engine/Aurealis/Math/MathLib.o \
-Engine/Shadow/Audio/sound_utils/pgeWav.o \
+OBJS = Engine/Shadow/Audio/sound_utils/pgeWav.o \
 Engine/Shadow/Audio/sound_utils/vfsFile.o \
 Engine/Shadow/Audio/sound_utils/VirtualFile.o \
 Engine/Shadow/Audio/sound_utils/audio.o \
