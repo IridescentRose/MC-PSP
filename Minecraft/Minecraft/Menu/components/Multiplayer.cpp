@@ -2,6 +2,7 @@
 
 #include <Shadow/System/NetworkDriver.h>
 #include <Shadow/System/Dialogs.h>
+#include "../../Client/GameClient.hpp"
 using namespace Shadow::System;
 
 namespace Minecraft::Menus{
@@ -103,7 +104,7 @@ namespace Minecraft::Menus{
         g_RenderManager.DebugPrint(356, 272 - 10, Common::g_TranslationOBJ.getText("gui.cancel").c_str());
 
     }
-	void MenuState::optionsMultiplayerScreenUpdate(){
+	void MenuState::optionsMultiplayerScreenUpdate(StateManager* sManager){
 
 		if (!tryConnect && !connected) {
 			Network::Init();
@@ -187,7 +188,6 @@ if(Input::KeyPressed(PSP_CTRL_UP)){
             }
 			if (selectPosX == 1 && selectPosY == 0) {
 
-				//TODO: CONNECT AND CHANGE STATE
 				unsigned short test2[15];
 				unsigned short opis2[10] = { 'I', 'P', ' ', 'A', 'd', 'd', 'r', 'e', 's', 's' };
 				if (Dialogs::ShowOSK(opis2, test2, 15) != -1)
@@ -201,6 +201,14 @@ if(Input::KeyPressed(PSP_CTRL_UP)){
 					}
 
 				}
+
+				Client::ClientState* client = new Client::ClientState();
+				client->connect_info.ip_address = ipaddr;
+				client->connect_info.username = username;
+
+				client->Init(); //Connect!
+				//TODO: CHECK CONNECTION FAILS?
+				sManager->PushState(client);
 
 			}
         }

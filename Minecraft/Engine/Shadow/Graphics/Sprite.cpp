@@ -1,7 +1,7 @@
-#include <Aurealis/Graphics/Sprite.h>
-#include <Aurealis/Graphics/TextureUtil.h>
+#include <Shadow/Graphics/Sprite.h>
+#include <Shadow/Graphics/TextureUtil.h>
 
-namespace Aurealis
+namespace Shadow
 {
 
 	namespace Graphics

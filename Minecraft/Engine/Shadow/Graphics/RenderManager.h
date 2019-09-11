@@ -2,15 +2,14 @@
 
 #include <stdarg.h>
 
-#include <Aurealis/Graphics/vram.h>
-#include <Aurealis/Graphics/vram.h>
-#include <Aurealis/Graphics/common.h>
+#include <Shadow/Utils/vram.h>
+#include <Shadow/Utils/vram.h>
+#include <Shadow/Utils/common.h>
 
-#include <Aurealis/Graphics/Vertex.h>
-#include <Aurealis/Graphics/Camera.h>
-#include <Aurealis/Graphics/TextureUtil.h>
+#include <Shadow/Graphics/Vertex.h>
+#include <Shadow/Graphics/TextureUtil.h>
 
-#include <Aurealis/Graphics/intraFont/intraFont.h>
+#include <intraFont.h>
 
 //psp headers
 #include <pspgu.h>
@@ -59,7 +58,7 @@
 #define SCEGU_VRAM_BP32_1     (void *)(SCEGU_VRAM_TOP+SCEGU_VRAM_BUFSIZE32)
 #define SCEGU_VRAM_BP32_2     (void *)(SCEGU_VRAM_TOP+(SCEGU_VRAM_BUFSIZE32*2))
 
-namespace Aurealis
+namespace Shadow
 {
 	namespace Graphics
 	{
@@ -67,26 +66,13 @@ namespace Aurealis
 		{
 		public:
 
-			enum FontColor
-			{
-				RED =	0xFF0000FF,
-				YELLOW = 0xFFFF00FF,
-				GREEN =	0xFF00FF00,
-				BLUE =	0xFFFF0000,
-				WHITE =	0xFFFFFFFF,
-				LITEGRAY = 0xFFBFBFBF,
-				GRAY =  0xFF7F7F7F,
-				DARKGRAY = 0xFF3F3F3F,
-				BLACK = 0xFF000000
-			};
-
+			
 			float fovv;
 
 			void Init();
-
 			void InitDebugFont();
-			void SetFontStyle(float size, unsigned int color, unsigned int shadowColor, unsigned int options, float angle);
 			
+			void SetFontStyle(float size, unsigned int color, unsigned int shadowColor, unsigned int options, float angle);
 			void DebugPrint(int x,int y, const char *message, ...);
 			void Start();
 			void CleanBuffers();
@@ -106,13 +92,11 @@ namespace Aurealis
 			void SetOrtho(float left, float right, float bottom, float top, float zNear, float zFar);
 			void SetOrtho2(float left, float right, float bottom, float top, float zNear, float zFar);
 			void SetPerspective(float _fov,float _aspect,float _znear,float _zfar);
-			void LookAt();
-
+			
 			void DrawToTexture(Texture* offscreenTexture );
 			void SetRTT();
 
 
-			void SetActiveCamera(Camera *camera);
 			void UpdateFrustumMatrix();
 
 			void SetClearColour(unsigned int color);
@@ -124,7 +108,6 @@ namespace Aurealis
 			
 			int defaultFontType;
 
-			Camera *mCam;
 
 			protected:
 				

@@ -1,6 +1,8 @@
 #include "Dialogs.h"
 
 namespace Shadow::System::Dialogs {
+
+	using namespace Shadow::Graphics;
 	pspUtilityMsgDialogParams dialog;
 	pspUtilityNetconfData networkData;
 

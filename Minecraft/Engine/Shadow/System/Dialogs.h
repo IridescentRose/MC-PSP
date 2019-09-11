@@ -4,7 +4,7 @@
 #include <pspctrl.h>
 #include <psputility.h>
 #include <string.h>
-#include <Aurealis/Graphics/RenderManager.h>
+#include <Shadow/Graphics/RenderManager.h>
 
 namespace Shadow::System::Dialogs {
 	void ConfigureDialog(pspUtilityMsgDialogParams* dialog, size_t dialog_size);

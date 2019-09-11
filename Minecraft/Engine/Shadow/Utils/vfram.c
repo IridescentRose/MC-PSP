@@ -24,7 +24,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <Aurealis/Graphics/vfram.h>
+#include "vfram.h"
 #include <stdio.h>
 
 // Configure the memory to be managed

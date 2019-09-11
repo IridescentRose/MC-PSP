@@ -1,10 +1,10 @@
 #include <math.h>
 #include <psptypes.h>
 
-#include <Aurealis/Graphics/RenderManager.h>
+#include <Shadow/Graphics/RenderManager.h>
 #include <Shadow/Utils/StateManager.h>
 #include <Shadow/Audio/AudioManager.hpp>
-#include <Aurealis/Graphics/TextureUtil.h>
+#include <Shadow/Graphics/TextureUtil.h>
 
 #include "Minecraft/Menu/Logo.hpp"
 #include "Minecraft/Version.hpp"
@@ -12,9 +12,9 @@
 using namespace Minecraft::Menus;
 
 using namespace Shadow::Audio;
-using namespace Aurealis::Graphics;
+using namespace Shadow::Graphics;
 using namespace Shadow::Utils;
-using namespace Aurealis;
+using namespace Shadow;
 
 PSP_MODULE_INFO("Minecraft", 0, VERSION_MAJOR, VERSION_MINOR);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_VFPU|THREAD_ATTR_USER);

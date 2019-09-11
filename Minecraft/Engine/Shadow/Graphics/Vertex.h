@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Aurealis
+namespace Shadow
 {
 	namespace Graphics
 	{

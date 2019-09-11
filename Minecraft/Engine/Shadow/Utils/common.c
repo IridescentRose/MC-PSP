@@ -1,4 +1,4 @@
-#include <Aurealis/Graphics/common.h>
+#include <Shadow/Utils/common.h>
 
 // Exit callback
 int exit_callback(int arg1, int arg2, void *common)

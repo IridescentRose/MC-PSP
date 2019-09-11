@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <vector>
 #include "Texture.h"
-#include "vfram.h"
-#include "vram.h"
+#include <Shadow/Utils/vfram.h>
+#include <Shadow/Utils/vram.h>
 #include <string.h>
 
 #define png_infopp_NULL (png_infopp)NULL

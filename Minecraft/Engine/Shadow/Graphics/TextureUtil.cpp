@@ -24,8 +24,9 @@ Texture* TextureUtil::LoadPngTexturePack(std::string texPackName, std::string fi
 	if (res == NULL) {
 		res = LoadPng("./Assets/Textures/Default/" + filename);
 		if (res == NULL) {
-			//CRASH IT
+			//CRASH IT & RETURN NULL TO CRASH IF RES DOESN'T FAIL
 			res->setColour(1, 1, 32, 32, 32, 255);
+			return NULL;
 		}
 		else {
 			return res;

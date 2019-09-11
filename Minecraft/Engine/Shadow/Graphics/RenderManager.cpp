@@ -1,6 +1,6 @@
-#include <Aurealis/Graphics/RenderManager.h>
+#include <Shadow/Graphics/RenderManager.h>
 
-namespace Aurealis
+namespace Shadow
 {
 	namespace Graphics
 	{
@@ -127,8 +127,7 @@ namespace Aurealis
 			sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
 
 			//initialize variables
-			mCam = 0;
-
+			
 			g_vbl_count = -1;
 			g_vbl_step = 1;
 			g_vbl_time = 0;
@@ -148,11 +147,11 @@ namespace Aurealis
 			intraFont* arib = intraFontLoad("flash0:/font/arib.pgf",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);                     //Symbols (not available on all systems)
   			intraFont* chn = intraFontLoad("flash0:/font/gb3s1518.bwfon",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);               //chinese font
  			
-			intraFontSetStyle(debugFont,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER);
-			intraFontSetStyle(jpn0,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER);
-			intraFontSetStyle(kr0,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER); 
-			intraFontSetStyle(chn,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER);
-			intraFontSetStyle(arib,0.5f,WHITE,BLACK, 0.0f, INTRAFONT_ALIGN_CENTER);
+			intraFontSetStyle(debugFont,0.5f,0xFFFFFFFF,0, 0.0f, INTRAFONT_ALIGN_CENTER);
+			intraFontSetStyle(jpn0,0.5f,0xFFFFFFFF,0, 0.0f, INTRAFONT_ALIGN_CENTER);
+			intraFontSetStyle(kr0,0.5f,0xFFFFFFFF,0, 0.0f, INTRAFONT_ALIGN_CENTER); 
+			intraFontSetStyle(chn,0.5f,0xFFFFFFFF,0, 0.0f, INTRAFONT_ALIGN_CENTER);
+			intraFontSetStyle(arib,0.5f,0xFFFFFFFF,0, 0.0f, INTRAFONT_ALIGN_CENTER);
 			 
 			intraFontSetAltFont(debugFont,jpn0);                     //japanese font is used for chars that don't exist in latin
   			intraFontSetAltFont(jpn0,chn);                        //chinese font (bwfon) is used for chars that don't exist in japanese (and latin)
@@ -174,7 +173,7 @@ namespace Aurealis
                 }
                 else
                 {
-                    intraFontSetStyle(debugFont, size, color, BLACK, angle, options2);
+                    intraFontSetStyle(debugFont, size, color, 0, angle, options2);
                 }
 		    }
 		    else
@@ -239,71 +238,8 @@ namespace Aurealis
 			sceGuClearDepth(0);
 			sceGuClear(GU_COLOR_BUFFER_BIT | GU_STENCIL_BUFFER_BIT | GU_DEPTH_BUFFER_BIT);
 
-			//set camera look at -- later maybe i will move this code somewhere else
-			if(mCam != NULL)
-			{
-				sceGumMatrixMode(GU_PROJECTION);
-				sceGumLoadIdentity();
-				sceGumLoadMatrix(&proj);
-
-				sceGumMatrixMode(GU_VIEW);
-				sceGumLoadIdentity();
-
-				ScePspFVector3 pos = {mCam->m_vPosition.x + mCam->m_vOffset.x,mCam->m_vPosition.y + mCam->m_vOffset.y + mCam->bobY,mCam->m_vPosition.z + mCam->m_vOffset.z};
-				ScePspFVector3 eye = {mCam->m_vView.x,mCam->m_vView.y,mCam->m_vView.z};
-				ScePspFVector3 up = {mCam->m_vUpVector.x,mCam->m_vUpVector.y,mCam->m_vUpVector.z};
-
-				ScePspFVector3 rotVec = { mCam->offAngleX, mCam->offAngleY, mCam->tiltAngle };
-				sceGumRotateXYZ(&rotVec);
-
-				sceGumLookAt(&pos, &eye, &up);
-				sceGumStoreMatrix(&view);
-
-				sceGumMatrixMode(GU_MODEL);
-				sceGumLoadIdentity();
-
-				if(mCam->needUpdate)
-				{
-					UpdateFrustumMatrix();
-					mCam->mFrustum.ExtractPlanes(projection_view_matrix);
-					mCam->needUpdate = false;
-				}
-			}
-
+			
 			sceGuShadeModel(GU_SMOOTH);
-		}
-
-		void RenderManager::LookAt()
-		{
-			//set camera look at -- later maybe i will move this code somewhere else
-			if(mCam != NULL)
-			{
-				sceGumMatrixMode(GU_PROJECTION);
-				sceGumLoadIdentity();
-				sceGumLoadMatrix(&proj);
-
-				sceGumMatrixMode(GU_VIEW);
-				sceGumLoadIdentity();
-
-				ScePspFVector3 pos = {mCam->m_vPosition.x + mCam->m_vOffset.x,mCam->m_vPosition.y + mCam->m_vOffset.y,mCam->m_vPosition.z + mCam->m_vOffset.z};
-				ScePspFVector3 eye = {mCam->m_vView.x,mCam->m_vView.y,mCam->m_vView.z};
-				ScePspFVector3 up = {mCam->m_vUpVector.x,mCam->m_vUpVector.y,mCam->m_vUpVector.z};
-
-				sceGumLookAt(&pos, &eye, &up);
-				sceGumUpdateMatrix();
-
-				sceGumStoreMatrix(&view);
-
-				sceGumMatrixMode(GU_MODEL);
-				sceGumLoadIdentity();
-
-				if(mCam->needUpdate)
-				{
-					UpdateFrustumMatrix();
-					mCam->mFrustum.ExtractPlanes(projection_view_matrix);
-					mCam->needUpdate = false;
-				}
-			}
 		}
 
 		void RenderManager::EndFrame()
@@ -446,11 +382,6 @@ namespace Aurealis
 		}
 
 
-		void RenderManager::SetActiveCamera(Camera *camera)
-		{
-			mCam = camera;
-			mCam->needUpdate = true;
-		}
 
 		void RenderManager::UpdateFrustumMatrix()
 		{

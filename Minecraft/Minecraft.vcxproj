@@ -65,7 +65,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <NMakeOutput>\</NMakeOutput>
     <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <IncludePath>$(SolutionDir)libs\libpspmath;C:\pspdev\psp\sdk\include\libc;$(SolutionDir)libs;C:\pspdev\psp\include;C:\pspdev\psp\sdk\include;$(SolutionDir)Engine;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)libs\include;C:\pspdev\psp\sdk\include\libc;$(SolutionDir)libs;C:\pspdev\psp\include;C:\pspdev\psp\sdk\include;$(SolutionDir)Engine;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <NMakeOutput>\</NMakeOutput>
@@ -157,6 +157,7 @@
     <ClCompile Include="libs\libpspmath\vfpu_translate_matrix.c" />
     <ClCompile Include="libs\libpspmath\vfpu_zero_vector.c" />
     <ClCompile Include="Minecraft.cpp" />
+    <ClCompile Include="Minecraft\Client\GameClient.cpp" />
     <ClCompile Include="Minecraft\Common\Options.cpp" />
     <ClCompile Include="Minecraft\Common\Translations.cpp" />
     <ClCompile Include="Minecraft\Menu\components\ChatScreen.cpp" />
@@ -356,6 +357,7 @@
     <ClInclude Include="libs\json\version.h" />
     <ClInclude Include="libs\json\writer.h" />
     <ClInclude Include="libs\libpspmath\pspmath.h" />
+    <ClInclude Include="Minecraft\Client\GameClient.hpp" />
     <ClInclude Include="Minecraft\Common\Options.hpp" />
     <ClInclude Include="Minecraft\Common\Translations.hpp" />
     <ClInclude Include="Minecraft\Menu\components\Panorama.hpp" />

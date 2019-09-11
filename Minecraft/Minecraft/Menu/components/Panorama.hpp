@@ -1,11 +1,11 @@
 #pragma once
-#include <Aurealis/Graphics/Vertex.h>
-#include <Aurealis/Graphics/TextureUtil.h>
-
+#include <Shadow/Graphics/Vertex.h>
+#include <Shadow/Graphics/TextureUtil.h>
+#include <pspmath.h>
 
 namespace Minecraft::Menus{
 
-using namespace Aurealis::Graphics;
+using namespace Shadow::Graphics;
     class Panorama{
         public:
 

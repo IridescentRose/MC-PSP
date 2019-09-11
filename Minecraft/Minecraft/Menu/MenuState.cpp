@@ -178,7 +178,7 @@ namespace Minecraft::Menus{
                 break;
             }
             case MENU_STATE_MULTIPLAYER:{
-               optionsMultiplayerScreenUpdate();
+               optionsMultiplayerScreenUpdate(sManager);
                break;
             }
         }

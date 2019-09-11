@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
-#include <Aurealis/Graphics/Vertex.h>
-#include <Aurealis/Graphics/Texture.h>
-namespace Aurealis
+#include <Shadow/Graphics/Vertex.h>
+#include <Shadow/Graphics/Texture.h>
+namespace Shadow
 {
 	namespace Graphics
 	{

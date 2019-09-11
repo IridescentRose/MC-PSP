@@ -5,10 +5,11 @@
 #include "components/Panorama.hpp"
 #include <Shadow/Audio/AudioManager.hpp>
 #include <Shadow/Utils/Timer.hpp>
-#include <Aurealis/Graphics/Sprite.h>
+#include <Shadow/Graphics/Sprite.h>
 #include <json/json.h>
+#include <pspmath.h>
 
-#include <Aurealis/Graphics/RenderManager.h>
+#include <Shadow/Graphics/RenderManager.h>
 #include <string>
 #include <fstream>
 #include "../Version.hpp"
@@ -43,7 +44,7 @@ namespace Minecraft::Menus{
     class MenuState : public GameState{
     public:
 	    MenuState();
-	    virtual ~MenuState();
+	    ~MenuState();
 
 	    void Init();
 	    void Enter();
@@ -83,7 +84,7 @@ namespace Minecraft::Menus{
 		void optionsSnooperScreenUpdate();
 
 		void optionsMultiplayerScreenDraw();
-		void optionsMultiplayerScreenUpdate();
+		void optionsMultiplayerScreenUpdate(StateManager* sManager);
 
         OSL_SOUND* bgm, *button;
 		Panorama* panorama;
