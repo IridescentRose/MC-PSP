@@ -10,7 +10,7 @@ namespace Shadow::Utils::Logging{
 		LOGGER_LEVEL_FATAL = 5,
 	};
 	
-	
+	extern std::string logFile;
 	extern LoggerLevel logging_level;
 
 	void log(std::string msg, LoggerLevel level);

@@ -43,7 +43,7 @@ ASFLAGS = $(CFLAGS)
 
 BUILD_PRX = 1
 PSP_FW_VERSION=371
-PSP_LARGE_MEMORY = 1
+PSP_LARGE_MEMORY = 0 # Let's try LMM first. If we need to, we can turn on HMM
 
 LIBDIR += ./libs/lib/
 LDFLAGS =

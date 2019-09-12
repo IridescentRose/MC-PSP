@@ -3,8 +3,11 @@
 #include <Shadow/Utils/StateManager.h>
 #include <Shadow/Utils/GameState.h>
 
+
+using namespace Shadow::Utils;
+using namespace Shadow;
+
 namespace Minecraft::Client {
-	using namespace Shadow::Utils;
 
 	struct ConnectInfo {
 		std::string username;

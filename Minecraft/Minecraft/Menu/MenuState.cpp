@@ -103,15 +103,18 @@ namespace Minecraft::Menus{
         Common::g_TranslationOBJ.setTranslation(Common::g_OptionsManager.options.lang);
 
         langPosMax = Common::g_TranslationOBJ.availableTranslations().size();
-		Logging::debug("Hello world!");
 		
+		//Delete Logs from past launch
+		remove(Logging::logFile.c_str());
+
 		u32 ramFree = freeMemory();
 		float ram = ((float)ramFree) / 1024.0f / 1024.0f;
-
 		std::ostringstream os;
 		os << ram;
 		std::string s(os.str());
-		Logging::debug("RAM: " + s);
+
+
+		Logging::log("RAM FOR MENU: " + s, Logging::LOGGER_LEVEL_TRACE);
     }
 
 	void MenuState::Enter(){
