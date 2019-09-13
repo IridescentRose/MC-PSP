@@ -13,7 +13,10 @@ namespace Minecraft::Client {
 	}
 
 	void ClientState::Init() {
+		//CONNECT TEST, DON'T START ALLOCATING RAM UNNECESSARILY!
 
+	}
+	void ClientState::Enter() {
 		u32 ramFree = System::freeMemory();
 		float ram = ((float)ramFree) / 1024.0f / 1024.0f;
 		std::ostringstream os;
@@ -22,9 +25,8 @@ namespace Minecraft::Client {
 
 
 		Logging::log("RAM AFTER MENU: " + s, Logging::LOGGER_LEVEL_TRACE);
-	}
-	void ClientState::Enter() {
 
+		//THIS IS WHERE WE HAVE FREE RAM TO LOAD!
 	}
 	void ClientState::CleanUp() {
 

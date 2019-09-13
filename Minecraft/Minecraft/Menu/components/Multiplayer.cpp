@@ -133,6 +133,9 @@ namespace Minecraft::Menus{
 
 				//TODO: STORE USERNAME!!!
 			}
+			else {
+				Network::Cleanup(); //Fixes crashing.
+			}
 			
 		}
 

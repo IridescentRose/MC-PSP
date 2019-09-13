@@ -38,7 +38,7 @@ namespace Shadow::Utils::Logging{
 	}
 	void trace(std::string msg) {
 		if (logging_level <= LOGGER_LEVEL_TRACE) {
-			std::ofstream file(logFile);
+			std::ofstream file(logFile, std::ios_base::app);
 			file << "[TRACE]: " << msg << std::endl;
 			file.close();
 		}
@@ -46,39 +46,39 @@ namespace Shadow::Utils::Logging{
 	void debug(std::string msg) {
 		if (logging_level <= LOGGER_LEVEL_DEBUG) {
 
-			std::ofstream file(logFile);
+			std::ofstream file(logFile, std::ios_base::app);
 			file << "[DEBUG]: " << msg << std::endl;
 			file.close();
 		}
 	}
 	void info(std::string msg) {
 		if (logging_level <= LOGGER_LEVEL_INFO) {
-			std::ofstream file(logFile);
+			std::ofstream file(logFile, std::ios_base::app);
 			file << "[INFO]: " << msg << std::endl;
 			file.close();
 		}
 	}
 	void warn(std::string msg) {
 		if (logging_level <= LOGGER_LEVEL_WARN) {
-			std::ofstream file(logFile);
+			std::ofstream file(logFile, std::ios_base::app);
 			file << "[WARN]: " << msg << std::endl;
 			file.close();
 		}
 	}
 	void error(std::string msg) {
 		if (logging_level <= LOGGER_LEVEL_ERROR) {
-			std::ofstream file(logFile);
+			std::ofstream file(logFile, std::ios_base::app);
 			file << "[ERROR]: " << msg << std::endl;
 			file.close();
 		}
 	}
 	void fatal(std::string msg) {
 		if (logging_level <= LOGGER_LEVEL_FATAL) {
-			std::ofstream file(logFile);
+			std::ofstream file(logFile, std::ios_base::app);
 			file << "[FATAL]: " << msg << std::endl;
 			file.close();
 		}
 	}
+	LoggerLevel logging_level = LoggerLevel::LOGGER_LEVEL_INFO;
 	std::string logFile = "log.log";
-	LoggerLevel logging_level = LoggerLevel::LOGGER_LEVEL_DEBUG;
 }
