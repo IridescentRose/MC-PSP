@@ -1,0 +1,20 @@
+--- include/openssl/opensslconf.h.rej	2007-06-06 03:14:17.000000000 -0400
++++ include/openssl/opensslconf.h.rej	1969-12-31 19:00:00.000000000 -0500
+@@ -1,17 +0,0 @@
+-***************
+-*** 33,39 ****
+-  
+-  #if !(defined(VMS) || defined(__VMS)) /* VMS uses logical names instead */
+-  #if defined(HEADER_CRYPTLIB_H) && !defined(OPENSSLDIR)
+-- #define OPENSSLDIR "/usr/local/pspdev/psp/ssl"
+-  #endif
+-  #endif
+-  
+---- 33,39 ----
+-  
+-  #if !(defined(VMS) || defined(__VMS)) /* VMS uses logical names instead */
+-  #if defined(HEADER_CRYPTLIB_H) && !defined(OPENSSLDIR)
+-+ #define OPENSSLDIR "/usr/local/ssl"
+-  #endif
+-  #endif
+-  
