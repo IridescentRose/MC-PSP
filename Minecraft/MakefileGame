@@ -37,7 +37,7 @@ Minecraft/Client/GameClient.o
 
 INCDIR = $(PSPPATH)/include
 INCDIR += ./LameCraft ./include ./Engine ./libs ./libs/include
-CFLAGS = -O3 -mpreferred-stack-boundary=4 -ffast-math
+CFLAGS = -O3 -G0 -mpreferred-stack-boundary=4 -ffast-math
 CXXFLAGS = -std=gnu++17 -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
@@ -47,7 +47,7 @@ PSP_LARGE_MEMORY = 0 # Let's try LMM first. If we need to, we can turn on HMM
 
 LIBDIR += ./libs/lib/
 LDFLAGS =
-LIBS=  -lpspaudiolib -lpspaudio -lpspaudiocodec -lpng -lintraFont -ljson -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath -lmclib-common
+LIBS=  -lpspaudiolib -lpspaudio -lpspaudiocodec -lpng -lintraFont -ljson -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath -lmclib-common -lssl -lcrypto -lcurl
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Minecraft
