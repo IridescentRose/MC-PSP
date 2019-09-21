@@ -47,7 +47,7 @@ PSP_LARGE_MEMORY = 0 # Let's try LMM first. If we need to, we can turn on HMM
 
 LIBDIR += ./libs/lib/
 LDFLAGS =
-LIBS=  -lpspaudiolib -lpspaudio -lpspaudiocodec -lpng -lintraFont -ljson -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath
+LIBS=  -lpspaudiolib -lpspaudio -lpspaudiocodec -lpng -lintraFont -ljson -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath -lmclib-common
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Minecraft
