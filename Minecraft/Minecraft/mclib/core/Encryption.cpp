@@ -65,7 +65,7 @@ private:
         m_PublicKey.key = new unsigned char[m_PublicKey.len];
         std::copy(publicKey.begin(), publicKey.end(), m_PublicKey.key);
 
-        RSA* rsa = d2i_RSA_PUBKEY(NULL, (const unsigned char**)&m_PublicKey.key, m_PublicKey.len);
+        RSA* rsa = d2i_RSA_PUBKEY(NULL, (unsigned char**)&m_PublicKey.key, m_PublicKey.len);
 
         // Generate random shared secret
         m_SharedSecret.len = AES_BLOCK_SIZE;
@@ -88,13 +88,13 @@ private:
         RSA_free(rsa);
 
         // Initialize AES encryption and decryption
-        if (!(m_EncryptCTX = EVP_CIPHER_CTX_new()))
+        if (!(m_EncryptCTX = new EVP_CIPHER_CTX()))
             return false;
 
         if (!(EVP_EncryptInit_ex(m_EncryptCTX, EVP_aes_128_cfb8(), nullptr, m_SharedSecret.key, m_SharedSecret.key)))
             return false;
 
-        if (!(m_DecryptCTX = EVP_CIPHER_CTX_new()))
+        if (!(m_DecryptCTX = new EVP_CIPHER_CTX()))
             return false;
 
         if (!(EVP_DecryptInit_ex(m_DecryptCTX, EVP_aes_128_cfb8(), nullptr, m_SharedSecret.key, m_SharedSecret.key)))
@@ -118,9 +118,8 @@ public:
         if (m_ResponsePacket)
             delete m_ResponsePacket;
 
-        EVP_CIPHER_CTX_free(m_EncryptCTX);
-        EVP_CIPHER_CTX_free(m_DecryptCTX);
-
+	delete m_EncryptCTX;
+	delete m_DecryptCTX;
         m_EncryptCTX = nullptr;
         m_DecryptCTX = nullptr;
     }

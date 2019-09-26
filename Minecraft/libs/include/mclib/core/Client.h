@@ -12,7 +12,8 @@
 #include <mclib/protocol/packets/PacketDispatcher.h>
 #include <mclib/util/ObserverSubject.h>
 #include <mclib/world/World.h>
-#include <thread>
+#include <pspkerneltypes.h>
+#include <pspkernel.h>
 
 namespace mc {
 
@@ -47,7 +48,7 @@ private:
     world::World m_World;
     s64 m_LastUpdate;
     bool m_Connected;
-    std::thread m_UpdateThread;
+	SceUID m_UpdateThread;
 
 public:
     MCLIB_API Client(protocol::packets::PacketDispatcher* dispatcher, protocol::Version version = protocol::Version::Minecraft_1_11_2);
@@ -64,7 +65,7 @@ public:
     bool MCLIB_API Login(const std::string& host, unsigned short port, const std::string& user, const std::string& password, UpdateMethod method = UpdateMethod::Block);
     bool MCLIB_API Login(const std::string& host, unsigned short port, const std::string& user, AuthToken token, UpdateMethod method = UpdateMethod::Block);
     void MCLIB_API Ping(const std::string& host, unsigned short port, UpdateMethod method = UpdateMethod::Block);
-
+    static int runUpdateThread(SceSize args, void *argp);
     protocol::packets::PacketDispatcher* GetDispatcher() { return m_Dispatcher; }
     core::Connection* GetConnection() { return &m_Connection; }
     core::PlayerManager* GetPlayerManager() { return &m_PlayerManager; }
@@ -75,6 +76,8 @@ public:
     world::World* GetWorld() { return &m_World; }
 
 };
+
+extern Client* g_Client;
 
 } // ns core
 } // ns mc

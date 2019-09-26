@@ -77,7 +77,7 @@ private:
         curl_easy_setopt(m_Curl, CURLOPT_URL, url.c_str());
         curl_easy_setopt(m_Curl, CURLOPT_WRITEFUNCTION, CurlWriteString);
         curl_easy_setopt(m_Curl, CURLOPT_HEADERFUNCTION, CurlWriteString);
-        curl_easy_setopt(m_Curl, CURLOPT_TIMEOUT_MS, m_Timeout);
+        curl_easy_setopt(m_Curl, CURLOPT_TIMEOUT, m_Timeout/1000);
         curl_easy_setopt(m_Curl, CURLOPT_WRITEDATA, &data);
         curl_easy_setopt(m_Curl, CURLOPT_HEADERDATA, &header);
         curl_easy_setopt(m_Curl, CURLOPT_SSL_VERIFYPEER, 0);

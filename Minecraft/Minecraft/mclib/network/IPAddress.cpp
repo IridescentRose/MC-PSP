@@ -51,10 +51,10 @@ IPAddress::IPAddress(const std::wstring& ip)
 
     std::wsmatch match = *begin;
 
-    int octet1 = std::stoi(match[1]);
-    int octet2 = std::stoi(match[2]);
-    int octet3 = std::stoi(match[3]);
-    int octet4 = std::stoi(match[4]);
+    int octet1 = atoi((const char*)match[1].str().c_str());
+    int octet2 = atoi((const char*)match[2].str().c_str());
+    int octet3 = atoi((const char*)match[3].str().c_str());
+    int octet4 = atoi((const char*)match[4].str().c_str());
 
     m_Address = (octet1 << 24) | (octet2 << 16) | (octet3 << 8) | octet4;
     m_Valid = true;

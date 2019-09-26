@@ -7,7 +7,7 @@
 #include <mclib/entity/EntityManager.h>
 #include <mclib/protocol/Protocol.h>
 #include <mclib/world/World.h>
-
+#include <pspkernel.h>
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -84,12 +84,7 @@ std::wstring GetAppDataPath() {
 #else
 
 std::wstring GetAppDataPath() {
-    const char* home = nullptr;
-
-    if ((home = getenv("HOME")) == nullptr)
-        home = getpwuid(getuid())->pw_dir;
-
-    return to_wstring(home);
+    return to_wstring(""); //TODO: DATAPATH
 }
 
 #endif
@@ -1114,75 +1109,25 @@ public:
         if (m_Created) return;
 
         m_Created = true;
-
-        std::async(std::launch::async, [&] {
-            std::this_thread::sleep_for(std::chrono::seconds(7));
-
-            std::vector<int> colors = {
-                //DyeColor::InkSac,
-                DyeColor::RoseRed,
-                DyeColor::CactusGreen,
-                //DyeColor::CocoaBeans,
-                DyeColor::LapisLazuli,
-                DyeColor::Purple,
-                DyeColor::Cyan,
-                DyeColor::LightGray,
-                DyeColor::Gray,
-                DyeColor::Pink,
-                DyeColor::Lime,
-                DyeColor::DandelionYellow,
-                DyeColor::LightBlue,
-                DyeColor::Magenta,
-                DyeColor::Orange,
-                DyeColor::BoneMeal
-            };
-            int slotIndex = 36;
-
-           /* std::map<u32, bool> usedMap;
-
-            for (u8 colorIndex1 = 0; colorIndex1 < colors.size(); ++colorIndex1) {
-                for (u8 colorIndex2 = 0; colorIndex2 < colors.size(); ++colorIndex2) {
-                    for (u8 colorIndex3 = 0; colorIndex3 < colors.size(); ++colorIndex3) {
-                        if (colorIndex1 == colorIndex2) continue;
-                        if (colorIndex1 == colorIndex3) continue;
-                        if (colorIndex2 == colorIndex3) continue;
-
-                        std::vector<u8> sorted = { colorIndex1, colorIndex2, colorIndex3 };
-                        std::sort(sorted.begin(), sorted.end());
-
-                        u32 combined = (sorted[0] << 16) | (sorted[1] << 8) | sorted[2];
-
-                        if (usedMap.find(combined) != usedMap.end()) continue;
-
-                        usedMap[combined] = true;
-
-                        for (int type = 0; type < 5; ++type) {
-                            Minecraft::Slot slot = CreateFirework(false, true, type, 2, std::vector<int> {
-                                colors[colorIndex1],
-                                colors[colorIndex2],
-                                colors[colorIndex3]
-                            });
-
-                            m_CreateQueue.push(slot);
-                        }
-                    }
-                }
-            }
-            std::wcout << m_CreateQueue.size() << std::endl;
-            for (int colorIndex = 0; colorIndex < colors.size(); ++colorIndex) {
-                for (int type = 0; type < 5; ++type) {
-                    Minecraft::Slot slot = CreateFirework(true, true, type, 1, std::vector<int>{colors[colorIndex]});
-
-                    m_CreateQueue.push(slot);
-                }
-            }
-
-            if (!m_CreateQueue.empty()) {
-                Minecraft::Packets::Outbound::CreativeInventoryActionPacket packet(36, m_CreateQueue.front());
-                m_CreateQueue.pop();
-                m_Connection->SendPacket(&packet);
-            }*/
-        });
+		std::vector<int> colors = {
+			//DyeColor::InkSac,
+			DyeColor::RoseRed,
+			DyeColor::CactusGreen,
+			//DyeColor::CocoaBeans,
+			DyeColor::LapisLazuli,
+			DyeColor::Purple,
+			DyeColor::Cyan,
+			DyeColor::LightGray,
+			DyeColor::Gray,
+			DyeColor::Pink,
+			DyeColor::Lime,
+			DyeColor::DandelionYellow,
+			DyeColor::LightBlue,
+			DyeColor::Magenta,
+			DyeColor::Orange,
+			DyeColor::BoneMeal
+		};
+		int slotIndex = 36;
 
     }
 };

@@ -24,31 +24,14 @@ bool TCPSocket::Connect(const IPAddress& address, unsigned short port) {
     if (this->GetStatus() == Connected)
         return true;
 
-    struct addrinfo hints = { 0 }, *result = nullptr;
+    
+	m_Handle = socket(PF_INET, SOCK_STREAM, 0);
+	struct sockaddr_in name;
 
-    if ((m_Handle = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
-        return false;
-
-    hints.ai_family = AF_INET;
-    hints.ai_socktype = SOCK_STREAM;
-    hints.ai_protocol = IPPROTO_TCP;
-
-    if (getaddrinfo(address.ToString().c_str(), std::to_string(port).c_str(), &hints, &result) != 0)
-        return false;
-
-    struct addrinfo* ptr = nullptr;
-    for (ptr = result; ptr != nullptr; ptr = ptr->ai_next) {
-        struct sockaddr_in* sockaddr = (struct sockaddr_in*)ptr->ai_addr;
-        if (::connect(m_Handle, (struct sockaddr*)sockaddr, sizeof(struct sockaddr_in)) != 0)
-            continue;
-        m_RemoteAddr = *sockaddr;
-        break;
-    }
-
-    freeaddrinfo(result);
-
-    if (!ptr)
-        return false;
+	name.sin_family = AF_INET;
+	name.sin_port = htons(port); //Default Port
+	inet_pton(AF_INET, address.ToString().c_str(), &name.sin_addr.s_addr);
+	connect(m_Handle, (struct sockaddr*) & name, sizeof(name)); //Full connection!
 
     this->SetStatus(Connected);
     m_RemoteIP = address;

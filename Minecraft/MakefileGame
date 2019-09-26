@@ -18,6 +18,52 @@ Engine/Shadow/System/NetworkDriver.o \
 Engine/Shadow/Graphics/RenderManager.o \
 Engine/Shadow/Graphics/Sprite.o \
 Engine/Shadow/Graphics/TextureUtil.o \
+Minecraft/mclib/block/Banner.o \
+Minecraft/mclib/block/Beacon.o \
+Minecraft/mclib/block/Bed.o \
+Minecraft/mclib/block/Block.o \
+Minecraft/mclib/block/BlockEntity.o \
+Minecraft/mclib/block/BrewingStand.o \
+Minecraft/mclib/block/Chest.o \
+Minecraft/mclib/block/Dispenser.o \
+Minecraft/mclib/block/Dropper.o \
+Minecraft/mclib/block/EnchantmentTable.o \
+Minecraft/mclib/block/EndGateway.o \
+Minecraft/mclib/block/FlowerPot.o \
+Minecraft/mclib/block/Furnace.o \
+Minecraft/mclib/block/Hopper.o \
+Minecraft/mclib/block/InventoryBlock.o \
+Minecraft/mclib/block/Jukebox.o \
+Minecraft/mclib/block/MonsterSpawner.o \
+Minecraft/mclib/block/NoteBlock.o \
+Minecraft/mclib/block/Piston.o \
+Minecraft/mclib/block/RedstoneComparator.o \
+Minecraft/mclib/block/ShulkerBox.o \
+Minecraft/mclib/block/Sign.o \
+Minecraft/mclib/block/Skull.o \
+Minecraft/mclib/entity/EntityManager.o \
+Minecraft/mclib/entity/Metadata.o \
+Minecraft/mclib/inventory/Hotbar.o \
+Minecraft/mclib/inventory/Inventory.o \
+Minecraft/mclib/inventory/Slot.o \
+Minecraft/mclib/world/World.o \
+Minecraft/mclib/world/Chunk.o \
+Minecraft/mclib/network/IPAddress.o \
+Minecraft/mclib/network/Network.o \
+Minecraft/mclib/network/Socket.o \
+Minecraft/mclib/network/TCPSocket.o \
+Minecraft/mclib/network/UDPSocket.o \
+Minecraft/mclib/protocol/Protocol.o \
+Minecraft/mclib/protocol/packets/Packet.o \
+Minecraft/mclib/protocol/packets/PacketDispatcher.o \
+Minecraft/mclib/protocol/packets/PacketFactory.o \
+Minecraft/mclib/protocol/packets/PacketHandler.o \
+Minecraft/mclib/util/Forge.o \
+Minecraft/mclib/util/Hash.o \
+Minecraft/mclib/util/HTTPClient.o \
+Minecraft/mclib/util/Utility.o \
+Minecraft/mclib/util/VersionFetcher.o \
+Minecraft/mclib/util/Yggdrasil.o \
 Minecraft.o \
 Minecraft/Common/Translations.o \
 Minecraft/Common/Options.o \
@@ -33,12 +79,19 @@ Minecraft/Menu/components/Multiplayer.o\
 Minecraft/Menu/components/Snooper.o\
 Minecraft/Menu/components/VideoScreen.o\
 Minecraft/Menu/components/Panorama.o \
-Minecraft/Client/GameClient.o
+Minecraft/Client/GameClient.o \
+Minecraft/mclib/core/AuthToken.o \
+Minecraft/mclib/core/ClientSettings.o \
+Minecraft/mclib/core/Compression.o \
+Minecraft/mclib/core/Connection.o \
+Minecraft/mclib/core/Encryption.o \
+Minecraft/mclib/core/PlayerManager.o \
+Minecraft/mclib/core/Client.o \
 
 INCDIR = $(PSPPATH)/include
 INCDIR += ./LameCraft ./include ./Engine ./libs ./libs/include
 CFLAGS = -O3 -G0 -mpreferred-stack-boundary=4 -ffast-math
-CXXFLAGS = -std=gnu++17 -fno-exceptions -fno-rtti
+CXXFLAGS = -std=gnu++17
 ASFLAGS = $(CFLAGS)
 
 BUILD_PRX = 1
