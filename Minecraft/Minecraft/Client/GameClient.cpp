@@ -23,6 +23,7 @@ namespace Minecraft::Client {
 	}
 
 	void ClientState::Init() {
+		updateTimer = Timer();
 		
 		Logging::warn("Connecting!");
 		//CONNECT TEST, DON'T START ALLOCATING RAM UNNECESSARILY!
@@ -54,11 +55,16 @@ namespace Minecraft::Client {
 		try {
 			Logging::log("Logging in.", Logging::LOGGER_LEVEL_INFO);
 			mc::core::g_Client->Login(connect_info.ip_address, 25565, connect_info.username, "", mc::core::UpdateMethod::Threaded);
+			mc::core::g_Client->Update();
 		}
 		catch (std::exception& e) {
 			Logging::log(e.what(), Logging::LOGGER_LEVEL_FATAL);
 			sceKernelExitGame();
 		}
+
+		//Once logged in, or when code reaches here, we reset the timer.
+		updateTimer.reset();
+
 	}
 	void ClientState::Enter() {
 		u32 ramFree = System::freeMemory();
@@ -66,9 +72,6 @@ namespace Minecraft::Client {
 		std::ostringstream os;
 		os << ram;
 		std::string s(os.str());
-
-
-		Logging::log("RAM AFTER MENU: " + s, Logging::LOGGER_LEVEL_TRACE);
 
 		//THIS IS WHERE WE HAVE FREE RAM TO LOAD!
 	}
@@ -83,15 +86,30 @@ namespace Minecraft::Client {
 
 	}
 
+#define REQUIRED_UPDATE_FREQUENCY 0.050f
+
 	void ClientState::Update(StateManager* sManager) {
-		u32 ramFree = System::freeMemory();
-		float ram = ((float)ramFree) / 1024.0f / 1024.0f;
-		std::ostringstream os;
-		os << ram;
-		std::string s(os.str());
 
+		//Get Delta Time
+		float dt = updateTimer.deltaTime();
 
-		Logging::log("RAM: " + s, Logging::LOGGER_LEVEL_TRACE);
+		sceKernelDelayThread(100); //Force thread switch, just in case
+
+		//See if the client connection is still active
+		try {
+			mc::core::g_Client->GetConnection()->CreatePacket();
+		}
+		catch (std::exception& e) {
+			Logging::log(e.what(), Logging::LOGGER_LEVEL_FATAL);
+			sceKernelExitGame();
+		}
+
+		//TODO: Update player position and look on interval
+		if (updateTimer.elapsed() >= REQUIRED_UPDATE_FREQUENCY) {
+
+		}
+		
+
 	}
 	void ClientState::Draw(StateManager* sManager) {
 

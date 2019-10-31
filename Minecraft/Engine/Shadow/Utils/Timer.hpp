@@ -13,8 +13,12 @@ public:
 
 	float deltaTime(void);
 
+	float elapsed();
+	void reset();
+
 private:
 	double dt;
+	double total;
 
 	u64 timeCurrent;
 	u64 timeLast;

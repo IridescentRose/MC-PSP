@@ -2,6 +2,7 @@
 #include <string>
 #include <Shadow/Utils/StateManager.h>
 #include <Shadow/Utils/GameState.h>
+#include <Shadow/Utils/Timer.hpp>
 
 
 using namespace Shadow::Utils;
@@ -30,6 +31,7 @@ namespace Minecraft::Client {
 		void Draw(StateManager* sManager);
 
 		ConnectInfo connect_info;
+		Timer updateTimer;
 	private:
 
 	};
