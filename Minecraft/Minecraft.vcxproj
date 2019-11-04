@@ -158,6 +158,7 @@
     <ClCompile Include="libs\libpspmath\vfpu_zero_vector.c" />
     <ClCompile Include="Minecraft.cpp" />
     <ClCompile Include="Minecraft\Client\GameClient.cpp" />
+    <ClCompile Include="Minecraft\Client\Player.cpp" />
     <ClCompile Include="Minecraft\Common\Options.cpp" />
     <ClCompile Include="Minecraft\Common\Translations.cpp" />
     <ClCompile Include="Minecraft\Menu\components\ChatScreen.cpp" />
@@ -358,6 +359,7 @@
     <ClInclude Include="libs\json\writer.h" />
     <ClInclude Include="libs\libpspmath\pspmath.h" />
     <ClInclude Include="Minecraft\Client\GameClient.hpp" />
+    <ClInclude Include="Minecraft\Client\Player.h" />
     <ClInclude Include="Minecraft\Common\Options.hpp" />
     <ClInclude Include="Minecraft\Common\Translations.hpp" />
     <ClInclude Include="Minecraft\Menu\components\Panorama.hpp" />

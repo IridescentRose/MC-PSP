@@ -10,6 +10,9 @@
 #include <mclib/util/Utility.h>
 #include <utf8.h>
 
+#include <Shadow/Utils/Logger.h>
+using namespace Shadow::Utils;
+
 #include <future>
 #include <thread>
 #include <memory>
@@ -51,19 +54,23 @@ network::Socket::Status Connection::GetSocketState() const {
 }
 
 void Connection::HandlePacket(protocol::packets::in::JoinGamePacket* packet) {
+	Logging::log("Join Game!", Logging::LOGGER_LEVEL_TRACE);
     m_Dimension = packet->GetDimension();
 }
 
 void Connection::HandlePacket(protocol::packets::in::RespawnPacket* packet) {
+	Logging::log("Respawn!", Logging::LOGGER_LEVEL_TRACE);
     m_Dimension = packet->GetDimension();
 }
 
 void Connection::HandlePacket(protocol::packets::in::KeepAlivePacket* packet) {
+	Logging::log("KEEP ALIVE!", Logging::LOGGER_LEVEL_TRACE);
     protocol::packets::out::KeepAlivePacket response(packet->GetAliveId());
     SendPacket(&response);
 }
 
 void Connection::HandlePacket(protocol::packets::in::PlayerPositionAndLookPacket* packet) {
+	Logging::log("PPANDL!", Logging::LOGGER_LEVEL_TRACE);
     using namespace protocol::packets;
 
     // Used to verify position
@@ -77,6 +84,7 @@ void Connection::HandlePacket(protocol::packets::in::PlayerPositionAndLookPacket
 }
 
 void Connection::HandlePacket(protocol::packets::in::UpdateHealthPacket* packet) {
+	Logging::log("Update Health!", Logging::LOGGER_LEVEL_TRACE);
     using namespace protocol::packets;
 
     if (packet->GetHealth() <= 0) {
@@ -86,6 +94,7 @@ void Connection::HandlePacket(protocol::packets::in::UpdateHealthPacket* packet)
 }
 
 void Connection::HandlePacket(protocol::packets::in::DisconnectPacket* packet) {
+	Logging::log("Disconnected!", Logging::LOGGER_LEVEL_TRACE);
     m_Socket->Disconnect();
 
     NotifyListeners(&ConnectionListener::OnSocketStateChange, m_Socket->GetStatus());
@@ -157,9 +166,11 @@ void Connection::HandlePacket(protocol::packets::in::LoginSuccessPacket* packet)
     m_ProtocolState = protocol::State::Play;
 
     NotifyListeners(&ConnectionListener::OnLogin, true);
+	Logging::log("Login Success!", Logging::LOGGER_LEVEL_TRACE);
 }
 
 void Connection::HandlePacket(protocol::packets::in::SetCompressionPacket* packet) {
+	Logging::log("Compression Set!", Logging::LOGGER_LEVEL_TRACE);
     m_Compressor = std::make_unique<CompressionZ>(packet->GetMaxPacketSize());
 }
 

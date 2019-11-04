@@ -80,6 +80,7 @@ Minecraft/Menu/components/Snooper.o\
 Minecraft/Menu/components/VideoScreen.o\
 Minecraft/Menu/components/Panorama.o \
 Minecraft/Client/GameClient.o \
+Minecraft/Client/Player.o \
 Minecraft/mclib/core/AuthToken.o \
 Minecraft/mclib/core/ClientSettings.o \
 Minecraft/mclib/core/Compression.o \

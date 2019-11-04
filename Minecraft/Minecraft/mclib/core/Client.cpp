@@ -1,6 +1,9 @@
 #include <mclib/core/Client.h>
 #include <mclib/util/Utility.h>
 
+#include <Shadow/Utils/Logger.h>
+using namespace Shadow::Utils;
+
 #include <iostream>
 #include <pspkernel.h>
 #include <pspthreadman.h>
@@ -44,8 +47,10 @@ void Client::Update() {
     try {
         m_Connection.CreatePacket();
     } catch (std::exception& e) {
-        std::wcout << e.what() << std::endl;
+        Logging::log(e.what(), Logging::LOGGER_LEVEL_FATAL);
+		sceKernelExitGame();
     }
+
 
     entity::EntityPtr playerEntity = m_EntityManager.GetPlayerEntity();
     if (playerEntity) {

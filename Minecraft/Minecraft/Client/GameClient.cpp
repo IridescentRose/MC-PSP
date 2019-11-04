@@ -15,8 +15,7 @@
 
 namespace Minecraft::Client {
 
-	ClientState::ClientState() {
-
+	ClientState::ClientState() : dispatcher(mc::protocol::packets::PacketDispatcher()), mc::protocol::packets::PacketHandler(&dispatcher) {
 	}
 	ClientState::~ClientState() {
 
@@ -36,7 +35,6 @@ namespace Minecraft::Client {
 
 		Logging::log("Connecting with version " + mc::protocol::to_string(version), Logging::LOGGER_LEVEL_INFO);
 		
-		mc::protocol::packets::PacketDispatcher dispatcher;
 		mc::core::g_Client = new mc::core::Client(&dispatcher, version);
 
 		mc::util::ForgeHandler& forge = versionFetcher.GetForge();
@@ -55,15 +53,22 @@ namespace Minecraft::Client {
 		try {
 			Logging::log("Logging in.", Logging::LOGGER_LEVEL_INFO);
 			mc::core::g_Client->Login(connect_info.ip_address, 25565, connect_info.username, "", mc::core::UpdateMethod::Threaded);
-			mc::core::g_Client->Update();
 		}
 		catch (std::exception& e) {
 			Logging::log(e.what(), Logging::LOGGER_LEVEL_FATAL);
 			sceKernelExitGame();
 		}
 
+
 		//Once logged in, or when code reaches here, we reset the timer.
 		updateTimer.reset();
+		player = new Player();
+		mc::core::g_Client->GetPlayerManager()->RegisterListener(player);
+
+		//Register listeners
+		mc::core::g_Client->GetDispatcher()->RegisterHandler(mc::protocol::State::Play, mc::protocol::play::EntityVelocity, this);
+		mc::core::g_Client->GetDispatcher()->RegisterHandler(mc::protocol::State::Play, mc::protocol::play::SpawnPosition, this);
+
 
 	}
 	void ClientState::Enter() {
@@ -89,29 +94,54 @@ namespace Minecraft::Client {
 #define REQUIRED_UPDATE_FREQUENCY 0.050f
 
 	void ClientState::Update(StateManager* sManager) {
-
 		//Get Delta Time
 		float dt = updateTimer.deltaTime();
 
-		sceKernelDelayThread(100); //Force thread switch, just in case
-
-		//See if the client connection is still active
-		try {
-			mc::core::g_Client->GetConnection()->CreatePacket();
-		}
-		catch (std::exception& e) {
-			Logging::log(e.what(), Logging::LOGGER_LEVEL_FATAL);
-			sceKernelExitGame();
-		}
-
-		//TODO: Update player position and look on interval
-		if (updateTimer.elapsed() >= REQUIRED_UPDATE_FREQUENCY) {
-
-		}
+		Logging::log("About to check for updates!", Logging::LOGGER_LEVEL_TRACE);
+		mc::core::g_Client->Update();
+		/*
+		player->Update(dt);
+		Logging::log("PLAYER POS: " + std::to_string(player->getPosition().x) + " " + std::to_string(player->getPosition().y) + " " + std::to_string(player->getPosition().z), Logging::LOGGER_LEVEL_INFO);
 		
+		//Update player position and look on interval
+		if (updateTimer.elapsed() >= REQUIRED_UPDATE_FREQUENCY && mc::core::g_Client->GetConnection()->GetProtocolState() == mc::protocol::State::Play) {
+			Logging::log("Client should update!", Logging::LOGGER_LEVEL_TRACE);
+
+			mc::protocol::packets::out::PlayerPositionAndLookPacket response(player->getPosition(), player->getYaw(), player->getPitch(), player->isOnGround());
+			Logging::log("Created Response!", Logging::LOGGER_LEVEL_TRACE);
+			mc::core::g_Client->GetConnection()->SendPacket(&response);
+			Logging::log("Sent Response!", Logging::LOGGER_LEVEL_TRACE);
+			//Handle sneaking & sprinting later
+			updateTimer.reset();
+		}
+		else if(updateTimer.elapsed() >= REQUIRED_UPDATE_FREQUENCY) {
+			updateTimer.reset();
+		}*/
+
+		sceKernelDelayThread(100); //Force thread switch, just in case		
 
 	}
 	void ClientState::Draw(StateManager* sManager) {
 
+	}
+	void ClientState::HandlePacket(mc::protocol::packets::in::EntityVelocityPacket* packet)
+	{
+
+		Logging::log("Handling Velocity!", Logging::LOGGER_LEVEL_TRACE);
+		mc::EntityId eid = packet->GetEntityId();
+
+		//Velocity for PLAYERS
+		//TODO: VELOCITY FOR MOBS
+
+		auto playerEntity = mc::core::g_Client->GetEntityManager()->GetPlayerEntity();
+		if (playerEntity && playerEntity->GetEntityId() == eid) {
+			player->SetVelocity(ToVector3d(packet->GetVelocity()) * 20.0 / 8000.0);
+			Logging::log("Handled Velocity!", Logging::LOGGER_LEVEL_TRACE);
+		}
+	}
+	void ClientState::HandlePacket(mc::protocol::packets::in::SpawnPositionPacket* packet)
+	{
+		//Nothing needs to be done here... Happens in playerListener
+		Logging::log("Handled Spawn Packet!", Logging::LOGGER_LEVEL_TRACE);
 	}
 }
