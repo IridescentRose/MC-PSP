@@ -60,7 +60,7 @@ namespace Minecraft::Menus{
         void panoramaPass();
 
 		void titleScreenDraw();
-		void titleScreenUpdate();
+		void titleScreenUpdate(StateManager* sManager);
 
 		void languageScreenDraw();
 		void languageScreenUpdate();

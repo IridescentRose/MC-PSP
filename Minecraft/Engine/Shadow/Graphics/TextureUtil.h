@@ -20,6 +20,8 @@
 #include <psputils.h>
 #include <pspdisplay.h>
 
+extern std::string texPackName;
+
 class TextureUtil {
 public:
 
@@ -109,5 +111,5 @@ public:
 
 	static Texture* LoadPng(std::string fileName);
 	static Texture* LoadPng(const char* filename, int ColorMode, int Swizzle, int Vram);
-	static Texture* LoadPngTexturePack(std::string texPackName, std::string filename);
+	static Texture* LoadPngTexturePack(std::string filename);
 };

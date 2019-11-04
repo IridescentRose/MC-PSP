@@ -1,4 +1,5 @@
 #include "../MenuState.hpp"
+#include "../../Client/SPClient.hpp"
 
 namespace Minecraft::Menus{
         
@@ -105,7 +106,7 @@ namespace Minecraft::Menus{
 
     }
 
-    void MenuState::titleScreenUpdate(){
+    void MenuState::titleScreenUpdate(StateManager* sManager){
 
 		splashSize = vfpu_sinf(elapsed * 2 * 2 * 3.14159f) * (0.618f - (1.0f - 0.618f)) / 8 + (1.0f - 0.687f) * 2;
                 if(Input::KeyPressed(PSP_CTRL_UP)){
@@ -148,6 +149,11 @@ namespace Minecraft::Menus{
                 if(Input::KeyPressed(PSP_CTRL_CROSS)){
                     if(selectPosY == 0){
                         //SINGLE PLAYER MENU
+						Client::SPClient* client = new Client::SPClient();
+						
+						client->Init(); //Connect!
+						//TODO: CHECK CONNECTION FAILS?
+						sManager->PushState(client);
                     }
                     if(selectPosY == 1){
                         //MP MENU

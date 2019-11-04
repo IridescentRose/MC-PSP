@@ -262,7 +262,7 @@ namespace Minecraft::Menus{
         Input::InputUpdate();
         switch(menu_states){
             case MENU_STATE_TITLE:{
-                titleScreenUpdate();
+                titleScreenUpdate(sManager);
                 break;
             }
 

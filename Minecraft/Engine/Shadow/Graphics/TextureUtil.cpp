@@ -19,10 +19,12 @@ Texture* TextureUtil::LoadPng(std::string fileName)
 	return LoadPng(fileName.c_str(), GU_PSM_8888, 1, 0);
 }
 
-Texture* TextureUtil::LoadPngTexturePack(std::string texPackName, std::string filename) {
-	Texture* res = LoadPng("./Assets/Textures/" + texPackName + "/" + filename);
-	if (res == NULL) {
-		res = LoadPng("./Assets/Textures/Default/" + filename);
+std::string texPackName = "";
+
+Texture* TextureUtil::LoadPngTexturePack(std::string filename) {
+	Texture* res = LoadPng("./resourcepacks/" + texPackName + "/" + filename);
+	if (res == NULL || texPackName == "") {
+		res = LoadPng("./assets/minecraft/textures/" + filename);
 		if (res == NULL) {
 			//CRASH IT & RETURN NULL TO CRASH IF RES DOESN'T FAIL
 			res->setColour(1, 1, 32, 32, 32, 255);
