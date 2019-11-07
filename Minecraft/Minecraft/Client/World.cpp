@@ -18,14 +18,19 @@ Minecraft::Client::World::~World()
 
 void Minecraft::Client::World::Init()
 {
-	tickUpdateThread = sceKernelCreateThread("TickUpdateThread", tickUpdate, 0x18, 0x10000, 0, NULL);
 	sun = new Rendering::Sun();
+	moon = new Rendering::Moon();
+
+	tickUpdateThread = sceKernelCreateThread("TickUpdateThread", tickUpdate, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
+	sceKernelStartThread(tickUpdateThread, 0, 0);
+	
 }
 
 void Minecraft::Client::World::Cleanup()
 {
 	sceKernelTerminateDeleteThread(tickUpdateThread);
 	delete sun;
+	delete moon;
 }
 
 void Minecraft::Client::World::Update(float dt)
@@ -35,19 +40,40 @@ void Minecraft::Client::World::Update(float dt)
 void Minecraft::Client::World::FixedUpdate()
 {
 	//TIME LOGIC
-	if(timeData->time > 0){
-		timeData->time++;
-	}
-	
+
+	timeData->time++;
 	timeData->worldAge++;
 
 	//Sun
 	sun->Update( (float)(timeData->time % 24000) / 24000.0f * 360.0f);
+	moon->Update((float)(timeData->time % 24000) / 24000.0f * 360.0f, timeData->worldAge);
 }
 
-void Minecraft::Client::World::Draw()
+void Minecraft::Client::World::Draw(Player* p)
 {
+	//Load Projection Matrix
+	sceGumMatrixMode(GU_PROJECTION);
+	sceGumLoadMatrix(&p->projMatrix);
+	
+	//Load Matrix For Pre-Offset Drawing
+	sceGumMatrixMode(GU_VIEW); 
+	sceGumLoadMatrix(&p->viewPreMatrix);
+	
+	//Skybox
+	
 	sun->Draw();
+	moon->Draw();
+	//Moon
+
+	//Clouds
+
+	//Weather
+
+	//Load Matrix For Offset Drawing
+	sceGumMatrixMode(GU_VIEW);
+	sceGumLoadMatrix(&p->viewMatrix);
+
+	//Draw stuff
 }
 
 int Minecraft::Client::World::tickUpdate(SceSize args, void* argp)

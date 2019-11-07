@@ -7,6 +7,8 @@ namespace Minecraft::Rendering {
 	{
 		skyVertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
 		tex = TextureUtil::LoadPngTexturePack("environment/sun.png");
+
+		Update(0.0f);
 	}
 	Sun::~Sun()
 	{
@@ -17,6 +19,7 @@ namespace Minecraft::Rendering {
 
 	void Sun::Update(float sun_angle)
 	{
+		sun_angle += 120.0f;
 		float r = 670.0f;
 		float shift = 325;
 		//float textureScale = 1.0f / stepScale;
@@ -60,12 +63,15 @@ namespace Minecraft::Rendering {
 	{
 		sceGuEnable(GU_TEXTURE_2D);
 		sceGuEnable(GU_BLEND);
+		sceGuDisable(GU_CULL_FACE);
+		tex->bindTexture();
 
 		sceGuBlendFunc(GU_ADD, GU_FIX, GU_FIX, 0xFFFFFFFF, 0xFFFFFFFF);
 		sceGumDrawArray(GU_TRIANGLE_STRIP, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, 4, 0, skyVertices);
 
 		sceGuDisable(GU_TEXTURE_2D);
 		sceGuDisable(GU_BLEND);
+		sceGuEnable(GU_CULL_FACE);
 
 		//make default blend function
 		sceGuBlendFunc(GU_ADD, GU_SRC_ALPHA, GU_ONE_MINUS_SRC_ALPHA, 0, 0);

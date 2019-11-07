@@ -2,6 +2,7 @@
 #include <mclib/mclib.h>
 #include <mclib/common/Vector.h>
 #include <mclib/core/PlayerManager.h>
+#include <pspgum.h>
 
 namespace Minecraft {
 	namespace Client {
@@ -53,13 +54,21 @@ namespace Minecraft {
 				return pitch;
 			}
 
+			ScePspFMatrix4 projMatrix;
+			ScePspFMatrix4 orthMatrix;
+			ScePspFMatrix4 viewMatrix;
+			ScePspFMatrix4 viewPreMatrix;
+			ScePspFMatrix4 projViewMatrix;
+
 		private:
 			float yaw, pitch, orientation; //In degrees!
 			mc::Vector3d position, velocity, acceleration;
 			bool onGround;
 			bool sneak, sprint;
+			float tilt; //Extra
 
-
+			bool changingFOV;
+			float fovChange;
 		};
 	}
 }

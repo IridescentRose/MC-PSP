@@ -84,6 +84,7 @@ Minecraft/Client/Player.o \
 Minecraft/Client/SPClient.o \
 Minecraft/Client/World.o \
 Minecraft/Client/Rendering/Sun.o \
+Minecraft/Client/Rendering/Moon.o \
 Minecraft/mclib/core/AuthToken.o \
 Minecraft/mclib/core/ClientSettings.o \
 Minecraft/mclib/core/Compression.o \

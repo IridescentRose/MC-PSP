@@ -2,6 +2,8 @@
 #include <pspkernel.h>
 #include <Shadow/Utils/Timer.hpp>
 #include "Rendering/Sun.h"
+#include "Rendering/Moon.h"
+#include "Player.h"
 using namespace Shadow::Utils;
 
 namespace Minecraft::Client {
@@ -21,7 +23,7 @@ namespace Minecraft::Client {
 		
 		void Update(float dt);
 		void FixedUpdate(); //OnTick events
-		void Draw();
+		void Draw(Player* p);
 
 		Timer tickTimer;
 
@@ -30,6 +32,7 @@ namespace Minecraft::Client {
 		SceUID tickUpdateThread;
 
 		Rendering::Sun* sun;
+		Rendering::Moon* moon;
 
 		static int tickUpdate(SceSize args, void* argp);
 
