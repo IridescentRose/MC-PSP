@@ -179,6 +179,7 @@ namespace Minecraft::Rendering {
 		skyBoxVertices[i++] = { GU_COLOR(v0[3].x, v0[3].y, v0[3].z, 1.0f), 0.5f,-0.5f, 0.5f}; // 6
 		skyBoxVertices[i++] = { GU_COLOR(v0[3].x, v0[3].y, v0[3].z, 1.0f), 0.5f,-0.5f,-0.5f}; // 5
 
+		sceKernelDcacheWritebackInvalidateRange(skyBoxVertices, 36 * sizeof(ColoredVertex));
 	}
 
 	void Sky::Draw()
