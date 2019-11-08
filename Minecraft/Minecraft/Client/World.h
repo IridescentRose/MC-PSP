@@ -1,6 +1,7 @@
 #pragma once
 #include <pspkernel.h>
 #include <Shadow/Utils/Timer.hpp>
+#include "Rendering/Sky.h"
 #include "Rendering/Sun.h"
 #include "Rendering/Moon.h"
 #include "Player.h"
@@ -33,6 +34,7 @@ namespace Minecraft::Client {
 
 		Rendering::Sun* sun;
 		Rendering::Moon* moon;
+		Rendering::Sky* sky;
 
 		static int tickUpdate(SceSize args, void* argp);
 

@@ -65,6 +65,7 @@ namespace Minecraft::Rendering {
 		sceGuEnable(GU_TEXTURE_2D);
 		sceGuEnable(GU_BLEND);
 		sceGuDisable(GU_CULL_FACE);
+		sceGuDisable(GU_DEPTH_TEST);
 		tex->bindTexture();
 
 		sceGuBlendFunc(GU_ADD, GU_FIX, GU_FIX, 0xFFFFFFFF, 0xFFFFFFFF);
@@ -72,6 +73,7 @@ namespace Minecraft::Rendering {
 
 		sceGuDisable(GU_TEXTURE_2D);
 		sceGuDisable(GU_BLEND);
+		sceGuEnable(GU_DEPTH_TEST);
 		sceGuEnable(GU_CULL_FACE);
 
 		//make default blend function
