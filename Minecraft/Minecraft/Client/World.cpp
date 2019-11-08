@@ -21,6 +21,7 @@ void Minecraft::Client::World::Init()
 	sun = new Rendering::Sun();
 	moon = new Rendering::Moon();
 	sky = new Rendering::Sky();
+	stars = new Rendering::Stars();
 
 	tickUpdateThread = sceKernelCreateThread("TickUpdateThread", tickUpdate, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(tickUpdateThread, 0, 0);
@@ -32,6 +33,8 @@ void Minecraft::Client::World::Cleanup()
 	sceKernelTerminateDeleteThread(tickUpdateThread);
 	delete sun;
 	delete moon;
+	delete sky;
+	delete stars;
 }
 
 void Minecraft::Client::World::Update(float dt)
@@ -64,9 +67,32 @@ void Minecraft::Client::World::Draw(Player* p)
 	//Skybox
 	sky->Draw();
 
+	//Stars
+	float starFade = 1.0f;
+
+	if ( (timeData->time % 24000) >= 12000) {
+		if (timeData->time % 24000 - 12000 < 2000) {
+			starFade = (float)(timeData->time % 24000 - 12000) / 2000.0f;
+		}
+		else if (timeData->time % 24000 - 12000 >= 2000 && timeData->time % 24000 - 12000 < 10000) {
+			starFade = 1.0f;
+		}
+		else {
+			starFade = (float)(12000 - (timeData->time % 24000 - 12000)) / 2000.0f;
+		}
+	}
+	else {
+		starFade = 0.0f;
+	}
+
+	sceGumPushMatrix();
+	sceGumRotateZ((float)(timeData->time % 24000) / 24000.0f * 2 * 3.14159);
+	stars->Draw(starFade);
+	sceGumPopMatrix();
+
+	//Sun & Moon
 	sun->Draw();
 	moon->Draw();
-	//Moon
 
 	//Clouds
 

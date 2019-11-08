@@ -161,6 +161,7 @@
     <ClCompile Include="Minecraft\Client\Player.cpp" />
     <ClCompile Include="Minecraft\Client\Rendering\Moon.cpp" />
     <ClCompile Include="Minecraft\Client\Rendering\Sky.cpp" />
+    <ClCompile Include="Minecraft\Client\Rendering\Stars.cpp" />
     <ClCompile Include="Minecraft\Client\Rendering\Sun.cpp" />
     <ClCompile Include="Minecraft\Client\SPClient.cpp" />
     <ClCompile Include="Minecraft\Client\World.cpp" />
@@ -367,6 +368,7 @@
     <ClInclude Include="Minecraft\Client\Player.h" />
     <ClInclude Include="Minecraft\Client\Rendering\Moon.h" />
     <ClInclude Include="Minecraft\Client\Rendering\Sky.h" />
+    <ClInclude Include="Minecraft\Client\Rendering\Stars.h" />
     <ClInclude Include="Minecraft\Client\Rendering\Sun.h" />
     <ClInclude Include="Minecraft\Client\SPClient.hpp" />
     <ClInclude Include="Minecraft\Client\World.h" />

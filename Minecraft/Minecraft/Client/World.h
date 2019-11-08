@@ -4,6 +4,8 @@
 #include "Rendering/Sky.h"
 #include "Rendering/Sun.h"
 #include "Rendering/Moon.h"
+#include "Rendering/Stars.h"
+
 #include "Player.h"
 using namespace Shadow::Utils;
 
@@ -35,6 +37,7 @@ namespace Minecraft::Client {
 		Rendering::Sun* sun;
 		Rendering::Moon* moon;
 		Rendering::Sky* sky;
+		Rendering::Stars* stars;
 
 		static int tickUpdate(SceSize args, void* argp);
 
