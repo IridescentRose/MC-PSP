@@ -297,6 +297,9 @@
     <ClCompile Include="Minecraft\Client\Rendering\Stars.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Minecraft\Client\Rendering\Clouds.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Minecraft\Common\Options.hpp">
@@ -888,6 +891,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Minecraft\Client\Rendering\Stars.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Minecraft\Client\Rendering\Clouds.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

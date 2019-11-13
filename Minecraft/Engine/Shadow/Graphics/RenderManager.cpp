@@ -95,7 +95,7 @@ namespace Shadow
 			sceGuOffset(2048 - (SCR_WIDTH/2),2048 - (SCR_HEIGHT/2));
 			sceGuViewport(2048,2048,SCR_WIDTH,SCR_HEIGHT);
 
-            sceGuDepthRange(65535, 1000);
+            sceGuDepthRange(50000, 10000);
 
 			sceGuEnable(GU_SCISSOR_TEST);
 			sceGuScissor(0,0,SCR_WIDTH,SCR_HEIGHT);
