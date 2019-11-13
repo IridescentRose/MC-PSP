@@ -87,6 +87,7 @@ Minecraft/Client/Rendering/Sun.o \
 Minecraft/Client/Rendering/Moon.o \
 Minecraft/Client/Rendering/Sky.o \
 Minecraft/Client/Rendering/Stars.o \
+Minecraft/Client/Rendering/Clouds.o \
 Minecraft/mclib/core/AuthToken.o \
 Minecraft/mclib/core/ClientSettings.o \
 Minecraft/mclib/core/Compression.o \

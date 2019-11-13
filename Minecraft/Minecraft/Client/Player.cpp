@@ -49,7 +49,7 @@ namespace Minecraft {
 
 			sceGumMatrixMode(GU_PROJECTION);
 			sceGumLoadIdentity();
-			sceGumPerspective(Common::g_OptionsManager.options.fov * 40 + 70, 480.0f / 272.0f, 0.2f, 1000.0f);
+			sceGumPerspective(Common::g_OptionsManager.options.fov * 40 + 70, 480.0f / 272.0f, 0.3f, 1024.0f);
 			sceGumStoreMatrix(&projMatrix);
 
 
@@ -162,7 +162,7 @@ namespace Minecraft {
 				//Only update with FOV modifier
 				sceGumMatrixMode(GU_PROJECTION);
 				sceGumLoadIdentity();
-				sceGumPerspective(Common::g_OptionsManager.options.fov * 40 + 70 + fovChange, 480.0f / 272.0f, 0.2f, 1000.0f);
+				sceGumPerspective(Common::g_OptionsManager.options.fov * 40 + 70 + fovChange, 480.0f / 272.0f, 0.3f, 1024.0f);
 				sceGumStoreMatrix(&projMatrix);
 
 			}
@@ -178,13 +178,13 @@ namespace Minecraft {
 					s = 1.317;
 				}
 
-				velocity.x += -vfpu_sinf(DEGTORAD(yaw)) * s;
-				velocity.z += -vfpu_cosf(DEGTORAD(yaw)) * s;
+				velocity.x -= -vfpu_sinf(DEGTORAD(yaw)) * s;
+				velocity.z -= -vfpu_cosf(DEGTORAD(yaw)) * s;
 			}
 
 			if (Input::GetAnalogY() < -0.4) {
-				velocity.x += vfpu_sinf(DEGTORAD(yaw)) * walkSpeed;
-				velocity.z += vfpu_cosf(DEGTORAD(yaw)) * walkSpeed;
+				velocity.x -= vfpu_sinf(DEGTORAD(yaw)) * walkSpeed;
+				velocity.z -= vfpu_cosf(DEGTORAD(yaw)) * walkSpeed;
 			}
 
 			if (Input::GetAnalogX() < -0.4) {

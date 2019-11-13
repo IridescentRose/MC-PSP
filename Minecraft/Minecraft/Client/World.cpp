@@ -22,6 +22,7 @@ void Minecraft::Client::World::Init()
 	moon = new Rendering::Moon();
 	sky = new Rendering::Sky();
 	stars = new Rendering::Stars();
+	clouds = new Rendering::Clouds();
 
 	tickUpdateThread = sceKernelCreateThread("TickUpdateThread", tickUpdate, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(tickUpdateThread, 0, 0);
@@ -35,6 +36,7 @@ void Minecraft::Client::World::Cleanup()
 	delete moon;
 	delete sky;
 	delete stars;
+	delete clouds;
 }
 
 void Minecraft::Client::World::Update(float dt)
@@ -52,6 +54,7 @@ void Minecraft::Client::World::FixedUpdate()
 	sky->Update(timeData->time);
 	sun->Update( (float)(timeData->time % 24000) / 24000.0f * 360.0f);
 	moon->Update((float)(timeData->time % 24000) / 24000.0f * 360.0f, timeData->worldAge);
+	clouds->Update();
 }
 
 void Minecraft::Client::World::Draw(Player* p)
@@ -95,12 +98,16 @@ void Minecraft::Client::World::Draw(Player* p)
 	moon->Draw();
 
 	//Clouds
+	clouds->Draw(p->getPosition(), timeData->time);
 
 	//Weather
 
 	//Load Matrix For Offset Drawing
 	sceGumMatrixMode(GU_VIEW);
 	sceGumLoadMatrix(&p->viewMatrix);
+
+
+
 
 	//Draw stuff
 }
@@ -109,7 +116,7 @@ int Minecraft::Client::World::tickUpdate(SceSize args, void* argp)
 {
 	while (true) {
 		g_World->FixedUpdate();
-		sceKernelDelayThread(1000 * 5); //1000 microseconds in a millisecond, and update 20 times per second, so 50ms
+		sceKernelDelayThread(1000 * 50); //1000 microseconds in a millisecond, and update 20 times per second, so 50ms
 	}
 
 	return 0;
