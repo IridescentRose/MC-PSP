@@ -19,5 +19,6 @@ namespace Minecraft::Rendering {
 	private:
 		Texture* tex;
 		TexturedVertex* cloudVerts;
+		int count;
 	};
 }

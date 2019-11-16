@@ -1,13 +1,13 @@
 #include "Clouds.h"
 #include "../../Common/Options.hpp"
+#include <glm/glm.hpp>
 
 namespace Minecraft::Rendering {
 	Clouds::Clouds()
 	{
-		cloudVerts = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
 		tex = TextureUtil::LoadPngTexturePack("environment/clouds.png");
-
 		Update();
+		count = 0;
 	}
 	Clouds::~Clouds()
 	{
@@ -17,57 +17,99 @@ namespace Minecraft::Rendering {
 
 	void Clouds::Update()
 	{
-		int i = 0;
+		std::vector<glm::vec3*> mPosition;
+		std::vector<glm::vec2*> mtextures;
+		std::vector<glm::vec3*> mTriangle;
 
-		cloudVerts[i].x = -256*2*3;
-		cloudVerts[i].y =  128;
-		cloudVerts[i].z = -256*2*3;
-		cloudVerts[i].u = 0.f;
-		cloudVerts[i].v = 0.f;
-		i++;
+		int iVertex = 0;
+		int points = 0;
 
-		// (x, y - 1, z)
-		cloudVerts[i].x = -256*2*3;
-		cloudVerts[i].y = 128;
-		cloudVerts[i].z = 256*2*3;
-		cloudVerts[i].u = 0.f;
-		cloudVerts[i].v = 3.f;
-		i++;
+		float x = 0;
+		float y = 0;
+		float z = 0;
 
+		iVertex = 0;
+		points = 0;
 
-		// (x + 1, y, z)
-		cloudVerts[i].x = 256*2*3;
-		cloudVerts[i].y = 128;
-		cloudVerts[i].z = -256*2*3;
-		cloudVerts[i].u = 3.f;
-		cloudVerts[i].v = 0.f;
-		i++;
+		for (float l = 1; l <= 10; l += 1)
+		{
+			for (float j = 1; j <= 10; j += 1)//0-|-
+			{
+				mPosition.push_back(new glm::vec3(x + ((l - 1) * 48), y, z + ((j - 1) * 48)));
+				mtextures.push_back(new glm::vec2(0 + (l - 1) / 40, 0 + (j - 1) / 10));
+				mPosition.push_back(new glm::vec3(x + (l * 48), y, z + ((j - 1) * 48)));
+				mtextures.push_back(new glm::vec2(l / 40, 0 + (j - 1) / 10));
+				mPosition.push_back(new glm::vec3(x + (l * 48), y, z + (j * 48)));
+				mtextures.push_back(new glm::vec2(l / 40, j / 10));
+				mPosition.push_back(new glm::vec3(x + ((l - 1) * 48), y, z + (j * 48)));
+				mtextures.push_back(new glm::vec2(0 + (l - 1) / 40, j / 10));
 
-		// (x + 1, y - 1, z)
-		cloudVerts[i].x = 256*2*3;
-		cloudVerts[i].y = 128;
-		cloudVerts[i].z = 256*2*3;
-		cloudVerts[i].u = 3.f;
-		cloudVerts[i].v = 3.f;
-		i++;
+				mTriangle.push_back(new glm::vec3(iVertex, iVertex + 1, iVertex + 2));
+				mTriangle.push_back(new glm::vec3(iVertex + 2, iVertex + 3, iVertex));
 
-		sceKernelDcacheWritebackInvalidateRange(cloudVerts, 4 * sizeof(TexturedVertex));
+				iVertex += 4;
+				points += 6;
+			}
+		}
+
+		cloudVerts = (TexturedVertex*)memalign(16, (mTriangle.size() * 3) * sizeof(TexturedVertex));
+		count = points;
+		
+		//build verts
+		//vertices
+		int vert = 0;
+		unsigned int size = mTriangle.size();
+		for (unsigned int j = 0; j < size; j++)
+		{
+			cloudVerts[vert].u = mtextures[mTriangle[j]->x]->x;
+			cloudVerts[vert].v = mtextures[mTriangle[j]->x]->y;
+			cloudVerts[vert].x = mPosition[mTriangle[j]->x]->x;
+			cloudVerts[vert].y = mPosition[mTriangle[j]->x]->y;
+			cloudVerts[vert].z = mPosition[mTriangle[j]->x]->z;
+			vert++;
+
+			cloudVerts[vert].u = mtextures[mTriangle[j]->y]->x;
+			cloudVerts[vert].v = mtextures[mTriangle[j]->y]->y;
+			cloudVerts[vert].x = mPosition[mTriangle[j]->y]->x;
+			cloudVerts[vert].y = mPosition[mTriangle[j]->y]->y;
+			cloudVerts[vert].z = mPosition[mTriangle[j]->y]->z;
+			vert++;
+
+			cloudVerts[vert].u = mtextures[mTriangle[j]->z]->x;
+			cloudVerts[vert].v = mtextures[mTriangle[j]->z]->y;
+			cloudVerts[vert].x = mPosition[mTriangle[j]->z]->x;
+			cloudVerts[vert].y = mPosition[mTriangle[j]->z]->y;
+			cloudVerts[vert].z = mPosition[mTriangle[j]->z]->z;
+			vert++;
+		}
+
+		//clear the cache or there will be some errors
+		sceKernelDcacheWritebackInvalidateRange(cloudVerts, (mTriangle.size() * 3) * sizeof(TexturedVertex));
+		//sceKernelDcacheWritebackInvalidateAll();
+
+		for (unsigned int aa = 0; aa < mPosition.size(); aa++)
+		{
+			delete mPosition[aa];
+			delete mtextures[aa];
+		}
+		mPosition.clear();
+		mtextures.clear();
+
+		for (unsigned int aa = 0; aa < mTriangle.size(); aa++)
+		{
+			delete 	mTriangle[aa];
+		}
+		mTriangle.clear();
+
 	}
 
 	void Clouds::Draw(mc::Vector3d pos, s64 dt)
 	{
 		sceGuEnable(GU_TEXTURE_2D);
 		sceGuEnable(GU_BLEND);
-		sceGuDisable(GU_CULL_FACE);
-		sceGuDisable(GU_DEPTH_TEST);
-		sceGuDisable(GU_CLIP_PLANES);
+		sceGuFrontFace(GU_CW);
+		sceGuDisable(GU_DEPTH_TEST);		
 		
-		sceGumPushMatrix();
-		ScePspFVector3 v = { pos.x + 0.0f, 0.0f, pos.z + (dt % 5460) * 2400.0f / 25600.0f };
-		sceGumTranslate(&v);
-
-		
-		sceGuTexScale(0.25f, 0.25f);
 		tex->bindTextureRepeat(0, 0, true);
 
 		float alpha = 0.7f;
@@ -91,20 +133,26 @@ namespace Minecraft::Rendering {
 			alpha = 0.3f + 0.2f * (((float)dt - 22000) / 2000);
 		}
 
-		sceGuColor(GU_COLOR(1.0f, 1.0f, 1.0f, alpha));
+		ScePspFVector3 v = { pos.x - 256.0f, 128.0f , pos.z - 256.0f };
+		sceGumPushMatrix();
+		sceGumTranslate(&v);
 
-		sceGumDrawArray(GU_TRIANGLE_STRIP, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, 4, 0, cloudVerts);
+		sceGuColor(GU_COLOR(1.0f, 1.0f, 1.0f, alpha));
+		sceGuTexScale(1.0f, 0.25f);
+		sceGuTexOffset( (float)((int)dt % 9600) / 9600.0f, 0.0f);
+		sceGuDisable(GU_CULL_FACE);
+
+		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, 600, 0, cloudVerts);
+		sceGuFrontFace(GU_CCW);
+		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, 600, 0, cloudVerts);
 
 		sceGuTexScale(1.0f, 1.0f);
-		sceGuColor(GU_COLOR(1.0f, 1.0f, 1.0f, 1.0f));
-
-
+		sceGuTexOffset(0.0f, 0.0f);
 		sceGumPopMatrix();
 
-		sceGuEnable(GU_CLIP_PLANES);
+		sceGuColor(GU_COLOR(1.0f, 1.0f, 1.0f, 1.0f));
 		sceGuDisable(GU_TEXTURE_2D);
 		sceGuDisable(GU_BLEND);
-		sceGuEnable(GU_CULL_FACE);
 		sceGuEnable(GU_DEPTH_TEST);
 	}
 }

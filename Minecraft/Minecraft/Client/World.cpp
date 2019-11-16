@@ -54,7 +54,7 @@ void Minecraft::Client::World::FixedUpdate()
 	sky->Update(timeData->time);
 	sun->Update( (float)(timeData->time % 24000) / 24000.0f * 360.0f);
 	moon->Update((float)(timeData->time % 24000) / 24000.0f * 360.0f, timeData->worldAge);
-	clouds->Update();
+	
 }
 
 void Minecraft::Client::World::Draw(Player* p)
@@ -100,11 +100,12 @@ void Minecraft::Client::World::Draw(Player* p)
 	//Clouds
 	clouds->Draw(p->getPosition(), timeData->time);
 
-	//Weather
-
 	//Load Matrix For Offset Drawing
 	sceGumMatrixMode(GU_VIEW);
 	sceGumLoadMatrix(&p->viewMatrix);
+
+	//Weather
+
 
 
 
