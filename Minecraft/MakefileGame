@@ -83,6 +83,7 @@ Minecraft/Client/GameClient.o \
 Minecraft/Client/Player.o \
 Minecraft/Client/SPClient.o \
 Minecraft/Client/World.o \
+Minecraft/Client/Audio/MusicManager.o \
 Minecraft/Client/Rendering/Sun.o \
 Minecraft/Client/Rendering/Moon.o \
 Minecraft/Client/Rendering/Sky.o \

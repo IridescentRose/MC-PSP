@@ -39,12 +39,12 @@ namespace Minecraft::Menus{
         srand(time(0));
 	    int musicChoice = rand() % 4 + 1; //1 - 4
         std::stringstream ss;
-        ss << "./assets/sounds/ambient/menu/menu";
+        ss << "./assets/sounds/music/menu/menu";
         ss << musicChoice;
         ss << ".bgm";
 
 	    bgm = oslLoadSoundFile(ss.str().c_str(),OSL_FMT_STREAM);
-        button = oslLoadSoundFile("./assets/sounds/other/button1.wav", 0);
+        button = oslLoadSoundFile("./assets/sounds/random/click.wav", 0);
 	    g_AudioManager.PlayMusic(bgm);
 
         panorama = new Panorama();

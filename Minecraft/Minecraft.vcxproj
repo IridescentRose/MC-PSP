@@ -157,6 +157,7 @@
     <ClCompile Include="libs\libpspmath\vfpu_translate_matrix.c" />
     <ClCompile Include="libs\libpspmath\vfpu_zero_vector.c" />
     <ClCompile Include="Minecraft.cpp" />
+    <ClCompile Include="Minecraft\Client\Audio\MusicManager.cpp" />
     <ClCompile Include="Minecraft\Client\GameClient.cpp" />
     <ClCompile Include="Minecraft\Client\Player.cpp" />
     <ClCompile Include="Minecraft\Client\Rendering\Clouds.cpp" />
@@ -365,6 +366,7 @@
     <ClInclude Include="libs\json\version.h" />
     <ClInclude Include="libs\json\writer.h" />
     <ClInclude Include="libs\libpspmath\pspmath.h" />
+    <ClInclude Include="Minecraft\Client\Audio\MusicManager.h" />
     <ClInclude Include="Minecraft\Client\GameClient.hpp" />
     <ClInclude Include="Minecraft\Client\Player.h" />
     <ClInclude Include="Minecraft\Client\Rendering\Clouds.h" />

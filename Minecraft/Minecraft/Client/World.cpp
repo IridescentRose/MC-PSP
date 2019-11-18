@@ -23,6 +23,8 @@ void Minecraft::Client::World::Init()
 	sky = new Rendering::Sky();
 	stars = new Rendering::Stars();
 	clouds = new Rendering::Clouds();
+	rmg = new Audio::RandomMusicGenerator();
+	rmg->Init();
 
 	tickUpdateThread = sceKernelCreateThread("TickUpdateThread", tickUpdate, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(tickUpdateThread, 0, 0);
@@ -32,6 +34,8 @@ void Minecraft::Client::World::Init()
 void Minecraft::Client::World::Cleanup()
 {
 	sceKernelTerminateDeleteThread(tickUpdateThread);
+	rmg->Cleanup();
+	delete rmg;
 	delete sun;
 	delete moon;
 	delete sky;
@@ -54,7 +58,7 @@ void Minecraft::Client::World::FixedUpdate()
 	sky->Update(timeData->time);
 	sun->Update( (float)(timeData->time % 24000) / 24000.0f * 360.0f);
 	moon->Update((float)(timeData->time % 24000) / 24000.0f * 360.0f, timeData->worldAge);
-	
+	rmg->FixedUpdate();
 }
 
 void Minecraft::Client::World::Draw(Player* p)

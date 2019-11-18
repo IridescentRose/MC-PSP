@@ -6,6 +6,8 @@
 #include "Rendering/Moon.h"
 #include "Rendering/Stars.h"
 #include "Rendering/Clouds.h"
+#include "Audio/MusicManager.h"
+
 
 #include "Player.h"
 using namespace Shadow::Utils;
@@ -40,6 +42,8 @@ namespace Minecraft::Client {
 		Rendering::Sky* sky;
 		Rendering::Stars* stars;
 		Rendering::Clouds* clouds;
+
+		Audio::RandomMusicGenerator* rmg;
 
 		static int tickUpdate(SceSize args, void* argp);
 
