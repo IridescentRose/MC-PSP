@@ -4,70 +4,18 @@ namespace Shadow
 {
 	namespace Graphics
 	{
-        float cubeSize = 0.5075f;
-        ColoredVertex2 __attribute__((aligned(16))) top[4] =
-		{
-			{-cubeSize,-cubeSize,cubeSize},	// Top
-			{cubeSize,-cubeSize,cubeSize},
-			{ cubeSize,-cubeSize,-cubeSize},
-			{ -cubeSize,-cubeSize, -cubeSize}
-		};
-		ColoredVertex2 __attribute__((aligned(16))) bottom[4] =
-		{
-			{-cubeSize, cubeSize, -cubeSize},	// Bottom
-			{ cubeSize, cubeSize, -cubeSize},
-			{ cubeSize, cubeSize, cubeSize},
-			{-cubeSize, cubeSize, cubeSize}
-		};
-		ColoredVertex2 __attribute__((aligned(16))) front[4] =
-		{
-			{-cubeSize,-cubeSize, cubeSize},	// Front
-			{ cubeSize,-cubeSize, cubeSize},
-			{ cubeSize, cubeSize, cubeSize},
-			{-cubeSize, cubeSize, cubeSize}
-		};
-		ColoredVertex2 __attribute__((aligned(16))) back[4] =
-		{
-			{- cubeSize,cubeSize, -cubeSize},	// Back
-			{ cubeSize,cubeSize,-cubeSize},
-			{ cubeSize, -cubeSize,-cubeSize},
-			{ -cubeSize, -cubeSize, -cubeSize}
-		};
-		ColoredVertex2 __attribute__((aligned(16))) left[4] =
-		{
-			{ -cubeSize,-cubeSize,cubeSize},	// Left
-			{-cubeSize,cubeSize,cubeSize},
-			{-cubeSize, cubeSize,-cubeSize},
-			{ -cubeSize, -cubeSize,-cubeSize}
-		};
-		ColoredVertex2 __attribute__((aligned(16))) right[4] =
-		{
-			{cubeSize,-cubeSize,-cubeSize},	// Right
-			{cubeSize,cubeSize, -cubeSize},
-			{cubeSize, cubeSize, cubeSize},
-			{cubeSize, -cubeSize,cubeSize}
-		};
 
         void RenderManager::DrawCube(float x, float y, float z)
         {
-           /* sceGumPushMatrix();
-			ScePspFVector3 move = {x,y,z};
-			sceGumTranslate(&move);
-			sceGuColor(GU_COLOR(0,0,0,1));
-			sceGuDisable(GU_TEXTURE_2D);
-			sceGuShadeModel(GU_FLAT);
-			sceGumDrawArray( GU_LINE_STRIP, GU_VERTEX_32BITF|GU_TRANSFORM_3D, 4, 0, top);
-			sceGumDrawArray( GU_LINE_STRIP, GU_VERTEX_32BITF|GU_TRANSFORM_3D, 4, 0, bottom);
-			sceGumDrawArray( GU_LINE_STRIP, GU_VERTEX_32BITF|GU_TRANSFORM_3D, 4, 0, front);
-			sceGumDrawArray( GU_LINE_STRIP, GU_VERTEX_32BITF|GU_TRANSFORM_3D, 4, 0, back);
-			sceGumDrawArray( GU_LINE_STRIP, GU_VERTEX_32BITF|GU_TRANSFORM_3D, 4, 0, left);
-			sceGumDrawArray( GU_LINE_STRIP, GU_VERTEX_32BITF|GU_TRANSFORM_3D, 4, 0, right);
-			sceGuShadeModel(GU_SMOOTH);
-			sceGumPopMatrix();*/
         }
 
 		void RenderManager::Init()
 		{
+
+			_fbp0 = getStaticVramBuffer(BUF_WIDTH, SCR_HEIGHT, GU_PSM_8888);
+			_fbp1 = getStaticVramBuffer(BUF_WIDTH, SCR_HEIGHT, GU_PSM_8888);
+			_zbp = getStaticVramBuffer(BUF_WIDTH, SCR_HEIGHT, GU_PSM_4444);
+
 		    fontVerticalShift = 3;
 		    fontType = 0;
 		    defaultFontType = 1;
@@ -88,9 +36,9 @@ namespace Shadow
 			sceGuStart(GU_DIRECT,list);
 
 
-            sceGuDrawBuffer( GU_PSM_8888, SCEGU_VRAM_BP32_0, BUF_WIDTH );
-			sceGuDispBuffer( SCR_WIDTH, SCR_HEIGHT, SCEGU_VRAM_BP32_1, BUF_WIDTH);
-			sceGuDepthBuffer( SCEGU_VRAM_BP32_2, BUF_WIDTH);
+            sceGuDrawBuffer( GU_PSM_8888, _fbp0, BUF_WIDTH );
+			sceGuDispBuffer( SCR_WIDTH, SCR_HEIGHT, _fbp1, BUF_WIDTH);
+			sceGuDepthBuffer( _zbp, BUF_WIDTH);
 
 			sceGuOffset(2048 - (SCR_WIDTH/2),2048 - (SCR_HEIGHT/2));
 			sceGuViewport(2048,2048,SCR_WIDTH,SCR_HEIGHT);
@@ -372,7 +320,7 @@ namespace Shadow
 		void RenderManager::SetRTT()
 		{
 			// set frame buffer
-			sceGuDrawBufferList(GU_PSM_8888,SCEGU_VRAM_BP32_0,BUF_WIDTH);
+			sceGuDrawBufferList(GU_PSM_8888,_fbp0,BUF_WIDTH);
 
 			// setup viewport
 			sceGuOffset(2048 - (SCR_WIDTH/2),2048 - (SCR_HEIGHT/2));

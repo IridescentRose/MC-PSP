@@ -109,7 +109,7 @@ public:
 		}
 	}
 
-	static Texture* LoadPng(std::string fileName);
-	static Texture* LoadPng(const char* filename, int ColorMode, int Swizzle, int Vram);
-	static Texture* LoadPngTexturePack(std::string filename);
+	static Texture* LoadPng(std::string fileName, bool vram = false);
+	static Texture* LoadPng(const char* filename, int ColorMode, int Swizzle, bool Vram);
+	static Texture* LoadPngTexturePack(std::string filename, bool vram = false);
 };

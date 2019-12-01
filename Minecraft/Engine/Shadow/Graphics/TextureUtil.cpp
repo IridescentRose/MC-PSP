@@ -14,20 +14,18 @@ bool FileExist(std::string fileName)
 	return true;
 }
 
-Texture* TextureUtil::LoadPng(std::string fileName)
+Texture* TextureUtil::LoadPng(std::string fileName, bool vram)
 {
-	return LoadPng(fileName.c_str(), GU_PSM_8888, 1, 0);
+	return LoadPng(fileName.c_str(), GU_PSM_8888, 1, vram);
 }
 
 std::string texPackName = "";
 
-Texture* TextureUtil::LoadPngTexturePack(std::string filename) {
-	Texture* res = LoadPng("./resourcepacks/" + texPackName + "/" + filename);
+Texture* TextureUtil::LoadPngTexturePack(std::string filename, bool vram) {
+	Texture* res = LoadPng("./resourcepacks/" + texPackName + "/" + filename, vram);
 	if (res == NULL || texPackName == "") {
-		res = LoadPng("./assets/minecraft/textures/" + filename);
+		res = LoadPng("./assets/minecraft/textures/" + filename, vram);
 		if (res == NULL) {
-			//CRASH IT & RETURN NULL TO CRASH IF RES DOESN'T FAIL
-			res->setColour(1, 1, 32, 32, 32, 255);
 			return NULL;
 		}
 		else {
@@ -39,7 +37,7 @@ Texture* TextureUtil::LoadPngTexturePack(std::string filename) {
 	}
 }
 
-Texture* TextureUtil::LoadPng(const char* filename, int ColorMode, int Swizzle, int Vram)
+Texture* TextureUtil::LoadPng(const char* filename, int ColorMode, int Swizzle, bool Vram)
 {
 	unsigned short *Buffer;
 	unsigned short *swizzled_pixels = NULL;
@@ -159,7 +157,7 @@ Texture* TextureUtil::LoadPng(const char* filename, int ColorMode, int Swizzle, 
 	Image1->swizzled = Swizzle;
 	Image1->fileName = filename;
 
-	if (Vram == 1)
+	if (Vram)
 	{
 		swizzled_pixels = (unsigned short*)getStaticVramTexture(Power2Width, Power2Height, ColorMode);//valloc(Image1->power2Height*Image1->power2Width*OutBytesPerPixel);
 

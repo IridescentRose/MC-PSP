@@ -27,36 +27,10 @@
 #include <stdlib.h>
 #include <malloc.h>
 
+
 #define BUF_WIDTH (512)
 #define SCR_WIDTH (480)
 #define SCR_HEIGHT (272)
-#define PIXEL_SIZE (4) /* change this if you change to another screenmode */
-#define FRAME_SIZE (BUF_WIDTH * SCR_HEIGHT * PIXEL_SIZE)
-#define ZBUF_SIZE (BUF_WIDTH SCR_HEIGHT * 2) /* zbuffer seems to be 16-bit? */
-
-#define	FRAME_BUFFER_WIDTH 		512
-#define FRAME_BUFFER_SIZE		FRAME_BUFFER_WIDTH*SCR_HEIGHT*PIXEL_SIZE
-
-#define	BUFFER_FORMAT		  GU_PSM_8888
-#define SCEGU_SCR_WIDTH       480
-#define SCEGU_SCR_HEIGHT      272
-#define SCEGU_SCR_ASPECT      ((float)SCEGU_SCR_WIDTH / (float)SCEGU_SCR_HEIGHT)
-#define SCEGU_SCR_OFFSETX     ((4096 - SCEGU_SCR_WIDTH) / 2)
-#define SCEGU_SCR_OFFSETY     ((4096 - SCEGU_SCR_HEIGHT) / 2)
-
-/* Frame buffer */
-#define SCEGU_VRAM_TOP        0x00000000
-#define SCEGU_VRAM_WIDTH      512
-/* 16bit mode */
-#define SCEGU_VRAM_BUFSIZE    (SCEGU_VRAM_WIDTH*SCEGU_SCR_HEIGHT*2)
-#define SCEGU_VRAM_BP_0       (void *)(SCEGU_VRAM_TOP)
-#define SCEGU_VRAM_BP_1       (void *)(SCEGU_VRAM_TOP+SCEGU_VRAM_BUFSIZE)
-#define SCEGU_VRAM_BP_2       (void *)(SCEGU_VRAM_TOP+(SCEGU_VRAM_BUFSIZE*2))
-/* 32bit mode */
-#define SCEGU_VRAM_BUFSIZE32  (SCEGU_VRAM_WIDTH*SCEGU_SCR_HEIGHT*4)
-#define SCEGU_VRAM_BP32_0     (void *)(SCEGU_VRAM_TOP)
-#define SCEGU_VRAM_BP32_1     (void *)(SCEGU_VRAM_TOP+SCEGU_VRAM_BUFSIZE32)
-#define SCEGU_VRAM_BP32_2     (void *)(SCEGU_VRAM_TOP+(SCEGU_VRAM_BUFSIZE32*2))
 
 namespace Shadow
 {
