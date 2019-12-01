@@ -10,7 +10,7 @@
 #define png_infopp_NULL (png_infopp)NULL
 #define int_p_NULL (int*)NULL
 
-
+#include <vector>
 #include <stdlib.h>
 #include <malloc.h>
 #include <png.h>
@@ -20,7 +20,7 @@
 #include <psputils.h>
 #include <pspdisplay.h>
 
-extern std::string texPackName;
+extern std::vector<std::string> texPacksEnabled;
 
 class TextureUtil {
 public:

@@ -19,22 +19,20 @@ Texture* TextureUtil::LoadPng(std::string fileName, bool vram)
 	return LoadPng(fileName.c_str(), GU_PSM_8888, 1, vram);
 }
 
-std::string texPackName = "";
+std::vector<std::string> texPacksEnabled;
 
 Texture* TextureUtil::LoadPngTexturePack(std::string filename, bool vram) {
-	Texture* res = LoadPng("./resourcepacks/" + texPackName + "/" + filename, vram);
-	if (res == NULL || texPackName == "") {
-		res = LoadPng("./assets/minecraft/textures/" + filename, vram);
-		if (res == NULL) {
-			return NULL;
-		}
-		else {
-			return res;
+	Texture* tex = NULL;
+	for (int i = 0; i < texPacksEnabled.size(); i++) {
+		tex = LoadPng("resourcepacks/" + texPacksEnabled[i] + "/" + filename, vram);
+		if (tex != NULL) {
+			return tex;
 		}
 	}
-	else {
-		return res;
-	}
+
+	tex = LoadPng("assets/minecraft/textures/" + filename, vram);
+
+	return tex;
 }
 
 Texture* TextureUtil::LoadPng(const char* filename, int ColorMode, int Swizzle, bool Vram)
