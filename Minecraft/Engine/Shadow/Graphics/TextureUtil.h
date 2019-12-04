@@ -22,6 +22,11 @@
 
 extern std::vector<std::string> texPacksEnabled;
 
+extern Texture* g_TexAtlas;
+extern std::vector<std::string> texPacksAll;
+
+extern void loadTextureAtlas();
+
 class TextureUtil {
 public:
 

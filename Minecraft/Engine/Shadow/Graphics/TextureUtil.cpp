@@ -179,3 +179,17 @@ Texture* TextureUtil::LoadPng(const char* filename, int ColorMode, int Swizzle, 
 
 	return Image1;
 }
+
+
+Texture* g_TexAtlas;
+
+void loadTextureAtlas()
+{
+	g_TexAtlas = new Texture();
+	g_TexAtlas->pHeight = 4096;
+	g_TexAtlas->pWidth = 4096;
+	g_TexAtlas->height = 4096;
+	g_TexAtlas->width = 4096;
+	g_TexAtlas->colorMode = GU_PSM_8888;
+	g_TexAtlas->swizzled = 1;
+}
