@@ -28,6 +28,11 @@ using namespace Shadow::System;
 using namespace Shadow::Audio;
 using namespace Shadow::Utils;
 
+struct ResourcePackData {
+	std::string name;
+	Texture* packImage;
+};
+
 namespace Minecraft::Menus{
 
 	enum MenuStates{
@@ -120,7 +125,8 @@ namespace Minecraft::Menus{
 		int selectPosY, selectPosX;
 
 		int selectRegion, langPos, langPosSel, langPosMax;
-		std::vector<Texture*> texes;
+		Texture* packDefault;
+		std::vector<ResourcePackData> packData;
 
 		MenuStates menu_states, previous_states;
 

@@ -1,4 +1,7 @@
 #include "TextureUtil.h"
+#include "../Utils/Logger.h"
+
+using namespace Shadow::Utils;
 #include <pspkernel.h>
 bool FileExist(std::string fileName)
 {
@@ -20,17 +23,22 @@ Texture* TextureUtil::LoadPng(std::string fileName, bool vram)
 }
 
 std::vector<std::string> texPacksEnabled;
+std::vector<std::string> texPacksAll;
 
 Texture* TextureUtil::LoadPngTexturePack(std::string filename, bool vram) {
 	Texture* tex = NULL;
+	
 	for (int i = 0; i < texPacksEnabled.size(); i++) {
 		tex = LoadPng("resourcepacks/" + texPacksEnabled[i] + "/" + filename, vram);
+		Logging::trace("LOADING: " + std::string("resourcepacks/") + texPacksEnabled[i] + "/" + filename);
 		if (tex != NULL) {
 			return tex;
 		}
 	}
 
-	tex = LoadPng("assets/minecraft/textures/" + filename, vram);
+	tex = LoadPng(filename, vram);
+	
+	Logging::trace("LOADING: " + filename);
 
 	return tex;
 }

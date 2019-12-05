@@ -5,7 +5,7 @@
 namespace Minecraft::Rendering {
 	Clouds::Clouds()
 	{
-		tex = TextureUtil::LoadPngTexturePack("environment/clouds.png");
+		tex = TextureUtil::LoadPngTexturePack("assets/minecraft/textures/environment/clouds.png");
 		Update();
 		count = 0;
 	}

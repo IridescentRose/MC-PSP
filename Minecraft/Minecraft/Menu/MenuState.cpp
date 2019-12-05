@@ -3,6 +3,7 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <string>
+#include <json/json.h>
 
 namespace Minecraft::Menus{
 
@@ -20,7 +21,7 @@ namespace Minecraft::Menus{
     }
 
 	void MenuState::Init(){
-
+		packDefault = TextureUtil::LoadPng("./assets/minecraft/textures/misc/unknown_pack.png");
 		//Delete Logs from past launch
 		remove(Logging::logFile.c_str());
 		Logging::logging_level = Logging::LOGGER_LEVEL_TRACE; //Most "verbose"
@@ -135,6 +136,10 @@ namespace Minecraft::Menus{
 
 		//Find texture packs
 
+		ResourcePackData defaultPack;
+		defaultPack.name = "Default";
+		defaultPack.packImage = packDefault;
+
 		DIR* directory = opendir("./resourcepacks");
 		struct dirent* de;
 
@@ -142,14 +147,18 @@ namespace Minecraft::Menus{
 			while ((de = readdir(directory)) != NULL) {
 				//Check folder
 
-				DIR* check = opendir( (std::string("./resourcepacks") + std::string(de->d_name)).c_str() );
+				DIR* check = opendir( (std::string("./resourcepacks/") + std::string(de->d_name)).c_str() );
 				if (check != NULL) {
 					//Folder exists, does the pack data exist?
 					struct stat buffer;
 
-					if ( stat( (std::string("./resourcepacks") + std::string(de->d_name) + std::string("/pack.mcmeta")).c_str(), &buffer) == 0) {
+					if ( stat( (std::string("./resourcepacks/") + std::string(de->d_name) + std::string("/pack.mcmeta")).c_str(), &buffer) == 0) {
 						texPacksAll.push_back(std::string(de->d_name));
-						texes.push_back(TextureUtil::LoadPng("./resourcepacks" + std::string(de->d_name) + "/pack.png"));
+						
+						ResourcePackData data;
+						data.name = std::string(de->d_name);
+						packData.push_back(data);
+						
 					}
 				}
 			}
@@ -175,10 +184,7 @@ namespace Minecraft::Menus{
 		delete logo;
 		delete widgets;
 		delete options_bg;
-
-		while (texes.size() > 0) {
-			texes.pop_back();
-		}
+		delete packDefault;
 
 		//CLEAN SPRITES
 		delete selected;
@@ -335,6 +341,7 @@ namespace Minecraft::Menus{
 
 			case MENU_STATE_RESOURCE_PACKS: {
 				resourcePackScreenUpdate();
+				break;
 			}
         }
     }
@@ -409,6 +416,7 @@ namespace Minecraft::Menus{
             }
 			case MENU_STATE_RESOURCE_PACKS: {
 				resourcePackScreenDraw();
+				break;
 			}
         }   
     }

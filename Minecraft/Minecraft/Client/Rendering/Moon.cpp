@@ -6,7 +6,7 @@ namespace Minecraft::Rendering {
 	Moon::Moon()
 	{
 		skyVertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
-		tex = TextureUtil::LoadPngTexturePack("environment/moon_phases.png");
+		tex = TextureUtil::LoadPngTexturePack("assets/minecraft/textures/environment/moon_phases.png");
 	}
 	Moon::~Moon()
 	{
