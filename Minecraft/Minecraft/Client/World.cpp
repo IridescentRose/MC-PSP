@@ -28,7 +28,8 @@ void Minecraft::Client::World::Init()
 
 	tickUpdateThread = sceKernelCreateThread("TickUpdateThread", tickUpdate, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(tickUpdateThread, 0, 0);
-	sceKernelDelayThread(500000);
+
+	sceKernelDcacheWritebackInvalidateAll();
 }
 
 void Minecraft::Client::World::Cleanup()
@@ -115,6 +116,8 @@ void Minecraft::Client::World::Draw(Player* p)
 
 
 	//Draw stuff
+
+	sceKernelDcacheWritebackInvalidateAll();
 }
 
 int Minecraft::Client::World::tickUpdate(SceSize args, void* argp)

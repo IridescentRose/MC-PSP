@@ -35,6 +35,8 @@ namespace Minecraft::Client {
 		Logging::log("RAM AVAILABLE FOR CLIENT: " + s, Logging::LOGGER_LEVEL_TRACE);
 
 		//THIS IS WHERE WE HAVE FREE RAM TO LOAD!
+
+		sceKernelDcacheWritebackInvalidateAll();
 	}
 	void SPClient::CleanUp() {
 
@@ -62,6 +64,14 @@ namespace Minecraft::Client {
 		//GUI LATER
 		player->Draw();
 		g_RenderManager.EndFrame();
+
+
+		u32 ramFree = System::freeMemory();
+		float ram = ((float)ramFree) / 1024.0f / 1024.0f;
+		std::ostringstream os;
+		os << ram;
+		std::string s(os.str());
+		Logging::log("RAM AVAILABLE FOR CLIENT: " + s, Logging::LOGGER_LEVEL_TRACE);
 	}
 
 
