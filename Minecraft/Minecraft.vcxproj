@@ -176,7 +176,6 @@
     <ClCompile Include="Minecraft\Menu\components\OptionsMusicScreen.cpp" />
     <ClCompile Include="Minecraft\Menu\components\OptionsSkinCustomization.cpp" />
     <ClCompile Include="Minecraft\Menu\components\Panorama.cpp" />
-    <ClCompile Include="Minecraft\Menu\components\ResourcePacks.cpp" />
     <ClCompile Include="Minecraft\Menu\components\Snooper.cpp" />
     <ClCompile Include="Minecraft\Menu\components\TitleScreen.cpp" />
     <ClCompile Include="Minecraft\Menu\components\VideoScreen.cpp" />

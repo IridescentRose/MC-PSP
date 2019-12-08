@@ -6,7 +6,7 @@ namespace Minecraft::Rendering {
 	Sun::Sun()
 	{
 		skyVertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
-		tex = TextureUtil::LoadPngTexturePack("assets/minecraft/textures/environment/sun.png");
+		tex = TextureUtil::LoadPngTexturePack("environment/sun.png");
 
 		Update(0.0f);
 	}

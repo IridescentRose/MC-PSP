@@ -10,7 +10,7 @@ namespace Minecraft::Rendering {
 		boxVertices5 = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
 		boxVertices6 = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
 
-		tex = TextureUtil::LoadPngTexturePack("assets/minecraft/textures/environment/stars.png");
+		tex = TextureUtil::LoadPngTexturePack("environment/stars.png");
 
 		size = 0.95f;
 

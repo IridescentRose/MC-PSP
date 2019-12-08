@@ -49,7 +49,7 @@ namespace Minecraft {
 
 			sceGumMatrixMode(GU_PROJECTION);
 			sceGumLoadIdentity();
-			sceGumPerspective(70, 480.0f / 272.0f, 0.1f, 768.0f);
+			sceGumPerspective(Common::g_OptionsManager.options.fov * 40 + 70, 480.0f / 272.0f, 0.1f, 768.0f);
 			sceGumStoreMatrix(&projMatrix);
 
 
@@ -162,7 +162,7 @@ namespace Minecraft {
 				//Only update with FOV modifier
 				sceGumMatrixMode(GU_PROJECTION);
 				sceGumLoadIdentity();
-				sceGumPerspective(70 + fovChange, 480.0f / 272.0f, 0.1f, 768.0f);
+				sceGumPerspective(Common::g_OptionsManager.options.fov * 40 + 70 + fovChange, 480.0f / 272.0f, 0.1f, 768.0f);
 				sceGumStoreMatrix(&projMatrix);
 
 			}
