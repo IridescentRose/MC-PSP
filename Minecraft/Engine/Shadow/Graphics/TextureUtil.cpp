@@ -24,7 +24,7 @@ std::vector<std::string> texPacksEnabled;
 Texture* TextureUtil::LoadPngTexturePack(std::string filename, bool vram) {
 	Texture* tex = NULL;
 	for (int i = 0; i < texPacksEnabled.size(); i++) {
-		tex = LoadPng("resourcepacks/" + texPacksEnabled[i] + "/" + filename, vram);
+		tex = LoadPng("resourcepacks/" + texPacksEnabled[i] + "assets/minecraft/textures/" + filename, vram);
 		if (tex != NULL) {
 			return tex;
 		}
