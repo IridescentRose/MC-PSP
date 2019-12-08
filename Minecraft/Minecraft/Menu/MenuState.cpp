@@ -1,8 +1,5 @@
 #include "MenuState.hpp"
 #include <Shadow/Utils/Logger.h>
-#include <dirent.h>
-#include <sys/stat.h>
-#include <string>
 
 namespace Minecraft::Menus{
 
@@ -132,29 +129,6 @@ namespace Minecraft::Menus{
 
 
 		Logging::log("RAM DURING MENU: " + s1, Logging::LOGGER_LEVEL_TRACE);
-
-		//Find texture packs
-
-		DIR* directory = opendir("./resourcepacks");
-		struct dirent* de;
-
-		if (directory != NULL) {
-			while ((de = readdir(directory)) != NULL) {
-				//Check folder
-
-				DIR* check = opendir( (std::string("./resourcepacks") + std::string(de->d_name)).c_str() );
-				if (check != NULL) {
-					//Folder exists, does the pack data exist?
-					struct stat buffer;
-
-					if ( stat( (std::string("./resourcepacks") + std::string(de->d_name) + std::string("/pack.mcmeta")).c_str(), &buffer) == 0) {
-						texPacksAll.push_back(std::string(de->d_name));
-						texes.push_back(TextureUtil::LoadPng("./resourcepacks" + std::string(de->d_name) + "/pack.png"));
-					}
-				}
-			}
-
-		}
     }
 
 	void MenuState::Enter(){
@@ -175,10 +149,6 @@ namespace Minecraft::Menus{
 		delete logo;
 		delete widgets;
 		delete options_bg;
-
-		while (texes.size() > 0) {
-			texes.pop_back();
-		}
 
 		//CLEAN SPRITES
 		delete selected;
@@ -332,10 +302,6 @@ namespace Minecraft::Menus{
                optionsMultiplayerScreenUpdate(sManager);
                break;
             }
-
-			case MENU_STATE_RESOURCE_PACKS: {
-				resourcePackScreenUpdate();
-			}
         }
     }
     
@@ -407,9 +373,6 @@ namespace Minecraft::Menus{
                 optionsMultiplayerScreenDraw();
                 break;
             }
-			case MENU_STATE_RESOURCE_PACKS: {
-				resourcePackScreenDraw();
-			}
         }   
     }
 

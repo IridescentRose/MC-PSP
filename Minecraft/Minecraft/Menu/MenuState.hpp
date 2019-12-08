@@ -14,7 +14,6 @@
 #include <fstream>
 #include "../Version.hpp"
 #include <sstream>
-#include <vector>
 
 #include <Shadow/System/Input.h>
 #include <Shadow/System/Ram.h>
@@ -40,7 +39,6 @@ namespace Minecraft::Menus{
 		MENU_STATE_CHAT_SETTINGS = 6,
 		MENU_STATE_SNOOPER = 7,
 		MENU_STATE_MULTIPLAYER = 8,
-		MENU_STATE_RESOURCE_PACKS = 9
 	};
 
     class MenuState : public GameState{
@@ -88,9 +86,6 @@ namespace Minecraft::Menus{
 		void optionsMultiplayerScreenDraw();
 		void optionsMultiplayerScreenUpdate(StateManager* sManager);
 
-		void resourcePackScreenDraw();
-		void resourcePackScreenUpdate();
-
         OSL_SOUND* bgm, *button;
 		Panorama* panorama;
 		Timer t;
@@ -120,7 +115,6 @@ namespace Minecraft::Menus{
 		int selectPosY, selectPosX;
 
 		int selectRegion, langPos, langPosSel, langPosMax;
-		std::vector<Texture*> texes;
 
 		MenuStates menu_states, previous_states;
 
