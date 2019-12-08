@@ -140,8 +140,6 @@ namespace Minecraft::Menus{
 		defaultPack.name = "Default";
 		defaultPack.packImage = packDefault;
 
-		packData.push_back(defaultPack);
-
 		DIR* directory = opendir("./resourcepacks");
 		struct dirent* de;
 
@@ -166,8 +164,6 @@ namespace Minecraft::Menus{
 			}
 
 		}
-
-		sceKernelDcacheWritebackInvalidateAll();
     }
 
 	void MenuState::Enter(){

@@ -19,11 +19,11 @@ namespace Minecraft::Menus {
 		}
 
 		if (selectRegion == 2) {
-			selected->SetPosition(240, 272 - 20 - 7);
+			selected->SetPosition(240, 272 - 24 - 7);
 			selected->Draw();
 		}
 		else {
-			unselected->SetPosition(240, 272 - 20 - 7);
+			unselected->SetPosition(240, 272 - 24 - 7);
 			unselected->Draw();
 		}
 
@@ -47,10 +47,8 @@ namespace Minecraft::Menus {
 				else {
 					g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
 				}
-				if(packData[i].name != "Default"){
-					g_RenderManager.DebugPrint(100, 80 + unOpened * 20, "%s", packData[i].name.c_str());
-					unOpened++;
-				}
+				g_RenderManager.DebugPrint(100, 80 + unOpened * 20, "%s", packData[i].name.c_str());
+				unOpened++;
 			}
 			else {
 				if (selectPosY == opened && selectRegion == 1) {
@@ -59,10 +57,8 @@ namespace Minecraft::Menus {
 				else {
 					g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
 				}
-				if(packData[i].name != "Default"){
-					g_RenderManager.DebugPrint(340, 80 + opened * 20, "%s", packData[i].name.c_str());
-					opened++;
-				}
+				g_RenderManager.DebugPrint(340, 80 + opened * 20, "%s", packData[i].name.c_str());
+				opened++;
 			}
 		}
 		if (selectPosY == opened && selectRegion == 1) {
@@ -81,7 +77,6 @@ namespace Minecraft::Menus {
 		}
 
 		if (Input::KeyPressed(PSP_CTRL_CROSS)) {
-			sceKernelDelayThread(300000);
 			g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
 
 			if (selectRegion == 0) {
@@ -98,7 +93,7 @@ namespace Minecraft::Menus {
 					}
 
 					//Draw on left
-					if (!isActive && packData[i].name != "Default") {
+					if (!isActive) {
 						if (z == selectPosY) {
 							texPacksEnabled.push_back(packData[i].name);
 						}
@@ -122,7 +117,7 @@ namespace Minecraft::Menus {
 		else {
 			g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
 		}
-		g_RenderManager.DebugPrint(240, 244, Common::g_TranslationOBJ.getText("gui.done").c_str());
+		g_RenderManager.DebugPrint(240, 240, Common::g_TranslationOBJ.getText("gui.done").c_str());
 
 
 		g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
@@ -150,14 +145,13 @@ namespace Minecraft::Menus {
 		}
 
 		if (Input::KeyPressed(PSP_CTRL_UP)) {
-			selectPosY++;
-			
-		}
-		if (Input::KeyPressed(PSP_CTRL_UP)) {
 			selectPosY--;
 			if (selectPosY < 0) {
 				selectPosY = 0;
 			}
+		}
+		if (Input::KeyPressed(PSP_CTRL_UP)) {
+			selectPosY++;
 		}
 
 		if (Input::KeyPressed(PSP_CTRL_CROSS)) {
