@@ -2,7 +2,6 @@
 
 #include <Shadow/System/NetworkDriver.h>
 #include <Shadow/System/Dialogs.h>
-#include "../../Client/GameClient.hpp"
 using namespace Shadow::System;
 
 namespace Minecraft::Menus{
@@ -205,14 +204,7 @@ if(Input::KeyPressed(PSP_CTRL_UP)){
 
 				}
 
-				Client::ClientState* client = new Client::ClientState();
-				client->connect_info.ip_address = ipaddr;
-				client->connect_info.username = username;
-
-				client->Init(); //Connect!
-				//TODO: CHECK CONNECTION FAILS?
-				sManager->PushState(client);
-
+				
 			}
         }
     }

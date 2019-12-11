@@ -1,7 +1,6 @@
 #include <mclib/inventory/Hotbar.h>
 
 #include <mclib/inventory/Inventory.h>
-#include <mclib/protocol/packets/PacketDispatcher.h>
 
 namespace mc {
 namespace inventory {

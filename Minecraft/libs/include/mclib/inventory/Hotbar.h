@@ -14,7 +14,7 @@ private:
     s32 m_SelectedSlot;
 
 public:
-    MCLIB_API Hotbar();
+    MCLIB_API Hotbar(InventoryManager* inventoryManager);
     MCLIB_API ~Hotbar();
 
     Hotbar(const Hotbar& rhs) = delete;

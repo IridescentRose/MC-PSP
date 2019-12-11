@@ -1,7 +1,5 @@
 #include <mclib/inventory/Inventory.h>
 
-#include <mclib/protocol/packets/PacketDispatcher.h>
-
 namespace mc {
 namespace inventory {
 
@@ -76,7 +74,7 @@ bool Inventory::ContainsAtLeast(Slot item, s32 amount) const {
 
 
 InventoryManager::~InventoryManager() {
-    GetDispatcher()->UnregisterHandler(this);
+    
 }
 
 Inventory* InventoryManager::GetInventory(s32 windowId) {

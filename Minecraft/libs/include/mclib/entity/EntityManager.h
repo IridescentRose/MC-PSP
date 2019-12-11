@@ -4,8 +4,6 @@
 #include <mclib/mclib.h>
 #include <mclib/entity/Entity.h>
 #include <mclib/entity/Player.h>
-#include <mclib/protocol/packets/Packet.h>
-#include <mclib/protocol/packets/PacketHandler.h>
 #include <mclib/util/ObserverSubject.h>
 
 #include <array>
@@ -25,7 +23,7 @@ public:
     virtual void OnEntityMove(EntityPtr entity, Vector3d oldPos, Vector3d newPos) { }
 };
 
-class EntityManager : public protocol::packets::PacketHandler, public util::ObserverSubject<EntityListener> {
+class EntityManager: public util::ObserverSubject<EntityListener> {
 public:
     using EntityMap = std::unordered_map<EntityId, EntityPtr>;
     using iterator = EntityMap::iterator;
@@ -37,7 +35,7 @@ private:
     EntityId m_EntityId;
 
 public:
-    MCLIB_API EntityManager(protocol::packets::PacketDispatcher* dispatcher);
+    MCLIB_API EntityManager();
     MCLIB_API ~EntityManager();
 
     EntityManager(const EntityManager& rhs) = delete;
@@ -64,25 +62,7 @@ public:
     const_iterator begin() const { return m_Entities.begin(); }
     const_iterator end() const { return m_Entities.end(); }
 
-    void MCLIB_API HandlePacket(protocol::packets::in::JoinGamePacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::PlayerPositionAndLookPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::SpawnPlayerPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::SpawnPaintingPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::SpawnExperienceOrbPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::SpawnGlobalEntityPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::SpawnMobPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::SpawnObjectPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::EntityPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::EntityRelativeMovePacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::EntityLookAndRelativeMovePacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::EntityTeleportPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::EntityLookPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::EntityHeadLookPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::EntityVelocityPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::EntityMetadataPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::EntityPropertiesPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::DestroyEntitiesPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::AttachEntityPacket* packet);
+    
 };
 
 } // ns entity

@@ -4,8 +4,6 @@
 #include <Shadow/Utils/GameState.h>
 #include <Shadow/Utils/Timer.hpp>
 #include "Player.h"
-#include <mclib/protocol/packets/PacketHandler.h>
-#include <mclib/protocol/packets/PacketDispatcher.h>
 #include "World.h"
 
 using namespace Shadow::Utils;

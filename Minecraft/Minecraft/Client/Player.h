@@ -1,12 +1,11 @@
 #pragma once
 #include <mclib/mclib.h>
 #include <mclib/common/Vector.h>
-#include <mclib/core/PlayerManager.h>
 #include <pspgum.h>
 
 namespace Minecraft {
 	namespace Client {
-		class Player : public mc::core::PlayerListener {
+		class Player {
 		public:
 			Player();
 			~Player();
@@ -28,7 +27,6 @@ namespace Minecraft {
 
 			void Draw();
 
-			void OnClientSpawn(mc::core::PlayerPtr player);
 
 			inline bool isSneaking() {
 				return sneak;

@@ -58,18 +58,6 @@ namespace Minecraft {
 		{
 		}
 
-		void Player::OnClientSpawn(mc::core::PlayerPtr player) {
-			Logging::log("Handling Spawn!", Logging::LOGGER_LEVEL_TRACE);
-			position = player->GetEntity()->GetPosition();
-			velocity = mc::Vector3d();
-			acceleration = mc::Vector3d();
-			orientation = player->GetEntity()->GetYaw();
-			yaw = orientation;
-			pitch = player->GetEntity()->GetHeadPitch();
-
-			Logging::log("Handled Spawn!", Logging::LOGGER_LEVEL_TRACE);
-		}
-
 
 		void Player::SetPosition(mc::Vector3d pos)
 		{
