@@ -48,22 +48,6 @@ Minecraft/mclib/inventory/Inventory.o \
 Minecraft/mclib/inventory/Slot.o \
 Minecraft/mclib/world/World.o \
 Minecraft/mclib/world/Chunk.o \
-Minecraft/mclib/network/IPAddress.o \
-Minecraft/mclib/network/Network.o \
-Minecraft/mclib/network/Socket.o \
-Minecraft/mclib/network/TCPSocket.o \
-Minecraft/mclib/network/UDPSocket.o \
-Minecraft/mclib/protocol/Protocol.o \
-Minecraft/mclib/protocol/packets/Packet.o \
-Minecraft/mclib/protocol/packets/PacketDispatcher.o \
-Minecraft/mclib/protocol/packets/PacketFactory.o \
-Minecraft/mclib/protocol/packets/PacketHandler.o \
-Minecraft/mclib/util/Forge.o \
-Minecraft/mclib/util/Hash.o \
-Minecraft/mclib/util/HTTPClient.o \
-Minecraft/mclib/util/Utility.o \
-Minecraft/mclib/util/VersionFetcher.o \
-Minecraft/mclib/util/Yggdrasil.o \
 Minecraft.o \
 Minecraft/Common/Translations.o \
 Minecraft/Common/Options.o \
@@ -89,13 +73,6 @@ Minecraft/Client/Rendering/Moon.o \
 Minecraft/Client/Rendering/Sky.o \
 Minecraft/Client/Rendering/Stars.o \
 Minecraft/Client/Rendering/Clouds.o \
-Minecraft/mclib/core/AuthToken.o \
-Minecraft/mclib/core/ClientSettings.o \
-Minecraft/mclib/core/Compression.o \
-Minecraft/mclib/core/Connection.o \
-Minecraft/mclib/core/Encryption.o \
-Minecraft/mclib/core/PlayerManager.o \
-Minecraft/mclib/core/Client.o \
 
 INCDIR = $(PSPPATH)/include
 INCDIR += ./LameCraft ./include ./Engine ./libs ./libs/include

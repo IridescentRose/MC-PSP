@@ -3,20 +3,11 @@
 namespace mc {
 namespace world {
 
-World::World(protocol::packets::PacketDispatcher* dispatcher)
-    : protocol::packets::PacketHandler(dispatcher)
+World::World()
 {
-    dispatcher->RegisterHandler(protocol::State::Play, protocol::play::MultiBlockChange, this);
-    dispatcher->RegisterHandler(protocol::State::Play, protocol::play::BlockChange, this);
-    dispatcher->RegisterHandler(protocol::State::Play, protocol::play::ChunkData, this);
-    dispatcher->RegisterHandler(protocol::State::Play, protocol::play::UnloadChunk, this);
-    dispatcher->RegisterHandler(protocol::State::Play, protocol::play::Explosion, this);
-    dispatcher->RegisterHandler(protocol::State::Play, protocol::play::UpdateBlockEntity, this);
-    dispatcher->RegisterHandler(protocol::State::Play, protocol::play::Respawn, this);
 }
 
 World::~World() {
-    GetDispatcher()->UnregisterHandler(this);
 }
 
 bool World::SetBlock(Vector3i position, s16 blockData) {
@@ -43,128 +34,6 @@ bool World::SetBlock(Vector3i position, s16 blockData) {
     relative.y %= 16;
     (*chunk)[index]->SetBlock(relative, block::BlockState(block::BlockRegistry::GetInstance()->GetBlock(blockData), blockData, position));
     return true;
-}
-
-void World::HandlePacket(protocol::packets::in::ExplosionPacket* packet) {
-    Vector3d position = packet->GetPosition();
-
-    for (Vector3s offset : packet->GetAffectedBlocks()) {
-        Vector3d absolute = position + ToVector3d(offset);
-
-        block::BlockState oldBlock = GetBlock(absolute);
-
-        // Set all affected blocks to air
-        SetBlock(ToVector3i(absolute), 0);
-
-        block::BlockState newBlock = block::BlockState(block::BlockRegistry::GetInstance()->GetBlock(0), 0, ToVector3i(absolute));
-        NotifyListeners(&WorldListener::OnBlockChange, ToVector3i(absolute), newBlock, oldBlock);
-    }
-}
-
-void World::HandlePacket(protocol::packets::in::ChunkDataPacket* packet) {
-    ChunkColumnPtr col = packet->GetChunkColumn();
-    const ChunkColumnMetadata& meta = col->GetMetadata();
-    ChunkCoord key(meta.x, meta.z);
-
-    if (meta.continuous && meta.sectionmask == 0) {
-        m_Chunks[key] = nullptr;
-        return;
-    }
-
-    if (!m_Chunks[key])
-        m_Chunks[key] = col;
-
-    for (s32 i = 0; i < ChunkColumn::ChunksPerColumn; ++i) {
-        ChunkPtr chunk = (*col)[i];
-
-        NotifyListeners(&WorldListener::OnChunkLoad, chunk, meta, i);
-    }
-}
-
-void World::HandlePacket(protocol::packets::in::MultiBlockChangePacket* packet) {
-    Vector3i chunkStart(packet->GetChunkX() * 16, 0, packet->GetChunkZ() * 16);
-    auto iter = m_Chunks.find(ChunkCoord(packet->GetChunkX(), packet->GetChunkZ()));
-    if (iter == m_Chunks.end()) return;
-
-    ChunkColumnPtr chunk = iter->second;
-    if (!chunk)
-        return;
-
-    const auto& changes = packet->GetBlockChanges();
-    for (const auto& change : changes) {
-        Vector3i relative(change.x, change.y, change.z);
-
-        chunk->RemoveBlockEntity(chunkStart + relative);
-
-        std::size_t index = change.y / 16;
-        block::BlockState oldBlock(0, 0, chunkStart + relative);
-        if ((*chunk)[index] == nullptr) {
-            ChunkPtr section = std::make_shared<Chunk>();
-
-            (*chunk)[index] = section;
-        } else {
-            oldBlock = chunk->GetBlock(relative);
-        }
-
-        block::BlockState newBlock = block::BlockState(block::BlockRegistry::GetInstance()->GetBlock(change.blockData), change.blockData, chunkStart + relative);
-
-        Vector3i blockChangePos = chunkStart + relative;
-
-        relative.y %= 16;
-        (*chunk)[index]->SetBlock(relative, newBlock);
-        NotifyListeners(&WorldListener::OnBlockChange, blockChangePos, newBlock, oldBlock);
-    }
-}
-
-void World::HandlePacket(protocol::packets::in::BlockChangePacket* packet) {
-    block::BlockState newBlock = block::BlockState(block::BlockRegistry::GetInstance()->GetBlock((u16)packet->GetBlockId()), (u16)packet->GetBlockId(), packet->GetPosition());
-    block::BlockState oldBlock = GetBlock(packet->GetPosition());
-
-    SetBlock(packet->GetPosition(), packet->GetBlockId());
-
-    NotifyListeners(&WorldListener::OnBlockChange, packet->GetPosition(), newBlock, oldBlock);
-
-    ChunkColumnPtr col = GetChunk(packet->GetPosition());
-    if (col) {
-        col->RemoveBlockEntity(packet->GetPosition());
-    }
-}
-
-void World::HandlePacket(protocol::packets::in::UpdateBlockEntityPacket* packet) {
-    Vector3i pos = packet->GetPosition();
-
-    ChunkColumnPtr col = GetChunk(pos);
-
-    if (!col) return;
-
-    col->RemoveBlockEntity(pos);
-
-    block::BlockEntityPtr entity = packet->GetBlockEntity();
-    if (entity)
-        col->AddBlockEntity(entity);
-}
-
-void World::HandlePacket(protocol::packets::in::UnloadChunkPacket* packet) {
-    ChunkCoord coord(packet->GetChunkX(), packet->GetChunkZ());
-
-    auto iter = m_Chunks.find(coord);
-
-    if (iter == m_Chunks.end()) return;
-
-    ChunkColumnPtr chunk = iter->second;
-    NotifyListeners(&WorldListener::OnChunkUnload, chunk);
-
-    m_Chunks.erase(iter);
-}
-
-// Clear all chunks because the server will resend the chunks after this.
-void World::HandlePacket(protocol::packets::in::RespawnPacket* packet) {
-    for (auto entry : m_Chunks) {
-        ChunkColumnPtr chunk = entry.second;
-
-        NotifyListeners(&WorldListener::OnChunkUnload, chunk);
-    }
-    m_Chunks.clear();
 }
 
 ChunkColumnPtr World::GetChunk(Vector3i pos) const {

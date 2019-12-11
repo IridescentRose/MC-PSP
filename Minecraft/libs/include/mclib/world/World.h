@@ -2,9 +2,6 @@
 #define MCLIB_WORLD_WORLD_H_
 
 #include <mclib/world/Chunk.h>
-#include <mclib/protocol/packets/PacketHandler.h>
-#include <mclib/protocol/packets/PacketDispatcher.h>
-#include <mclib/util/ObserverSubject.h>
 
 #include <map>
 
@@ -19,7 +16,7 @@ public:
     virtual void OnBlockChange(Vector3i position, block::BlockState newBlock, block::BlockState oldBlock) { }
 };
 
-class World : public protocol::packets::PacketHandler, public util::ObserverSubject<WorldListener> {
+class World{
 private:
     typedef std::pair<s32, s32> ChunkCoord;
 
@@ -28,21 +25,13 @@ private:
     bool MCLIB_API SetBlock(Vector3i position, s16 blockData);
 
 public:
-    MCLIB_API World(protocol::packets::PacketDispatcher* dispatcher);
+    MCLIB_API World();
     MCLIB_API ~World();
 
     World(const World& rhs) = delete;
     World& operator=(const World& rhs) = delete;
     World(World&& rhs) = delete;
     World& operator=(World&& rhs) = delete;
-
-    void MCLIB_API HandlePacket(protocol::packets::in::ChunkDataPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::UnloadChunkPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::MultiBlockChangePacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::BlockChangePacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::ExplosionPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::UpdateBlockEntityPacket* packet);
-    void MCLIB_API HandlePacket(protocol::packets::in::RespawnPacket* packet);
 
     /**
      * Pos can be any world position inside of the chunk
