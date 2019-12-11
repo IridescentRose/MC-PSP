@@ -1,15 +1,15 @@
 #pragma once
 #include <pspkernel.h>
 #include <Shadow/Utils/Timer.hpp>
-#include "Rendering/Sky.h"
-#include "Rendering/Sun.h"
-#include "Rendering/Moon.h"
-#include "Rendering/Stars.h"
-#include "Rendering/Clouds.h"
-#include "Audio/MusicManager.h"
+#include "../Rendering/Sky.h"
+#include "../Rendering/Sun.h"
+#include "../Rendering/Moon.h"
+#include "../Rendering/Stars.h"
+#include "../Rendering/Clouds.h"
+#include "../Audio/MusicManager.h"
 
 
-#include "Player.h"
+#include "../Player.h"
 using namespace Shadow::Utils;
 
 namespace Minecraft::Client {

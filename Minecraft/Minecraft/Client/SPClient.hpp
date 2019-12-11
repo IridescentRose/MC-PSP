@@ -4,7 +4,7 @@
 #include <Shadow/Utils/GameState.h>
 #include <Shadow/Utils/Timer.hpp>
 #include "Player.h"
-#include "World.h"
+#include "World/World.h"
 
 using namespace Shadow::Utils;
 using namespace Shadow;
