@@ -10,6 +10,9 @@
 
 
 #include "../Player.h"
+#include "TerrainGenerator.h"
+#include "Chunk.h"
+
 using namespace Shadow::Utils;
 
 namespace Minecraft::Client {
@@ -44,6 +47,8 @@ namespace Minecraft::Client {
 		Rendering::Clouds* clouds;
 
 		Audio::RandomMusicGenerator* rmg;
+
+		Terrain::Chunk* chnk;
 
 		static int tickUpdate(SceSize args, void* argp);
 

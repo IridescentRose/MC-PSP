@@ -10,6 +10,13 @@ Minecraft::Client::World::World()
 	timeData = new TickTime();
 	timeData->time = 0;
 	timeData->worldAge = 0;
+
+	chnk = 0;
+	chnk = new Terrain::Chunk();
+	chnk->generateData(0, 0);
+	chnk->generateMesh();
+
+	
 }
 
 Minecraft::Client::World::~World()
@@ -33,6 +40,7 @@ void Minecraft::Client::World::Init()
 
 void Minecraft::Client::World::Cleanup()
 {
+	
 	sceKernelTerminateDeleteThread(tickUpdateThread);
 	rmg->Cleanup();
 	delete rmg;

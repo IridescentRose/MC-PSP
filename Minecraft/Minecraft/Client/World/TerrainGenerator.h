@@ -20,6 +20,9 @@ namespace Minecraft::Terrain {
 					}
 				}
 			}
+
+			return res;
 		}
+
 	}
 }

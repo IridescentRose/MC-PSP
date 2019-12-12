@@ -1,0 +1,26 @@
+#pragma once
+
+#include "ChunkData.h"
+#include "ChunkMesh.h"
+#include <array>
+namespace Minecraft::Terrain {
+	class Chunk {
+	public:
+		Chunk();
+		~Chunk();
+
+		void generateData(int relX, int relY);
+		void generateMesh();
+		void tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3i& blockFacing, int type);
+
+		void Update();
+		void Draw();
+
+	private:
+		ChunkColumnData* data;
+		ChunkMeshCollection meshes;
+		ChunkMesh* mesh;
+
+		
+	};
+}
