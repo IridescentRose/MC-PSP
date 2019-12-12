@@ -4,6 +4,8 @@
 #include <time.h>
 #include <string>
 #include <sstream>
+#include <Shadow/Utils/Logger.h>
+using namespace Shadow::Utils;
 
 namespace std
 {
@@ -51,7 +53,7 @@ namespace Minecraft::Audio {
 
 			int maxLim = 0;
 			
-			std::string path = "./assets/sounds/music/game/";
+			std::string path = "assets/sounds/music/game/";
 
 			switch (choice) {
 			case 0: {
@@ -79,6 +81,8 @@ namespace Minecraft::Audio {
 			int actualChoice = 1 + rand() % maxLim;
 			path += std::to_string(actualChoice);
 			path += ".bgm";
+
+			Logging::log("STARTING MUSIC AT: " + path, Logging::LOGGER_LEVEL_INFO);
 
 			snd = oslLoadSoundFile(path.c_str(), OSL_FMT_STREAM); //STREAM!
 			g_AudioManager.PlayMusic(snd);
