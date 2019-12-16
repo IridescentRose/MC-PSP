@@ -100,9 +100,9 @@ namespace Minecraft::Terrain {
 	{
 	}
 
-	void Chunk::generateData(int relX, int relZ)
+	void Chunk::generateData(int relX, int relY, int relZ)
 	{
-		data = SimpleGenerator::generateTerrain(relX, relZ);
+		data = SimpleGenerator::generateTerrain(relX, relY, relZ);
 	}
 
 
@@ -112,7 +112,7 @@ namespace Minecraft::Terrain {
 		LocalFaces faces = LocalFaces();
 		
 		//Gen Mesh
-		for (short y = 0; y < 256; y++) {
+		for (short y = 0; y < 16; y++) {
 			for (short z = 0; z < 16; z++) {
 				for (short x = 0; x < 16; x++) {
 					

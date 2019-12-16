@@ -11,11 +11,6 @@ Minecraft::Client::World::World()
 	timeData->time = 0;
 	timeData->worldAge = 0;
 
-	chnk = 0;
-	chnk = new Terrain::Chunk();
-	chnk->generateData(0, 0);
-	chnk->generateMesh();
-
 	
 }
 
@@ -35,6 +30,11 @@ void Minecraft::Client::World::Init()
 
 	tickUpdateThread = sceKernelCreateThread("TickUpdateThread", tickUpdate, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(tickUpdateThread, 0, 0);
+
+	chnk = new Terrain::Chunk();
+	chnk->generateData(0, 0, 0);
+	chnk->generateMesh();
+
 	
 }
 

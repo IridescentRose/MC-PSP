@@ -9,10 +9,10 @@ test_img.close()
 
 default_size = size[0]
 
-#New image must be 24 * size by 24 * size
+#New image must be 25 * size by 25 * size
 
-ROWS = 24
-COLUMNS = 24
+ROWS = 32
+COLUMNS = 32
 
 atlas = Image.new("RGBA", (ROWS * default_size, COLUMNS * default_size), 0)
 

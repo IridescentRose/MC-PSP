@@ -9,7 +9,7 @@ namespace Minecraft::Terrain {
 		Chunk();
 		~Chunk();
 
-		void generateData(int relX, int relY);
+		void generateData(int relX, int relZ, int relY);
 		void generateMesh();
 		void tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3i& blockFacing, int type);
 
@@ -17,7 +17,7 @@ namespace Minecraft::Terrain {
 		void Draw();
 
 	private:
-		ChunkColumnData* data;
+		ChunkData* data;
 		ChunkMeshCollection meshes;
 		ChunkMesh* mesh;
 

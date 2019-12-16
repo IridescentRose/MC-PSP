@@ -9,30 +9,36 @@ namespace Minecraft::Terrain {
 		int meta;
 	};
 	
-	class ChunkColumnData {
+	class ChunkData {
 	private:
-		int relativeX, relativeZ;
-		BlockData data[16][256][16];
+		int relativeX, relativeY, relativeZ;
+		BlockData data[16][16][16];
 
 	public:
-		ChunkColumnData();
-		~ChunkColumnData();
+		ChunkData();
+		~ChunkData();
 
 
 		inline int getRelativeX() {
 			return relativeX;
 		}
+		inline int getRelativeY() {
+			return relativeY;
+		}
+		inline int getRelativeZ() {
+			return relativeZ;
+		}
 
 		inline void setRelativeX(int x) {
 			relativeX = x;
+		}
+		inline void setRelativeY(int y) {
+			relativeY = y;
 		}
 		inline void setRelativeZ(int z) {
 			relativeZ = z;
 		}
 
-		inline int getRelativeZ() {
-			return relativeZ;
-		}
 
 		inline BlockData* getBlock(int x, int y, int z) {
 			return &data[x][y][z];
