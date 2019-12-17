@@ -2,7 +2,7 @@
 #include "TerrainGenerator.h"
 #include <Shadow/Graphics/RenderManager.h>
 
-const float frontFace[12] =
+const short frontFace[12] =
 {
 	0, 0, 0,
 	0, 1, 0,
@@ -10,7 +10,7 @@ const float frontFace[12] =
 	1, 1, 0,
 };
 
-const float backFace[12] =
+const short backFace[12] =
 {
 	0, 0, 1,
 	1, 0, 1,
@@ -18,15 +18,15 @@ const float backFace[12] =
 	1, 1, 1,
 };
 
-const float leftFace[12] =
+const short leftFace[12] =
 {
-	1.001, 0, 0,
-	1.001, 1, 0,
-	1.001, 0, 1,
-	1.001, 1, 1,
+	1, 0, 0,
+	1, 1, 0,
+	1, 0, 1,
+	1, 1, 1,
 };
 
-const float rightFace[12] =
+const short rightFace[12] =
 {
 
 	0, 0, 0,
@@ -35,7 +35,7 @@ const float rightFace[12] =
 	0, 1, 1,
 };
 
-const float topFace[12] =
+const short topFace[12] =
 {
 	0, 1, 0,
 	0, 1, 1,
@@ -43,7 +43,7 @@ const float topFace[12] =
 	1, 1, 1
 };
 
-const float bottomFace[12] =
+const short bottomFace[12] =
 {
 	0, 0, 0,
 	1, 0, 0,
@@ -53,7 +53,7 @@ const float bottomFace[12] =
 
 
 
-const float crossPlane1[12] =
+const short crossPlane1[12] =
 {
 	0, 0, 0,
 	1, 0, 1,
@@ -61,7 +61,7 @@ const float crossPlane1[12] =
 	0, 1, 0,
 };
 
-const float crossPlane2[12] =
+const short crossPlane2[12] =
 {
 	0, 0, 1,
 	1, 0, 0,
@@ -129,25 +129,23 @@ namespace Minecraft::Terrain {
 
 					faces.update(x, y, z);
 
-					tryAddFaceToMesh(bottomFace, { 0 , 0, 0 ,1.f / 24.0f, 1.f / 24.0f , 1.f / 24.0f , 1.f / 24.0f , 0 }, position, faces.down, 0);
-					tryAddFaceToMesh(topFace, { 0 , 0, 0 ,1.f / 24.0f, 1.f / 24.0f , 1.f / 24.0f , 1.f / 24.0f , 0 }, position, faces.up, 0);
+					tryAddFaceToMesh(bottomFace, { 0 , 0, 0 , 8, 8 , 8 , 8 , 0 }, position, faces.down, TYPE_BOTTOM);
+					tryAddFaceToMesh(topFace, { 0 , 0, 0 ,8, 8 , 8 , 8 , 0 }, position, faces.up, TYPE_TOP);
 
 					//Left/ Right
-					tryAddFaceToMesh(leftFace, { 0 , 0, 0 ,1.f / 24.0f, 1.f / 24.0f , 1.f / 24.0f , 1.f / 24.0f , 0 }, position, faces.left, 0);
-					tryAddFaceToMesh(rightFace, { 0 , 0, 0 ,1.f / 24.0f, 1.f / 24.0f , 1.f / 24.0f , 1.f / 24.0f , 0 }, position, faces.right, 1);
+					tryAddFaceToMesh(leftFace, { 0 , 0, 0 ,8, 8 , 8 , 8 , 0 }, position, faces.left, TYPE_LEFT);
+					tryAddFaceToMesh(rightFace, { 0 , 0, 0 ,8, 8 , 8 , 8 , 0 }, position, faces.right, TYPE_RIGHT);
 
 					//Front/ Back
-					tryAddFaceToMesh(frontFace, { 0 , 0, 0 ,1.f / 24.0f, 1.f / 24.0f , 1.f / 24.0f , 1.f / 24.0f , 0 }, position, faces.front, 0);
-					tryAddFaceToMesh(backFace, { 0 , 0, 0 ,1.f / 24.0f, 1.f / 24.0f , 1.f / 24.0f , 1.f / 24.0f , 0 }, position, faces.back, 1);
-
-					
+					tryAddFaceToMesh(frontFace, { 0 , 0, 0 ,8, 8 , 8 , 8 , 0 }, position, faces.front, TYPE_FRONT);
+					tryAddFaceToMesh(backFace, { 0 , 0, 0 ,8, 8 , 8 , 8 , 0 }, position, faces.back, TYPE_BACK);
 				}
 			}
 		}
 	}
 
 
-	void Chunk::tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3i& blockFacing, int type)
+	void Chunk::tryAddFaceToMesh(const short blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3i& blockFacing, int type)
 	{
 		//Attempt Mesh Addition
 		if ((blockFacing.x >= 0 && blockFacing.x < 16) && (blockFacing.y >= 0 && blockFacing.y < 16) && (blockFacing.z >= 0 && blockFacing.z < 16)) {
@@ -173,8 +171,22 @@ namespace Minecraft::Terrain {
 	void Chunk::Draw()
 	{
 		//Mesh Draw
-		sceGuEnable(GU_TEXTURE_2D);
-		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.solidMesh.faces * 6, 0, meshes.solidMesh.verticeData.data());
-		sceGuDisable(GU_TEXTURE_2D);
+		//sceGuEnable(GU_TEXTURE_2D);
+		sceGuColor(0xFFFFFFFF);
+
+		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.topVertexData.size(), 0, meshes.solidMesh.topVertexData.data());
+		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.bottomVertexData.size(), 0, meshes.solidMesh.bottomVertexData.data());
+		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.leftVertexData.size(), 0, meshes.solidMesh.leftVertexData.data());
+		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.rightVertexData.size(), 0, meshes.solidMesh.rightVertexData.data());
+		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.frontVertexData.size(), 0, meshes.solidMesh.frontVertexData.data());
+		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.backVertexData.size(), 0, meshes.solidMesh.backVertexData.data());
+
+		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.topVertexData2.size(), 0, meshes.solidMesh.topVertexData2.data());
+		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.bottomVertexData2.size(), 0, meshes.solidMesh.bottomVertexData2.data());
+		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.leftVertexData2.size(), 0, meshes.solidMesh.leftVertexData2.data());
+		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.rightVertexData2.size(), 0, meshes.solidMesh.rightVertexData2.data());
+		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.frontVertexData2.size(), 0, meshes.solidMesh.frontVertexData2.data());
+		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.backVertexData2.size(), 0, meshes.solidMesh.backVertexData2.data());
+		//sceGuDisable(GU_TEXTURE_2D);
 	}
 }

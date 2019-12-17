@@ -3,6 +3,12 @@
 #include <pspkernel.h>
 #include <pspthreadman.h>
 
+#include <Shadow/Utils/Logger.h>
+#include <Shadow/System/Ram.h>
+
+using namespace Shadow;
+using namespace Shadow::Utils;
+
 Minecraft::Client::World* Minecraft::Client::g_World = new Minecraft::Client::World();
 
 Minecraft::Client::World::World()
@@ -34,8 +40,6 @@ void Minecraft::Client::World::Init()
 	chnk = new Terrain::Chunk();
 	chnk->generateData(0, 0, 0);
 	chnk->generateMesh();
-
-	
 }
 
 void Minecraft::Client::World::Cleanup()
@@ -115,14 +119,9 @@ void Minecraft::Client::World::Draw(Player* p)
 	//Load Matrix For Offset Drawing
 	sceGumMatrixMode(GU_VIEW);
 	sceGumLoadMatrix(&p->viewMatrix);
-
-	//Weather
-
-
-
-
-
+	
 	//Draw stuff
+	chnk->Draw();
 }
 
 int Minecraft::Client::World::tickUpdate(SceSize args, void* argp)
