@@ -23,6 +23,7 @@ namespace Minecraft::Menus{
 		Logging::logging_level = Logging::LOGGER_LEVEL_TRACE; //Most "verbose"
 
 
+        terrain_atlas = TextureUtil::LoadPng("assets/minecraft/textures/terrain_atlas.png");
 
 		u32 ramFree = freeMemory();
 		float ram = ((float)ramFree) / 1024.0f / 1024.0f;

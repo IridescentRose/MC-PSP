@@ -121,6 +121,7 @@ void Minecraft::Client::World::Draw(Player* p)
 	sceGumLoadMatrix(&p->viewMatrix);
 	
 	//Draw stuff
+	terrain_atlas->bindTexture();
 	chnk->Draw();
 }
 

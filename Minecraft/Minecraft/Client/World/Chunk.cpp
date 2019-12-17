@@ -171,9 +171,9 @@ namespace Minecraft::Terrain {
 	void Chunk::Draw()
 	{
 		//Mesh Draw
-		//sceGuEnable(GU_TEXTURE_2D);
-		sceGuColor(0xFFFFFFFF);
-
+		sceGuEnable(GU_TEXTURE_2D);
+		sceGuDisable(GU_CULL_FACE);
+		
 		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.topVertexData.size(), 0, meshes.solidMesh.topVertexData.data());
 		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.bottomVertexData.size(), 0, meshes.solidMesh.bottomVertexData.data());
 		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.leftVertexData.size(), 0, meshes.solidMesh.leftVertexData.data());
@@ -187,6 +187,7 @@ namespace Minecraft::Terrain {
 		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.rightVertexData2.size(), 0, meshes.solidMesh.rightVertexData2.data());
 		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.frontVertexData2.size(), 0, meshes.solidMesh.frontVertexData2.data());
 		sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.backVertexData2.size(), 0, meshes.solidMesh.backVertexData2.data());
-		//sceGuDisable(GU_TEXTURE_2D);
+		
+		sceGuDisable(GU_TEXTURE_2D);
 	}
 }

@@ -113,3 +113,5 @@ public:
 	static Texture* LoadPng(const char* filename, int ColorMode, int Swizzle, bool Vram);
 	static Texture* LoadPngTexturePack(std::string filename, bool vram = false);
 };
+
+extern Texture* terrain_atlas;

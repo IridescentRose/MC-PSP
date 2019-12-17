@@ -40,7 +40,7 @@ Texture* TextureUtil::LoadPngTexturePack(std::string filename, bool vram) {
 
 	return tex;
 }
-
+Texture* terrain_atlas;
 Texture* TextureUtil::LoadPng(const char* filename, int ColorMode, int Swizzle, bool Vram)
 {
 	unsigned short *Buffer;
