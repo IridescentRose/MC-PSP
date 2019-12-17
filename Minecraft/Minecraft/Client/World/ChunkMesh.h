@@ -8,8 +8,8 @@ namespace Minecraft::Terrain {
 
 	typedef struct
 	{
-		unsigned char u, v;
-		short x, y, z;
+		float u, v;
+		float x, y, z;
 	}__attribute__((packed)) ChunkVertex16;
 
 	enum FaceTypes{
@@ -40,15 +40,6 @@ namespace Minecraft::Terrain {
 		std::vector<ChunkVertex16> rightVertexData;
 		std::vector<ChunkVertex16> topVertexData;
 		std::vector<ChunkVertex16> bottomVertexData;
-
-		std::vector<ChunkVertex16> frontVertexData2;
-		std::vector<ChunkVertex16> backVertexData2;
-		std::vector<ChunkVertex16> leftVertexData2;
-		std::vector<ChunkVertex16> rightVertexData2;
-		std::vector<ChunkVertex16> topVertexData2;
-		std::vector<ChunkVertex16> bottomVertexData2;
-
-
 	};
 
 	struct ChunkMeshCollection

@@ -166,30 +166,30 @@ namespace Minecraft {
 					s = 1.317;
 				}
 
-				velocity.x -= -vfpu_sinf(DEGTORAD(yaw)) * s;
-				velocity.z -= -vfpu_cosf(DEGTORAD(yaw)) * s;
+				velocity.x -= vfpu_sinf(DEGTORAD(-yaw)) * s;
+				velocity.z -= vfpu_cosf(DEGTORAD(-yaw)) * s;
 			}
 
 			if (Input::GetAnalogY() < -0.4) {
-				velocity.x -= vfpu_sinf(DEGTORAD(yaw)) * walkSpeed;
-				velocity.z -= vfpu_cosf(DEGTORAD(yaw)) * walkSpeed;
+				velocity.x -= -vfpu_sinf(DEGTORAD(-yaw)) * walkSpeed;
+				velocity.z -= -vfpu_cosf(DEGTORAD(-yaw)) * walkSpeed;
 			}
 
 			if (Input::GetAnalogX() < -0.4) {
-				velocity.x += -vfpu_sinf(DEGTORAD((yaw + 90))) * walkSpeed * 0.7;
-				velocity.z += -vfpu_cosf(DEGTORAD((yaw + 90))) * walkSpeed * 0.7;
+				velocity.x += -vfpu_sinf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7;
+				velocity.z += -vfpu_cosf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7;
 			}
 
 			if (Input::GetAnalogX() > 0.4) {
-				velocity.x += -vfpu_sinf(DEGTORAD((yaw - 90))) * walkSpeed * 0.7;
-				velocity.z += -vfpu_cosf(DEGTORAD((yaw - 90))) * walkSpeed * 0.7;
+				velocity.x += -vfpu_sinf(DEGTORAD((-yaw - 270))) * walkSpeed * 0.7;
+				velocity.z += -vfpu_cosf(DEGTORAD((-yaw - 270))) * walkSpeed * 0.7;
 			}
 
 			position += velocity * dt;
 
 			velocity = { 0, 0, 0 };
 
-			ScePspFVector3 pos = { (float)position.x, (float)position.y, (float)position.z };
+			ScePspFVector3 pos = { (float)position.x, -(float)position.y, (float)position.z };
 			sceGumTranslate(&pos);
 			sceGumStoreMatrix(&viewMatrix);
 

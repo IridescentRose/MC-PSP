@@ -1,26 +1,42 @@
 #pragma once
-
-#include "ChunkData.h"
 #include "ChunkMesh.h"
 #include <array>
-namespace Minecraft::Terrain {
-	class Chunk {
-	public:
-		Chunk();
-		~Chunk();
+#include <mclib/common/Vector.h>
 
-		void generateData(int relX, int relZ, int relY);
-		void generateMesh();
-		void tryAddFaceToMesh(const short blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3i& blockFacing, int type);
+#define CHUNK_SIZE 16
 
-		void Update();
-		void Draw();
+namespace Minecraft::Terrain{
+struct Block{
+	char id;
+	char meta;
+};
 
-	private:
-		ChunkData* data;
-		ChunkMeshCollection meshes;
-		ChunkMesh* mesh;
+class Chunk {
+public:
+	Chunk();
+	~Chunk();
 
-		
-	};
+	Block getBlockAtTranslatedLocation(unsigned int x, unsigned int y, unsigned int z);
+
+	void generateData();
+
+	void generateMesh();
+	void updateMesh();
+	void updateMeshLightingOnly();
+
+	void Draw();
+	void Update();
+
+	void tryAddFaceToMesh(const short blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3f& blockFacing, int type);
+
+	//MESH
+	
+	//Block Data organized by XYZ
+	Block blocks[16][16][16];
+	ChunkMeshCollection meshes;
+	ChunkMesh* mesh;
+	//CHUNK COORDINATES
+	int chunk_x, chunk_y, chunk_z;
+};
+
 }

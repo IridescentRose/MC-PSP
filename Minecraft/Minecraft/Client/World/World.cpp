@@ -38,7 +38,7 @@ void Minecraft::Client::World::Init()
 	sceKernelStartThread(tickUpdateThread, 0, 0);
 
 	chnk = new Terrain::Chunk();
-	chnk->generateData(0, 0, 0);
+	chnk->generateData();
 	chnk->generateMesh();
 }
 

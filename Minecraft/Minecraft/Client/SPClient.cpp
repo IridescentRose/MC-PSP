@@ -21,7 +21,7 @@ namespace Minecraft::Client {
 		
 		updateTimer.reset();
 		player = new Player();
-		player->Init({ 0, 64, 0 }, 0, 0);
+		player->Init({ 0, 17.8f, 0 }, 0, 0);
 		
 		g_World->Init();
 

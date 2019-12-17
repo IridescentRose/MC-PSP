@@ -28,13 +28,6 @@ namespace Minecraft::Terrain {
 		rightVertexData.clear();
 		topVertexData.clear();
 		bottomVertexData.clear();
-
-		frontVertexData2.clear();
-		backVertexData2.clear();
-		leftVertexData2.clear();
-		rightVertexData2.clear();
-		topVertexData2.clear();
-		bottomVertexData2.clear();
 	}
 
 	ChunkMesh::~ChunkMesh()
@@ -53,9 +46,7 @@ namespace Minecraft::Terrain {
 		v5 = {texCoords[0], texCoords[1], blockFace[3 * 3 + 0] + blockPosition.x, blockFace[3 * 3 + 1] + blockPosition.y, blockFace[3 * 3 + 2] + blockPosition.z};
 		v6 = {texCoords[0], texCoords[0], blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
 		
-
-		if(blockPosition.y > 8){
-switch(faceType){
+		switch(faceType){
 			case TYPE_TOP:{
 				topVertexData.push_back(v1);
 				topVertexData.push_back(v2);
@@ -116,70 +107,6 @@ switch(faceType){
 				rightVertexData.push_back(v6);
 				break;
 			}
-		}
-		}else{
-switch(faceType){
-			case TYPE_TOP:{
-				topVertexData2.push_back(v1);
-				topVertexData2.push_back(v2);
-				topVertexData2.push_back(v3);
-				topVertexData2.push_back(v4);
-				topVertexData2.push_back(v5);
-				topVertexData2.push_back(v6);
-				break;
-			}
-
-			case TYPE_BOTTOM:{
-				bottomVertexData2.push_back(v1);
-				bottomVertexData2.push_back(v2);
-				bottomVertexData2.push_back(v3);
-				bottomVertexData2.push_back(v4);
-				bottomVertexData2.push_back(v5);
-				bottomVertexData2.push_back(v6);
-				break;
-			}
-
-			case TYPE_FRONT:{
-				frontVertexData2.push_back(v1);
-				frontVertexData2.push_back(v2);
-				frontVertexData2.push_back(v3);
-				frontVertexData2.push_back(v4);
-				frontVertexData2.push_back(v5);
-				frontVertexData2.push_back(v6);
-				break;
-			}
-
-
-			case TYPE_BACK:{
-				backVertexData2.push_back(v1);
-				backVertexData2.push_back(v2);
-				backVertexData2.push_back(v3);
-				backVertexData2.push_back(v4);
-				backVertexData2.push_back(v5);
-				backVertexData2.push_back(v6);
-				break;
-			}
-
-			case TYPE_LEFT:{
-				leftVertexData2.push_back(v1);
-				leftVertexData2.push_back(v2);
-				leftVertexData2.push_back(v3);
-				leftVertexData2.push_back(v4);
-				leftVertexData2.push_back(v5);
-				leftVertexData2.push_back(v6);
-				break;
-			}
-
-			case TYPE_RIGHT:{
-				rightVertexData2.push_back(v1);
-				rightVertexData2.push_back(v2);
-				rightVertexData2.push_back(v3);
-				rightVertexData2.push_back(v4);
-				rightVertexData2.push_back(v5);
-				rightVertexData2.push_back(v6);
-				break;
-			}
-		}
 		}
 		
 	}

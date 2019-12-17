@@ -10,7 +10,6 @@
 
 
 #include "../Player.h"
-#include "TerrainGenerator.h"
 #include "Chunk.h"
 
 using namespace Shadow::Utils;

@@ -137,7 +137,7 @@ namespace Minecraft::Rendering {
 		sceGumPushMatrix();
 		sceGumTranslate(&v);
 
-		sceGuColor(GU_COLOR(1.0f, 1.0f, 1.0f, alpha));
+		sceGuColor(GU_COLOR(1.0f, 1.0f, 1.0f, alpha * 0.5f));
 		sceGuTexScale(1.0f, 0.25f);
 		sceGuTexOffset( (float)((int)dt % 9600) / 9600.0f, 0.0f);
 		sceGuDisable(GU_CULL_FACE);

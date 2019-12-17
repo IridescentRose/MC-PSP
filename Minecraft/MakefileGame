@@ -66,7 +66,6 @@ Minecraft/Menu/components/Panorama.o \
 Minecraft/Client/Player.o \
 Minecraft/Client/SPClient.o \
 Minecraft/Client/World/World.o \
-Minecraft/Client/World/ChunkData.o \
 Minecraft/Client/World/Chunk.o \
 Minecraft/Client/World/ChunkMesh.o \
 Minecraft/Client/Audio/MusicManager.o \
