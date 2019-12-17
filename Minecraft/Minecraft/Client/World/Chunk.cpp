@@ -156,16 +156,16 @@ void Chunk::generateMesh()
 
 				faces.update(x, y, z);
 
-				tryAddFaceToMesh(bottomFace, {0, 0, 1/32.0f, 0, 1/32.0f, 1/32.0f, 0, 1/32.0f}, position, faces.down, TYPE_BOTTOM);
-				tryAddFaceToMesh(topFace, {0, 0, 1/32.0f, 0, 1/32.0f, 1/32.0f, 0, 1/32.0f}, position, faces.up, TYPE_TOP);
+				tryAddFaceToMesh(bottomFace, {0, 0, 8, 0, 8, 8, 0, 8}, position, faces.down, TYPE_BOTTOM);
+				tryAddFaceToMesh(topFace, {0, 0, 8, 0, 8, 8, 0, 8}, position, faces.up, TYPE_TOP);
 
 				//Left/ Right
-				tryAddFaceToMesh(leftFace, {0, 0, 1/32.0f, 0, 1/32.0f, 1/32.0f, 0, 1/32.0f}, position, faces.left, TYPE_LEFT);
-				tryAddFaceToMesh(rightFace, {0, 0, 1/32.0f, 0, 1/32.0f, 1/32.0f, 0, 1/32.0f}, position, faces.right, TYPE_RIGHT);
+				tryAddFaceToMesh(leftFace, {0, 0, 8, 0, 8, 8, 0, 8}, position, faces.left, TYPE_LEFT);
+				tryAddFaceToMesh(rightFace, {0, 0, 8, 0, 8, 8, 0, 8}, position, faces.right, TYPE_RIGHT);
 
 				//Front/ Back
-				tryAddFaceToMesh(frontFace, {0, 0, 1/32.0f, 0, 1/32.0f, 1/32.0f, 0, 1/32.0f}, position, faces.front, TYPE_FRONT);
-				tryAddFaceToMesh(backFace, {0, 0, 1/32.0f, 0, 1/32.0f, 1/32.0f, 0, 1/32.0f}, position, faces.back, TYPE_BACK);
+				tryAddFaceToMesh(frontFace, {0, 0, 8, 0, 8, 8, 0, 8}, position, faces.front, TYPE_FRONT);
+				tryAddFaceToMesh(backFace, {0, 0, 8, 0, 8, 8, 0, 8}, position, faces.back, TYPE_BACK);
 
 			}
 		}
@@ -203,12 +203,12 @@ void Chunk::Draw()
 	sceGuEnable(GU_BLEND);
 	sceGuEnable(GU_CULL_FACE);
 	
-	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.solidMesh.topVertexData.size(), 0, meshes.solidMesh.topVertexData.data());
-	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.solidMesh.bottomVertexData.size(), 0, meshes.solidMesh.bottomVertexData.data());
-	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.solidMesh.frontVertexData.size(), 0, meshes.solidMesh.frontVertexData.data());
-	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.solidMesh.backVertexData.size(), 0, meshes.solidMesh.backVertexData.data());
-	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.solidMesh.leftVertexData.size(), 0, meshes.solidMesh.leftVertexData.data());
-	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.solidMesh.rightVertexData.size(), 0, meshes.solidMesh.rightVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.topVertexData.size(), 0, meshes.solidMesh.topVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.bottomVertexData.size(), 0, meshes.solidMesh.bottomVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.frontVertexData.size(), 0, meshes.solidMesh.frontVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.backVertexData.size(), 0, meshes.solidMesh.backVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.leftVertexData.size(), 0, meshes.solidMesh.leftVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.rightVertexData.size(), 0, meshes.solidMesh.rightVertexData.data());
 	sceGuDisable(GU_BLEND);
 	sceGuDisable(GU_TEXTURE_2D);
 	sceGuDisable(GU_CULL_FACE);
