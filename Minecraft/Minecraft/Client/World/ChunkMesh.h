@@ -8,8 +8,8 @@ namespace Minecraft::Terrain {
 
 	typedef struct
 	{
-		unsigned char u, v;
-		unsigned short x, y, z;
+		float u, v;
+		float x, y, z;
 	}__attribute__((packed)) ChunkVertex16;
 
 	enum FaceTypes{

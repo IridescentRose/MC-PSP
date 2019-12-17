@@ -31,21 +31,31 @@ namespace Minecraft::Terrain {
 	}
 
 	ChunkMesh::~ChunkMesh()
-	{
+	{ 
 	}
 
 	void ChunkMesh::addFace(int faceType, const short blockFace[12], std::array<float, 8> texCoords, mc::Vector3i chunkPosition, mc::Vector3i blockPosition)
 	{
 		ChunkVertex16 v1, v2, v3, v4, v5, v6;
 
-		v1 = {texCoords[0], texCoords[1], blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
-		v2 = {texCoords[2], texCoords[3], blockFace[1 * 3 + 0] + blockPosition.x, blockFace[1 * 3 + 1] + blockPosition.y, blockFace[1 * 3 + 2] + blockPosition.z};
-		v3 = {texCoords[4], texCoords[5], blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
+		if(faceType == TYPE_BACK || faceType == TYPE_RIGHT){
+			v1 = {texCoords[0], texCoords[1], blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
+			v2 = {texCoords[2], texCoords[3], blockFace[1 * 3 + 0] + blockPosition.x, blockFace[1 * 3 + 1] + blockPosition.y, blockFace[1 * 3 + 2] + blockPosition.z};
+			v3 = {texCoords[4], texCoords[5], blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
 
-		v4 = {texCoords[4], texCoords[5], blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
-		v5 = {texCoords[6], texCoords[7], blockFace[3 * 3 + 0] + blockPosition.x, blockFace[3 * 3 + 1] + blockPosition.y, blockFace[3 * 3 + 2] + blockPosition.z};
-		v6 = {texCoords[0], texCoords[1], blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
-		
+			v4 = {texCoords[4], texCoords[5], blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
+			v5 = {texCoords[6], texCoords[7], blockFace[3 * 3 + 0] + blockPosition.x, blockFace[3 * 3 + 1] + blockPosition.y, blockFace[3 * 3 + 2] + blockPosition.z};
+			v6 = {texCoords[0], texCoords[1], blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
+		}else{
+			v1 = {texCoords[2], texCoords[3], blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
+			v2 = {texCoords[4], texCoords[5], blockFace[1 * 3 + 0] + blockPosition.x, blockFace[1 * 3 + 1] + blockPosition.y, blockFace[1 * 3 + 2] + blockPosition.z};
+			v3 = {texCoords[6], texCoords[7], blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
+
+			v4 = {texCoords[6], texCoords[7], blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
+			v5 = {texCoords[0], texCoords[1], blockFace[3 * 3 + 0] + blockPosition.x, blockFace[3 * 3 + 1] + blockPosition.y, blockFace[3 * 3 + 2] + blockPosition.z};
+			v6 = {texCoords[2], texCoords[3], blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
+		}
+
 		switch(faceType){
 			case TYPE_TOP:{
 				topVertexData.push_back(v1);

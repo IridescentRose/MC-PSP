@@ -118,6 +118,27 @@ Block Chunk::getBlockAtTranslatedLocation(unsigned int x, unsigned int y, unsign
 
 int numFaces;
 
+std::array<float, 8> getTextureAtlasIndex(int idx){
+	//Index is 32x32
+	int rIDX = idx - 1;
+
+	int row = rIDX / 32;
+	int column = rIDX % 32;
+
+	float size = 1.f / 32.f;
+	float y = (float)row * size;
+	float x = (float)column * size;
+	float h = y + size;
+	float w = x + size;
+
+	return {
+		w, h,
+		x, h,
+		x, y,
+		w, y,
+	};
+}
+
 void Chunk::generateMesh()
 {
 	LocalFaces faces;
@@ -156,16 +177,16 @@ void Chunk::generateMesh()
 
 				faces.update(x, y, z);
 
-				tryAddFaceToMesh(bottomFace, {0, 0, 8, 0, 8, 8, 0, 8}, position, faces.down, TYPE_BOTTOM);
-				tryAddFaceToMesh(topFace, {0, 0, 8, 0, 8, 8, 0, 8}, position, faces.up, TYPE_TOP);
+				tryAddFaceToMesh(bottomFace, getTextureAtlasIndex(3), position, faces.down, TYPE_BOTTOM);
+				tryAddFaceToMesh(topFace, getTextureAtlasIndex(3), position, faces.up, TYPE_TOP);
 
 				//Left/ Right
-				tryAddFaceToMesh(leftFace, {0, 0, 8, 0, 8, 8, 0, 8}, position, faces.left, TYPE_LEFT);
-				tryAddFaceToMesh(rightFace, {0, 0, 8, 0, 8, 8, 0, 8}, position, faces.right, TYPE_RIGHT);
+				tryAddFaceToMesh(leftFace, getTextureAtlasIndex(3), position, faces.left, TYPE_LEFT);
+				tryAddFaceToMesh(rightFace, getTextureAtlasIndex(3), position, faces.right, TYPE_RIGHT);
 
 				//Front/ Back
-				tryAddFaceToMesh(frontFace, {0, 0, 8, 0, 8, 8, 0, 8}, position, faces.front, TYPE_FRONT);
-				tryAddFaceToMesh(backFace, {0, 0, 8, 0, 8, 8, 0, 8}, position, faces.back, TYPE_BACK);
+				tryAddFaceToMesh(frontFace, getTextureAtlasIndex(3), position, faces.front, TYPE_FRONT);
+				tryAddFaceToMesh(backFace, getTextureAtlasIndex(3), position, faces.back, TYPE_BACK);
 
 			}
 		}
@@ -199,16 +220,18 @@ void Chunk::Draw()
 	ScePspFVector3 v = {chunk_x * 16, chunk_y * 16, chunk_z * 16};
 	sceGumTranslate(&v);
 
+
 	sceGuEnable(GU_TEXTURE_2D);
 	sceGuEnable(GU_BLEND);
 	sceGuEnable(GU_CULL_FACE);
 	
-	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.topVertexData.size(), 0, meshes.solidMesh.topVertexData.data());
-	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.bottomVertexData.size(), 0, meshes.solidMesh.bottomVertexData.data());
-	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.frontVertexData.size(), 0, meshes.solidMesh.frontVertexData.data());
-	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.backVertexData.size(), 0, meshes.solidMesh.backVertexData.data());
-	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.leftVertexData.size(), 0, meshes.solidMesh.leftVertexData.data());
-	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_8BIT | GU_VERTEX_16BIT | GU_TRANSFORM_3D, meshes.solidMesh.rightVertexData.size(), 0, meshes.solidMesh.rightVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.solidMesh.topVertexData.size(), 0, meshes.solidMesh.topVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.solidMesh.bottomVertexData.size(), 0, meshes.solidMesh.bottomVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.solidMesh.frontVertexData.size(), 0, meshes.solidMesh.frontVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.solidMesh.backVertexData.size(), 0, meshes.solidMesh.backVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.solidMesh.leftVertexData.size(), 0, meshes.solidMesh.leftVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.solidMesh.rightVertexData.size(), 0, meshes.solidMesh.rightVertexData.data());
+	
 	sceGuDisable(GU_BLEND);
 	sceGuDisable(GU_TEXTURE_2D);
 	sceGuDisable(GU_CULL_FACE);
