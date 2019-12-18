@@ -40,8 +40,6 @@ namespace Minecraft::Terrain {
 			mc::Vector3i chunkPosition,
 			mc::Vector3i blockPosition);
 
-		void bufferMesh();
-
 		int faces;
 
 		std::vector<ChunkVertex16> frontVertexData;

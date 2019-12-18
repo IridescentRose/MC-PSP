@@ -10,8 +10,9 @@
 
 
 #include "../Player.h"
-#include "Chunk.h"
+#include "ChunkManager.h"
 #include "BlockData.h"
+
 using namespace Shadow::Utils;
 
 namespace Minecraft::Client {
@@ -47,7 +48,8 @@ namespace Minecraft::Client {
 
 		Audio::RandomMusicGenerator* rmg;
 
-		Terrain::Chunk* chnk;
+		Terrain::ChunkManager* chunkMan;
+		
 
 		static int tickUpdate(SceSize args, void* argp);
 

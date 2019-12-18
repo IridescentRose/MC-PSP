@@ -112,6 +112,7 @@ Chunk::Chunk()
 
 Chunk::~Chunk()
 {
+	
 }
 
 ChunkBlock Chunk::getBlockAtTranslatedLocation(unsigned int x, unsigned int y, unsigned int z)

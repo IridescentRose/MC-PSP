@@ -37,9 +37,10 @@ void Minecraft::Client::World::Init()
 	tickUpdateThread = sceKernelCreateThread("TickUpdateThread", tickUpdate, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(tickUpdateThread, 0, 0);
 
-	chnk = new Terrain::Chunk();
-	chnk->generateData();
-	chnk->generateMesh();
+	chunkMan = new Terrain::ChunkManager();
+	for(int i = 0; i < 4; i++){
+		chunkMan->loadChunk(0, i, 0);
+	}
 }
 
 void Minecraft::Client::World::Cleanup()
@@ -122,7 +123,11 @@ void Minecraft::Client::World::Draw(Player* p)
 	
 	//Draw stuff
 	terrain_atlas->bindTexture();
-	chnk->Draw();
+	
+	for(const auto& [key, chnk] : chunkMan->getChunks()){
+		chnk->Draw();
+	}
+
 }
 
 int Minecraft::Client::World::tickUpdate(SceSize args, void* argp)
