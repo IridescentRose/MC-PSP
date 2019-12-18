@@ -21,11 +21,12 @@ namespace Minecraft::Client {
 		
 		updateTimer.reset();
 		player = new Player();
-		player->Init({ 0, 17.8f, 0 }, 0, 0);
+		player->Init({ 0, 69.0f, 0 }, 0, 0);
 		
 		//CREATIVE
 		player->toggleFly();
 
+		g_World->p = player;
 		g_World->Init();
 
 	}
@@ -60,7 +61,7 @@ namespace Minecraft::Client {
 	void SPClient::Draw(StateManager* sManager) {
 		g_RenderManager.StartFrame(0, 0, 0);
 
-		g_World->Draw(player);
+		g_World->Draw();
 
 		//GUI LATER
 		player->Draw();

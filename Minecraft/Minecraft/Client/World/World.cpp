@@ -38,9 +38,10 @@ void Minecraft::Client::World::Init()
 	sceKernelStartThread(tickUpdateThread, 0, 0);
 
 	chunkMan = new Terrain::ChunkManager();
-	for(int i = 0; i < 4; i++){
-		chunkMan->loadChunk(0, i, 0);
-	}
+	chunkManagerThread = sceKernelCreateThread("ChunkManagementThread", chunkManagement, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
+	sceKernelStartThread(chunkManagerThread, 0, 0);
+
+
 }
 
 void Minecraft::Client::World::Cleanup()
@@ -74,7 +75,7 @@ void Minecraft::Client::World::FixedUpdate()
 	rmg->FixedUpdate();
 }
 
-void Minecraft::Client::World::Draw(Player* p)
+void Minecraft::Client::World::Draw()
 {
 	//Load Projection Matrix
 	sceGumMatrixMode(GU_PROJECTION);
@@ -135,6 +136,57 @@ int Minecraft::Client::World::tickUpdate(SceSize args, void* argp)
 	while (true) {
 		g_World->FixedUpdate();
 		sceKernelDelayThread(1000 * 50); //1000 microseconds in a millisecond, and update 20 times per second, so 50ms
+	}
+
+	return 0;
+}
+
+int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
+{
+	while(true){
+		
+		std::vector<mc::Vector3i> needed;
+		std::vector<mc::Vector3i> excess;
+		mc::Vector3i center = {g_World->p->getPosition().x / 16, g_World->p->getPosition().y / 16, g_World->p->getPosition().z / 16};
+		
+		//Box bounds
+		mc::Vector3i top = {center.x + 1, center.y + 1, center.z + 1};
+		mc::Vector3i bot = {center.x - 1, center.y - 1, center.z - 1};
+
+		
+		for(int y = bot.y; y <= top.y && y < 16 && y >= 0; y++){
+			for(int x = bot.x; x <= top.x; x++){
+				for(int z = bot.z; z <= top.z; z++){
+					if(!g_World->chunkMan->chunkExists(x, y, z)){
+						g_World->chunkMan->loadChunk(x, y, z);
+						sceKernelDelayThread(1000 * 5); //1000 microseconds in a millisecond, and update 40 times per second, so 25ms
+						needed.push_back(mc::Vector3i(x, y, z));
+					}
+				}	
+			}
+		}
+
+		/*
+		
+		for(const auto& [key, chnk] : g_World->chunkMan->getChunks()){
+			bool isNeeded = false;
+
+			for(mc::Vector3i& v : needed){
+				if(v == key){
+					//Is needed
+					isNeeded = true;
+				}
+			}
+
+			if(!isNeeded){
+				g_World->chunkMan->unloadChunk(key.x, key.y, key.z);
+				sceKernelDelayThread(1000 * 25); //1000 microseconds in a millisecond, and update 40 times per second, so 25ms
+			}
+		}
+		*/
+		sceKernelDelayThread(1000 * 1000 * 2); //Check every 2 seonds
+		
+
 	}
 
 	return 0;

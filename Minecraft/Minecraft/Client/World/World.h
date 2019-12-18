@@ -32,13 +32,16 @@ namespace Minecraft::Client {
 		
 		void Update(float dt);
 		void FixedUpdate(); //OnTick events
-		void Draw(Player* p);
+		void Draw();
 
 		Timer tickTimer;
+		Terrain::ChunkManager* chunkMan;
+		Player* p;
 
 	private:
 		TickTime* timeData;
 		SceUID tickUpdateThread;
+		SceUID chunkManagerThread;
 
 		Rendering::Sun* sun;
 		Rendering::Moon* moon;
@@ -48,10 +51,10 @@ namespace Minecraft::Client {
 
 		Audio::RandomMusicGenerator* rmg;
 
-		Terrain::ChunkManager* chunkMan;
 		
 
 		static int tickUpdate(SceSize args, void* argp);
+		static int chunkManagement(SceSize args, void* argp);
 
 	};
 
