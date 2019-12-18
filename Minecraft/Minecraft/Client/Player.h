@@ -52,6 +52,14 @@ namespace Minecraft {
 				return pitch;
 			}
 
+			inline void toggleFly(){
+				flyEnabled = !flyEnabled;
+			}
+
+			inline bool isFly(){
+				return flyEnabled;
+			}
+
 			ScePspFMatrix4 projMatrix;
 			ScePspFMatrix4 orthMatrix;
 			ScePspFMatrix4 viewMatrix;
@@ -66,6 +74,7 @@ namespace Minecraft {
 			float tilt; //Extra
 
 			bool changingFOV;
+			bool flyEnabled;
 			float fovChange;
 		};
 	}

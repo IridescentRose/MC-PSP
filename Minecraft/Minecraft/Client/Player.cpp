@@ -41,6 +41,7 @@ namespace Minecraft {
 			sneak = false;
 			sprint = false;
 			onGround = true;
+			flyEnabled = false;
 
 			sceGumMatrixMode(GU_PROJECTION);
 			sceGumLoadIdentity();
@@ -183,6 +184,17 @@ namespace Minecraft {
 			if (Input::GetAnalogX() > 0.4) {
 				velocity.x += -vfpu_sinf(DEGTORAD((-yaw - 270))) * walkSpeed * 0.7;
 				velocity.z += -vfpu_cosf(DEGTORAD((-yaw - 270))) * walkSpeed * 0.7;
+			}
+
+			if(flyEnabled){
+				if(Input::KeyPressed(PSP_CTRL_SELECT) || Input::KeyHold(PSP_CTRL_SELECT)){
+					//Fly upwards
+					velocity.y += 5.612;
+				}
+				if(Input::KeyPressed(PSP_CTRL_DOWN) || Input::KeyHold(PSP_CTRL_DOWN)){
+					//Fly downwards
+					velocity.y -= 4.317;
+				}
 			}
 
 			position += velocity * dt;

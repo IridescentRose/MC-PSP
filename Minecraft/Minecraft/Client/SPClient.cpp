@@ -23,6 +23,9 @@ namespace Minecraft::Client {
 		player = new Player();
 		player->Init({ 0, 17.8f, 0 }, 0, 0);
 		
+		//CREATIVE
+		player->toggleFly();
+
 		g_World->Init();
 
 	}
