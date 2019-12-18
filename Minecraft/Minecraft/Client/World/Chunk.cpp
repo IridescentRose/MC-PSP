@@ -1,6 +1,9 @@
 #include "Chunk.h"
 #include <mclib/common/Vector.h>
 #include <Shadow/Graphics/RenderManager.h>
+#include <Shadow/Utils/Logger.h>
+
+using namespace Shadow::Utils;
 
 namespace Minecraft::Terrain{
 
@@ -92,8 +95,9 @@ struct LocalFaces{
 
 Chunk::Chunk()
 {
-	struct Block c;
-	c.id = 0;
+	struct ChunkBlock c;
+	c.ID = 0;
+	c.meta = 0;
 	chunk_x = 0;
 	chunk_y = 0;
 	chunk_z = 0;
@@ -110,7 +114,7 @@ Chunk::~Chunk()
 {
 }
 
-Block Chunk::getBlockAtTranslatedLocation(unsigned int x, unsigned int y, unsigned int z)
+ChunkBlock Chunk::getBlockAtTranslatedLocation(unsigned int x, unsigned int y, unsigned int z)
 {
 	return blocks[x][y][z];
 }
@@ -146,51 +150,52 @@ void Chunk::generateMesh()
 	for (char y = 0; y < CHUNK_SIZE; y++) {
 		for (char z = 0; z < CHUNK_SIZE; z++) {
 			for (char x = 0; x < CHUNK_SIZE; x++) {
-				Block temp = blocks[x][y][z];
+				ChunkBlock temp = blocks[x][y][z];
 				mc::Vector3i position;
 				position.x = x; position.y = y; position.z = z;
 
-				if (temp.id == 0) { //DONT TRY TO GENERATE AIR!
+				if (temp.ID == 0) { //DONT TRY TO GENERATE AIR!
 					continue;
 				}
 
-				mesh = &meshes.solidMesh;
-				//Block blockData = BlockData::InstancePointer()->blockData[temp.ID];
-				/*
-				if (blockData.meshType == -1) {
-					continue;
-				}
-				else {
-					switch (blockData.meshType) {
-					case 0:
+				Block blockData = BlockData::InstancePointer()->blockData[temp.ID];
+				//Multi mesh support (similar to gbuffers)
+
+				switch(blockData.meshType){
+					case 0:{
 						mesh = &meshes.solidMesh;
 						break;
-					case 1:
-						mesh = &meshes.waterMesh;
-						break;
-					case 2:
+					}
+					case 1:{
 						mesh = &meshes.floraMesh;
 						break;
 					}
-				}*/
+					case 2:{
+						mesh = &meshes.waterMesh;
+						break;
+					}
+				}
+
 				//ADDITIONALLY CROSS PLANE BLOCKS LATER
 
 				faces.update(x, y, z);
 
-				tryAddFaceToMesh(bottomFace, getTextureAtlasIndex(3), position, faces.down, TYPE_BOTTOM);
-				tryAddFaceToMesh(topFace, getTextureAtlasIndex(3), position, faces.up, TYPE_TOP);
+				tryAddFaceToMesh(bottomFace, getTextureAtlasIndex(blockData.bottomAtlas), position, faces.down, TYPE_BOTTOM);
+				tryAddFaceToMesh(topFace, getTextureAtlasIndex(blockData.topAtlas), position, faces.up, TYPE_TOP);
 
 				//Left/ Right
-				tryAddFaceToMesh(leftFace, getTextureAtlasIndex(3), position, faces.left, TYPE_LEFT);
-				tryAddFaceToMesh(rightFace, getTextureAtlasIndex(3), position, faces.right, TYPE_RIGHT);
+				tryAddFaceToMesh(leftFace, getTextureAtlasIndex(blockData.leftAtlas), position, faces.left, TYPE_LEFT);
+				tryAddFaceToMesh(rightFace, getTextureAtlasIndex(blockData.rightAtlas), position, faces.right, TYPE_RIGHT);
 
 				//Front/ Back
-				tryAddFaceToMesh(frontFace, getTextureAtlasIndex(3), position, faces.front, TYPE_FRONT);
-				tryAddFaceToMesh(backFace, getTextureAtlasIndex(3), position, faces.back, TYPE_BACK);
+				tryAddFaceToMesh(frontFace, getTextureAtlasIndex(blockData.frontAtlas), position, faces.front, TYPE_FRONT);
+				tryAddFaceToMesh(backFace, getTextureAtlasIndex(blockData.backAtlas), position, faces.back, TYPE_BACK);
 
 			}
 		}
 	}
+
+	Logging::debug("Mesh generated with " + std::to_string(numFaces) + " faces.");
 }
 
 void Chunk::updateMesh()
@@ -206,8 +211,17 @@ void Chunk::generateData(){
 	for(int x = 0; x < CHUNK_SIZE; x++){
 		for(int y = 0; y < CHUNK_SIZE; y++){
 			for(int z = 0; z < CHUNK_SIZE; z++){
-				blocks[x][y][z].id = 1;
-				blocks[x][y][z].meta = 0;
+
+				if(y <= 11){
+					blocks[x][y][z].ID = 1;
+					blocks[x][y][z].meta = 0;
+				}else if(y > 11 && y < 15){
+					blocks[x][y][z].ID = 2;
+					blocks[x][y][z].meta = 0;
+				}else{
+					blocks[x][y][z].ID = 3;
+					blocks[x][y][z].meta = 0;
+				}
 			}
 		}	
 	}
@@ -246,16 +260,16 @@ void Chunk::Update()
 
 void Chunk::tryAddFaceToMesh(const short blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3f& blockFacing, int type)
 {
-
+	
 	if ((blockFacing.x >= 0 && blockFacing.x < 16) && (blockFacing.y >= 0 && blockFacing.y < 16) && (blockFacing.z >= 0 && blockFacing.z < 16)) {
 		//No out of bound data accessses. If it will be, we will generate the faces by default... Note... change this if we have a world based system.
-		Block cblk = blocks[(int)blockFacing.x][(int)blockFacing.y][(int)blockFacing.z];
-		//BlockData blk = BlockData::InstancePointer()->blockData[cblk.ID];
+		ChunkBlock cblk = blocks[(int)blockFacing.x][(int)blockFacing.y][(int)blockFacing.z];
+		Block blk = BlockData::InstancePointer()->blockData[cblk.ID];
 
-		
-		numFaces++;
-		mesh->addFace(type, blockFace, texCoords, {chunk_x, chunk_y, chunk_z}, blockPosition);
-		
+		if(!blk.transparent){
+			numFaces++;
+			mesh->addFace(type, blockFace, texCoords, {chunk_x, chunk_y, chunk_z}, blockPosition);
+		}
 
 	}
 	else { //Default generate

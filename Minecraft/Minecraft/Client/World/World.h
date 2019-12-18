@@ -11,7 +11,7 @@
 
 #include "../Player.h"
 #include "Chunk.h"
-
+#include "BlockData.h"
 using namespace Shadow::Utils;
 
 namespace Minecraft::Client {

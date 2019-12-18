@@ -1,6 +1,6 @@
 #include "MenuState.hpp"
 #include <Shadow/Utils/Logger.h>
-
+#include "../Client/World/BlockData.h"
 namespace Minecraft::Menus{
 
 	MenuState::MenuState(){
@@ -10,6 +10,7 @@ namespace Minecraft::Menus{
         langPos = langPosMax = langPosSel = 0;
 		tryConnect = false;
 		connected = false;
+        
     }
 
     MenuState::~MenuState(){
@@ -17,7 +18,8 @@ namespace Minecraft::Menus{
     }
 
 	void MenuState::Init(){
-
+        
+        BlockData::InstancePointer()->loadBlockData();
 		//Delete Logs from past launch
 		remove(Logging::logFile.c_str());
 		Logging::logging_level = Logging::LOGGER_LEVEL_TRACE; //Most "verbose"

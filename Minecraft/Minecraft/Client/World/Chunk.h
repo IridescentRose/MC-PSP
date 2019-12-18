@@ -2,21 +2,17 @@
 #include "ChunkMesh.h"
 #include <array>
 #include <mclib/common/Vector.h>
-
+#include "BlockData.h"
 #define CHUNK_SIZE 16
 
 namespace Minecraft::Terrain{
-struct Block{
-	char id;
-	char meta;
-};
 
 class Chunk {
 public:
 	Chunk();
 	~Chunk();
 
-	Block getBlockAtTranslatedLocation(unsigned int x, unsigned int y, unsigned int z);
+	ChunkBlock getBlockAtTranslatedLocation(unsigned int x, unsigned int y, unsigned int z);
 
 	void generateData();
 
@@ -32,7 +28,7 @@ public:
 	//MESH
 	
 	//Block Data organized by XYZ
-	Block blocks[16][16][16];
+	ChunkBlock blocks[16][16][16];
 	ChunkMeshCollection meshes;
 	ChunkMesh* mesh;
 	//CHUNK COORDINATES
