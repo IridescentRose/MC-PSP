@@ -30,7 +30,7 @@ namespace Minecraft::Terrain {
 	{
 		ChunkVertex16 v1, v2, v3, v4, v5, v6;
 
-		if(faceType == TYPE_BACK || faceType == TYPE_RIGHT){
+		if(faceType != TYPE_BACK && faceType != TYPE_RIGHT){
 			v1 = {texCoords[0], texCoords[1], blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
 			v2 = {texCoords[2], texCoords[3], blockFace[1 * 3 + 0] + blockPosition.x, blockFace[1 * 3 + 1] + blockPosition.y, blockFace[1 * 3 + 2] + blockPosition.z};
 			v3 = {texCoords[4], texCoords[5], blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};

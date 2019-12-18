@@ -7,7 +7,7 @@ using namespace Shadow::Utils;
 
 namespace Minecraft::Terrain{
 
-const short frontFace[12] =
+const short backFace[12] =
 {
 	0, 0, 0,
 	0, 1, 0,
@@ -15,7 +15,7 @@ const short frontFace[12] =
 	1, 0, 0,
 };
 
-const short backFace[12] =
+const short frontFace[12] =
 {
 	0, 0, 1,
 	1, 0, 1,
@@ -23,7 +23,7 @@ const short backFace[12] =
 	0, 1, 1,
 };
 
-const short leftFace[12] =
+const short rightFace[12] =
 {
 	1, 0, 0,
 	1, 1, 0,
@@ -31,7 +31,7 @@ const short leftFace[12] =
 	1, 0, 1,
 };
 
-const short rightFace[12] =
+const short leftFace[12] =
 {
 
 	0, 0, 0,
@@ -176,7 +176,7 @@ void Chunk::generateMesh()
 					}
 				}
 
-				//ADDITIONALLY CROSS PLANE BLOCKS LATER
+				//TODO: ADD CROSS PLANE BLOCKS LATER (flowers, grass, etc)
 
 				faces.update(x, y, z);
 
@@ -266,7 +266,7 @@ void Chunk::tryAddFaceToMesh(const short blockFace[12], std::array<float, 8> tex
 		ChunkBlock cblk = blocks[(int)blockFacing.x][(int)blockFacing.y][(int)blockFacing.z];
 		Block blk = BlockData::InstancePointer()->blockData[cblk.ID];
 
-		if(!blk.transparent){
+		if(blk.transparent || blk.ID == 0){
 			numFaces++;
 			mesh->addFace(type, blockFace, texCoords, {chunk_x, chunk_y, chunk_z}, blockPosition);
 		}
