@@ -147,26 +147,21 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		
 		std::vector<mc::Vector3i> needed;
 		std::vector<mc::Vector3i> excess;
-		mc::Vector3i center = {g_World->p->getPosition().x / 16, g_World->p->getPosition().y / 16, g_World->p->getPosition().z / 16};
+		mc::Vector3i center = {(-g_World->p->getPosition().x) / 16, (g_World->p->getPosition().y) / 16, (-g_World->p->getPosition().z) / 16};
+
 		
 		//Box bounds
-		mc::Vector3i top = {center.x + 1, center.y + 1, center.z + 1};
-		mc::Vector3i bot = {center.x - 1, center.y - 1, center.z - 1};
+		mc::Vector3i top = {center.x + 2, center.y+1, center.z + 2};
+		mc::Vector3i bot = {center.x - 2, center.y-1, center.z - 2};
 
 		
 		for(int y = bot.y; y <= top.y && y < 16 && y >= 0; y++){
 			for(int x = bot.x; x <= top.x; x++){
 				for(int z = bot.z; z <= top.z; z++){
-					if(!g_World->chunkMan->chunkExists(x, y, z)){
-						g_World->chunkMan->loadChunk(x, y, z);
-						sceKernelDelayThread(1000 * 5); //1000 microseconds in a millisecond, and update 40 times per second, so 25ms
-						needed.push_back(mc::Vector3i(x, y, z));
-					}
-				}	
+					needed.push_back(mc::Vector3i(x, y, z));
+				}
 			}
 		}
-
-		/*
 		
 		for(const auto& [key, chnk] : g_World->chunkMan->getChunks()){
 			bool isNeeded = false;
@@ -179,12 +174,34 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 			}
 
 			if(!isNeeded){
-				g_World->chunkMan->unloadChunk(key.x, key.y, key.z);
-				sceKernelDelayThread(1000 * 25); //1000 microseconds in a millisecond, and update 40 times per second, so 25ms
+				excess.push_back(key);
 			}
 		}
-		*/
-		sceKernelDelayThread(1000 * 1000 * 2); //Check every 2 seonds
+
+		//Get rid of excesses!
+
+		for(mc::Vector3i& v : excess){
+			g_World->chunkMan->unloadChunk(v.x, v.y, v.z);
+			sceKernelDelayThread(1000 * 25); //1000 microseconds in a millisecond, and update 40 times per second, so 25ms
+		}
+		excess.clear();
+
+		for(mc::Vector3i& v : needed){
+			if(!g_World->chunkMan->chunkExists(v.x, v.y, v.z)){
+				g_World->chunkMan->loadChunk(v.x, v.y, v.z);
+				sceKernelDelayThread(1000 * 5); //1000 microseconds in a millisecond, and update 40 times per second, so 25ms
+			}
+		}
+
+
+		u32 ramFree = System::freeMemory();
+		float ram = ((float)ramFree) / 1024.0f / 1024.0f;
+		std::ostringstream os;
+		os << ram;
+		std::string s(os.str());
+		Logging::log("RAM AVAILABLE FOR CLIENT: " + s, Logging::LOGGER_LEVEL_TRACE);
+
+		sceKernelDelayThread(1000 * 500); //Check every 1/2 seonds
 		
 
 	}

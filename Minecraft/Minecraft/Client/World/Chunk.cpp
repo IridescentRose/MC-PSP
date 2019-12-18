@@ -2,6 +2,9 @@
 #include <mclib/common/Vector.h>
 #include <Shadow/Graphics/RenderManager.h>
 #include <Shadow/Utils/Logger.h>
+#include <Shadow/System/Ram.h>
+
+using namespace Shadow;
 
 using namespace Shadow::Utils;
 
