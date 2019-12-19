@@ -84,8 +84,8 @@ namespace Minecraft::Audio {
 
 			Logging::log("STARTING MUSIC AT: " + path, Logging::LOGGER_LEVEL_INFO);
 
-			snd = oslLoadSoundFile(path.c_str(), OSL_FMT_STREAM); //STREAM!
-			g_AudioManager.PlayMusic(snd);
+			snd = oslLoadSoundFile(path.c_str(), OSL_FMT_NONE); //STREAM!
+			g_AudioManager.PlaySound(snd, (SoundChannel)7);
 
 			srand(time(NULL));
 			timeUntilNext = 6001 + rand() % 2000;
