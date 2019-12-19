@@ -59,6 +59,7 @@ namespace Minecraft::Client {
 		
 	}
 	void SPClient::Draw(StateManager* sManager) {
+		g_AudioManager.Update();
 		g_RenderManager.StartFrame(0, 0, 0);
 
 		g_World->Draw();
