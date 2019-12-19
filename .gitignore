@@ -405,10 +405,3 @@ ASALocalRun/
 *.la
 *.lib
 
-# Executables
-*.exe
-*.out
-*.app
-*.prx
-*.elf
-*.SFO
