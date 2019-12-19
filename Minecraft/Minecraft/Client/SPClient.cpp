@@ -38,6 +38,7 @@ namespace Minecraft::Client {
 		std::string s(os.str());
 		Logging::log("RAM AVAILABLE FOR CLIENT: " + s, Logging::LOGGER_LEVEL_TRACE);
 
+		Logging::logging_level = Logging::LOGGER_LEVEL_DEBUG;
 		//THIS IS WHERE WE HAVE FREE RAM TO LOAD!
 	}
 	void SPClient::CleanUp() {
@@ -54,6 +55,8 @@ namespace Minecraft::Client {
 	void SPClient::Update(StateManager* sManager) {
 		//Get Delta Time
 		float dt = updateTimer.deltaTime();
+
+		int fps = 1.0f / dt;
 		player->Update(dt);	
 		g_World->Update(dt);
 		

@@ -146,9 +146,11 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 	while(true){
 		
 		std::vector<mc::Vector3i> needed;
+		needed.clear();
 		std::vector<mc::Vector3i> excess;
+		excess.clear();
 		mc::Vector3i center = {(-g_World->p->getPosition().x) / 16, (g_World->p->getPosition().y) / 16, (-g_World->p->getPosition().z) / 16};
-
+		
 		
 		//Box bounds
 		mc::Vector3i top = {center.x + 1, center.y+1, center.z + 1};
@@ -162,6 +164,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 				}
 			}
 		}
+
 		
 		for(const auto& [key, chnk] : g_World->chunkMan->getChunks()){
 			bool isNeeded = false;
@@ -178,6 +181,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 			}
 		}
 
+		
 		//Get rid of excesses!
 
 		for(mc::Vector3i& v : excess){
@@ -185,22 +189,17 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 			sceKernelDelayThread(1000 * 25); //1000 microseconds in a millisecond, and update 40 times per second, so 25ms
 		}
 		excess.clear();
-
+		
+		Logging::trace("Num chunks to gen: " + std::to_string(needed.size()));
 		for(mc::Vector3i& v : needed){
 			if(!g_World->chunkMan->chunkExists(v.x, v.y, v.z)){
 				g_World->chunkMan->loadChunk(v.x, v.y, v.z);
-				sceKernelDelayThread(1000 * 5); //1000 microseconds in a millisecond, and update 40 times per second, so 25ms
+				//sceKernelDelayThread(1000 * 25); //1000 microseconds in a millisecond, and update 40 times per second, so 25ms
 			}
+			
 		}
 
-
-		u32 ramFree = System::freeMemory();
-		float ram = ((float)ramFree) / 1024.0f / 1024.0f;
-		std::ostringstream os;
-		os << ram;
-		std::string s(os.str());
-		Logging::log("RAM AVAILABLE FOR CLIENT: " + s, Logging::LOGGER_LEVEL_TRACE);
-
+		
 		sceKernelDelayThread(1000 * 500); //Check every 1/2 seonds
 		
 
