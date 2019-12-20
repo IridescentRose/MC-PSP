@@ -259,6 +259,7 @@ namespace Minecraft::Menus{
 	void MenuState::Update(StateManager* sManager){
         dt = t.deltaTime();
         elapsed += dt;
+        g_AudioManager.Update();
 
         Input::InputUpdate();
         switch(menu_states){

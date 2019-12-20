@@ -27,10 +27,11 @@ namespace Minecraft::Client {
 		player->toggleFly();
 
 		g_World->p = player;
-		g_World->Init();
 
 	}
 	void SPClient::Enter() {
+
+		g_World->Init();
 		u32 ramFree = System::freeMemory();
 		float ram = ((float)ramFree) / 1024.0f / 1024.0f;
 		std::ostringstream os;

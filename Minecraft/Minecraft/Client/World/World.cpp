@@ -186,15 +186,13 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 
 		for(mc::Vector3i& v : excess){
 			g_World->chunkMan->unloadChunk(v.x, v.y, v.z);
-			sceKernelDelayThread(1000 * 25); //1000 microseconds in a millisecond, and update 40 times per second, so 25ms
+			sceKernelDelayThread(1000 * 1);
 		}
 		excess.clear();
 		
-		Logging::trace("Num chunks to gen: " + std::to_string(needed.size()));
 		for(mc::Vector3i& v : needed){
 			if(!g_World->chunkMan->chunkExists(v.x, v.y, v.z)){
 				g_World->chunkMan->loadChunk(v.x, v.y, v.z);
-				//sceKernelDelayThread(1000 * 25); //1000 microseconds in a millisecond, and update 40 times per second, so 25ms
 			}
 			
 		}
