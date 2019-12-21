@@ -90,10 +90,10 @@ namespace Shadow
 		{
 			intraFontInit();
 			debugFont = intraFontLoad("flash0:/font/ltn8.pgf",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);	
-			intraFont* jpn0 = intraFontLoad("flash0:/font/jpn0.pgf",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);
-  			intraFont* kr0 = intraFontLoad("flash0:/font/kr0.pgf",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);  //Korean font (not available on all systems) with UTF-8 encoding
-			intraFont* arib = intraFontLoad("flash0:/font/arib.pgf",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);                     //Symbols (not available on all systems)
-  			intraFont* chn = intraFontLoad("flash0:/font/gb3s1518.bwfon",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);               //chinese font
+			jpn0 = intraFontLoad("flash0:/font/jpn0.pgf",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);
+  			kr0 = intraFontLoad("flash0:/font/kr0.pgf",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);  //Korean font (not available on all systems) with UTF-8 encoding
+			arib = intraFontLoad("flash0:/font/arib.pgf",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);                     //Symbols (not available on all systems)
+  			chn = intraFontLoad("flash0:/font/gb3s1518.bwfon",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);               //chinese font
  			
 			intraFontSetStyle(debugFont,0.5f,0xFFFFFFFF,0, 0.0f, INTRAFONT_ALIGN_CENTER);
 			intraFontSetStyle(jpn0,0.5f,0xFFFFFFFF,0, 0.0f, INTRAFONT_ALIGN_CENTER);
@@ -112,22 +112,13 @@ namespace Shadow
 		{
 					sceGuDisable(GU_BLEND);
 		sceGuEnable(GU_DEPTH_TEST);
-			unsigned int options2 = options |INTRAFONT_CACHE_ALL;
-		    if(fontType != 0)
-		    {
-		        if(shadowColor == 999)
-                {
-                    intraFontSetStyle(debugFont, size, color, 0, angle, options2);
-                }
-                else
-                {
-                    intraFontSetStyle(debugFont, size, color, 0, angle, options2);
-                }
-		    }
-		    else
-            {
-                intraFontSetStyle(debugFont, size, color, shadowColor, angle, options2);
-            }
+			
+            intraFontSetStyle(debugFont, size, color, shadowColor, angle, options);
+            intraFontSetStyle(jpn0, size, color, shadowColor, angle, options);
+            intraFontSetStyle(kr0, size, color, shadowColor, angle, options);
+            intraFontSetStyle(chn, size, color, shadowColor, angle, options);
+            intraFontSetStyle(arib, size, color, shadowColor, angle, options);
+            
 
 		sceGuDisable(GU_DEPTH_TEST);
 		sceGuEnable(GU_BLEND);
@@ -253,26 +244,12 @@ namespace Shadow
 			//GU_RGBA();
 		}
 
-		void RenderManager::SetOrtho(float left, float right, float bottom, float top, float zNear, float zFar)
+		void RenderManager::SetOrtho()
 		{
 			//some lame stuff XD
 			sceGumMatrixMode(GU_PROJECTION);
 			sceGumLoadIdentity();
 			sceGumOrtho(0, 480, 272, 0, -30, 30);
-
-			sceGumMatrixMode(GU_VIEW);
-			sceGumLoadIdentity();
-
-			sceGumMatrixMode(GU_MODEL);
-			sceGumLoadIdentity();
-		}
-
-        void RenderManager::SetOrtho2(float left, float right, float bottom, float top, float zNear, float zFar)
-		{
-			//some lame stuff XD
-			sceGumMatrixMode(GU_PROJECTION);
-			sceGumLoadIdentity();
-			sceGumOrtho(-1024, 1024, -1024, 1024, -1024, 1024);
 
 			sceGumMatrixMode(GU_VIEW);
 			sceGumLoadIdentity();

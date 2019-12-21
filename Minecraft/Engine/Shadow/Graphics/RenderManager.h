@@ -63,8 +63,7 @@ namespace Shadow
 			void UseVerticalSync(bool Enabled);
 			void SetClearColor(float r,float g,float b,float a);
 
-			void SetOrtho(float left, float right, float bottom, float top, float zNear, float zFar);
-			void SetOrtho2(float left, float right, float bottom, float top, float zNear, float zFar);
+			void SetOrtho();
 			void SetPerspective(float _fov,float _aspect,float _znear,float _zfar);
 			
 			void DrawToTexture(Texture* offscreenTexture );
@@ -110,6 +109,10 @@ namespace Shadow
 			intraFont* numFont;
 			intraFont* engFont;
 			intraFont* rusFont;
+			intraFont* jpn0;
+			intraFont* kr0; 
+			intraFont* arib;
+			intraFont* chn; 
 			float fontVerticalShift;
 			int fontType;
 

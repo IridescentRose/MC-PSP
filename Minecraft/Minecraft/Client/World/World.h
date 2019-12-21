@@ -37,6 +37,7 @@ namespace Minecraft::Client {
 		Timer tickTimer;
 		Terrain::ChunkManager* chunkMan;
 		Player* p;
+		float fps;
 
 	private:
 		TickTime* timeData;

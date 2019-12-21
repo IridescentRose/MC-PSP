@@ -59,6 +59,7 @@ void Minecraft::Client::World::Cleanup()
 
 void Minecraft::Client::World::Update(float dt)
 {
+	fps = 1.0f / dt;
 	rmg->FixedUpdate();
 }
 
@@ -129,6 +130,15 @@ void Minecraft::Client::World::Draw()
 	for(const auto& [key, chnk] : chunkMan->getChunks()){
 		chnk->Draw();
 	}
+
+
+	g_RenderManager.SetOrtho();
+
+	g_RenderManager.SetFontStyle(0.8f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_LEFT, 0);
+	g_RenderManager.DebugPrint(0, 7, "Minecraft v0.3-pre3");
+
+	g_RenderManager.SetFontStyle(0.8f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_RIGHT, 0);
+	g_RenderManager.DebugPrint(480, 7, "FPS: %d", (int)fps + 1);
 
 }
 

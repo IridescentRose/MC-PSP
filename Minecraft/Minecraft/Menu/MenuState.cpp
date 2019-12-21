@@ -316,7 +316,7 @@ namespace Minecraft::Menus{
             panoramaPass();
         }
 
-        g_RenderManager.SetOrtho(0,0,0,0,0,0); //Into 2D Mode for menu pass
+        g_RenderManager.SetOrtho(); //Into 2D Mode for menu pass
         menuPass();
 
         
