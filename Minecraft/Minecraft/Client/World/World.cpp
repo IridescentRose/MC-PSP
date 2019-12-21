@@ -59,6 +59,7 @@ void Minecraft::Client::World::Cleanup()
 
 void Minecraft::Client::World::Update(float dt)
 {
+	rmg->FixedUpdate();
 }
 
 void Minecraft::Client::World::FixedUpdate()
@@ -72,7 +73,7 @@ void Minecraft::Client::World::FixedUpdate()
 	sky->Update(timeData->time);
 	sun->Update( (float)(timeData->time % 24000) / 24000.0f * 360.0f);
 	moon->Update((float)(timeData->time % 24000) / 24000.0f * 360.0f, timeData->worldAge);
-	rmg->FixedUpdate();
+	rmg->timeUntilNext--;
 }
 
 void Minecraft::Client::World::Draw()
@@ -189,10 +190,15 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 			sceKernelDelayThread(1000 * 1);
 		}
 		excess.clear();
+
+
+		sceKernelDelayThread(1000 * 20);
 		
 		for(mc::Vector3i& v : needed){
 			if(!g_World->chunkMan->chunkExists(v.x, v.y, v.z)){
 				g_World->chunkMan->loadChunk(v.x, v.y, v.z);
+
+				sceKernelDelayThread(1000 * 1);
 			}
 			
 		}

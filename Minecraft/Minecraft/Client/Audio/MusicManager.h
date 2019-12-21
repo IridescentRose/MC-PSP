@@ -15,8 +15,8 @@ namespace Minecraft::Audio {
 
 		void FixedUpdate();
 
-	private:
 		int timeUntilNext;
+	private:
 		OSL_SOUND* snd;
 	};
 }

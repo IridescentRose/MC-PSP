@@ -41,7 +41,6 @@ namespace Minecraft::Audio {
 	}
 	void RandomMusicGenerator::FixedUpdate()
 	{
-		timeUntilNext--;
 		if (timeUntilNext <= 0) {
 			//PLAY RANDOM
 			
@@ -82,13 +81,13 @@ namespace Minecraft::Audio {
 			path += std::to_string(actualChoice);
 			path += ".bgm";
 
-			Logging::log("STARTING MUSIC AT: " + path, Logging::LOGGER_LEVEL_INFO);
-
 			snd = oslLoadSoundFile(path.c_str(), OSL_FMT_STREAM); //STREAM!
-			//oslPlaySound(snd, 0);
+			g_AudioManager.PlayMusic(snd);
 
 			srand(time(NULL));
-			timeUntilNext = 6001 + rand() % 2000;
+			timeUntilNext = 6001 + (rand() % 2000);
+
+			Logging::log("Music Time Left: " + std::to_string(timeUntilNext), Logging::LOGGER_LEVEL_INFO);
 		}
 	}
 }
