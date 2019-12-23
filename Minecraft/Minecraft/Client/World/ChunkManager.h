@@ -16,7 +16,8 @@ namespace Minecraft{
 
                 bool chunkExists(int x, int y, int z);
 
-                void loadChunk(int x, int y, int z);
+                void loadChunkData(int x, int y, int z);
+                void loadChunkMesh(int x, int y, int z);
                 void unloadChunk(int x, int y, int z);
         };
         extern ChunkMap m_chunks;

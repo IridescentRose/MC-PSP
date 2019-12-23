@@ -20,16 +20,21 @@ namespace Minecraft::Terrain{
         return m_chunks.find(mc::Vector3i(x, y, z)) != m_chunks.end();
     }
 
-    void ChunkManager::loadChunk(int x, int y, int z){
+    void ChunkManager::loadChunkData(int x, int y, int z){
         Chunk* c = new Chunk();
         c->chunk_x = x;
         c->chunk_y = y;
         c->chunk_z = z;
 
         c->generateData();
-        c->generateMesh();
 
         m_chunks.emplace(mc::Vector3i(x, y, z), std::move(c));
+    }
+
+    void ChunkManager::loadChunkMesh(int x, int y, int z){
+        if(chunkExists(x, y, z)){
+            m_chunks[mc::Vector3i(x,y,z)]->generateMesh();
+        }
     }
     
     void ChunkManager::unloadChunk(int x, int y, int z){

@@ -208,8 +208,14 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		
 		for(mc::Vector3i& v : needed){
 			if(!g_World->chunkMan->chunkExists(v.x, v.y, v.z)){
-				g_World->chunkMan->loadChunk(v.x, v.y, v.z);
-
+				g_World->chunkMan->loadChunkData(v.x, v.y, v.z);
+				sceKernelDelayThread(1000 * 1);
+			}
+			
+		}
+		for(mc::Vector3i& v : needed){
+			if(g_World->chunkMan->chunkExists(v.x, v.y, v.z) && !g_World->chunkMan->getChunk(v.x, v.y, v.z)->hasMesh){
+				g_World->chunkMan->loadChunkMesh(v.x, v.y, v.z);
 				sceKernelDelayThread(1000 * 1);
 			}
 			
