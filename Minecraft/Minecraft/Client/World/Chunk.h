@@ -33,6 +33,8 @@ public:
 	ChunkMesh* mesh;
 	//CHUNK COORDINATES
 	int chunk_x, chunk_y, chunk_z;
+
+	bool hasMesh;
 };
 
 }

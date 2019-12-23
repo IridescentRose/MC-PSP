@@ -128,7 +128,9 @@ void Minecraft::Client::World::Draw()
 	terrain_atlas->bindTexture();
 	
 	for(const auto& [key, chnk] : chunkMan->getChunks()){
-		chnk->Draw();
+		if(chnk->hasMesh){
+			chnk->Draw();
+		}
 	}
 
 

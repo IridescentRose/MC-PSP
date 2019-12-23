@@ -111,6 +111,8 @@ Chunk::Chunk()
 			}
 		}
 	}
+	sceKernelDcacheWritebackInvalidateAll();
+	hasMesh = false;
 }
 
 Chunk::~Chunk()
@@ -198,7 +200,7 @@ void Chunk::generateMesh()
 			}
 		}
 	}
-
+	hasMesh = true;
 	Logging::debug("Mesh generated with " + std::to_string(numFaces) + " faces.");
 }
 

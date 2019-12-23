@@ -143,8 +143,12 @@ namespace Minecraft::Menus{
 
 	void MenuState::Pause(){
 		//CLEAN SOUND
+        oslStopSound(bgm);
+        oslStopSound(button);
 		oslDeleteSound(bgm);
 		oslDeleteSound(button);
+
+        
 
 		//CLEAN TEXTURES
 		delete logo;

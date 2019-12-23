@@ -187,7 +187,6 @@ namespace Minecraft::Menus{
                             sceKernelExitGame();
                         }
                     }
-                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
                 }
 
     }
