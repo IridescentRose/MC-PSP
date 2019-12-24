@@ -69,7 +69,6 @@ Minecraft/Client/World/World.o \
 Minecraft/Client/World/BlockData.o \
 Minecraft/Client/World/Chunk.o \
 Minecraft/Client/World/ChunkMesh.o \
-Minecraft/Client/World/ChunkManager.o \
 Minecraft/Client/Audio/MusicManager.o \
 Minecraft/Client/Rendering/Sun.o \
 Minecraft/Client/Rendering/Moon.o \
@@ -85,7 +84,7 @@ ASFLAGS = $(CFLAGS)
 
 BUILD_PRX = 1
 PSP_FW_VERSION=371
-PSP_LARGE_MEMORY = 1
+PSP_LARGE_MEMORY = 0
 
 LIBDIR += ./libs/lib/
 LDFLAGS =

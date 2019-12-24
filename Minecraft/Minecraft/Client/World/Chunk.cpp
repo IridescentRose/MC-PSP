@@ -3,13 +3,53 @@
 #include <Shadow/Graphics/RenderManager.h>
 #include <Shadow/Utils/Logger.h>
 #include <Shadow/System/Ram.h>
-
 using namespace Shadow;
 
 using namespace Shadow::Utils;
 
 namespace Minecraft::Terrain{
+ChunkMap m_chunks;
+    ChunkManager::ChunkManager(){
+        m_chunks.clear();
+    }
 
+    Chunk* ChunkManager::getChunk(int x, int y, int z){
+        if (!chunkExists(x, y, z)){
+            return NULL;
+        }
+        return m_chunks[mc::Vector3i(x, y, z)];
+    }
+    ChunkMap& ChunkManager::getChunks(){
+        return m_chunks;
+    }
+
+    bool ChunkManager::chunkExists(int x, int y, int z){
+        return m_chunks.find(mc::Vector3i(x, y, z)) != m_chunks.end();
+    }
+
+    void ChunkManager::loadChunkData(int x, int y, int z){
+        Chunk* c = new Chunk();
+        c->chunk_x = x;
+        c->chunk_y = y;
+        c->chunk_z = z;
+
+        c->generateData();
+
+        m_chunks.emplace(mc::Vector3i(x, y, z), std::move(c));
+    }
+
+    void ChunkManager::loadChunkMesh(int x, int y, int z){
+        if(chunkExists(x, y, z)){
+            m_chunks[mc::Vector3i(x,y,z)]->generateMesh(this);
+        }
+    }
+    
+    void ChunkManager::unloadChunk(int x, int y, int z){
+        if(chunkExists(x, y, z)){
+            delete m_chunks[mc::Vector3i(x, y, z)]; //Safety
+            m_chunks.erase(mc::Vector3i(x, y, z));
+        }
+    }
 const short backFace[12] =
 {
 	0, 0, 0,
@@ -149,7 +189,7 @@ std::array<float, 8> getTextureAtlasIndex(int idx){
 	};
 }
 
-void Chunk::generateMesh()
+void Chunk::generateMesh(ChunkManager* man)
 {
 	LocalFaces faces;
 	numFaces = 0;
@@ -186,16 +226,16 @@ void Chunk::generateMesh()
 
 				faces.update(x, y, z);
 
-				tryAddFaceToMesh(bottomFace, getTextureAtlasIndex(blockData.bottomAtlas), position, faces.down, TYPE_BOTTOM);
-				tryAddFaceToMesh(topFace, getTextureAtlasIndex(blockData.topAtlas), position, faces.up, TYPE_TOP);
+				tryAddFaceToMesh(bottomFace, getTextureAtlasIndex(blockData.bottomAtlas), position, faces.down, TYPE_BOTTOM, man);
+				tryAddFaceToMesh(topFace, getTextureAtlasIndex(blockData.topAtlas), position, faces.up, TYPE_TOP, man);
 
 				//Left/ Right
-				tryAddFaceToMesh(leftFace, getTextureAtlasIndex(blockData.leftAtlas), position, faces.left, TYPE_LEFT);
-				tryAddFaceToMesh(rightFace, getTextureAtlasIndex(blockData.rightAtlas), position, faces.right, TYPE_RIGHT);
+				tryAddFaceToMesh(leftFace, getTextureAtlasIndex(blockData.leftAtlas), position, faces.left, TYPE_LEFT, man);
+				tryAddFaceToMesh(rightFace, getTextureAtlasIndex(blockData.rightAtlas), position, faces.right, TYPE_RIGHT, man);
 
 				//Front/ Back
-				tryAddFaceToMesh(frontFace, getTextureAtlasIndex(blockData.frontAtlas), position, faces.front, TYPE_FRONT);
-				tryAddFaceToMesh(backFace, getTextureAtlasIndex(blockData.backAtlas), position, faces.back, TYPE_BACK);
+				tryAddFaceToMesh(frontFace, getTextureAtlasIndex(blockData.frontAtlas), position, faces.front, TYPE_FRONT, man);
+				tryAddFaceToMesh(backFace, getTextureAtlasIndex(blockData.backAtlas), position, faces.back, TYPE_BACK, man);
 
 			}
 		}
@@ -271,11 +311,10 @@ void Chunk::Update()
 {
 }
 
-void Chunk::tryAddFaceToMesh(const short blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3f& blockFacing, int type)
+void Chunk::tryAddFaceToMesh(const short blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3f& blockFacing, int type, ChunkManager* man)
 {
 	
 	if ((blockFacing.x >= 0 && blockFacing.x < 16) && (blockFacing.y >= 0 && blockFacing.y < 16) && (blockFacing.z >= 0 && blockFacing.z < 16)) {
-		//No out of bound data accessses. If it will be, we will generate the faces by default... Note... change this if we have a world based system.
 		ChunkBlock cblk = blocks[(int)blockFacing.x][(int)blockFacing.y][(int)blockFacing.z];
 		Block blk = BlockData::InstancePointer()->blockData[cblk.ID];
 
@@ -286,8 +325,56 @@ void Chunk::tryAddFaceToMesh(const short blockFace[12], std::array<float, 8> tex
 
 	}
 	else { //Default generate
-		numFaces++;
-		mesh->addFace(type, blockFace, texCoords, {chunk_x, chunk_y, chunk_z}, blockPosition);
+
+		//So we now have a chunk out of bounds, lets find the coordinates and check if it's loaded.
+		mc::Vector3i v = {0, 0, 0};
+		if(blockFacing.x < 0){
+			v.x = chunk_x - 1;
+		}else if(blockFacing.x >= 16){
+			v.x = chunk_x + 1;
+		}
+
+		if(blockFacing.y < 0){
+			v.y = chunk_y - 1;
+		}else if(blockFacing.y >= 16){
+			v.y = chunk_y + 1;
+		}
+
+		if(blockFacing.z < 0){
+			v.z = chunk_z - 1;
+		}else if(blockFacing.z >= 16){
+			v.z = chunk_z + 1;
+		}
+
+		if(man->chunkExists(v.x, v.y, v.z)){
+			//If it exists, let's do the tests!
+		
+		mc::Vector3i blockPos = {0, 0, 0};
+
+		if(blockFacing.x < 0){
+			blockPos.x = blockFacing.x + 16;
+		}else if(blockFacing.x >= 16){
+			blockPos.x = blockFacing.x - 16;
+		}
+		if(blockFacing.y < 0){
+			blockPos.y = blockFacing.y + 16;
+		}else if(blockFacing.y >= 16){
+			blockPos.y = blockFacing.y - 16;
+		}
+		if(blockFacing.z < 0){
+			blockPos.z = blockFacing.z + 16;
+		}else if(blockFacing.z >= 16){
+			blockPos.z = blockFacing.z - 16;
+		}
+
+		ChunkBlock cblk = man->getChunk(v.x, v.y, v.z)->getBlockAtTranslatedLocation(blockPos.x, blockPos.y, blockPos.z);
+		Block blk = BlockData::InstancePointer()->blockData[cblk.ID];
+
+		if(blk.transparent || blk.ID == 0){
+			numFaces++;
+			mesh->addFace(type, blockFace, texCoords, {chunk_x, chunk_y, chunk_z}, blockPosition);
+		}
+		}
 	}
 	
 }

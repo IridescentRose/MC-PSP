@@ -156,18 +156,21 @@ int Minecraft::Client::World::tickUpdate(SceSize args, void* argp)
 
 int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 {
+	mc::Vector3i last_pos = {0, -1, 0};
 	while(true){
-		
+		mc::Vector3i center = {(-g_World->p->getPosition().x) / 16, (g_World->p->getPosition().y) / 16, (-g_World->p->getPosition().z) / 16};
+
+		if(center != last_pos){
 		std::vector<mc::Vector3i> needed;
 		needed.clear();
 		std::vector<mc::Vector3i> excess;
 		excess.clear();
-		mc::Vector3i center = {(-g_World->p->getPosition().x) / 16, (g_World->p->getPosition().y) / 16, (-g_World->p->getPosition().z) / 16};
+		
 		
 		
 		//Box bounds
-		mc::Vector3i top = {center.x + 2, center.y+1, center.z + 2};
-		mc::Vector3i bot = {center.x - 2, center.y-1, center.z - 2};
+		mc::Vector3i top = {center.x + 4, center.y+1, center.z + 4};
+		mc::Vector3i bot = {center.x - 4, center.y-1, center.z - 4};
 
 		
 		for(int y = bot.y; y <= top.y && y < 16 && y >= 0; y++){
@@ -199,7 +202,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 
 		for(mc::Vector3i& v : excess){
 			g_World->chunkMan->unloadChunk(v.x, v.y, v.z);
-			sceKernelDelayThread(1000 * 1);
+			sceKernelDelayThread(1000 * 20);
 		}
 		excess.clear();
 
@@ -209,21 +212,24 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		for(mc::Vector3i& v : needed){
 			if(!g_World->chunkMan->chunkExists(v.x, v.y, v.z)){
 				g_World->chunkMan->loadChunkData(v.x, v.y, v.z);
-				sceKernelDelayThread(1000 * 1);
-			}
-			
-		}
-		for(mc::Vector3i& v : needed){
-			if(g_World->chunkMan->chunkExists(v.x, v.y, v.z) && !g_World->chunkMan->getChunk(v.x, v.y, v.z)->hasMesh){
-				g_World->chunkMan->loadChunkMesh(v.x, v.y, v.z);
-				sceKernelDelayThread(1000 * 1);
+				sceKernelDelayThread(1000*20);
 			}
 			
 		}
 
-		
+		sceKernelDelayThread(1000*100);
+
+		for(mc::Vector3i& v : needed){
+			if(g_World->chunkMan->chunkExists(v.x, v.y, v.z) && !g_World->chunkMan->getChunk(v.x, v.y, v.z)->hasMesh){
+				g_World->chunkMan->loadChunkMesh(v.x, v.y, v.z);
+				sceKernelDelayThread(1000*20);
+			}
+			
+		}
+
+		last_pos = center;
+		}
 		sceKernelDelayThread(1000 * 500); //Check every 1/2 seonds
-		
 
 	}
 

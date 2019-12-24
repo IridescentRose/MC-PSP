@@ -10,7 +10,7 @@
 
 
 #include "../Player.h"
-#include "ChunkManager.h"
+#include "Chunk.h"
 #include "BlockData.h"
 
 using namespace Shadow::Utils;
