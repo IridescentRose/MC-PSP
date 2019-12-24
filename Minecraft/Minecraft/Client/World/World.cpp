@@ -169,8 +169,8 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		
 		
 		//Box bounds
-		mc::Vector3i top = {center.x + 4, center.y+1, center.z + 4};
-		mc::Vector3i bot = {center.x - 4, center.y-1, center.z - 4};
+		mc::Vector3i top = {center.x + 3, center.y+1, center.z + 3};
+		mc::Vector3i bot = {center.x - 3, center.y-1, center.z - 3};
 
 		
 		for(int y = bot.y; y <= top.y && y < 16 && y >= 0; y++){
