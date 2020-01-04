@@ -22,6 +22,16 @@ namespace Minecraft::Terrain {
 		bottomVertexData.clear();
 	}
 
+	void ChunkMesh::clear(){
+		faces = 0;
+		frontVertexData.clear();
+		backVertexData.clear();
+		leftVertexData.clear();
+		rightVertexData.clear();
+		topVertexData.clear();
+		bottomVertexData.clear();
+	}
+
 	ChunkMesh::~ChunkMesh()
 	{ 
 	}

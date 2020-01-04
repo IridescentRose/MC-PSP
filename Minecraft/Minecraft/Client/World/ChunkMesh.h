@@ -42,6 +42,8 @@ namespace Minecraft::Terrain {
 
 		int faces;
 
+		void clear();
+
 		std::vector<ChunkVertex16> frontVertexData;
 		std::vector<ChunkVertex16> backVertexData;
 		std::vector<ChunkVertex16> leftVertexData;

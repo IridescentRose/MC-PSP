@@ -50,6 +50,12 @@ ChunkMap m_chunks;
             m_chunks.erase(mc::Vector3i(x, y, z));
         }
     }
+
+	void ChunkManager::updateChunk(int x, int y, int z){
+		if(chunkExists(x, y, z)){
+			m_chunks[mc::Vector3i(x,y,z)]->updateMesh(this);
+		}
+	}
 const short backFace[12] =
 {
 	0, 0, 0,
@@ -244,13 +250,16 @@ void Chunk::generateMesh(ChunkManager* man)
 	Logging::debug("Mesh generated with " + std::to_string(numFaces) + " faces.");
 }
 
-void Chunk::updateMesh()
-{
-	
+void Chunk::deleteMesh(){
+	meshes.solidMesh.clear();
+	meshes.floraMesh.clear();
+	meshes.waterMesh.clear();
 }
 
-void Chunk::updateMeshLightingOnly()
+void Chunk::updateMesh(ChunkManager* man)
 {
+	deleteMesh();
+	generateMesh(man);	
 }
 
 void Chunk::generateData(){
