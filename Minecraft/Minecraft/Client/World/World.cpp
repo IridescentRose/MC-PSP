@@ -5,6 +5,7 @@
 
 #include <Shadow/Utils/Logger.h>
 #include <Shadow/System/Ram.h>
+#include "../../Version.hpp"
 
 using namespace Shadow;
 using namespace Shadow::Utils;
@@ -137,7 +138,7 @@ void Minecraft::Client::World::Draw()
 	g_RenderManager.SetOrtho();
 
 	g_RenderManager.SetFontStyle(0.8f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_LEFT, 0);
-	g_RenderManager.DebugPrint(0, 7, "Minecraft v0.3-pre3");
+	g_RenderManager.DebugPrint(0, 7, "%s v%s", GAME_NAME, (IS_SNAPSHOT) ? INTERNAL_SNAPSHOT : INTERNAL_VERSION);
 
 	g_RenderManager.SetFontStyle(0.8f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_RIGHT, 0);
 	g_RenderManager.DebugPrint(480, 7, "FPS: %d", (int)fps + 1);
