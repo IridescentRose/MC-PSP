@@ -17,7 +17,6 @@ Minecraft::Client::World::World()
 	timeData = new TickTime();
 	timeData->time = 0;
 	timeData->worldAge = 0;
-
 	
 }
 
@@ -62,6 +61,76 @@ void Minecraft::Client::World::Update(float dt)
 {
 	fps = 1.0f / dt;
 	rmg->FixedUpdate();
+
+
+	while(!eventBus.empty()){
+		Event* v = eventBus.front();
+		
+		switch(v->type){
+			case EVENT_TYPE_BREAK:{
+
+				BlockBreakEvent* b = (BlockBreakEvent*) v;
+				mc::Vector3i pos = mc::Vector3i(b->breakPositionAbsolute.x, b->breakPositionAbsolute.y, b->breakPositionAbsolute.z);
+
+
+
+				//Calculate chunk position & relative position
+				mc::Vector3i chunkPos = mc::Vector3i(pos.x/16, pos.y/16, pos.z/16);
+				mc::Vector3i relPos = mc::Vector3i(pos.x%16, pos.y%16, pos.z%16);
+
+				Terrain::Chunk* ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z);
+				ch->blocks[relPos.x][relPos.y][relPos.z] = {0, 0}; //Air
+
+			
+				Logging::info("REL POS: " + std::to_string(relPos.x) + " " + std::to_string(relPos.y) + " "  + std::to_string(relPos.z) + " ");
+
+				ch->updateMesh(chunkMan);
+
+				if(relPos.x == 0){
+					ch = chunkMan->getChunk(chunkPos.x - 1, chunkPos.y, chunkPos.z);
+					ch->updateMesh(chunkMan);
+					Logging::info("SIDE CHUNK X-");
+				}
+				if(relPos.x == 15){
+					ch = chunkMan->getChunk(chunkPos.x + 1, chunkPos.y, chunkPos.z);
+					ch->updateMesh(chunkMan);
+					Logging::info("SIDE CHUNK X+");
+				}
+
+				if(relPos.y == 0){
+					ch = chunkMan->getChunk(chunkPos.x, chunkPos.y - 1, chunkPos.z);
+					ch->updateMesh(chunkMan);
+					Logging::info("SIDE CHUNK Y-");
+				}
+				if(relPos.y == 15){
+					ch = chunkMan->getChunk(chunkPos.x, chunkPos.y + 1, chunkPos.z);
+					ch->updateMesh(chunkMan);
+					Logging::info("SIDE CHUNK Y+");
+				}
+
+				if(relPos.z == 0){
+					ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z - 1);
+					ch->updateMesh(chunkMan);
+					Logging::info("SIDE CHUNK Z-");
+				}
+				if(relPos.z == 15){
+					ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z + 1);
+					ch->updateMesh(chunkMan);
+					Logging::info("SIDE CHUNK Z+");
+				}
+
+
+				break;
+			}
+
+			default:{
+				break;
+			}
+		}
+
+		delete v;
+		eventBus.pop();
+	}
 }
 
 void Minecraft::Client::World::FixedUpdate()
@@ -76,6 +145,7 @@ void Minecraft::Client::World::FixedUpdate()
 	sun->Update( (float)(timeData->time % 24000) / 24000.0f * 360.0f);
 	moon->Update((float)(timeData->time % 24000) / 24000.0f * 360.0f, timeData->worldAge);
 	rmg->timeUntilNext--;
+
 }
 
 void Minecraft::Client::World::Draw()
@@ -157,9 +227,9 @@ int Minecraft::Client::World::tickUpdate(SceSize args, void* argp)
 
 int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 {
-	mc::Vector3i last_pos = {0, -1, 0};
+	mc::Vector3i last_pos = mc::Vector3i(0, -1, 0);
 	while(true){
-		mc::Vector3i center = {(-g_World->p->getPosition().x) / 16, (g_World->p->getPosition().y) / 16, (-g_World->p->getPosition().z) / 16};
+		mc::Vector3i center = mc::Vector3i((-g_World->p->getPosition().x) / 16, (g_World->p->getPosition().y) / 16, (-g_World->p->getPosition().z) / 16);
 
 		if(center != last_pos){
 		std::vector<mc::Vector3i> needed;

@@ -205,6 +205,12 @@ namespace Minecraft {
 			sceGumTranslate(&pos);
 			sceGumStoreMatrix(&viewMatrix);
 
+			if(Input::KeyPressed(PSP_CTRL_LTRIGGER)){
+				BlockBreakEvent* e = new BlockBreakEvent();
+				e->type = EVENT_TYPE_BREAK;
+				e->breakPositionAbsolute = mc::Vector3d(3, 67, 7);
+				g_World->eventBus.push(e);
+			}
 
 		}
 		

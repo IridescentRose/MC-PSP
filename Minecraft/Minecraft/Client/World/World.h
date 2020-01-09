@@ -11,11 +11,25 @@
 
 #include "../Player.h"
 #include "Chunk.h"
+#include <queue>
 #include "BlockData.h"
 
 using namespace Shadow::Utils;
 
 namespace Minecraft::Client {
+	class Player;
+	
+	enum EventTypes{
+		EVENT_TYPE_BREAK
+	};
+
+	struct Event{
+		int type;
+	};
+
+	struct BlockBreakEvent : Event {
+		mc::Vector3d breakPositionAbsolute;
+	};
 
 	struct TickTime {
 		s64 worldAge;
@@ -39,6 +53,8 @@ namespace Minecraft::Client {
 		Player* p;
 		float fps;
 
+		std::queue<Event*> eventBus;
+
 	private:
 		TickTime* timeData;
 		SceUID tickUpdateThread;
@@ -52,7 +68,6 @@ namespace Minecraft::Client {
 
 		Audio::RandomMusicGenerator* rmg;
 
-		
 
 		static int tickUpdate(SceSize args, void* argp);
 		static int chunkManagement(SceSize args, void* argp);

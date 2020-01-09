@@ -237,7 +237,7 @@ void Chunk::generateMesh(ChunkManager* man)
 
 				//Left/ Right
 				tryAddFaceToMesh(leftFace, getTextureAtlasIndex(blockData.leftAtlas), position, faces.left, TYPE_LEFT, man);
-				tryAddFaceToMesh(rightFace, getTextureAtlasIndex(blockData.rightAtlas), position, faces.right, TYPE_RIGHT, man);
+				tryAddFaceToMesh(rightFace, getTextureAtlasIndex(1), position, faces.right, TYPE_RIGHT, man);
 
 				//Front/ Back
 				tryAddFaceToMesh(frontFace, getTextureAtlasIndex(blockData.frontAtlas), position, faces.front, TYPE_FRONT, man);

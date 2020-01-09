@@ -2,6 +2,7 @@
 #include <mclib/mclib.h>
 #include <mclib/common/Vector.h>
 #include <pspgum.h>
+#include "World/World.h"
 
 namespace Minecraft {
 	namespace Client {
