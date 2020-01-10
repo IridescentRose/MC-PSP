@@ -89,36 +89,76 @@ void Minecraft::Client::World::Update(float dt)
 				if(relPos.x == 0){
 					ch = chunkMan->getChunk(chunkPos.x - 1, chunkPos.y, chunkPos.z);
 					ch->updateMesh(chunkMan);
-					Logging::info("SIDE CHUNK X-");
 				}
 				if(relPos.x == 15){
 					ch = chunkMan->getChunk(chunkPos.x + 1, chunkPos.y, chunkPos.z);
 					ch->updateMesh(chunkMan);
-					Logging::info("SIDE CHUNK X+");
 				}
 
 				if(relPos.y == 0){
 					ch = chunkMan->getChunk(chunkPos.x, chunkPos.y - 1, chunkPos.z);
 					ch->updateMesh(chunkMan);
-					Logging::info("SIDE CHUNK Y-");
 				}
 				if(relPos.y == 15){
 					ch = chunkMan->getChunk(chunkPos.x, chunkPos.y + 1, chunkPos.z);
 					ch->updateMesh(chunkMan);
-					Logging::info("SIDE CHUNK Y+");
 				}
 
 				if(relPos.z == 0){
 					ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z - 1);
 					ch->updateMesh(chunkMan);
-					Logging::info("SIDE CHUNK Z-");
 				}
 				if(relPos.z == 15){
 					ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z + 1);
 					ch->updateMesh(chunkMan);
-					Logging::info("SIDE CHUNK Z+");
 				}
 
+
+				break;
+			}
+
+			case EVENT_TYPE_PLACE:{
+				BlockPlaceEvent* b = (BlockPlaceEvent*) v;
+				mc::Vector3i pos = mc::Vector3i(b->placePositionAbsolute.x, b->placePositionAbsolute.y, b->placePositionAbsolute.z);
+
+				//Calculate chunk position & relative position
+				mc::Vector3i chunkPos = mc::Vector3i(pos.x/16, pos.y/16, pos.z/16);
+				mc::Vector3i relPos = mc::Vector3i(pos.x%16, pos.y%16, pos.z%16);
+
+				Terrain::Chunk* ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z);
+				ch->blocks[relPos.x][relPos.y][relPos.z] = {0, 0}; //Air
+
+			
+				Logging::info("REL POS: " + std::to_string(relPos.x) + " " + std::to_string(relPos.y) + " "  + std::to_string(relPos.z) + " ");
+
+				ch->updateMesh(chunkMan);
+
+				if(relPos.x == 0){
+					ch = chunkMan->getChunk(chunkPos.x - 1, chunkPos.y, chunkPos.z);
+					ch->updateMesh(chunkMan);
+				}
+				if(relPos.x == 15){
+					ch = chunkMan->getChunk(chunkPos.x + 1, chunkPos.y, chunkPos.z);
+					ch->updateMesh(chunkMan);
+				}
+
+				if(relPos.y == 0){
+					ch = chunkMan->getChunk(chunkPos.x, chunkPos.y - 1, chunkPos.z);
+					ch->updateMesh(chunkMan);
+				}
+				if(relPos.y == 15){
+					ch = chunkMan->getChunk(chunkPos.x, chunkPos.y + 1, chunkPos.z);
+					ch->updateMesh(chunkMan);
+				}
+
+				if(relPos.z == 0){
+					ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z - 1);
+					ch->updateMesh(chunkMan);
+				}
+				if(relPos.z == 15){
+					ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z + 1);
+					ch->updateMesh(chunkMan);
+				}
 
 				break;
 			}
