@@ -20,7 +20,8 @@ namespace Minecraft::Client {
 	class Player;
 	
 	enum EventTypes{
-		EVENT_TYPE_BREAK
+		EVENT_TYPE_BREAK,
+		EVENT_TYPE_PLACE
 	};
 
 	struct Event{
@@ -29,6 +30,10 @@ namespace Minecraft::Client {
 
 	struct BlockBreakEvent : Event {
 		mc::Vector3d breakPositionAbsolute;
+	};
+	struct BlockPlaceEvent : Event {
+		mc::Vector3d placePositionAbsolute;
+		ChunkBlock blk;
 	};
 
 	struct TickTime {
