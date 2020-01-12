@@ -215,8 +215,8 @@ namespace Minecraft {
 			if(Input::KeyPressed(PSP_CTRL_RTRIGGER)){
 				BlockPlaceEvent* e = new BlockPlaceEvent();
 				e->type = EVENT_TYPE_PLACE;
-				e->placePositionAbsolute = mc::Vector3d(4, 68, 7);
-				e->blk = {1, 0};
+				e->placePositionAbsolute = mc::Vector3d(4, 69, 7);
+				e->blk = {2, 0};
 				g_World->eventBus.push(e);
 			}
 
