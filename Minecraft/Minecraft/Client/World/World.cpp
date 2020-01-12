@@ -82,7 +82,6 @@ void Minecraft::Client::World::Update(float dt)
 				ch->blocks[relPos.x][relPos.y][relPos.z] = {0, 0}; //Air
 
 			
-				Logging::info("REL POS: " + std::to_string(relPos.x) + " " + std::to_string(relPos.y) + " "  + std::to_string(relPos.z) + " ");
 
 				ch->updateMesh(chunkMan);
 

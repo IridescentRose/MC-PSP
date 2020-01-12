@@ -129,7 +129,7 @@ struct LocalFaces{
 		up.x = x; up.y = y + 1; up.z = z;
 		down.x = x; down.y = y - 1; down.z = z;
 		left.x = x - 1; left.y = y; left.z = z;
-		right.x = x + 1; left.y = y; left.z = z;
+		right.x = x + 1; right.y = y; right.z = z;
 		front.x = x; front.y = y; front.z = z + 1;
 		back.x = x; back.y = y; back.z = z - 1;
 	}
