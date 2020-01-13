@@ -2,10 +2,12 @@
 #include <Shadow/Utils/Logger.h>
 #include <Shadow/Graphics/RenderManager.h>
 #include "../Common/Options.hpp"
+#include <glm/glm.hpp>
 #include <Shadow/System/Input.h>
+#include <glm/gtx/rotate_vector.hpp>
 #include <pspmath.h>
 
-#define DEGTORAD(angleDegrees) ((angleDegrees) * 3.14159 / 180.0)
+#define DEGTORAD(angleDegrees) ((angleDegrees) * 3.14159f / 180.0f)
 
 
 using namespace Shadow::System;
@@ -206,10 +208,50 @@ namespace Minecraft {
 			sceGumStoreMatrix(&viewMatrix);
 
 			if(Input::KeyPressed(PSP_CTRL_LTRIGGER)){
-				BlockBreakEvent* e = new BlockBreakEvent();
-				e->type = EVENT_TYPE_BREAK;
-				e->breakPositionAbsolute = mc::Vector3d(3, 67, 7);
-				g_World->eventBus.push(e);
+				
+
+				//RAY CAST
+
+				glm::vec3 unitVec = glm::vec3(0, 0, -1);
+				unitVec = glm::rotateX(unitVec, -pitch);
+				unitVec = glm::rotateY(unitVec, -yaw);
+				glm::normalize(unitVec);
+				unitVec *= 0.5;
+
+				glm::vec3 currVec = glm::vec3(-position.x, position.y, -position.z);
+
+
+				Logging::info("BREAK! RAY TRACING!");
+				Logging::info("POS " + std::to_string((int)position.x) + " " + std::to_string((int)position.y) + " " + std::to_string((int)position.z));
+				Logging::info("UNIT VEC " + std::to_string(unitVec.x) + " " + std::to_string(unitVec.y) + " " + std::to_string(unitVec.z));
+
+
+				glm::vec3 diffVec = glm::vec3(0, 0, 0);
+
+				//Do this out to 4 blocks (0.5 * 8)
+				for(int i = 0; i < 8; i++){
+					
+					currVec += unitVec;
+
+					Logging::info("TRACE VEC " + std::to_string((int)currVec.x) + " " + std::to_string((int)currVec.y) + " " + std::to_string((int)currVec.z));
+
+
+					//Check if it hits a block
+					ChunkBlock blk = g_World->chunkMan->getBlock((int)currVec.x, (int)currVec.y, (int)currVec.z);
+
+					//If it hits something real...
+					if(blk.ID != 0){
+						
+						Logging::info("RAY HIT AT " + std::to_string((int)currVec.x) + " " + std::to_string((int)currVec.y) + " " + std::to_string((int)currVec.z));
+						BlockBreakEvent* e = new BlockBreakEvent();
+						e->type = EVENT_TYPE_BREAK;
+						e->breakPositionAbsolute = mc::Vector3d((int)currVec.x, (int)currVec.y, (int)currVec.z);
+						g_World->eventBus.push(e);
+						break;
+					}
+				}
+
+
 			}
 			
 			if(Input::KeyPressed(PSP_CTRL_RTRIGGER)){

@@ -55,6 +55,8 @@ using ChunkMap = std::map<mc::Vector3i, Chunk*>;
                 void loadChunkMesh(int x, int y, int z);
                 void unloadChunk(int x, int y, int z);
 				void updateChunk(int x, int y, int z);
+
+				ChunkBlock getBlock(int x, int y, int z);
         };
         extern ChunkMap m_chunks;
 

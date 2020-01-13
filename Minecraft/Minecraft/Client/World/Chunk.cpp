@@ -320,6 +320,17 @@ void Chunk::Update()
 {
 }
 
+
+ChunkBlock ChunkManager::getBlock(int x, int y, int z){
+	ChunkBlock res = {0, 0};
+	
+	if(chunkExists(x/16, y/16, z/16)){
+		res = m_chunks[mc::Vector3i(x/16, y/16, z/16)]->blocks[x%16][y%16][z%16];
+	}
+
+	return res;
+}
+
 void Chunk::tryAddFaceToMesh(const short blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3f& blockFacing, int type, ChunkManager* man)
 {
 	
