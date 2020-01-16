@@ -346,56 +346,16 @@ void Chunk::tryAddFaceToMesh(const short blockFace[12], std::array<float, 8> tex
 	}
 	else { //Default generate
 
-		//So we now have a chunk out of bounds, lets find the coordinates and check if it's loaded.
-		mc::Vector3i v = {0, 0, 0};
-		if(blockFacing.x < 0){
-			v.x = chunk_x - 1;
-		}else if(blockFacing.x >= 16){
-			v.x = chunk_x + 1;
-		}
-
-		if(blockFacing.y < 0){
-			v.y = chunk_y - 1;
-		}else if(blockFacing.y >= 16){
-			v.y = chunk_y + 1;
-		}
-
-		if(blockFacing.z < 0){
-			v.z = chunk_z - 1;
-		}else if(blockFacing.z >= 16){
-			v.z = chunk_z + 1;
-		}
-
-		if(man->chunkExists(v.x, v.y, v.z)){
-			//If it exists, let's do the tests!
-		
-		mc::Vector3i blockPos = {0, 0, 0};
-
-		if(blockFacing.x < 0){
-			blockPos.x = blockFacing.x + 16;
-		}else if(blockFacing.x >= 16){
-			blockPos.x = blockFacing.x - 16;
-		}
-		if(blockFacing.y < 0){
-			blockPos.y = blockFacing.y + 16;
-		}else if(blockFacing.y >= 16){
-			blockPos.y = blockFacing.y - 16;
-		}
-		if(blockFacing.z < 0){
-			blockPos.z = blockFacing.z + 16;
-		}else if(blockFacing.z >= 16){
-			blockPos.z = blockFacing.z - 16;
-		}
-
-		ChunkBlock cblk = man->getChunk(v.x, v.y, v.z)->getBlockAtTranslatedLocation(blockPos.x, blockPos.y, blockPos.z);
+		ChunkBlock cblk = man->getBlock(blockFacing.x + chunk_x * CHUNK_SIZE,blockFacing.y + chunk_y * CHUNK_SIZE, blockFacing.z + chunk_z * CHUNK_SIZE);
 		Block blk = BlockData::InstancePointer()->blockData[cblk.ID];
 
 		if(blk.transparent || blk.ID == 0){
 			numFaces++;
 			mesh->addFace(type, blockFace, texCoords, {chunk_x, chunk_y, chunk_z}, blockPosition);
 		}
+
+
 		}
 	}
 	
-}
 }
