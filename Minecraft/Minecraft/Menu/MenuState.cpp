@@ -34,8 +34,6 @@ namespace Minecraft::Menus{
 		std::string s(os.str());
 
 
-		Logging::log("RAM BEFORE MENU: " + s, Logging::LOGGER_LEVEL_TRACE);
-
         t = Timer();
         Common::g_OptionsManager.init();
         //BGM!!!
@@ -129,9 +127,6 @@ namespace Minecraft::Menus{
 		std::ostringstream os2;
 		os2 << ram;
 		std::string s1(os2.str());
-
-
-		Logging::log("RAM DURING MENU: " + s1, Logging::LOGGER_LEVEL_TRACE);
     }
 
 	void MenuState::Enter(){
@@ -308,6 +303,11 @@ namespace Minecraft::Menus{
                optionsMultiplayerScreenUpdate(sManager);
                break;
             }
+
+            case MENU_STATE_RESOURCE_PACK:{
+                optionsResourceScreenUpdate();
+                break;
+            }
         }
     }
     
@@ -323,15 +323,6 @@ namespace Minecraft::Menus{
         g_RenderManager.SetOrtho(); //Into 2D Mode for menu pass
         menuPass();
 
-        
-        #ifdef DEBUG
-        g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-        
-        u32 ramFree = Input::freeMemory();
-        
-        g_RenderManager.DebugPrint(240, 15, "RAM: %.3f MB", ((float)ramFree) / 1024.0f / 1024.0f );
-        #endif
-		
         g_RenderManager.EndFrame();
     }
 
@@ -377,6 +368,11 @@ namespace Minecraft::Menus{
 
             case MENU_STATE_MULTIPLAYER:{
                 optionsMultiplayerScreenDraw();
+                break;
+            }
+
+            case MENU_STATE_RESOURCE_PACK:{
+                optionsResourceScreenDraw();
                 break;
             }
         }   

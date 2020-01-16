@@ -39,6 +39,7 @@ namespace Minecraft::Menus{
 		MENU_STATE_CHAT_SETTINGS = 6,
 		MENU_STATE_SNOOPER = 7,
 		MENU_STATE_MULTIPLAYER = 8,
+		MENU_STATE_RESOURCE_PACK = 9
 	};
 
     class MenuState : public GameState{
@@ -85,6 +86,9 @@ namespace Minecraft::Menus{
 
 		void optionsMultiplayerScreenDraw();
 		void optionsMultiplayerScreenUpdate(StateManager* sManager);
+
+		void optionsResourceScreenDraw();
+		void optionsResourceScreenUpdate();
 
         OSL_SOUND* bgm, *button;
 		Panorama* panorama;

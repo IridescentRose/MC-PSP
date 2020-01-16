@@ -219,7 +219,12 @@ namespace Minecraft::Menus{
                 }
                 if(selectPosY == 4){
                     //RESOURCE PACKS
-                    //TODO: ASK DARTH!
+                    selectPosX = 0;
+                    selectPosY = 0;
+                    selectRegion = 0;
+                    previous_states = menu_states;
+                    menu_states = MENU_STATE_RESOURCE_PACK;
+                    
                 }
             }
             if(selectRegion == 1){ //RIGHT SIDE
