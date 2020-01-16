@@ -149,6 +149,8 @@ namespace Minecraft::Menus{
                 if(Input::KeyPressed(PSP_CTRL_CROSS)){
                     if(selectPosY == 0){
                         //SINGLE PLAYER MENU
+
+                        terrain_atlas = TextureUtil::LoadPng("assets/minecraft/textures/terrain_atlas.png");
 						Client::SPClient* client = new Client::SPClient();
 						
 						client->Init(); //Connect!

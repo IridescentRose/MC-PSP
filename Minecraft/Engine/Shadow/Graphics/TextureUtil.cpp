@@ -23,6 +23,7 @@ Texture* TextureUtil::LoadPng(std::string fileName, bool vram)
 }
 
 std::vector<std::string> texPacksEnabled;
+std::vector<std::string> texPacksDisabled;
 
 Texture* TextureUtil::LoadPngTexturePack(std::string filename, bool vram) {
 	Texture* tex = NULL;

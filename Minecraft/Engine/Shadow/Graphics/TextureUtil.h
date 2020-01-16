@@ -21,6 +21,7 @@
 #include <pspdisplay.h>
 
 extern std::vector<std::string> texPacksEnabled;
+extern std::vector<std::string> texPacksDisabled;
 
 class TextureUtil {
 public:
