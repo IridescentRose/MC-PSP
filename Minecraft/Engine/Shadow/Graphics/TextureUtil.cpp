@@ -28,8 +28,8 @@ std::vector<std::string> texPacksDisabled;
 Texture* TextureUtil::LoadPngTexturePack(std::string filename, bool vram) {
 	Texture* tex = NULL;
 	for (int i = 0; i < texPacksEnabled.size(); i++) {
-		Logging::trace("ATTEMPTING LOAD AT: " + std::string("resourcepacks/") + texPacksEnabled[i] + "assets/minecraft/textures/" + filename);
-		tex = LoadPng("resourcepacks/" + texPacksEnabled[i] + "assets/minecraft/textures/" + filename, vram);
+		Logging::trace("ATTEMPTING LOAD AT: " + std::string("resourcepacks/") + texPacksEnabled[i] + "/assets/minecraft/textures/" + filename);
+		tex = LoadPng("resourcepacks/" + texPacksEnabled[i] + "/assets/minecraft/textures/" + filename, vram);
 		if (tex != NULL) {
 			return tex;
 		}

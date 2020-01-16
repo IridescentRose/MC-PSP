@@ -24,7 +24,7 @@ namespace Minecraft::Menus{
 		remove(Logging::logFile.c_str());
 		Logging::logging_level = Logging::LOGGER_LEVEL_TRACE; //Most "verbose"
 
-
+        texPacksEnabled.push_back("EX3");
 
 		u32 ramFree = freeMemory();
 		float ram = ((float)ramFree) / 1024.0f / 1024.0f;
