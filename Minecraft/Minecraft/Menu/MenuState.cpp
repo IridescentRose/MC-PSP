@@ -1,5 +1,6 @@
 #include "MenuState.hpp"
 #include <Shadow/Utils/Logger.h>
+#include <sys/stat.h>
 #include "../Client/World/BlockData.h"
 namespace Minecraft::Menus{
 
@@ -29,6 +30,18 @@ namespace Minecraft::Menus{
 		std::ostringstream os;
 		os << ram;
 		std::string s(os.str());
+
+        struct stat buffer;
+
+        if(stat("resourcepacks.txt", &buffer) == 0){
+            std::fstream file("resourcepacks.txt");
+
+            std::string str;
+            file >> str;
+
+            texPacksEnabled.push_back(str);
+
+        }
 
 
         t = Timer();
