@@ -1,6 +1,6 @@
 # MC-PSP
 
-MC-PSP is a mod to Woolio's Minecraft-PSP Edition.
+MC-PSP is a brand new Minecraft port for the PSP!
 
 # News
 
