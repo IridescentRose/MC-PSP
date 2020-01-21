@@ -185,9 +185,9 @@ void Minecraft::Client::World::FixedUpdate()
 	moon->Update((float)(timeData->time % 24000) / 24000.0f * 360.0f, timeData->worldAge);
 	rmg->timeUntilNext--;
 
-	if(lighting(timeData->time) != lastLevel){
+	if(lighting(timeData->time % 24000) != lastLevel){
 		//Lighting update
-		int newLevel = lighting(timeData->time);
+		int newLevel = lighting(timeData->time % 24000);
 
 		chunkMan->updateLightingAll(newLevel);
 		Logging::debug("NEW LIGHT LEVEL " + newLevel);
@@ -237,12 +237,13 @@ void Minecraft::Client::World::Draw()
 	sun->Draw();
 	moon->Draw();
 
-	//Clouds
-	clouds->Draw(p->getPosition(), timeData->time);
 
 	//Load Matrix For Offset Drawing
 	sceGumMatrixMode(GU_VIEW);
 	sceGumLoadMatrix(&p->viewMatrix);
+
+	//Clouds
+	clouds->Draw(p->getPosition(), timeData->time);
 	
 	//Draw stuff
 	terrain_atlas->bindTexture(0, 0, true);

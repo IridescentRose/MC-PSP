@@ -1,5 +1,7 @@
 #pragma once
 #include <unordered_map>
+#include <map>
+#include <vector>
 
 class Block {
 	public:
@@ -68,6 +70,7 @@ public:
 	static BlockData* InstancePointer();
 
 	BlockRegistry block_data;
+	std::vector<ChunkBlock> registered_blocks;
 
 protected:
 	static BlockData instance;

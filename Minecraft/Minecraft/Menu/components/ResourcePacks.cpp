@@ -44,7 +44,14 @@ namespace Minecraft::Menus{
     }
 
     void MenuState::optionsResourceScreenUpdate(){
+        if(Input::KeyPressed(PSP_CTRL_CROSS)){
+            menu_states = previous_states;
+            previous_states = MENU_STATE_RESOURCE_PACK;
 
+            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+
+            selectRegion = 0;
+        }
     }
 
 }

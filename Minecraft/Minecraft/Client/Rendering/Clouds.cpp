@@ -133,7 +133,7 @@ namespace Minecraft::Rendering {
 			alpha = 0.3f + 0.2f * (((float)dt - 22000) / 2000);
 		}
 
-		ScePspFVector3 v = { -256.0f, 128.0f , -256.0f };
+		ScePspFVector3 v = { -256.0f - pos.x , 128.0f , -256.0f - pos.z};
 		sceGumPushMatrix();
 		sceGumTranslate(&v);
 

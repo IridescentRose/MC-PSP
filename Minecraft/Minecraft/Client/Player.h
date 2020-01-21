@@ -74,6 +74,8 @@ namespace Minecraft {
 			bool sneak, sprint;
 			float tilt; //Extra
 
+			int currBlock;
+
 			bool changingFOV;
 			bool flyEnabled;
 			float fovChange;

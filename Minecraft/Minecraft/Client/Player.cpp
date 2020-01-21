@@ -27,6 +27,7 @@ namespace Minecraft {
 			tilt = 0;
 			fovChange = 0;
 			changingFOV = false;
+			currBlock = 0;
 		}
 		
 		Player::~Player()
@@ -282,12 +283,28 @@ namespace Minecraft {
 						}
 
 						e->placePositionAbsolute = mc::Vector3d((int)untrace.x, (int)untrace.y, (int)untrace.z);
-						e->blk = {2, 0};
+						e->blk = BlockData::InstancePointer()->registered_blocks[currBlock];
 						g_World->eventBus.push(e);
 						break;
 					}
 				}
 			}
+
+			if(Input::KeyPressed(PSP_CTRL_LEFT)){
+				currBlock--;
+				if(currBlock < 0){
+					currBlock = BlockData::InstancePointer()->registered_blocks.size() - 1;
+				}
+			}
+
+			if(Input::KeyPressed(PSP_CTRL_RIGHT)){
+				currBlock++;
+				if(currBlock == BlockData::InstancePointer()->registered_blocks.size()){
+					currBlock = 0;
+				}
+			}
+
+			
 
 		}
 		

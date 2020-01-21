@@ -273,7 +273,7 @@ void Chunk::generateData(){
 
 				if(rY + y <= 63){
 					blocks[x][y][z].ID = 1;
-					blocks[x][y][z].meta = 0;
+					blocks[x][y][z].meta = 2;
 				}else if(rY + y > 63 && rY + y < 67){
 					blocks[x][y][z].ID = 3;
 					blocks[x][y][z].meta = 0;
