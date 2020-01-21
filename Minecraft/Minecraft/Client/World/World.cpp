@@ -7,6 +7,8 @@
 #include <Shadow/System/Ram.h>
 #include "../../Version.hpp"
 
+#include "ChunkMesh.h"
+
 using namespace Shadow;
 using namespace Shadow::Utils;
 
@@ -40,7 +42,7 @@ void Minecraft::Client::World::Init()
 	chunkMan = new Terrain::ChunkManager();
 	chunkManagerThread = sceKernelCreateThread("ChunkManagementThread", chunkManagement, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(chunkManagerThread, 0, 0);
-
+	lastLevel = lighting(0);
 
 }
 
@@ -183,6 +185,16 @@ void Minecraft::Client::World::FixedUpdate()
 	moon->Update((float)(timeData->time % 24000) / 24000.0f * 360.0f, timeData->worldAge);
 	rmg->timeUntilNext--;
 
+	if(lighting(timeData->time) != lastLevel){
+		//Lighting update
+		int newLevel = lighting(timeData->time);
+
+		chunkMan->updateLightingAll(newLevel);
+		Logging::debug("NEW LIGHT LEVEL " + newLevel);
+
+		lastLevel = newLevel;
+	}
+
 }
 
 void Minecraft::Client::World::Draw()
@@ -233,7 +245,7 @@ void Minecraft::Client::World::Draw()
 	sceGumLoadMatrix(&p->viewMatrix);
 	
 	//Draw stuff
-	terrain_atlas->bindTexture();
+	terrain_atlas->bindTexture(0, 0, true);
 	
 	for(const auto& [key, chnk] : chunkMan->getChunks()){
 		if(chnk->hasMesh){
@@ -256,7 +268,7 @@ int Minecraft::Client::World::tickUpdate(SceSize args, void* argp)
 {
 	while (true) {
 		g_World->FixedUpdate();
-		sceKernelDelayThread(1000 * 50); //1000 microseconds in a millisecond, and update 20 times per second, so 50ms
+		sceKernelDelayThread(1000 * 5); //1000 microseconds in a millisecond, and update 20 times per second, so 50ms
 	}
 
 	return 0;

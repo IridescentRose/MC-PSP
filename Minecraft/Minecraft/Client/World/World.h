@@ -59,9 +59,9 @@ namespace Minecraft::Client {
 		float fps;
 
 		std::queue<Event*> eventBus;
+		TickTime* timeData;
 
 	private:
-		TickTime* timeData;
 		SceUID tickUpdateThread;
 		SceUID chunkManagerThread;
 
@@ -76,6 +76,8 @@ namespace Minecraft::Client {
 
 		static int tickUpdate(SceSize args, void* argp);
 		static int chunkManagement(SceSize args, void* argp);
+
+		int lastLevel;
 
 	};
 

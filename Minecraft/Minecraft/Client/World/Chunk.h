@@ -22,6 +22,7 @@ public:
 	void generateMesh(ChunkManager* man);
 	void deleteMesh();
 	void updateMesh(ChunkManager* man);
+	void updateLighting(int level);
 
 	void Draw();
 	void Update();
@@ -55,6 +56,7 @@ using ChunkMap = std::map<mc::Vector3i, Chunk*>;
                 void loadChunkMesh(int x, int y, int z);
                 void unloadChunk(int x, int y, int z);
 				void updateChunk(int x, int y, int z);
+				void updateLightingAll(int level);
 
 				ChunkBlock getBlock(int x, int y, int z);
         };

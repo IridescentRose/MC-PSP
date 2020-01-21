@@ -14,11 +14,14 @@ namespace std
     }
 }
 
+extern int lighting(float time);
+
 namespace Minecraft::Terrain {
 
 	typedef struct
 	{
 		float u, v;
+		unsigned int color;
 		float x, y, z;
 	}__attribute__((packed)) ChunkVertex16;
 
@@ -50,6 +53,8 @@ namespace Minecraft::Terrain {
 		std::vector<ChunkVertex16> rightVertexData;
 		std::vector<ChunkVertex16> topVertexData;
 		std::vector<ChunkVertex16> bottomVertexData;
+
+		void updateLighting(int level);
 	};
 
 	struct ChunkMeshCollection
