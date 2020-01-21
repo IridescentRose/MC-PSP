@@ -122,6 +122,13 @@ const short crossPlane2[12] =
 	1, 1, 0,
 	0, 1, 1,
 };
+const short xFace1[12]{
+    0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0,
+};
+
+const short xFace2[12]{
+    0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1,
+};
 
 struct LocalFaces{
 	void update(int x, int y, int z)
@@ -228,7 +235,15 @@ void Chunk::generateMesh(ChunkManager* man)
 					}
 				}
 
-				//TODO: ADD CROSS PLANE BLOCKS LATER (flowers, grass, etc)
+				//CROSS PLANE
+				if(blockData->renderType == 1){
+					mesh->addFace(0, xFace1, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z} , position);
+					mesh->addFace(0, xFace2, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z} , position);
+					continue;
+				}
+
+
+				//TODO: WHEAT TYPE
 
 				faces.update(x, y, z);
 
@@ -310,6 +325,8 @@ void Chunk::Draw()
 	
 
 	sceGuDisable(GU_CULL_FACE);
+	sceGuEnable(GU_ALPHA_TEST);
+	sceGuBlendFunc(GU_ADD, GU_SRC_ALPHA, GU_ONE_MINUS_SRC_ALPHA, 0, 0);
 	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.floraMesh.topVertexData.size(), 0, meshes.floraMesh.topVertexData.data());
 	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.floraMesh.bottomVertexData.size(), 0, meshes.floraMesh.bottomVertexData.data());
 	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.floraMesh.frontVertexData.size(), 0, meshes.floraMesh.frontVertexData.data());
@@ -324,6 +341,7 @@ void Chunk::Draw()
 	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.waterMesh.leftVertexData.size(), 0, meshes.waterMesh.leftVertexData.data());
 	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.waterMesh.rightVertexData.size(), 0, meshes.waterMesh.rightVertexData.data());
 	
+	sceGuDisable(GU_ALPHA_TEST);
 	sceGuDisable(GU_BLEND);
 	sceGuDisable(GU_TEXTURE_2D);
 	sceGuDisable(GU_CULL_FACE);
