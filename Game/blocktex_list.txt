@@ -298,6 +298,7 @@ glass_pane_top_brown
 glass_pane_top_red
 leaves_acacia
 leaves_big_oak
+log_acacia_top
 log_acacia
 log_big_oak_top
 log_big_oak
