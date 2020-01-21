@@ -29,9 +29,9 @@ line = fp.readline()
 count = 0
 while line:
     if len(sys.argv) - 1 == 0:
-        atlas.paste(Image.open("assets/minecraft/textures/blocks/" + line.strip() + ".png") , (count * default_size, count // COLUMNS * default_size))
+        atlas.paste(Image.open("assets/minecraft/textures/blocks/" + line.strip() + ".png") , ( (count % COLUMNS) * default_size, count // COLUMNS * default_size))
     else:
-        atlas.paste(Image.open("assets/minecraft/textures/items/" + line.strip() + ".png") , (count * default_size, count // COLUMNS * default_size))
+        atlas.paste(Image.open("assets/minecraft/textures/items/" + line.strip() + ".png") , ((count % COLUMNS) * default_size, count // COLUMNS * default_size))
     line = fp.readline()
     count = count + 1
 
