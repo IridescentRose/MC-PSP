@@ -210,10 +210,10 @@ void Chunk::generateMesh(ChunkManager* man)
 					continue;
 				}
 
-				Block blockData = BlockData::InstancePointer()->blockData[temp.ID];
+				Block* blockData = BlockData::InstancePointer()->block_data[temp];
 				//Multi mesh support (similar to gbuffers)
 
-				switch(blockData.meshType){
+				switch(blockData->meshType){
 					case 0:{
 						mesh = &meshes.solidMesh;
 						break;
@@ -232,16 +232,16 @@ void Chunk::generateMesh(ChunkManager* man)
 
 				faces.update(x, y, z);
 
-				tryAddFaceToMesh(bottomFace, getTextureAtlasIndex(blockData.bottomAtlas), position, faces.down, TYPE_BOTTOM, man);
-				tryAddFaceToMesh(topFace, getTextureAtlasIndex(blockData.topAtlas), position, faces.up, TYPE_TOP, man);
+				tryAddFaceToMesh(bottomFace, getTextureAtlasIndex(blockData->bottomAtlas), position, faces.down, TYPE_BOTTOM, man);
+				tryAddFaceToMesh(topFace, getTextureAtlasIndex(blockData->topAtlas), position, faces.up, TYPE_TOP, man);
 
 				//Left/ Right
-				tryAddFaceToMesh(leftFace, getTextureAtlasIndex(blockData.leftAtlas), position, faces.left, TYPE_LEFT, man);
-				tryAddFaceToMesh(rightFace, getTextureAtlasIndex(blockData.rightAtlas), position, faces.right, TYPE_RIGHT, man);
+				tryAddFaceToMesh(leftFace, getTextureAtlasIndex(blockData->leftAtlas), position, faces.left, TYPE_LEFT, man);
+				tryAddFaceToMesh(rightFace, getTextureAtlasIndex(blockData->rightAtlas), position, faces.right, TYPE_RIGHT, man);
 
 				//Front/ Back
-				tryAddFaceToMesh(frontFace, getTextureAtlasIndex(blockData.frontAtlas), position, faces.front, TYPE_FRONT, man);
-				tryAddFaceToMesh(backFace, getTextureAtlasIndex(blockData.backAtlas), position, faces.back, TYPE_BACK, man);
+				tryAddFaceToMesh(frontFace, getTextureAtlasIndex(blockData->frontAtlas), position, faces.front, TYPE_FRONT, man);
+				tryAddFaceToMesh(backFace, getTextureAtlasIndex(blockData->backAtlas), position, faces.back, TYPE_BACK, man);
 
 			}
 		}
@@ -275,10 +275,10 @@ void Chunk::generateData(){
 					blocks[x][y][z].ID = 1;
 					blocks[x][y][z].meta = 0;
 				}else if(rY + y > 63 && rY + y < 67){
-					blocks[x][y][z].ID = 2;
+					blocks[x][y][z].ID = 3;
 					blocks[x][y][z].meta = 0;
 				}else if(rY + y == 67){
-					blocks[x][y][z].ID = 3;
+					blocks[x][y][z].ID = 2;
 					blocks[x][y][z].meta = 0;
 				}else{
 					blocks[x][y][z].ID = 0;
@@ -364,9 +364,9 @@ void Chunk::tryAddFaceToMesh(const short blockFace[12], std::array<float, 8> tex
 	
 	if ((blockFacing.x >= 0 && blockFacing.x < 16) && (blockFacing.y >= 0 && blockFacing.y < 16) && (blockFacing.z >= 0 && blockFacing.z < 16)) {
 		ChunkBlock cblk = blocks[(int)blockFacing.x][(int)blockFacing.y][(int)blockFacing.z];
-		Block blk = BlockData::InstancePointer()->blockData[cblk.ID];
+		Block* blk = BlockData::InstancePointer()->block_data[cblk];
 
-		if(blk.transparent || blk.ID == 0){
+		if(blk->transparent || cblk.ID == 0){
 			numFaces++;
 			mesh->addFace(type, blockFace, texCoords, {chunk_x, chunk_y, chunk_z}, blockPosition);
 		}
@@ -375,9 +375,9 @@ void Chunk::tryAddFaceToMesh(const short blockFace[12], std::array<float, 8> tex
 	else { //Default generate
 
 		ChunkBlock cblk = man->getBlock(blockFacing.x + chunk_x * CHUNK_SIZE,blockFacing.y + chunk_y * CHUNK_SIZE, blockFacing.z + chunk_z * CHUNK_SIZE);
-		Block blk = BlockData::InstancePointer()->blockData[cblk.ID];
+		Block* blk = BlockData::InstancePointer()->block_data[cblk];
 
-		if(blk.transparent || blk.ID == 0){
+		if(blk->transparent || cblk.ID == 0){
 			numFaces++;
 			mesh->addFace(type, blockFace, texCoords, {chunk_x, chunk_y, chunk_z}, blockPosition);
 		}
