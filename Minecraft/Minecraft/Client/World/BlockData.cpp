@@ -302,6 +302,140 @@ void BlockData::loadBlockData()
 	registered_blocks.push_back(ChunkBlock(42, 0));
 
 
+	block_data.emplace(ChunkBlock(43, 0), new Block(103, 103, 104, 104, 104, 104, 
+												0, 0, false, false, false));
+
+	block_data.emplace(ChunkBlock(43, 1), new Block(54, 55, 56, 56, 56, 56, 
+												0, 0, false, false, false));
+	block_data.emplace(ChunkBlock(43, 2), new Block(16, 16, 16, 16, 16, 16, 
+												0, 0, false, false, false));
+	block_data.emplace(ChunkBlock(43, 3), new Block(15, 15, 15, 15, 15, 15, 
+												0, 0, false, false, false));
+	block_data.emplace(ChunkBlock(43, 4), new Block(105, 105, 105, 105, 105, 105, 
+												0, 0, false, false, false));
+	block_data.emplace(ChunkBlock(43, 5), new Block(184, 184, 184, 184, 184, 184, 
+												0, 0, false, false, false));
+	block_data.emplace(ChunkBlock(43, 6), new Block(202, 202, 202, 202, 202, 202, 
+												0, 0, false, false, false));
+	block_data.emplace(ChunkBlock(43, 7), new Block(262, 262, 262, 262, 262, 262, 
+												0, 0, false, false, false));
+
+
+	//TODO: SLAVS!
+	//TODO: SLAVS!
+	//TODO: SLAVS!
+	//TODO: SLAVS!
+	//TODO: SLAVS!
+	//TODO: SLAVS!
+	//TODO: SLAVS!
+	//TODO: SLAVS!
+	//TODO: SLAVS!
+
+
+
+	block_data.emplace(ChunkBlock(45, 0), new Block(105, 105, 105, 105, 105, 105, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(45, 0));
+	block_data.emplace(ChunkBlock(46, 0), new Block(106, 108, 107, 107, 107, 107, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(46, 0));
+	block_data.emplace(ChunkBlock(47, 0), new Block(16, 16, 109, 109, 109, 109, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(47, 0));
+	block_data.emplace(ChunkBlock(48, 0), new Block(110, 110, 110, 110, 110, 110, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(48, 0));
+	block_data.emplace(ChunkBlock(49, 0), new Block(111, 111, 111, 111, 111, 111, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(49, 0));
+
+
+	//TODO: TORCHES
+	//TODO: FIRE
+
+	block_data.emplace(ChunkBlock(52, 0), new Block(113, 113, 113, 113, 113, 113, 
+												0, 0, true, false, false));
+	registered_blocks.push_back(ChunkBlock(52, 0));
+
+	//TODO: STAIRS
+	//TODO: BLOCK ENTITY CHEST
+
+	block_data.emplace(ChunkBlock(56, 0), new Block(116, 116, 116, 116, 116, 116, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(56, 0));
+	block_data.emplace(ChunkBlock(57, 0), new Block(117, 117, 117, 117, 117, 117, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(57, 0));
+	block_data.emplace(ChunkBlock(58, 0), new Block(118, 16, 120, 119, 119, 119, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(58, 0));
+
+	//WHEAT CROPS
+
+	block_data.emplace(ChunkBlock(60, 0), new Block(129, 11, 11, 11, 11, 11, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(60, 0));
+	block_data.emplace(ChunkBlock(61, 0), new Block(131, 131, 134, 132, 132, 132, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(61, 0));
+	block_data.emplace(ChunkBlock(62, 0), new Block(131, 131, 133, 132, 132, 132, 
+												0, 0, false, true, false));
+	registered_blocks.push_back(ChunkBlock(62, 0));
+
+	//TODO: SIGN, DOOR, LADDER, RAIl, STAIRS, SIGN, LEVER, PP, DOOR, PP
+
+	block_data.emplace(ChunkBlock(73, 0), new Block(143, 143, 143, 143, 143, 143, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(73, 0));
+	block_data.emplace(ChunkBlock(74, 0), new Block(143, 143, 143, 143, 143, 143, 
+												0, 0, false, true, false));
+	registered_blocks.push_back(ChunkBlock(74, 0));
+
+	//TODO: TORCH, BUTTON, RAIL
+
+
+	block_data.emplace(ChunkBlock(79, 0), new Block(147, 147, 147, 147, 147, 147, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(79, 0));
+	block_data.emplace(ChunkBlock(80, 0), new Block(146, 146, 146, 146, 146, 146, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(80, 0));
+
+	//TODO: CACTUS
+
+	block_data.emplace(ChunkBlock(82, 0), new Block(151, 151, 151, 151, 151, 151, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(82, 0));
+	block_data.emplace(ChunkBlock(83, 0), new Block(152, 152, 152, 152, 152, 152, 
+												1, 1, true, false, false));
+	registered_blocks.push_back(ChunkBlock(83, 0));
+	block_data.emplace(ChunkBlock(84, 0), new Block(153, 154, 154, 154, 154, 154, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(84, 0));
+
+	//TODO: FENCE!
+
+	block_data.emplace(ChunkBlock(86, 0), new Block(155, 155, 158, 156, 156, 156, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(86, 0));
+	block_data.emplace(ChunkBlock(87, 0), new Block(159, 159, 159, 159, 159, 159, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(87, 0));
+	block_data.emplace(ChunkBlock(88, 0), new Block(160, 160, 160, 160, 160, 160, 
+												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(88, 0));
+	block_data.emplace(ChunkBlock(89, 0), new Block(161, 161, 161, 161, 161, 161, 
+												0, 0, false, true, false));
+	registered_blocks.push_back(ChunkBlock(89, 0));
+	
+	//TODO: PORTAL
+
+	block_data.emplace(ChunkBlock(91, 0), new Block(155, 155, 157, 156, 156, 156, 
+												0, 0, false, true, false));
+	registered_blocks.push_back(ChunkBlock(91, 0));
+
+	//TODO: CAKE, REPEATERS
+
 }
 BlockData BlockData::instance;
 

@@ -153,8 +153,8 @@ namespace Minecraft::Menus{
                         terrain_atlas = TextureUtil::LoadPng("assets/minecraft/textures/terrain_atlas.png");
 						Client::SPClient* client = new Client::SPClient();
 						
-						client->Init(); //Connect!
-						//TODO: CHECK CONNECTION FAILS?
+						client->Init();
+                        
 						sManager->PushState(client);
                     }
                     if(selectPosY == 1){
