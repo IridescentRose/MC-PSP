@@ -160,6 +160,46 @@ const float carpetL[12] =
 	0, 0.0625, 0,
 };
 
+const float slabT[12]{
+	0, 0.5, 0,
+	1, 0.5, 0,
+	1, 0.5, 1,
+	0, 0.5, 1,
+};
+
+const float slabB[12] =
+{
+	0, 0, 0,
+	0, 0.5, 0,
+	1, 0.5, 0,
+	1, 0, 0,
+};
+
+const float slabF[12] =
+{
+	0, 0, 1,
+	1, 0, 1,
+	1, 0.5, 1,
+	0, 0.5, 1,
+};
+
+const float slabR[12] =
+{
+	1, 0, 0,
+	1, 0.5, 0,
+	1, 0.5, 1,
+	1, 0, 1,
+};
+
+const float slabL[12] =
+{
+
+	0, 0, 0,
+	0, 0, 1,
+	0, 0.5, 1,
+	0, 0.5, 0,
+};
+
 const float paneL[12] = 
 {
 	0.5, 0, 0,
@@ -307,6 +347,23 @@ void Chunk::generateMesh(ChunkManager* man)
 
 				if(blockData->renderType == 5){
 					mesh->addFace(TYPE_RIGHT, paneL, getTextureAtlasIndex(blockData->rightAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					continue;
+				}
+
+				if(blockData->renderType == 6){					
+					
+					std::array<float, 8> coords = getTextureAtlasIndex(blockData->leftAtlas);
+					
+					coords[5] = (coords[5] - coords[1]) / 2.f + coords[1];
+					coords[7] = (coords[7] - coords[3]) / 2.f + coords[1];
+
+					mesh->addFace(TYPE_LEFT, slabL, coords, {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_RIGHT, slabR, coords, {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_FRONT, slabF, coords, {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_BACK, slabB, coords, {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_TOP, slabT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
+
+					mesh->addFace(TYPE_BOTTOM, bottomFace, getTextureAtlasIndex(blockData->bottomAtlas), {chunk_x, chunk_y, chunk_z}, position);
 					continue;
 				}
 

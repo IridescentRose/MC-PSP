@@ -305,33 +305,56 @@ void BlockData::loadBlockData()
 
 	block_data.emplace(ChunkBlock(43, 0), new Block(103, 103, 104, 104, 104, 104, 
 												0, 0, false, false, false));
-
+	registered_blocks.push_back(ChunkBlock(43, 0));
 	block_data.emplace(ChunkBlock(43, 1), new Block(54, 55, 56, 56, 56, 56, 
 												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(43, 1));
 	block_data.emplace(ChunkBlock(43, 2), new Block(16, 16, 16, 16, 16, 16, 
 												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(43, 2));
 	block_data.emplace(ChunkBlock(43, 3), new Block(15, 15, 15, 15, 15, 15, 
 												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(43, 3));
 	block_data.emplace(ChunkBlock(43, 4), new Block(105, 105, 105, 105, 105, 105, 
 												0, 0, false, false, false));
-	block_data.emplace(ChunkBlock(43, 5), new Block(184, 184, 184, 184, 184, 184, 
+	registered_blocks.push_back(ChunkBlock(43, 4));
+	block_data.emplace(ChunkBlock(43, 5), new Block(185, 185, 185, 185, 185, 185, 
 												0, 0, false, false, false));
-	block_data.emplace(ChunkBlock(43, 6), new Block(202, 202, 202, 202, 202, 202, 
+	registered_blocks.push_back(ChunkBlock(43, 5));
+	block_data.emplace(ChunkBlock(43, 6), new Block(203, 203, 203, 203, 203, 203, 
 												0, 0, false, false, false));
-	block_data.emplace(ChunkBlock(43, 7), new Block(262, 262, 262, 262, 262, 262, 
+	registered_blocks.push_back(ChunkBlock(43, 6));
+	block_data.emplace(ChunkBlock(43, 7), new Block(263, 263, 263, 263, 263, 263, 
 												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(43, 7));
 
 
-	//TODO: SLAVS!
-	//TODO: SLAVS!
-	//TODO: SLAVS!
-	//TODO: SLAVS!
-	//TODO: SLAVS!
-	//TODO: SLAVS!
-	//TODO: SLAVS!
-	//TODO: SLAVS!
-	//TODO: SLAVS!
+	//SLAVS!
 
+	block_data.emplace(ChunkBlock(44, 0), new Block(103, 103, 104, 104, 104, 104, 
+												1, 6, true, false, false));
+	registered_blocks.push_back(ChunkBlock(44, 0));
+	block_data.emplace(ChunkBlock(44, 1), new Block(54, 55, 56, 56, 56, 56, 
+												1, 6, true, false, false));
+	registered_blocks.push_back(ChunkBlock(44, 1));
+	block_data.emplace(ChunkBlock(44, 2), new Block(16, 16, 16, 16, 16, 16, 
+												1, 6, true, false, false));
+	registered_blocks.push_back(ChunkBlock(44, 2));
+	block_data.emplace(ChunkBlock(44, 3), new Block(15, 15, 15, 15, 15, 15, 
+												1, 6, true, false, false));
+	registered_blocks.push_back(ChunkBlock(44, 3));
+	block_data.emplace(ChunkBlock(44, 4), new Block(105, 105, 105, 105, 105, 105, 
+												1, 6, true, false, false));
+	registered_blocks.push_back(ChunkBlock(44, 4));
+	block_data.emplace(ChunkBlock(44, 5), new Block(185, 185, 185, 185, 185, 185, 
+												1, 6, true, false, false));
+	registered_blocks.push_back(ChunkBlock(44, 5));
+	block_data.emplace(ChunkBlock(44, 6), new Block(203, 203, 203, 203, 203, 203, 
+												1, 6, true, false, false));
+	registered_blocks.push_back(ChunkBlock(44, 6));
+	block_data.emplace(ChunkBlock(44, 7), new Block(263, 263, 263, 263, 263, 263, 
+												1, 6, true, false, false));
+	registered_blocks.push_back(ChunkBlock(44, 7));
 
 
 	block_data.emplace(ChunkBlock(45, 0), new Block(105, 105, 105, 105, 105, 105, 
@@ -614,6 +637,26 @@ void BlockData::loadBlockData()
 												0, 0, false, false, false));
 	registered_blocks.push_back(ChunkBlock(125, 5));
 
+	block_data.emplace(ChunkBlock(126, 0), new Block(16, 16, 16, 16, 16, 16, 
+												1, 6, false, false, false));
+	registered_blocks.push_back(ChunkBlock(126, 0));
+	block_data.emplace(ChunkBlock(126, 1), new Block(17, 17, 17, 17, 17, 17, 
+												1, 6, false, false, false));
+	registered_blocks.push_back(ChunkBlock(126, 1));
+	block_data.emplace(ChunkBlock(126, 2), new Block(18, 18, 18, 18, 18, 18, 
+												1, 6, false, false, false));
+	registered_blocks.push_back(ChunkBlock(126, 2));
+	block_data.emplace(ChunkBlock(126, 3), new Block(19, 19, 19, 19, 19, 19, 
+												1, 6, false, false, false));
+	registered_blocks.push_back(ChunkBlock(126, 3));
+	block_data.emplace(ChunkBlock(126, 4), new Block(20, 20, 20, 20, 20, 20, 
+												1, 6, false, false, false));
+	registered_blocks.push_back(ChunkBlock(126, 4));
+	block_data.emplace(ChunkBlock(126, 5), new Block(21, 21, 21, 21, 21, 21, 
+												1, 6, false, false, false));
+	registered_blocks.push_back(ChunkBlock(126, 5));
+
+
 	//TODO: LOTS OF STUFF
 
 	block_data.emplace(ChunkBlock(129, 0), new Block(226, 226, 226, 226, 226, 226, 
@@ -636,6 +679,10 @@ void BlockData::loadBlockData()
 	registered_blocks.push_back(ChunkBlock(137, 0));
 
 	//TODO: LOTS OF STUFF
+
+	block_data.emplace(ChunkBlock(151, 0), new Block(258, 259, 259, 259, 259, 259, 
+												1, 6, true, false, false));
+	registered_blocks.push_back(ChunkBlock(151, 0));
 
 	block_data.emplace(ChunkBlock(152, 0), new Block(261, 261, 261, 261, 261, 261, 
 												0, 0, false, false, false));
@@ -867,6 +914,10 @@ void BlockData::loadBlockData()
 
 	//TODO: LOTS OF STUFF
 
+
+	block_data.emplace(ChunkBlock(178, 0), new Block(260, 259, 259, 259, 259, 259, 
+												1, 6, true, false, false));
+	registered_blocks.push_back(ChunkBlock(178, 0));
 	block_data.emplace(ChunkBlock(179, 0), new Block(337, 338, 339, 339, 339, 339, 
 												0, 0, false, false, false));
 	registered_blocks.push_back(ChunkBlock(179, 0));
@@ -882,6 +933,9 @@ void BlockData::loadBlockData()
 	block_data.emplace(ChunkBlock(181, 0), new Block(337, 338, 339, 339, 339, 339, 
 												0, 0, false, false, false));
 	registered_blocks.push_back(ChunkBlock(181, 0));
+	block_data.emplace(ChunkBlock(182, 0), new Block(337, 338, 339, 339, 339, 339, 
+												1, 6, true, false, false));
+	registered_blocks.push_back(ChunkBlock(182, 0));
 
 	//FENCES DOORS AND SHIT
 
@@ -899,7 +953,9 @@ void BlockData::loadBlockData()
 												0, 0, false, false, false));
 	registered_blocks.push_back(ChunkBlock(204, 0));
 
-	//TODO: SLABS
+	block_data.emplace(ChunkBlock(205, 0), new Block(359, 359, 359, 359, 359, 359, 
+												1, 6, true, false, false));
+	registered_blocks.push_back(ChunkBlock(205, 0));
 
 	block_data.emplace(ChunkBlock(206, 0), new Block(359, 359, 359, 359, 359, 359, 
 												0, 0, false, false, false));
