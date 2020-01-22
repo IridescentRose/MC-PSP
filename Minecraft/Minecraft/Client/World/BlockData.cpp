@@ -169,6 +169,7 @@ void BlockData::loadBlockData()
 	registered_blocks.push_back(ChunkBlock(22, 0));
 	block_data.emplace(ChunkBlock(23, 0), new Block(130, 130, 53, 131, 131, 131, 
 												0, 0, false, false, false));
+	registered_blocks.push_back(ChunkBlock(23, 0));
 	block_data.emplace(ChunkBlock(24, 0), new Block(54, 55, 56, 56, 56, 56, 
 												0, 0, false, false, false));
 	registered_blocks.push_back(ChunkBlock(24, 0));
@@ -398,7 +399,7 @@ void BlockData::loadBlockData()
 												0, 0, false, false, false));
 	registered_blocks.push_back(ChunkBlock(79, 0));
 	block_data.emplace(ChunkBlock(80, 0), new Block(146, 146, 146, 146, 146, 146, 
-												0, 0, false, false, false));
+												0, 0, true, false, false));
 	registered_blocks.push_back(ChunkBlock(80, 0));
 
 	//TODO: CACTUS

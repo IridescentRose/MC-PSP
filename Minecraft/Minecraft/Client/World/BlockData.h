@@ -6,7 +6,7 @@
 class Block {
 	public:
 
-	Block(char tpa, char bta, char fra, char baa, char lta, char rta, char mT, char rT, bool tr, bool li, bool sp){
+	Block(short tpa, short bta, short fra, short baa, short lta, short rta, short mT, short rT, bool tr, bool li, bool sp){
 		topAtlas = tpa;
 		bottomAtlas = bta;
 		frontAtlas = fra;
@@ -22,7 +22,7 @@ class Block {
 		special = sp;
 	}
 
-	char topAtlas, bottomAtlas, frontAtlas, backAtlas, leftAtlas, rightAtlas, meshType, renderType;
+	short topAtlas, bottomAtlas, frontAtlas, backAtlas, leftAtlas, rightAtlas, meshType, renderType;
 	bool transparent;
 	bool lightSource;
 	bool special;
