@@ -160,6 +160,14 @@ const float carpetL[12] =
 	0, 0.0625, 0,
 };
 
+const float paneL[12] = 
+{
+	0.5, 0, 0,
+	0.5, 1, 0,
+	0.5, 1, 1,
+	0.5, 0, 1,
+};
+
 
 struct LocalFaces{
 	void update(int x, int y, int z)
@@ -292,6 +300,13 @@ void Chunk::generateMesh(ChunkManager* man)
 				//LADDER
 				if(blockData->renderType == 4){
 					mesh->addFace(TYPE_LEFT, ladder, getTextureAtlasIndex(blockData->rightAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					continue;
+				}
+
+				//PANE
+
+				if(blockData->renderType == 5){
+					mesh->addFace(TYPE_RIGHT, paneL, getTextureAtlasIndex(blockData->rightAtlas), {chunk_x, chunk_y, chunk_z}, position);
 					continue;
 				}
 
