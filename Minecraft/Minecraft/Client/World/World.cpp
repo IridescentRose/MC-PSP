@@ -130,6 +130,11 @@ void Minecraft::Client::World::Update(float dt)
 
 				if(ch->blocks[relPos.x][relPos.y][relPos.z].ID == 0){
 					ch->blocks[relPos.x][relPos.y][relPos.z] = b->blk;
+				}else{
+					relPos.y++;
+					if(ch->blocks[relPos.x][relPos.y][relPos.z].ID == 0){
+						ch->blocks[relPos.x][relPos.y][relPos.z] = b->blk;
+					}
 				}
 
 

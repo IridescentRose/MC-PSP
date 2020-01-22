@@ -120,6 +120,47 @@ const float ladder[12]{
 	0.9375, 1, 0,
 };
 
+const float carpetT[12]{
+	0, 0.0625, 0,
+	1, 0.0625, 0,
+	1, 0.0625, 1,
+	0, 0.0625, 1,
+};
+
+const float carpetB[12] =
+{
+	0, 0, 0,
+	0, 0.0625, 0,
+	1, 0.0625, 0,
+	1, 0, 0,
+};
+
+const float carpetF[12] =
+{
+	0, 0, 1,
+	1, 0, 1,
+	1, 0.0625, 1,
+	0, 0.0625, 1,
+};
+
+const float carpetR[12] =
+{
+	1, 0, 0,
+	1, 0.0625, 0,
+	1, 0.0625, 1,
+	1, 0, 1,
+};
+
+const float carpetL[12] =
+{
+
+	0, 0, 0,
+	0, 0, 1,
+	0, 0.0625, 1,
+	0, 0.0625, 0,
+};
+
+
 struct LocalFaces{
 	void update(int x, int y, int z)
 	{
@@ -229,6 +270,22 @@ void Chunk::generateMesh(ChunkManager* man)
 				if(blockData->renderType == 1){
 					mesh->addFace(0, xFace1, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z} , position);
 					mesh->addFace(0, xFace2, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z} , position);
+					continue;
+				}
+
+				//CARPET
+				if(blockData->renderType == 3){
+					std::array<float, 8> coords = getTextureAtlasIndex(blockData->topAtlas);
+					
+					coords[5] = (coords[5] - coords[1]) / 16.f + coords[1];
+					coords[7] = (coords[5] - coords[1]) / 16.f + coords[1];
+
+					mesh->addFace(TYPE_LEFT, carpetL, coords, {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_RIGHT, carpetR, coords, {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_FRONT, carpetF, coords, {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_BACK, carpetB, coords, {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_TOP, carpetT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
+
 					continue;
 				}
 
