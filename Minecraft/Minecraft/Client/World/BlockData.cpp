@@ -383,6 +383,10 @@ void BlockData::loadBlockData()
 												0, 0, false, true, false));
 	registered_blocks.push_back(ChunkBlock(62, 0));
 
+
+	block_data.emplace(ChunkBlock(65, 0), new Block(137, 137, 137, 137, 137, 137, 
+												1, 4, true, false, false));
+	registered_blocks.push_back(ChunkBlock(65, 0));
 	//TODO: SIGN, DOOR, LADDER, RAIl, STAIRS, SIGN, LEVER, PP, DOOR, PP
 
 	block_data.emplace(ChunkBlock(73, 0), new Block(143, 143, 143, 143, 143, 143, 
@@ -541,6 +545,10 @@ void BlockData::loadBlockData()
 	registered_blocks.push_back(ChunkBlock(105, 0));
 
 	//TODO: LADDER, FENCE GATE, STAIRS
+
+	block_data.emplace(ChunkBlock(106, 0), new Block(199, 199, 199, 199, 199, 199, 
+												1, 4, true, false, false));
+	registered_blocks.push_back(ChunkBlock(106, 0));
 
 	block_data.emplace(ChunkBlock(110, 0), new Block(200, 11, 201, 201, 201, 201, 
 												0, 0, false, false, false));

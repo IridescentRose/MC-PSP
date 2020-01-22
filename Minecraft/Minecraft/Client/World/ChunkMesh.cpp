@@ -87,7 +87,7 @@ namespace Minecraft::Terrain {
 		}
 	}
 
-	void ChunkMesh::addFace(int faceType, const short blockFace[12], std::array<float, 8> texCoords, mc::Vector3i chunkPosition, mc::Vector3i blockPosition)
+	void ChunkMesh::addFace(int faceType, const float blockFace[12], std::array<float, 8> texCoords, mc::Vector3i chunkPosition, mc::Vector3i blockPosition)
 	{
 		ChunkVertex16 v1, v2, v3, v4, v5, v6;
 

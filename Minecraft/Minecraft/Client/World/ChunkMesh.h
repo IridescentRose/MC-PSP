@@ -39,7 +39,7 @@ namespace Minecraft::Terrain {
 		ChunkMesh();
 		~ChunkMesh();
 
-		void addFace(int faceType, const short blockFace[12], std::array<float, 8> texCoords,
+		void addFace(int faceType, const float blockFace[12], std::array<float, 8> texCoords,
 			mc::Vector3i chunkPosition,
 			mc::Vector3i blockPosition);
 

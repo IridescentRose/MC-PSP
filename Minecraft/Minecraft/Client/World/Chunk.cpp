@@ -56,7 +56,7 @@ ChunkMap m_chunks;
 			m_chunks[mc::Vector3i(x,y,z)]->updateMesh(this);
 		}
 	}
-const short backFace[12] =
+const float backFace[12] =
 {
 	0, 0, 0,
 	0, 1, 0,
@@ -64,7 +64,7 @@ const short backFace[12] =
 	1, 0, 0,
 };
 
-const short frontFace[12] =
+const float frontFace[12] =
 {
 	0, 0, 1,
 	1, 0, 1,
@@ -72,7 +72,7 @@ const short frontFace[12] =
 	0, 1, 1,
 };
 
-const short rightFace[12] =
+const float rightFace[12] =
 {
 	1, 0, 0,
 	1, 1, 0,
@@ -80,7 +80,7 @@ const short rightFace[12] =
 	1, 0, 1,
 };
 
-const short leftFace[12] =
+const float leftFace[12] =
 {
 
 	0, 0, 0,
@@ -89,7 +89,7 @@ const short leftFace[12] =
 	0, 1, 0,
 };
 
-const short topFace[12] =
+const float topFace[12] =
 {
 	0, 1, 0,
 	0, 1, 1,
@@ -97,7 +97,7 @@ const short topFace[12] =
 	1, 1, 0
 };
 
-const short bottomFace[12] =
+const float bottomFace[12] =
 {
 	0, 0, 0,
 	1, 0, 0,
@@ -105,29 +105,19 @@ const short bottomFace[12] =
 	0, 0, 1,
 };
 
-
-
-const short crossPlane1[12] =
-{
-	0, 0, 0,
-	1, 0, 1,
-	1, 1, 1,
-	0, 1, 0,
-};
-
-const short crossPlane2[12] =
-{
-	0, 0, 1,
-	1, 0, 0,
-	1, 1, 0,
-	0, 1, 1,
-};
-const short xFace1[12]{
+const float xFace1[12]{
     0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0,
 };
 
-const short xFace2[12]{
+const float xFace2[12]{
     0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1,
+};
+
+const float ladder[12]{
+	0.9375, 0, 0,
+	0.9375, 0, 1,
+	0.9375, 1, 1,
+	0.9375, 1, 0,
 };
 
 struct LocalFaces{
@@ -239,6 +229,12 @@ void Chunk::generateMesh(ChunkManager* man)
 				if(blockData->renderType == 1){
 					mesh->addFace(0, xFace1, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z} , position);
 					mesh->addFace(0, xFace2, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z} , position);
+					continue;
+				}
+
+				//LADDER
+				if(blockData->renderType == 4){
+					mesh->addFace(TYPE_LEFT, ladder, getTextureAtlasIndex(blockData->rightAtlas), {chunk_x, chunk_y, chunk_z}, position);
 					continue;
 				}
 
@@ -377,7 +373,7 @@ void Chunk::updateLighting(int level){
 	meshes.waterMesh.updateLighting(level);
 }
 
-void Chunk::tryAddFaceToMesh(const short blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3f& blockFacing, int type, ChunkManager* man)
+void Chunk::tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3f& blockFacing, int type, ChunkManager* man)
 {
 	
 	if ((blockFacing.x >= 0 && blockFacing.x < 16) && (blockFacing.y >= 0 && blockFacing.y < 16) && (blockFacing.z >= 0 && blockFacing.z < 16)) {
