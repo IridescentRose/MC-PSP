@@ -39,7 +39,15 @@ namespace Shadow
 		class RenderManager
 		{
 		public:
+inline void DrawSetInverseColors()
+{
+    sceGuBlendFunc(GU_ABS, GU_ONE_MINUS_SRC_ALPHA, GU_SRC_ALPHA, 0, 0);
+}
 
+inline void DrawSetDefaultColors()
+{
+    sceGuBlendFunc(GU_ADD, GU_SRC_ALPHA, GU_ONE_MINUS_SRC_ALPHA, 0, 0);
+}
 			
 			float fovv;
 

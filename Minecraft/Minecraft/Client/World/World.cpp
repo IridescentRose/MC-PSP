@@ -44,6 +44,7 @@ void Minecraft::Client::World::Init()
 	sceKernelStartThread(chunkManagerThread, 0, 0);
 	lastLevel = lighting(0);
 
+	crosshair = new Sprite("assets/minecraft/textures/misc/cross.png", 8, 8, 16, 16);
 }
 
 void Minecraft::Client::World::Cleanup()
@@ -265,6 +266,15 @@ void Minecraft::Client::World::Draw()
 
 
 	g_RenderManager.SetOrtho();
+
+	g_RenderManager.DrawSetInverseColors();
+	
+	sceGuEnable(GU_BLEND);
+	crosshair->SetPosition(240, 136);
+	crosshair->Draw();
+
+
+	g_RenderManager.DrawSetDefaultColors();
 
 	g_RenderManager.SetFontStyle(0.8f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_LEFT, 0);
 	g_RenderManager.DebugPrint(0, 7, "%s v%s", GAME_NAME, (IS_SNAPSHOT) ? INTERNAL_SNAPSHOT : INTERNAL_VERSION);

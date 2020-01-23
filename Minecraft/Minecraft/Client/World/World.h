@@ -7,7 +7,7 @@
 #include "../Rendering/Stars.h"
 #include "../Rendering/Clouds.h"
 #include "../Audio/MusicManager.h"
-
+#include <Shadow/Graphics/Sprite.h>
 
 #include "../Player.h"
 #include "Chunk.h"
@@ -15,6 +15,7 @@
 #include "BlockData.h"
 
 using namespace Shadow::Utils;
+using namespace Shadow::Graphics;
 
 namespace Minecraft::Client {
 	class Player;
@@ -78,6 +79,8 @@ namespace Minecraft::Client {
 		static int chunkManagement(SceSize args, void* argp);
 
 		int lastLevel;
+
+		Sprite* crosshair;
 
 	};
 

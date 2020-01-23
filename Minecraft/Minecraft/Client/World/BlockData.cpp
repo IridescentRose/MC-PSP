@@ -167,7 +167,7 @@ void BlockData::loadBlockData()
 	block_data.emplace(ChunkBlock(22, 0), new Block(51, 51, 51, 51, 51, 51, 
 												0, 0, false, false, false));
 	registered_blocks.push_back(ChunkBlock(22, 0));
-	block_data.emplace(ChunkBlock(23, 0), new Block(130, 130, 53, 131, 131, 131, 
+	block_data.emplace(ChunkBlock(23, 0), new Block(131, 131, 53, 132, 132, 132, 
 												0, 0, false, false, false));
 	registered_blocks.push_back(ChunkBlock(23, 0));
 	block_data.emplace(ChunkBlock(24, 0), new Block(54, 55, 56, 56, 56, 56, 
