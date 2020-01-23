@@ -105,6 +105,39 @@ const float bottomFace[12] =
 	0, 0, 1,
 };
 
+const float wheatB[12] =
+{
+	0, 0, 0.25,
+	0, 1, 0.25,
+	1, 1, 0.25,
+	1, 0, 0.25,
+};
+
+const float wheatF[12] =
+{
+	0, 0, 0.75,
+	1, 0, 0.75,
+	1, 1, 0.75,
+	0, 1, 0.75,
+};
+
+const float wheatR[12] =
+{
+	0.75, 0, 0,
+	0.75, 1, 0,
+	0.75, 1, 1,
+	0.75, 0, 1,
+};
+
+const float wheatL[12] =
+{
+
+	0.25, 0, 0,
+	0.25, 0, 1,
+	0.25, 1, 1,
+	0.25, 1, 0,
+};
+
 const float xFace1[12]{
     0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0,
 };
@@ -422,6 +455,16 @@ void Chunk::generateMesh(ChunkManager* man)
 					mesh->addFace(TYPE_TOP, farmT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
 
 					mesh->addFace(TYPE_BOTTOM, bottomFace, getTextureAtlasIndex(blockData->bottomAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					continue;
+				}
+
+				if(blockData->renderType == 8){					
+					
+
+					mesh->addFace(TYPE_LEFT, wheatL, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_RIGHT, wheatR, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_FRONT, wheatF, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_BACK, wheatB, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
 					continue;
 				}
 

@@ -398,7 +398,10 @@ void BlockData::loadBlockData()
 												0, 0, false, false, false));
 	registered_blocks.push_back(ChunkBlock(58, 0));
 
-	//WHEAT CROPS
+
+	block_data.emplace(ChunkBlock(59, 0), new Block(128, 128, 128, 128, 128, 128, 
+												1, 8, true, false, false));
+	registered_blocks.push_back(ChunkBlock(59, 0));
 
 	block_data.emplace(ChunkBlock(60, 0), new Block(129, 11, 11, 11, 11, 11, 
 												1, 7, true, false, false));
@@ -606,6 +609,9 @@ void BlockData::loadBlockData()
 	registered_blocks.push_back(ChunkBlock(112, 0));
 
 	//TODO: LOTS OF STUFF
+	block_data.emplace(ChunkBlock(115, 0), new Block(206, 206, 206, 206, 206, 206, 
+												1, 8, true, false, false));
+	registered_blocks.push_back(ChunkBlock(115, 0));
 
 	
 	block_data.emplace(ChunkBlock(121, 0), new Block(219, 219, 219, 219, 219, 219, 
@@ -679,6 +685,14 @@ void BlockData::loadBlockData()
 	registered_blocks.push_back(ChunkBlock(137, 0));
 
 	//TODO: LOTS OF STUFF
+
+	block_data.emplace(ChunkBlock(141, 0), new Block(247, 247, 247, 247, 247, 247, 
+												1, 8, true, false, false));
+	registered_blocks.push_back(ChunkBlock(141, 0));
+	block_data.emplace(ChunkBlock(142, 0), new Block(251, 251, 251, 251, 251, 251, 
+												1, 8, true, false, false));
+	registered_blocks.push_back(ChunkBlock(142, 0));
+	
 
 	block_data.emplace(ChunkBlock(151, 0), new Block(258, 259, 259, 259, 259, 259, 
 												1, 6, true, false, false));
@@ -960,6 +974,10 @@ void BlockData::loadBlockData()
 	block_data.emplace(ChunkBlock(206, 0), new Block(359, 359, 359, 359, 359, 359, 
 												0, 0, false, false, false));
 	registered_blocks.push_back(ChunkBlock(206, 0));
+
+	block_data.emplace(ChunkBlock(207, 0), new Block(363, 363, 363, 363, 363, 363, 
+												1, 8, true, false, false));
+	registered_blocks.push_back(ChunkBlock(207, 0));
 
 	block_data.emplace(ChunkBlock(208, 0), new Block(364, 11, 365, 365, 365, 365, 
 												1, 7, true, false, false));
