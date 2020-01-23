@@ -233,6 +233,45 @@ const float slabL[12] =
 	0, 0.5, 0,
 };
 
+const float ppT[12]{
+	0.0625, 0.125, 0.0625,
+	0.9375, 0.125, 0.0625,
+	0.9375, 0.125, 0.9375,
+	0.0625, 0.125, 0.9375,
+};
+
+const float ppB[12] =
+{
+	0.0625, 0, 0.0625,
+	0.0625, 0.125, 0.0625,
+	0.9375, 0.125, 0.0625,
+	0.9375, 0, 0.0625,
+};
+
+const float ppF[12] =
+{
+	0.0625, 0, 0.9375,
+	0.9375, 0, 0.9375,
+	0.9375, 0.125, 0.9375,
+	0.0625, 0.125, 0.9375,
+};
+
+const float ppR[12] =
+{
+	0.9375, 0, 0.0625,
+	0.9375, 0.125, 0.0625,
+	0.9375, 0.125, 0.9375,
+	0.9375, 0, 0.9375,
+};
+
+const float ppL[12] =
+{
+
+	0.0625, 0, 0.0625,
+	0.0625, 0, 0.9375,
+	0.0625, 0.125, 0.9375,
+	0.0625, 0.125, 0.0625,
+};
 
 const float farmT[12]{
 	0, 0.9375, 0,
@@ -465,6 +504,22 @@ void Chunk::generateMesh(ChunkManager* man)
 					mesh->addFace(TYPE_RIGHT, wheatR, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
 					mesh->addFace(TYPE_FRONT, wheatF, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
 					mesh->addFace(TYPE_BACK, wheatB, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					continue;
+				}
+
+				//Pressure Plate
+				if(blockData->renderType == 9){
+					std::array<float, 8> coords = getTextureAtlasIndex(blockData->topAtlas);
+					
+					coords[5] = (coords[5] - coords[1]) / 8.f + coords[1];
+					coords[7] = (coords[7] - coords[3]) / 8.f + coords[1];
+
+					mesh->addFace(TYPE_LEFT, ppL, coords, {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_RIGHT, ppR, coords, {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_FRONT, ppF, coords, {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_BACK, ppB, coords, {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_TOP, ppT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
+
 					continue;
 				}
 
