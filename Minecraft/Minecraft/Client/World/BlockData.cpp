@@ -401,7 +401,7 @@ void BlockData::loadBlockData()
 	//WHEAT CROPS
 
 	block_data.emplace(ChunkBlock(60, 0), new Block(129, 11, 11, 11, 11, 11, 
-												0, 0, false, false, false));
+												1, 7, true, false, false));
 	registered_blocks.push_back(ChunkBlock(60, 0));
 	block_data.emplace(ChunkBlock(61, 0), new Block(131, 131, 134, 132, 132, 132, 
 												0, 0, false, false, false));
@@ -638,22 +638,22 @@ void BlockData::loadBlockData()
 	registered_blocks.push_back(ChunkBlock(125, 5));
 
 	block_data.emplace(ChunkBlock(126, 0), new Block(16, 16, 16, 16, 16, 16, 
-												1, 6, false, false, false));
+												1, 6, true, false, false));
 	registered_blocks.push_back(ChunkBlock(126, 0));
 	block_data.emplace(ChunkBlock(126, 1), new Block(17, 17, 17, 17, 17, 17, 
-												1, 6, false, false, false));
+												1, 6, true, false, false));
 	registered_blocks.push_back(ChunkBlock(126, 1));
 	block_data.emplace(ChunkBlock(126, 2), new Block(18, 18, 18, 18, 18, 18, 
-												1, 6, false, false, false));
+												1, 6, true, false, false));
 	registered_blocks.push_back(ChunkBlock(126, 2));
 	block_data.emplace(ChunkBlock(126, 3), new Block(19, 19, 19, 19, 19, 19, 
-												1, 6, false, false, false));
+												1, 6, true, false, false));
 	registered_blocks.push_back(ChunkBlock(126, 3));
 	block_data.emplace(ChunkBlock(126, 4), new Block(20, 20, 20, 20, 20, 20, 
-												1, 6, false, false, false));
+												1, 6, true, false, false));
 	registered_blocks.push_back(ChunkBlock(126, 4));
 	block_data.emplace(ChunkBlock(126, 5), new Block(21, 21, 21, 21, 21, 21, 
-												1, 6, false, false, false));
+												1, 6, true, false, false));
 	registered_blocks.push_back(ChunkBlock(126, 5));
 
 
@@ -962,7 +962,7 @@ void BlockData::loadBlockData()
 	registered_blocks.push_back(ChunkBlock(206, 0));
 
 	block_data.emplace(ChunkBlock(208, 0), new Block(364, 11, 365, 365, 365, 365, 
-												0, 0, false, false, false));
+												1, 7, true, false, false));
 	registered_blocks.push_back(ChunkBlock(208, 0));
 
 	//TODO: SPECIAL
