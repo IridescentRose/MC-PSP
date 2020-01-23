@@ -451,7 +451,9 @@ void BlockData::loadBlockData()
 												0, 0, true, false, false));
 	registered_blocks.push_back(ChunkBlock(80, 0));
 
-	//TODO: CACTUS
+	block_data.emplace(ChunkBlock(81, 0), new Block(148, 150, 149, 149, 149, 149, 
+												1, 10, true, false, false));
+	registered_blocks.push_back(ChunkBlock(81, 0));
 
 	block_data.emplace(ChunkBlock(82, 0), new Block(151, 151, 151, 151, 151, 151, 
 												0, 0, false, false, false));

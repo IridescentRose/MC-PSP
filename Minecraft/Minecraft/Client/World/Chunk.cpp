@@ -273,6 +273,51 @@ const float ppL[12] =
 	0.0625, 0.125, 0.0625,
 };
 
+const float cacT[12]{
+	0.0625, 1, 0.0625,
+	0.9375, 1, 0.0625,
+	0.9375, 1, 0.9375,
+	0.0625, 1, 0.9375,
+};
+const float cacB[12]{
+	0.0625, 0, 0.0625,
+	0.9375, 0, 0.0625,
+	0.9375, 0, 0.9375,
+	0.0625, 0, 0.9375,
+};
+const float cacBa[12] =
+{
+	0.0625, 0, 0.125,
+	0.0625, 1, 0.125,
+	0.9375, 1, 0.125,
+	0.9375, 0, 0.125,
+};
+
+const float cacF[12] =
+{
+	0.0625, 0, 0.875,
+	0.9375, 0, 0.875,
+	0.9375, 1, 0.875,
+	0.0625, 1, 0.875,
+};
+
+const float cacR[12] =
+{
+	0.875, 0, 0.0625,
+	0.875, 1, 0.0625,
+	0.875, 1, 0.9375,
+	0.875, 0, 0.9375,
+};
+
+const float cacL[12] =
+{
+
+	0.125, 0, 0.0625,
+	0.125, 0, 0.9375,
+	0.125, 1, 0.9375,
+	0.125, 1, 0.0625,
+};
+
 const float farmT[12]{
 	0, 0.9375, 0,
 	1, 0.9375, 0,
@@ -504,6 +549,18 @@ void Chunk::generateMesh(ChunkManager* man)
 					mesh->addFace(TYPE_RIGHT, wheatR, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
 					mesh->addFace(TYPE_FRONT, wheatF, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
 					mesh->addFace(TYPE_BACK, wheatB, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					continue;
+				}
+
+				if(blockData->renderType == 10){					
+					
+
+					mesh->addFace(TYPE_LEFT, cacL, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_RIGHT, cacR, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_FRONT, cacF, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_BACK, cacBa, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_BOTTOM, cacB, getTextureAtlasIndex(blockData->bottomAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_TOP, cacT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
 					continue;
 				}
 
