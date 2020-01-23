@@ -374,11 +374,14 @@ void BlockData::loadBlockData()
 	registered_blocks.push_back(ChunkBlock(49, 0));
 
 
-	//TODO: TORCHES
+	block_data.emplace(ChunkBlock(50, 0), new Block(112, 112, 112, 112, 112, 112, 
+												1, 11, true, false, false));
+	registered_blocks.push_back(ChunkBlock(50, 0));
+
 	//TODO: FIRE
 
 	block_data.emplace(ChunkBlock(52, 0), new Block(113, 113, 113, 113, 113, 113, 
-												0, 0, true, false, false));
+												1, 0, true, false, false));
 	registered_blocks.push_back(ChunkBlock(52, 0));
 
 	//TODO: STAIRS
@@ -436,6 +439,14 @@ void BlockData::loadBlockData()
 	block_data.emplace(ChunkBlock(74, 0), new Block(143, 143, 143, 143, 143, 143, 
 												0, 0, false, true, false));
 	registered_blocks.push_back(ChunkBlock(74, 0));
+
+	block_data.emplace(ChunkBlock(75, 0), new Block(144, 144, 144, 144, 144, 144, 
+												0, 0, false, true, false));
+	registered_blocks.push_back(ChunkBlock(75, 0));
+	block_data.emplace(ChunkBlock(76, 0), new Block(145, 145, 145, 145, 145, 145, 
+												0, 0, false, true, false));
+	registered_blocks.push_back(ChunkBlock(76, 0));
+	
 
 	//TODO: TORCH, BUTTON
 
