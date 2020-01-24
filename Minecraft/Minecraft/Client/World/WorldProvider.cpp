@@ -1,25 +1,40 @@
 #include "WorldProvider.h"
+#include <Shadow/Utils/Logger.h>
+
+using namespace Shadow::Utils;
 
 namespace Minecraft::Terrain{
 
     int WorldProvider::seed = 0;
+    PerlinNoise* WorldProvider::noise = NULL;
 
     void WorldProvider::generate(Chunk* c){
+
+		int rX = c->chunk_x * CHUNK_SIZE;
+		int rY = c->chunk_y * CHUNK_SIZE;
+		int rZ = c->chunk_z * CHUNK_SIZE;
+
+        int heightMap[16][16];
+
+        for(int x = 0; x < CHUNK_SIZE; x++){
+            for(int z = 0; z < CHUNK_SIZE; z++){
+                heightMap[x][z] = noise->noise((float)(rX + x) / 32.f, 0, (float)(rZ + z) / 32.f) * 35 + 35;
+            }
+        }
+
+
         for(int x = 0; x < CHUNK_SIZE; x++){
 		    for(int y = 0; y < CHUNK_SIZE; y++){
 			    for(int z = 0; z < CHUNK_SIZE; z++){
 
-				    int rX = c->chunk_x * CHUNK_SIZE;
-				    int rY = c->chunk_y * CHUNK_SIZE;
-				    int rZ = c->chunk_z * CHUNK_SIZE;
 
-				    if(rY + y <= 63){
+				    if(rY + y <= heightMap[x][z]){
 					    c->blocks[x][y][z].ID = 1;
-					    c->blocks[x][y][z].meta = 2;
-			    	}else if(rY + y > 63 && rY + y < 67){
+					    c->blocks[x][y][z].meta = 0;
+			    	}else if(rY + y > heightMap[x][z] && rY + y < heightMap[x][z] + 3){
 					    c->blocks[x][y][z].ID = 3;
 					    c->blocks[x][y][z].meta = 0;
-				    }else if(rY + y == 67){
+				    }else if(rY + y == heightMap[x][z] + 3){
 					    c->blocks[x][y][z].ID = 2;
 					    c->blocks[x][y][z].meta = 0;
 				    }else{

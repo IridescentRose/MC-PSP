@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Perlin.h"
 #include "Chunk.h"
 
 namespace Minecraft::Terrain{
@@ -10,7 +11,7 @@ namespace Minecraft::Terrain{
         static void generate(Chunk* chunk);
 
         static int seed;
-
+        static PerlinNoise* noise;
     };
 
 

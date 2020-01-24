@@ -48,6 +48,7 @@ void Minecraft::Client::World::Init()
 
 	srand(time(0));
 	Terrain::WorldProvider::seed = rand();
+	Terrain::WorldProvider::noise = new PerlinNoise(Terrain::WorldProvider::seed);
 }
 
 void Minecraft::Client::World::Cleanup()

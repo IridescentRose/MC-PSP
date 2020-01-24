@@ -39,6 +39,7 @@ Minecraft/Client/Player.o \
 Minecraft/Client/SPClient.o \
 Minecraft/Client/World/BlockData.o \
 Minecraft/Client/World/Chunk.o \
+Minecraft/Client/World/Perlin.o \
 Minecraft/Client/World/WorldProvider.o \
 Minecraft/Client/World/ChunkMesh.o \
 Minecraft/Client/Audio/MusicManager.o \
