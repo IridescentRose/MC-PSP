@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageOps
 import sys
  
 
@@ -29,9 +29,13 @@ line = fp.readline()
 count = 0
 while line:
     if len(sys.argv) - 1 == 0:
-        atlas.paste(Image.open("assets/minecraft/textures/blocks/" + line.strip() + ".png") , ( (count % COLUMNS) * default_size, count // COLUMNS * default_size))
+        img = Image.open("assets/minecraft/textures/blocks/" + line.strip() + ".png")
+        img_flip = ImageOps.mirror(img) 
+        atlas.paste( img_flip, ( (count % COLUMNS) * default_size, count // COLUMNS * default_size))
     else:
-        atlas.paste(Image.open("assets/minecraft/textures/items/" + line.strip() + ".png") , ((count % COLUMNS) * default_size, count // COLUMNS * default_size))
+        img = Image.open("assets/minecraft/textures/items/" + line.strip() + ".png")
+        img_flip = ImageOps.mirror(img) 
+        atlas.paste( img_flip, ( (count % COLUMNS) * default_size, count // COLUMNS * default_size))
     line = fp.readline()
     count = count + 1
 
