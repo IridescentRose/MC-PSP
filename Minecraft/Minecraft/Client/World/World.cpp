@@ -45,6 +45,9 @@ void Minecraft::Client::World::Init()
 	lastLevel = lighting(0);
 
 	crosshair = new Sprite("assets/minecraft/textures/misc/cross.png", 8, 8, 16, 16);
+
+	srand(time(0));
+	Terrain::WorldProvider::seed = rand();
 }
 
 void Minecraft::Client::World::Cleanup()

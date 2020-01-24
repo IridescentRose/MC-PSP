@@ -704,32 +704,8 @@ void Chunk::updateMesh(ChunkManager* man)
 	deleteMesh();
 	generateMesh(man);
 }
-
 void Chunk::generateData(){
-	for(int x = 0; x < CHUNK_SIZE; x++){
-		for(int y = 0; y < CHUNK_SIZE; y++){
-			for(int z = 0; z < CHUNK_SIZE; z++){
-
-				int rX = chunk_x * CHUNK_SIZE;
-				int rY = chunk_y * CHUNK_SIZE;
-				int rZ = chunk_z * CHUNK_SIZE;
-
-				if(rY + y <= 63){
-					blocks[x][y][z].ID = 1;
-					blocks[x][y][z].meta = 2;
-				}else if(rY + y > 63 && rY + y < 67){
-					blocks[x][y][z].ID = 3;
-					blocks[x][y][z].meta = 0;
-				}else if(rY + y == 67){
-					blocks[x][y][z].ID = 2;
-					blocks[x][y][z].meta = 0;
-				}else{
-					blocks[x][y][z].ID = 0;
-					blocks[x][y][z].meta = 0;
-				}
-			}
-		}	
-	}
+	WorldProvider::generate(this);
 }
 
 void Chunk::Draw()

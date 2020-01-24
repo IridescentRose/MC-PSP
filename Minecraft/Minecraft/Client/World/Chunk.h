@@ -4,12 +4,13 @@
 #include <mclib/common/Vector.h>
 #include "BlockData.h"
 #include <map>
+#include "WorldProvider.h"
 #define CHUNK_SIZE 16
 
 namespace Minecraft::Terrain{
 
 class ChunkManager;
-
+class WorldProvider;
 class Chunk {
 public:
 	Chunk();
