@@ -1,5 +1,6 @@
 TARGET = Minecraft
 OBJS = Engine/Shadow/Audio/sound_utils/pgeWav.o \
+Minecraft/Client/World/BlockData.o \
 Engine/Shadow/Audio/sound_utils/vfsFile.o \
 Engine/Shadow/Audio/sound_utils/VirtualFile.o \
 Engine/Shadow/Audio/sound_utils/audio.o \
@@ -37,7 +38,6 @@ Minecraft/Menu/components/Panorama.o \
 Minecraft/Client/World/World.o \
 Minecraft/Client/Player.o \
 Minecraft/Client/SPClient.o \
-Minecraft/Client/World/BlockData.o \
 Minecraft/Client/World/Chunk.o \
 Minecraft/Client/World/Perlin.o \
 Minecraft/Client/World/WorldProvider.o \
