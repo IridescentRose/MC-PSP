@@ -263,6 +263,11 @@ void Minecraft::Client::World::Draw()
 			chnk->Draw();
 		}
 	}
+	for(const auto& [key, chnk] : chunkMan->getChunks()){
+		if(chnk->hasMesh){
+			chnk->DrawTrans();
+		}
+	}
 
 
 	g_RenderManager.SetOrtho();

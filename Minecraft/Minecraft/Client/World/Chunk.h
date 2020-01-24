@@ -25,6 +25,7 @@ public:
 	void updateLighting(int level);
 
 	void Draw();
+	void DrawTrans();
 	void Update();
 
 	void tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3f& blockFacing, int type, ChunkManager* man, mc::Vector3f colorOffsets);
