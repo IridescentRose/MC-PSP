@@ -39,6 +39,10 @@ void Minecraft::Client::World::Init()
 	tickUpdateThread = sceKernelCreateThread("TickUpdateThread", tickUpdate, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(tickUpdateThread, 0, 0);
 
+	srand(time(0));
+	Terrain::WorldProvider::seed = rand();
+	Terrain::WorldProvider::noise = new PerlinNoise(Terrain::WorldProvider::seed);
+	
 	chunkMan = new Terrain::ChunkManager();
 	chunkManagerThread = sceKernelCreateThread("ChunkManagementThread", chunkManagement, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(chunkManagerThread, 0, 0);
@@ -46,9 +50,6 @@ void Minecraft::Client::World::Init()
 
 	crosshair = new Sprite("assets/minecraft/textures/misc/cross.png", 8, 8, 16, 16);
 
-	srand(time(0));
-	Terrain::WorldProvider::seed = rand();
-	Terrain::WorldProvider::noise = new PerlinNoise(Terrain::WorldProvider::seed);
 }
 
 void Minecraft::Client::World::Cleanup()
