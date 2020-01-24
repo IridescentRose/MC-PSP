@@ -483,6 +483,33 @@ std::array<float, 8> getTextureAtlasIndex(int idx){
 	};
 }
 
+mc::Vector3f getColorOffsets(ChunkBlock cblk, int side){
+
+	if(cblk.ID == 2 && side == TYPE_TOP){
+		return {83.f / 255.f * 1.8f, 157.f / 255.f * 1.6f, 52.f / 255.f * 1.8f};
+	}
+
+	if(cblk.ID == 31 && (cblk.meta == 1 || cblk.meta == 2)  ){
+		return {0.0f, 1.0f, 0.0f};
+	}else if (cblk.ID == 18 || cblk.ID == 161){
+		if(cblk.ID == 18){
+			if(cblk.meta == 1){
+				return {0.38, 0.6, 0.38};
+			}else if(cblk.meta == 2){
+				return {0.502, 0.655, 0.333};
+			}else{
+				return {0.0f, 1.0f, 0.0f};
+			}
+		}else{
+			return {0.0f, 1.0f, 0.0f};
+		}
+	}else if(cblk.ID == 104 || cblk.ID == 105 || cblk.ID == 106 || cblk.ID == 111){
+		return {0.0f, 1.0f, 0.0f};
+	}else{
+		return {1.0f, 1.0f, 1.0f};
+	}
+}
+
 void Chunk::generateMesh(ChunkManager* man)
 {
 	LocalFaces faces;
@@ -501,6 +528,8 @@ void Chunk::generateMesh(ChunkManager* man)
 				Block* blockData = BlockData::InstancePointer()->block_data[temp];
 				//Multi mesh support (similar to gbuffers)
 
+				mc::Vector3f cOff = getColorOffsets(temp, 0);
+
 				switch(blockData->meshType){
 					case 0:{
 						mesh = &meshes.solidMesh;
@@ -518,8 +547,8 @@ void Chunk::generateMesh(ChunkManager* man)
 
 				//CROSS PLANE
 				if(blockData->renderType == 1){
-					mesh->addFace(0, xFace1, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z} , position);
-					mesh->addFace(0, xFace2, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z} , position);
+					mesh->addFace(0, xFace1, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z} , position,cOff);
+					mesh->addFace(0, xFace2, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z} , position,cOff);
 					continue;
 				}
 
@@ -530,25 +559,25 @@ void Chunk::generateMesh(ChunkManager* man)
 					coords[5] = (coords[5] - coords[1]) / 16.f + coords[1];
 					coords[7] = (coords[5] - coords[1]) / 16.f + coords[1];
 
-					mesh->addFace(TYPE_LEFT, carpetL, coords, {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_RIGHT, carpetR, coords, {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_FRONT, carpetF, coords, {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_BACK, carpetB, coords, {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_TOP, carpetT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_LEFT, carpetL, coords, {chunk_x, chunk_y, chunk_z}, position,cOff);
+					mesh->addFace(TYPE_RIGHT, carpetR, coords, {chunk_x, chunk_y, chunk_z}, position,cOff);
+					mesh->addFace(TYPE_FRONT, carpetF, coords, {chunk_x, chunk_y, chunk_z}, position,cOff);
+					mesh->addFace(TYPE_BACK, carpetB, coords, {chunk_x, chunk_y, chunk_z}, position,cOff);
+					mesh->addFace(TYPE_TOP, carpetT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position,cOff);
 
 					continue;
 				}
 
 				//LADDER
 				if(blockData->renderType == 4){
-					mesh->addFace(TYPE_LEFT, ladder, getTextureAtlasIndex(blockData->rightAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_LEFT, ladder, getTextureAtlasIndex(blockData->rightAtlas), {chunk_x, chunk_y, chunk_z}, position,cOff);
 					continue;
 				}
 
 				//PANE
 
 				if(blockData->renderType == 5){
-					mesh->addFace(TYPE_RIGHT, paneL, getTextureAtlasIndex(blockData->rightAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_RIGHT, paneL, getTextureAtlasIndex(blockData->rightAtlas), {chunk_x, chunk_y, chunk_z}, position,cOff);
 					continue;
 				}
 
@@ -559,13 +588,13 @@ void Chunk::generateMesh(ChunkManager* man)
 					coords[5] = (coords[5] - coords[1]) / 2.f + coords[1];
 					coords[7] = (coords[7] - coords[3]) / 2.f + coords[1];
 
-					mesh->addFace(TYPE_LEFT, slabL, coords, {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_RIGHT, slabR, coords, {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_FRONT, slabF, coords, {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_BACK, slabB, coords, {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_TOP, slabT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_LEFT, slabL, coords, {chunk_x, chunk_y, chunk_z}, position,cOff);
+					mesh->addFace(TYPE_RIGHT, slabR, coords, {chunk_x, chunk_y, chunk_z}, position,cOff);
+					mesh->addFace(TYPE_FRONT, slabF, coords, {chunk_x, chunk_y, chunk_z}, position,cOff);
+					mesh->addFace(TYPE_BACK, slabB, coords, {chunk_x, chunk_y, chunk_z}, position,cOff);
+					mesh->addFace(TYPE_TOP, slabT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position,cOff);
 
-					mesh->addFace(TYPE_BOTTOM, bottomFace, getTextureAtlasIndex(blockData->bottomAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_BOTTOM, bottomFace, getTextureAtlasIndex(blockData->bottomAtlas), {chunk_x, chunk_y, chunk_z}, position,cOff);
 					continue;
 				}
 
@@ -576,49 +605,49 @@ void Chunk::generateMesh(ChunkManager* man)
 					coords[5] = (coords[5] - coords[1]) / 16.f * 15.f + coords[1];
 					coords[7] = (coords[7] - coords[3]) / 16.f * 15.f + coords[1];
 
-					mesh->addFace(TYPE_LEFT, farmL, coords, {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_RIGHT, farmR, coords, {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_FRONT, farmF, coords, {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_BACK, farmB, coords, {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_TOP, farmT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_LEFT, farmL, coords, {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_RIGHT, farmR, coords, {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_FRONT, farmF, coords, {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_BACK, farmB, coords, {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_TOP, farmT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
 
-					mesh->addFace(TYPE_BOTTOM, bottomFace, getTextureAtlasIndex(blockData->bottomAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_BOTTOM, bottomFace, getTextureAtlasIndex(blockData->bottomAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
 					continue;
 				}
 
 				if(blockData->renderType == 8){					
 					
 
-					mesh->addFace(TYPE_LEFT, wheatL, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_RIGHT, wheatR, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_FRONT, wheatF, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_BACK, wheatB, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_LEFT, wheatL, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_RIGHT, wheatR, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_FRONT, wheatF, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_BACK, wheatB, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
 					continue;
 				}
 
 				if(blockData->renderType == 10){					
 					
 
-					mesh->addFace(TYPE_LEFT, cacL, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_RIGHT, cacR, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_FRONT, cacF, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_BACK, cacBa, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_BOTTOM, cacB, getTextureAtlasIndex(blockData->bottomAtlas), {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_TOP, cacT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_LEFT, cacL, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_RIGHT, cacR, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_FRONT, cacF, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_BACK, cacBa, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_BOTTOM, cacB, getTextureAtlasIndex(blockData->bottomAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_TOP, cacT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
 					continue;
 				}
 
 				if(blockData->renderType == 11){					
 					
 
-					mesh->addFace(TYPE_LEFT, torL, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_RIGHT, torR, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_FRONT, torF, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_BACK, torBa, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_LEFT, torL, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_RIGHT, torR, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_FRONT, torF, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_BACK, torBa, getTextureAtlasIndex(blockData->leftAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
 
 
-					mesh->addFace(TYPE_BOTTOM, torB,getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_TOP, torT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_BOTTOM, torB,getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_TOP, torT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
 					continue;
 				}
 
@@ -629,11 +658,11 @@ void Chunk::generateMesh(ChunkManager* man)
 					coords[5] = (coords[5] - coords[1]) / 8.f + coords[1];
 					coords[7] = (coords[7] - coords[3]) / 8.f + coords[1];
 
-					mesh->addFace(TYPE_LEFT, ppL, coords, {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_RIGHT, ppR, coords, {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_FRONT, ppF, coords, {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_BACK, ppB, coords, {chunk_x, chunk_y, chunk_z}, position);
-					mesh->addFace(TYPE_TOP, ppT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position);
+					mesh->addFace(TYPE_LEFT, ppL, coords, {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_RIGHT, ppR, coords, {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_FRONT, ppF, coords, {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_BACK, ppB, coords, {chunk_x, chunk_y, chunk_z}, position, cOff);
+					mesh->addFace(TYPE_TOP, ppT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
 
 					continue;
 				}
@@ -643,16 +672,19 @@ void Chunk::generateMesh(ChunkManager* man)
 
 				faces.update(x, y, z);
 
-				tryAddFaceToMesh(bottomFace, getTextureAtlasIndex(blockData->bottomAtlas), position, faces.down, TYPE_BOTTOM, man);
-				tryAddFaceToMesh(topFace, getTextureAtlasIndex(blockData->topAtlas), position, faces.up, TYPE_TOP, man);
+				tryAddFaceToMesh(bottomFace, getTextureAtlasIndex(blockData->bottomAtlas), position, faces.down, TYPE_BOTTOM, man, cOff);
+
+				cOff = getColorOffsets(temp, 4);
+				tryAddFaceToMesh(topFace, getTextureAtlasIndex(blockData->topAtlas), position, faces.up, TYPE_TOP, man, cOff);
+				cOff = getColorOffsets(temp, 0);
 
 				//Left/ Right
-				tryAddFaceToMesh(leftFace, getTextureAtlasIndex(blockData->leftAtlas), position, faces.left, TYPE_LEFT, man);
-				tryAddFaceToMesh(rightFace, getTextureAtlasIndex(blockData->rightAtlas), position, faces.right, TYPE_RIGHT, man);
+				tryAddFaceToMesh(leftFace, getTextureAtlasIndex(blockData->leftAtlas), position, faces.left, TYPE_LEFT, man, cOff);
+				tryAddFaceToMesh(rightFace, getTextureAtlasIndex(blockData->rightAtlas), position, faces.right, TYPE_RIGHT, man, cOff);
 
 				//Front/ Back
-				tryAddFaceToMesh(frontFace, getTextureAtlasIndex(blockData->frontAtlas), position, faces.front, TYPE_FRONT, man);
-				tryAddFaceToMesh(backFace, getTextureAtlasIndex(blockData->backAtlas), position, faces.back, TYPE_BACK, man);
+				tryAddFaceToMesh(frontFace, getTextureAtlasIndex(blockData->frontAtlas), position, faces.front, TYPE_FRONT, man, cOff);
+				tryAddFaceToMesh(backFace, getTextureAtlasIndex(blockData->backAtlas), position, faces.back, TYPE_BACK, man, cOff);
 
 			}
 		}
@@ -773,7 +805,7 @@ void Chunk::updateLighting(int level){
 	meshes.waterMesh.updateLighting(level);
 }
 
-void Chunk::tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3f& blockFacing, int type, ChunkManager* man)
+void Chunk::tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3f& blockFacing, int type, ChunkManager* man, mc::Vector3f colorOffsets)
 {
 	
 	if ((blockFacing.x >= 0 && blockFacing.x < 16) && (blockFacing.y >= 0 && blockFacing.y < 16) && (blockFacing.z >= 0 && blockFacing.z < 16)) {
@@ -782,7 +814,7 @@ void Chunk::tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> tex
 
 		if(blk->transparent || cblk.ID == 0){
 			numFaces++;
-			mesh->addFace(type, blockFace, texCoords, {chunk_x, chunk_y, chunk_z}, blockPosition);
+			mesh->addFace(type, blockFace, texCoords, {chunk_x, chunk_y, chunk_z}, blockPosition, colorOffsets);
 		}
 
 	}
@@ -793,7 +825,7 @@ void Chunk::tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> tex
 
 		if(blk->transparent || cblk.ID == 0){
 			numFaces++;
-			mesh->addFace(type, blockFace, texCoords, {chunk_x, chunk_y, chunk_z}, blockPosition);
+			mesh->addFace(type, blockFace, texCoords, {chunk_x, chunk_y, chunk_z}, blockPosition, colorOffsets);
 		}
 
 

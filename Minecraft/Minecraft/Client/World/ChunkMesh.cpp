@@ -65,29 +65,50 @@ namespace Minecraft::Terrain {
 
 	void ChunkMesh::updateLighting(int level){
 
+		float lastLevel = (float) (level-1) / 16.0f;
+
+
 		float light = (float) level / 16.0f;
 
 		for(ChunkVertex16& v : frontVertexData){
-			v.color = GU_COLOR(light, light, light, 1.0f);
+		float b = (float) ( (v.color >> 16) & 0xFF ) / 255.f / lastLevel;
+		float g = (float) ( (v.color >> 8) & 0xFF ) / 255.f / lastLevel;
+		float r = (float) ( (v.color >> 0) & 0xFF ) / 255.f / lastLevel;
+			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
 		}
 		for(ChunkVertex16& v : backVertexData){
-			v.color = GU_COLOR(light, light, light, 1.0f);
+		float b = (float) ( (v.color >> 16) & 0xFF ) / 255.f / lastLevel;
+		float g = (float) ( (v.color >> 8) & 0xFF ) / 255.f / lastLevel;
+		float r = (float) ( (v.color >> 0) & 0xFF ) / 255.f / lastLevel;
+			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
 		}
 		for(ChunkVertex16& v : rightVertexData){
-			v.color = GU_COLOR(light, light, light, 1.0f);
+		float b = (float) ( (v.color >> 16) & 0xFF ) / 255.f / lastLevel;
+		float g = (float) ( (v.color >> 8) & 0xFF ) / 255.f / lastLevel;
+		float r = (float) ( (v.color >> 0) & 0xFF ) / 255.f / lastLevel;
+			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
 		}
 		for(ChunkVertex16& v : leftVertexData){
-			v.color = GU_COLOR(light, light, light, 1.0f);
+		float b = (float) ( (v.color >> 16) & 0xFF ) / 255.f / lastLevel;
+		float g = (float) ( (v.color >> 8) & 0xFF ) / 255.f / lastLevel;
+		float r = (float) ( (v.color >> 0) & 0xFF ) / 255.f / lastLevel;
+			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
 		}
 		for(ChunkVertex16& v : topVertexData){
-			v.color = GU_COLOR(light, light, light, 1.0f);
+		float b = (float) ( (v.color >> 16) & 0xFF ) / 255.f / lastLevel;
+		float g = (float) ( (v.color >> 8) & 0xFF ) / 255.f / lastLevel;
+		float r = (float) ( (v.color >> 0) & 0xFF ) / 255.f / lastLevel;
+			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
 		}
 		for(ChunkVertex16& v : bottomVertexData){
-			v.color = GU_COLOR(light, light, light, 1.0f);
+		float b = (float) ( (v.color >> 16) & 0xFF ) / 255.f / lastLevel;
+		float g = (float) ( (v.color >> 8) & 0xFF ) / 255.f / lastLevel;
+		float r = (float) ( (v.color >> 0) & 0xFF ) / 255.f / lastLevel;
+			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
 		}
 	}
 
-	void ChunkMesh::addFace(int faceType, const float blockFace[12], std::array<float, 8> texCoords, mc::Vector3i chunkPosition, mc::Vector3i blockPosition)
+	void ChunkMesh::addFace(int faceType, const float blockFace[12], std::array<float, 8> texCoords, mc::Vector3i chunkPosition, mc::Vector3i blockPosition, mc::Vector3f colorOffsets)
 	{
 		ChunkVertex16 v1, v2, v3, v4, v5, v6;
 
@@ -95,18 +116,18 @@ namespace Minecraft::Terrain {
 		float light = (float) l / 16.0f;
 
 		if(faceType != TYPE_BACK && faceType != TYPE_RIGHT){
-			v1 = {texCoords[0], texCoords[1], GU_COLOR(light, light, light, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
-			v2 = {texCoords[2], texCoords[3], GU_COLOR(light, light, light, 1.0f), blockFace[1 * 3 + 0] + blockPosition.x, blockFace[1 * 3 + 1] + blockPosition.y, blockFace[1 * 3 + 2] + blockPosition.z};
-			v3 = {texCoords[4], texCoords[5], GU_COLOR(light, light, light, 1.0f), blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
-			v4 = {texCoords[4], texCoords[5], GU_COLOR(light, light, light, 1.0f), blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
-			v5 = {texCoords[6], texCoords[7], GU_COLOR(light, light, light, 1.0f), blockFace[3 * 3 + 0] + blockPosition.x, blockFace[3 * 3 + 1] + blockPosition.y, blockFace[3 * 3 + 2] + blockPosition.z};
-			v6 = {texCoords[0], texCoords[1], GU_COLOR(light, light, light, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};}else{
-			v1 = {texCoords[2], texCoords[3], GU_COLOR(light, light, light, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
-			v2 = {texCoords[4], texCoords[5], GU_COLOR(light, light, light, 1.0f), blockFace[1 * 3 + 0] + blockPosition.x, blockFace[1 * 3 + 1] + blockPosition.y, blockFace[1 * 3 + 2] + blockPosition.z};
-			v3 = {texCoords[6], texCoords[7], GU_COLOR(light, light, light, 1.0f), blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
-			v4 = {texCoords[6], texCoords[7], GU_COLOR(light, light, light, 1.0f), blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
-			v5 = {texCoords[0], texCoords[1], GU_COLOR(light, light, light, 1.0f), blockFace[3 * 3 + 0] + blockPosition.x, blockFace[3 * 3 + 1] + blockPosition.y, blockFace[3 * 3 + 2] + blockPosition.z};
-			v6 = {texCoords[2], texCoords[3], GU_COLOR(light, light, light, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
+			v1 = {texCoords[0], texCoords[1], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
+			v2 = {texCoords[2], texCoords[3], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[1 * 3 + 0] + blockPosition.x, blockFace[1 * 3 + 1] + blockPosition.y, blockFace[1 * 3 + 2] + blockPosition.z};
+			v3 = {texCoords[4], texCoords[5], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
+			v4 = {texCoords[4], texCoords[5], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
+			v5 = {texCoords[6], texCoords[7], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[3 * 3 + 0] + blockPosition.x, blockFace[3 * 3 + 1] + blockPosition.y, blockFace[3 * 3 + 2] + blockPosition.z};
+			v6 = {texCoords[0], texCoords[1], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};}else{
+			v1 = {texCoords[2], texCoords[3], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
+			v2 = {texCoords[4], texCoords[5], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[1 * 3 + 0] + blockPosition.x, blockFace[1 * 3 + 1] + blockPosition.y, blockFace[1 * 3 + 2] + blockPosition.z};
+			v3 = {texCoords[6], texCoords[7], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
+			v4 = {texCoords[6], texCoords[7], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
+			v5 = {texCoords[0], texCoords[1], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[3 * 3 + 0] + blockPosition.x, blockFace[3 * 3 + 1] + blockPosition.y, blockFace[3 * 3 + 2] + blockPosition.z};
+			v6 = {texCoords[2], texCoords[3], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
 		}
 
 

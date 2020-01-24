@@ -41,7 +41,8 @@ namespace Minecraft::Terrain {
 
 		void addFace(int faceType, const float blockFace[12], std::array<float, 8> texCoords,
 			mc::Vector3i chunkPosition,
-			mc::Vector3i blockPosition);
+			mc::Vector3i blockPosition,
+			mc::Vector3f colorOffsets);
 
 		int faces;
 
