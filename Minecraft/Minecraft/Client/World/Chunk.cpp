@@ -757,6 +757,14 @@ void Chunk::DrawTrans()
 	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.floraMesh.backVertexData.size(), 0, meshes.floraMesh.backVertexData.data());
 	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.floraMesh.leftVertexData.size(), 0, meshes.floraMesh.leftVertexData.data());
 	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.floraMesh.rightVertexData.size(), 0, meshes.floraMesh.rightVertexData.data());
+
+	sceGuEnable(GU_CULL_FACE);
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.waterMesh.topVertexData.size(), 0, meshes.waterMesh.topVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.waterMesh.bottomVertexData.size(), 0, meshes.waterMesh.bottomVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.waterMesh.frontVertexData.size(), 0, meshes.waterMesh.frontVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.waterMesh.backVertexData.size(), 0, meshes.waterMesh.backVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.waterMesh.leftVertexData.size(), 0, meshes.waterMesh.leftVertexData.data());
+	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.waterMesh.rightVertexData.size(), 0, meshes.waterMesh.rightVertexData.data());
 	
 	sceGuDisable(GU_ALPHA_TEST);
 	sceGuDisable(GU_BLEND);
