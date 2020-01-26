@@ -12,6 +12,8 @@ v0.3 IS HERE! The game now has infinite worlds, building, and will be gaining mo
 
 Note: Some antivirus's false flag this as a Trojan, but I assure you that there is no harm. If you wish to view the install script, look here: <https://gist.github.com/NT-Bourgeois-Iridescence-Technologies/9358ff678038f9cfac0572b0f015d06a>
 
+If you want to see the Antivirus scans, 3 out of 68 find a false flag: <https://www.virustotal.com/gui/file/5aeed7d7abe038b2219ea1e25ad49e5cbf8df2fd04e92983f55f3806943e7df7/detection>
+
 2.) Plug in your PSP by USB. For this tutorial we will say that the drive letter is D, but please check with your system.
 
 3.) Run the installer and set your install directory to your D:/PSP/GAME/ folder
