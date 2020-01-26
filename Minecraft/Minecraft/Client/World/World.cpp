@@ -298,7 +298,7 @@ int Minecraft::Client::World::tickUpdate(SceSize args, void* argp)
 {
 	while (true) {
 		g_World->FixedUpdate();
-		sceKernelDelayThread(1000 * 50); //1000 microseconds in a millisecond, and update 20 times per second, so 50ms
+		sceKernelDelayThread(1000 * 5); //1000 microseconds in a millisecond, and update 20 times per second, so 50ms
 	}
 
 	return 0;

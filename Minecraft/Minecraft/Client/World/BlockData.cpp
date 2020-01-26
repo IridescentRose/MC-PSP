@@ -441,10 +441,10 @@ void BlockData::loadBlockData()
 	registered_blocks.push_back(ChunkBlock(74, 0));
 
 	block_data.emplace(ChunkBlock(75, 0), new Block(144, 144, 144, 144, 144, 144, 
-												1, 11, false, true, false));
+												1, 11, true, true, false));
 	registered_blocks.push_back(ChunkBlock(75, 0));
 	block_data.emplace(ChunkBlock(76, 0), new Block(145, 145, 145, 145, 145, 145, 
-												1, 11, false, true, false));
+												1, 11, true, true, false));
 	registered_blocks.push_back(ChunkBlock(76, 0));
 	
 
