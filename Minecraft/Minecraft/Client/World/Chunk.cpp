@@ -486,7 +486,7 @@ std::array<float, 8> getTextureAtlasIndex(int idx){
 mc::Vector3f getColorOffsets(ChunkBlock cblk, int side){
 
 	if(cblk.ID == 2 && side == TYPE_TOP){
-		return {83.f / 255.f * 1.8f, 157.f / 255.f * 1.6f, 52.f / 255.f * 1.8f};
+		return {83.f / 255.f * 1.4f, 157.f / 255.f * 1.6f, 52.f / 255.f * 1.8f};
 	}
 
 	if(cblk.ID == 31 && (cblk.meta == 1 || cblk.meta == 2)  ){
@@ -782,16 +782,16 @@ ChunkBlock ChunkManager::getBlock(int x, int y, int z){
 	return res;
 }
 
-void ChunkManager::updateLightingAll(int level){
+void ChunkManager::updateLightingAll(int level, int ll){
 	for(const auto& [key, chnk] : m_chunks){
-		chnk->updateLighting(level);
+		chnk->updateLighting(level, ll);
 	}
 }
 
-void Chunk::updateLighting(int level){
-	meshes.solidMesh.updateLighting(level);
-	meshes.floraMesh.updateLighting(level);
-	meshes.waterMesh.updateLighting(level);
+void Chunk::updateLighting(int level, int ll){
+	meshes.solidMesh.updateLighting(level, ll);
+	meshes.floraMesh.updateLighting(level, ll);
+	meshes.waterMesh.updateLighting(level, ll);
 }
 
 void Chunk::tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3f& blockFacing, int type, ChunkManager* man, mc::Vector3f colorOffsets)

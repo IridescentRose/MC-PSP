@@ -204,7 +204,7 @@ void Minecraft::Client::World::FixedUpdate()
 		//Lighting update
 		int newLevel = lighting(timeData->time % 24000);
 
-		chunkMan->updateLightingAll(newLevel);
+		chunkMan->updateLightingAll(newLevel, lastLevel);
 		Logging::debug("NEW LIGHT LEVEL " + newLevel);
 
 		lastLevel = newLevel;

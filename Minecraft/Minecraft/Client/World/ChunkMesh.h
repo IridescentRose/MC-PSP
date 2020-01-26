@@ -55,7 +55,7 @@ namespace Minecraft::Terrain {
 		std::vector<ChunkVertex16> topVertexData;
 		std::vector<ChunkVertex16> bottomVertexData;
 
-		void updateLighting(int level);
+		void updateLighting(int level, int lastLevel);
 	};
 
 	struct ChunkMeshCollection

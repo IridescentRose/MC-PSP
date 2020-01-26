@@ -63,47 +63,47 @@ namespace Minecraft::Terrain {
 
 
 
-	void ChunkMesh::updateLighting(int level){
+	void ChunkMesh::updateLighting(int level, int ll){
 
-		float lastLevel = (float) (level-1) / 16.0f;
+		float lastLevel = (float) (ll) / 16.0f;
 
 
 		float light = (float) level / 16.0f;
 
 		for(ChunkVertex16& v : frontVertexData){
-		float b = (float) ( (v.color >> 16) & 0xFF ) / 255.f / lastLevel;
-		float g = (float) ( (v.color >> 8) & 0xFF ) / 255.f / lastLevel;
-		float r = (float) ( (v.color >> 0) & 0xFF ) / 255.f / lastLevel;
+		float b = (float) ( (v.color >> 16) & 0xFF ) / 256.f / lastLevel;
+		float g = (float) ( (v.color >> 8) & 0xFF ) / 256.f / lastLevel;
+		float r = (float) ( (v.color >> 0) & 0xFF ) / 256.f / lastLevel;
 			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
 		}
 		for(ChunkVertex16& v : backVertexData){
-		float b = (float) ( (v.color >> 16) & 0xFF ) / 255.f / lastLevel;
-		float g = (float) ( (v.color >> 8) & 0xFF ) / 255.f / lastLevel;
-		float r = (float) ( (v.color >> 0) & 0xFF ) / 255.f / lastLevel;
+		float b = (float) ( (v.color >> 16) & 0xFF ) / 256.f / lastLevel;
+		float g = (float) ( (v.color >> 8) & 0xFF ) / 256.f / lastLevel;
+		float r = (float) ( (v.color >> 0) & 0xFF ) / 256.f / lastLevel;
 			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
 		}
 		for(ChunkVertex16& v : rightVertexData){
-		float b = (float) ( (v.color >> 16) & 0xFF ) / 255.f / lastLevel;
-		float g = (float) ( (v.color >> 8) & 0xFF ) / 255.f / lastLevel;
-		float r = (float) ( (v.color >> 0) & 0xFF ) / 255.f / lastLevel;
+		float b = (float) ( (v.color >> 16) & 0xFF ) / 256.f / lastLevel;
+		float g = (float) ( (v.color >> 8) & 0xFF ) / 256.f / lastLevel;
+		float r = (float) ( (v.color >> 0) & 0xFF ) / 256.f / lastLevel;
 			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
 		}
 		for(ChunkVertex16& v : leftVertexData){
-		float b = (float) ( (v.color >> 16) & 0xFF ) / 255.f / lastLevel;
-		float g = (float) ( (v.color >> 8) & 0xFF ) / 255.f / lastLevel;
-		float r = (float) ( (v.color >> 0) & 0xFF ) / 255.f / lastLevel;
+		float b = (float) ( (v.color >> 16) & 0xFF ) / 256.f / lastLevel;
+		float g = (float) ( (v.color >> 8) & 0xFF ) / 256.f / lastLevel;
+		float r = (float) ( (v.color >> 0) & 0xFF ) / 256.f / lastLevel;
 			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
 		}
 		for(ChunkVertex16& v : topVertexData){
-		float b = (float) ( (v.color >> 16) & 0xFF ) / 255.f / lastLevel;
-		float g = (float) ( (v.color >> 8) & 0xFF ) / 255.f / lastLevel;
-		float r = (float) ( (v.color >> 0) & 0xFF ) / 255.f / lastLevel;
+		float b = (float) ( (v.color >> 16) & 0xFF ) / 256.f / lastLevel;
+		float g = (float) ( (v.color >> 8) & 0xFF ) / 256.f / lastLevel;
+		float r = (float) ( (v.color >> 0) & 0xFF ) / 256.f / lastLevel;
 			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
 		}
 		for(ChunkVertex16& v : bottomVertexData){
-		float b = (float) ( (v.color >> 16) & 0xFF ) / 255.f / lastLevel;
-		float g = (float) ( (v.color >> 8) & 0xFF ) / 255.f / lastLevel;
-		float r = (float) ( (v.color >> 0) & 0xFF ) / 255.f / lastLevel;
+		float b = (float) ( (v.color >> 16) & 0xFF ) / 256.f / lastLevel;
+		float g = (float) ( (v.color >> 8) & 0xFF ) / 256.f / lastLevel;
+		float r = (float) ( (v.color >> 0) & 0xFF ) / 256.f / lastLevel;
 			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
 		}
 	}
