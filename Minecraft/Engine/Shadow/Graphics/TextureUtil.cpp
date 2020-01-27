@@ -39,6 +39,9 @@ Texture* TextureUtil::LoadPngTexturePack(std::string filename, bool vram) {
 	Logging::trace("assets/minecraft/textures/" + filename);
 	tex = LoadPng("assets/minecraft/textures/" + filename, vram);
 
+	if(tex == NULL)
+		Logging::error("COULDN'T LOAD: " + filename );
+
 	return tex;
 }
 Texture* terrain_atlas;

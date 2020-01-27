@@ -54,8 +54,8 @@ void Minecraft::Client::World::Init()
 	animationLavaFrame = 0;
 	animationWaterFrame = 0;
 
-	textureWaterAnimationId = TextureUtil::LoadPngTexturePack("assets/minecraft/textures/blocks/water_still.png");
-	textureLavaAnimationId = TextureUtil::LoadPngTexturePack("assets/minecraft/textures/blocks/lava_still.png");
+	textureWaterAnimationId = TextureUtil::LoadPngTexturePack("blocks/water_still.png");
+	textureLavaAnimationId = TextureUtil::LoadPngTexturePack("blocks/lava_still.png");
 	animationLavaStep = true;
 }
 
@@ -195,56 +195,57 @@ void Minecraft::Client::World::Update(float dt)
 
 	animationTimer += dt;
 
-    if(animationTimer >= 0.075) // every 0.075 secs
+    if(animationTimer >= 0.075){
+        int waterFrameSize = 16;
+
+        animationTimer = 0.0f; // zeroize timer
+        animationWaterFrame += 1; // go to the next water frame
+
+        if(animationWaterFrame >= textureWaterAnimationId->height/textureWaterAnimationId->width) // if all frames passed
         {
-            int waterFrameSize = 16;
+            animationWaterFrame = 0; // zeroize frames
+        }
 
-            animationTimer = 0.0f; // zeroize timer
-            animationWaterFrame += 1; // go to the next water frame
+        if(animationLavaFrame >= textureLavaAnimationId->height/textureLavaAnimationId->width - 1)
+        {
+			animationLavaStep = false;
+         }
+        if(animationLavaFrame == 0)
+        {
+            animationLavaStep = true;
+        }
+        if(animationLavaStep == true)
+        {
+            animationLavaFrame += 1;
+        }
+        else
+        {
+            animationLavaFrame -= 1;
+        }
+		
+		Logging::info("WATER FRAME: " + std::to_string(animationWaterFrame));
 
-            if(animationWaterFrame >= textureWaterAnimationId->height/textureWaterAnimationId->width) // if all frames passed
+		
+        for(int i = 0; i < waterFrameSize; i++)
+        {
+            for(int j = 0; j < waterFrameSize; j++)
             {
-                animationWaterFrame = 0; // zeroize frames
+                // copy each water pixel from water_still.png to terrain.png
+                terrain_atlas->setColour(			waterFrameSize*13+i,
+                                                    waterFrameSize*30+j,
+                                                      textureWaterAnimationId->getRed(i,animationWaterFrame*waterFrameSize+j),
+                                                      textureWaterAnimationId->getGreen(i,animationWaterFrame*waterFrameSize+j),
+                                                      textureWaterAnimationId->getBlue(i,animationWaterFrame*waterFrameSize+j),
+                                                      184);
+                // same to lava
+                terrain_atlas->setColour(			waterFrameSize*13+i,
+                                                    waterFrameSize*31+j,
+                                                      textureLavaAnimationId->getRed(i,animationLavaFrame*waterFrameSize+j),
+                                                      textureLavaAnimationId->getGreen(i,animationLavaFrame*waterFrameSize+j),
+                                                      textureLavaAnimationId->getBlue(i,animationLavaFrame*waterFrameSize+j),
+                                                      255);
             }
-
-            if(animationLavaFrame >= textureLavaAnimationId->height/textureLavaAnimationId->width - 1)
-            {
-                animationLavaStep = false;
-            }
-            if(animationLavaFrame == 0)
-            {
-                animationLavaStep = true;
-            }
-
-            if(animationLavaStep == true)
-            {
-                animationLavaFrame += 1;
-            }
-            else
-            {
-                animationLavaFrame -= 1;
-            }
-
-            for(int i = 0; i < waterFrameSize; i++)
-            {
-                for(int j = 0; j < waterFrameSize; j++)
-                {
-                    // copy each water pixel from water_still.png to terrain.png
-                    terrain_atlas->setColour(			waterFrameSize*13+i,
-                                                        waterFrameSize*29+j,
-                                                          textureWaterAnimationId->getRed(i,animationWaterFrame*waterFrameSize+j),
-                                                          textureWaterAnimationId->getGreen(i,animationWaterFrame*waterFrameSize+j),
-                                                          textureWaterAnimationId->getBlue(i,animationWaterFrame*waterFrameSize+j),
-                                                          184);
-                    // same to lava
-                    terrain_atlas->setColour(			waterFrameSize*13+i,
-                                                        waterFrameSize*30+j,
-                                                          textureLavaAnimationId->getRed(i,animationLavaFrame*waterFrameSize+j),
-                                                          textureLavaAnimationId->getGreen(i,animationLavaFrame*waterFrameSize+j),
-                                                          textureLavaAnimationId->getBlue(i,animationLavaFrame*waterFrameSize+j),
-                                                          255);
-                }
-            }
+        }
     }
 
 }
