@@ -81,6 +81,12 @@ namespace Minecraft::Client {
 		int lastLevel;
 
 		Sprite* crosshair;
+		float animationTimer;
+		int animationWaterFrame;
+		int animationLavaFrame;
+		bool animationLavaStep;
+
+		Texture* textureWaterAnimationId, *textureLavaAnimationId;
 
 	};
 

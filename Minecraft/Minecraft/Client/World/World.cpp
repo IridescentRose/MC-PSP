@@ -50,6 +50,13 @@ void Minecraft::Client::World::Init()
 
 	crosshair = new Sprite("assets/minecraft/textures/misc/cross.png", 8, 8, 16, 16);
 
+	animationTimer = 0;
+	animationLavaFrame = 0;
+	animationWaterFrame = 0;
+
+	textureWaterAnimationId = TextureUtil::LoadPngTexturePack("assets/minecraft/textures/blocks/water_still.png");
+	textureLavaAnimationId = TextureUtil::LoadPngTexturePack("assets/minecraft/textures/blocks/lava_still.png");
+	animationLavaStep = true;
 }
 
 void Minecraft::Client::World::Cleanup()
@@ -185,6 +192,61 @@ void Minecraft::Client::World::Update(float dt)
 		delete v;
 		eventBus.pop();
 	}
+
+	animationTimer += dt;
+
+    if(animationTimer >= 0.075) // every 0.075 secs
+        {
+            int waterFrameSize = 16;
+
+            animationTimer = 0.0f; // zeroize timer
+            animationWaterFrame += 1; // go to the next water frame
+
+            if(animationWaterFrame >= textureWaterAnimationId->height/textureWaterAnimationId->width) // if all frames passed
+            {
+                animationWaterFrame = 0; // zeroize frames
+            }
+
+            if(animationLavaFrame >= textureLavaAnimationId->height/textureLavaAnimationId->width - 1)
+            {
+                animationLavaStep = false;
+            }
+            if(animationLavaFrame == 0)
+            {
+                animationLavaStep = true;
+            }
+
+            if(animationLavaStep == true)
+            {
+                animationLavaFrame += 1;
+            }
+            else
+            {
+                animationLavaFrame -= 1;
+            }
+
+            for(int i = 0; i < waterFrameSize; i++)
+            {
+                for(int j = 0; j < waterFrameSize; j++)
+                {
+                    // copy each water pixel from water_still.png to terrain.png
+                    terrain_atlas->setColour(			waterFrameSize*13+i,
+                                                        waterFrameSize*29+j,
+                                                          textureWaterAnimationId->getRed(i,animationWaterFrame*waterFrameSize+j),
+                                                          textureWaterAnimationId->getGreen(i,animationWaterFrame*waterFrameSize+j),
+                                                          textureWaterAnimationId->getBlue(i,animationWaterFrame*waterFrameSize+j),
+                                                          184);
+                    // same to lava
+                    terrain_atlas->setColour(			waterFrameSize*13+i,
+                                                        waterFrameSize*30+j,
+                                                          textureLavaAnimationId->getRed(i,animationLavaFrame*waterFrameSize+j),
+                                                          textureLavaAnimationId->getGreen(i,animationLavaFrame*waterFrameSize+j),
+                                                          textureLavaAnimationId->getBlue(i,animationLavaFrame*waterFrameSize+j),
+                                                          255);
+                }
+            }
+    }
+
 }
 
 void Minecraft::Client::World::FixedUpdate()
