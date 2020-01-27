@@ -5,8 +5,32 @@ using namespace Shadow::Utils;
 
 namespace Minecraft::Terrain{
 
+    NoiseParameters defaultNoiseParams = {
+		2, 160, 16, -160, 0.11
+	};
+
     int WorldProvider::seed = 0;
     PerlinNoise* WorldProvider::noise = NULL;
+
+
+	int getHeight(int x, int z, NoiseParameters noiseParams = defaultNoiseParams){
+
+   		if (x < 0 || z < 0) {
+        	return 64 - 1;
+    	}
+
+    	auto totalValue = 0.0;
+
+    	for (auto a = 0; a < noiseParams.octaves - 1; a++){
+        	auto frequency = pow(2.0, a); // This increases the frequency with every loop of the octave.
+        	auto amplitude = pow(noiseParams.roughness, a); // This decreases the amplitude with every loop of the octave.
+        	totalValue += WorldProvider::noise->noise(((double)x) * frequency / noiseParams.smoothness, 0, ((double)z) * frequency / noiseParams.smoothness) * amplitude;
+    	}
+
+    	auto val = (((totalValue / 2.1) + 1.2) * noiseParams.amplitude) + noiseParams.heightOffset;
+
+    	return val > 0 ? val : 1;
+	}
 
     void WorldProvider::generate(Chunk* c){
 
@@ -20,7 +44,7 @@ namespace Minecraft::Terrain{
 
         	for(int x = 0; x < CHUNK_SIZE; x++){
             	for(int z = 0; z < CHUNK_SIZE; z++){
-                	heightMap[x][z] = noise->noise((float)(rX + x) / 32.f, 0, (float)(rZ + z) / 32.f) * 35 + 42;
+                	heightMap[x][z] = getHeight(rX + x, rZ + z);
             	}
         	}
 
