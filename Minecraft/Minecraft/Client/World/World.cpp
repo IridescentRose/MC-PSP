@@ -231,15 +231,15 @@ void Minecraft::Client::World::Update(float dt)
             for(int j = 0; j < waterFrameSize; j++)
             {
                 // copy each water pixel from water_still.png to terrain.png
-                terrain_atlas->setColour(			waterFrameSize*13+i,
-                                                    waterFrameSize*30+j,
+                terrain_atlas->setColour(			waterFrameSize*29+i,
+                                                    waterFrameSize*13+j,
                                                       textureWaterAnimationId->getRed(i,animationWaterFrame*waterFrameSize+j),
                                                       textureWaterAnimationId->getGreen(i,animationWaterFrame*waterFrameSize+j),
                                                       textureWaterAnimationId->getBlue(i,animationWaterFrame*waterFrameSize+j),
                                                       184);
                 // same to lava
-                terrain_atlas->setColour(			waterFrameSize*13+i,
-                                                    waterFrameSize*31+j,
+                terrain_atlas->setColour(			waterFrameSize*30+i,
+                                                    waterFrameSize*13+j,
                                                       textureLavaAnimationId->getRed(i,animationLavaFrame*waterFrameSize+j),
                                                       textureLavaAnimationId->getGreen(i,animationLavaFrame*waterFrameSize+j),
                                                       textureLavaAnimationId->getBlue(i,animationLavaFrame*waterFrameSize+j),
