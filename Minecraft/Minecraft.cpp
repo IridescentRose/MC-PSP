@@ -10,6 +10,7 @@
 #include "Minecraft/Version.hpp"
 #include "Minecraft/Menu/MenuState.hpp"
 #include <Shadow/Utils/ModulePSP.h>
+#include <Shadow/Utils/JobManager.h>
 
 using namespace Minecraft::Menus;
 
@@ -18,15 +19,18 @@ using namespace Shadow::Graphics;
 using namespace Shadow::Utils;
 using namespace Shadow;
 
-PSP_MODULE_INFO("Minecraft", 0, VERSION_MAJOR, VERSION_MINOR);
+PSP_MODULE_INFO("Minecraft", 0x1006, VERSION_MAJOR, VERSION_MINOR);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_VFPU|THREAD_ATTR_USER);
 PSP_HEAP_SIZE_KB(-1024);
+
+extern bool InitialiseJobManager();
 
 void initGame(){
 SetupCallbacks();
 	scePowerSetClockFrequency(333, 333, 166);
 	srand(time(NULL));
 
+	InitialiseJobManager();
 	//initialize render manager
 	{
 		g_RenderManager.Init();

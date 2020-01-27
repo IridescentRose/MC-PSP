@@ -13,6 +13,7 @@ Engine/Shadow/Utils/common.o \
 Engine/Shadow/Utils/vfram.o \
 Engine/Shadow/Utils/vram.o \
 Engine/Shadow/Utils/ModulePSP.o \
+Engine/Shadow/Utils/JobManager.o \
 Engine/Shadow/System/Input.o \
 Engine/Shadow/System/Ram.o \
 Engine/Shadow/System/Dialogs.o \
@@ -49,6 +50,9 @@ Minecraft/Client/Rendering/Moon.o \
 Minecraft/Client/Rendering/Sky.o \
 Minecraft/Client/Rendering/Stars.o \
 Minecraft/Client/Rendering/Clouds.o \
+MediaEngine/main.o \
+MediaEngine/me.o \
+MediaEngine/me_stub.o
 
 INCDIR = $(PSPPATH)/include
 INCDIR += ./LameCraft ./include ./Engine ./libs ./libs/include
@@ -57,8 +61,8 @@ CXXFLAGS = -std=gnu++17
 ASFLAGS = $(CFLAGS)
 
 BUILD_PRX = 1
-PSP_FW_VERSION=371
-PSP_LARGE_MEMORY = 0
+PSP_FW_VERSION=500
+PSP_LARGE_MEMORY = 1
 
 LIBDIR += ./libs/lib/
 LDFLAGS =
@@ -68,6 +72,7 @@ EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Minecraft
 PSP_EBOOT_ICON = ICON0.png
 PSP_EBOOT_PIC1 = PIC1.png
+
 
 PSPSDK=$(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak

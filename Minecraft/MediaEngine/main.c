@@ -6,11 +6,6 @@
 #define VERS 1
 #define REVS 0
 
-
-PSP_MODULE_INFO("MediaEngine", 0x1006, VERS, REVS);
-PSP_MAIN_THREAD_ATTR(0);
-
-
 struct me_struct
 {
 	int start;
@@ -164,15 +159,4 @@ void KillME(volatile struct me_struct *mei)
 
 	sceSysregMeResetEnable();
 	pspSdkSetK1(k1);
-}
-
-
-int module_start(SceSize args, void *argp)
-{
-	return 0;
-}
-
-int module_stop()
-{
-	return 0;
 }
