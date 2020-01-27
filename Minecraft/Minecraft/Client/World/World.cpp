@@ -223,7 +223,6 @@ void Minecraft::Client::World::Update(float dt)
             animationLavaFrame -= 1;
         }
 		
-		Logging::info("WATER FRAME: " + std::to_string(animationWaterFrame));
 
 		
         for(int i = 0; i < waterFrameSize; i++)

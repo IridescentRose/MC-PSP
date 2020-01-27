@@ -6,7 +6,7 @@ using namespace Shadow::Utils;
 namespace Minecraft::Terrain{
 
     NoiseParameters defaultNoiseParams = {
-		2, 160, 16, -160, 0.11
+		0, 20, 16, 35, 0.11
 	};
 
     int WorldProvider::seed = 0;
@@ -19,17 +19,13 @@ namespace Minecraft::Terrain{
         	return 64 - 1;
     	}
 
-    	auto totalValue = 0.0;
+    	auto total = 0;
 
-    	for (auto a = 0; a < noiseParams.octaves - 1; a++){
-        	auto frequency = pow(2.0, a); // This increases the frequency with every loop of the octave.
-        	auto amplitude = pow(noiseParams.roughness, a); // This decreases the amplitude with every loop of the octave.
-        	totalValue += WorldProvider::noise->noise(((double)x) * frequency / noiseParams.smoothness, 0, ((double)z) * frequency / noiseParams.smoothness) * amplitude;
-    	}
+		int frequency = 2;
+		
+		total += WorldProvider::noise->noise((float)(x) / (float)defaultNoiseParams.smoothness, 0, (float)(z) / (float)defaultNoiseParams.smoothness) * (float) defaultNoiseParams.amplitude / defaultNoiseParams.roughness + defaultNoiseParams.heightOffset;;
 
-    	auto val = (((totalValue / 2.1) + 1.2) * noiseParams.amplitude) + noiseParams.heightOffset;
-
-    	return val > 0 ? val : 1;
+		return total;
 	}
 
     void WorldProvider::generate(Chunk* c){
