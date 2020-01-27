@@ -670,13 +670,17 @@ void Chunk::generateMesh(ChunkManager* man)
 
 				//TODO: WHEAT TYPE
 
-				faces.update(x, y, z);
 
-				tryAddFaceToMesh(bottomFace, getTextureAtlasIndex(blockData->bottomAtlas), position, faces.down, TYPE_BOTTOM, man, cOff);
+				faces.update(x, y, z);
 
 				cOff = getColorOffsets(temp, 4);
 				tryAddFaceToMesh(topFace, getTextureAtlasIndex(blockData->topAtlas), position, faces.up, TYPE_TOP, man, cOff);
 				cOff = getColorOffsets(temp, 0);
+
+				if(temp.ID == 8)
+					continue;
+				
+				tryAddFaceToMesh(bottomFace, getTextureAtlasIndex(blockData->bottomAtlas), position, faces.down, TYPE_BOTTOM, man, cOff);
 
 				//Left/ Right
 				tryAddFaceToMesh(leftFace, getTextureAtlasIndex(blockData->leftAtlas), position, faces.left, TYPE_LEFT, man, cOff);
@@ -809,7 +813,9 @@ void Chunk::tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> tex
 		ChunkBlock cblk = blocks[(int)blockFacing.x][(int)blockFacing.y][(int)blockFacing.z];
 		Block* blk = BlockData::InstancePointer()->block_data[cblk];
 
-		if(blk->transparent || cblk.ID == 0){
+		
+
+		if( (blk->transparent && cblk.ID != blocks[blockPosition.x][blockPosition.y][blockPosition.z].ID) || cblk.ID == 0){
 			numFaces++;
 			mesh->addFace(type, blockFace, texCoords, {chunk_x, chunk_y, chunk_z}, blockPosition, colorOffsets);
 		}
@@ -820,7 +826,7 @@ void Chunk::tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> tex
 		ChunkBlock cblk = man->getBlock(blockFacing.x + chunk_x * CHUNK_SIZE,blockFacing.y + chunk_y * CHUNK_SIZE, blockFacing.z + chunk_z * CHUNK_SIZE);
 		Block* blk = BlockData::InstancePointer()->block_data[cblk];
 
-		if(blk->transparent || cblk.ID == 0){
+		if( (blk->transparent && cblk.ID != blocks[blockPosition.x][blockPosition.y][blockPosition.z].ID) || cblk.ID == 0){
 			numFaces++;
 			mesh->addFace(type, blockFace, texCoords, {chunk_x, chunk_y, chunk_z}, blockPosition, colorOffsets);
 		}

@@ -20,7 +20,7 @@ namespace Minecraft::Terrain{
 
         	for(int x = 0; x < CHUNK_SIZE; x++){
             	for(int z = 0; z < CHUNK_SIZE; z++){
-                	heightMap[x][z] = noise->noise((float)(rX + x) / 32.f, 0, (float)(rZ + z) / 32.f) * 35 + 35;
+                	heightMap[x][z] = noise->noise((float)(rX + x) / 32.f, 0, (float)(rZ + z) / 32.f) * 35 + 42;
             	}
         	}
 
@@ -39,6 +39,9 @@ namespace Minecraft::Terrain{
 					    	c->blocks[x][y][z].meta = 0;
 				    	}else if(rY + y == heightMap[x][z] + 3){
 					    	c->blocks[x][y][z].ID = 2;
+							if(rY + y < 63){
+								c->blocks[x][y][z].ID = 3;
+							}
 					    	c->blocks[x][y][z].meta = 0;
 				    	}else if(rY + y == 0){
 							c->blocks[x][y][z].ID = 7;
@@ -47,9 +50,14 @@ namespace Minecraft::Terrain{
 					    	c->blocks[x][y][z].ID = 0;
 					    	c->blocks[x][y][z].meta = 0;
 				    	}
+
+						if(rY + y <= 63 && c->blocks[x][y][z].ID == 0){
+							c->blocks[x][y][z].ID = 8;
+						}
 			    	}
 		    	}	
 	    	}
+
 		}
     }
 }

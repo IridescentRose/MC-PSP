@@ -102,14 +102,17 @@ void BlockData::loadBlockData()
 	block_data.emplace(ChunkBlock(7, 0), new Block(28, 28, 28, 28, 28, 28, 
 												0, 0, false, false, false));
 	registered_blocks.push_back(ChunkBlock(7, 0));
-	block_data.emplace(ChunkBlock(8, 0), new Block(-1, -1, -1, -1, -1, -1, 
-												1, 0, true, false, true));
+
+	block_data.emplace(ChunkBlock(8, 0), new Block(446, 446, 446, 446, 446, 446, 
+												2, 0, true, false, true));
 	block_data.emplace(ChunkBlock(9, 0), new Block(-1, -1, -1, -1, -1, -1, 
-												1, 0, true, false, true));
-	block_data.emplace(ChunkBlock(10, 0), new Block(-1, -1, -1, -1, -1, -1, 
-												1, 0, true, false, true));
+												2, 0, true, false, true));
+	block_data.emplace(ChunkBlock(10, 0), new Block(447, 447, 447, 447, 447, 447, 
+												2, 0, true, false, true));
 	block_data.emplace(ChunkBlock(11, 0), new Block(-1, -1, -1, -1, -1, -1, 
-												1, 0, true, false, true));
+												2, 0, true, false, true));
+	
+
 	block_data.emplace(ChunkBlock(12, 0), new Block(29, 29, 29, 29, 29, 29, 
 												0, 0, false, false, false));
 	registered_blocks.push_back(ChunkBlock(12, 0));
