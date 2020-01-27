@@ -12,6 +12,7 @@ Engine/Shadow/Utils/Logger.o \
 Engine/Shadow/Utils/common.o \
 Engine/Shadow/Utils/vfram.o \
 Engine/Shadow/Utils/vram.o \
+Engine/Shadow/Utils/ModulePSP.o \
 Engine/Shadow/System/Input.o \
 Engine/Shadow/System/Ram.o \
 Engine/Shadow/System/Dialogs.o \

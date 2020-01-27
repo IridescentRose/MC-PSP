@@ -9,6 +9,8 @@
 #include "Minecraft/Menu/Logo.hpp"
 #include "Minecraft/Version.hpp"
 #include "Minecraft/Menu/MenuState.hpp"
+#include <Shadow/Utils/ModulePSP.h>
+
 using namespace Minecraft::Menus;
 
 using namespace Shadow::Audio;
