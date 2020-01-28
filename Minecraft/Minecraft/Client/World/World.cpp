@@ -6,6 +6,7 @@
 #include <Shadow/Utils/Logger.h>
 #include <Shadow/System/Ram.h>
 #include "../../Version.hpp"
+#include <iostream>
 
 #include "ChunkMesh.h"
 #include <Shadow/Utils/JobManager.h>
@@ -27,6 +28,127 @@ Minecraft::Client::World::World()
 Minecraft::Client::World::~World()
 {
 }
+#include <iostream>
+class ChunkManagementJob : public SJob{
+	public:
+
+	ChunkManagementJob(){
+		InitJob = NULL;
+		DoJob = (JobFunction)&DoChunkManagementStatic;
+		FiniJob = (JobFunction)&DoFinish;
+	}
+
+	static int DoChunkManagementStatic(SJob * arg ){
+		ChunkManagementJob *  job( static_cast< ChunkManagementJob * >( arg ) );
+		job->DoChunkManagement();
+		return 0;
+	}
+
+	static int DoFinish(SJob * arg){
+		ChunkManagementJob *  job( static_cast< ChunkManagementJob * >( arg ) );
+		job->Finish();
+		return 0;
+	}
+
+	int Finish(){
+		return 0;
+	}
+
+	int DoChunkManagement(){
+		mc::Vector3i last_pos = mc::Vector3i(0, -1, 0);
+	while(true){
+		mc::Vector3i center = mc::Vector3i((-Minecraft::Client::g_World->p->getPosition().x) / 16, (Minecraft::Client::g_World->p->getPosition().y) / 16, (-Minecraft::Client::g_World->p->getPosition().z) / 16);
+
+		if(center != last_pos){
+		std::vector<mc::Vector3i> needed;
+		needed.clear();
+		std::vector<mc::Vector3i> excess;
+		excess.clear();
+		
+		
+		
+		//Box bounds
+		mc::Vector3i top = {center.x + 2, center.y+1, center.z + 2};
+		mc::Vector3i bot = {center.x - 2, center.y-1, center.z - 2};
+
+		
+		for(int y = bot.y; y <= top.y && y < 16 && y >= 0; y++){
+			for(int x = bot.x; x <= top.x; x++){
+				for(int z = bot.z; z <= top.z; z++){
+					needed.push_back(mc::Vector3i(x, y, z));
+				}
+			}
+		}
+
+		
+		for(const auto& [key, chnk] : Minecraft::Client::g_World->chunkMan->getChunks()){
+			bool isNeeded = false;
+
+			for(mc::Vector3i& v : needed){
+				if(v == key){
+					//Is needed
+					isNeeded = true;
+				}
+			}
+
+			if(!isNeeded){
+				excess.push_back(key);
+			}
+		}
+
+		
+		//Get rid of excesses!
+
+		for(mc::Vector3i& v : excess){
+			Minecraft::Client::g_World->chunkMan->unloadChunk(v.x, v.y, v.z);
+		}
+		excess.clear();
+
+
+		for(mc::Vector3i& v : needed){
+			if(!Minecraft::Client::g_World->chunkMan->chunkExists(v.x, v.y, v.z)){
+				Minecraft::Client::g_World->chunkMan->loadChunkData(v.x, v.y, v.z);
+			}
+			
+		}
+
+		for(mc::Vector3i& v : needed){
+			if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x, v.y, v.z) && !Minecraft::Client::g_World->chunkMan->getChunk(v.x, v.y, v.z)->hasMesh){
+				Minecraft::Client::g_World->chunkMan->loadChunkMesh(v.x, v.y, v.z);
+
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x + 1, v.y, v.z)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x + 1, v.y, v.z);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x - 1, v.y, v.z)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x - 1, v.y, v.z);
+				}
+
+
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x, v.y + 1, v.z)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x, v.y + 1, v.z);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x, v.y - 1, v.z)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x, v.y - 1, v.z);
+				}
+
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x, v.y, v.z + 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x, v.y, v.z + 1);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x, v.y, v.z - 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x, v.y, v.z - 1);
+				}
+
+			}
+			
+		}
+
+		last_pos = center;
+		}
+	}
+
+	return 0;
+	}
+};
 
 void Minecraft::Client::World::Init()
 {
@@ -46,14 +168,15 @@ void Minecraft::Client::World::Init()
 	Terrain::WorldProvider::noise = new FastNoise(Terrain::WorldProvider::seed);
 	Terrain::WorldProvider::noise->SetFrequency(0.11);
 	
-	chunkMan = new Terrain::ChunkManager();
-	chunkManagerThread = sceKernelCreateThread("ChunkManagementThread", chunkManagement, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
-	sceKernelStartThread(chunkManagerThread, 0, 0);
 	lastLevel = lighting(0);
 
 	crosshair = new Sprite("assets/minecraft/textures/misc/cross.png", 8, 8, 16, 16);
 
 	InitialiseJobManager();
+	//ADD JOB
+	ChunkManagementJob manage;
+	gJobManager.AddJob(&manage, sizeof(manage));
+	
 
 	animationTimer = 0;
 	animationLavaFrame = 0;
@@ -374,105 +497,5 @@ int Minecraft::Client::World::tickUpdate(SceSize args, void* argp)
 
 int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 {
-	mc::Vector3i last_pos = mc::Vector3i(0, -1, 0);
-	while(true){
-		mc::Vector3i center = mc::Vector3i((-g_World->p->getPosition().x) / 16, (g_World->p->getPosition().y) / 16, (-g_World->p->getPosition().z) / 16);
-
-		if(center != last_pos){
-		std::vector<mc::Vector3i> needed;
-		needed.clear();
-		std::vector<mc::Vector3i> excess;
-		excess.clear();
-		
-		
-		
-		//Box bounds
-		mc::Vector3i top = {center.x + 2, center.y+1, center.z + 2};
-		mc::Vector3i bot = {center.x - 2, center.y-1, center.z - 2};
-
-		
-		for(int y = bot.y; y <= top.y && y < 16 && y >= 0; y++){
-			for(int x = bot.x; x <= top.x; x++){
-				for(int z = bot.z; z <= top.z; z++){
-					needed.push_back(mc::Vector3i(x, y, z));
-				}
-			}
-		}
-
-		
-		for(const auto& [key, chnk] : g_World->chunkMan->getChunks()){
-			bool isNeeded = false;
-
-			for(mc::Vector3i& v : needed){
-				if(v == key){
-					//Is needed
-					isNeeded = true;
-				}
-			}
-
-			if(!isNeeded){
-				excess.push_back(key);
-			}
-		}
-
-		
-		//Get rid of excesses!
-
-		for(mc::Vector3i& v : excess){
-			g_World->chunkMan->unloadChunk(v.x, v.y, v.z);
-			sceKernelDelayThread(1000 * 20);
-		}
-		excess.clear();
-
-
-		sceKernelDelayThread(1000 * 20);
-		
-		for(mc::Vector3i& v : needed){
-			if(!g_World->chunkMan->chunkExists(v.x, v.y, v.z)){
-				g_World->chunkMan->loadChunkData(v.x, v.y, v.z);
-				sceKernelDelayThread(1000*20);
-			}
-			
-		}
-
-		sceKernelDelayThread(1000*100);
-
-		for(mc::Vector3i& v : needed){
-			if(g_World->chunkMan->chunkExists(v.x, v.y, v.z) && !g_World->chunkMan->getChunk(v.x, v.y, v.z)->hasMesh){
-				g_World->chunkMan->loadChunkMesh(v.x, v.y, v.z);
-
-				if(g_World->chunkMan->chunkExists(v.x + 1, v.y, v.z)){
-					g_World->chunkMan->updateChunk(v.x + 1, v.y, v.z);
-				}
-				if(g_World->chunkMan->chunkExists(v.x - 1, v.y, v.z)){
-					g_World->chunkMan->updateChunk(v.x - 1, v.y, v.z);
-				}
-
-
-				if(g_World->chunkMan->chunkExists(v.x, v.y + 1, v.z)){
-					g_World->chunkMan->updateChunk(v.x, v.y + 1, v.z);
-				}
-				if(g_World->chunkMan->chunkExists(v.x, v.y - 1, v.z)){
-					g_World->chunkMan->updateChunk(v.x, v.y - 1, v.z);
-				}
-
-				if(g_World->chunkMan->chunkExists(v.x, v.y, v.z + 1)){
-					g_World->chunkMan->updateChunk(v.x, v.y, v.z + 1);
-				}
-				if(g_World->chunkMan->chunkExists(v.x, v.y, v.z - 1)){
-					g_World->chunkMan->updateChunk(v.x, v.y, v.z - 1);
-				}
-
-				sceKernelDelayThread(1000*20);
-			}
-			
-		}
-
-		last_pos = center;
-		}
-		sceKernelDelayThread(1000 * 500); //Check every 1/2 seonds
-
-	}
-
-	return 0;
+	
 }

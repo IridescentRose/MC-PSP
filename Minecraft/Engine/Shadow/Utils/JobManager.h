@@ -21,16 +21,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #ifndef SYSPSP_UTILITY_JOBMANAGER_H_
 #define SYSPSP_UTILITY_JOBMANAGER_H_
-
 #include <psptypes.h>
-#include <cassert>
-#include "ModulePSP.h"
-#include <memory>
-#include <memory.h>
-#include <pspkernel.h>
-#include <malloc.h>
 
-void memcpy_vfpu( void* dst, const void* src, size_t size );
 
 enum ETaskMode
 {
@@ -39,11 +31,12 @@ enum ETaskMode
 	TM_ASYNC_ME,	// Asynchronous on ME
 };
 
-struct SJob;
+class SJob;
 typedef int (*JobFunction)( SJob * job );
 
-struct SJob
+class SJob
 {
+public:
 	JobFunction			InitJob;
 	JobFunction			DoJob;
 	JobFunction			FiniJob;
@@ -63,13 +56,12 @@ public:
 	bool			AddJob( SJob * job, u32 job_size );
 
 private:
-	static s32		JobMain( u32 argc, void * arg );
+	static u32		JobMain( void * arg );
 
 	void			Run();
 
 private:
 	void *			mJobBuffer;
-	void *			mRunBuffer;
 	u32				mJobBufferSize {};
 
 	ETaskMode		mTaskMode;
