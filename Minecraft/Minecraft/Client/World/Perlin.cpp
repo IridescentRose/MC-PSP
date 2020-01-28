@@ -1271,7 +1271,7 @@ FN_DECIMAL FastNoise::GetSimplex(FN_DECIMAL x, FN_DECIMAL y) const
 static const FN_DECIMAL SQRT3 = FN_DECIMAL(1.7320508075688772935274463415059);
 static const FN_DECIMAL F2 = FN_DECIMAL(0.5) * (SQRT3 - FN_DECIMAL(1.0));
 static const FN_DECIMAL G2 = (FN_DECIMAL(3.0) - SQRT3) / FN_DECIMAL(6.0);
-
+#include <pspmath.h>
 FN_DECIMAL FastNoise::SingleSimplex(unsigned char offset, FN_DECIMAL x, FN_DECIMAL y) const
 {
 	FN_DECIMAL t = (x + y) * F2;

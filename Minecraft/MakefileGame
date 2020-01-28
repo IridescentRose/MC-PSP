@@ -13,7 +13,6 @@ Engine/Shadow/Utils/common.o \
 Engine/Shadow/Utils/vfram.o \
 Engine/Shadow/Utils/vram.o \
 Engine/Shadow/Utils/ModulePSP.o \
-Engine/Shadow/Utils/JobManager.o \
 Engine/Shadow/System/Input.o \
 Engine/Shadow/System/Ram.o \
 Engine/Shadow/System/Dialogs.o \
@@ -50,9 +49,6 @@ Minecraft/Client/Rendering/Moon.o \
 Minecraft/Client/Rendering/Sky.o \
 Minecraft/Client/Rendering/Stars.o \
 Minecraft/Client/Rendering/Clouds.o \
-MediaEngine/main.o \
-MediaEngine/me.o \
-MediaEngine/me_stub.o
 
 INCDIR = $(PSPPATH)/include
 INCDIR += ./LameCraft ./include ./Engine ./libs ./libs/include
