@@ -26,8 +26,6 @@ Minecraft::Client::World::~World()
 {
 }
 
-volatile me_struct *mei;
-
 void Minecraft::Client::World::Init()
 {
 	sun = new Rendering::Sun();
@@ -50,10 +48,6 @@ void Minecraft::Client::World::Init()
 	chunkManagerThread = sceKernelCreateThread("ChunkManagementThread", chunkManagement, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(chunkManagerThread, 0, 0);
 	lastLevel = lighting(0);
-
-	if(InitME(mei) != 0){
-		sceKernelExitGame();
-	}
 
 	crosshair = new Sprite("assets/minecraft/textures/misc/cross.png", 8, 8, 16, 16);
 

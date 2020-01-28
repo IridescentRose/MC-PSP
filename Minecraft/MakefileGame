@@ -13,6 +13,7 @@ Engine/Shadow/Utils/common.o \
 Engine/Shadow/Utils/vfram.o \
 Engine/Shadow/Utils/vram.o \
 Engine/Shadow/Utils/ModulePSP.o \
+Engine/Shadow/Utils/JobManager.o \
 Engine/Shadow/System/Input.o \
 Engine/Shadow/System/Ram.o \
 Engine/Shadow/System/Dialogs.o \
@@ -61,7 +62,7 @@ PSP_FW_VERSION=500
 PSP_LARGE_MEMORY = 1
 
 LIBDIR += ./libs/lib/
-LDFLAGS =
+LDFLAGS = MediaEngine/mediaengine.prx
 LIBS=  -lpspaudiolib -lpspaudio -lpspaudiocodec -lpng -lintraFont -ljson -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath -lmclib-common #-lssl -lcrypto -lcurl
 
 EXTRA_TARGETS = EBOOT.PBP
