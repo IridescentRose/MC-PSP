@@ -210,6 +210,7 @@ bool InitialiseJobManager()
 
 	mei = (volatile struct me_struct *)malloc_64(sizeof(struct me_struct));
 	mei = (volatile struct me_struct *)(MAKE_UNCACHED_PTR(mei));
+	
 	sceKernelDcacheWritebackInvalidateAll();
 
 	if (InitME(mei) == 0)
@@ -294,6 +295,7 @@ bool CJobManager::AddJob( SJob * job, u32 job_size )
 		// Add job to queue
 		if (!job == 0){
 		memcpy_vfpu( mJobBuffer, job, job_size );
+		std::cout << mJobBuffer << std::endl;
 		}
 		else{
 			return true;
@@ -313,10 +315,6 @@ bool CJobManager::AddJob( SJob * job, u32 job_size )
 	// Execute job initialise
 	if( run->InitJob )
 		run->InitJob( run );
-
-	// Start the job on the ME - inv_all dcache on entry, wbinv_all on exit
-	// if the me is busy run the job on the main cpu so we don't stall
-	std::cout << "START" << std::endl;
 	
 	if(BeginME( mei, (int)run->DoJob, (int)run, -1, NULL, -1, NULL) < 0){
 		if( job->InitJob ) job->InitJob( job );
@@ -325,12 +323,5 @@ bool CJobManager::AddJob( SJob * job, u32 job_size )
 		return success;
 	}
 
-	//Mark Job(run) from Mrunbuffer as Finished
-	run->FiniJob( run );
-	run->FiniJob = nullptr; // so it doesn't get run again later
-
-	//printf( "Adding job...done\n" );
-	std::cout << "END" << std::endl;
-	
 	return success;
 }

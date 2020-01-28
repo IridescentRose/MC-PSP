@@ -205,7 +205,7 @@ void Minecraft::Client::World::Update(float dt)
 {
 	fps = 1.0f / dt;
 	rmg->FixedUpdate();
-
+	
 
 	while(!eventBus.empty()){
 		Event* v = eventBus.front();
