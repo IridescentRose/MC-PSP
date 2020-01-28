@@ -173,14 +173,6 @@ void memcpy_vfpu( void* dst, const void* src, size_t size )
     }
 }
 
-void *malloc_64(int size)
-{
-	int mod_64 {size & 0x3f};
-	if (mod_64 != 0) size += 64 - mod_64;
-	return((void *)memalign(64, size));
-}
-
-const s32 kInvalidThreadHandle = -1;
 
 
 /*
@@ -235,7 +227,7 @@ CJobManager::CJobManager( u32 job_buffer_size, ETaskMode task_mode )
 :	mJobBuffer( malloc_64( job_buffer_size ) )
 ,	mJobBufferSize( job_buffer_size )
 ,	mTaskMode( task_mode )
-,	mThread( kInvalidThreadHandle )
+,	mThread( -1 )
 ,	mWorkReady( sceKernelCreateSema( "JMWorkReady", 0, 0, 1, 0) )	// Initval is 0 - i.e. no work ready
 ,	mWorkEmpty( sceKernelCreateSema( "JMWorkEmpty", 0, 1, 1, 0 ) )	// Initval is 1 - i.e. work done
 ,	mWantQuit( false )
@@ -276,55 +268,10 @@ u32 CJobManager::JobMain( void * arg )
 //*****************************************************************************
 bool CJobManager::AddJob( SJob * job, u32 job_size )
 {
-	bool	success( false );
-
-	if( job == nullptr ){
-		success = true;
-		return success;
-	}
-
-	if( mTaskMode == TM_SYNC )
-	{
-		if( job->InitJob ) job->InitJob( job );
-		if( job->DoJob )   job->DoJob( job );
-		if( job->FiniJob ) job->FiniJob( job );
-		return true;
-	}
-
-	// Add job to queue
-	if( job_size <= mJobBufferSize )
-	{
-		// Add job to queue
-		if (!job == 0){
-		memcpy_vfpu( mJobBuffer, job, job_size );
-		std::cout << mJobBuffer << std::endl;
-		}
-		else{
-			return true;
-		}
-
-		//clear the Cache
-		sceKernelDcacheWritebackInvalidateAll();
-
-		success = true;
-	}
-
-	SJob *	run( static_cast< SJob * >( mJobBuffer) );
-
-	//clear Cache -> this one is very important without it the CheckME(mei) will not return with the ME status.
 	sceKernelDcacheWritebackInvalidateAll();
-
-	// Execute job initialise
-	if( run->InitJob )
-		run->InitJob( run );
+	BeginME( mei, (int)job->DoJob, (int)job, -1, NULL, -1, NULL);
+	sceKernelDcacheWritebackInvalidateAll();
 	
-	sceKernelDcacheWritebackInvalidateAll();
-	if(BeginME( mei, (int)run->DoJob, (int)run, -1, NULL, -1, NULL) < 0){
-		if( job->InitJob ) job->InitJob( job );
-		if( job->DoJob )   job->DoJob( job );
-		if( job->FiniJob ) job->FiniJob( job );
-		return success;
-	}
 
-	return success;
+	return true;
 }

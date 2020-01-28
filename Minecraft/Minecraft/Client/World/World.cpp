@@ -22,7 +22,7 @@ Minecraft::Client::World::World()
 	timeData = new TickTime();
 	timeData->time = 0;
 	timeData->worldAge = 0;
-	
+	xabcd = 0;
 }
 
 Minecraft::Client::World::~World()
@@ -34,8 +34,8 @@ class ChunkManagementJob : public SJob{
 
 	ChunkManagementJob(){
 		InitJob = NULL;
-		DoJob = (JobFunction)&DoChunkManagementStatic;
-		FiniJob = (JobFunction)&DoFinish;
+		DoJob = &DoChunkManagementStatic;
+		FiniJob = &DoFinish;
 		sceKernelDcacheWritebackInvalidateAll();
 	}
 
@@ -56,8 +56,13 @@ class ChunkManagementJob : public SJob{
 	}
 
 	int DoChunkManagement(){
+		while(true){
+			Minecraft::Client::g_World->xabcd++;
+			dcache_wbinv_all();
+		}
+		/*
 		mc::Vector3i last_pos = mc::Vector3i(0, -1, 0);
-	while(true){
+		while(true){
 		mc::Vector3i center = mc::Vector3i((-Minecraft::Client::g_World->p->getPosition().x) / 16, (Minecraft::Client::g_World->p->getPosition().y) / 16, (-Minecraft::Client::g_World->p->getPosition().z) / 16);
 
 		if(center != last_pos){
@@ -80,8 +85,7 @@ class ChunkManagementJob : public SJob{
 				}
 			}
 		}
-
-		sceKernelDcacheWritebackInvalidateAll();
+		dcache_wbinv_all();
 		
 		for(const auto& [key, chnk] : Minecraft::Client::g_World->chunkMan->getChunks()){
 			bool isNeeded = false;
@@ -99,7 +103,7 @@ class ChunkManagementJob : public SJob{
 		}
 
 		
-		sceKernelDcacheWritebackInvalidateAll();
+		dcache_wbinv_all();
 		//Get rid of excesses!
 
 		for(mc::Vector3i& v : excess){
@@ -115,7 +119,7 @@ class ChunkManagementJob : public SJob{
 			
 		}
 
-		sceKernelDcacheWritebackInvalidateAll();
+		dcache_wbinv_all();
 		
 		for(mc::Vector3i& v : needed){
 			if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x, v.y, v.z) && !Minecraft::Client::g_World->chunkMan->getChunk(v.x, v.y, v.z)->hasMesh){
@@ -206,15 +210,14 @@ class ChunkManagementJob : public SJob{
 					Minecraft::Client::g_World->chunkMan->updateChunk(v.x - 1, v.y - 1, v.z - 1);
 				}
 			}
-			
-			sceKernelDcacheWritebackInvalidateAll();
+			dcache_wbinv_all();
+			dcache_wbinv_all();
+			last_pos = center;
 		}
 
-		sceKernelDcacheWritebackInvalidateAll();
-		last_pos = center;
 		}
-	}
-
+		}
+*/
 	return 0;
 	}
 };
@@ -242,13 +245,9 @@ void Minecraft::Client::World::Init()
 	crosshair = new Sprite("assets/minecraft/textures/misc/cross.png", 8, 8, 16, 16);
 
 	InitialiseJobManager();
-	sceKernelDcacheWritebackInvalidateAll();
 	//ADD JOB
 	ChunkManagementJob manage;
-	
-	sceKernelDcacheWritebackInvalidateAll();
 	gJobManager.AddJob(&manage, sizeof(manage));
-	
 	sceKernelDcacheWritebackInvalidateAll();	
 
 	animationTimer = 0;
@@ -278,6 +277,8 @@ void Minecraft::Client::World::Update(float dt)
 {
 	fps = 1.0f / dt;
 	rmg->FixedUpdate();
+
+	Logging::info("XABCD: " + std::to_string(xabcd));
 	
 
 	while(!eventBus.empty()){

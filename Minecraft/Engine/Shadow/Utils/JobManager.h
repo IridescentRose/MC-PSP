@@ -22,6 +22,33 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef SYSPSP_UTILITY_JOBMANAGER_H_
 #define SYSPSP_UTILITY_JOBMANAGER_H_
 #include <psptypes.h>
+#include <malloc.h>
+
+inline void *malloc_64(int size)
+{
+	int mod_64 {size & 0x3f};
+	if (mod_64 != 0) size += 64 - mod_64;
+	return((void *)memalign(64, size));
+}
+inline void dcache_wbinv_all()
+{
+   for(int i {0}; i < 8192; i += 64)
+__builtin_allegrex_cache(0x14, i);
+}
+
+inline void dcache_wbinv_range(const void *addr, int size)
+{
+   int i {0}, j = (int)addr;
+   for(i = j; i < size+j; i += 64)
+      __builtin_allegrex_cache(0x1b, i);
+}
+
+inline void dcache_inv_range(void *addr, int size)
+{
+   int i {0}, j = (int)addr;
+   for(i = j; i < size+j; i += 64)
+      __builtin_allegrex_cache(0x1b, i);
+}
 
 
 enum ETaskMode

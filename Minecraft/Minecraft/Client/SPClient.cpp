@@ -3,7 +3,7 @@
 #include <Shadow/System/Ram.h>
 #include <sstream>
 #include <Shadow/Graphics/RenderManager.h>
-
+#include <pspkernel.h>
 using namespace Shadow::Graphics;
 
 
@@ -60,7 +60,7 @@ namespace Minecraft::Client {
 		int fps = 1.0f / dt;
 		player->Update(dt);	
 		g_World->Update(dt);
-		
+		sceKernelDcacheWritebackInvalidateAll();
 	}
 	void SPClient::Draw(StateManager* sManager) {
 		g_AudioManager.Update();
