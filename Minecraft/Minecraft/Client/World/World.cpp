@@ -41,7 +41,8 @@ void Minecraft::Client::World::Init()
 
 	srand(time(0));
 	Terrain::WorldProvider::seed = rand();
-	Terrain::WorldProvider::noise = new PerlinNoise(Terrain::WorldProvider::seed);
+	Terrain::WorldProvider::noise = new FastNoise(Terrain::WorldProvider::seed);
+	Terrain::WorldProvider::noise->SetFrequency(0.11);
 	
 	chunkMan = new Terrain::ChunkManager();
 	chunkManagerThread = sceKernelCreateThread("ChunkManagementThread", chunkManagement, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
@@ -223,7 +224,6 @@ void Minecraft::Client::World::Update(float dt)
             animationLavaFrame -= 1;
         }
 		
-		Logging::info("WATER FRAME: " + std::to_string(animationWaterFrame));
 
 		
         for(int i = 0; i < waterFrameSize; i++)
