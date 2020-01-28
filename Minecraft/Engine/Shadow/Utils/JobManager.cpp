@@ -182,8 +182,10 @@ const s32 kInvalidThreadHandle = -1;
 
 bool InitialiseJobManager()
 {
+	if( CModule::Load("mediaengine.prx") < 0 )	return false;
+
 	mei = (volatile struct me_struct *)malloc_64(sizeof(struct me_struct));
-	mei = (volatile struct me_struct *)((mei));
+	mei = (volatile struct me_struct *)(mei);
 	sceKernelDcacheWritebackInvalidateAll();
 
 	if (InitME(mei) == 0)
