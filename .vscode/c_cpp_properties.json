@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc"
+        },
+        {
+            "name": "PSP",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/local/pspdev/psp/include/**",
+                "/usr/local/pspdev/psp/sdk/include/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/local/pspdev/bin/psp-gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}
