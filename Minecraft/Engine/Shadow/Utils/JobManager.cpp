@@ -205,7 +205,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 bool InitialiseJobManager()
 {
-
+	sceKernelDcacheWritebackInvalidateAll();
 	if( CModule::Load("mediaengine.prx") < 0 )	return false;
 
 	mei = (volatile struct me_struct *)malloc_64(sizeof(struct me_struct));
@@ -241,6 +241,8 @@ CJobManager::CJobManager( u32 job_buffer_size, ETaskMode task_mode )
 ,	mWantQuit( false )
 {
 //	memset( mRunBuffer, 0, mJobBufferSize );
+
+sceKernelDcacheWritebackInvalidateAll();
 }
 
 //*****************************************************************************
@@ -316,6 +318,7 @@ bool CJobManager::AddJob( SJob * job, u32 job_size )
 	if( run->InitJob )
 		run->InitJob( run );
 	
+	sceKernelDcacheWritebackInvalidateAll();
 	if(BeginME( mei, (int)run->DoJob, (int)run, -1, NULL, -1, NULL) < 0){
 		if( job->InitJob ) job->InitJob( job );
 		if( job->DoJob )   job->DoJob( job );

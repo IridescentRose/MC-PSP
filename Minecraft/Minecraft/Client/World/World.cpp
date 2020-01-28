@@ -36,6 +36,7 @@ class ChunkManagementJob : public SJob{
 		InitJob = NULL;
 		DoJob = (JobFunction)&DoChunkManagementStatic;
 		FiniJob = (JobFunction)&DoFinish;
+		sceKernelDcacheWritebackInvalidateAll();
 	}
 
 	static int DoChunkManagementStatic(SJob * arg ){
@@ -80,6 +81,7 @@ class ChunkManagementJob : public SJob{
 			}
 		}
 
+		sceKernelDcacheWritebackInvalidateAll();
 		
 		for(const auto& [key, chnk] : Minecraft::Client::g_World->chunkMan->getChunks()){
 			bool isNeeded = false;
@@ -97,6 +99,7 @@ class ChunkManagementJob : public SJob{
 		}
 
 		
+		sceKernelDcacheWritebackInvalidateAll();
 		//Get rid of excesses!
 
 		for(mc::Vector3i& v : excess){
@@ -112,6 +115,8 @@ class ChunkManagementJob : public SJob{
 			
 		}
 
+		sceKernelDcacheWritebackInvalidateAll();
+		
 		for(mc::Vector3i& v : needed){
 			if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x, v.y, v.z) && !Minecraft::Client::g_World->chunkMan->getChunk(v.x, v.y, v.z)->hasMesh){
 				Minecraft::Client::g_World->chunkMan->loadChunkMesh(v.x, v.y, v.z);
@@ -122,8 +127,6 @@ class ChunkManagementJob : public SJob{
 				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x - 1, v.y, v.z)){
 					Minecraft::Client::g_World->chunkMan->updateChunk(v.x - 1, v.y, v.z);
 				}
-
-
 				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x, v.y + 1, v.z)){
 					Minecraft::Client::g_World->chunkMan->updateChunk(v.x, v.y + 1, v.z);
 				}
@@ -137,11 +140,77 @@ class ChunkManagementJob : public SJob{
 				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x, v.y, v.z - 1)){
 					Minecraft::Client::g_World->chunkMan->updateChunk(v.x, v.y, v.z - 1);
 				}
+				
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x + 1, v.y, v.z + 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x + 1, v.y, v.z + 1);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x + 1, v.y, v.z - 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x + 1, v.y, v.z - 1);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x - 1, v.y, v.z + 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x - 1, v.y, v.z + 1);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x - 1, v.y, v.z - 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x - 1, v.y, v.z - 1);
+				}
 
+
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x + 1, v.y + 1, v.z + 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x + 1, v.y + 1, v.z + 1);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x + 1, v.y + 1, v.z - 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x + 1, v.y + 1, v.z - 1);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x - 1, v.y + 1, v.z + 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x - 1, v.y + 1, v.z + 1);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x - 1, v.y + 1, v.z - 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x - 1, v.y + 1, v.z - 1);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x + 1, v.y + 1, v.z)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x + 1, v.y + 1, v.z);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x - 1, v.y + 1, v.z)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x - 1, v.y + 1, v.z);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x - 1, v.y + 1, v.z + 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x - 1, v.y + 1, v.z + 1);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x - 1, v.y + 1, v.z - 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x - 1, v.y + 1, v.z - 1);
+				}
+
+
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x + 1, v.y - 1, v.z + 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x + 1, v.y - 1, v.z + 1);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x + 1, v.y - 1, v.z - 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x + 1, v.y - 1, v.z - 1);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x - 1, v.y - 1, v.z + 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x - 1, v.y - 1, v.z + 1);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x - 1, v.y - 1, v.z - 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x - 1, v.y - 1, v.z - 1);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x + 1, v.y - 1, v.z)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x + 1, v.y - 1, v.z);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x - 1, v.y - 1, v.z)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x - 1, v.y - 1, v.z);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x - 1, v.y - 1, v.z + 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x - 1, v.y - 1, v.z + 1);
+				}
+				if(Minecraft::Client::g_World->chunkMan->chunkExists(v.x - 1, v.y - 1, v.z - 1)){
+					Minecraft::Client::g_World->chunkMan->updateChunk(v.x - 1, v.y - 1, v.z - 1);
+				}
 			}
 			
+			sceKernelDcacheWritebackInvalidateAll();
 		}
 
+		sceKernelDcacheWritebackInvalidateAll();
 		last_pos = center;
 		}
 	}
@@ -173,10 +242,14 @@ void Minecraft::Client::World::Init()
 	crosshair = new Sprite("assets/minecraft/textures/misc/cross.png", 8, 8, 16, 16);
 
 	InitialiseJobManager();
+	sceKernelDcacheWritebackInvalidateAll();
 	//ADD JOB
 	ChunkManagementJob manage;
+	
+	sceKernelDcacheWritebackInvalidateAll();
 	gJobManager.AddJob(&manage, sizeof(manage));
 	
+	sceKernelDcacheWritebackInvalidateAll();	
 
 	animationTimer = 0;
 	animationLavaFrame = 0;
