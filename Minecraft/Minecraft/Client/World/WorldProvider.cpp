@@ -6,11 +6,11 @@ using namespace Shadow::Utils;
 namespace Minecraft::Terrain{
 
     NoiseParameters defaultNoiseParams = {
-		0, 20, 16, 35, 0.11
+		0, 8.7, 3.4, 63, 1.0
 	};
 
     int WorldProvider::seed = 0;
-    PerlinNoise* WorldProvider::noise = NULL;
+    FastNoise* WorldProvider::noise = NULL;
 
 
 	int getHeight(int x, int z, NoiseParameters noiseParams = defaultNoiseParams){
@@ -19,11 +19,11 @@ namespace Minecraft::Terrain{
         	return 64 - 1;
     	}
 
-    	auto total = 0;
+    	auto total = 0.0f;
 
 		int frequency = 2;
 		
-		total += WorldProvider::noise->noise((float)(x) / (float)defaultNoiseParams.smoothness, 0, (float)(z) / (float)defaultNoiseParams.smoothness) * (float) defaultNoiseParams.amplitude / defaultNoiseParams.roughness + defaultNoiseParams.heightOffset;;
+		total += WorldProvider::noise->GetSimplex((float)(x) / (float)defaultNoiseParams.smoothness, (float)(z) / (float)defaultNoiseParams.smoothness) * (float) defaultNoiseParams.amplitude / defaultNoiseParams.roughness + defaultNoiseParams.heightOffset;;
 
 		return total;
 	}

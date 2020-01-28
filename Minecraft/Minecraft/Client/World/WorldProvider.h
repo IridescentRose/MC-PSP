@@ -6,10 +6,10 @@
 namespace Minecraft::Terrain{
 
     struct NoiseParameters{
-        int octaves;
-        int amplitude;
-        int smoothness;
-        int heightOffset;
+        double octaves;
+        double amplitude;
+        double smoothness;
+        double heightOffset;
         double roughness;
     };
 
@@ -20,7 +20,7 @@ namespace Minecraft::Terrain{
         static void generate(Chunk* chunk);
 
         static int seed;
-        static PerlinNoise* noise;
+        static FastNoise* noise;
     };
 
     extern NoiseParameters defaultNoiseParams;
