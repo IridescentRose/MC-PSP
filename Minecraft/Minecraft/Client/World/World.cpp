@@ -8,9 +8,11 @@
 #include "../../Version.hpp"
 
 #include "ChunkMesh.h"
-#include "MediaEngine/me.h"
+#include <Shadow/Utils/JobManager.h>
 using namespace Shadow;
 using namespace Shadow::Utils;
+
+bool InitialiseJobManager();
 
 Minecraft::Client::World* Minecraft::Client::g_World = new Minecraft::Client::World();
 
@@ -50,6 +52,8 @@ void Minecraft::Client::World::Init()
 	lastLevel = lighting(0);
 
 	crosshair = new Sprite("assets/minecraft/textures/misc/cross.png", 8, 8, 16, 16);
+
+	InitialiseJobManager();
 
 	animationTimer = 0;
 	animationLavaFrame = 0;

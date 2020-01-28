@@ -50,10 +50,13 @@ Minecraft/Client/Rendering/Moon.o \
 Minecraft/Client/Rendering/Sky.o \
 Minecraft/Client/Rendering/Stars.o \
 Minecraft/Client/Rendering/Clouds.o \
+MediaEngine/me.o \
+MediaEngine/MediaEngine.o
+
 
 INCDIR = $(PSPPATH)/include
 INCDIR += ./LameCraft ./include ./Engine ./libs ./libs/include
-CFLAGS = -O3 -g3 -mpreferred-stack-boundary=4 -ffast-math -fno-rtti -fno-exceptions
+CFLAGS = -O3 -mpreferred-stack-boundary=4 -ffast-math -fno-rtti -fno-exceptions
 CXXFLAGS = -std=gnu++17
 ASFLAGS = $(CFLAGS)
 
@@ -61,8 +64,8 @@ BUILD_PRX = 1
 PSP_FW_VERSION=500
 PSP_LARGE_MEMORY = 1
 
-LIBDIR += ./libs/lib/
-LDFLAGS = MediaEngine/mediaengine.prx
+LIBDIR += ./libs/lib/ -L/usr/local/pspdev/psp/sdk/lib
+LDFLAGS = 
 LIBS=  -lpspaudiolib -lpspaudio -lpspaudiocodec -lpng -lintraFont -ljson -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath -lmclib-common #-lssl -lcrypto -lcurl
 
 EXTRA_TARGETS = EBOOT.PBP
