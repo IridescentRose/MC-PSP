@@ -8,7 +8,7 @@
 #include "../../Version.hpp"
 
 #include "ChunkMesh.h"
-
+#include "MediaEngine/me.h"
 using namespace Shadow;
 using namespace Shadow::Utils;
 
@@ -25,6 +25,8 @@ Minecraft::Client::World::World()
 Minecraft::Client::World::~World()
 {
 }
+
+volatile me_struct *mei;
 
 void Minecraft::Client::World::Init()
 {
@@ -49,6 +51,10 @@ void Minecraft::Client::World::Init()
 	sceKernelStartThread(chunkManagerThread, 0, 0);
 	lastLevel = lighting(0);
 
+	if(InitME(mei) != 0){
+		sceKernelExitGame();
+	}
+
 	crosshair = new Sprite("assets/minecraft/textures/misc/cross.png", 8, 8, 16, 16);
 
 	animationTimer = 0;
@@ -58,6 +64,7 @@ void Minecraft::Client::World::Init()
 	textureWaterAnimationId = TextureUtil::LoadPngTexturePack("blocks/water_still.png");
 	textureLavaAnimationId = TextureUtil::LoadPngTexturePack("blocks/lava_still.png");
 	animationLavaStep = true;
+
 }
 
 void Minecraft::Client::World::Cleanup()

@@ -31,8 +31,6 @@ SetupCallbacks();
 	scePowerSetClockFrequency(333, 333, 166);
 	srand(time(NULL));
 
-	//if(!InitialiseJobManager())
-	//	sceKernelExitGame();
 
 	//initialize render manager
 	{
