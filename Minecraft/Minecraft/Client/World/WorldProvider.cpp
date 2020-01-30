@@ -6,7 +6,7 @@ using namespace Shadow::Utils;
 namespace Minecraft::Terrain{
 
     NoiseParameters defaultNoiseParams = {
-		0, 8.7, 3.4, 63, 1.0
+		0, 8.7, 3.4, 63, 1.0, {2, 0}, {3, 0}, {3, 0}
 	};
 
     int WorldProvider::seed = 0;
@@ -55,24 +55,20 @@ namespace Minecraft::Terrain{
 						    c->blocks[x][y][z].ID = 1;
 						    c->blocks[x][y][z].meta = 0;
 				    	}else if(rY + y > heightMap[x][z] && rY + y < heightMap[x][z] + 3){
-					    	c->blocks[x][y][z].ID = 3;
-					    	c->blocks[x][y][z].meta = 0;
+					    	c->blocks[x][y][z] = defaultNoiseParams.midBlock;
 				    	}else if(rY + y == heightMap[x][z] + 3){
-					    	c->blocks[x][y][z].ID = 2;
+					    	c->blocks[x][y][z] = defaultNoiseParams.topBlock;
 							if(rY + y < 63){
-								c->blocks[x][y][z].ID = 3;
+								c->blocks[x][y][z] = defaultNoiseParams.underwaterBlock;
 							}
-					    	c->blocks[x][y][z].meta = 0;
 				    	}else if(rY + y == 0){
-							c->blocks[x][y][z].ID = 7;
-							c->blocks[x][y][z].meta = 0;	
+							c->blocks[x][y][z] = {7, 0};	
 						}else{
-					    	c->blocks[x][y][z].ID = 0;
-					    	c->blocks[x][y][z].meta = 0;
+					    	c->blocks[x][y][z] = {0, 0};
 				    	}
 
 						if(rY + y <= 63 && c->blocks[x][y][z].ID == 0){
-							c->blocks[x][y][z].ID = 8;
+							c->blocks[x][y][z] = {8, 0};
 						}
 			    	}
 		    	}	

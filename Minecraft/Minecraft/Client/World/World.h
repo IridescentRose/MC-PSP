@@ -80,6 +80,8 @@ namespace Minecraft::Client {
 
 		int lastLevel;
 
+		static int DoChunkManagement();
+
 		Sprite* crosshair;
 		float animationTimer;
 		int animationWaterFrame;

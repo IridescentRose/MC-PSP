@@ -11,6 +11,10 @@ namespace Minecraft::Terrain{
         double smoothness;
         double heightOffset;
         double roughness;
+
+        ChunkBlock topBlock;
+        ChunkBlock midBlock;
+        ChunkBlock underwaterBlock;
     };
 
     class Chunk;
