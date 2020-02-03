@@ -69,9 +69,54 @@ namespace Minecraft::Terrain{
         ChunkBlock midBlock;
 
         ChunkBlock underBlock;
+        ChunkBlock aboveTop;
     };
 
     extern BiomeProfile defaultBiome;
+    extern BiomeProfile oceanBiome;
+    extern BiomeProfile riverBiome;
+    extern BiomeProfile forestBiome;
+    extern BiomeProfile woodlandBiomeHills;
+    extern BiomeProfile flowerForestBiome;
+    extern BiomeProfile birchForestBiome;
+    extern BiomeProfile birchForestBiomeHills;
+    extern BiomeProfile tallBirchForestBiome;
+    extern BiomeProfile tallBirchForestBiomeHills;
+    extern BiomeProfile darkForestBiomeHills;
+    extern BiomeProfile jungleBiome;
+    extern BiomeProfile jungleBiomeHills;
+    extern BiomeProfile jungleEdgeBiome;
+    extern BiomeProfile taigaBiome;
+    extern BiomeProfile taigaBiomeHills;
+    extern BiomeProfile taigaBiomeMountains;
+    extern BiomeProfile taigaSnowyBiomeHills;
+    extern BiomeProfile taigaSnowyBiomeMountains;
+    extern BiomeProfile giantTreeTaigaBiome;
+    extern BiomeProfile giantTreeTaigaBiomeHills;
+    extern BiomeProfile giantSpruceTaigaBiome;
+    extern BiomeProfile giantSpruceTaigaBiomeHills;
+    extern BiomeProfile mushroomBiome;
+    extern BiomeProfile mushroomShoreBiome;
+    extern BiomeProfile swampBiome;
+    extern BiomeProfile swampHillsBiome;
+    extern BiomeProfile savannaBiome;
+    extern BiomeProfile savannaPlateauBiome;
+    extern BiomeProfile savannaShatteredBiome;
+    extern BiomeProfile savannaShatteredPlateauBiome;
+    extern BiomeProfile plainsBiome;
+    extern BiomeProfile sunflowerPlainsBiome;
+    extern BiomeProfile desertBiome;
+    extern BiomeProfile desertBiomeHills;
+    extern BiomeProfile desertLakesBiome;
+    extern BiomeProfile snowyTundraBiome;
+    extern BiomeProfile snowyMountainsBiome;
+    extern BiomeProfile iceSpikesBiome;
+    extern BiomeProfile mountainsBiome;
+    extern BiomeProfile woodedMountainsBiome;
+    extern BiomeProfile gravelMountainsBiome;
+    extern BiomeProfile mesaBiome;
+    extern BiomeProfile mesaPlateauBiome;
+
 
     class Chunk;
     class WorldProvider{
