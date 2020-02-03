@@ -432,8 +432,9 @@ struct LocalFaces{
 
 Chunk::Chunk()
 {
-	struct ChunkBlock c;
+	struct ChunkBlockExtended c;
 	c.ID = 0;
+	c.biomeID = 0;
 	c.meta = 0;
 	chunk_x = 0;
 	chunk_y = 0;

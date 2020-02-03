@@ -61,7 +61,6 @@ namespace Minecraft::Client {
 
 		std::queue<Event*> eventBus;
 		TickTime* timeData;
-
 	private:
 		SceUID tickUpdateThread;
 		SceUID chunkManagerThread;

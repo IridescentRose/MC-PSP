@@ -49,6 +49,19 @@ class ChunkBlock {
     char meta;
 };
 
+class ChunkBlockExtended : public ChunkBlock{
+	public:
+
+	char biomeID;
+
+	ChunkBlockExtended(): ChunkBlock(0, 0){
+		biomeID = 0;
+	}
+	ChunkBlockExtended(char i, char m) : ChunkBlock(i, m){
+		biomeID = 0;
+	}
+};
+
 class ChunkBlockHasher{
 public:
 

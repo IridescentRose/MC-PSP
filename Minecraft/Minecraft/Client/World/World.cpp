@@ -19,7 +19,7 @@ Minecraft::Client::World::World()
 	timeData = new TickTime();
 	timeData->time = 0;
 	timeData->worldAge = 0;
-	
+ 
 }
 
 Minecraft::Client::World::~World()
@@ -143,11 +143,13 @@ void Minecraft::Client::World::Update(float dt)
 				Terrain::Chunk* ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z);
 
 				if(ch->blocks[relPos.x][relPos.y][relPos.z].ID == 0){
-					ch->blocks[relPos.x][relPos.y][relPos.z] = b->blk;
+					ch->blocks[relPos.x][relPos.y][relPos.z].ID = b->blk.ID;
+					ch->blocks[relPos.x][relPos.y][relPos.z].meta = b->blk.meta;
 				}else{
 					relPos.y++;
 					if(ch->blocks[relPos.x][relPos.y][relPos.z].ID == 0){
-						ch->blocks[relPos.x][relPos.y][relPos.z] = b->blk;
+						ch->blocks[relPos.x][relPos.y][relPos.z].ID = b->blk.ID;
+						ch->blocks[relPos.x][relPos.y][relPos.z].meta = b->blk.meta;
 					}
 				}
 

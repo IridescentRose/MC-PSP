@@ -34,7 +34,7 @@ public:
 	//MESH
 	
 	//Block Data organized by XYZ
-	ChunkBlock blocks[16][16][16];
+	ChunkBlockExtended blocks[16][16][16];
 	ChunkMeshCollection meshes;
 	ChunkMesh* mesh;
 	//CHUNK COORDINATES
