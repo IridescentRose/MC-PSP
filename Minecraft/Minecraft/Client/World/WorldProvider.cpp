@@ -2,6 +2,8 @@
 #include <Shadow/Utils/Logger.h>
 
 using namespace Shadow::Utils;
+#include <cmath>
+#include <iostream>
 
 namespace Minecraft::Terrain{
 
@@ -31,9 +33,7 @@ namespace Minecraft::Terrain{
     BiomeProfile defaultBiome = {BIOME_DEFAULT, defaultNoiseParams, {2, 0}, {3, 0}, {3, 0}};
 
 
-
-    BiomeProfile oceanBiome = {BIOME_OCEAN,{0, 8.7, 3.4, 40, 1.0},{13, 0}, {13,0}, {13,0}};
-    BiomeProfile riverBiome = {BIOME_RIVER,{0, 8.5, 1.5, 58, 1.0},{2, 0}, {2,0}, {3,0}};
+	std::map<int, BiomeProfile> bioMap;
 
 
     NoiseParameters forest = {
@@ -47,7 +47,7 @@ namespace Minecraft::Terrain{
 		0, 4.2, 4.2, 66, 1.0
 	};
     NoiseParameters mountains = {
-		0, 19.6, 4.2, 83, 1.0
+		0, 12.6, 4.2, 78, 1.0
 	};
 
 	NoiseParameters plateaus = {
@@ -58,48 +58,79 @@ namespace Minecraft::Terrain{
 		0, 4.2, 4.2, 62, 1.0
 	};
 
-    BiomeProfile forestBiome = {BIOME_FOREST, forest, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
-    BiomeProfile woodlandBiomeHills = {BIOME_WOODLAND_HILLS, forestHills, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
-    BiomeProfile flowerForestBiome = {BIOME_FLOWER_FOREST, forest, {2, 0}, {3, 0}, {3,0}, {0, 0}};
-    BiomeProfile birchForestBiome= {BIOME_BIRCH_FOREST, forest, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
-    BiomeProfile birchForestBiomeHills  = {BIOME_BIRCH_FOREST_HILLS, forestHills, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
-    BiomeProfile tallBirchForestBiome = {BIOME_BIRCH_FOREST, forest, {2,0}, {3,0}, {3,0}, {0, 0}};
-    BiomeProfile tallBirchForestBiomeHills = {BIOME_TALL_BIRCH_FOREST_HILLS, forestHills, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
-    BiomeProfile darkForestBiome = {BIOME_DARK_FOREST_HILLS, forest, {2,0}, {3,0}, {3,0}, {0, 0}};
-    BiomeProfile jungleBiome = {BIOME_JUNGLE, forest, {2,0}, {3,0}, {3,0}, {0, 0}};
-    BiomeProfile jungleBiomeHills = {BIOME_JUNGLE_HILLS, forestHills, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
-    BiomeProfile jungleEdgeBiome = {BIOME_JUNGLE_EDGE, plains, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
-    BiomeProfile taigaBiome = {BIOME_TAIGA, forest, {2,0}, {3,0}, {3,0}, {0, 0}};
-    BiomeProfile taigaBiomeHills = {BIOME_Taiga_Hills, forestHills, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
-    BiomeProfile taigaBiomeMountains = {BIOME_Taiga_Mountains, mountains, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
-    BiomeProfile taigaSnowyBiomeHills = {BIOME_Snowy_Taiga_Hills, forestHills, {2, 0}, {3, 0}, {3, 0}, {78, 0}};
+	//COLD
+
+	//Rough
+	BiomeProfile snowyMountainsBiome = {BIOME_Snow_Mountains, mountains, {2, 0}, {3, 0}, {3, 0}, {78, 0}};
     BiomeProfile taigaSnowyBiomeMountains = {BIOME_Snowy_Taiga_Mountains, mountains, {2, 0}, {3, 0}, {3, 0}, {78, 0}};
-    BiomeProfile giantTreeTaigaBiome = {BIOME_Giant_Tree_Taiga, forest, {3,2}, {3,0}, {3,0}, {0, 0}};
+    BiomeProfile taigaBiomeMountains = {BIOME_Taiga_Mountains, mountains, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
+    
+	//Hilly
+	BiomeProfile taigaSnowyBiomeHills = {BIOME_Snowy_Taiga_Hills, forestHills, {2, 0}, {3, 0}, {3, 0}, {78, 0}};
+	BiomeProfile giantSpruceTaigaBiomeHills = {BIOME_Giant_Spruce_Taiga_Hills, forestHills, {3, 1}, {3, 0}, {3, 0}, {0, 0}};
     BiomeProfile giantTreeTaigaBiomeHills = {BIOME_WOODLAND_HILLS, forestHills, {3,2}, {3, 0}, {3, 0}, {0, 0}};
+    BiomeProfile taigaBiomeHills = {BIOME_Taiga_Hills, forestHills, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
+    
+	//Smooth
+	BiomeProfile giantTreeTaigaBiome = {BIOME_Giant_Tree_Taiga, forest, {3,2}, {3,0}, {3,0}, {0, 0}};
     BiomeProfile giantSpruceTaigaBiome = {BIOME_Giant_Spruce_Taiga, forest, {3,1}, {3,0}, {3,0}, {0, 0}};
-    BiomeProfile giantSpruceTaigaBiomeHills = {BIOME_Giant_Spruce_Taiga_Hills, forestHills, {3, 1}, {3, 0}, {3, 0}, {0, 0}};
-    BiomeProfile mushroomBiome = {BIOME_Mushroom_Fields, forest, {110,0}, {3,0}, {3,0}, {0, 0}};
-    BiomeProfile mushroomShoreBiome = {BIOME_Mushroom_Fields_Shore, plains, {110,0}, {3,0}, {3,0}, {0, 0}};
-    BiomeProfile swampBiome = {BIOME_Swamp, lakes, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
-    BiomeProfile swampHillsBiome = {BIOME_Swamp_Hills, forest, {2,0}, {3,0}, {3,0}, {0, 0}};
-    BiomeProfile savannaBiome = {BIOME_Savanna, forest, {2,0}, {3,0}, {3,0}, {0, 0}};
-    BiomeProfile savannaPlateauBiome = {BIOME_Savanna_Plateau, plateaus, {2,0}, {3,0}, {3,0}, {0, 0}};
-    BiomeProfile savannaShatteredBiome = {BIOME_Shattered_Savanna, forestHills, {2,0}, {3,0}, {3,0}, {0, 0}};
-    BiomeProfile savannaShatteredPlateauBiome = {BIOME_Shattered_Savanna_Plateau, plateaus, {2,0}, {3,0}, {3,0}, {0, 0}};
-    BiomeProfile plainsBiome = {BIOME_Plains, plains, {2,0}, {3,0}, {3,0}, {0, 0}};
-    BiomeProfile sunflowerPlainsBiome = {BIOME_Sunflower_Plains, plains, {2,0}, {3,0}, {3,0}, {0, 0}};
-    BiomeProfile desertBiome = {BIOME_Desert, plains, {12,0}, {12,0}, {12,0}};
-    BiomeProfile desertBiomeHills = {BIOME_Desert_Hills, forest, {12,0}, {12,0}, {12,0}, {0, 0}};
-    BiomeProfile desertLakesBiome = {BIOME_Desert_Lakes, lakes, {12, 0}, {12, 0}, {12, 0}, {0, 0}};
-    BiomeProfile snowyTundraBiome = {BIOME_Snowy_Tundra, plains, {2,0}, {3,0}, {3,0}, {78, 0}};
-    BiomeProfile snowyMountainsBiome = {BIOME_Snow_Mountains, mountains, {2, 0}, {3, 0}, {3, 0}, {78, 0}};
+	BiomeProfile taigaBiome = {BIOME_TAIGA, forest, {2,0}, {3,0}, {3,0}, {0, 0}};
+    
+	//Flat
+	BiomeProfile snowyTundraBiome = {BIOME_Snowy_Tundra, plains, {2,0}, {3,0}, {3,0}, {78, 0}};
     BiomeProfile iceSpikesBiome = {BIOME_Ice_Spikes, plains, {2,0}, {3,0}, {3,0}, {78, 0}};
+    
+
+	//TEMPERATE
+	//Rough
     BiomeProfile mountainsBiome = {BIOME_Mountains, mountains, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
     BiomeProfile woodedMountainsBiome = {BIOME_Wooded_Mountains, mountains, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
-    BiomeProfile gravelMountainsBiome = {BIOME_Gravelly_Mountains, mountains, {13, 0}, {3, 0}, {3, 0}, {0, 0}};
-    BiomeProfile mesaBiome = {BIOME_Badlands, mountains, {3, 1}, {3, 0}, {3, 0}, {0, 0}};
-    BiomeProfile mesaPlateauBiome = {BIOME_Badlands, plateaus, {3,1}, {3,0}, {3,0}, {0, 0}};
+    BiomeProfile gravelMountainsBiome = {BIOME_Gravelly_Mountains, mountains, {13, 0}, {13, 0}, {13, 0}, {0, 0}};
+    BiomeProfile oceanBiome = {BIOME_OCEAN,{0, 8.7, 3.4, 40, 1.0},{13, 0}, {13,0}, {13,0}};
 
+	//Hills
+	BiomeProfile woodlandBiomeHills = {BIOME_WOODLAND_HILLS, forestHills, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
+	BiomeProfile birchForestBiomeHills  = {BIOME_BIRCH_FOREST_HILLS, forestHills, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
+    BiomeProfile tallBirchForestBiomeHills = {BIOME_TALL_BIRCH_FOREST_HILLS, forestHills, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
+    BiomeProfile swampHillsBiome = {BIOME_Swamp_Hills, forest, {2,0}, {3,0}, {3,0}, {0, 0}};
+    
+	//Smooth
+    BiomeProfile riverBiome = {BIOME_RIVER,{0, 8.5, 1.5, 58, 1.0},{2, 0}, {2,0}, {3,0}};
+    BiomeProfile forestBiome = {BIOME_FOREST, forest, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
+    BiomeProfile flowerForestBiome = {BIOME_FLOWER_FOREST, forest, {2, 0}, {3, 0}, {3,0}, {0, 0}};
+    BiomeProfile birchForestBiome= {BIOME_BIRCH_FOREST, forest, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
+    BiomeProfile tallBirchForestBiome = {BIOME_BIRCH_FOREST, forest, {2,0}, {3,0}, {3,0}, {0, 0}};
+    BiomeProfile darkForestBiome = {BIOME_DARK_FOREST_HILLS, forest, {2,0}, {3,0}, {3,0}, {0, 0}};
+    BiomeProfile mushroomBiome = {BIOME_Mushroom_Fields, forest, {110,0}, {3,0}, {3,0}, {0, 0}};
+    
+	//Flat
+	BiomeProfile mushroomShoreBiome = {BIOME_Mushroom_Fields_Shore, plains, {110,0}, {3,0}, {3,0}, {0, 0}};
+    BiomeProfile swampBiome = {BIOME_Swamp, lakes, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
+    BiomeProfile plainsBiome = {BIOME_Plains, plains, {2,0}, {3,0}, {3,0}, {0, 0}};
+    BiomeProfile sunflowerPlainsBiome = {BIOME_Sunflower_Plains, plains, {2,0}, {3,0}, {3,0}, {0, 0}};
+    
+	//HOT
+
+	//Rough
+    BiomeProfile savannaPlateauBiome = {BIOME_Savanna_Plateau, plateaus, {2,0}, {3,0}, {3,0}, {0, 0}};
+    BiomeProfile savannaShatteredPlateauBiome = {BIOME_Shattered_Savanna_Plateau, plateaus, {2,0}, {3,0}, {3,0}, {0, 0}};
+	BiomeProfile mesaBiome = {BIOME_Badlands, mountains, {3, 1}, {3, 0}, {3, 0}, {0, 0}};
+    BiomeProfile mesaPlateauBiome = {BIOME_Badlands, plateaus, {3,1}, {3,0}, {3,0}, {0, 0}};
+	
+	//Hills
+	BiomeProfile desertBiomeHills = {BIOME_Desert_Hills, forest, {12,0}, {12,0}, {12,0}, {0, 0}};
+    BiomeProfile jungleBiomeHills = {BIOME_JUNGLE_HILLS, forestHills, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
+    BiomeProfile savannaShatteredBiome = {BIOME_Shattered_Savanna, forestHills, {2,0}, {3,0}, {3,0}, {0, 0}};
+    
+	//Smooth
+    BiomeProfile savannaBiome = {BIOME_Savanna, forest, {2,0}, {3,0}, {3,0}, {0, 0}};
+    BiomeProfile jungleBiome = {BIOME_JUNGLE, forest, {2,0}, {3,0}, {3,0}, {0, 0}};
+    
+	//Flat
+	BiomeProfile desertBiome = {BIOME_Desert, plains, {12,0}, {12,0}, {12,0}};
+	BiomeProfile desertLakesBiome = {BIOME_Desert_Lakes, lakes, {12, 0}, {12, 0}, {12, 0}, {0, 0}};
+    BiomeProfile jungleEdgeBiome = {BIOME_JUNGLE_EDGE, plains, {2, 0}, {3, 0}, {3, 0}, {0, 0}};
+    
 
 	void WorldProvider::generate(Chunk* c){
 
@@ -111,21 +142,208 @@ namespace Minecraft::Terrain{
 
         	int heightMap[16][16];
 
+			int biomeMap[16][16];
+
+
+			for(int x = 0; x < CHUNK_SIZE; x++){
+				for(int z = 0; z < CHUNK_SIZE; z++){
+					float temp = WorldProvider::noise->GetPerlin( (float)(rX + x)/128.f, (float)(rX + z)/128.f);
+					temp += 0.65f;
+					temp /= 1.2f;
+
+					if(temp < 0){
+						temp = 0.05f;
+					}
+					if(temp > 1){
+						temp = 0.95f;
+					}
+
+					temp = round(temp *40.f)/40.f;
+
+					float roughness = WorldProvider::noise->GetSimplex( (float)(rX + x)/64.f, (float)(rX + z)/64.f);
+					roughness += 0.5f;
+					temp /= 1.1f;
+
+					if(roughness < 0){
+						roughness = 0.05f;
+					}
+					if(roughness > 1){
+						roughness = 0.95f;
+					}
+
+					roughness = round(roughness *40.f)/40.f;
+
+					int bioRes = BIOME_FOREST;
+					if(temp < 0.4){
+						//COLD
+						if(roughness < 0.3f){
+							//FLAT
+							if(temp < 0.05f){
+								bioRes = BIOME_Ice_Spikes;
+							}else{
+								bioRes = BIOME_Snowy_Tundra;
+							}
+						}
+
+						if(roughness >= 0.3f && roughness < 0.5f){
+							//SMOOTH
+							if(temp < 0.2f && temp > 0.16f){
+								bioRes = BIOME_Giant_Spruce_Taiga;
+							}else if(temp >= 0.2f && temp < 0.23f){
+								bioRes = BIOME_Giant_Tree_Taiga;
+							}else{
+								bioRes = BIOME_TAIGA;
+							}
+						}
+
+						if(roughness >= 0.5f && roughness < 0.7f){
+							//HILLS
+							if(temp < 0.2f){
+								bioRes = BIOME_Snowy_Taiga_Hills;
+							}else if(temp >= 0.2f && temp < 0.22f){
+								bioRes = BIOME_Giant_Spruce_Taiga_Hills;
+							}else if(temp >= 0.22f && temp <= 0.2f){
+								bioRes = BIOME_Giant_Tree_Taiga_Hills;
+							}else{
+								bioRes = BIOME_Taiga_Hills;
+							}
+						}
+
+						if(roughness >= 0.7f){
+							//MOUNTAINS
+							if(temp < 0.15f){
+								bioRes = BIOME_Snow_Mountains;
+							}else if(temp >= 0.15f && temp < 0.25f){
+								bioRes = BIOME_Snowy_Taiga_Mountains;
+							}else{
+								bioRes = BIOME_Taiga_Mountains;
+							}
+						}
+
+
+					}else if(temp > 0.4f && temp < 0.65f){
+						//TEMPERATE
+						if(roughness < 0.35f){
+							//FLAT
+							if(temp >= 0.4f && temp < 0.5f){
+								bioRes = BIOME_Plains;
+							}else if(temp >= 0.50f && temp < 0.55f){
+								bioRes = BIOME_Swamp;
+							}else if(temp >= 0.55f && temp < 0.675f){
+								bioRes = BIOME_Plains;
+							}else{
+								bioRes = BIOME_Sunflower_Plains;
+							}
+						}
+
+						if(roughness >= 0.35f && roughness < 0.5f){
+							//SMOOTH
+
+							if(temp >= 0.4f && temp < 0.45f){
+								bioRes = BIOME_DARK_FOREST_HILLS;
+							}else if(temp >= 0.45f && temp < 0.50f){
+								bioRes = BIOME_FOREST;
+							}else if(temp >= 0.5f && temp < 0.55f){
+								bioRes = BIOME_FLOWER_FOREST;
+							}else if(temp >= 0.55f && temp < 0.6f){
+								bioRes = BIOME_BIRCH_FOREST;
+							}else if(temp >= 0.6f && temp < 0.65f){
+								bioRes = BIOME_TALL_BIRCH_FOREST;
+							}
+						}
+
+						if(roughness >= 0.5f && roughness < 0.7f){
+							//HILLS
+							if(temp >= 0.4f && temp < 0.45f){
+								bioRes = BIOME_WOODLAND_HILLS;
+							}else if(temp >= 0.45f && temp < 0.50f){
+								bioRes = BIOME_BIRCH_FOREST_HILLS;
+							}else if(temp >= 0.50f && temp < 0.55f){
+								bioRes = BIOME_TALL_BIRCH_FOREST_HILLS;
+							}else if(temp >= 0.50f && temp < 0.55f){
+								bioRes = BIOME_Swamp_Hills;
+							}
+						}
+
+						if(roughness >= 0.7f){
+							//MOUNTAINS
+							if(temp >= 0.4f && temp < 0.45f){
+								bioRes = BIOME_OCEAN;
+							}else if(temp >= 0.45f && temp < 0.55f){
+								bioRes = BIOME_Mountains;
+							}else if(temp >= 0.5f && temp < 0.6f){
+								bioRes = BIOME_Wooded_Mountains;
+							}else{
+								bioRes = BIOME_Gravelly_Mountains;
+							}
+						}
+					}else{
+						//HOT
+						if(roughness < 0.67f){
+							//FLAT
+							if(temp >= 0.65f && temp < 0.7f){
+								bioRes = BIOME_JUNGLE_EDGE;
+							}else if(temp >= 0.7f && temp < 0.75f){
+								bioRes = BIOME_Savanna;
+							}else if(temp >= 0.75f && temp < 0.8f){
+								bioRes = BIOME_Desert_Lakes;
+							}else{
+								bioRes = BIOME_Desert;
+							}
+						}
+
+						if(roughness >= 0.3f && roughness < 0.5f){
+							//SMOOTH
+							if(temp < 0.7f){
+								bioRes = BIOME_JUNGLE;
+							}else{
+								bioRes = BIOME_Desert;
+							}
+						}
+
+						if(roughness >= 0.5f && roughness < 0.7f){
+							//HILLS
+							if(temp < 0.7f){
+								bioRes = BIOME_JUNGLE_HILLS;
+							}else if(temp >= 0.7f && temp < 0.75f){
+								bioRes = BIOME_Shattered_Savanna;
+							}else{
+								bioRes = BIOME_Desert_Hills;
+							}
+						}
+
+						if(roughness >= 0.7f){
+							//MOUNTAINS
+							if(temp < 0.7f){
+								bioRes = BIOME_Savanna_Plateau;
+							}else if(temp >= 0.7f && temp < 0.8f){
+								bioRes = BIOME_Shattered_Savanna_Plateau;
+							}else if(temp >= 0.8f && temp < 0.9f){
+								bioRes = BIOME_Badlands;
+							}else{
+								bioRes = BIOME_Badlands_Plateau;
+							}
+						}
+					}
+
+					biomeMap[x][z] = bioRes;
+				}
+			}
+
         	for(int x = 0; x < CHUNK_SIZE; x++){
             	for(int z = 0; z < CHUNK_SIZE; z++){
-					BiomeProfile thisBiome = desertLakesBiome;
-                	heightMap[x][z] = getHeight(rX + x, rZ + z, thisBiome.params);
+					NoiseParameters profile = bioMap[biomeMap[x][z]].params;
+                	heightMap[x][z] = getHeight(rX + x, rZ + z, profile);
             	}
         	}
 
-
         	for(int x = 0; x < CHUNK_SIZE; x++){
-		    	for(int y = 0; y < CHUNK_SIZE; y++){
 
-					BiomeProfile thisBiome = desertLakesBiome;
 
 				    for(int z = 0; z < CHUNK_SIZE; z++){
 						
+					BiomeProfile thisBiome = bioMap[biomeMap[x][z]];
+		    	for(int y = 0; y < CHUNK_SIZE; y++){
 					    if(rY + y <= heightMap[x][z] && rY + y > 0){
 						    c->blocks[x][y][z].ID = 1;
 						    c->blocks[x][y][z].meta = 0;

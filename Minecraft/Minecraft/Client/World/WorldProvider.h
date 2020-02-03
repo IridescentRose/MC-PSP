@@ -3,6 +3,7 @@
 #include "Perlin.h"
 #include "Chunk.h"
 #include <glm/glm.hpp>
+#include <map>
 namespace Minecraft::Terrain{
 
     struct NoiseParameters{
@@ -71,6 +72,7 @@ namespace Minecraft::Terrain{
         ChunkBlock underBlock;
         ChunkBlock aboveTop;
     };
+	extern std::map<int, BiomeProfile> bioMap;
 
     extern BiomeProfile defaultBiome;
     extern BiomeProfile oceanBiome;
@@ -82,7 +84,7 @@ namespace Minecraft::Terrain{
     extern BiomeProfile birchForestBiomeHills;
     extern BiomeProfile tallBirchForestBiome;
     extern BiomeProfile tallBirchForestBiomeHills;
-    extern BiomeProfile darkForestBiomeHills;
+    extern BiomeProfile darkForestBiome;
     extern BiomeProfile jungleBiome;
     extern BiomeProfile jungleBiomeHills;
     extern BiomeProfile jungleEdgeBiome;
