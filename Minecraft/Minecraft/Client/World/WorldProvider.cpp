@@ -28,6 +28,8 @@ namespace Minecraft::Terrain{
 		return total;
 	}
 
+    BiomeProfile defaultBiome = {BIOME_DEFAULT, defaultNoiseParams, {2, 0}, {3, 0}, {3, 0}};
+
     void WorldProvider::generate(Chunk* c){
 
 		int rX = c->chunk_x * CHUNK_SIZE;
@@ -47,22 +49,24 @@ namespace Minecraft::Terrain{
 
         	for(int x = 0; x < CHUNK_SIZE; x++){
 		    	for(int y = 0; y < CHUNK_SIZE; y++){
+
+					BiomeProfile thisBiome = defaultBiome;
+
 				    for(int z = 0; z < CHUNK_SIZE; z++){
 						
-						
-
 					    if(rY + y <= heightMap[x][z] && rY + y > 0){
 						    c->blocks[x][y][z].ID = 1;
 						    c->blocks[x][y][z].meta = 0;
 				    	}else if(rY + y > heightMap[x][z] && rY + y < heightMap[x][z] + 3){
-					    	c->blocks[x][y][z].ID = 3;
-					    	c->blocks[x][y][z].meta = 0;
+					    	c->blocks[x][y][z].ID = thisBiome.midBlock.ID;
+					    	c->blocks[x][y][z].meta = thisBiome.midBlock.meta;
 				    	}else if(rY + y == heightMap[x][z] + 3){
-					    	c->blocks[x][y][z].ID = 2;
+					    	c->blocks[x][y][z].ID = thisBiome.topBlock.ID;
+					    	c->blocks[x][y][z].meta = thisBiome.topBlock.meta;
 							if(rY + y < 63){
-								c->blocks[x][y][z].ID = 3;
+					    	c->blocks[x][y][z].ID = thisBiome.underBlock.ID;
+					    	c->blocks[x][y][z].meta = thisBiome.underBlock.meta;
 							}
-					    	c->blocks[x][y][z].meta = 0;
 				    	}else if(rY + y == 0){
 							c->blocks[x][y][z].ID = 7;
 							c->blocks[x][y][z].meta = 0;	

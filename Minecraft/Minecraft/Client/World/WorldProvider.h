@@ -64,7 +64,6 @@ namespace Minecraft::Terrain{
     struct BiomeProfile{
         BiomeTypes type;
         NoiseParameters params;
-        glm::vec4 color;
 
         ChunkBlock topBlock;
         ChunkBlock midBlock;
@@ -72,7 +71,7 @@ namespace Minecraft::Terrain{
         ChunkBlock underBlock;
     };
 
-
+    extern BiomeProfile defaultBiome;
 
     class Chunk;
     class WorldProvider{
