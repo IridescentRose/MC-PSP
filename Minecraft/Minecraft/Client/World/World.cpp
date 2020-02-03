@@ -140,7 +140,8 @@ void Minecraft::Client::World::Update(float dt)
 				mc::Vector3i relPos = mc::Vector3i(pos.x%16, pos.y%16, pos.z%16);
 
 				Terrain::Chunk* ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z);
-				ch->blocks[relPos.x][relPos.y][relPos.z] = {0, 0}; //Air
+				ch->blocks[relPos.x][relPos.y][relPos.z].ID = 0; //Air
+				ch->blocks[relPos.x][relPos.y][relPos.z].meta = 0; //Air
 
 			
 

@@ -71,6 +71,8 @@ namespace Minecraft::Terrain{
 
         ChunkBlock underBlock;
         ChunkBlock aboveTop;
+
+        glm::vec3 color;
     };
 	extern std::map<int, BiomeProfile> bioMap;
 

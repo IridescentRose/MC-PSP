@@ -484,28 +484,30 @@ std::array<float, 8> getTextureAtlasIndex(int idx){
 	};
 }
 
-mc::Vector3f getColorOffsets(ChunkBlock cblk, int side){
+mc::Vector3f getColorOffsets(ChunkBlockExtended cblk, int side){
+
+	glm::vec3 v = Terrain::bioMap[cblk.biomeID].color;
 
 	if(cblk.ID == 2 && side == TYPE_TOP){
-		return {83.f / 255.f * 1.4f, 157.f / 255.f * 1.6f, 52.f / 255.f * 1.8f};
+		return {83.f / 255.f * 1.4f * v.x, 157.f / 255.f * 1.6f * v.y, 52.f / 255.f * 1.8f * v.z};
 	}
 
 	if(cblk.ID == 31 && (cblk.meta == 1 || cblk.meta == 2)  ){
-		return {0.0f, 1.0f, 0.0f};
+		return {0.2f * v.x, 1.0f * v.y, 0.2f * v.z};
 	}else if (cblk.ID == 18 || cblk.ID == 161){
 		if(cblk.ID == 18){
 			if(cblk.meta == 1){
-				return {0.38, 0.6, 0.38};
+				return {0.38 * v.x, 0.6 * v.y, 0.38 * v.z};
 			}else if(cblk.meta == 2){
-				return {0.502, 0.655, 0.333};
+				return {0.502 * v.x, 0.655 * v.y, 0.333 * v.z};
 			}else{
-				return {0.0f, 1.0f, 0.0f};
+				return {0.4f * v.x, 1.0f * v.y, 0.4f * v.z};
 			}
 		}else{
-			return {0.0f, 1.0f, 0.0f};
+			return {0.4f * v.x, 1.0f * v.y, 0.4f * v.z};
 		}
 	}else if(cblk.ID == 104 || cblk.ID == 105 || cblk.ID == 106 || cblk.ID == 111){
-		return {0.0f, 1.0f, 0.0f};
+		return {0.2f * v.z, 1.0f * v.y, 0.2f * v.z};
 	}else{
 		return {1.0f, 1.0f, 1.0f};
 	}
@@ -518,7 +520,7 @@ void Chunk::generateMesh(ChunkManager* man)
 	for (char y = 0; y < CHUNK_SIZE; y++) {
 		for (char z = 0; z < CHUNK_SIZE; z++) {
 			for (char x = 0; x < CHUNK_SIZE; x++) {
-				ChunkBlock temp = blocks[x][y][z];
+				ChunkBlockExtended temp = blocks[x][y][z];
 				mc::Vector3i position;
 				position.x = x; position.y = y; position.z = z;
 
