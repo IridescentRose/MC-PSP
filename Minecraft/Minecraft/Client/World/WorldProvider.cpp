@@ -156,7 +156,7 @@ namespace Minecraft::Terrain{
 
 			for(int x = 0; x < CHUNK_SIZE; x++){
 				for(int z = 0; z < CHUNK_SIZE; z++){
-					float temp = WorldProvider::noise->GetPerlin( (float)(rX + x)/4.f, (float)(rX + z)/4.f);
+					float temp = WorldProvider::noise->GetPerlin( (float)(rX + x)/192.f, (float)(rX + z)/192.f);
 					temp += 0.65f;
 					temp /= 1.2f;
 
@@ -169,7 +169,7 @@ namespace Minecraft::Terrain{
 
 					temp = round(temp *40.f)/40.f;
 
-					float roughness = WorldProvider::noise->GetSimplex( (float)(rX + x)/4.f, (float)(rX + z)/4.f);
+					float roughness = WorldProvider::noise->GetSimplex( (float)(rX + x)/96.f, (float)(rX + z)/96.f);
 					roughness += 0.5f;
 					temp /= 1.1f;
 
