@@ -1,9 +1,11 @@
 #include "WorldProvider.h"
 #include <Shadow/Utils/Logger.h>
-
+#include <pspmath.h>
 using namespace Shadow::Utils;
 #include <cmath>
 #include <iostream>
+
+#define WATER_LEVEL 63
 
 namespace Minecraft::Terrain{
 
@@ -58,14 +60,14 @@ namespace Minecraft::Terrain{
 		0, 4.2, 4.2, 62, 1.0
 	};
 
-	glm::vec3 coldColor = {1.1f, 0.9f, 1.6f};
-	glm::vec3 hotColor = {1.4f, 0.7f, 0.9f};
-	glm::vec3 forestColor = {1.1f, 0.9f, 1.05f};
-	glm::vec3 jungleColor = {1.2f, 0.9f, 1.1f};
-	glm::vec3 plainsColor = {1.2f, 0.9f, 1.0f};
-	glm::vec3 savanna = {1.2f, 0.8f, 1.0f};
-	glm::vec3 defaultColor = {1.0f, 1.0f, 1.0f};
-	glm::vec3 swampColor = {1.0f, 0.6f, 0.4f};
+	glm::vec3 coldColor = {0.549, 0.71, 0.545};
+	glm::vec3 hotColor = {0.686, 0.706, 0.333};
+	glm::vec3 forestColor = {0.498f, 0.761f, 0.376f};
+	glm::vec3 jungleColor = {0.498f, 0.861f, 0.376f};
+	glm::vec3 plainsColor = {0.58, 0.737, 0.353};
+	glm::vec3 savanna = {0.686, 0.806, 0.333};
+	glm::vec3 defaultColor = {0.8f, 0.8f, 0.8f};
+	glm::vec3 swampColor = {0.8f, 0.6f, 0.4f};
 
 	//COLD
 
@@ -156,8 +158,8 @@ namespace Minecraft::Terrain{
 
 			for(int x = 0; x < CHUNK_SIZE; x++){
 				for(int z = 0; z < CHUNK_SIZE; z++){
-					float temp = WorldProvider::noise->GetPerlin( (float)(rX + x)/192.f, (float)(rX + z)/192.f);
-					temp += 0.65f;
+					float temp = WorldProvider::noise->GetPerlin( (float)(rX + x)/512.f, (float)(rX + z)/512.f);
+					temp += 0.75f;
 					temp /= 1.2f;
 
 					if(temp < 0){
@@ -169,7 +171,7 @@ namespace Minecraft::Terrain{
 
 					temp = round(temp *40.f)/40.f;
 
-					float roughness = WorldProvider::noise->GetSimplex( (float)(rX + x)/96.f, (float)(rX + z)/96.f);
+					float roughness = WorldProvider::noise->GetSimplex( (float)(rX + x)/256.f, (float)(rX + z)/256.f);
 					roughness += 0.5f;
 					temp /= 1.1f;
 
@@ -362,7 +364,7 @@ namespace Minecraft::Terrain{
 				    	}else if(rY + y == heightMap[x][z] + 2){
 					    	c->blocks[x][y][z].ID = thisBiome.topBlock.ID;
 					    	c->blocks[x][y][z].meta = thisBiome.topBlock.meta;
-							if(rY + y < 63){
+							if(rY + y < WATER_LEVEL){
 					    	c->blocks[x][y][z].ID = thisBiome.underBlock.ID;
 					    	c->blocks[x][y][z].meta = thisBiome.underBlock.meta;
 							}
@@ -370,6 +372,92 @@ namespace Minecraft::Terrain{
 						else if(rY + y == heightMap[x][z] + 3){
 					    	c->blocks[x][y][z].ID = thisBiome.aboveTop.ID;
 					    	c->blocks[x][y][z].meta = thisBiome.aboveTop.meta;
+
+							vfpu_srand(seed + (rX + x - 1) * (rZ + z + 1));
+							float rands = vfpu_randf(0, 1);
+
+							if(rands > 0.65f && rY +y > WATER_LEVEL && (thisBiome.type == BIOME_Plains || thisBiome.type == BIOME_Sunflower_Plains || thisBiome.type == BIOME_Savanna_Plateau || thisBiome.type == BIOME_Savanna || thisBiome.type == BIOME_Shattered_Savanna || thisBiome.type == BIOME_FLOWER_FOREST)){
+								if(thisBiome.type == BIOME_FLOWER_FOREST){
+									c->blocks[x][y][z].ID = 38;
+									c->blocks[x][y][z].meta = (int)vfpu_randf(0, 9);
+									if(c->blocks[x][y][z].meta == 9){
+										c->blocks[x][y][z].meta = 8;
+									}
+									if(c->blocks[x][y][z].meta == 1){
+										c->blocks[x][y][z].meta = 0;
+									}
+								}else{
+									int randomChoice = abs(noise->GetPerlin( (float)(rX + x)/3.f, (float)(rZ + z)/3.f  ) * 30.f);
+
+										if(randomChoice >= 0 && randomChoice < 15){
+											c->blocks[x][y][z].ID = 31;
+											c->blocks[x][y][z].meta = 1;
+										}else{
+											c->blocks[x][y][z].ID = 37 + vfpu_randf(0, 1.2);
+											if(c->blocks[x][y][z].ID == 38){
+												c->blocks[x][y][z].meta = (int)vfpu_randf(0, 9);
+												if(c->blocks[x][y][z].meta == 1){
+													c->blocks[x][y][z].meta = 0;
+													c->blocks[x][y][z].ID = 0;
+												}
+												if(c->blocks[x][y][z].meta == 2){
+													c->blocks[x][y][z].meta = 0;
+													c->blocks[x][y][z].ID = 0;
+												}
+												if(c->blocks[x][y][z].meta == 9){
+													c->blocks[x][y][z].meta = 0;
+													c->blocks[x][y][z].ID = 0;
+												}
+											}else{
+												c->blocks[x][y][z].meta = 0;
+											}
+										}
+								}
+							}else if (rands > 0.875f && rY + y > WATER_LEVEL && thisBiome.type != BIOME_Gravelly_Mountains){
+								
+								if(thisBiome.type == BIOME_Desert || thisBiome.type == BIOME_Desert_Hills || thisBiome.type == BIOME_Desert_Lakes){
+									int randomChoice = abs(noise->GetPerlin( (float)(rX + x)/3.f, (float)(rZ + z)/3.f  ) * 30.f);
+										if(randomChoice >= 0 && randomChoice < 1){
+											c->blocks[x][y][z].ID = 32;
+											c->blocks[x][y][z].meta = 0;
+										}
+								}else{
+
+									if(thisBiome.type == BIOME_TAIGA || thisBiome.type == BIOME_Taiga_Hills || thisBiome.type == BIOME_Taiga_Mountains || thisBiome.type == BIOME_Giant_Tree_Taiga || thisBiome.type == BIOME_Giant_Tree_Taiga_Hills || thisBiome.type == BIOME_Giant_Spruce_Taiga || thisBiome.type == BIOME_Giant_Spruce_Taiga_Hills){
+										int randomChoice = vfpu_randf(0, 12);
+
+										if(randomChoice >= 0 && randomChoice < 6){
+											c->blocks[x][y][z].ID = 31;
+											c->blocks[x][y][z].meta = 1;
+										}else if(randomChoice >= 6 && randomChoice < 10){
+											c->blocks[x][y][z].ID = 31;
+											c->blocks[x][y][z].meta = 2;
+										}else if(randomChoice == 10){
+											c->blocks[x][y][z].ID = 39;
+											c->blocks[x][y][z].meta = 0;
+										}else if(randomChoice == 11){
+											c->blocks[x][y][z].ID = 40;
+											c->blocks[x][y][z].meta = 0;
+										}else{
+											c->blocks[x][y][z].ID = 38;
+											c->blocks[x][y][z].meta = 1;
+										}
+									}else{
+										int randomChoice = abs(noise->GetPerlin( (float)(rX + x)/3.f, (float)(rZ + z)/3.f  ) * 30.f);
+
+										if(randomChoice >= 0 && randomChoice < 15){
+											c->blocks[x][y][z].ID = 31;
+											c->blocks[x][y][z].meta = 1;
+										}else{
+											c->blocks[x][y][z].ID = 37 + vfpu_randf(0, 1.2);
+											c->blocks[x][y][z].meta = 0;
+										}
+									}
+								}
+							}
+
+
+
 				    	}else if(rY + y == 0){
 							c->blocks[x][y][z].ID = 7;
 							c->blocks[x][y][z].meta = 0;	

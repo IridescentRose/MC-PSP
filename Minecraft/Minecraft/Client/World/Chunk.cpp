@@ -489,25 +489,25 @@ mc::Vector3f getColorOffsets(ChunkBlockExtended cblk, int side){
 	glm::vec3 v = Terrain::bioMap[cblk.biomeID].color;
 
 	if(cblk.ID == 2 && side == TYPE_TOP){
-		return {83.f / 255.f * 1.4f * v.x, 157.f / 255.f * 1.6f * v.y, 52.f / 255.f * 1.8f * v.z};
+		return {1.06f * v.x, 1.07f * v.y, 1.06f * v.z};
 	}
 
 	if(cblk.ID == 31 && (cblk.meta == 1 || cblk.meta == 2)  ){
-		return {0.2f * v.x, 1.0f * v.y, 0.2f * v.z};
+		return {1.06f * v.x, 1.07f * v.y, 1.06f * v.z};
 	}else if (cblk.ID == 18 || cblk.ID == 161){
 		if(cblk.ID == 18){
 			if(cblk.meta == 1){
-				return {0.38 * v.x, 0.6 * v.y, 0.38 * v.z};
+				return {1.06f * v.x, 1.07f * v.y, 1.06f * v.z};
 			}else if(cblk.meta == 2){
-				return {0.502 * v.x, 0.655 * v.y, 0.333 * v.z};
+				return {1.06f * v.x, 1.07f * v.y, 1.06f * v.z};
 			}else{
-				return {0.4f * v.x, 1.0f * v.y, 0.4f * v.z};
+				return {1.06f * v.x, 1.07f * v.y, 1.06f * v.z};
 			}
 		}else{
-			return {0.4f * v.x, 1.0f * v.y, 0.4f * v.z};
+			return {1.06f * v.x, 1.07f * v.y, 1.06f * v.z};
 		}
 	}else if(cblk.ID == 104 || cblk.ID == 105 || cblk.ID == 106 || cblk.ID == 111){
-		return {0.2f * v.z, 1.0f * v.y, 0.2f * v.z};
+		return {1.06f * v.x, 1.07f * v.y, 1.06f * v.z};
 	}else{
 		return {1.0f, 1.0f, 1.0f};
 	}

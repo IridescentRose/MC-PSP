@@ -70,41 +70,148 @@ namespace Minecraft::Terrain {
 
 		float light = (float) level / 16.0f;
 
+
+
 		for(ChunkVertex16& v : frontVertexData){
 		float b = (float) ( (v.color >> 16) & 0xFF ) / 256.f / lastLevel;
 		float g = (float) ( (v.color >> 8) & 0xFF ) / 256.f / lastLevel;
 		float r = (float) ( (v.color >> 0) & 0xFF ) / 256.f / lastLevel;
-			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
+		
+		r *= light;
+		g *= light;
+		b *= light;
+
+		if(r > 1.0f){
+			r = 1.0f;
+		}
+
+		if(b > 1.0f){
+			b = 1.0f;
+		}
+
+		if(g > 1.0f){
+			g = 1.0f;
+		}
+
+			v.color = GU_COLOR(r,g,b, 1.0f);
 		}
 		for(ChunkVertex16& v : backVertexData){
 		float b = (float) ( (v.color >> 16) & 0xFF ) / 256.f / lastLevel;
 		float g = (float) ( (v.color >> 8) & 0xFF ) / 256.f / lastLevel;
 		float r = (float) ( (v.color >> 0) & 0xFF ) / 256.f / lastLevel;
-			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
+
+		
+		r *= light;
+		g *= light;
+		b *= light;
+
+		if(r > 1.0f){
+			r = 1.0f;
+		}
+
+		if(b > 1.0f){
+			b = 1.0f;
+		}
+
+		if(g > 1.0f){
+			g = 1.0f;
+		}
+
+			v.color = GU_COLOR(r,g,b, 1.0f);
 		}
 		for(ChunkVertex16& v : rightVertexData){
 		float b = (float) ( (v.color >> 16) & 0xFF ) / 256.f / lastLevel;
 		float g = (float) ( (v.color >> 8) & 0xFF ) / 256.f / lastLevel;
 		float r = (float) ( (v.color >> 0) & 0xFF ) / 256.f / lastLevel;
-			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
+		
+		r *= light;
+		g *= light;
+		b *= light;
+
+		if(r > 1.0f){
+			r = 1.0f;
+		}
+
+		if(b > 1.0f){
+			b = 1.0f;
+		}
+
+		if(g > 1.0f){
+			g = 1.0f;
+		}
+
+			v.color = GU_COLOR(r,g,b, 1.0f);
 		}
 		for(ChunkVertex16& v : leftVertexData){
 		float b = (float) ( (v.color >> 16) & 0xFF ) / 256.f / lastLevel;
 		float g = (float) ( (v.color >> 8) & 0xFF ) / 256.f / lastLevel;
 		float r = (float) ( (v.color >> 0) & 0xFF ) / 256.f / lastLevel;
-			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
+		
+		r *= light;
+		g *= light;
+		b *= light;
+
+		if(r > 1.0f){
+			r = 1.0f;
+		}
+
+		if(b > 1.0f){
+			b = 1.0f;
+		}
+
+		if(g > 1.0f){
+			g = 1.0f;
+		}
+
+			v.color = GU_COLOR(r,g,b, 1.0f);
 		}
 		for(ChunkVertex16& v : topVertexData){
 		float b = (float) ( (v.color >> 16) & 0xFF ) / 256.f / lastLevel;
 		float g = (float) ( (v.color >> 8) & 0xFF ) / 256.f / lastLevel;
 		float r = (float) ( (v.color >> 0) & 0xFF ) / 256.f / lastLevel;
-			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
+		
+		r *= light;
+		g *= light;
+		b *= light;
+
+		if(r > 1.0f){
+			r = 1.0f;
+		}
+
+		if(b > 1.0f){
+			b = 1.0f;
+		}
+
+		if(g > 1.0f){
+			g = 1.0f;
+		}
+
+			v.color = GU_COLOR(r,g,b, 1.0f);
 		}
 		for(ChunkVertex16& v : bottomVertexData){
 		float b = (float) ( (v.color >> 16) & 0xFF ) / 256.f / lastLevel;
 		float g = (float) ( (v.color >> 8) & 0xFF ) / 256.f / lastLevel;
 		float r = (float) ( (v.color >> 0) & 0xFF ) / 256.f / lastLevel;
-			v.color = GU_COLOR(light * r, light * g, light * b, 1.0f);
+		
+		float nLight = light * 0.6f;
+
+		r *= light;
+		g *= light;
+		b *= light;
+
+		if(r > 1.0f){
+			r = 1.0f;
+		}
+
+		if(b > 1.0f){
+			b = 1.0f;
+		}
+
+		if(g > 1.0f){
+			g = 1.0f;
+		}
+
+			v.color = GU_COLOR(r,g,b, 1.0f);
 		}
 	}
 
@@ -115,19 +222,35 @@ namespace Minecraft::Terrain {
 		int l = lighting(Client::g_World->timeData->time % 24000);
 		float light = (float) l / 16.0f;
 
+		float precalcX = light * colorOffsets.x;
+		float precalcY = light * colorOffsets.y;
+		float precalcZ = light * colorOffsets.z;
+
+		if(precalcX > 1.0f){
+			precalcX = 0.98f;
+		}
+
+		if(precalcY > 1.0f){
+			precalcY = 0.98f;
+		}
+
+		if(precalcZ > 1.0f){
+			precalcZ = 0.98f;
+		}
+
 		if(faceType != TYPE_BACK && faceType != TYPE_RIGHT){
-			v1 = {texCoords[0], texCoords[1], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
-			v2 = {texCoords[2], texCoords[3], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[1 * 3 + 0] + blockPosition.x, blockFace[1 * 3 + 1] + blockPosition.y, blockFace[1 * 3 + 2] + blockPosition.z};
-			v3 = {texCoords[4], texCoords[5], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
-			v4 = {texCoords[4], texCoords[5], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
-			v5 = {texCoords[6], texCoords[7], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[3 * 3 + 0] + blockPosition.x, blockFace[3 * 3 + 1] + blockPosition.y, blockFace[3 * 3 + 2] + blockPosition.z};
-			v6 = {texCoords[0], texCoords[1], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};}else{
-			v1 = {texCoords[2], texCoords[3], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
-			v2 = {texCoords[4], texCoords[5], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[1 * 3 + 0] + blockPosition.x, blockFace[1 * 3 + 1] + blockPosition.y, blockFace[1 * 3 + 2] + blockPosition.z};
-			v3 = {texCoords[6], texCoords[7], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
-			v4 = {texCoords[6], texCoords[7], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
-			v5 = {texCoords[0], texCoords[1], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[3 * 3 + 0] + blockPosition.x, blockFace[3 * 3 + 1] + blockPosition.y, blockFace[3 * 3 + 2] + blockPosition.z};
-			v6 = {texCoords[2], texCoords[3], GU_COLOR(light * colorOffsets.x, light * colorOffsets.y, light * colorOffsets.z, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
+			v1 = {texCoords[0], texCoords[1], GU_COLOR(precalcX, precalcY, precalcZ, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
+			v2 = {texCoords[2], texCoords[3], GU_COLOR(precalcX, precalcY, precalcZ, 1.0f), blockFace[1 * 3 + 0] + blockPosition.x, blockFace[1 * 3 + 1] + blockPosition.y, blockFace[1 * 3 + 2] + blockPosition.z};
+			v3 = {texCoords[4], texCoords[5], GU_COLOR(precalcX, precalcY, precalcZ, 1.0f), blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
+			v4 = {texCoords[4], texCoords[5], GU_COLOR(precalcX, precalcY, precalcZ, 1.0f), blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
+			v5 = {texCoords[6], texCoords[7], GU_COLOR(precalcX, precalcY, precalcZ, 1.0f), blockFace[3 * 3 + 0] + blockPosition.x, blockFace[3 * 3 + 1] + blockPosition.y, blockFace[3 * 3 + 2] + blockPosition.z};
+			v6 = {texCoords[0], texCoords[1], GU_COLOR(precalcX, precalcY, precalcZ, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};}else{
+			v1 = {texCoords[2], texCoords[3], GU_COLOR(precalcX, precalcY, precalcZ, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
+			v2 = {texCoords[4], texCoords[5], GU_COLOR(precalcX, precalcY, precalcZ, 1.0f), blockFace[1 * 3 + 0] + blockPosition.x, blockFace[1 * 3 + 1] + blockPosition.y, blockFace[1 * 3 + 2] + blockPosition.z};
+			v3 = {texCoords[6], texCoords[7], GU_COLOR(precalcX, precalcY, precalcZ, 1.0f), blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
+			v4 = {texCoords[6], texCoords[7], GU_COLOR(precalcX, precalcY, precalcZ, 1.0f), blockFace[2 * 3 + 0] + blockPosition.x, blockFace[2 * 3 + 1] + blockPosition.y, blockFace[2 * 3 + 2] + blockPosition.z};
+			v5 = {texCoords[0], texCoords[1], GU_COLOR(precalcX, precalcY, precalcZ, 1.0f), blockFace[3 * 3 + 0] + blockPosition.x, blockFace[3 * 3 + 1] + blockPosition.y, blockFace[3 * 3 + 2] + blockPosition.z};
+			v6 = {texCoords[2], texCoords[3], GU_COLOR(precalcX, precalcY, precalcZ, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};
 		}
 
 

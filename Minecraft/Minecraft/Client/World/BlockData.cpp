@@ -262,36 +262,36 @@ void BlockData::loadBlockData()
 	block_data.emplace(ChunkBlock(35, 15), new Block(88, 88, 88, 88, 88, 88, 
 												0, 0, false, false, false));
 	registered_blocks.push_back(ChunkBlock(35, 15));
-	block_data.emplace(ChunkBlock(36, 0), new Block(89, 89, 89, 89, 89, 89, 
-												1, 1, true, false, false));
-	registered_blocks.push_back(ChunkBlock(36, 0));
-	block_data.emplace(ChunkBlock(37, 0), new Block(90, 90, 90, 90, 90, 90, 
+	block_data.emplace(ChunkBlock(37, 0), new Block(89, 89, 89, 89, 89, 89, 
 												1, 1, true, false, false));
 	registered_blocks.push_back(ChunkBlock(37, 0));
-	block_data.emplace(ChunkBlock(37, 1), new Block(91, 91, 91, 91, 91, 91, 
+	block_data.emplace(ChunkBlock(38, 0), new Block(90, 90, 90, 90, 90, 90, 
 												1, 1, true, false, false));
-	registered_blocks.push_back(ChunkBlock(37, 1));
-	block_data.emplace(ChunkBlock(37, 2), new Block(92, 92, 92, 92, 92, 92, 
+	registered_blocks.push_back(ChunkBlock(38, 0));
+	block_data.emplace(ChunkBlock(38, 1), new Block(91, 91, 91, 91, 91, 91, 
 												1, 1, true, false, false));
-	registered_blocks.push_back(ChunkBlock(37, 2));
-	block_data.emplace(ChunkBlock(37, 3), new Block(93, 93, 93, 93, 93, 93, 
+	registered_blocks.push_back(ChunkBlock(38, 1));
+	block_data.emplace(ChunkBlock(38, 2), new Block(92, 92, 92, 92, 92, 92, 
 												1, 1, true, false, false));
-	registered_blocks.push_back(ChunkBlock(37, 3));
-	block_data.emplace(ChunkBlock(37, 4), new Block(94, 94, 94, 94, 94, 94, 
+	registered_blocks.push_back(ChunkBlock(38, 2));
+	block_data.emplace(ChunkBlock(38, 3), new Block(93, 93, 93, 93, 93, 93, 
 												1, 1, true, false, false));
-	registered_blocks.push_back(ChunkBlock(37, 4));
-	block_data.emplace(ChunkBlock(37, 5), new Block(95, 95, 95, 95, 95, 95, 
+	registered_blocks.push_back(ChunkBlock(38, 3));
+	block_data.emplace(ChunkBlock(38, 4), new Block(94, 94, 94, 94, 94, 94, 
 												1, 1, true, false, false));
-	registered_blocks.push_back(ChunkBlock(37, 5));
-	block_data.emplace(ChunkBlock(37, 6), new Block(96, 96, 96, 96, 96, 96, 
+	registered_blocks.push_back(ChunkBlock(38, 4));
+	block_data.emplace(ChunkBlock(38, 5), new Block(95, 95, 95, 95, 95, 95, 
 												1, 1, true, false, false));
-	registered_blocks.push_back(ChunkBlock(37, 6));
-	block_data.emplace(ChunkBlock(37, 7), new Block(97, 97, 97, 97, 97, 97, 
+	registered_blocks.push_back(ChunkBlock(38, 5));
+	block_data.emplace(ChunkBlock(38, 6), new Block(96, 96, 96, 96, 96, 96, 
 												1, 1, true, false, false));
-	registered_blocks.push_back(ChunkBlock(37, 7));
-	block_data.emplace(ChunkBlock(37, 8), new Block(98, 98, 98, 98, 98, 98, 
+	registered_blocks.push_back(ChunkBlock(38, 6));
+	block_data.emplace(ChunkBlock(38, 7), new Block(97, 97, 97, 97, 97, 97, 
 												1, 1, true, false, false));
-	registered_blocks.push_back(ChunkBlock(37, 8));
+	registered_blocks.push_back(ChunkBlock(38, 7));
+	block_data.emplace(ChunkBlock(38, 8), new Block(98, 98, 98, 98, 98, 98, 
+												1, 1, true, false, false));
+	registered_blocks.push_back(ChunkBlock(38, 8));
 	block_data.emplace(ChunkBlock(39, 0), new Block(99, 99, 99, 99, 99, 99, 
 												1, 1, true, false, false));
 	registered_blocks.push_back(ChunkBlock(39, 0));
