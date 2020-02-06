@@ -358,6 +358,10 @@ namespace Minecraft::Terrain{
 					    if(rY + y <= heightMap[x][z] && rY + y > 0){
 						    c->blocks[x][y][z].ID = 1;
 						    c->blocks[x][y][z].meta = 0;
+
+							
+
+
 				    	}else if(rY + y > heightMap[x][z] && rY + y < heightMap[x][z] + 2){
 					    	c->blocks[x][y][z].ID = thisBiome.midBlock.ID;
 					    	c->blocks[x][y][z].meta = thisBiome.midBlock.meta;
@@ -469,6 +473,15 @@ namespace Minecraft::Terrain{
 						if(rY + y <= 63 && c->blocks[x][y][z].ID == 0){
 							c->blocks[x][y][z].ID = 8;
 						}
+
+						float variance = noise->GetPerlin((float)(rX + x) * 1.3f, (float)(rY + y) * 1.56f, (float)(rZ+z) * 1.3f) * 1.5f + 0.99f;
+
+						if(variance < 0.3f && c->blocks[x][y][z].ID != 8){
+							c->blocks[x][y][z].ID = 0;
+							c->blocks[x][y][z].meta = 0;	
+						}
+
+
 
 						c->blocks[x][y][z].biomeID = biomeMap[x][z];
 			    	}
