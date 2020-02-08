@@ -39,25 +39,28 @@ namespace Minecraft::Terrain{
 
 
     NoiseParameters forest = {
-		0, 5.4, 2.7, 70, 1.0
+		0, 5.4, 2.7, 66, 1.0
 	};
     NoiseParameters forestHills = {
-		0, 6.5, 2.3, 70, 1.0
+		0, 6.5, 2.3, 66, 1.0
 	};
 
 	NoiseParameters plains = {
-		0, 4.2, 4.2, 66, 1.0
+		0, 4.7, 4.2, 64, 1.0
+	};
+	NoiseParameters desert = {
+		0, 4.7, 4.2, 66, 1.0
 	};
     NoiseParameters mountains = {
-		0, 12.6, 4.2, 78, 1.0
+		0, 12.6, 4.2, 68, 1.0
 	};
 
 	NoiseParameters plateaus = {
-		0, 4.2, 4.2, 75, 1.0
+		0, 4.7, 4.2, 65, 1.0
 	};
 
 	NoiseParameters lakes = {
-		0, 4.2, 4.2, 62, 1.0
+		0, 4.7, 4.2, 63, 1.0
 	};
 
 	glm::vec3 coldColor = {0.549, 0.71, 0.545};
@@ -66,7 +69,7 @@ namespace Minecraft::Terrain{
 	glm::vec3 jungleColor = {0.498f, 0.861f, 0.376f};
 	glm::vec3 plainsColor = {0.58, 0.737, 0.353};
 	glm::vec3 savanna = {0.686, 0.806, 0.333};
-	glm::vec3 defaultColor = {0.8f, 0.8f, 0.8f};
+	glm::vec3 defaultColor = {0.498f, 0.761f, 0.376f};
 	glm::vec3 swampColor = {0.8f, 0.6f, 0.4f};
 
 	//COLD
@@ -106,7 +109,7 @@ namespace Minecraft::Terrain{
     BiomeProfile swampHillsBiome = {BIOME_Swamp_Hills, forest, {2,0}, {3,0}, {3,0}, {0, 0}, swampColor};
     
 	//Smooth
-    BiomeProfile riverBiome = {BIOME_RIVER,{0, 8.5, 1.5, 58, 1.0},{2, 0}, {2,0}, {3,0}, {0, 0}, defaultColor};
+    BiomeProfile riverBiome = {BIOME_RIVER,{0, 1, 1.5, 60, 1.0},{2, 0}, {3,0}, {3,0}, {0, 0}, defaultColor};
     BiomeProfile forestBiome = {BIOME_FOREST, forest, {2, 0}, {3, 0}, {3, 0}, {0, 0}, forestColor};
     BiomeProfile flowerForestBiome = {BIOME_FLOWER_FOREST, forest, {2, 0}, {3, 0}, {3,0}, {0, 0}, forestColor};
     BiomeProfile birchForestBiome= {BIOME_BIRCH_FOREST, forest, {2, 0}, {3, 0}, {3, 0}, {0, 0}, forestColor};
@@ -138,8 +141,8 @@ namespace Minecraft::Terrain{
     BiomeProfile jungleBiome = {BIOME_JUNGLE, forest, {2,0}, {3,0}, {3,0}, {0, 0}, jungleColor};
     
 	//Flat
-	BiomeProfile desertBiome = {BIOME_Desert, plains, {12,0}, {12,0}, {12,0}, {0, 0}, hotColor};
-	BiomeProfile desertLakesBiome = {BIOME_Desert_Lakes, lakes, {12, 0}, {12, 0}, {12, 0}, {0, 0}, hotColor};
+	BiomeProfile desertBiome = {BIOME_Desert, desert, {12,0}, {12,0}, {12,0}, {0, 0}, hotColor};
+	BiomeProfile desertLakesBiome = {BIOME_Desert_Lakes, plains, {12, 0}, {12, 0}, {12, 0}, {0, 0}, hotColor};
     BiomeProfile jungleEdgeBiome = {BIOME_JUNGLE_EDGE, plains, {2, 0}, {3, 0}, {3, 0}, {0, 0}, jungleColor};
     
 
@@ -158,7 +161,7 @@ namespace Minecraft::Terrain{
 
 			for(int x = 0; x < CHUNK_SIZE; x++){
 				for(int z = 0; z < CHUNK_SIZE; z++){
-					float temp = WorldProvider::noise->GetPerlin( (float)(rX + x)/512.f, (float)(rX + z)/512.f);
+					float temp = WorldProvider::noise->GetPerlin( (float)(rX + x)/256.f, (float)(rZ + z)/256.f);
 					temp += 0.75f;
 					temp /= 1.2f;
 
@@ -171,7 +174,7 @@ namespace Minecraft::Terrain{
 
 					temp = round(temp *40.f)/40.f;
 
-					float roughness = WorldProvider::noise->GetSimplex( (float)(rX + x)/256.f, (float)(rX + z)/256.f);
+					float roughness = WorldProvider::noise->GetSimplex( (float)(rX + x)/128.f, (float)(rZ + z)/128.f);
 					roughness += 0.5f;
 					temp /= 1.1f;
 
@@ -183,6 +186,13 @@ namespace Minecraft::Terrain{
 					}
 
 					roughness = round(roughness *40.f)/40.f;
+
+					float river = WorldProvider::noise->GetPerlinFractal( (float)(rX + x) / 3.f, (float)(rZ + z) / 3.f);
+
+					if(river > 0.175f && roughness < 0.7f && temp < 0.65f && !(temp >= 0.4f && temp < 0.45f && roughness >= 0.7f) ){
+						biomeMap[x][z] = BIOME_RIVER;
+						continue;
+					}
 
 					int bioRes = BIOME_FOREST;
 					if(temp < 0.4){
@@ -296,7 +306,7 @@ namespace Minecraft::Terrain{
 								bioRes = BIOME_JUNGLE_EDGE;
 							}else if(temp >= 0.7f && temp < 0.75f){
 								bioRes = BIOME_Savanna;
-							}else if(temp >= 0.75f && temp < 0.8f){
+							}else if(temp >= 0.75f && temp < 0.77f){
 								bioRes = BIOME_Desert_Lakes;
 							}else{
 								bioRes = BIOME_Desert;
@@ -373,7 +383,7 @@ namespace Minecraft::Terrain{
 					    	c->blocks[x][y][z].meta = thisBiome.underBlock.meta;
 							}
 				    	}
-						else if(rY + y == heightMap[x][z] + 3){
+						else if(rY + y == heightMap[x][z] + 3 && rY + y > WATER_LEVEL){
 					    	c->blocks[x][y][z].ID = thisBiome.aboveTop.ID;
 					    	c->blocks[x][y][z].meta = thisBiome.aboveTop.meta;
 
@@ -470,7 +480,7 @@ namespace Minecraft::Terrain{
 					    	c->blocks[x][y][z].meta = 0;
 				    	}
 
-						if(rY + y <= 63 && c->blocks[x][y][z].ID == 0){
+						if(rY + y <= WATER_LEVEL && c->blocks[x][y][z].ID == 0){
 							c->blocks[x][y][z].ID = 8;
 						}
 
