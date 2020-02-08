@@ -325,6 +325,8 @@ void Minecraft::Client::World::FixedUpdate()
 
 void Minecraft::Client::World::Draw()
 {
+
+
 	//Load Projection Matrix
 	sceGumMatrixMode(GU_PROJECTION);
 	sceGumLoadMatrix(&p->projMatrix);
@@ -371,6 +373,13 @@ void Minecraft::Client::World::Draw()
 	//Clouds
 	clouds->Draw(p->getPosition(), timeData->time);
 	
+
+	sceGuEnable(GU_FOG);
+
+	float finalFog = 1.0 - starFade * 0.6f;
+
+	sceGuFog(0.8f, 192.f, GU_COLOR(finalFog, finalFog, finalFog, 1.0));
+
 	//Draw stuff
 	terrain_atlas->bindTexture(0, 0, true);
 	
@@ -385,6 +394,7 @@ void Minecraft::Client::World::Draw()
 		}
 	}
 
+	sceGuDisable(GU_FOG);
 
 	g_RenderManager.SetOrtho();
 
@@ -409,7 +419,7 @@ int Minecraft::Client::World::tickUpdate(SceSize args, void* argp)
 {
 	while (true) {
 		g_World->FixedUpdate();
-		sceKernelDelayThread(1000 * 50); //1000 microseconds in a millisecond, and update 20 times per second, so 50ms
+		sceKernelDelayThread(1000 * 5); //1000 microseconds in a millisecond, and update 20 times per second, so 50ms
 	}
 
 	return 0;
