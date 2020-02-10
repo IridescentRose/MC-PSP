@@ -516,6 +516,54 @@ namespace Minecraft::Terrain{
 							c->blocks[x][y][z].meta = 5;	
 						}
 
+						//TYPE 2
+
+
+						variance = noise->GetPerlin(-(float)(rX + x) * 2.5f, -(float)(rY + y) * 2.5f, (float)(rZ+z) * 2.5f) + 0.3f;
+
+						if(variance > 0.85f && c->blocks[x][y][z].ID != 8 && rY + y < 63 && rY + y < heightMap[x][z]){
+							if(rY + y < 32){
+								int rand = vfpu_randf(0, 8);
+
+								if(rand < 2){
+									c->blocks[x][y][z].ID = 21;
+									c->blocks[x][y][z].meta = 0;
+								}else{
+									if(rY+ y < 16){
+										if(rand < 4){
+											c->blocks[x][y][z].ID = 73;
+											c->blocks[x][y][z].meta = 0;
+										}else{
+											c->blocks[x][y][z].ID = 15;
+											c->blocks[x][y][z].meta = 0;
+										}
+									}
+								}
+
+							}else{
+								c->blocks[x][y][z].ID = 15;
+								c->blocks[x][y][z].meta = 0;
+							}
+						}
+
+						variance = noise->GetPerlin((float)(rX + x) * 2.5f, (float)(rY + y) * 2.5f, -(float)(rZ+z) * 2.5f) + 0.2f;
+
+						if(variance > 0.85f && c->blocks[x][y][z].ID != 8 && rY + y < 32 && rY + y < heightMap[x][z]){
+							c->blocks[x][y][z].ID = 14;
+							c->blocks[x][y][z].meta = 0;
+						}
+						variance = noise->GetPerlin((float)(rX + x) * 2.5f, (float)(rY + y) * 2.5f, (float)(rZ+z) * 2.5f) + 0.2f;
+
+						if(variance > 0.9f && c->blocks[x][y][z].ID != 8 && rY + y < 16 && rY + y < heightMap[x][z]){
+							c->blocks[x][y][z].ID = 56;
+							c->blocks[x][y][z].meta = 0;
+						}
+
+
+
+
+
+						//CAVES
 						variance = noise->GetPerlin((float)(rX + x) * 1.3f, (float)(rY + y) * 1.56f, (float)(rZ+z) * 1.3f) * 1.5f + 0.99f;
 
 						if(variance < 0.3f && c->blocks[x][y][z].ID != 8){
