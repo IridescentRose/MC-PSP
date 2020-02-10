@@ -484,7 +484,39 @@ namespace Minecraft::Terrain{
 							c->blocks[x][y][z].ID = 8;
 						}
 
-						float variance = noise->GetPerlin((float)(rX + x) * 1.3f, (float)(rY + y) * 1.56f, (float)(rZ+z) * 1.3f) * 1.5f + 0.99f;
+						//ORES
+						float variance = noise->GetPerlin(-(float)(rX + x) * 1.5f, -(float)(rY + y) * 1.5f, -(float)(rZ+z) * 1.5f) + 0.3f;
+
+						if(variance > 0.8f && c->blocks[x][y][z].ID != 8 && rY + y < heightMap[x][z] - 3 ){
+							c->blocks[x][y][z].ID = 16;
+							c->blocks[x][y][z].meta = 0;	
+						}
+
+						variance = noise->GetPerlin(-(float)(rX + x) * 1.5f, -(float)(rY + y) * 1.5f, (float)(rZ+z) * 1.5f) + 0.3f;
+						if(variance > 0.8f && c->blocks[x][y][z].ID != 8 && rY + y < heightMap[x][z] - 3 ){
+							c->blocks[x][y][z].ID = 3;
+							c->blocks[x][y][z].meta = 0;	
+						}
+
+						variance = noise->GetPerlin(-(float)(rX + x) * 1.5f, (float)(rY + y) * 1.5f, (float)(rZ+z) * 1.5f) + 0.3f;
+						if(variance > 0.8f && c->blocks[x][y][z].ID != 8 && rY + y < heightMap[x][z] - 3 ){
+							c->blocks[x][y][z].ID = 1;
+							c->blocks[x][y][z].meta = 1;	
+						}
+
+						variance = noise->GetPerlin((float)(rX + x) * 1.5f, -(float)(rY + y) * 1.5f, -(float)(rZ+z) * 1.5f) + 0.3f;
+						if(variance > 0.8f && c->blocks[x][y][z].ID != 8 && rY + y < heightMap[x][z] - 3 ){
+							c->blocks[x][y][z].ID = 1;
+							c->blocks[x][y][z].meta = 3;	
+						}
+
+						variance = noise->GetPerlin((float)(rX + x) * 1.5f, -(float)(rY + y) * 1.5f, (float)(rZ+z) * 1.5f) + 0.3f;
+						if(variance > 0.8f && c->blocks[x][y][z].ID != 8 && rY + y < heightMap[x][z] - 3 ){
+							c->blocks[x][y][z].ID = 1;
+							c->blocks[x][y][z].meta = 5;	
+						}
+
+						variance = noise->GetPerlin((float)(rX + x) * 1.3f, (float)(rY + y) * 1.56f, (float)(rZ+z) * 1.3f) * 1.5f + 0.99f;
 
 						if(variance < 0.3f && c->blocks[x][y][z].ID != 8){
 							c->blocks[x][y][z].ID = 0;
