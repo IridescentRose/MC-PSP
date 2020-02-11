@@ -38,6 +38,11 @@ ChunkMap m_chunks;
         m_chunks.emplace(mc::Vector3i(x, y, z), std::move(c));
     }
 
+    void ChunkManager::loadChunkData2(int x, int y, int z){
+        Chunk* c = m_chunks[mc::Vector3i(x, y, z)];
+		c->generateStructures(this);
+    }
+
     void ChunkManager::loadChunkMesh(int x, int y, int z){
         if(chunkExists(x, y, z)){
             m_chunks[mc::Vector3i(x,y,z)]->generateMesh(this);
@@ -714,6 +719,9 @@ void Chunk::updateMesh(ChunkManager* man)
 void Chunk::generateData(){
 	WorldProvider::generate(this);
 }
+void Chunk::generateStructures(ChunkManager* man){
+	WorldProvider::generateStructures(this, man);
+}
 
 void Chunk::Draw()
 {
@@ -796,6 +804,15 @@ ChunkBlock ChunkManager::getBlock(int x, int y, int z){
 	}
 	return res;
 }
+void ChunkManager::setBlock(int x, int y, int z, ChunkBlock blk){
+	ChunkBlock res = {0, 0};
+	if(x > 0 && y > 0 && z > 0){
+		if(chunkExists(x/16, y/16, z/16)){
+			m_chunks[mc::Vector3i(x/16, y/16, z/16)]->blocks[x%16][y%16][z%16].ID = blk.ID;
+			m_chunks[mc::Vector3i(x/16, y/16, z/16)]->blocks[x%16][y%16][z%16].meta = blk.meta;
+		}
+	}
+}
 
 void ChunkManager::updateLightingAll(int level, int ll){
 	for(const auto& [key, chnk] : m_chunks){
@@ -818,9 +835,18 @@ void Chunk::tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> tex
 
 		
 
-		if( (blk->transparent && cblk.ID != blocks[blockPosition.x][blockPosition.y][blockPosition.z].ID) || cblk.ID == 0){
+		if( blk->transparent || cblk.ID == 0){
+			if(mesh == &meshes.waterMesh){
+				if(cblk.ID != blocks[blockPosition.x][blockPosition.y][blockPosition.z].ID){
 			numFaces++;
 			mesh->addFace(type, blockFace, texCoords, {chunk_x, chunk_y, chunk_z}, blockPosition, colorOffsets);
+
+				}
+			}else{
+			numFaces++;
+			mesh->addFace(type, blockFace, texCoords, {chunk_x, chunk_y, chunk_z}, blockPosition, colorOffsets);
+
+			}
 		}
 
 	}

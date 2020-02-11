@@ -19,6 +19,7 @@ public:
 	ChunkBlock getBlockAtTranslatedLocation(unsigned int x, unsigned int y, unsigned int z);
 
 	void generateData();
+	void generateStructures(ChunkManager* man);
 
 	void generateMesh(ChunkManager* man);
 	void deleteMesh();
@@ -55,12 +56,14 @@ using ChunkMap = std::map<mc::Vector3i, Chunk*>;
                 bool chunkExists(int x, int y, int z);
 
                 void loadChunkData(int x, int y, int z);
+                void loadChunkData2(int x, int y, int z);
                 void loadChunkMesh(int x, int y, int z);
                 void unloadChunk(int x, int y, int z);
 				void updateChunk(int x, int y, int z);
 				void updateLightingAll(int level, int ll);
 
 				ChunkBlock getBlock(int x, int y, int z);
+				void setBlock(int x, int y, int z, ChunkBlock blk);
         };
         extern ChunkMap m_chunks;
 

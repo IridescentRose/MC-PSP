@@ -123,10 +123,12 @@ namespace Minecraft::Terrain{
 
 
     class Chunk;
+    class ChunkManager;
     class WorldProvider{
         public:
 
         static void generate(Chunk* chunk);
+        static void generateStructures(Chunk* chunk, ChunkManager* man);
 
         static int seed;
         static FastNoise* noise;

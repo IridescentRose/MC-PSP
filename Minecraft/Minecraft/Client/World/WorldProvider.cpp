@@ -580,4 +580,79 @@ namespace Minecraft::Terrain{
 
 		}
     }
+
+	void WorldProvider::generateStructures(Chunk* c, ChunkManager* man){
+
+		int rX = c->chunk_x * CHUNK_SIZE;
+		int rY = c->chunk_y * CHUNK_SIZE;
+		int rZ = c->chunk_z * CHUNK_SIZE;
+
+		if(rX >= 0 && rY >= 0 && rZ >= 0){
+        	int heightMap[16][16];
+
+			for(int x = 0; x < CHUNK_SIZE; x++){
+            	for(int z = 0; z < CHUNK_SIZE; z++){
+					NoiseParameters profile = bioMap[c->blocks[x][0][z].biomeID].params;
+                	heightMap[x][z] = getHeight(rX + x, rZ + z, profile);
+            	}
+        	}
+
+			for(int x = 0; x < CHUNK_SIZE; x++){
+            	for(int z = 0; z < CHUNK_SIZE; z++){
+
+					if(heightMap[x][z] + 3 > WATER_LEVEL){
+
+					float rands = WorldProvider::noise->GetPerlin(rX + x, rZ + z) * 2.0f + 0.8f;
+
+					if(rands > 0.8f && rands < 0.81f){
+
+						if( (heightMap[x][z] / CHUNK_SIZE + 1) * CHUNK_SIZE > rY && heightMap[x][z] / CHUNK_SIZE * CHUNK_SIZE <= rY){
+							
+							int y = (heightMap[x][z] + 3) - rY;
+							vfpu_srand(seed + (rX + x - 1) * (rZ + z + 1));
+							int rand = vfpu_randf(0, 3);
+
+
+
+
+
+							for(int i = 0; i < 4 + rand; i++){
+
+								if(i >= 1 + rand && i < 3 + rand){
+									for(int x2 = -2; x2 <= 2; x2++){
+										for(int z2 = -2; z2 <= 2; z2++){
+											man->setBlock(rX + x + x2, rY + y + i, rZ + z + z2, {18, 0});
+										}
+									}
+								}else if(i >= 3 + rand){
+									for(int x2 = -1; x2 <= 1; x2++){
+										for(int z2 = -1; z2 <= 1; z2++){
+											man->setBlock(rX + x + x2, rY + y + i, rZ + z + z2, {18, 0});
+										}
+									}
+								}
+
+								man->setBlock(rX + x, rY + y + i, rZ + z, {17, 0});
+							}
+							man->setBlock(rX + x + 1, rY + y + 4 + rand, rZ + z, {18, 0});
+							man->setBlock(rX + x - 1, rY + y + 4 + rand, rZ + z, {18, 0});
+							man->setBlock(rX + x, rY + y + 4 + rand, rZ + z + 1, {18, 0});
+							man->setBlock(rX + x, rY + y + 4 + rand, rZ + z - 1, {18, 0});
+							man->setBlock(rX + x, rY + y + 4 + rand, rZ + z, {18, 0});
+							
+
+
+
+						}
+
+					}
+
+					}
+
+				}
+			}
+
+		}
+
+	}
 }
