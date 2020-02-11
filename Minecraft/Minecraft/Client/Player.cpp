@@ -217,13 +217,13 @@ namespace Minecraft {
 				unitVec = glm::rotateX(unitVec, -pitch);
 				unitVec = glm::rotateY(unitVec, -yaw);
 				glm::normalize(unitVec);
-				unitVec *= 0.5;
+				unitVec *= 0.25;
 
 				glm::vec3 currVec = glm::vec3(-position.x, position.y, -position.z);
 				glm::vec3 diffVec = glm::vec3(0, 0, 0);
 
-				//Do this out to 4 blocks (0.5 * 8)
-				for(int i = 0; i < 8; i++){
+				//Do this out to 4 blocks (0.25 * 8)
+				for(int i = 0; i < 16; i++){
 					
 					currVec += unitVec;
 					//Check if it hits a block
@@ -252,13 +252,13 @@ namespace Minecraft {
 				unitVec = glm::rotateX(unitVec, -pitch);
 				unitVec = glm::rotateY(unitVec, -yaw);
 				glm::normalize(unitVec);
-				unitVec *= 0.5;
+				unitVec *= 0.25;
 
 				glm::vec3 currVec = glm::vec3(-position.x, position.y, -position.z);
 				glm::vec3 diffVec = glm::vec3(0, 0, 0);
 
-				//Do this out to 4 blocks (0.5 * 8)
-				for(int i = 0; i < 8; i++){
+				//Do this out to 4 blocks (0.25 * 16)
+				for(int i = 0; i < 16; i++){
 					
 					currVec += unitVec;
 
