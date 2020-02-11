@@ -121,6 +121,7 @@ inline void DrawSetDefaultColors()
 			intraFont* kr0; 
 			intraFont* arib;
 			intraFont* chn; 
+			intraFont* defFont; 
 			float fontVerticalShift;
 			int fontType;
 

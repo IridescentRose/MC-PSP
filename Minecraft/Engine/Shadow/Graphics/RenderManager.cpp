@@ -89,6 +89,7 @@ namespace Shadow
 		void RenderManager::InitDebugFont()
 		{
 			intraFontInit();
+			defFont = intraFontLoad("./assets/font/font.pgf", INTRAFONT_STRING_UTF8 | INTRAFONT_CACHE_LARGE);
 			debugFont = intraFontLoad("./assets/font/ltn8.pgf",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);	
 			jpn0 = intraFontLoad("./assets/font/jpn0.pgf",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);
   			kr0 = intraFontLoad("./assets/font/kr0.pgf",INTRAFONT_STRING_UTF8|INTRAFONT_CACHE_LARGE);  //Korean font (not available on all systems) with UTF-8 encoding
@@ -100,7 +101,9 @@ namespace Shadow
 			intraFontSetStyle(kr0,0.5f,0xFFFFFFFF,0, 0.0f, INTRAFONT_ALIGN_CENTER); 
 			intraFontSetStyle(chn,0.5f,0xFFFFFFFF,0, 0.0f, INTRAFONT_ALIGN_CENTER);
 			intraFontSetStyle(arib,0.5f,0xFFFFFFFF,0, 0.0f, INTRAFONT_ALIGN_CENTER);
+			intraFontSetStyle(defFont,0.25f,0xFFFFFFFF,0, 0.0f, INTRAFONT_ALIGN_CENTER);
 			 
+			intraFontSetAltFont(defFont, debugFont);
 			intraFontSetAltFont(debugFont,jpn0);                     //japanese font is used for chars that don't exist in latin
   			intraFontSetAltFont(jpn0,chn);                        //chinese font (bwfon) is used for chars that don't exist in japanese (and latin)
   			intraFontSetAltFont(chn,kr0);                         //korean font is used for chars that don't exist in chinese (and jap and ltn)
@@ -112,6 +115,7 @@ namespace Shadow
 		{
 					sceGuDisable(GU_BLEND);
 		sceGuEnable(GU_DEPTH_TEST);
+            intraFontSetStyle(defFont, size * 0.5f, color, shadowColor, angle, options);
 			
             intraFontSetStyle(debugFont, size, color, shadowColor, angle, options);
             intraFontSetStyle(jpn0, size, color, shadowColor, angle, options);
@@ -137,7 +141,7 @@ namespace Shadow
 			sceGuEnable(GU_BLEND);
 			sceGuEnable(GU_TEXTURE_2D);
 
-			intraFontPrint(debugFont, x, y+fontVerticalShift, cbuffer);
+			intraFontPrint(defFont, x, y+fontVerticalShift, cbuffer);
 			sceGuDisable(GU_BLEND);
 			sceGuDisable(GU_TEXTURE_2D);
 		}
