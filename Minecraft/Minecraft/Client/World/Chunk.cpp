@@ -94,6 +94,39 @@ const float leftFace[12] =
 	0, 1, 0,
 };
 
+const float backFaceOverlay[12] =
+{
+	0, 0, -0.001f,
+	0, 1, -0.001f,
+	1, 1, -0.001f,
+	1, 0, -0.001f,
+};
+
+const float frontFaceOverlay[12] =
+{
+	0, 0, 1.001f,
+	1, 0, 1.001f,
+	1, 1, 1.001f,
+	0, 1, 1.001f,
+};
+
+const float rightFaceOverlay[12] =
+{
+	1.001f, 0, 0,
+	1.001f, 1, 0,
+	1.001f, 1, 1,
+	1.001f, 0, 1,
+};
+
+const float leftFaceOverlay[12] =
+{
+
+	-0.001f, 0, 0,
+	-0.001f, 0, 1,
+	-0.001f, 1, 1,
+	-0.001f, 1, 0,
+};
+
 const float topFace[12] =
 {
 	0, 1, 0,
@@ -679,6 +712,19 @@ void Chunk::generateMesh(ChunkManager* man)
 
 				cOff = getColorOffsets(temp, 4);
 				tryAddFaceToMesh(topFace, getTextureAtlasIndex(blockData->topAtlas), position, faces.up, TYPE_TOP, man, cOff);
+
+				if(temp.ID == 2){
+					mesh = &meshes.floraMesh;
+					//Left/ Right
+					tryAddFaceToMesh(leftFaceOverlay, getTextureAtlasIndex(445), position, faces.left, TYPE_LEFT, man, cOff);
+					tryAddFaceToMesh(rightFaceOverlay, getTextureAtlasIndex(445), position, faces.right, TYPE_RIGHT, man, cOff);
+
+					//Front/ Back
+					tryAddFaceToMesh(frontFaceOverlay, getTextureAtlasIndex(445), position, faces.front, TYPE_FRONT, man, cOff);
+					tryAddFaceToMesh(backFaceOverlay, getTextureAtlasIndex(445), position, faces.back, TYPE_BACK, man, cOff);
+					mesh = &meshes.solidMesh;
+				}
+
 				cOff = getColorOffsets(temp, 0);
 
 				if(temp.ID == 8)
