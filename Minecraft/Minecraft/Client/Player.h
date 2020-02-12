@@ -3,6 +3,7 @@
 #include <mclib/common/Vector.h>
 #include <pspgum.h>
 #include "World/World.h"
+#include <Shadow/Graphics/Frustum.h>
 
 namespace Minecraft {
 	namespace Client {
@@ -61,6 +62,10 @@ namespace Minecraft {
 				return flyEnabled;
 			}
 
+			inline ViewFrustum getFrustum(){
+				return m_Frustum;
+			}
+
 			ScePspFMatrix4 projMatrix;
 			ScePspFMatrix4 orthMatrix;
 			ScePspFMatrix4 viewMatrix;
@@ -72,6 +77,8 @@ namespace Minecraft {
 			mc::Vector3d position, velocity, acceleration;
 			bool onGround;
 			bool sneak, sprint;
+
+			ViewFrustum m_Frustum;
 			float tilt; //Extra
 
 			int currBlock;

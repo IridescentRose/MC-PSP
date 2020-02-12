@@ -6,6 +6,7 @@
 #include <map>
 #include "WorldProvider.h"
 #define CHUNK_SIZE 16
+#include <Shadow/Physics/AABB.h>
 
 namespace Minecraft::Terrain{
 
@@ -40,6 +41,8 @@ public:
 	ChunkMesh* mesh;
 	//CHUNK COORDINATES
 	int chunk_x, chunk_y, chunk_z;
+
+	AABB m_aabb;
 
 	bool hasMesh;
 };

@@ -19,6 +19,7 @@ Engine/Shadow/System/NetworkDriver.o \
 Engine/Shadow/Graphics/RenderManager.o \
 Engine/Shadow/Graphics/Sprite.o \
 Engine/Shadow/Graphics/TextureUtil.o \
+Engine/Shadow/Graphics/Frustum.o \
 Minecraft.o \
 Minecraft/Common/Translations.o \
 Minecraft/Common/Options.o \

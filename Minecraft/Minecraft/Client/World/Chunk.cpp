@@ -435,7 +435,7 @@ struct LocalFaces{
 	mc::Vector3f back;
 };
 
-Chunk::Chunk()
+Chunk::Chunk() : m_aabb({CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE})
 {
 	struct ChunkBlockExtended c;
 	c.ID = 0;
@@ -675,10 +675,6 @@ void Chunk::generateMesh(ChunkManager* man)
 					continue;
 				}
 
-
-				//TODO: WHEAT TYPE
-
-
 				faces.update(x, y, z);
 
 				cOff = getColorOffsets(temp, 4);
@@ -717,6 +713,7 @@ void Chunk::updateMesh(ChunkManager* man)
 	generateMesh(man);
 }
 void Chunk::generateData(){
+	m_aabb.update({chunk_x * CHUNK_SIZE, chunk_y * CHUNK_SIZE, chunk_z * CHUNK_SIZE});
 	WorldProvider::generate(this);
 }
 void Chunk::generateStructures(ChunkManager* man){

@@ -304,7 +304,14 @@ namespace Minecraft {
 				}
 			}
 
+			glm::mat4 p = glm::perspective(Common::g_OptionsManager.options.fov * 40 + 70 + fovChange, 480.0f / 272.0f, 0.1f, 768.0f);
+			glm::mat4 vie = glm::mat4(1);
 			
+			vie = glm::rotate(vie, pitch, {1, 0, 0});
+			vie = glm::rotate(vie, yaw, {0, 1, 0});
+			vie = glm::translate(vie, {pos.x, pos.y, pos.z});
+
+			m_Frustum.update(p * vie);
 
 		}
 		
