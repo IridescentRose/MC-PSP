@@ -442,3 +442,4 @@ concrete_powder_green
 concrete_powder_red
 concrete_powder_black
 structure_block
+grass_side_overlay
