@@ -4,7 +4,7 @@
 #include <Shadow/Utils/Logger.h>
 #include <Shadow/System/Ram.h>
 using namespace Shadow;
-
+#include <iostream>
 using namespace Shadow::Utils;
 
 namespace Minecraft::Terrain{
@@ -744,7 +744,6 @@ void Chunk::generateMesh(ChunkManager* man)
 		}
 	}
 	hasMesh = true;
-	Logging::debug("Mesh generated with " + std::to_string(numFaces) + " faces.");
 }
 
 void Chunk::deleteMesh(){
@@ -839,8 +838,8 @@ void Chunk::Update()
 
 
 ChunkBlock ChunkManager::getBlock(int x, int y, int z){
-	ChunkBlock res = {0, 0};
-	if(x > 0 && y > 0 && z > 0){
+	ChunkBlock res = {0, 1};
+	if(x >= 0 && y >= 0 && z >= 0){
 		if(chunkExists(x/16, y/16, z/16)){
 			res = m_chunks[mc::Vector3i(x/16, y/16, z/16)]->blocks[x%16][y%16][z%16];
 		}
@@ -896,6 +895,13 @@ void Chunk::tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> tex
 	else { //Default generate
 
 		ChunkBlock cblk = man->getBlock(blockFacing.x + chunk_x * CHUNK_SIZE,blockFacing.y + chunk_y * CHUNK_SIZE, blockFacing.z + chunk_z * CHUNK_SIZE);
+
+
+		if(cblk.ID == 0 && cblk.meta == 1){
+			return;
+		}
+
+
 		Block* blk = BlockData::InstancePointer()->block_data[cblk];
 
 		if( (blk->transparent && cblk.ID != blocks[blockPosition.x][blockPosition.y][blockPosition.z].ID) || cblk.ID == 0){

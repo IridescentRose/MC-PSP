@@ -89,6 +89,8 @@ void Minecraft::Client::World::Init()
     Terrain::bioMap.emplace(Terrain::BIOME_Badlands , Terrain::mesaBiome);
     Terrain::bioMap.emplace(Terrain::BIOME_Badlands_Plateau , Terrain::mesaPlateauBiome);
 
+
+	genning = false;
 	chunkMan = new Terrain::ChunkManager();
 	chunkManagerThread = sceKernelCreateThread("ChunkManagementThread", chunkManagement, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(chunkManagerThread, 0, 0);
@@ -523,6 +525,8 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		last_pos = center;
 		}
 		sceKernelDelayThread(1000 * 500); //Check every 1/2 seonds
+
+		g_World->genning = false;
 
 	}
 

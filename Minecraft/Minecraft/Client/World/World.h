@@ -79,6 +79,8 @@ namespace Minecraft::Client {
 
 		int lastLevel;
 
+		volatile bool genning;
+
 		Sprite* crosshair;
 		float animationTimer;
 		int animationWaterFrame;
