@@ -19,7 +19,7 @@ Minecraft::Client::World::World()
 	timeData = new TickTime();
 	timeData->time = 0;
 	timeData->worldAge = 0;
- 
+	genning = true;
 }
 
 Minecraft::Client::World::~World()
@@ -89,8 +89,9 @@ void Minecraft::Client::World::Init()
     Terrain::bioMap.emplace(Terrain::BIOME_Badlands , Terrain::mesaBiome);
     Terrain::bioMap.emplace(Terrain::BIOME_Badlands_Plateau , Terrain::mesaPlateauBiome);
 
-
-	genning = false;
+	ld = new LoadingScreen();
+	sceKernelDelayThread(5000);
+	genning = true;
 	chunkMan = new Terrain::ChunkManager();
 	chunkManagerThread = sceKernelCreateThread("ChunkManagementThread", chunkManagement, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(chunkManagerThread, 0, 0);
@@ -122,12 +123,24 @@ void Minecraft::Client::World::Cleanup()
 
 void Minecraft::Client::World::Update(float dt)
 {
+	if(!genning){
+
+	if(ld != NULL){
+		ld->KillLoadingScreen();
+		delete ld;
+		ld = NULL;
+	}
+
 	fps = 1.0f / dt;
 	rmg->FixedUpdate();
 
+	for(const auto& [key, chnk] : chunkMan->getChunks() ){
+		chnk->Update(dt);
+	}
 
 	while(!eventBus.empty()){
 		Event* v = eventBus.front();
+
 		
 		switch(v->type){
 			case EVENT_TYPE_BREAK:{
@@ -291,7 +304,8 @@ void Minecraft::Client::World::Update(float dt)
             }
         }
     }
-
+	}
+	
 }
 
 void Minecraft::Client::World::FixedUpdate()
@@ -321,8 +335,10 @@ void Minecraft::Client::World::FixedUpdate()
 
 void Minecraft::Client::World::Draw()
 {
+	if(!genning){
+		g_RenderManager.StartFrame(0, 0, 0);
 
-
+	
 	//Load Projection Matrix
 	sceGumMatrixMode(GU_PROJECTION);
 	sceGumLoadMatrix(&p->projMatrix);
@@ -413,6 +429,8 @@ void Minecraft::Client::World::Draw()
 	g_RenderManager.SetFontStyle(0.8f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_RIGHT, 0);
 	g_RenderManager.DebugPrint(480, 7, "FPS: %d", (int)fps + 1);
 
+		g_RenderManager.EndFrame();
+	}
 }
 
 int Minecraft::Client::World::tickUpdate(SceSize args, void* argp)
@@ -444,7 +462,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		mc::Vector3i bot = {center.x - 2, center.y-1, center.z - 2};
 
 		
-		for(int y = bot.y; y <= top.y && y < 16 && y >= 0; y++){
+		for(int y = bot.y; y <= top.y && y < 17 && y >= -1; y++){
 			for(int x = bot.x; x <= top.x; x++){
 				for(int z = bot.z; z <= top.z; z++){
 					needed.push_back(mc::Vector3i(x, y, z));
@@ -473,7 +491,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 
 		for(mc::Vector3i& v : excess){
 			g_World->chunkMan->unloadChunk(v.x, v.y, v.z);
-			sceKernelDelayThread(1000 * 20);
+				sceKernelDelayThread(1000 * 20);
 		}
 		excess.clear();
 
@@ -484,39 +502,16 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 			if(!g_World->chunkMan->chunkExists(v.x, v.y, v.z)){
 				g_World->chunkMan->loadChunkData(v.x, v.y, v.z);
 				g_World->chunkMan->loadChunkData2(v.x, v.y, v.z);
-				sceKernelDelayThread(1000*20);
+					sceKernelDelayThread(1000*20);
 			}
 			
 		}
-		
-		sceKernelDelayThread(1000*100);
+
+			sceKernelDelayThread(1000*100);
 
 		for(mc::Vector3i& v : needed){
 			if(g_World->chunkMan->chunkExists(v.x, v.y, v.z) && !g_World->chunkMan->getChunk(v.x, v.y, v.z)->hasMesh){
 				g_World->chunkMan->loadChunkMesh(v.x, v.y, v.z);
-
-				if(g_World->chunkMan->chunkExists(v.x + 1, v.y, v.z)){
-					g_World->chunkMan->updateChunk(v.x + 1, v.y, v.z);
-				}
-				if(g_World->chunkMan->chunkExists(v.x - 1, v.y, v.z)){
-					g_World->chunkMan->updateChunk(v.x - 1, v.y, v.z);
-				}
-
-
-				if(g_World->chunkMan->chunkExists(v.x, v.y + 1, v.z)){
-					g_World->chunkMan->updateChunk(v.x, v.y + 1, v.z);
-				}
-				if(g_World->chunkMan->chunkExists(v.x, v.y - 1, v.z)){
-					g_World->chunkMan->updateChunk(v.x, v.y - 1, v.z);
-				}
-
-				if(g_World->chunkMan->chunkExists(v.x, v.y, v.z + 1)){
-					g_World->chunkMan->updateChunk(v.x, v.y, v.z + 1);
-				}
-				if(g_World->chunkMan->chunkExists(v.x, v.y, v.z - 1)){
-					g_World->chunkMan->updateChunk(v.x, v.y, v.z - 1);
-				}
-
 				sceKernelDelayThread(1000*20);
 			}
 			
@@ -524,7 +519,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 
 		last_pos = center;
 		}
-		sceKernelDelayThread(1000 * 500); //Check every 1/2 seonds
+			sceKernelDelayThread(1000 * 500); //Check every 1/2 seonds
 
 		g_World->genning = false;
 

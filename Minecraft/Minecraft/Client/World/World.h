@@ -12,6 +12,7 @@
 #include "../Player.h"
 #include "Chunk.h"
 #include <queue>
+#include "../../Menu/LoadingScreen.hpp"
 #include "BlockData.h"
 
 using namespace Shadow::Utils;
@@ -88,6 +89,7 @@ namespace Minecraft::Client {
 		bool animationLavaStep;
 
 		Texture* textureWaterAnimationId, *textureLavaAnimationId;
+		LoadingScreen* ld;
 
 	};
 

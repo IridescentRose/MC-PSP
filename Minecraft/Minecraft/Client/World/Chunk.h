@@ -29,7 +29,7 @@ public:
 
 	void Draw();
 	void DrawTrans();
-	void Update();
+	void Update(float dt);
 
 	void tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3f& blockFacing, int type, ChunkManager* man, mc::Vector3f colorOffsets);
 
@@ -41,6 +41,9 @@ public:
 	ChunkMesh* mesh;
 	//CHUNK COORDINATES
 	int chunk_x, chunk_y, chunk_z;
+
+	float animPos;
+	bool firstShow;
 
 	AABB m_aabb;
 

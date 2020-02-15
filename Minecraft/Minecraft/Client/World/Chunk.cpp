@@ -8,9 +8,10 @@ using namespace Shadow;
 using namespace Shadow::Utils;
 
 namespace Minecraft::Terrain{
-ChunkMap m_chunks;
+	ChunkMap m_chunks;
     ChunkManager::ChunkManager(){
         m_chunks.clear();
+		
     }
 
     Chunk* ChunkManager::getChunk(int x, int y, int z){
@@ -96,35 +97,35 @@ const float leftFace[12] =
 
 const float backFaceOverlay[12] =
 {
-	0, 0, -0.001f,
-	0, 1, -0.001f,
-	1, 1, -0.001f,
-	1, 0, -0.001f,
+	0, 0, -0.005f,
+	0, 1, -0.005f,
+	1, 1, -0.005f,
+	1, 0, -0.005f,
 };
 
 const float frontFaceOverlay[12] =
 {
-	0, 0, 1.001f,
-	1, 0, 1.001f,
-	1, 1, 1.001f,
-	0, 1, 1.001f,
+	0, 0, 1.005f,
+	1, 0, 1.005f,
+	1, 1, 1.005f,
+	0, 1, 1.005f,
 };
 
 const float rightFaceOverlay[12] =
 {
-	1.001f, 0, 0,
-	1.001f, 1, 0,
-	1.001f, 1, 1,
-	1.001f, 0, 1,
+	1.005f, 0, 0,
+	1.005f, 1, 0,
+	1.005f, 1, 1,
+	1.005f, 0, 1,
 };
 
 const float leftFaceOverlay[12] =
 {
 
-	-0.001f, 0, 0,
-	-0.001f, 0, 1,
-	-0.001f, 1, 1,
-	-0.001f, 1, 0,
+	-0.005f, 0, 0,
+	-0.005f, 0, 1,
+	-0.005f, 1, 1,
+	-0.005f, 1, 0,
 };
 
 const float topFace[12] =
@@ -486,6 +487,8 @@ Chunk::Chunk() : m_aabb({CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE})
 	}
 	sceKernelDcacheWritebackInvalidateAll();
 	hasMesh = false;
+	animPos = -8.0f;
+	firstShow = true;
 }
 
 Chunk::~Chunk()
@@ -769,7 +772,7 @@ void Chunk::Draw()
 {
 
 	sceGumPushMatrix();
-	ScePspFVector3 v = {chunk_x * 16, chunk_y * 16, chunk_z * 16};
+	ScePspFVector3 v = {chunk_x * 16, chunk_y * 16 + animPos, chunk_z * 16};
 	sceGumTranslate(&v);
 
 
@@ -797,7 +800,7 @@ void Chunk::DrawTrans()
 {
 
 	sceGumPushMatrix();
-	ScePspFVector3 v = {chunk_x * 16, chunk_y * 16, chunk_z * 16};
+	ScePspFVector3 v = {chunk_x * 16, chunk_y * 16 + animPos, chunk_z * 16};
 	sceGumTranslate(&v);
 
 
@@ -832,8 +835,15 @@ void Chunk::DrawTrans()
 	sceGumPopMatrix();
 }
 
-void Chunk::Update()
+void Chunk::Update(float dt)
 {
+	if(firstShow && hasMesh){
+		animPos += 12 * dt;
+		if(animPos > 0){
+			animPos = 0;
+			firstShow = false;
+		}
+	}
 }
 
 
