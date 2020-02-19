@@ -113,15 +113,16 @@ namespace Shadow
 
 		void RenderManager::SetFontStyle(float size, unsigned int color, unsigned int shadowColor, unsigned int options, float angle)
 		{
+			float size2 = size * 0.5f;
 					sceGuDisable(GU_BLEND);
 		sceGuEnable(GU_DEPTH_TEST);
-            intraFontSetStyle(defFont, size * 0.5f, color, shadowColor, angle, options);
+            intraFontSetStyle(defFont, size2, color, shadowColor, angle, options);
 			
-            intraFontSetStyle(debugFont, size, color, shadowColor, angle, options);
-            intraFontSetStyle(jpn0, size, color, shadowColor, angle, options);
-            intraFontSetStyle(kr0, size, color, shadowColor, angle, options);
-            intraFontSetStyle(chn, size, color, shadowColor, angle, options);
-            intraFontSetStyle(arib, size, color, shadowColor, angle, options);
+            intraFontSetStyle(debugFont, size2, color, shadowColor, angle, options);
+            intraFontSetStyle(jpn0, size2, color, shadowColor, angle, options);
+            intraFontSetStyle(kr0, size2, color, shadowColor, angle, options);
+            intraFontSetStyle(chn, size2, color, shadowColor, angle, options);
+            intraFontSetStyle(arib, size2, color, shadowColor, angle, options);
             
 
 		sceGuDisable(GU_DEPTH_TEST);

@@ -5,7 +5,7 @@
 
 #define IS_SNAPSHOT true
 #define INTERNAL_VERSION "0.4-pre3"
-#define INTERNAL_SNAPSHOT "20w7b"
+#define INTERNAL_SNAPSHOT "20w8a"
 
 #define VERSION_MAJOR 0
 #define VERSION_MINOR 3

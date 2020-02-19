@@ -222,6 +222,14 @@ namespace Minecraft::Terrain {
 		int l = lighting(Client::g_World->timeData->time % 24000);
 		float light = (float) l / 16.0f;
 
+		if(faceType == TYPE_BACK || faceType == TYPE_LEFT || faceType == TYPE_RIGHT || faceType == TYPE_FRONT){
+			light *= 15.25f / 16.0f;
+		}
+
+		if(faceType == TYPE_BOTTOM){
+			light *= 14.5f / 16.0f;
+		}
+
 		float precalcX = light * colorOffsets.x;
 		float precalcY = light * colorOffsets.y;
 		float precalcZ = light * colorOffsets.z;
@@ -237,6 +245,7 @@ namespace Minecraft::Terrain {
 		if(precalcZ > 1.0f){
 			precalcZ = 0.98f;
 		}
+
 
 		if(faceType != TYPE_BACK && faceType != TYPE_RIGHT){
 			v1 = {texCoords[0], texCoords[1], GU_COLOR(precalcX, precalcY, precalcZ, 1.0f), blockFace[0 * 3 + 0] + blockPosition.x, blockFace[0 * 3 + 1] + blockPosition.y, blockFace[0 * 3 + 2] + blockPosition.z};

@@ -5,7 +5,7 @@
 #include <pspdisplay.h>
 #include <Shadow/Graphics/RenderManager.h>
 #include <Shadow/Graphics/Sprite.h>
-
+#include "../Common/Translations.hpp"
 using namespace Shadow::Graphics;
 
 Sprite* options_tile;
@@ -53,7 +53,7 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
     }
 
     g_RenderManager.SetFontStyle(1.0f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0);
-    g_RenderManager.DebugPrint(240, 136, "Loading...");
+    g_RenderManager.DebugPrint(240, 136, Minecraft::Common::g_TranslationOBJ.getText("menu.generatingTerrain").c_str());
 
     g_RenderManager.EndFrame();
 	while(1){

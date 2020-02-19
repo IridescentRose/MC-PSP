@@ -46,10 +46,10 @@ namespace Minecraft::Terrain{
 
 
     NoiseParameters forest = {
-		3, 0.48f, 128.0f, 5.0f, 66.0f
+		3, 0.44f, 128.0f, 5.0f, 66.0f
 	};
     NoiseParameters forestHills = {
-		3, 0.59f, 128.0f, 6.6f, 66.0f
+		3, 0.52f, 128.0f, 6.6f, 66.0f
 	};
 
 	NoiseParameters plains = {
