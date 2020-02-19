@@ -10,7 +10,7 @@ using namespace Shadow::Utils;
 namespace Minecraft::Terrain{
 
     NoiseParameters defaultNoiseParams = {
-		0, 8.7, 3.4, 63, 1.0
+		3, 0.75f, 128.0f, 32.0f, 63.0f
 	};
 
     int WorldProvider::seed = 0;
@@ -23,11 +23,18 @@ namespace Minecraft::Terrain{
         	return 64 - 1;
     	}
 
-    	auto total = 0.0f;
+    	float total = 0.0f;
+		float amplitude = noiseParams.amplitude;
+		float frequency = 4 / noiseParams.smoothness;
 
-		int frequency = 2;
-		
-		total += WorldProvider::noise->GetSimplex((float)(x) / (float)noiseParams.smoothness, (float)(z) / (float)noiseParams.smoothness) * (float) noiseParams.amplitude / noiseParams.roughness + noiseParams.heightOffset;;
+		for(int i = 0; i < noiseParams.octaves; i++){
+
+			total += (float)WorldProvider::noise->GetSimplexFractal( (float)(x) * frequency, (float)(z) * frequency ) * amplitude * 2;
+			amplitude *= noiseParams.persistence;
+			frequency *= 4.5f;
+		}
+
+		total += noiseParams.heightOffset;
 
 		return total;
 	}
@@ -39,28 +46,28 @@ namespace Minecraft::Terrain{
 
 
     NoiseParameters forest = {
-		0, 5.4, 2.7, 66, 1.0
+		3, 0.48f, 128.0f, 5.0f, 66.0f
 	};
     NoiseParameters forestHills = {
-		0, 6.5, 2.3, 66, 1.0
+		3, 0.59f, 128.0f, 6.6f, 66.0f
 	};
 
 	NoiseParameters plains = {
-		0, 4.7, 4.2, 64, 1.0
+		3, 0.32f, 128.0f, 3.6f, 66.0f
 	};
 	NoiseParameters desert = {
-		0, 4.7, 4.2, 66, 1.0
+		3, 0.32f, 128.0f, 4.0f, 67.0f
 	};
     NoiseParameters mountains = {
-		0, 12.6, 4.2, 68, 1.0
+		3, 0.66f, 256.0f, 10.0f, 81.0f
 	};
 
 	NoiseParameters plateaus = {
-		0, 4.7, 4.2, 65, 1.0
+		3, 0.18f, 128.0f, 4.0f, 75.0f
 	};
 
 	NoiseParameters lakes = {
-		0, 4.7, 4.2, 63, 1.0
+		3, 0.18f, 128.0f, 4.0f, 64.0f
 	};
 
 	glm::vec3 coldColor = {0.549, 0.71, 0.545};
@@ -161,7 +168,7 @@ namespace Minecraft::Terrain{
 
 			for(int x = 0; x < CHUNK_SIZE; x++){
 				for(int z = 0; z < CHUNK_SIZE; z++){
-					float temp = WorldProvider::noise->GetPerlin( (float)(rX + x)/256.f, (float)(rZ + z)/256.f);
+					float temp = WorldProvider::noise->GetPerlin( (float)(rX + x)/128.f, (float)(rZ + z)/128.f);
 					temp += 0.75f;
 					temp /= 1.2f;
 
@@ -174,7 +181,7 @@ namespace Minecraft::Terrain{
 
 					temp = round(temp *40.f)/40.f;
 
-					float roughness = WorldProvider::noise->GetSimplex( (float)(rX + x)/128.f, (float)(rZ + z)/128.f);
+					float roughness = WorldProvider::noise->GetSimplex( (float)(rX + x)/64.f, (float)(rZ + z)/64.f);
 					roughness += 0.5f;
 					temp /= 1.1f;
 
@@ -189,10 +196,7 @@ namespace Minecraft::Terrain{
 
 					float river = WorldProvider::noise->GetPerlinFractal( (float)(rX + x) / 3.f, (float)(rZ + z) / 3.f);
 
-					if(river > 0.175f && roughness < 0.7f && temp < 0.65f && !(temp >= 0.4f && temp < 0.45f && roughness >= 0.7f) ){
-						biomeMap[x][z] = BIOME_RIVER;
-						continue;
-					}
+				
 
 					int bioRes = BIOME_FOREST;
 					if(temp < 0.4){

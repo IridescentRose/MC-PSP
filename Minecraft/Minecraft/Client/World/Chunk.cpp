@@ -603,11 +603,12 @@ void Chunk::generateMesh(ChunkManager* man)
 					coords[5] = (coords[5] - coords[1]) / 16.f + coords[1];
 					coords[7] = (coords[5] - coords[1]) / 16.f + coords[1];
 
-					mesh->addFace(TYPE_LEFT, carpetL, coords, {chunk_x, chunk_y, chunk_z}, position,cOff);
-					mesh->addFace(TYPE_RIGHT, carpetR, coords, {chunk_x, chunk_y, chunk_z}, position,cOff);
-					mesh->addFace(TYPE_FRONT, carpetF, coords, {chunk_x, chunk_y, chunk_z}, position,cOff);
-					mesh->addFace(TYPE_BACK, carpetB, coords, {chunk_x, chunk_y, chunk_z}, position,cOff);
-					mesh->addFace(TYPE_TOP, carpetT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position,cOff);
+
+					tryAddFaceToMesh(carpetL, coords, position, faces.left, TYPE_LEFT, man, cOff);
+					tryAddFaceToMesh(carpetR, coords, position, faces.right, TYPE_RIGHT, man, cOff);
+					tryAddFaceToMesh(carpetF, coords, position, faces.front, TYPE_FRONT, man, cOff);
+					tryAddFaceToMesh(carpetB, coords, position, faces.back, TYPE_BACK, man, cOff);
+					mesh->addFace(TYPE_TOP, carpetT, getTextureAtlasIndex(blockData->topAtlas), {chunk_x, chunk_y, chunk_z}, position, cOff);
 
 					continue;
 				}
@@ -818,7 +819,6 @@ void Chunk::DrawTrans()
 	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.floraMesh.leftVertexData.size(), 0, meshes.floraMesh.leftVertexData.data());
 	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.floraMesh.rightVertexData.size(), 0, meshes.floraMesh.rightVertexData.data());
 
-	sceGuEnable(GU_CULL_FACE);
 	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.waterMesh.topVertexData.size(), 0, meshes.waterMesh.topVertexData.data());
 	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.waterMesh.bottomVertexData.size(), 0, meshes.waterMesh.bottomVertexData.data());
 	sceGumDrawArray(GU_TRIANGLES, GU_TEXTURE_32BITF | GU_COLOR_8888 | GU_VERTEX_32BITF | GU_TRANSFORM_3D, meshes.waterMesh.frontVertexData.size(), 0, meshes.waterMesh.frontVertexData.data());
@@ -838,7 +838,7 @@ void Chunk::DrawTrans()
 void Chunk::Update(float dt)
 {
 	if(firstShow && hasMesh){
-		animPos += 12 * dt;
+		animPos += 24 * dt;
 		if(animPos > 0){
 			animPos = 0;
 			firstShow = false;

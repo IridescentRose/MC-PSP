@@ -512,6 +512,27 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		for(mc::Vector3i& v : needed){
 			if(g_World->chunkMan->chunkExists(v.x, v.y, v.z) && !g_World->chunkMan->getChunk(v.x, v.y, v.z)->hasMesh){
 				g_World->chunkMan->loadChunkMesh(v.x, v.y, v.z);
+				if(g_World->chunkMan->chunkExists(v.x + 1, v.y, v.z)){
+					g_World->chunkMan->updateChunk(v.x + 1, v.y, v.z);
+				}
+				if(g_World->chunkMan->chunkExists(v.x - 1, v.y, v.z)){
+					g_World->chunkMan->updateChunk(v.x - 1, v.y, v.z);
+				}
+
+
+				if(g_World->chunkMan->chunkExists(v.x, v.y + 1, v.z)){
+					g_World->chunkMan->updateChunk(v.x, v.y + 1, v.z);
+				}
+				if(g_World->chunkMan->chunkExists(v.x, v.y - 1, v.z)){
+					g_World->chunkMan->updateChunk(v.x, v.y - 1, v.z);
+				}
+
+				if(g_World->chunkMan->chunkExists(v.x, v.y, v.z + 1)){
+					g_World->chunkMan->updateChunk(v.x, v.y, v.z + 1);
+				}
+				if(g_World->chunkMan->chunkExists(v.x, v.y, v.z - 1)){
+					g_World->chunkMan->updateChunk(v.x, v.y, v.z - 1);
+				}
 				sceKernelDelayThread(1000*20);
 			}
 			

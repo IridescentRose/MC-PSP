@@ -7,11 +7,11 @@
 namespace Minecraft::Terrain{
 
     struct NoiseParameters{
-        double octaves;
-        double amplitude;
+        int octaves;
+        double persistence;
         double smoothness;
+        double amplitude;
         double heightOffset;
-        double roughness;
     };
 
     enum BiomeTypes {
