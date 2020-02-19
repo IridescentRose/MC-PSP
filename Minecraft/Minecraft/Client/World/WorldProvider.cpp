@@ -153,6 +153,185 @@ namespace Minecraft::Terrain{
     BiomeProfile jungleEdgeBiome = {BIOME_JUNGLE_EDGE, plains, {2, 0}, {3, 0}, {3, 0}, {0, 0}, jungleColor};
     
 
+	void makeFoliage(Chunk* c, int x, int rX, int y, int rY, int z, int rZ, BiomeProfile thisBiome){
+
+							vfpu_srand(WorldProvider::seed + (rX + x - 1) * (rZ + z + 1));
+							float rands = vfpu_randf(0, 1);
+
+							if(rands > 0.65f && rY +y > WATER_LEVEL && (thisBiome.type == BIOME_Plains || thisBiome.type == BIOME_Sunflower_Plains || thisBiome.type == BIOME_Savanna_Plateau || thisBiome.type == BIOME_Savanna || thisBiome.type == BIOME_Shattered_Savanna || thisBiome.type == BIOME_FLOWER_FOREST)){
+								if(thisBiome.type == BIOME_FLOWER_FOREST){
+									c->blocks[x][y][z].ID = 38;
+									c->blocks[x][y][z].meta = (int)vfpu_randf(0, 9);
+									if(c->blocks[x][y][z].meta == 9){
+										c->blocks[x][y][z].meta = 8;
+									}
+									if(c->blocks[x][y][z].meta == 1){
+										c->blocks[x][y][z].meta = 0;
+									}
+								}else{
+									int randomChoice = abs(WorldProvider::noise->GetPerlin( (float)(rX + x)/3.f, (float)(rZ + z)/3.f  ) * 30.f);
+
+										if(randomChoice >= 0 && randomChoice < 15){
+											c->blocks[x][y][z].ID = 31;
+											c->blocks[x][y][z].meta = 1;
+										}else{
+											c->blocks[x][y][z].ID = 37 + vfpu_randf(0, 1.2);
+											if(c->blocks[x][y][z].ID == 38){
+												c->blocks[x][y][z].meta = (int)vfpu_randf(0, 9);
+												if(c->blocks[x][y][z].meta == 1){
+													c->blocks[x][y][z].meta = 0;
+													c->blocks[x][y][z].ID = 0;
+												}
+												if(c->blocks[x][y][z].meta == 2){
+													c->blocks[x][y][z].meta = 0;
+													c->blocks[x][y][z].ID = 0;
+												}
+												if(c->blocks[x][y][z].meta == 9){
+													c->blocks[x][y][z].meta = 0;
+													c->blocks[x][y][z].ID = 0;
+												}
+											}else{
+												c->blocks[x][y][z].meta = 0;
+											}
+										}
+								}
+							}else if (rands > 0.875f && rY + y > WATER_LEVEL && thisBiome.type != BIOME_Gravelly_Mountains){
+								
+								if(thisBiome.type == BIOME_Desert || thisBiome.type == BIOME_Desert_Hills || thisBiome.type == BIOME_Desert_Lakes){
+									int randomChoice = abs(WorldProvider::noise->GetPerlin( (float)(rX + x)/3.f, (float)(rZ + z)/3.f  ) * 30.f);
+										if(randomChoice >= 0 && randomChoice < 1){
+											c->blocks[x][y][z].ID = 32;
+											c->blocks[x][y][z].meta = 0;
+										}
+								}else{
+
+									if(thisBiome.type == BIOME_TAIGA || thisBiome.type == BIOME_Taiga_Hills || thisBiome.type == BIOME_Taiga_Mountains || thisBiome.type == BIOME_Giant_Tree_Taiga || thisBiome.type == BIOME_Giant_Tree_Taiga_Hills || thisBiome.type == BIOME_Giant_Spruce_Taiga || thisBiome.type == BIOME_Giant_Spruce_Taiga_Hills){
+										int randomChoice = vfpu_randf(0, 12);
+
+										if(randomChoice >= 0 && randomChoice < 6){
+											c->blocks[x][y][z].ID = 31;
+											c->blocks[x][y][z].meta = 1;
+										}else if(randomChoice >= 6 && randomChoice < 10){
+											c->blocks[x][y][z].ID = 31;
+											c->blocks[x][y][z].meta = 2;
+										}else if(randomChoice == 10){
+											c->blocks[x][y][z].ID = 39;
+											c->blocks[x][y][z].meta = 0;
+										}else if(randomChoice == 11){
+											c->blocks[x][y][z].ID = 40;
+											c->blocks[x][y][z].meta = 0;
+										}else{
+											c->blocks[x][y][z].ID = 38;
+											c->blocks[x][y][z].meta = 1;
+										}
+									}else{
+										int randomChoice = abs(WorldProvider::noise->GetPerlin( (float)(rX + x)/3.f, (float)(rZ + z)/3.f  ) * 30.f);
+
+										if(randomChoice >= 0 && randomChoice < 15){
+											c->blocks[x][y][z].ID = 31;
+											c->blocks[x][y][z].meta = 1;
+										}else{
+											c->blocks[x][y][z].ID = 37 + vfpu_randf(0, 1.2);
+											c->blocks[x][y][z].meta = 0;
+										}
+									}
+								}
+							}
+	}
+
+	void makeCavesOres(Chunk* c, int x, int rX, int y, int rY, int z, int rZ, int height){
+								//ORES
+						float variance = WorldProvider::noise->GetPerlin(-(float)(rX + x) * 1.5f, -(float)(rY + y) * 1.5f, -(float)(rZ+z) * 1.5f) + 0.3f;
+
+						if(variance > 0.8f && c->blocks[x][y][z].ID != 8 && rY + y < height - 3 ){
+							c->blocks[x][y][z].ID = 16;
+							c->blocks[x][y][z].meta = 0;	
+						}
+
+						variance = WorldProvider::noise->GetPerlin(-(float)(rX + x) * 1.5f, -(float)(rY + y) * 1.5f, (float)(rZ+z) * 1.5f) + 0.3f;
+						if(variance > 0.8f && c->blocks[x][y][z].ID != 8 && rY + y < height - 3 ){
+							c->blocks[x][y][z].ID = 3;
+							c->blocks[x][y][z].meta = 0;	
+						}
+
+						variance = WorldProvider::noise->GetPerlin(-(float)(rX + x) * 1.5f, (float)(rY + y) * 1.5f, (float)(rZ+z) * 1.5f) + 0.3f;
+						if(variance > 0.8f && c->blocks[x][y][z].ID != 8 && rY + y < height - 3 ){
+							c->blocks[x][y][z].ID = 1;
+							c->blocks[x][y][z].meta = 1;	
+						}
+
+						variance = WorldProvider::noise->GetPerlin((float)(rX + x) * 1.5f, -(float)(rY + y) * 1.5f, -(float)(rZ+z) * 1.5f) + 0.3f;
+						if(variance > 0.8f && c->blocks[x][y][z].ID != 8 && rY + y < height - 3 ){
+							c->blocks[x][y][z].ID = 1;
+							c->blocks[x][y][z].meta = 3;	
+						}
+
+						variance = WorldProvider::noise->GetPerlin((float)(rX + x) * 1.5f, -(float)(rY + y) * 1.5f, (float)(rZ+z) * 1.5f) + 0.3f;
+						if(variance > 0.8f && c->blocks[x][y][z].ID != 8 && rY + y < height - 3 ){
+							c->blocks[x][y][z].ID = 1;
+							c->blocks[x][y][z].meta = 5;	
+						}
+
+						//TYPE 2
+
+
+						variance = WorldProvider::noise->GetPerlin(-(float)(rX + x) * 2.5f, -(float)(rY + y) * 2.5f, (float)(rZ+z) * 2.5f) + 0.3f;
+
+						if(variance > 0.85f && c->blocks[x][y][z].ID != 8 && rY + y < 63 && rY + y < height){
+							if(rY + y < 32){
+								int rand = vfpu_randf(0, 8);
+
+								if(rand < 1){
+									c->blocks[x][y][z].ID = 21;
+									c->blocks[x][y][z].meta = 0;
+								}else{
+									if(rY+ y < 16){
+										if(rand < 4){
+											c->blocks[x][y][z].ID = 73;
+											c->blocks[x][y][z].meta = 0;
+										}else{
+											c->blocks[x][y][z].ID = 15;
+											c->blocks[x][y][z].meta = 0;
+										}
+									}
+								}
+
+							}else{
+								c->blocks[x][y][z].ID = 15;
+								c->blocks[x][y][z].meta = 0;
+							}
+						}
+
+						variance = WorldProvider::noise->GetPerlin((float)(rX + x) * 2.5f, (float)(rY + y) * 2.5f, -(float)(rZ+z) * 2.5f) + 0.2f;
+
+						if(variance > 0.85f && c->blocks[x][y][z].ID != 8 && rY + y < 32 && rY + y < height){
+							c->blocks[x][y][z].ID = 14;
+							c->blocks[x][y][z].meta = 0;
+						}
+						variance = WorldProvider::noise->GetPerlin((float)(rX + x) * 2.5f, (float)(rY + y) * 2.5f, (float)(rZ+z) * 2.5f) + 0.2f;
+
+						if(variance > 0.9f && c->blocks[x][y][z].ID != 8 && rY + y < 16 && rY + y < height){
+							c->blocks[x][y][z].ID = 56;
+							c->blocks[x][y][z].meta = 0;
+						}
+
+
+
+
+
+						if(rY + y < 90.0f){
+							//CAVES
+							variance = WorldProvider::noise->GetSimplex((float)(rX + x) / 1.3f , (float)(rY + y) / 1.3f, (float)(rZ+z) / 1.3f) * 2.50f + 1.5f;
+
+							if(variance < 0.3f && c->blocks[x][y][z].ID != 8){
+								c->blocks[x][y][z].ID = 0;
+								c->blocks[x][y][z].meta = 0;	
+							}
+						}
+						
+
+	}
+
 	void WorldProvider::generate(Chunk* c){
 
 		int rX = c->chunk_x * CHUNK_SIZE;
@@ -372,10 +551,6 @@ namespace Minecraft::Terrain{
 					    if(rY + y <= heightMap[x][z] && rY + y > 0){
 						    c->blocks[x][y][z].ID = 1;
 						    c->blocks[x][y][z].meta = 0;
-
-							
-
-
 				    	}else if(rY + y > heightMap[x][z] && rY + y < heightMap[x][z] + 2){
 					    	c->blocks[x][y][z].ID = thisBiome.midBlock.ID;
 					    	c->blocks[x][y][z].meta = thisBiome.midBlock.meta;
@@ -391,91 +566,8 @@ namespace Minecraft::Terrain{
 					    	c->blocks[x][y][z].ID = thisBiome.aboveTop.ID;
 					    	c->blocks[x][y][z].meta = thisBiome.aboveTop.meta;
 
-							vfpu_srand(seed + (rX + x - 1) * (rZ + z + 1));
-							float rands = vfpu_randf(0, 1);
-
-							if(rands > 0.65f && rY +y > WATER_LEVEL && (thisBiome.type == BIOME_Plains || thisBiome.type == BIOME_Sunflower_Plains || thisBiome.type == BIOME_Savanna_Plateau || thisBiome.type == BIOME_Savanna || thisBiome.type == BIOME_Shattered_Savanna || thisBiome.type == BIOME_FLOWER_FOREST)){
-								if(thisBiome.type == BIOME_FLOWER_FOREST){
-									c->blocks[x][y][z].ID = 38;
-									c->blocks[x][y][z].meta = (int)vfpu_randf(0, 9);
-									if(c->blocks[x][y][z].meta == 9){
-										c->blocks[x][y][z].meta = 8;
-									}
-									if(c->blocks[x][y][z].meta == 1){
-										c->blocks[x][y][z].meta = 0;
-									}
-								}else{
-									int randomChoice = abs(noise->GetPerlin( (float)(rX + x)/3.f, (float)(rZ + z)/3.f  ) * 30.f);
-
-										if(randomChoice >= 0 && randomChoice < 15){
-											c->blocks[x][y][z].ID = 31;
-											c->blocks[x][y][z].meta = 1;
-										}else{
-											c->blocks[x][y][z].ID = 37 + vfpu_randf(0, 1.2);
-											if(c->blocks[x][y][z].ID == 38){
-												c->blocks[x][y][z].meta = (int)vfpu_randf(0, 9);
-												if(c->blocks[x][y][z].meta == 1){
-													c->blocks[x][y][z].meta = 0;
-													c->blocks[x][y][z].ID = 0;
-												}
-												if(c->blocks[x][y][z].meta == 2){
-													c->blocks[x][y][z].meta = 0;
-													c->blocks[x][y][z].ID = 0;
-												}
-												if(c->blocks[x][y][z].meta == 9){
-													c->blocks[x][y][z].meta = 0;
-													c->blocks[x][y][z].ID = 0;
-												}
-											}else{
-												c->blocks[x][y][z].meta = 0;
-											}
-										}
-								}
-							}else if (rands > 0.875f && rY + y > WATER_LEVEL && thisBiome.type != BIOME_Gravelly_Mountains){
-								
-								if(thisBiome.type == BIOME_Desert || thisBiome.type == BIOME_Desert_Hills || thisBiome.type == BIOME_Desert_Lakes){
-									int randomChoice = abs(noise->GetPerlin( (float)(rX + x)/3.f, (float)(rZ + z)/3.f  ) * 30.f);
-										if(randomChoice >= 0 && randomChoice < 1){
-											c->blocks[x][y][z].ID = 32;
-											c->blocks[x][y][z].meta = 0;
-										}
-								}else{
-
-									if(thisBiome.type == BIOME_TAIGA || thisBiome.type == BIOME_Taiga_Hills || thisBiome.type == BIOME_Taiga_Mountains || thisBiome.type == BIOME_Giant_Tree_Taiga || thisBiome.type == BIOME_Giant_Tree_Taiga_Hills || thisBiome.type == BIOME_Giant_Spruce_Taiga || thisBiome.type == BIOME_Giant_Spruce_Taiga_Hills){
-										int randomChoice = vfpu_randf(0, 12);
-
-										if(randomChoice >= 0 && randomChoice < 6){
-											c->blocks[x][y][z].ID = 31;
-											c->blocks[x][y][z].meta = 1;
-										}else if(randomChoice >= 6 && randomChoice < 10){
-											c->blocks[x][y][z].ID = 31;
-											c->blocks[x][y][z].meta = 2;
-										}else if(randomChoice == 10){
-											c->blocks[x][y][z].ID = 39;
-											c->blocks[x][y][z].meta = 0;
-										}else if(randomChoice == 11){
-											c->blocks[x][y][z].ID = 40;
-											c->blocks[x][y][z].meta = 0;
-										}else{
-											c->blocks[x][y][z].ID = 38;
-											c->blocks[x][y][z].meta = 1;
-										}
-									}else{
-										int randomChoice = abs(noise->GetPerlin( (float)(rX + x)/3.f, (float)(rZ + z)/3.f  ) * 30.f);
-
-										if(randomChoice >= 0 && randomChoice < 15){
-											c->blocks[x][y][z].ID = 31;
-											c->blocks[x][y][z].meta = 1;
-										}else{
-											c->blocks[x][y][z].ID = 37 + vfpu_randf(0, 1.2);
-											c->blocks[x][y][z].meta = 0;
-										}
-									}
-								}
-							}
-
-
-
+							makeFoliage(c, x, rX, y, rY, z, rZ, thisBiome);
+							
 				    	}else if(rY + y == 0){
 							c->blocks[x][y][z].ID = 7;
 							c->blocks[x][y][z].meta = 0;	
@@ -487,97 +579,9 @@ namespace Minecraft::Terrain{
 						if(rY + y <= WATER_LEVEL && c->blocks[x][y][z].ID == 0){
 							c->blocks[x][y][z].ID = 8;
 						}
-
-						//ORES
-						float variance = noise->GetPerlin(-(float)(rX + x) * 1.5f, -(float)(rY + y) * 1.5f, -(float)(rZ+z) * 1.5f) + 0.3f;
-
-						if(variance > 0.8f && c->blocks[x][y][z].ID != 8 && rY + y < heightMap[x][z] - 3 ){
-							c->blocks[x][y][z].ID = 16;
-							c->blocks[x][y][z].meta = 0;	
-						}
-
-						variance = noise->GetPerlin(-(float)(rX + x) * 1.5f, -(float)(rY + y) * 1.5f, (float)(rZ+z) * 1.5f) + 0.3f;
-						if(variance > 0.8f && c->blocks[x][y][z].ID != 8 && rY + y < heightMap[x][z] - 3 ){
-							c->blocks[x][y][z].ID = 3;
-							c->blocks[x][y][z].meta = 0;	
-						}
-
-						variance = noise->GetPerlin(-(float)(rX + x) * 1.5f, (float)(rY + y) * 1.5f, (float)(rZ+z) * 1.5f) + 0.3f;
-						if(variance > 0.8f && c->blocks[x][y][z].ID != 8 && rY + y < heightMap[x][z] - 3 ){
-							c->blocks[x][y][z].ID = 1;
-							c->blocks[x][y][z].meta = 1;	
-						}
-
-						variance = noise->GetPerlin((float)(rX + x) * 1.5f, -(float)(rY + y) * 1.5f, -(float)(rZ+z) * 1.5f) + 0.3f;
-						if(variance > 0.8f && c->blocks[x][y][z].ID != 8 && rY + y < heightMap[x][z] - 3 ){
-							c->blocks[x][y][z].ID = 1;
-							c->blocks[x][y][z].meta = 3;	
-						}
-
-						variance = noise->GetPerlin((float)(rX + x) * 1.5f, -(float)(rY + y) * 1.5f, (float)(rZ+z) * 1.5f) + 0.3f;
-						if(variance > 0.8f && c->blocks[x][y][z].ID != 8 && rY + y < heightMap[x][z] - 3 ){
-							c->blocks[x][y][z].ID = 1;
-							c->blocks[x][y][z].meta = 5;	
-						}
-
-						//TYPE 2
-
-
-						variance = noise->GetPerlin(-(float)(rX + x) * 2.5f, -(float)(rY + y) * 2.5f, (float)(rZ+z) * 2.5f) + 0.3f;
-
-						if(variance > 0.85f && c->blocks[x][y][z].ID != 8 && rY + y < 63 && rY + y < heightMap[x][z]){
-							if(rY + y < 32){
-								int rand = vfpu_randf(0, 8);
-
-								if(rand < 2){
-									c->blocks[x][y][z].ID = 21;
-									c->blocks[x][y][z].meta = 0;
-								}else{
-									if(rY+ y < 16){
-										if(rand < 4){
-											c->blocks[x][y][z].ID = 73;
-											c->blocks[x][y][z].meta = 0;
-										}else{
-											c->blocks[x][y][z].ID = 15;
-											c->blocks[x][y][z].meta = 0;
-										}
-									}
-								}
-
-							}else{
-								c->blocks[x][y][z].ID = 15;
-								c->blocks[x][y][z].meta = 0;
-							}
-						}
-
-						variance = noise->GetPerlin((float)(rX + x) * 2.5f, (float)(rY + y) * 2.5f, -(float)(rZ+z) * 2.5f) + 0.2f;
-
-						if(variance > 0.85f && c->blocks[x][y][z].ID != 8 && rY + y < 32 && rY + y < heightMap[x][z]){
-							c->blocks[x][y][z].ID = 14;
-							c->blocks[x][y][z].meta = 0;
-						}
-						variance = noise->GetPerlin((float)(rX + x) * 2.5f, (float)(rY + y) * 2.5f, (float)(rZ+z) * 2.5f) + 0.2f;
-
-						if(variance > 0.9f && c->blocks[x][y][z].ID != 8 && rY + y < 16 && rY + y < heightMap[x][z]){
-							c->blocks[x][y][z].ID = 56;
-							c->blocks[x][y][z].meta = 0;
-						}
-
-
-
-
-
-						//CAVES
-						variance = noise->GetPerlin((float)(rX + x) * 1.3f, (float)(rY + y) * 1.56f, (float)(rZ+z) * 1.3f) * 1.5f + 0.99f;
-
-						if(variance < 0.3f && c->blocks[x][y][z].ID != 8){
-							c->blocks[x][y][z].ID = 0;
-							c->blocks[x][y][z].meta = 0;	
-						}
-
-
-
 						c->blocks[x][y][z].biomeID = biomeMap[x][z];
+
+						makeCavesOres(c, x, rX, y, rY, z, rZ, heightMap[x][z]);
 			    	}
 		    	}	
 	    	}
