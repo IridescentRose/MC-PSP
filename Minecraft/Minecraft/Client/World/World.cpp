@@ -89,7 +89,14 @@ void Minecraft::Client::World::Init()
     Terrain::bioMap.emplace(Terrain::BIOME_Badlands , Terrain::mesaBiome);
     Terrain::bioMap.emplace(Terrain::BIOME_Badlands_Plateau , Terrain::mesaPlateauBiome);
 
-	ld = new LoadingScreen();
+
+	// load up the images
+	glbl_loadingscreen = new LoadingScreen();
+    glbl_loadingscreen->options_bg = TextureUtil::LoadPng("assets/minecraft/textures/gui/options_background.png");
+    glbl_loadingscreen->options_tile = new Sprite(glbl_loadingscreen->options_bg);
+    glbl_loadingscreen->options_tile->alpha = 255;
+    glbl_loadingscreen->options_tile->Scale(2.0f, 2.0f);
+	glbl_loadingscreen->StartLoadingScreen();
 	sceKernelDelayThread(5000);
 	genning = true;
 	chunkMan = new Terrain::ChunkManager();
@@ -125,10 +132,10 @@ void Minecraft::Client::World::Update(float dt)
 {
 	if(!genning){
 
-	if(ld != NULL){
-		ld->KillLoadingScreen();
-		delete ld;
-		ld = NULL;
+	if(glbl_loadingscreen != NULL){
+		glbl_loadingscreen->KillLoadingScreen();
+		delete glbl_loadingscreen;
+		glbl_loadingscreen = NULL;
 	}
 
 	fps = 1.0f / dt;

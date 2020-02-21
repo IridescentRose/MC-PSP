@@ -89,7 +89,6 @@ namespace Minecraft::Client {
 		bool animationLavaStep;
 
 		Texture* textureWaterAnimationId, *textureLavaAnimationId;
-		LoadingScreen* ld;
 
 	};
 

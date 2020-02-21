@@ -21,7 +21,7 @@
 #include "../Common/Options.hpp"
 #include <Shadow/Utils/Logger.h>
 
-#define PSP_MENU_SIZE 0.8
+#define PSP_MENU_SIZE 1.0
 
 using namespace Shadow::System;
 using namespace Shadow::Audio;
