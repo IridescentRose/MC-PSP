@@ -318,6 +318,11 @@ namespace Minecraft::Menus{
                 optionsResourceScreenUpdate();
                 break;
             }
+
+            case MENU_STATE_PLAY_GENERATE:{
+                playGenerateUpdate(sManager);
+                break;
+            }
         }
     }
     
@@ -383,6 +388,11 @@ namespace Minecraft::Menus{
 
             case MENU_STATE_RESOURCE_PACK:{
                 optionsResourceScreenDraw();
+                break;
+            }
+
+            case MENU_STATE_PLAY_GENERATE:{
+                playGenerateDraw();
                 break;
             }
         }   

@@ -149,13 +149,11 @@ namespace Minecraft::Menus{
                 if(Input::KeyPressed(PSP_CTRL_CROSS)){
                     if(selectPosY == 0){
                         //SINGLE PLAYER MENU
-
-                        terrain_atlas = TextureUtil::LoadPng("assets/minecraft/textures/terrain_atlas.png");
-						Client::SPClient* client = new Client::SPClient();
-						
-						client->Init();
+                        selectPosX = 0;
+                        selectPosY = 0;
+                        previous_states = menu_states;
+                        menu_states = MENU_STATE_PLAY_GENERATE;
                         
-						sManager->PushState(client);
                     }
                     if(selectPosY == 1){
                         //MP MENU

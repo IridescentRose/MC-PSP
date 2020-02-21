@@ -40,9 +40,8 @@ void Minecraft::Client::World::Init()
 	sceKernelStartThread(tickUpdateThread, 0, 0);
 
 	srand(time(0));
-	Terrain::WorldProvider::seed = rand();
 	Terrain::WorldProvider::noise = new FastNoise(Terrain::WorldProvider::seed);
-	Terrain::WorldProvider::noise->SetFrequency(0.11);
+	Terrain::WorldProvider::noise->SetFrequency(0.1);
 
 	Terrain::bioMap.emplace(Terrain::BIOME_DEFAULT , Terrain::defaultBiome);
     Terrain::bioMap.emplace(Terrain::BIOME_OCEAN , Terrain::oceanBiome);
