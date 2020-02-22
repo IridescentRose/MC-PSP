@@ -364,7 +364,7 @@ namespace Minecraft::Terrain{
 		//LAND
 		
 			float temp = WorldProvider::noise->GetPerlin( (float)(x)/128.f, (float)(z)/128.f);
-					temp += 0.75f;
+					temp += 0.6875f;
 					temp /= 1.2f;
 
 					if(temp < 0){
@@ -792,10 +792,40 @@ namespace Minecraft::Terrain{
 									}
 								}else if( (res == BIOME_TAIGA) || (res == BIOME_Taiga_Hills) || (res == BIOME_Taiga_Mountains) || (res == BIOME_Snowy_Taiga_Hills) || (res == BIOME_Snowy_Taiga_Mountains)){
 									//Pure Spruce
+									if(rands > 0.5f && rands < 0.53f){
+									int rand = (seed + (rX + x - 1) * (rZ + z + 1)) % 2;
 
 
-									
-								}else if( (res == BIOME_Desert) || (res == BIOME_Desert_Hills) || (res== BIOME_Desert_Lakes)){
+									for(int i = 0; i < 5 + rand; i++){
+
+										if(i == 1 + rand){
+											for(int x2 = -2; x2 <= 2; x2++){
+												for(int z2 = -2; z2 <= 2; z2++){
+													man->setBlock(rX + x + x2, heightMap[x][z] + 3 + i, rZ + z + z2, {18, 1});
+												}
+											}
+										}else if(i == 2 + rand){
+												for(int x2 = -1; x2 <= 1; x2++){
+													for(int z2 = -1; z2 <= 1; z2++){
+														man->setBlock(rX + x + x2, heightMap[x][z] + 3 + i, rZ + z + z2, {18, 1});
+													}
+												}
+											}
+										man->setBlock(rX + x, heightMap[x][z] + 3 + i, rZ + z, {17, 1});
+										}
+
+
+									man->setBlock(rX + x + 1, heightMap[x][z] + 3 + 4 + rand, rZ + z, {18, 1});
+									man->setBlock(rX + x - 1, heightMap[x][z] + 3 + 4 + rand, rZ + z, {18, 1});
+									man->setBlock(rX + x, heightMap[x][z] + 3 + 4 + rand, rZ + z + 1, {18, 1});
+									man->setBlock(rX + x, heightMap[x][z] + 3 + 4 + rand, rZ + z - 1, {18, 1});
+									man->setBlock(rX + x, heightMap[x][z] + 3 + 4 + rand, rZ + z, {18, 1});
+									man->setBlock(rX + x, heightMap[x][z] + 3 + 5 + rand, rZ + z, {18, 1});
+									man->setBlock(rX + x, heightMap[x][z] + 3 + 4 + rand, rZ + z, {18, 1});
+
+									}
+								}
+									else if( (res == BIOME_Desert) || (res == BIOME_Desert_Hills) || (res== BIOME_Desert_Lakes)){
 									
 									if(rands > 0.8f && rands < 0.81f){
 									

@@ -733,9 +733,6 @@ void Chunk::generateMesh(ChunkManager* man)
 				}
 
 				cOff = getColorOffsets(temp, 0);
-
-				if(temp.ID == 8)
-					continue;
 				
 				tryAddFaceToMesh(bottomFace, getTextureAtlasIndex(blockData->bottomAtlas), position, faces.down, TYPE_BOTTOM, man, cOff);
 
