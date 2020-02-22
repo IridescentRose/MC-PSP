@@ -46,28 +46,28 @@ namespace Minecraft::Terrain{
 
 
     NoiseParameters forest = {
-		3, 0.44f, 128.0f, 5.0f, 66.0f
+		3, 0.44f, 128.0f, 5.0f, 62.0f
 	};
     NoiseParameters forestHills = {
-		3, 0.52f, 128.0f, 6.6f, 66.0f
+		3, 0.52f, 128.0f, 6.6f, 62.0f
 	};
 
 	NoiseParameters plains = {
-		3, 0.32f, 128.0f, 3.6f, 66.0f
+		3, 0.32f, 128.0f, 3.6f, 62.0f
 	};
 	NoiseParameters desert = {
-		3, 0.32f, 128.0f, 4.0f, 67.0f
+		3, 0.32f, 128.0f, 4.0f, 64.0f
 	};
     NoiseParameters mountains = {
-		3, 0.66f, 256.0f, 10.0f, 81.0f
+		3, 0.66f, 256.0f, 10.0f, 77.0f
 	};
 
 	NoiseParameters plateaus = {
-		3, 0.18f, 128.0f, 4.0f, 75.0f
+		3, 0.18f, 128.0f, 4.0f, 72.0f
 	};
 
 	NoiseParameters lakes = {
-		3, 0.18f, 128.0f, 4.0f, 64.0f
+		3, 0.18f, 128.0f, 4.0f, 60.0f
 	};
 
 	glm::vec3 coldColor = {0.549, 0.71, 0.545};
@@ -107,7 +107,7 @@ namespace Minecraft::Terrain{
     BiomeProfile mountainsBiome = {BIOME_Mountains, mountains, {2, 0}, {3, 0}, {3, 0}, {0, 0}, coldColor};
     BiomeProfile woodedMountainsBiome = {BIOME_Wooded_Mountains, mountains, {2, 0}, {3, 0}, {3, 0}, {0, 0}, coldColor};
     BiomeProfile gravelMountainsBiome = {BIOME_Gravelly_Mountains, mountains, {13, 0}, {13, 0}, {13, 0}, {0, 0}, coldColor};
-    BiomeProfile oceanBiome = {BIOME_OCEAN,{0, 8.7, 3.4, 40, 1.0},{13, 0}, {13,0}, {13,0}, {0, 0}, defaultColor};
+    BiomeProfile oceanBiome = {BIOME_OCEAN,{3, 0.6f, 256.0f, 12.0f, 28.0},{13, 0}, {13,0}, {13,0}, {0, 0}, defaultColor};
 
 	//Hills
 	BiomeProfile woodlandBiomeHills = {BIOME_WOODLAND_HILLS, forestHills, {2, 0}, {3, 0}, {3, 0}, {0, 0}, forestColor};
@@ -116,7 +116,7 @@ namespace Minecraft::Terrain{
     BiomeProfile swampHillsBiome = {BIOME_Swamp_Hills, forest, {2,0}, {3,0}, {3,0}, {0, 0}, swampColor};
     
 	//Smooth
-    BiomeProfile riverBiome = {BIOME_RIVER,{0, 1, 1.5, 60, 1.0},{2, 0}, {3,0}, {3,0}, {0, 0}, defaultColor};
+    BiomeProfile riverBiome = {BIOME_RIVER,{3, 0.4f, 64.0f, 4.0, 60.0},{2, 0}, {3,0}, {3,0}, {0, 0}, defaultColor};
     BiomeProfile forestBiome = {BIOME_FOREST, forest, {2, 0}, {3, 0}, {3, 0}, {0, 0}, forestColor};
     BiomeProfile flowerForestBiome = {BIOME_FLOWER_FOREST, forest, {2, 0}, {3, 0}, {3,0}, {0, 0}, forestColor};
     BiomeProfile birchForestBiome= {BIOME_BIRCH_FOREST, forest, {2, 0}, {3, 0}, {3, 0}, {0, 0}, forestColor};
@@ -319,7 +319,7 @@ namespace Minecraft::Terrain{
 
 
 
-						if(rY + y < 90.0f){
+						if(rY + y < 90.0f && rY + y > 8.0f){
 							//CAVES
 							variance = WorldProvider::noise->GetSimplex((float)(rX + x) / 1.3f , (float)(rY + y) / 1.3f, (float)(rZ+z) / 1.3f) * 2.50f + 1.5f;
 
@@ -328,26 +328,42 @@ namespace Minecraft::Terrain{
 								c->blocks[x][y][z].meta = 0;	
 							}
 						}
+
+						if(rY + y <= 11){
+							if(c->blocks[x][y][z].ID == 0){
+								c->blocks[x][y][z].ID = 10;
+								c->blocks[x][y][z].meta = 0;
+							}
+						}
 						
 
 	}
 
-	void WorldProvider::generate(Chunk* c){
-
-		int rX = c->chunk_x * CHUNK_SIZE;
-		int rY = c->chunk_y * CHUNK_SIZE;
-		int rZ = c->chunk_z * CHUNK_SIZE;
-
-		if(rX >= 0 && rY >= 0 && rZ >= 0){
-
-        	int heightMap[16][16];
-
-			int biomeMap[16][16];
+	int getBiome(int x, int z){
 
 
-			for(int x = 0; x < CHUNK_SIZE; x++){
-				for(int z = 0; z < CHUNK_SIZE; z++){
-					float temp = WorldProvider::noise->GetPerlin( (float)(rX + x)/128.f, (float)(rZ + z)/128.f);
+		/*    
+    if(value2 == 1.0){
+         //Lakes
+        float deter = simplex3d(p3*64.0 + 12.0);
+        deter *= deter * deter * 10.0;
+        if(deter > 0.75){
+            value2 = 0.7f;
+        }
+    }
+ 
+		*/
+
+	//LAND MAP
+
+	float value = WorldProvider::noise->GetSimplexFractal((float)(x) / 128.f, (float)(z) / 128.f);
+
+	value = 0.5 + 0.5 * value;
+
+	if(value > 0.425f){
+		//LAND
+		
+			float temp = WorldProvider::noise->GetPerlin( (float)(x)/128.f, (float)(z)/128.f);
 					temp += 0.75f;
 					temp /= 1.2f;
 
@@ -360,7 +376,7 @@ namespace Minecraft::Terrain{
 
 					temp = round(temp *40.f)/40.f;
 
-					float roughness = WorldProvider::noise->GetSimplex( (float)(rX + x)/64.f, (float)(rZ + z)/64.f);
+					float roughness = WorldProvider::noise->GetSimplex( (float)(x)/64.f, (float)(z)/64.f);
 					roughness += 0.5f;
 					temp /= 1.1f;
 
@@ -372,10 +388,6 @@ namespace Minecraft::Terrain{
 					}
 
 					roughness = round(roughness *40.f)/40.f;
-
-					float river = WorldProvider::noise->GetPerlinFractal( (float)(rX + x) / 3.f, (float)(rZ + z) / 3.f);
-
-				
 
 					int bioRes = BIOME_FOREST;
 					if(temp < 0.4){
@@ -471,9 +483,10 @@ namespace Minecraft::Terrain{
 
 						if(roughness >= 0.7f){
 							//MOUNTAINS
-							if(temp >= 0.4f && temp < 0.45f){
-								bioRes = BIOME_OCEAN;
-							}else if(temp >= 0.45f && temp < 0.55f){
+							if(temp >= 0.40f && temp < 0.41f){
+								bioRes = BIOME_Mushroom_Fields;
+							}
+							if(temp >= 0.41f && temp < 0.55f){
 								bioRes = BIOME_Mountains;
 							}else if(temp >= 0.5f && temp < 0.6f){
 								bioRes = BIOME_Wooded_Mountains;
@@ -530,7 +543,51 @@ namespace Minecraft::Terrain{
 						}
 					}
 
-					biomeMap[x][z] = bioRes;
+					if(roughness < 0.5f && (bioRes != BIOME_Savanna_Plateau || bioRes != BIOME_Shattered_Savanna_Plateau)){
+						//Lakes
+						float deter = WorldProvider::noise->GetSimplexFractal((float)(x) / 4.f, (float)(z) / 4.f);
+        				deter *= deter * deter * 10.0;
+
+
+    			    	if(deter > 0.75f){
+							return BIOME_RIVER;
+						}
+
+						//Rivers
+
+						float river = WorldProvider::noise->GetPerlinFractal((float)(x) / 4.f, (float)(z) / 4.f);
+						
+						std::cout << river << std::endl;
+
+						if(river > 0.22f){
+							return BIOME_RIVER;
+						}
+					}
+					return bioRes;
+
+	}else{
+		//OCEAN
+		return BIOME_OCEAN;
+	}
+
+	}
+
+	void WorldProvider::generate(Chunk* c){
+
+		int rX = c->chunk_x * CHUNK_SIZE;
+		int rY = c->chunk_y * CHUNK_SIZE;
+		int rZ = c->chunk_z * CHUNK_SIZE;
+
+		if(rX >= 0 && rY >= 0 && rZ >= 0){
+
+        	int heightMap[16][16];
+
+			int biomeMap[16][16];
+
+
+			for(int x = 0; x < CHUNK_SIZE; x++){
+				for(int z = 0; z < CHUNK_SIZE; z++){
+					biomeMap[x][z] = getBiome(rX + x, rZ + z);
 				}
 			}
 
