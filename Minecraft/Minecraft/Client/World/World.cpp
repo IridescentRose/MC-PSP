@@ -507,10 +507,12 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		for(mc::Vector3i& v : needed){
 			if(!g_World->chunkMan->chunkExists(v.x, v.y, v.z)){
 				g_World->chunkMan->loadChunkData(v.x, v.y, v.z);
-				g_World->chunkMan->loadChunkData2(v.x, v.y, v.z);
 					sceKernelDelayThread(1000*20);
 			}
-			
+		}
+
+		for(mc::Vector3i& v : needed){
+			g_World->chunkMan->loadChunkData2(v.x, v.y, v.z);
 		}
 
 			sceKernelDelayThread(1000*100);

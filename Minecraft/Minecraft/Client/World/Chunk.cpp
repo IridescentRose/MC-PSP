@@ -40,8 +40,10 @@ namespace Minecraft::Terrain{
     }
 
     void ChunkManager::loadChunkData2(int x, int y, int z){
-        Chunk* c = m_chunks[mc::Vector3i(x, y, z)];
-		c->generateStructures(this);
+		if(chunkExists(x, y, z)){
+        	Chunk* c = m_chunks[mc::Vector3i(x, y, z)];
+			c->generateStructures(this);
+		}
     }
 
     void ChunkManager::loadChunkMesh(int x, int y, int z){
@@ -489,6 +491,7 @@ Chunk::Chunk() : m_aabb({CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE})
 	hasMesh = false;
 	animPos = -8.0f;
 	firstShow = true;
+	hasStruct = false;
 }
 
 Chunk::~Chunk()
@@ -764,9 +767,13 @@ void Chunk::updateMesh(ChunkManager* man)
 void Chunk::generateData(){
 	m_aabb.update({chunk_x * CHUNK_SIZE, chunk_y * CHUNK_SIZE, chunk_z * CHUNK_SIZE});
 	WorldProvider::generate(this);
+
 }
 void Chunk::generateStructures(ChunkManager* man){
+	if(!hasStruct){
 	WorldProvider::generateStructures(this, man);
+	hasStruct = true;
+	}
 }
 
 void Chunk::Draw()

@@ -47,6 +47,7 @@ public:
 
 	AABB m_aabb;
 
+	bool hasStruct;
 	bool hasMesh;
 };
 

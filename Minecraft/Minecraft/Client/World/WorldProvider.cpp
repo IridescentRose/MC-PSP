@@ -557,7 +557,6 @@ namespace Minecraft::Terrain{
 
 						float river = WorldProvider::noise->GetPerlinFractal((float)(x) / 4.f, (float)(z) / 4.f);
 						
-						std::cout << river << std::endl;
 
 						if(river > 0.22f){
 							return BIOME_RIVER;
@@ -667,50 +666,155 @@ namespace Minecraft::Terrain{
 
 					if(heightMap[x][z] + 3 > WATER_LEVEL){
 
-					float rands = WorldProvider::noise->GetPerlin(rX + x, rZ + z) * 2.0f + 0.8f;
+					float rands = WorldProvider::noise->GetPerlin(rX + x, rZ + z) * 2.0f + 0.8f + (float) (( seed + (rX + x - 1) * (rZ + z + 1)) % 3) / 6.0f;
 
-					if(rands > 0.8f && rands < 0.81f){
 
 						if( (heightMap[x][z] / CHUNK_SIZE + 1) * CHUNK_SIZE > rY && heightMap[x][z] / CHUNK_SIZE * CHUNK_SIZE <= rY){
 							
-							int y = (heightMap[x][z] + 3) - rY;
-							vfpu_srand(seed + (rX + x - 1) * (rZ + z + 1));
-							int rand = vfpu_randf(0, 3);
+							int res = getBiome(rX + x, rZ + z);
 
+							if( (res == BIOME_FOREST) || (res == BIOME_FLOWER_FOREST) || (res == BIOME_WOODLAND_HILLS) || (res == BIOME_BIRCH_FOREST) || (res == BIOME_BIRCH_FOREST_HILLS) || (res == BIOME_TALL_BIRCH_FOREST) || (res == BIOME_TALL_BIRCH_FOREST_HILLS) || (res == BIOME_Wooded_Mountains) || (res == BIOME_DARK_FOREST_HILLS) || (res == BIOME_JUNGLE) || (res == BIOME_JUNGLE_EDGE) || (res == BIOME_JUNGLE_HILLS) || (res == BIOME_TAIGA) || (res == BIOME_Taiga_Hills) || (res == BIOME_Taiga_Mountains) || (res == BIOME_Snowy_Taiga_Hills) || (res == BIOME_Snowy_Taiga_Mountains) || (res == BIOME_Giant_Spruce_Taiga) || (res == BIOME_Giant_Spruce_Taiga_Hills) || (res == BIOME_Giant_Tree_Taiga_Hills) || (res == BIOME_Giant_Tree_Taiga) || (res == BIOME_Mushroom_Fields) || (res == BIOME_Desert) || (res == BIOME_Desert_Hills) || (res == BIOME_Desert_Lakes)){
+								
+								if( (res == BIOME_FOREST) || (res == BIOME_FLOWER_FOREST) || (res == BIOME_Wooded_Mountains)){
+									//Mixed Oak & Birch
+									if(rands > 0.5f && rands < 0.53f){
+									int oak = (seed + (rX + x - 1) * (rZ + z + 1)) % 3;
+									int rand = (seed + (rX + x - 1) * (rZ + z + 1)) % 3;
+									if(oak < 2){
+												//Oak
+										for(int i = 0; i < 4 + rand; i++){
+														
+										if(i >= 1 + rand && i < 3 + rand){
+											for(int x2 = -2; x2 <= 2; x2++){
+												for(int z2 = -2; z2 <= 2; z2++){
+													man->setBlock(rX + x + x2, heightMap[x][z] + 3 + i, rZ + z + z2, {18, 0});
+												}
+											}
+										}else if(i >= 3 + rand){
+											for(int x2 = -1; x2 <= 1; x2++){
+													for(int z2 = -1; z2 <= 1; z2++){
+														man->setBlock(rX + x + x2, heightMap[x][z] + 3 + i, rZ + z + z2, {18, 0});
+													}
+												}
+											}
 
+											man->setBlock(rX + x, heightMap[x][z] + 3 + i, rZ + z, {17, 0});
+										}
+										man->setBlock(rX + x + 1, heightMap[x][z] + 3 + 4 + rand, rZ + z, {18, 0});
+										man->setBlock(rX + x - 1, heightMap[x][z] + 3 + 4 + rand, rZ + z, {18, 0});
+										man->setBlock(rX + x, heightMap[x][z] + 3 + 4 + rand, rZ + z + 1, {18, 0});
+										man->setBlock(rX + x, heightMap[x][z] + 3 + 4 + rand, rZ + z - 1, {18, 0});
+										man->setBlock(rX + x, heightMap[x][z] + 3 + 4 + rand, rZ + z, {18, 0});
+									}else{
+										//Birch
+												//Oak
+										for(int i = 0; i < 5 + rand; i++){
+														
+										if(i >= 2 + rand && i < 4 + rand){
+											for(int x2 = -2; x2 <= 2; x2++){
+												for(int z2 = -2; z2 <= 2; z2++){
+													man->setBlock(rX + x + x2, heightMap[x][z] + 3 + i, rZ + z + z2, {18, 2});
+												}
+											}
+										}else if(i >= 4 + rand){
+											for(int x2 = -1; x2 <= 1; x2++){
+													for(int z2 = -1; z2 <= 1; z2++){
+														man->setBlock(rX + x + x2, heightMap[x][z] + 3 + i, rZ + z + z2, {18, 2});
+													}
+												}
+											}
 
+											man->setBlock(rX + x, heightMap[x][z] + 3 + i, rZ + z, {17, 2});
+										}
+										man->setBlock(rX + x + 1, heightMap[x][z] + 3 + 5 + rand, rZ + z, {18, 2});
+										man->setBlock(rX + x - 1, heightMap[x][z] + 3 + 5 + rand, rZ + z, {18, 2});
+										man->setBlock(rX + x, heightMap[x][z] + 3 + 5 + rand, rZ + z + 1, {18, 2});
+										man->setBlock(rX + x, heightMap[x][z] + 3 + 5 + rand, rZ + z - 1, {18, 2});
+										man->setBlock(rX + x, heightMap[x][z] + 3 + 5 + rand, rZ + z, {18, 2});
+									}
+									}
 
+								}else if( (res == BIOME_BIRCH_FOREST) || (res == BIOME_BIRCH_FOREST_HILLS) || (res == BIOME_TALL_BIRCH_FOREST_HILLS) || (res == BIOME_TALL_BIRCH_FOREST) ){
+									//Pure Birch
+									if(rands > 0.5f && rands < 0.53f){
+										if((res == BIOME_BIRCH_FOREST) || (res == BIOME_BIRCH_FOREST_HILLS)){
 
-							for(int i = 0; i < 4 + rand; i++){
+									int rand = (seed + (rX + x - 1) * (rZ + z + 1)) % 3;
+											for(int i = 0; i < 5 + rand; i++){
+														
+										if(i >= 2 + rand && i < 4 + rand){
+											for(int x2 = -2; x2 <= 2; x2++){
+												for(int z2 = -2; z2 <= 2; z2++){
+													man->setBlock(rX + x + x2, heightMap[x][z] + 3 + i, rZ + z + z2, {18, 2});
+												}
+											}
+										}else if(i >= 4 + rand){
+											for(int x2 = -1; x2 <= 1; x2++){
+													for(int z2 = -1; z2 <= 1; z2++){
+														man->setBlock(rX + x + x2, heightMap[x][z] + 3 + i, rZ + z + z2, {18, 2});
+													}
+												}
+											}
 
-								if(i >= 1 + rand && i < 3 + rand){
-									for(int x2 = -2; x2 <= 2; x2++){
-										for(int z2 = -2; z2 <= 2; z2++){
-											man->setBlock(rX + x + x2, rY + y + i, rZ + z + z2, {18, 0});
+											man->setBlock(rX + x, heightMap[x][z] + 3 + i, rZ + z, {17, 2});
+										}
+										man->setBlock(rX + x + 1, heightMap[x][z] + 3 + 5 + rand, rZ + z, {18, 2});
+										man->setBlock(rX + x - 1, heightMap[x][z] + 3 + 5 + rand, rZ + z, {18, 2});
+										man->setBlock(rX + x, heightMap[x][z] + 3 + 5 + rand, rZ + z + 1, {18, 2});
+										man->setBlock(rX + x, heightMap[x][z] + 3 + 5 + rand, rZ + z - 1, {18, 2});
+										man->setBlock(rX + x, heightMap[x][z] + 3 + 5 + rand, rZ + z, {18, 2});
+										}else{
+											int rand = (seed + (rX + x - 1) * (rZ + z + 1)) % 4 + 2;
+											for(int i = 0; i < 5 + rand; i++){
+														
+										if(i >= 2 + rand && i < 4 + rand){
+											for(int x2 = -2; x2 <= 2; x2++){
+												for(int z2 = -2; z2 <= 2; z2++){
+													man->setBlock(rX + x + x2, heightMap[x][z] + 3 + i, rZ + z + z2, {18, 2});
+												}
+											}
+										}else if(i >= 4 + rand){
+											for(int x2 = -1; x2 <= 1; x2++){
+													for(int z2 = -1; z2 <= 1; z2++){
+														man->setBlock(rX + x + x2, heightMap[x][z] + 3 + i, rZ + z + z2, {18, 2});
+													}
+												}
+											}
+
+											man->setBlock(rX + x, heightMap[x][z] + 3 + i, rZ + z, {17, 2});
+										}
+										man->setBlock(rX + x + 1, heightMap[x][z] + 3 + 5 + rand, rZ + z, {18, 2});
+										man->setBlock(rX + x - 1, heightMap[x][z] + 3 + 5 + rand, rZ + z, {18, 2});
+										man->setBlock(rX + x, heightMap[x][z] + 3 + 5 + rand, rZ + z + 1, {18, 2});
+										man->setBlock(rX + x, heightMap[x][z] + 3 + 5 + rand, rZ + z - 1, {18, 2});
+										man->setBlock(rX + x, heightMap[x][z] + 3 + 5 + rand, rZ + z, {18, 2});
 										}
 									}
-								}else if(i >= 3 + rand){
-									for(int x2 = -1; x2 <= 1; x2++){
-										for(int z2 = -1; z2 <= 1; z2++){
-											man->setBlock(rX + x + x2, rY + y + i, rZ + z + z2, {18, 0});
-										}
+								}else if( (res == BIOME_TAIGA) || (res == BIOME_Taiga_Hills) || (res == BIOME_Taiga_Mountains) || (res == BIOME_Snowy_Taiga_Hills) || (res == BIOME_Snowy_Taiga_Mountains)){
+									//Pure Spruce
+
+
+									
+								}else if( (res == BIOME_Desert) || (res == BIOME_Desert_Hills) || (res== BIOME_Desert_Lakes)){
+									
+									if(rands > 0.8f && rands < 0.81f){
+									
+									//Cactus
+									for(int i = 0; i < (seed + (rX + x - 1) * (rZ + z + 1)) % 3 + 1; i++){
+										man->setBlock(rX + x, heightMap[x][z] + 3 + i, rZ + z, {81, 0});
 									}
+
+									}
+								}else{
+									//ADD OTHERS
 								}
 
-								man->setBlock(rX + x, rY + y + i, rZ + z, {17, 0});
 							}
-							man->setBlock(rX + x + 1, rY + y + 4 + rand, rZ + z, {18, 0});
-							man->setBlock(rX + x - 1, rY + y + 4 + rand, rZ + z, {18, 0});
-							man->setBlock(rX + x, rY + y + 4 + rand, rZ + z + 1, {18, 0});
-							man->setBlock(rX + x, rY + y + 4 + rand, rZ + z - 1, {18, 0});
-							man->setBlock(rX + x, rY + y + 4 + rand, rZ + z, {18, 0});
 							
-
-
 
 						}
 
-					}
+					
 
 					}
 
