@@ -7,8 +7,13 @@
 #include "WorldProvider.h"
 #define CHUNK_SIZE 16
 #include <Shadow/Physics/AABB.h>
-
+#include <fstream>
 namespace Minecraft::Terrain{
+
+struct ChunkDataEntry{
+	mc::Vector3i position;
+	ChunkBlock blk;
+};
 
 class ChunkManager;
 class WorldProvider;
@@ -21,6 +26,7 @@ public:
 
 	void generateData();
 	void generateStructures(ChunkManager* man);
+	void loadCheck();
 
 	void generateMesh(ChunkManager* man);
 	void deleteMesh();
@@ -49,7 +55,11 @@ public:
 
 	bool hasStruct;
 	bool hasMesh;
+
+	std::vector<ChunkDataEntry> delta;
+
 };
+
 
 using ChunkMap = std::map<mc::Vector3i, Chunk*>;
         class ChunkManager
@@ -64,6 +74,7 @@ using ChunkMap = std::map<mc::Vector3i, Chunk*>;
 
                 void loadChunkData(int x, int y, int z);
                 void loadChunkData2(int x, int y, int z);
+                void loadChunkData3(int x, int y, int z);
                 void loadChunkMesh(int x, int y, int z);
                 void unloadChunk(int x, int y, int z);
 				void updateChunk(int x, int y, int z);

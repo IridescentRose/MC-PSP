@@ -492,11 +492,21 @@ Chunk::Chunk() : m_aabb({CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE})
 	animPos = -8.0f;
 	firstShow = true;
 	hasStruct = false;
+
+	delta.clear();
 }
 
 Chunk::~Chunk()
 {
-	
+	if(delta.size() > 0 ){
+		//Write data to save
+		std::ofstream file("saves/world1/" + std::to_string(chunk_x) + " " + std::to_string(chunk_y) + " " + std::to_string(chunk_z) + ".chnk");
+
+		for(int i = 0; i < delta.size(); i++){
+			file << delta[i].position.x << " " << delta[i].position.y << " " << delta[i].position.z << " "; //Prints position
+			file << (int)delta[i].blk.ID << " " << (int)delta[i].blk.meta << std::endl;
+		}
+	}
 }
 
 ChunkBlock Chunk::getBlockAtTranslatedLocation(unsigned int x, unsigned int y, unsigned int z)
@@ -772,6 +782,37 @@ void Chunk::generateStructures(ChunkManager* man){
 	hasStruct = true;
 	}
 }
+#include <sys/stat.h>
+void Chunk::loadCheck(){
+
+	std::ifstream file("saves/world1/" + std::to_string(chunk_x) + " " + std::to_string(chunk_y) + " " + std::to_string(chunk_z) + ".chnk");
+
+	if(file.is_open()){
+		std::string line;
+		while(std::getline(file, line)){
+			std::stringstream str(line);
+
+			ChunkDataEntry temp = {mc::Vector3i(0, 0, 0), {0, 0}};
+
+			int ID, meta;
+			str >> temp.position.x >> temp.position.y >> temp.position.z >> ID >> meta;
+
+			std::cout << temp.position.x << " " << temp.position.y << " " << temp.position.z << std::endl;
+			std::cout << (int)ID << " " << (int)meta << std::endl;
+
+			if(temp.position.x >= 0 && temp.position.x < 16 && temp.position.y >= 0 && temp.position.y < 16 && temp.position.z >= 0 && temp.position.z < 16 ){
+				blocks[temp.position.x][temp.position.y][temp.position.z].ID = ID;
+				blocks[temp.position.x][temp.position.y][temp.position.z].meta = meta;
+			}
+
+		}
+
+		file.close();
+	}else{
+		file.close();
+	}
+	
+}
 
 void Chunk::Draw()
 {
@@ -868,6 +909,10 @@ void ChunkManager::setBlock(int x, int y, int z, ChunkBlock blk){
 			m_chunks[mc::Vector3i(x/16, y/16, z/16)]->blocks[x%16][y%16][z%16].meta = blk.meta;
 		}
 	}
+}
+
+void ChunkManager::loadChunkData3(int x, int y, int z){
+	m_chunks[mc::Vector3i(x, y, z)]->loadCheck();
 }
 
 void ChunkManager::updateLightingAll(int level, int ll){

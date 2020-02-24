@@ -6,7 +6,9 @@
 #include <Shadow/Utils/Logger.h>
 #include <Shadow/System/Ram.h>
 #include "../../Version.hpp"
-
+#include <sys/stat.h> 
+#include <stdlib.h>
+#include <iostream>
 #include "ChunkMesh.h"
 
 using namespace Shadow;
@@ -38,6 +40,24 @@ void Minecraft::Client::World::Init()
 
 	tickUpdateThread = sceKernelCreateThread("TickUpdateThread", tickUpdate, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(tickUpdateThread, 0, 0);
+
+
+	mkdir("saves/world1", 0777);
+
+	std::ifstream file("saves/world1/level.dat");
+	
+	if(file.is_open()){
+		file >> Terrain::WorldProvider::seed;
+		std::cout << "SEED: " << Terrain::WorldProvider::seed << std::endl;
+ 		file.close();
+	}else{
+		file.close();
+		std::ofstream file2("saves/world1/level.dat");
+
+		file2 << Terrain::WorldProvider::seed << std::endl;
+
+		file2.close();
+	}
 
 	srand(time(0));
 	Terrain::WorldProvider::noise = new FastNoise(Terrain::WorldProvider::seed);
@@ -89,6 +109,9 @@ void Minecraft::Client::World::Init()
     Terrain::bioMap.emplace(Terrain::BIOME_Badlands_Plateau , Terrain::mesaPlateauBiome);
 
 
+	
+
+
 	// load up the images
 	glbl_loadingscreen = new LoadingScreen();
     glbl_loadingscreen->options_bg = TextureUtil::LoadPng("assets/minecraft/textures/gui/options_background.png");
@@ -112,6 +135,9 @@ void Minecraft::Client::World::Init()
 	textureWaterAnimationId = TextureUtil::LoadPngTexturePack("blocks/water_still.png");
 	textureLavaAnimationId = TextureUtil::LoadPngTexturePack("blocks/lava_still.png");
 	animationLavaStep = true;
+
+
+
 }
 
 void Minecraft::Client::World::Cleanup()
@@ -126,6 +152,7 @@ void Minecraft::Client::World::Cleanup()
 	delete stars;
 	delete clouds;
 }
+#include <iostream>
 
 void Minecraft::Client::World::Update(float dt)
 {
@@ -164,6 +191,20 @@ void Minecraft::Client::World::Update(float dt)
 				ch->blocks[relPos.x][relPos.y][relPos.z].ID = 0; //Air
 				ch->blocks[relPos.x][relPos.y][relPos.z].meta = 0; //Air
 
+
+				bool check = false;
+				for(int i = 0; i < ch->delta.size(); i++){
+					std::cout << "CHANGE: " + std::to_string((int)ch->delta.at(i).blk.ID) << std::endl;
+
+					if(ch->delta.at(i).position == mc::Vector3i(relPos.x, relPos.y, relPos.z)) {
+						check = true;
+						ch->delta.at(i) = {mc::Vector3i(relPos.x, relPos.y, relPos.z), {0, 0}};
+					}
+				}
+
+				if(!check){
+					ch->delta.push_back({mc::Vector3i(relPos.x, relPos.y, relPos.z), {0, 0}});
+				}
 			
 
 				ch->updateMesh(chunkMan);
@@ -212,6 +253,21 @@ void Minecraft::Client::World::Update(float dt)
 				if(ch->blocks[relPos.x][relPos.y][relPos.z].ID == 0){
 					ch->blocks[relPos.x][relPos.y][relPos.z].ID = b->blk.ID;
 					ch->blocks[relPos.x][relPos.y][relPos.z].meta = b->blk.meta;
+
+
+					bool check = false;
+					for(int i = 0; i < ch->delta.size(); i++){
+						std::cout << "CHANGE: " + std::to_string((int)ch->delta.at(i).blk.ID) << std::endl;
+
+						if(ch->delta.at(i).position == mc::Vector3i(relPos.x, relPos.y, relPos.z)) {
+							check = true;
+							ch->delta.at(i) = {mc::Vector3i(relPos.x, relPos.y, relPos.z), b->blk};
+						}
+					}
+
+					if(!check){
+						ch->delta.push_back({mc::Vector3i(relPos.x, relPos.y, relPos.z), b->blk});
+					}
 				}
 
 
@@ -516,6 +572,11 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		}
 
 			sceKernelDelayThread(1000*100);
+
+		for(mc::Vector3i& v : needed){
+			g_World->chunkMan->loadChunkData3(v.x, v.y, v.z);
+		}
+
 
 		for(mc::Vector3i& v : needed){
 			if(g_World->chunkMan->chunkExists(v.x, v.y, v.z) && !g_World->chunkMan->getChunk(v.x, v.y, v.z)->hasMesh){
