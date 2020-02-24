@@ -126,5 +126,7 @@ namespace Minecraft::Menus{
 
 		MenuStates menu_states, previous_states;
 
+		std::string worldName, seedName;
+
     };
 }

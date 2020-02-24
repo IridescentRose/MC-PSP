@@ -15,6 +15,7 @@ namespace Minecraft::Terrain{
 
     int WorldProvider::seed = 0;
     FastNoise* WorldProvider::noise = NULL;
+    std::string WorldProvider::worldName = "New World";
 
 
 	int getHeight(int x, int z, NoiseParameters noiseParams = defaultNoiseParams){

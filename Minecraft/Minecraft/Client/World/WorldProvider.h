@@ -4,6 +4,7 @@
 #include "Chunk.h"
 #include <glm/glm.hpp>
 #include <map>
+#include <string>
 namespace Minecraft::Terrain{
 
     struct NoiseParameters{
@@ -132,6 +133,7 @@ namespace Minecraft::Terrain{
 
         static int seed;
         static FastNoise* noise;
+        static std::string worldName;
     };
 
     extern NoiseParameters defaultNoiseParams;

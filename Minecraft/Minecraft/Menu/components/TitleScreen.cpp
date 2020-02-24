@@ -153,7 +153,7 @@ namespace Minecraft::Menus{
                         selectPosY = 0;
                         previous_states = menu_states;
                         menu_states = MENU_STATE_PLAY_GENERATE;
-                        
+                        Terrain::WorldProvider::seed = rand();
                     }
                     if(selectPosY == 1){
                         //MP MENU

@@ -500,7 +500,7 @@ Chunk::~Chunk()
 {
 	if(delta.size() > 0 ){
 		//Write data to save
-		std::ofstream file("saves/world1/" + std::to_string(chunk_x) + " " + std::to_string(chunk_y) + " " + std::to_string(chunk_z) + ".chnk");
+		std::ofstream file("saves/" +  Terrain::WorldProvider::worldName + "/" + std::to_string(chunk_x) + " " + std::to_string(chunk_y) + " " + std::to_string(chunk_z) + ".chnk");
 
 		for(int i = 0; i < delta.size(); i++){
 			file << delta[i].position.x << " " << delta[i].position.y << " " << delta[i].position.z << " "; //Prints position
@@ -785,7 +785,7 @@ void Chunk::generateStructures(ChunkManager* man){
 #include <sys/stat.h>
 void Chunk::loadCheck(){
 
-	std::ifstream file("saves/world1/" + std::to_string(chunk_x) + " " + std::to_string(chunk_y) + " " + std::to_string(chunk_z) + ".chnk");
+	std::ifstream file("saves/" +  Terrain::WorldProvider::worldName + "/" + std::to_string(chunk_x) + " " + std::to_string(chunk_y) + " " + std::to_string(chunk_z) + ".chnk");
 
 	if(file.is_open()){
 		std::string line;
@@ -797,9 +797,7 @@ void Chunk::loadCheck(){
 			int ID, meta;
 			str >> temp.position.x >> temp.position.y >> temp.position.z >> ID >> meta;
 
-			std::cout << temp.position.x << " " << temp.position.y << " " << temp.position.z << std::endl;
-			std::cout << (int)ID << " " << (int)meta << std::endl;
-
+			
 			if(temp.position.x >= 0 && temp.position.x < 16 && temp.position.y >= 0 && temp.position.y < 16 && temp.position.z >= 0 && temp.position.z < 16 ){
 				blocks[temp.position.x][temp.position.y][temp.position.z].ID = ID;
 				blocks[temp.position.x][temp.position.y][temp.position.z].meta = meta;
