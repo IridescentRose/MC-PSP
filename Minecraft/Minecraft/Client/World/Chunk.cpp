@@ -499,6 +499,7 @@ Chunk::Chunk() : m_aabb({CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE})
 Chunk::~Chunk()
 {
 	save();
+	deleteMesh();
 }
 
 void Chunk::save(){

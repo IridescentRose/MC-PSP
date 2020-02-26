@@ -20,7 +20,7 @@
 #include "../Common/Translations.hpp"
 #include "../Common/Options.hpp"
 #include <Shadow/Utils/Logger.h>
-
+#include <iostream>
 #define PSP_MENU_SIZE 1.0
 
 using namespace Shadow::System;

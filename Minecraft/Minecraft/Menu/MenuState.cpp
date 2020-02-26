@@ -198,12 +198,19 @@ namespace Minecraft::Menus{
 		srand(time(0));
 		int musicChoice = rand() % 4 + 1; //1 - 4
 		std::stringstream ss;
-		ss << "./assets/sounds/ambient/menu/menu";
+		ss << "./assets/sounds/music/menu/menu";
 		ss << musicChoice;
 		ss << ".bgm";
 
+        u32 ramFree = freeMemory();
+		float ram = ((float)ramFree) / 1024.0f / 1024.0f;
+		std::ostringstream os;
+		os << ram;
+		std::string s(os.str());
+		std::cout << "RAM AVAILABLE FOR CLIENT: " + s << std::endl;
+
 		bgm = oslLoadSoundFile(ss.str().c_str(), OSL_FMT_STREAM);
-		button = oslLoadSoundFile("./assets/sounds/other/button1.wav", 0);
+		button = oslLoadSoundFile("./assets/sounds/random/click.wav", 0);
 		g_AudioManager.PlayMusic(bgm);
 
 		panorama = new Panorama();

@@ -1,5 +1,6 @@
 #include "SPClient.hpp"
 #include <Shadow/Utils/Logger.h>
+#include <Shadow/System/Input.h>
 #include <Shadow/System/Ram.h>
 #include <sstream>
 #include <Shadow/Graphics/RenderManager.h>
@@ -10,7 +11,7 @@ using namespace Shadow::Graphics;
 namespace Minecraft::Client {
 
 	SPClient::SPClient() {
-
+		g_World = new World();
 	}
 	SPClient::~SPClient() {
 
@@ -41,10 +42,13 @@ namespace Minecraft::Client {
 
 		Logging::logging_level = Logging::LOGGER_LEVEL_INFO;
 		//THIS IS WHERE WE HAVE FREE RAM TO LOAD!
-		g_World->Save();
 	}
 	void SPClient::CleanUp() {
 
+		g_World->Save();
+		delete g_World;
+		delete player;
+		delete terrain_atlas;
 	}
 
 	void SPClient::Pause() {
@@ -61,6 +65,10 @@ namespace Minecraft::Client {
 		int fps = 1.0f / dt;
 		player->Update(dt);	
 		g_World->Update(dt);
+
+		if(System::Input::KeyPressed(PSP_CTRL_START)){
+			sManager->PopState();
+		}
 		
 	}
 	void SPClient::Draw(StateManager* sManager) {

@@ -43,6 +43,7 @@ namespace Shadow
 			// cleanup the current state
 			if ( !states.empty() ) {
 				states.back()->CleanUp();
+				delete states.back();
 				states.pop_back();
 			}
 

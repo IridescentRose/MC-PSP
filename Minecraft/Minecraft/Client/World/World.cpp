@@ -26,6 +26,7 @@ Minecraft::Client::World::World()
 
 Minecraft::Client::World::~World()
 {
+	Cleanup();
 }
 
 void Minecraft::Client::World::Init()
@@ -38,6 +39,17 @@ void Minecraft::Client::World::Init()
 	rmg = new Audio::RandomMusicGenerator();
 	rmg->Init();
 
+
+	// load up the images
+	glbl_loadingscreen = new LoadingScreen();
+    glbl_loadingscreen->options_bg = TextureUtil::LoadPng("assets/minecraft/textures/gui/options_background.png");
+    glbl_loadingscreen->options_tile = new Sprite(glbl_loadingscreen->options_bg);
+    glbl_loadingscreen->options_tile->alpha = 255;
+    glbl_loadingscreen->options_tile->Scale(2.0f, 2.0f);
+	sceKernelDelayThread(5000);
+	glbl_loadingscreen->StartLoadingScreen();
+
+	lastLevel = lighting(0);
 	tickUpdateThread = sceKernelCreateThread("TickUpdateThread", tickUpdate, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(tickUpdateThread, 0, 0);
 
@@ -114,19 +126,11 @@ void Minecraft::Client::World::Init()
 	
 
 
-	// load up the images
-	glbl_loadingscreen = new LoadingScreen();
-    glbl_loadingscreen->options_bg = TextureUtil::LoadPng("assets/minecraft/textures/gui/options_background.png");
-    glbl_loadingscreen->options_tile = new Sprite(glbl_loadingscreen->options_bg);
-    glbl_loadingscreen->options_tile->alpha = 255;
-    glbl_loadingscreen->options_tile->Scale(2.0f, 2.0f);
-	glbl_loadingscreen->StartLoadingScreen();
-	sceKernelDelayThread(5000);
 	genning = true;
 	chunkMan = new Terrain::ChunkManager();
 	chunkManagerThread = sceKernelCreateThread("ChunkManagementThread", chunkManagement, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(chunkManagerThread, 0, 0);
-	lastLevel = lighting(0);
+	
 
 	crosshair = new Sprite("assets/minecraft/textures/misc/cross.png", 8, 8, 16, 16);
 
@@ -149,6 +153,15 @@ void Minecraft::Client::World::Cleanup()
 	
 	sceKernelTerminateDeleteThread(tickUpdateThread);
 	sceKernelTerminateDeleteThread(chunkManagerThread);
+	delete textureWaterAnimationId;
+	delete textureLavaAnimationId;
+
+	delete timeData;
+
+	for(const auto& [key, chnk] : chunkMan->getChunks() ){
+		chunkMan->unloadChunk(chnk->chunk_x, chnk->chunk_y, chnk->chunk_z);
+	}
+
 	rmg->Cleanup();
 	delete rmg;
 	delete sun;
@@ -156,6 +169,10 @@ void Minecraft::Client::World::Cleanup()
 	delete sky;
 	delete stars;
 	delete clouds;
+	delete crosshair;
+	delete chunkMan;
+	delete Terrain::WorldProvider::noise;
+	Terrain::bioMap.clear();
 }
 #include <iostream>
 
@@ -377,8 +394,7 @@ void Minecraft::Client::World::FixedUpdate()
 
 	timeData->time++;
 	timeData->worldAge++;
-
-	//Sun
+	
 	sky->Update(timeData->time);
 	sun->Update( (float)(timeData->time % 24000) / 24000.0f * 360.0f);
 	moon->Update((float)(timeData->time % 24000) / 24000.0f * 360.0f, timeData->worldAge);
