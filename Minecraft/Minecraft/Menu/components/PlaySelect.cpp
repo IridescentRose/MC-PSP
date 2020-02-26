@@ -254,16 +254,7 @@ namespace Minecraft::Menus{
 
         if(Input::KeyPressed(PSP_CTRL_CROSS)){
             if(selectRegion == 1){
-                if(selectPosY == 0 && selectPosX == 1){
-                    //Create New
-
-                    selectPosX = 0;
-                    selectPosY = 0;
-                    selectRegion = 0;
-                    previous_states = menu_states;
-                    menu_states = MENU_STATE_PLAY_GENERATE;
-                }
-
+                
                 if(selectPosY == 0 && selectPosX == 0){
                     Terrain::WorldProvider::worldName = entries[loadPosSel];
                     //LOAD WORLD!
@@ -273,6 +264,17 @@ namespace Minecraft::Menus{
 		            client->Init();
 
 		            sManager->PushState(client);
+                }
+                if(selectPosY == 0 && selectPosX == 1){
+                    //Create New
+
+                    selectPosX = 0;
+                    selectPosY = 0;
+                    selectRegion = 0;
+                    previous_states = menu_states;
+
+                    std::cout << "LOAD" << std::endl;
+                    menu_states = MENU_STATE_PLAY_GENERATE;
                 }
 
                 if(selectPosY == 1 && selectPosX == 2){
