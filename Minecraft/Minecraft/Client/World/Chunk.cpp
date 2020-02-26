@@ -498,6 +498,10 @@ Chunk::Chunk() : m_aabb({CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE})
 
 Chunk::~Chunk()
 {
+	save();
+}
+
+void Chunk::save(){
 	if(delta.size() > 0 ){
 		//Write data to save
 		std::ofstream file("saves/" +  Terrain::WorldProvider::worldName + "/" + std::to_string(chunk_x) + " " + std::to_string(chunk_y) + " " + std::to_string(chunk_z) + ".chnk");

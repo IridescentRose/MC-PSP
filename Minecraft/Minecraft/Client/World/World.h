@@ -55,6 +55,8 @@ namespace Minecraft::Client {
 		void FixedUpdate(); //OnTick events
 		void Draw();
 
+		void Save();
+
 		Timer tickTimer;
 		Terrain::ChunkManager* chunkMan;
 		Player* p;

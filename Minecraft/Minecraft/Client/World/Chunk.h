@@ -58,6 +58,8 @@ public:
 
 	std::vector<ChunkDataEntry> delta;
 
+	void save();
+
 };
 
 

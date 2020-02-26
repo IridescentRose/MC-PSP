@@ -49,14 +49,18 @@ void Minecraft::Client::World::Init()
 	if(file.is_open()){
 		file >> Terrain::WorldProvider::seed;
 		std::cout << "SEED: " << Terrain::WorldProvider::seed << std::endl;
+
+		mc::Vector3d position;
+
+		file >> position.x >> position.y >> position.z;
+
+		p->SetPosition(position);
+
  		file.close();
 	}else{
 		file.close();
-		std::ofstream file2("saves/" + Terrain::WorldProvider::worldName + "/level.dat");
-
-		file2 << Terrain::WorldProvider::seed << std::endl;
-
-		file2.close();
+		
+		Save();
 	}
 
 	srand(time(0));
@@ -142,8 +146,11 @@ void Minecraft::Client::World::Init()
 
 void Minecraft::Client::World::Cleanup()
 {
+
+	Save();
 	
 	sceKernelTerminateDeleteThread(tickUpdateThread);
+	sceKernelTerminateDeleteThread(chunkManagerThread);
 	rmg->Cleanup();
 	delete rmg;
 	delete sun;
@@ -392,6 +399,21 @@ void Minecraft::Client::World::FixedUpdate()
 		lastLevel = newLevel;
 	}
 
+}
+
+void Minecraft::Client::World::Save(){
+
+	std::ofstream file("saves/" + Terrain::WorldProvider::worldName + "/level.dat");
+	
+	file << Terrain::WorldProvider::seed;
+	mc::Vector3d position; 
+	file << position.x << position.y << position.z;
+	file.close();
+
+
+	for(const auto& [key, chnk] : chunkMan->getChunks()){
+		chnk->save();
+	}
 }
 
 void Minecraft::Client::World::Draw()
