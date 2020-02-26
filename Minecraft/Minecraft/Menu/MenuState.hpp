@@ -96,7 +96,7 @@ namespace Minecraft::Menus{
 		void playGenerateUpdate(StateManager* sManager);
 		
 		void playSelectDraw();
-		void playSelectUpdate();
+		void playSelectUpdate(StateManager* sManager);
 
         OSL_SOUND* bgm, *button;
 		Panorama* panorama;
@@ -128,9 +128,12 @@ namespace Minecraft::Menus{
 
 		int selectRegion, langPos, langPosSel, langPosMax;
 
+		int loadPos, loadPosSel, loadPosMax;
+
 		MenuStates menu_states, previous_states;
 
 		std::string worldName, seedName;
 
+        std::vector<std::string> entries;
     };
 }

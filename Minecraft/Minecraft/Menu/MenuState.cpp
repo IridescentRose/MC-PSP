@@ -1,6 +1,7 @@
 #include "MenuState.hpp"
 #include <Shadow/Utils/Logger.h>
 #include <sys/stat.h>
+#include <dirent.h>
 #include "../Client/World/BlockData.h"
 namespace Minecraft::Menus{
 
@@ -11,7 +12,7 @@ namespace Minecraft::Menus{
         langPos = langPosMax = langPosSel = 0;
 		tryConnect = false;
 		connected = false;
-        
+        loadPos = loadPosSel = loadPosMax = 0;
     }
 
     MenuState::~MenuState(){
@@ -137,6 +138,8 @@ namespace Minecraft::Menus{
 		std::ostringstream os2;
 		os2 << ram;
 		std::string s1(os2.str());
+
+        entries.clear();
     }
 
 	void MenuState::Enter(){
@@ -192,6 +195,10 @@ namespace Minecraft::Menus{
 		langPos = langPosMax = langPosSel = 0;
 		tryConnect = false;
 		connected = false;
+
+
+        DIR *dir;
+        struct dirent *ent;
 
 		t = Timer();
 		//BGM!!!
@@ -281,7 +288,7 @@ namespace Minecraft::Menus{
         switch(menu_states){
 
             case MENU_STATE_LOAD_SELECT:{
-                playSelectUpdate();
+                playSelectUpdate(sManager);
                 break;
             }
 

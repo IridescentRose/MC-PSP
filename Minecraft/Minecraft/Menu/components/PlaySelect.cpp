@@ -1,5 +1,45 @@
 #include "../MenuState.hpp"
 
+#include <dirent.h>
+#include <sys/stat.h>
+
+
+#include <Shadow/System/Dialogs.h>
+
+#include "../../Client/SPClient.hpp"
+using namespace Shadow::System;
+
+void remove_dir(char *path)
+{
+        struct dirent *entry = NULL;
+        DIR *dir = NULL;
+        dir = opendir(path);
+        while(entry = readdir(dir))
+        {   
+                DIR *sub_dir = NULL;
+                FILE *file = NULL;
+                char abs_path[100] = {0};
+                if(*(entry->d_name) != '.')
+                {   
+                        sprintf(abs_path, "%s/%s", path, entry->d_name);
+                        if(sub_dir = opendir(abs_path))
+                        {   
+                                closedir(sub_dir);
+                                remove_dir(abs_path);
+                        }   
+                        else 
+                        {   
+                                if(file = fopen(abs_path, "r"))
+                                {   
+                                        fclose(file);
+                                        remove(abs_path);
+                                }   
+                        }   
+                }   
+        }   
+        remove(path);
+}
+
 namespace Minecraft::Menus{
     void MenuState::playSelectDraw(){
         for(int x = 0; x < 16; x++){
@@ -21,13 +61,24 @@ namespace Minecraft::Menus{
         g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         g_RenderManager.DebugPrint(240, 16, Common::g_TranslationOBJ.getText("selectWorld.title").c_str());
 
-
         if(selectRegion == 1 && selectPosY == 0 && selectPosX == 0){
             opt_sel->SetPosition(156, 236);
             opt_sel->Draw();
         }else{
             opt_unsel->SetPosition(156, 236);
             opt_unsel->Draw();
+        }
+
+        for(int i = 0; i < 8; i++){
+
+            if(i + loadPos < entries.size()){
+                if(i + loadPos == loadPosSel){
+                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                }else{
+                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                }
+                g_RenderManager.DebugPrint(240, 41 + i * 20, entries[i + loadPos].c_str());
+            }
         }
 
         if(selectRegion == 1 && selectPosY == 0 && selectPosX == 1){
@@ -108,7 +159,7 @@ namespace Minecraft::Menus{
         g_RenderManager.DebugPrint(200, 256, Common::g_TranslationOBJ.getText("selectWorld.delete").c_str());
 
     }
-    void MenuState::playSelectUpdate(){
+    void MenuState::playSelectUpdate(StateManager* sManager){
         if(Input::KeyPressed(PSP_CTRL_RTRIGGER)){
             selectRegion++;
         }
@@ -124,6 +175,8 @@ namespace Minecraft::Menus{
         if(selectRegion > 1){
             selectRegion = 1;
         }
+
+
 
         if(selectRegion == 1){
             if(Input::KeyPressed(PSP_CTRL_UP)){
@@ -166,7 +219,38 @@ namespace Minecraft::Menus{
                 }
             }
 
+        }else{
+            if(Input::KeyPressed(PSP_CTRL_UP)){
+                loadPosSel--;
+            }
+            if(Input::KeyPressed(PSP_CTRL_DOWN)){
+                loadPosSel++;
+            }
+
         }
+
+        if(loadPosSel >= entries.size()){
+                loadPosSel = entries.size() - 1;
+            }
+
+            if(loadPosSel < 0){
+                loadPosSel = 0;
+            }
+
+            if(loadPosSel - loadPos > 8){
+                loadPos++;
+            }
+
+            if(loadPosSel - loadPos < 0){
+                loadPos--;
+            }
+
+            if(loadPos < 0){
+                loadPos = 0;
+            }
+            if(loadPos > entries.size() - 9){
+                loadPos = entries.size() - 9;
+            }
 
         if(Input::KeyPressed(PSP_CTRL_CROSS)){
             if(selectRegion == 1){
@@ -181,7 +265,14 @@ namespace Minecraft::Menus{
                 }
 
                 if(selectPosY == 0 && selectPosX == 0){
+                    Terrain::WorldProvider::worldName = entries[loadPosSel];
                     //LOAD WORLD!
+                    terrain_atlas = TextureUtil::LoadPng("assets/minecraft/textures/terrain_atlas.png");
+                    Client::SPClient* client = new Client::SPClient();
+						
+		            client->Init();
+
+		            sManager->PushState(client);
                 }
 
                 if(selectPosY == 1 && selectPosX == 2){
@@ -195,11 +286,61 @@ namespace Minecraft::Menus{
 
                 if(selectPosY == 1 && selectPosX == 0){
                     //RENAME
+                    
+                    unsigned short test2[16];
+                    std::string newName = entries[loadPosSel];
+
+                    for(int i = 0; i < 16; i++){
+                        test2[i] = '\0';
+                    }
+		            unsigned short opis2[5] = { 'N', 'a', 'm', 'e', '\0' };
+		
+                    if (Dialogs::ShowOSK(opis2, test2, 16) != -1){
+                        newName = "";
+			            for (int j = 0; test2[j]; j++){
+				            unsigned c = test2[j];
+				            if (32 <= c && c <= 127) // print ascii only
+					            newName += c;
+			            }
+		            }
+        
+
+                    rename(("saves/" + entries[loadPosSel]).c_str(), ("saves/" + newName).c_str());
+
+                    DIR *dir;
+                    struct dirent *ent;
+                    entries.clear();
+                    if ((dir = opendir ("saves/")) != NULL) {
+                        while ((ent = readdir (dir)) != NULL) {
+                            if(std::string(ent->d_name) != "." &&  std::string(ent->d_name) != ".."){
+                                struct stat buffer;
+
+                                if(stat( ("saves/" + std::string(ent->d_name) + "/level.dat").c_str(), &buffer) == 0)
+                                    entries.push_back(std::string(ent->d_name));
+                            }
+                        }
+                        closedir (dir);
+                    }
                 }
 
                 if(selectPosY == 1 && selectPosX == 1){
                     //DELETE
+                    remove_dir((char*) ("saves/" + entries[loadPosSel] + "/").c_str());
 
+                    DIR *dir;
+                    struct dirent *ent;
+                    entries.clear();
+                    if ((dir = opendir ("saves/")) != NULL) {
+                        while ((ent = readdir (dir)) != NULL) {
+                            if(std::string(ent->d_name) != "." &&  std::string(ent->d_name) != ".."){
+                                struct stat buffer;
+
+                                if(stat( ("saves/" + std::string(ent->d_name) + "/level.dat").c_str(), &buffer) == 0)
+                                    entries.push_back(std::string(ent->d_name));
+                            }
+                        }
+                        closedir (dir);
+                    }
                 }
 
 

@@ -50,6 +50,7 @@
         "typeinfo": "cpp",
         "random": "cpp",
         "bit": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "codecvt": "cpp"
     }
 }

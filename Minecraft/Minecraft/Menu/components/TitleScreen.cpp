@@ -1,6 +1,7 @@
 #include "../MenuState.hpp"
 #include "../../Client/SPClient.hpp"
-
+#include <dirent.h>
+#include <sys/stat.h>
 namespace Minecraft::Menus{
         
     void MenuState::titleScreenDraw(){
@@ -153,8 +154,27 @@ namespace Minecraft::Menus{
                         selectPosY = 0;
                         selectRegion = 0;
                         previous_states = menu_states;
+                        DIR *dir;
+                        struct dirent *ent;
+
+                        entries.clear();
+
+                        if ((dir = opendir ("saves/")) != NULL) {
+                            while ((ent = readdir (dir)) != NULL) {
+                                if(std::string(ent->d_name) != "." &&  std::string(ent->d_name) != ".."){
+                                                                    struct stat buffer;
+
+                                if(stat( ("saves/" + std::string(ent->d_name) + "/level.dat").c_str(), &buffer) == 0)
+                                    entries.push_back(std::string(ent->d_name));
+                                }
+                            }
+                            closedir (dir);
+                        }
                         menu_states = MENU_STATE_LOAD_SELECT;
                         Terrain::WorldProvider::seed = rand();
+
+                        
+
                     }
                     if(selectPosY == 1){
                         //MP MENU
