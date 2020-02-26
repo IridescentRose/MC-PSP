@@ -41,6 +41,7 @@ namespace Minecraft::Client {
 
 		Logging::logging_level = Logging::LOGGER_LEVEL_INFO;
 		//THIS IS WHERE WE HAVE FREE RAM TO LOAD!
+		g_World->Save();
 	}
 	void SPClient::CleanUp() {
 

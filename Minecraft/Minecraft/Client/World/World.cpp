@@ -48,8 +48,6 @@ void Minecraft::Client::World::Init()
 	
 	if(file.is_open()){
 		file >> Terrain::WorldProvider::seed;
-		std::cout << "SEED: " << Terrain::WorldProvider::seed << std::endl;
-
 		mc::Vector3d position;
 
 		file >> position.x >> position.y >> position.z;
@@ -201,8 +199,6 @@ void Minecraft::Client::World::Update(float dt)
 
 				bool check = false;
 				for(int i = 0; i < ch->delta.size(); i++){
-					std::cout << "CHANGE: " + std::to_string((int)ch->delta.at(i).blk.ID) << std::endl;
-
 					if(ch->delta.at(i).position == mc::Vector3i(relPos.x, relPos.y, relPos.z)) {
 						check = true;
 						ch->delta.at(i) = {mc::Vector3i(relPos.x, relPos.y, relPos.z), {0, 0}};
@@ -264,8 +260,6 @@ void Minecraft::Client::World::Update(float dt)
 
 					bool check = false;
 					for(int i = 0; i < ch->delta.size(); i++){
-						std::cout << "CHANGE: " + std::to_string((int)ch->delta.at(i).blk.ID) << std::endl;
-
 						if(ch->delta.at(i).position == mc::Vector3i(relPos.x, relPos.y, relPos.z)) {
 							check = true;
 							ch->delta.at(i) = {mc::Vector3i(relPos.x, relPos.y, relPos.z), b->blk};
@@ -405,9 +399,9 @@ void Minecraft::Client::World::Save(){
 
 	std::ofstream file("saves/" + Terrain::WorldProvider::worldName + "/level.dat");
 	
-	file << Terrain::WorldProvider::seed;
-	mc::Vector3d position; 
-	file << position.x << position.y << position.z;
+	file << Terrain::WorldProvider::seed << std::endl;
+	mc::Vector3d position = p->getPosition(); 
+	file << position.x << " " << position.y << " " << position.z;
 	file.close();
 
 
