@@ -279,6 +279,12 @@ namespace Minecraft::Menus{
 
         Input::InputUpdate();
         switch(menu_states){
+
+            case MENU_STATE_LOAD_SELECT:{
+                playSelectUpdate();
+                break;
+            }
+
             case MENU_STATE_TITLE:{
                 titleScreenUpdate(sManager);
                 break;
@@ -350,6 +356,11 @@ namespace Minecraft::Menus{
 
     void MenuState::menuPass(){
         switch(menu_states){
+            case MENU_STATE_LOAD_SELECT:{
+                playSelectDraw();
+                break;
+            }
+
             case MENU_STATE_TITLE:{
                 titleScreenDraw();
                 break;

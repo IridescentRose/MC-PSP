@@ -151,8 +151,9 @@ namespace Minecraft::Menus{
                         //SINGLE PLAYER MENU
                         selectPosX = 0;
                         selectPosY = 0;
+                        selectRegion = 0;
                         previous_states = menu_states;
-                        menu_states = MENU_STATE_PLAY_GENERATE;
+                        menu_states = MENU_STATE_LOAD_SELECT;
                         Terrain::WorldProvider::seed = rand();
                     }
                     if(selectPosY == 1){

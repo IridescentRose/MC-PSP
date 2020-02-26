@@ -27,6 +27,7 @@ Minecraft/Menu/Logo.o \
 Minecraft/Menu/MenuState.o \
 Minecraft/Menu/components/TitleScreen.o \
 Minecraft/Menu/components/PlayGenerate.o \
+Minecraft/Menu/components/PlaySelect.o \
 Minecraft/Menu/components/LanguageScreen.o \
 Minecraft/Menu/components/OptionsMainScreen.o \
 Minecraft/Menu/components/OptionsSkinCustomization.o \

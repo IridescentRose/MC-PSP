@@ -41,6 +41,7 @@ namespace Minecraft::Menus{
 		MENU_STATE_MULTIPLAYER = 8,
 		MENU_STATE_RESOURCE_PACK = 9,
 		MENU_STATE_PLAY_GENERATE = 10,
+		MENU_STATE_LOAD_SELECT = 11,
 	};
 
     class MenuState : public GameState{
@@ -93,6 +94,9 @@ namespace Minecraft::Menus{
 
 		void playGenerateDraw();
 		void playGenerateUpdate(StateManager* sManager);
+		
+		void playSelectDraw();
+		void playSelectUpdate();
 
         OSL_SOUND* bgm, *button;
 		Panorama* panorama;
