@@ -255,6 +255,8 @@ namespace Minecraft::Menus{
         if(Input::KeyPressed(PSP_CTRL_CROSS)){
             if(selectRegion == 1){
                 
+                if(entries.size() > 0 ){
+                    
                 if(selectPosY == 0 && selectPosX == 0){
                     Terrain::WorldProvider::worldName = entries[loadPosSel];
                     //LOAD WORLD!
@@ -264,26 +266,6 @@ namespace Minecraft::Menus{
 		            client->Init();
 
 		            sManager->PushState(client);
-                }
-                if(selectPosY == 0 && selectPosX == 1){
-                    //Create New
-
-                    selectPosX = 0;
-                    selectPosY = 0;
-                    selectRegion = 0;
-                    previous_states = menu_states;
-
-                    std::cout << "LOAD" << std::endl;
-                    menu_states = MENU_STATE_PLAY_GENERATE;
-                }
-
-                if(selectPosY == 1 && selectPosX == 2){
-                    //Cancel!
-                    selectPosX = 0;
-                    selectPosY = 0;
-                    selectRegion = 0;
-                    menu_states = MENU_STATE_TITLE;
-                    previous_states = MENU_STATE_LOAD_SELECT;
                 }
 
                 if(selectPosY == 1 && selectPosX == 0){
@@ -343,6 +325,30 @@ namespace Minecraft::Menus{
                         }
                         closedir (dir);
                     }
+                }
+
+                }
+
+
+                if(selectPosY == 0 && selectPosX == 1){
+                    //Create New
+
+                    selectPosX = 0;
+                    selectPosY = 0;
+                    selectRegion = 0;
+                    previous_states = menu_states;
+
+                    std::cout << "LOAD" << std::endl;
+                    menu_states = MENU_STATE_PLAY_GENERATE;
+                }
+
+                if(selectPosY == 1 && selectPosX == 2){
+                    //Cancel!
+                    selectPosX = 0;
+                    selectPosY = 0;
+                    selectRegion = 0;
+                    menu_states = MENU_STATE_TITLE;
+                    previous_states = MENU_STATE_LOAD_SELECT;
                 }
 
 
