@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include "ChunkMesh.h"
-
+#include <pspsdk.h>
 using namespace Shadow;
 using namespace Shadow::Utils;
 
@@ -142,7 +142,7 @@ void Minecraft::Client::World::Init()
 	textureLavaAnimationId = TextureUtil::LoadPngTexturePack("blocks/lava_still.png");
 	animationLavaStep = true;
 
-
+	int ret = pspSdkLoadStartModule("mediaengine.prx", PSP_MEMORY_PARTITION_KERNEL);
 
 }
 
