@@ -156,13 +156,13 @@ namespace Minecraft::Terrain{
 
 	void makeFoliage(Chunk* c, int x, int rX, int y, int rY, int z, int rZ, BiomeProfile thisBiome){
 
-							vfpu_srand(WorldProvider::seed + (rX + x - 1) * (rZ + z + 1));
-							float rands = vfpu_randf(0, 1);
+							//vfpu_srand(WorldProvider::seed + (rX + x - 1) * (rZ + z + 1));
+							float rands = 0;
 
 							if(rands > 0.65f && rY +y > WATER_LEVEL && (thisBiome.type == BIOME_Plains || thisBiome.type == BIOME_Sunflower_Plains || thisBiome.type == BIOME_Savanna_Plateau || thisBiome.type == BIOME_Savanna || thisBiome.type == BIOME_Shattered_Savanna || thisBiome.type == BIOME_FLOWER_FOREST)){
 								if(thisBiome.type == BIOME_FLOWER_FOREST){
 									c->blocks[x][y][z].ID = 38;
-									c->blocks[x][y][z].meta = (int)vfpu_randf(0, 9);
+									c->blocks[x][y][z].meta = 0;
 									if(c->blocks[x][y][z].meta == 9){
 										c->blocks[x][y][z].meta = 8;
 									}
@@ -176,9 +176,9 @@ namespace Minecraft::Terrain{
 											c->blocks[x][y][z].ID = 31;
 											c->blocks[x][y][z].meta = 1;
 										}else{
-											c->blocks[x][y][z].ID = 37 + vfpu_randf(0, 1.2);
+											c->blocks[x][y][z].ID = 37 + 0;
 											if(c->blocks[x][y][z].ID == 38){
-												c->blocks[x][y][z].meta = (int)vfpu_randf(0, 9);
+												c->blocks[x][y][z].meta = 0;
 												if(c->blocks[x][y][z].meta == 1){
 													c->blocks[x][y][z].meta = 0;
 													c->blocks[x][y][z].ID = 0;
@@ -207,7 +207,7 @@ namespace Minecraft::Terrain{
 								}else{
 
 									if(thisBiome.type == BIOME_TAIGA || thisBiome.type == BIOME_Taiga_Hills || thisBiome.type == BIOME_Taiga_Mountains || thisBiome.type == BIOME_Giant_Tree_Taiga || thisBiome.type == BIOME_Giant_Tree_Taiga_Hills || thisBiome.type == BIOME_Giant_Spruce_Taiga || thisBiome.type == BIOME_Giant_Spruce_Taiga_Hills){
-										int randomChoice = vfpu_randf(0, 12);
+										int randomChoice = 0;
 
 										if(randomChoice >= 0 && randomChoice < 6){
 											c->blocks[x][y][z].ID = 31;
@@ -232,7 +232,7 @@ namespace Minecraft::Terrain{
 											c->blocks[x][y][z].ID = 31;
 											c->blocks[x][y][z].meta = 1;
 										}else{
-											c->blocks[x][y][z].ID = 37 + vfpu_randf(0, 1.2);
+											c->blocks[x][y][z].ID = 37 + 0;
 											c->blocks[x][y][z].meta = 0;
 										}
 									}
@@ -280,7 +280,7 @@ namespace Minecraft::Terrain{
 
 						if(variance > 0.85f && c->blocks[x][y][z].ID != 8 && rY + y < 63 && rY + y < height){
 							if(rY + y < 32){
-								int rand = vfpu_randf(0, 8);
+								int rand = 0;
 
 								if(rand < 1){
 									c->blocks[x][y][z].ID = 21;
