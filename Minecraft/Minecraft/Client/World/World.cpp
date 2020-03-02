@@ -137,8 +137,6 @@ void Minecraft::Client::World::Init()
 
 	genning = true;
 	chunkMan = new Terrain::ChunkManager();
-	//chunkManagerThread = sceKernelCreateThread("ChunkManagementThread", chunkManagement, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
-	//sceKernelStartThread(chunkManagerThread, 0, 0);
 	
 
 	crosshair = new Sprite("assets/minecraft/textures/misc/cross.png", 8, 8, 16, 16);
@@ -157,8 +155,13 @@ void Minecraft::Client::World::Init()
 	mei = (volatile struct me_struct*)(reinterpret_cast< void * >( reinterpret_cast<u32>( (mei) ) | 0x40000000 ) );
 
 	InitME(mei);
-	sceKernelDcacheWritebackInvalidateAll();
-	BeginME(mei, (int)(&ChunkMan2), (int)g_World, -1, 0, -1, 0);
+	//sceKernelDcacheWritebackInvalidateAll();
+	//BeginME(mei, (int)(&ChunkMan2), (int)g_World, -1, 0, -1, 0);
+
+
+
+	chunkManagerThread = sceKernelCreateThread("ChunkManagementThread", chunkManagement, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
+	sceKernelStartThread(chunkManagerThread, 0, 0);
 }
 
 void Minecraft::Client::World::Cleanup()
@@ -565,27 +568,23 @@ int Minecraft::Client::World::ChunkMan2(int gWorld){
 	return 0;
 }
 
-int Minecraft::Client::World::chunkManagement(int gWorld)
-{
-	World* g_world = (World*)gWorld;
-	
+int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
+{	
 	mc::Vector3i last_pos = mc::Vector3i(0, -1, 0);
 	while(true){
-		mc::Vector3i center = mc::Vector3i((-g_world->p->getPosition().x) / 16, (g_world->p->getPosition().y) / 16, (-g_world->p->getPosition().z) / 16);
 
+		mc::Vector3i center = mc::Vector3i((-g_World->p->getPosition().x) / 16, (g_World->p->getPosition().y) / 16, (-g_World->p->getPosition().z) / 16);
+		
 		if(center != last_pos){
+		
+		//CPU STUFF!
 		std::vector<mc::Vector3i> needed;
 		needed.clear();
 		std::vector<mc::Vector3i> excess;
 		excess.clear();
-		
-		
-		
 		//Box bounds
-		mc::Vector3i top = {center.x + 2, center.y+1, center.z + 2};
-		mc::Vector3i bot = {center.x - 2, center.y-1, center.z - 2};
-
-		
+		mc::Vector3i top = {center.x + 1, center.y+1, center.z + 1};
+		mc::Vector3i bot = {center.x - 1, center.y-1, center.z - 1};
 		for(int y = bot.y; y <= top.y && y < 17 && y >= -1; y++){
 			for(int x = bot.x; x <= top.x; x++){
 				for(int z = bot.z; z <= top.z; z++){
@@ -593,9 +592,7 @@ int Minecraft::Client::World::chunkManagement(int gWorld)
 				}
 			}
 		}
-
-		
-		for(const auto& [key, chnk] : g_world->chunkMan->getChunks()){
+		for(const auto& [key, chnk] : g_World->chunkMan->getChunks()){
 			bool isNeeded = false;
 
 			for(mc::Vector3i& v : needed){
@@ -613,80 +610,61 @@ int Minecraft::Client::World::chunkManagement(int gWorld)
 		
 		//Get rid of excesses!
 
-		for(mc::Vector3i& v : excess){
-			g_world->chunkMan->unloadChunk(v.x, v.y, v.z);
-   for(int i = 0; i < 8192; i += 64)
-   {
-      __builtin_allegrex_cache(0x14, i);
-      __builtin_allegrex_cache(0x14, i);
-   }
-		}
-		excess.clear();
+		//CPU ONLY!
+		//for(mc::Vector3i& v : excess){
+		//	g_World->chunkMan->unloadChunk(v.x, v.y, v.z);
+  		//}
+		//excess.clear();
 
-		
+		/* ME
 		for(mc::Vector3i& v : needed){
-			if(!g_world->chunkMan->chunkExists(v.x, v.y, v.z)){
-				g_world->chunkMan->loadChunkData(v.x, v.y, v.z);
-   for(int i = 0; i < 8192; i += 64)
-   {
-      __builtin_allegrex_cache(0x14, i);
-      __builtin_allegrex_cache(0x14, i);
-   }
+			if(!g_World->chunkMan->chunkExists(v.x, v.y, v.z)){
+				g_World->chunkMan->loadChunkData(v.x, v.y, v.z);
 			}
 		}
 
 		for(mc::Vector3i& v : needed){
-			g_world->chunkMan->loadChunkData2(v.x, v.y, v.z);
-   for(int i = 0; i < 8192; i += 64)
-   {
-      __builtin_allegrex_cache(0x14, i);
-      __builtin_allegrex_cache(0x14, i);
-   }
-		}
+			g_World->chunkMan->loadChunkData2(v.x, v.y, v.z);
+		}*/
 
+		//CPU ONLY
+		//for(mc::Vector3i& v : needed){
+		//	g_World->chunkMan->loadChunkData3(v.x, v.y, v.z);
+		//}
+
+
+		/* ME
 		for(mc::Vector3i& v : needed){
-			g_world->chunkMan->loadChunkData3(v.x, v.y, v.z);
-   for(int i = 0; i < 8192; i += 64)
-   {
-      __builtin_allegrex_cache(0x14, i);
-      __builtin_allegrex_cache(0x14, i);
-   }
-		}
-
-
-		for(mc::Vector3i& v : needed){
-			if(g_world->chunkMan->chunkExists(v.x, v.y, v.z) && !g_world->chunkMan->getChunk(v.x, v.y, v.z)->hasMesh){
-				g_world->chunkMan->loadChunkMesh(v.x, v.y, v.z);
-				if(g_world->chunkMan->chunkExists(v.x + 1, v.y, v.z)){
-					g_world->chunkMan->updateChunk(v.x + 1, v.y, v.z);
+			if(g_World->chunkMan->chunkExists(v.x, v.y, v.z) && !g_World->chunkMan->getChunk(v.x, v.y, v.z)->hasMesh){
+				g_World->chunkMan->loadChunkMesh(v.x, v.y, v.z);
+				if(g_World->chunkMan->chunkExists(v.x + 1, v.y, v.z)){
+					g_World->chunkMan->updateChunk(v.x + 1, v.y, v.z);
 				}
-				if(g_world->chunkMan->chunkExists(v.x - 1, v.y, v.z)){
-					g_world->chunkMan->updateChunk(v.x - 1, v.y, v.z);
+				if(g_World->chunkMan->chunkExists(v.x - 1, v.y, v.z)){
+					g_World->chunkMan->updateChunk(v.x - 1, v.y, v.z);
+				}
+				if(g_World->chunkMan->chunkExists(v.x, v.y + 1, v.z)){
+					g_World->chunkMan->updateChunk(v.x, v.y + 1, v.z);
+				}
+				if(g_World->chunkMan->chunkExists(v.x, v.y - 1, v.z)){
+					g_World->chunkMan->updateChunk(v.x, v.y - 1, v.z);
 				}
 
-
-				if(g_world->chunkMan->chunkExists(v.x, v.y + 1, v.z)){
-					g_world->chunkMan->updateChunk(v.x, v.y + 1, v.z);
+				if(g_World->chunkMan->chunkExists(v.x, v.y, v.z + 1)){
+					g_World->chunkMan->updateChunk(v.x, v.y, v.z + 1);
 				}
-				if(g_world->chunkMan->chunkExists(v.x, v.y - 1, v.z)){
-					g_world->chunkMan->updateChunk(v.x, v.y - 1, v.z);
-				}
-
-				if(g_world->chunkMan->chunkExists(v.x, v.y, v.z + 1)){
-					g_world->chunkMan->updateChunk(v.x, v.y, v.z + 1);
-				}
-				if(g_world->chunkMan->chunkExists(v.x, v.y, v.z - 1)){
-					g_world->chunkMan->updateChunk(v.x, v.y, v.z - 1);
+				if(g_World->chunkMan->chunkExists(v.x, v.y, v.z - 1)){
+					g_World->chunkMan->updateChunk(v.x, v.y, v.z - 1);
 				}
 			}
 			
-		}
+		}*/
+
 
 		last_pos = center;
 		}
-
-		g_world->genning = false;
-
+		g_World->genning = false;
+		sceKernelDelayThread(200 * 1000);
 	}
 
 	return 0;

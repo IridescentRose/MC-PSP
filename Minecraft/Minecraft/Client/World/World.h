@@ -78,7 +78,7 @@ namespace Minecraft::Client {
 
 
 		static int tickUpdate(SceSize args, void* argp);
-		static int chunkManagement(int x);
+		static int chunkManagement(SceSize args, void* argp);
 
 		static int ChunkMan2(int z);
 
