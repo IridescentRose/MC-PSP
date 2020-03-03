@@ -603,20 +603,17 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
         		c->chunk_y = v.y;
         		c->chunk_z = v.z;
 
-        		c->generateData();
-
-        		g_World->chunkMan->getChunks().emplace(v, std::move(c));
-				sceKernelDelayThread(20 * 1000);
-				//ME
+        		//ME
 				c->m_aabb.update({c->chunk_x * CHUNK_SIZE, c->chunk_y * CHUNK_SIZE, c->chunk_z * CHUNK_SIZE});
 
 				#ifndef ME_ENABLED
 					Terrain::WorldProvider::generate(c);
 				#else
-
+					
 				#endif
 
-
+        		g_World->chunkMan->getChunks().emplace(v, std::move(c));
+				sceKernelDelayThread(20 * 1000);
 			}
 		}
 
