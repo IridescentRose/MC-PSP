@@ -155,8 +155,8 @@ void Minecraft::Client::World::Init()
 	mei = (volatile struct me_struct*)(reinterpret_cast< void * >( reinterpret_cast<u32>( (mei) ) | 0x40000000 ) );
 
 	InitME(mei);
-	//sceKernelDcacheWritebackInvalidateAll();
-	//BeginME(mei, (int)(&ChunkMan2), (int)g_World, -1, 0, -1, 0);
+	sceKernelDcacheWritebackInvalidateAll();
+	
 
 
 
@@ -231,18 +231,8 @@ void Minecraft::Client::World::Update(float dt)
 				ch->blocks[relPos.x][relPos.y][relPos.z].ID = 0; //Air
 				ch->blocks[relPos.x][relPos.y][relPos.z].meta = 0; //Air
 
-
-				bool check = false;
-				for(int i = 0; i < ch->delta.size(); i++){
-					if(ch->delta.at(i).position == mc::Vector3i(relPos.x, relPos.y, relPos.z)) {
-						check = true;
-						ch->delta.at(i) = {mc::Vector3i(relPos.x, relPos.y, relPos.z), {0, 0}};
-					}
-				}
-
-				if(!check){
-					ch->delta.push_back({mc::Vector3i(relPos.x, relPos.y, relPos.z), {0, 0}});
-				}
+				ch->delta.push_back({mc::Vector3i(relPos.x, relPos.y, relPos.z), {0, 0}});
+				
 			
 
 				ch->updateMesh(chunkMan);
@@ -291,19 +281,7 @@ void Minecraft::Client::World::Update(float dt)
 				if(ch->blocks[relPos.x][relPos.y][relPos.z].ID == 0){
 					ch->blocks[relPos.x][relPos.y][relPos.z].ID = b->blk.ID;
 					ch->blocks[relPos.x][relPos.y][relPos.z].meta = b->blk.meta;
-
-
-					bool check = false;
-					for(int i = 0; i < ch->delta.size(); i++){
-						if(ch->delta.at(i).position == mc::Vector3i(relPos.x, relPos.y, relPos.z)) {
-							check = true;
-							ch->delta.at(i) = {mc::Vector3i(relPos.x, relPos.y, relPos.z), b->blk};
-						}
-					}
-
-					if(!check){
-						ch->delta.push_back({mc::Vector3i(relPos.x, relPos.y, relPos.z), b->blk});
-					}
+					ch->delta.push_back({mc::Vector3i(relPos.x, relPos.y, relPos.z), b->blk});
 				}
 
 
@@ -613,7 +591,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		//CPU ONLY!
 		for(mc::Vector3i& v : excess){
 			g_World->chunkMan->unloadChunk(v.x, v.y, v.z);
-			sceKernelDelayThread(160 * 1000);
+			sceKernelDelayThread(20 * 1000);
   		}
 		excess.clear();
 
@@ -628,29 +606,50 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
         		c->generateData();
 
         		g_World->chunkMan->getChunks().emplace(v, std::move(c));
-				sceKernelDelayThread(160 * 1000);
+				sceKernelDelayThread(20 * 1000);
 				//ME
-				//g_World->chunkMan->loadChunkData(v.x, v.y, v.z);
+				c->m_aabb.update({c->chunk_x * CHUNK_SIZE, c->chunk_y * CHUNK_SIZE, c->chunk_z * CHUNK_SIZE});
+
+				#ifndef ME_ENABLED
+					Terrain::WorldProvider::generate(c);
+				#else
+
+				#endif
+
+
 			}
 		}
-		/*
+
+
+		
 		for(mc::Vector3i& v : needed){
-			g_World->chunkMan->loadChunkData2(v.x, v.y, v.z);
-		}*/
+			//ME
+			#ifndef ME_ENABLED
+				g_World->chunkMan->loadChunkData2(v.x, v.y, v.z);
+			#else
+			
+			#endif
+			sceKernelDelayThread(20 * 1000);
+		}
 
 		//CPU ONLY
 		for(mc::Vector3i& v : needed){
 			g_World->chunkMan->loadChunkData3(v.x, v.y, v.z);
-			sceKernelDelayThread(160 * 1000);
+			sceKernelDelayThread(20 * 1000);
 		}
 
 
-		/* ME
 		for(mc::Vector3i& v : needed){
 			if(g_World->chunkMan->chunkExists(v.x, v.y, v.z) && !g_World->chunkMan->getChunk(v.x, v.y, v.z)->hasMesh){
-				g_World->chunkMan->loadChunkMesh(v.x, v.y, v.z);
+
+				#ifndef ME_ENABLED
+					g_World->chunkMan->loadChunkMesh(v.x, v.y, v.z);
+				#else
+
+				#endif
+				
 			}
-		}*/
+		}
 
 
 		last_pos = center;
