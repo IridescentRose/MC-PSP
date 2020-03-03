@@ -480,6 +480,8 @@ Chunk::Chunk() : m_aabb({CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE})
 	chunk_x = 0;
 	chunk_y = 0;
 	chunk_z = 0;
+
+	#ifndef ME_ENABLED
 	for (int x = 0; x < 16; x++) {
 		for (int y = 0; y < 16; y++) {
 			for (int z = 0; z < 16; z++) {
@@ -488,6 +490,7 @@ Chunk::Chunk() : m_aabb({CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE})
 		}
 	}
 	sceKernelDcacheWritebackInvalidateAll();
+	#endif
 	hasMesh = false;
 	animPos = -8.0f;
 	firstShow = true;

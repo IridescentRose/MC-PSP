@@ -611,53 +611,45 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		//Get rid of excesses!
 
 		//CPU ONLY!
-		//for(mc::Vector3i& v : excess){
-		//	g_World->chunkMan->unloadChunk(v.x, v.y, v.z);
-  		//}
-		//excess.clear();
+		for(mc::Vector3i& v : excess){
+			g_World->chunkMan->unloadChunk(v.x, v.y, v.z);
+			sceKernelDelayThread(160 * 1000);
+  		}
+		excess.clear();
 
-		/* ME
+		//ME
 		for(mc::Vector3i& v : needed){
 			if(!g_World->chunkMan->chunkExists(v.x, v.y, v.z)){
-				g_World->chunkMan->loadChunkData(v.x, v.y, v.z);
+				Terrain::Chunk* c = new Terrain::Chunk();
+        		c->chunk_x = v.x;
+        		c->chunk_y = v.y;
+        		c->chunk_z = v.z;
+
+        		c->generateData();
+
+        		g_World->chunkMan->getChunks().emplace(v, std::move(c));
+				sceKernelDelayThread(160 * 1000);
+				//ME
+				//g_World->chunkMan->loadChunkData(v.x, v.y, v.z);
 			}
 		}
-
+		/*
 		for(mc::Vector3i& v : needed){
 			g_World->chunkMan->loadChunkData2(v.x, v.y, v.z);
 		}*/
 
 		//CPU ONLY
-		//for(mc::Vector3i& v : needed){
-		//	g_World->chunkMan->loadChunkData3(v.x, v.y, v.z);
-		//}
+		for(mc::Vector3i& v : needed){
+			g_World->chunkMan->loadChunkData3(v.x, v.y, v.z);
+			sceKernelDelayThread(160 * 1000);
+		}
 
 
 		/* ME
 		for(mc::Vector3i& v : needed){
 			if(g_World->chunkMan->chunkExists(v.x, v.y, v.z) && !g_World->chunkMan->getChunk(v.x, v.y, v.z)->hasMesh){
 				g_World->chunkMan->loadChunkMesh(v.x, v.y, v.z);
-				if(g_World->chunkMan->chunkExists(v.x + 1, v.y, v.z)){
-					g_World->chunkMan->updateChunk(v.x + 1, v.y, v.z);
-				}
-				if(g_World->chunkMan->chunkExists(v.x - 1, v.y, v.z)){
-					g_World->chunkMan->updateChunk(v.x - 1, v.y, v.z);
-				}
-				if(g_World->chunkMan->chunkExists(v.x, v.y + 1, v.z)){
-					g_World->chunkMan->updateChunk(v.x, v.y + 1, v.z);
-				}
-				if(g_World->chunkMan->chunkExists(v.x, v.y - 1, v.z)){
-					g_World->chunkMan->updateChunk(v.x, v.y - 1, v.z);
-				}
-
-				if(g_World->chunkMan->chunkExists(v.x, v.y, v.z + 1)){
-					g_World->chunkMan->updateChunk(v.x, v.y, v.z + 1);
-				}
-				if(g_World->chunkMan->chunkExists(v.x, v.y, v.z - 1)){
-					g_World->chunkMan->updateChunk(v.x, v.y, v.z - 1);
-				}
 			}
-			
 		}*/
 
 
