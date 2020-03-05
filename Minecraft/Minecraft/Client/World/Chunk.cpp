@@ -811,6 +811,8 @@ void Chunk::loadCheck(){
 				blocks[temp.position.x][temp.position.y][temp.position.z].meta = meta;
 			}
 
+			delta.push_back(temp);
+
 		}
 
 		file.close();
@@ -961,11 +963,9 @@ void Chunk::tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> tex
 
 		ChunkBlock cblk = man->getBlock(blockFacing.x + chunk_x * CHUNK_SIZE,blockFacing.y + chunk_y * CHUNK_SIZE, blockFacing.z + chunk_z * CHUNK_SIZE);
 
-
-		if(cblk.ID == 0 && cblk.meta == 1){
-			return;
+		if(cblk.meta == 1){
+			cblk.meta = 0;
 		}
-
 
 		Block* blk = BlockData::InstancePointer()->block_data[cblk];
 

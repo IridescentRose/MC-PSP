@@ -125,15 +125,31 @@ namespace Minecraft::Terrain{
 
     class Chunk;
     class ChunkManager;
+
+    int getBiome(int x, int z);
+    int getHeight(int x, int z, NoiseParameters params);
+    void makeCavesOres(Chunk* c, int x, int rX, int y, int rY, int z, int rZ, int height);
+    void makeFoliage(Chunk* c, int x, int rX, int y, int rY, int z, int rZ, BiomeProfile thisBiome);
+
+    struct me_generator_struct {
+        Chunk* c;
+        int biomeMap[16][16];
+        int heightMap[16][16];
+        std::map<int, BiomeProfile> bioMap;
+        int seed;
+    };
+
     class WorldProvider{
         public:
 
         static void generate(Chunk* chunk);
+        static int GenerateME(int chunk);
         static void generateStructures(Chunk* chunk, ChunkManager* man);
 
         static int seed;
         static FastNoise* noise;
         static std::string worldName;
+        
     };
 
     extern NoiseParameters defaultNoiseParams;
