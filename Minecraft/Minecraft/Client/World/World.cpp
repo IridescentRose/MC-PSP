@@ -40,6 +40,8 @@ inline void *malloc_64(int size)
 
 void Minecraft::Client::World::Init()
 {
+	killReceived = false;
+	readyForKill = false;
 	sun = new Rendering::Sun();
 	moon = new Rendering::Moon();
 	sky = new Rendering::Sky();
@@ -136,6 +138,8 @@ void Minecraft::Client::World::Init()
 
 
 	genning = true;
+	tUpReady = false;
+	cUpReady = false;
 	chunkMan = new Terrain::ChunkManager();
 	
 
@@ -162,6 +166,9 @@ void Minecraft::Client::World::Init()
 
 	chunkManagerThread = sceKernelCreateThread("ChunkManagementThread", chunkManagement, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(chunkManagerThread, 0, 0);
+	frameTimer = 0;
+	fps = 0;
+	frameCounter = 0;
 }
 
 void Minecraft::Client::World::Cleanup()
@@ -177,7 +184,8 @@ void Minecraft::Client::World::Cleanup()
 	delete timeData;
 
 	for(const auto& [key, chnk] : chunkMan->getChunks() ){
-		chunkMan->unloadChunk(chnk->chunk_x, chnk->chunk_y, chnk->chunk_z);
+		if(chunkMan->chunkExists(key.x, key.y, key.z))
+			chunkMan->unloadChunk(chnk->chunk_x, chnk->chunk_y, chnk->chunk_z);
 	}
 
 	rmg->Cleanup();
@@ -196,6 +204,15 @@ void Minecraft::Client::World::Cleanup()
 
 void Minecraft::Client::World::Update(float dt)
 {
+	frameTimer += dt;
+	frameCounter++;
+
+	if(frameTimer >= 1){
+		fps = frameCounter;
+		frameTimer = 0;
+		frameCounter = 0;
+	}
+
 	if(!genning){
 
 	if(glbl_loadingscreen != NULL){
@@ -204,7 +221,6 @@ void Minecraft::Client::World::Update(float dt)
 		glbl_loadingscreen = NULL;
 	}
 
-	fps = 1.0f / dt;
 	rmg->FixedUpdate();
 
 	for(const auto& [key, chnk] : chunkMan->getChunks() ){
@@ -532,11 +548,13 @@ void Minecraft::Client::World::Draw()
 
 int Minecraft::Client::World::tickUpdate(SceSize args, void* argp)
 {
-	while (true) {
+	while (!g_World->killReceived) {
 		g_World->FixedUpdate();
 		sceKernelDelayThread(1000 * 50); //1000 microseconds in a millisecond, and update 20 times per second, so 50ms
 	}
 
+	g_World->tUpReady = true;
+	g_World->readyForKill = g_World->cUpReady && g_World->tUpReady;
 	return 0;
 }
 
@@ -549,7 +567,7 @@ int Minecraft::Client::World::ChunkMan2(int gWorld){
 int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 {	
 	mc::Vector3i last_pos = mc::Vector3i(0, -1, 0);
-	while(true){
+	while(!g_World->killReceived){
 
 		mc::Vector3i center = mc::Vector3i((-g_World->p->getPosition().x) / 16, (g_World->p->getPosition().y) / 16, (-g_World->p->getPosition().z) / 16);
 		
@@ -625,7 +643,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 					}
 				}
 				if(!g_World->genning)
-					sceKernelDelayThread(20 * 1000);
+					sceKernelDelayThread(10 * 1000);
 
         		for(int x = 0; x < CHUNK_SIZE; x++){
             		for(int z = 0; z < CHUNK_SIZE; z++){
@@ -635,7 +653,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
         		}
 
 				if(!g_World->genning)
-					sceKernelDelayThread(20 * 1000);
+					sceKernelDelayThread(10 * 1000);
 				
 				str.c = c;
 				str.bioMap = Terrain::bioMap;
@@ -658,7 +676,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 				}
 
 				if(!g_World->genning)
-					sceKernelDelayThread(20 * 1000);
+					sceKernelDelayThread(10 * 1000);
 
 				for(int x = 0; x < CHUNK_SIZE; x++){
 					for(int z = 0; z < CHUNK_SIZE; z++){
@@ -675,24 +693,23 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 
         		g_World->chunkMan->getChunks().emplace(v, std::move(c));
 				if(!g_World->genning)
-					sceKernelDelayThread(16 * 1000);
+					sceKernelDelayThread(7 * 1000);
 			}
 		}
 
 
 		
-		for(mc::Vector3i& v : needed){
-			// g_World->chunkMan->loadChunkData2(v.x, v.y, v.z);
-			
+		for(mc::Vector3i& v : needed){			
+			g_World->chunkMan->loadChunkData2(v.x, v.y, v.z);
 			if(!g_World->genning)
-				sceKernelDelayThread(16 * 1000);
+				sceKernelDelayThread(8 * 1000);
 		}
 
 		//CPU ONLY
 		for(mc::Vector3i& v : needed){
 			g_World->chunkMan->loadChunkData3(v.x, v.y, v.z);
 			if(!g_World->genning)
-				sceKernelDelayThread(16 * 1000);
+				sceKernelDelayThread(8 * 1000);
 		}
 
 
@@ -701,7 +718,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 				g_World->chunkMan->loadChunkMesh(v.x, v.y, v.z);
 			
 				if(!g_World->genning)
-					sceKernelDelayThread(16 * 1000);
+					sceKernelDelayThread(32 * 1000);
 				
 			}
 		}
@@ -712,6 +729,12 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		g_World->genning = false;
 		sceKernelDelayThread(50 * 1000);
 	}
+
+			#ifdef ME_ENABLED
+				KillME(mei);
+			#endif
+	g_World->cUpReady = true;
+	g_World->readyForKill = g_World->cUpReady && g_World->tUpReady;
 
 	return 0;
 }

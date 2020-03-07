@@ -2,6 +2,7 @@
 #include <Shadow/Utils/Logger.h>
 #include <Shadow/System/Input.h>
 #include <Shadow/System/Ram.h>
+#include "ME/me.h"
 #include <sstream>
 #include <Shadow/Graphics/RenderManager.h>
 
@@ -67,7 +68,12 @@ namespace Minecraft::Client {
 		g_World->Update(dt);
 
 		if(System::Input::KeyPressed(PSP_CTRL_START)){
+			g_World->killReceived = true;
+			while(!g_World->readyForKill){
+				sceKernelDelayThread(50 * 1000);
+			}
 			sManager->PopState();
+
 		}
 		
 	}

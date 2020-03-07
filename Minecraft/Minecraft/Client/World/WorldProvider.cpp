@@ -626,6 +626,115 @@ namespace Minecraft::Terrain{
 
 		return 0;
 	}
+
+	static int GenerateStructME(int chunk){
+
+		me_generate_struct_struct* gen = (me_generate_struct_struct*)chunk;
+
+		int rX = gen->c->chunk_x * CHUNK_SIZE;
+		int rY = gen->c->chunk_y * CHUNK_SIZE;
+		int rZ = gen->c->chunk_z * CHUNK_SIZE;
+
+		if(rX >= 0 && rY >= 0 && rZ >= 0){
+			for(int x = 0; x < CHUNK_SIZE; x++){
+            	for(int z = 0; z < CHUNK_SIZE; z++){
+
+					if(gen->map[x][z].type == 1){
+						for(int i = 0; i < 4 + gen->map[x][z].tall; i++){
+														
+							if(i >= 1 + gen->map[x][z].tall && i < 3 + gen->map[x][z].tall){
+								for(int x2 = -2; x2 <= 2; x2++){
+									for(int z2 = -2; z2 <= 2; z2++){
+										gen->man->setBlock(rX + x + x2, gen->heightMap[x][z] + 3 + i, rZ + z + z2, {18, 0});
+									}
+								}
+							}else if(i >= 3 + gen->map[x][z].tall){
+								for(int x2 = -1; x2 <= 1; x2++){
+									for(int z2 = -1; z2 <= 1; z2++){
+										gen->man->setBlock(rX + x + x2, gen->heightMap[x][z] + 3 + i, rZ + z + z2, {18, 0});
+									}
+								}
+							}
+							gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + i, rZ + z, {17, 0});
+						}
+						gen->man->setBlock(rX + x + 1, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z, {18, 0});
+						gen->man->setBlock(rX + x - 1, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z, {18, 0});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z + 1, {18, 0});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z - 1, {18, 0});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z, {18, 0});
+
+						continue;
+					}				
+										
+					if(gen->map[x][z].type == 2){
+						//Birch
+						for(int i = 0; i < 5 + gen->map[x][z].tall; i++){
+										
+							if(i >= 2 + gen->map[x][z].tall && i < 4 + gen->map[x][z].tall){
+								for(int x2 = -2; x2 <= 2; x2++){
+									for(int z2 = -2; z2 <= 2; z2++){
+										gen->man->setBlock(rX + x + x2, gen->heightMap[x][z] + 3 + i, rZ + z + z2, {18, 2});
+									}
+								}
+							}else if(i >= 4 + gen->map[x][z].tall){
+								for(int x2 = -1; x2 <= 1; x2++){
+									for(int z2 = -1; z2 <= 1; z2++){
+										gen->man->setBlock(rX + x + x2, gen->heightMap[x][z] + 3 + i, rZ + z + z2, {18, 2});
+									}
+								}
+							}
+							gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + i, rZ + z, {17, 2});
+						}
+						gen->man->setBlock(rX + x + 1, gen->heightMap[x][z] + 3 + 5 + gen->map[x][z].tall, rZ + z, {18, 2});
+						gen->man->setBlock(rX + x - 1, gen->heightMap[x][z] + 3 + 5 + gen->map[x][z].tall, rZ + z, {18, 2});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 5 + gen->map[x][z].tall, rZ + z + 1, {18, 2});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 5 + gen->map[x][z].tall, rZ + z - 1, {18, 2});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 5 + gen->map[x][z].tall, rZ + z, {18, 2});
+
+						continue;					
+					}
+					if(gen->map[x][z].type == 3){
+						//Spruce
+						for(int i = 0; i < 5 + gen->map[x][z].tall; i++){
+							if(i == 1 + gen->map[x][z].tall){
+								for(int x2 = -2; x2 <= 2; x2++){
+									for(int z2 = -2; z2 <= 2; z2++){
+										gen->man->setBlock(rX + x + x2, gen->heightMap[x][z] + 3 + i, rZ + z + z2, {18, 1});
+									}
+								}
+							}else if(i == 2 + gen->map[x][z].tall){
+								for(int x2 = -1; x2 <= 1; x2++){
+									for(int z2 = -1; z2 <= 1; z2++){
+										gen->man->setBlock(rX + x + x2, gen->heightMap[x][z] + 3 + i, rZ + z + z2, {18, 1});
+									}
+								}
+							}
+							gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + i, rZ + z, {17, 1});
+						}
+
+						gen->man->setBlock(rX + x + 1, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z, {18, 1});
+						gen->man->setBlock(rX + x - 1, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z, {18, 1});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z + 1, {18, 1});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z - 1, {18, 1});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z, {18, 1});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 5 + gen->map[x][z].tall, rZ + z, {18, 1});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z, {18, 1});
+
+						continue;
+					}
+					
+					if(gen->map[x][z].type == 4){
+						//Cactus
+						for(int i = 0; i < ((rX + x - 1) * (rZ + z + 1)) % 3 + 1; i++){
+							gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + i, rZ + z, {81, 0});
+						}
+					}			
+				}
+			}
+		}
+		return 0;
+	}
+
     
 
 	void WorldProvider::generate(Chunk* c){

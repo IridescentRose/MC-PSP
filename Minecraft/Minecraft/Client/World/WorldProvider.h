@@ -139,11 +139,24 @@ namespace Minecraft::Terrain{
         int seed;
     };
 
+    struct TreeData{
+        int type;
+        int tall;
+    };
+
+    struct me_generate_struct_struct {
+        Chunk* c;
+        ChunkManager* man;
+        TreeData map[16][16];
+        int heightMap[16][16];
+    };
+
     class WorldProvider{
         public:
 
         static void generate(Chunk* chunk);
         static int GenerateME(int chunk);
+        static int GenerateStructME(int chunk);
         static void generateStructures(Chunk* chunk, ChunkManager* man);
 
         static int seed;
