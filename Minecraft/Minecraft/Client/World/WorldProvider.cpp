@@ -18,7 +18,7 @@ namespace Minecraft::Terrain{
     std::string WorldProvider::worldName = "New World";
 
 
-	int getHeight(int x, int z, NoiseParameters noiseParams = defaultNoiseParams){
+	int getHeight(int x, int z, NoiseParameters noiseParams){
 
    		if (x < 0 || z < 0) {
         	return 64 - 1;
@@ -162,7 +162,7 @@ namespace Minecraft::Terrain{
 							if(rands > 0.65f && rY +y > WATER_LEVEL && (thisBiome.type == BIOME_Plains || thisBiome.type == BIOME_Sunflower_Plains || thisBiome.type == BIOME_Savanna_Plateau || thisBiome.type == BIOME_Savanna || thisBiome.type == BIOME_Shattered_Savanna || thisBiome.type == BIOME_FLOWER_FOREST)){
 								if(thisBiome.type == BIOME_FLOWER_FOREST){
 									c->blocks[x][y][z].ID = 38;
-									c->blocks[x][y][z].meta = (int)vfpu_randf(0, 9);
+									c->blocks[x][y][z].meta = 0;
 									if(c->blocks[x][y][z].meta == 9){
 										c->blocks[x][y][z].meta = 8;
 									}
@@ -176,9 +176,9 @@ namespace Minecraft::Terrain{
 											c->blocks[x][y][z].ID = 31;
 											c->blocks[x][y][z].meta = 1;
 										}else{
-											c->blocks[x][y][z].ID = 37 + vfpu_randf(0, 1.2);
+											c->blocks[x][y][z].ID = 37 + 0;
 											if(c->blocks[x][y][z].ID == 38){
-												c->blocks[x][y][z].meta = (int)vfpu_randf(0, 9);
+												c->blocks[x][y][z].meta = 0;
 												if(c->blocks[x][y][z].meta == 1){
 													c->blocks[x][y][z].meta = 0;
 													c->blocks[x][y][z].ID = 0;
@@ -207,7 +207,7 @@ namespace Minecraft::Terrain{
 								}else{
 
 									if(thisBiome.type == BIOME_TAIGA || thisBiome.type == BIOME_Taiga_Hills || thisBiome.type == BIOME_Taiga_Mountains || thisBiome.type == BIOME_Giant_Tree_Taiga || thisBiome.type == BIOME_Giant_Tree_Taiga_Hills || thisBiome.type == BIOME_Giant_Spruce_Taiga || thisBiome.type == BIOME_Giant_Spruce_Taiga_Hills){
-										int randomChoice = vfpu_randf(0, 12);
+										int randomChoice = vfpu_randf(0, 12.0f);
 
 										if(randomChoice >= 0 && randomChoice < 6){
 											c->blocks[x][y][z].ID = 31;
@@ -232,7 +232,7 @@ namespace Minecraft::Terrain{
 											c->blocks[x][y][z].ID = 31;
 											c->blocks[x][y][z].meta = 1;
 										}else{
-											c->blocks[x][y][z].ID = 37 + vfpu_randf(0, 1.2);
+											c->blocks[x][y][z].ID = 37 + 0;
 											c->blocks[x][y][z].meta = 0;
 										}
 									}
@@ -280,7 +280,7 @@ namespace Minecraft::Terrain{
 
 						if(variance > 0.85f && c->blocks[x][y][z].ID != 8 && rY + y < 63 && rY + y < height){
 							if(rY + y < 32){
-								int rand = vfpu_randf(0, 8);
+								int rand = 0;
 
 								if(rand < 1){
 									c->blocks[x][y][z].ID = 21;
@@ -341,19 +341,6 @@ namespace Minecraft::Terrain{
 	}
 
 	int getBiome(int x, int z){
-
-
-		/*    
-    if(value2 == 1.0){
-         //Lakes
-        float deter = simplex3d(p3*64.0 + 12.0);
-        deter *= deter * deter * 10.0;
-        if(deter > 0.75){
-            value2 = 0.7f;
-        }
-    }
- 
-		*/
 
 	//LAND MAP
 
@@ -571,6 +558,184 @@ namespace Minecraft::Terrain{
 	}
 
 	}
+
+	int WorldProvider::GenerateME(int chnk){
+
+		me_generator_struct* gen = (me_generator_struct*)chnk;
+
+		Chunk* c = gen->c;
+
+		int rX = c->chunk_x * CHUNK_SIZE;
+		int rY = c->chunk_y * CHUNK_SIZE;
+		int rZ = c->chunk_z * CHUNK_SIZE;
+
+		//Clear data
+		for(int x = 0; x < CHUNK_SIZE; x++){
+			for(int z = 0; z < CHUNK_SIZE; z++){
+				for(int y = 0; y < CHUNK_SIZE; y++){
+					c->blocks[x][y][z].ID = 0;
+					c->blocks[x][y][z].meta = 0;
+					c->blocks[x][y][z].biomeID = 0;
+				}
+			}
+		}
+
+
+		if(!(rX >= 0 && rY >= 0 && rZ >= 0)) {
+			return -1;
+		}
+		for(int x = 0; x < CHUNK_SIZE; x++){
+			for(int z = 0; z < CHUNK_SIZE; z++){
+
+				BiomeProfile thisBiome = gen->bioMap[gen->biomeMap[x][z]];
+		    	for(int y = 0; y < CHUNK_SIZE; y++){
+					if(rY + y <= gen->heightMap[x][z] && rY + y > 0){
+					    c->blocks[x][y][z].ID = 1;
+					    c->blocks[x][y][z].meta = 0;
+				    }else if(rY + y > gen->heightMap[x][z] && rY + y < gen->heightMap[x][z] + 2){
+						c->blocks[x][y][z].ID = thisBiome.midBlock.ID;
+						c->blocks[x][y][z].meta = thisBiome.midBlock.meta;
+				    }else if(rY + y == gen->heightMap[x][z] + 2){
+						c->blocks[x][y][z].ID = thisBiome.topBlock.ID;
+						c->blocks[x][y][z].meta = thisBiome.topBlock.meta;
+						if(rY + y < WATER_LEVEL){
+						c->blocks[x][y][z].ID = thisBiome.underBlock.ID;
+						c->blocks[x][y][z].meta = thisBiome.underBlock.meta;
+						}
+				    }
+					else if(rY + y == gen->heightMap[x][z] + 3 && rY + y > WATER_LEVEL){
+						c->blocks[x][y][z].ID = thisBiome.aboveTop.ID;
+						c->blocks[x][y][z].meta = thisBiome.aboveTop.meta;
+						//makeFoliage(c, x, rX, y, rY, z, rZ, thisBiome);
+						
+				    }else if(rY + y == 0){
+						c->blocks[x][y][z].ID = 7;
+						c->blocks[x][y][z].meta = 0;	
+					}else{
+						c->blocks[x][y][z].ID = 0;
+						c->blocks[x][y][z].meta = 0;
+				    }
+					if(rY + y <= WATER_LEVEL && c->blocks[x][y][z].ID == 0){
+						c->blocks[x][y][z].ID = 8;
+					}
+					c->blocks[x][y][z].biomeID = gen->biomeMap[x][z];
+					//makeCavesOres(c, x, rX, y, rY, z, rZ, heightMap[x][z]);
+			    }
+		    }	
+	    }
+
+		return 0;
+	}
+
+	static int GenerateStructME(int chunk){
+
+		me_generate_struct_struct* gen = (me_generate_struct_struct*)chunk;
+
+		int rX = gen->c->chunk_x * CHUNK_SIZE;
+		int rY = gen->c->chunk_y * CHUNK_SIZE;
+		int rZ = gen->c->chunk_z * CHUNK_SIZE;
+
+		if(rX >= 0 && rY >= 0 && rZ >= 0){
+			for(int x = 0; x < CHUNK_SIZE; x++){
+            	for(int z = 0; z < CHUNK_SIZE; z++){
+
+					if(gen->map[x][z].type == 1){
+						for(int i = 0; i < 4 + gen->map[x][z].tall; i++){
+														
+							if(i >= 1 + gen->map[x][z].tall && i < 3 + gen->map[x][z].tall){
+								for(int x2 = -2; x2 <= 2; x2++){
+									for(int z2 = -2; z2 <= 2; z2++){
+										gen->man->setBlock(rX + x + x2, gen->heightMap[x][z] + 3 + i, rZ + z + z2, {18, 0});
+									}
+								}
+							}else if(i >= 3 + gen->map[x][z].tall){
+								for(int x2 = -1; x2 <= 1; x2++){
+									for(int z2 = -1; z2 <= 1; z2++){
+										gen->man->setBlock(rX + x + x2, gen->heightMap[x][z] + 3 + i, rZ + z + z2, {18, 0});
+									}
+								}
+							}
+							gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + i, rZ + z, {17, 0});
+						}
+						gen->man->setBlock(rX + x + 1, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z, {18, 0});
+						gen->man->setBlock(rX + x - 1, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z, {18, 0});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z + 1, {18, 0});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z - 1, {18, 0});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z, {18, 0});
+
+						continue;
+					}				
+										
+					if(gen->map[x][z].type == 2){
+						//Birch
+						for(int i = 0; i < 5 + gen->map[x][z].tall; i++){
+										
+							if(i >= 2 + gen->map[x][z].tall && i < 4 + gen->map[x][z].tall){
+								for(int x2 = -2; x2 <= 2; x2++){
+									for(int z2 = -2; z2 <= 2; z2++){
+										gen->man->setBlock(rX + x + x2, gen->heightMap[x][z] + 3 + i, rZ + z + z2, {18, 2});
+									}
+								}
+							}else if(i >= 4 + gen->map[x][z].tall){
+								for(int x2 = -1; x2 <= 1; x2++){
+									for(int z2 = -1; z2 <= 1; z2++){
+										gen->man->setBlock(rX + x + x2, gen->heightMap[x][z] + 3 + i, rZ + z + z2, {18, 2});
+									}
+								}
+							}
+							gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + i, rZ + z, {17, 2});
+						}
+						gen->man->setBlock(rX + x + 1, gen->heightMap[x][z] + 3 + 5 + gen->map[x][z].tall, rZ + z, {18, 2});
+						gen->man->setBlock(rX + x - 1, gen->heightMap[x][z] + 3 + 5 + gen->map[x][z].tall, rZ + z, {18, 2});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 5 + gen->map[x][z].tall, rZ + z + 1, {18, 2});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 5 + gen->map[x][z].tall, rZ + z - 1, {18, 2});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 5 + gen->map[x][z].tall, rZ + z, {18, 2});
+
+						continue;					
+					}
+					if(gen->map[x][z].type == 3){
+						//Spruce
+						for(int i = 0; i < 5 + gen->map[x][z].tall; i++){
+							if(i == 1 + gen->map[x][z].tall){
+								for(int x2 = -2; x2 <= 2; x2++){
+									for(int z2 = -2; z2 <= 2; z2++){
+										gen->man->setBlock(rX + x + x2, gen->heightMap[x][z] + 3 + i, rZ + z + z2, {18, 1});
+									}
+								}
+							}else if(i == 2 + gen->map[x][z].tall){
+								for(int x2 = -1; x2 <= 1; x2++){
+									for(int z2 = -1; z2 <= 1; z2++){
+										gen->man->setBlock(rX + x + x2, gen->heightMap[x][z] + 3 + i, rZ + z + z2, {18, 1});
+									}
+								}
+							}
+							gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + i, rZ + z, {17, 1});
+						}
+
+						gen->man->setBlock(rX + x + 1, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z, {18, 1});
+						gen->man->setBlock(rX + x - 1, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z, {18, 1});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z + 1, {18, 1});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z - 1, {18, 1});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z, {18, 1});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 5 + gen->map[x][z].tall, rZ + z, {18, 1});
+						gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + 4 + gen->map[x][z].tall, rZ + z, {18, 1});
+
+						continue;
+					}
+					
+					if(gen->map[x][z].type == 4){
+						//Cactus
+						for(int i = 0; i < ((rX + x - 1) * (rZ + z + 1)) % 3 + 1; i++){
+							gen->man->setBlock(rX + x, gen->heightMap[x][z] + 3 + i, rZ + z, {81, 0});
+						}
+					}			
+				}
+			}
+		}
+		return 0;
+	}
+
+    
 
 	void WorldProvider::generate(Chunk* c){
 

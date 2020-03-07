@@ -17,7 +17,7 @@
 
 using namespace Shadow::Utils;
 using namespace Shadow::Graphics;
-
+using namespace Minecraft::Terrain;
 namespace Minecraft::Client {
 	class Player;
 	
@@ -60,10 +60,16 @@ namespace Minecraft::Client {
 		Timer tickTimer;
 		Terrain::ChunkManager* chunkMan;
 		Player* p;
-		float fps;
+		int fps;
+		int frameCounter;
+		float frameTimer;
 
 		std::queue<Event*> eventBus;
 		TickTime* timeData;
+		bool killReceived;
+		bool tUpReady;
+		bool cUpReady;
+		bool readyForKill;
 	private:
 		SceUID tickUpdateThread;
 		SceUID chunkManagerThread;
@@ -79,6 +85,8 @@ namespace Minecraft::Client {
 
 		static int tickUpdate(SceSize args, void* argp);
 		static int chunkManagement(SceSize args, void* argp);
+
+		static int ChunkMan2(int z);
 
 		int lastLevel;
 

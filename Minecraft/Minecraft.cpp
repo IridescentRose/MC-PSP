@@ -18,7 +18,7 @@ using namespace Shadow;
 
 PSP_MODULE_INFO("Minecraft", 0, VERSION_MAJOR, VERSION_MINOR);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_VFPU|THREAD_ATTR_USER);
-PSP_HEAP_SIZE_KB(-1024);
+PSP_HEAP_SIZE_KB(-256);
 
 void initGame(){
 SetupCallbacks();
