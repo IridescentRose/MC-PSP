@@ -8,7 +8,7 @@ v0.3 IS HERE! The game now has infinite worlds, building, and will be gaining mo
 
 ## How to Install
 
-1.) Download the installer (Minecraft-PSP.exe) from v0.3 release: <https://github.com/NT-Bourgeois-Iridescence-Technologies/MC-PSP/releases/tag/v0.3>
+1.) Download the installer (Minecraft-PSP.exe) from v0.4 release: <https://github.com/NT-Bourgeois-Iridescence-Technologies/MC-PSP/releases/tag/v0.4>
 
 Note: Some antivirus's false flag this as a Trojan, but I assure you that there is no harm. If you wish to view the install script, look here: <https://gist.github.com/NT-Bourgeois-Iridescence-Technologies/9358ff678038f9cfac0572b0f015d06a>
 
