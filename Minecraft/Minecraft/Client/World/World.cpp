@@ -41,6 +41,7 @@ inline void *malloc_64(int size)
 
 void Minecraft::Client::World::Init()
 {
+	std::cout << gameMode << std::endl;
 	killReceived = false;
 	readyForKill = false;
 	sun = new Rendering::Sun();
@@ -235,7 +236,7 @@ void Minecraft::Client::World::Update(float dt)
 		
 		switch(v->type){
 			case EVENT_TYPE_BREAK:{
-				if(g_World->gameMode <= 1){
+				if(g_World->gameMode <= 1 || g_World->gameMode == 4){
 
 				BlockBreakEvent* b = (BlockBreakEvent*) v;
 				mc::Vector3i pos = mc::Vector3i(b->breakPositionAbsolute.x, b->breakPositionAbsolute.y, b->breakPositionAbsolute.z);
@@ -289,7 +290,7 @@ void Minecraft::Client::World::Update(float dt)
 			}
 
 			case EVENT_TYPE_PLACE:{
-				if(g_World->gameMode <= 1){
+				if(g_World->gameMode <= 1 || g_World->gameMode == 4){
 					BlockPlaceEvent* b = (BlockPlaceEvent*) v;
 				mc::Vector3i pos = mc::Vector3i(b->placePositionAbsolute.x, b->placePositionAbsolute.y, b->placePositionAbsolute.z);
 

@@ -20,7 +20,7 @@ namespace Minecraft::Menus{
     }
 
 	void MenuState::Init(){
-        
+        gm = 0;
         BlockData::InstancePointer()->loadBlockData();
 		//Delete Logs from past launch
 		remove(Logging::logFile.c_str());

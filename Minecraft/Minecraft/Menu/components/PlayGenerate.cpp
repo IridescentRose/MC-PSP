@@ -51,7 +51,6 @@ namespace Minecraft::Menus{
         g_RenderManager.DebugPrint(240, 84, Common::g_TranslationOBJ.getText("selectWorld.enterSeed").c_str());
 
 
-        g_RenderManager.DebugPrint(240, 160, Common::g_TranslationOBJ.getText("selectWorld.gameMode").c_str());
 
 
         if(selectPosY == 0){
@@ -70,6 +69,40 @@ namespace Minecraft::Menus{
         
         g_RenderManager.DebugPrint(240, 100, seedName.c_str());
 
+
+
+        if(selectPosY == 2){
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }else{
+            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        }
+
+        std::string modeSelect;
+
+        switch(Client::g_World->gameMode){
+            case 0:{
+                modeSelect = Common::g_TranslationOBJ.getText("gameMode.survival");
+                break;
+            }
+            case 1:{
+                modeSelect = Common::g_TranslationOBJ.getText("gameMode.creative");
+                break;
+            }
+            case 2:{
+                modeSelect = Common::g_TranslationOBJ.getText("gameMode.adventure");
+                break;
+            }
+            case 3:{
+                modeSelect = Common::g_TranslationOBJ.getText("gameMode.spectator");
+                break;
+            }
+            case 4:{
+                modeSelect = Common::g_TranslationOBJ.getText("gameMode.hardcore");
+                break;
+            }
+        }
+
+        g_RenderManager.DebugPrint(240, 160, (Common::g_TranslationOBJ.getText("selectWorld.gameMode") + ": " + modeSelect).c_str());
 
         if(selectPosY == 3){
             g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
@@ -164,11 +197,22 @@ namespace Minecraft::Menus{
             if(selectPosY == 3){
                 //Generate
                 terrain_atlas = TextureUtil::LoadPng("assets/minecraft/textures/terrain_atlas.png");
+                
+                gm = Client::g_World->gameMode;
                 Client::SPClient* client = new Client::SPClient();
 						
 		        client->Init();
 
+                
+                Client::g_World->gameMode = gm;
 		        sManager->PushState(client);
+            }
+
+            if(selectPosY == 2){
+                Client::g_World->gameMode++;
+                if(Client::g_World->gameMode > 4){
+                    Client::g_World->gameMode = 0;
+                }
             }
         }
         if(Input::KeyPressed(PSP_CTRL_UP)){

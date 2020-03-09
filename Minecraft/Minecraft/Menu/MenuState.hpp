@@ -111,6 +111,7 @@ namespace Minecraft::Menus{
 
 		bool tryConnect, connected;
 
+		int gm;
 		std::string username, ipaddr;
 		float splashSize, dt, elapsed;
 
