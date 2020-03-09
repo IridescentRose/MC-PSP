@@ -170,39 +170,40 @@ namespace Minecraft {
 					s = 1.317;
 				}
 
-				velocity.x -= vfpu_sinf(DEGTORAD(-yaw)) * s;
-				velocity.z -= vfpu_cosf(DEGTORAD(-yaw)) * s;
+				velocity.x += -vfpu_sinf(DEGTORAD(-yaw)) * s * dt;
+				velocity.z += -vfpu_cosf(DEGTORAD(-yaw)) * s * dt;
 			}
 
 			if (Input::GetAnalogY() < -0.4) {
-				velocity.x -= -vfpu_sinf(DEGTORAD(-yaw)) * walkSpeed;
-				velocity.z -= -vfpu_cosf(DEGTORAD(-yaw)) * walkSpeed;
+				velocity.x += vfpu_sinf(DEGTORAD(-yaw)) * walkSpeed * dt;
+				velocity.z += vfpu_cosf(DEGTORAD(-yaw)) * walkSpeed * dt;
 			}
 
 			if (Input::GetAnalogX() < -0.4) {
-				velocity.x += -vfpu_sinf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7;
-				velocity.z += -vfpu_cosf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7;
+				velocity.x += -vfpu_sinf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt;
+				velocity.z += -vfpu_cosf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt;
 			}
 
 			if (Input::GetAnalogX() > 0.4) {
-				velocity.x += -vfpu_sinf(DEGTORAD((-yaw - 270))) * walkSpeed * 0.7;
-				velocity.z += -vfpu_cosf(DEGTORAD((-yaw - 270))) * walkSpeed * 0.7;
+				velocity.x += -vfpu_sinf(DEGTORAD((-yaw - 270))) * walkSpeed * 0.7 * dt;
+				velocity.z += -vfpu_cosf(DEGTORAD((-yaw - 270))) * walkSpeed * 0.7 * dt;
 			}
 
 			if(flyEnabled){
 				if(Input::KeyPressed(PSP_CTRL_SELECT) || Input::KeyHold(PSP_CTRL_SELECT)){
 					//Fly upwards
-					velocity.y += 5.612;
+					velocity.y += 5.612 * dt;
 				}
 				if(Input::KeyPressed(PSP_CTRL_DOWN) || Input::KeyHold(PSP_CTRL_DOWN)){
 					//Fly downwards
-					velocity.y -= 4.317;
+					velocity.y -= 4.317 *dt;
 				}
 			}
 
-			position += velocity * dt;
+			position += velocity / 4.0f;
 
-			velocity = { 0, 0, 0 };
+			velocity *= 0.9f;
+
 
 			ScePspFVector3 pos = { (float)position.x, -(float)position.y, (float)position.z };
 			sceGumTranslate(&pos);
