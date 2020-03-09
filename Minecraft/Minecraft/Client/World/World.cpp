@@ -23,6 +23,7 @@ Minecraft::Client::World::World()
 	timeData->time = 0;
 	timeData->worldAge = 0;
 	genning = true;
+	gameMode = 0;
 }
 
 Minecraft::Client::World::~World()

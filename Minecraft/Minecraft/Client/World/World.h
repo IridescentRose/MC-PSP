@@ -63,6 +63,8 @@ namespace Minecraft::Client {
 		int fps;
 		int frameCounter;
 		float frameTimer;
+	
+		int gameMode;
 
 		std::queue<Event*> eventBus;
 		TickTime* timeData;
