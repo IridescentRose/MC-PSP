@@ -205,6 +205,8 @@ namespace Minecraft::Menus{
 
                 
                 Client::g_World->gameMode = gm;
+                Client::g_World->handleGM();
+                std::cout << gm << std::endl;
 		        sManager->PushState(client);
             }
 

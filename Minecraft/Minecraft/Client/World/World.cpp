@@ -23,7 +23,7 @@ Minecraft::Client::World::World()
 	timeData->time = 0;
 	timeData->worldAge = 0;
 	genning = true;
-	gameMode = 0;
+	gameMode = 1;
 }
 
 Minecraft::Client::World::~World()
@@ -76,6 +76,10 @@ void Minecraft::Client::World::Init()
 		mc::Vector3d position;
 
 		file >> position.x >> position.y >> position.z;
+
+		file >> gameMode;
+		file >> timeData->time;
+		file >> timeData->worldAge;
 
 		p->SetPosition(position);
 
@@ -408,6 +412,15 @@ void Minecraft::Client::World::Update(float dt)
 	
 }
 
+
+void Minecraft::Client::World::handleGM(){
+	
+	if(gameMode != 1 && gameMode != 3){
+		p->toggleFly();
+	}
+
+}
+
 void Minecraft::Client::World::FixedUpdate()
 {
 	//TIME LOGIC
@@ -437,7 +450,13 @@ void Minecraft::Client::World::Save(){
 	
 	file << Terrain::WorldProvider::seed << std::endl;
 	mc::Vector3d position = p->getPosition(); 
-	file << position.x << " " << position.y << " " << position.z;
+	file << position.x << " " << position.y << " " << position.z << std::endl;
+
+
+	file << gameMode << std::endl;
+	file << timeData->time << std::endl;
+	file << timeData->worldAge << std::endl;
+
 	file.close();
 
 

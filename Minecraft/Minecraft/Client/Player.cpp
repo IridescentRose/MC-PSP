@@ -199,10 +199,13 @@ namespace Minecraft {
 					velocity.y -= 4.317 *dt;
 				}
 			}
-
-			position += velocity / 4.0f;
-
-			velocity *= 0.9f;
+			if(flyEnabled){
+				position += velocity / 4.0f;
+				velocity *= 0.9f;
+			}else{
+				position += velocity;
+				velocity = {0, 0, 0};
+			}
 
 
 			ScePspFVector3 pos = { (float)position.x, -(float)position.y, (float)position.z };
