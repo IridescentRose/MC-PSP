@@ -153,6 +153,7 @@ void Minecraft::Client::World::Init()
 	textureLavaAnimationId = TextureUtil::LoadPngTexturePack("blocks/lava_still.png");
 	animationLavaStep = true;
 
+#ifdef ME_ENABLED
 	int ret = pspSdkLoadStartModule("mediaengine.prx", PSP_MEMORY_PARTITION_KERNEL);
 
 	mei = (volatile struct me_struct*)malloc_64(sizeof(struct me_struct*));
@@ -160,7 +161,7 @@ void Minecraft::Client::World::Init()
 
 	InitME(mei);
 	sceKernelDcacheWritebackInvalidateAll();
-	
+#endif
 
 
 

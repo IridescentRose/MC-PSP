@@ -66,10 +66,10 @@ namespace Minecraft::Client {
 
 		std::queue<Event*> eventBus;
 		TickTime* timeData;
-		bool killReceived;
-		bool tUpReady;
-		bool cUpReady;
-		bool readyForKill;
+		volatile bool killReceived;
+		volatile bool tUpReady;
+		volatile bool cUpReady;
+		volatile bool readyForKill;
 	private:
 		SceUID tickUpdateThread;
 		SceUID chunkManagerThread;

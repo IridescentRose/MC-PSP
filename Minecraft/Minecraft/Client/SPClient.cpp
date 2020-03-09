@@ -68,12 +68,8 @@ namespace Minecraft::Client {
 		g_World->Update(dt);
 
 		if(System::Input::KeyPressed(PSP_CTRL_START)){
-			g_World->killReceived = true;
-			while(!g_World->readyForKill){
-				sceKernelDelayThread(50 * 1000);
-			}
-			sManager->PopState();
-
+			g_World->Save();
+			sceKernelExitGame();
 		}
 		
 	}
