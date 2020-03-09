@@ -23,7 +23,7 @@ namespace Minecraft::Client {
 		
 		updateTimer.reset();
 		player = new Player();
-		player->Init({ -32000, 69.0f, -32000}, 0, 0);
+		player->Init({ -256000, 69.0f, -256000}, 0, 0);
 		
 		//CREATIVE
 		player->toggleFly();
