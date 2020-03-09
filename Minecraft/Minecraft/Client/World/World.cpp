@@ -235,6 +235,7 @@ void Minecraft::Client::World::Update(float dt)
 		
 		switch(v->type){
 			case EVENT_TYPE_BREAK:{
+				if(g_World->gameMode <= 1){
 
 				BlockBreakEvent* b = (BlockBreakEvent*) v;
 				mc::Vector3i pos = mc::Vector3i(b->breakPositionAbsolute.x, b->breakPositionAbsolute.y, b->breakPositionAbsolute.z);
@@ -281,13 +282,15 @@ void Minecraft::Client::World::Update(float dt)
 					ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z + 1);
 					ch->updateMesh(chunkMan);
 				}
+				}
 
 
 				break;
 			}
 
 			case EVENT_TYPE_PLACE:{
-				BlockPlaceEvent* b = (BlockPlaceEvent*) v;
+				if(g_World->gameMode <= 1){
+					BlockPlaceEvent* b = (BlockPlaceEvent*) v;
 				mc::Vector3i pos = mc::Vector3i(b->placePositionAbsolute.x, b->placePositionAbsolute.y, b->placePositionAbsolute.z);
 
 				//Calculate chunk position & relative position
@@ -333,6 +336,8 @@ void Minecraft::Client::World::Update(float dt)
 					ch->updateMesh(chunkMan);
 				}
 
+				}
+				
 				break;
 			}
 
