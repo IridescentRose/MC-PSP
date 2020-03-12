@@ -9,12 +9,12 @@ struct AABB {
     {
     }
 
-    void update(const glm::vec3 &location)
+    inline void update(const glm::vec3 &location)
     {
         position = location;
     }
 
-    glm::vec3 getVN(const glm::vec3 &normal) const
+    inline glm::vec3 getVN(const glm::vec3 &normal) const
     {
         glm::vec3 res = position;
 
@@ -31,7 +31,7 @@ struct AABB {
         return res;
     }
 
-    glm::vec3 getVP(const glm::vec3 &normal) const
+    inline glm::vec3 getVP(const glm::vec3 &normal) const
     {
         glm::vec3 res = position;
 
@@ -46,6 +46,16 @@ struct AABB {
         }
 
         return res;
+    }
+
+    inline bool isColliding(const glm::vec3 &v)
+    {
+		return (v.x > position.x&& v.x < (dimensions + position).x && v.y > position.y&& v.y < (dimensions + position).y && v.z > position.z&& v.z < (dimensions + position).z);
+    }
+
+    inline bool isColliding(const AABB &aabb)
+    {
+		return isColliding(aabb.position) && isColliding(aabb.position + dimensions);
     }
 
     glm::vec3 position;

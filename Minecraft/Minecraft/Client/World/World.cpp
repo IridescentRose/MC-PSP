@@ -73,7 +73,7 @@ void Minecraft::Client::World::Init()
 	
 	if(file.is_open()){
 		file >> Terrain::WorldProvider::seed;
-		mc::Vector3d position;
+		glm::vec3 position;
 
 		file >> position.x >> position.y >> position.z;
 
@@ -251,13 +251,19 @@ void Minecraft::Client::World::Update(float dt)
 				mc::Vector3i chunkPos = mc::Vector3i(pos.x/16, pos.y/16, pos.z/16);
 				mc::Vector3i relPos = mc::Vector3i(pos.x%16, pos.y%16, pos.z%16);
 
-				Terrain::Chunk* ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z);
-				ch->blocks[relPos.x][relPos.y][relPos.z].ID = 0; //Air
-				ch->blocks[relPos.x][relPos.y][relPos.z].meta = 0; //Air
-
-				ch->delta.push_back({mc::Vector3i(relPos.x, relPos.y, relPos.z), {0, 0}});
+				chunkMan->setBlock(b->breakPositionAbsolute.x, b->breakPositionAbsolute.y, b->breakPositionAbsolute.z, {0, 0});
+				Chunk* ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z);
 				
-			
+				bool check = false;
+				for(int i = 0; i < ch->delta.size(); i++){
+					if(ch->delta.at(i).position == mc::Vector3i(relPos.x, relPos.y, relPos.z)) {
+						check = true;
+						ch->delta.at(i) = {mc::Vector3i(relPos.x, relPos.y, relPos.z), {0,0}};
+					}
+				}
+				if(!check){
+					ch->delta.push_back({mc::Vector3i(relPos.x, relPos.y, relPos.z), {0, 0}});
+				}
 
 				ch->updateMesh(chunkMan);
 
@@ -302,12 +308,22 @@ void Minecraft::Client::World::Update(float dt)
 				mc::Vector3i chunkPos = mc::Vector3i(pos.x/16, pos.y/16, pos.z/16);
 				mc::Vector3i relPos = mc::Vector3i(pos.x%16, pos.y%16, pos.z%16);
 
-				Terrain::Chunk* ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z);
-
-				if(ch->blocks[relPos.x][relPos.y][relPos.z].ID == 0){
-					ch->blocks[relPos.x][relPos.y][relPos.z].ID = b->blk.ID;
-					ch->blocks[relPos.x][relPos.y][relPos.z].meta = b->blk.meta;
+				Chunk* ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z);
+				if(ch->blocks[relPos.x][relPos.y][relPos.z].ID == 0){	
+					chunkMan->setBlock(b->placePositionAbsolute.x, b->placePositionAbsolute.y, b->placePositionAbsolute.z, b->blk);
 					ch->delta.push_back({mc::Vector3i(relPos.x, relPos.y, relPos.z), b->blk});
+
+					bool check = false;
+				for(int i = 0; i < ch->delta.size(); i++){
+					if(ch->delta.at(i).position == mc::Vector3i(relPos.x, relPos.y, relPos.z)) {
+						check = true;
+						ch->delta.at(i) = {mc::Vector3i(relPos.x, relPos.y, relPos.z), b->blk};
+					}
+				}
+				if(!check){
+					ch->delta.push_back({mc::Vector3i(relPos.x, relPos.y, relPos.z), b->blk});
+				}
+
 				}
 
 
@@ -449,7 +465,7 @@ void Minecraft::Client::World::Save(){
 	std::ofstream file("saves/" + Terrain::WorldProvider::worldName + "/level.dat");
 	
 	file << Terrain::WorldProvider::seed << std::endl;
-	mc::Vector3d position = p->getPosition(); 
+	glm::vec3 position = p->getPosition(); 
 	file << position.x << " " << position.y << " " << position.z << std::endl;
 
 
@@ -645,6 +661,9 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		//ME
 		for(mc::Vector3i& v : needed){
 			if(!g_World->chunkMan->chunkExists(v.x, v.y, v.z)){
+				
+				#ifdef ME_ENABLED
+				
 				Terrain::Chunk* c = new Terrain::Chunk();
         		c->chunk_x = v.x;
         		c->chunk_y = v.y;
@@ -654,9 +673,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 				c->m_aabb.update({c->chunk_x * CHUNK_SIZE, c->chunk_y * CHUNK_SIZE, c->chunk_z * CHUNK_SIZE});
 
 
-				#ifndef ME_ENABLED
-					Terrain::WorldProvider::generate(c);
-				#else
+				
 
 				Terrain::me_generator_struct str;
 
@@ -716,11 +733,15 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 					}
 				}
 
-				#endif
 
         		g_World->chunkMan->getChunks().emplace(v, std::move(c));
+
+				#else	
+					g_World->chunkMan->loadChunkData(v.x, v.y, v.z);
+				#endif
+
 				if(!g_World->genning)
-					sceKernelDelayThread(7 * 1000);
+					sceKernelDelayThread(20 * 1000);
 			}
 		}
 

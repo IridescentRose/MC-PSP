@@ -4,6 +4,8 @@
 #include <pspgum.h>
 #include "World/World.h"
 #include <Shadow/Graphics/Frustum.h>
+#include <Shadow/Physics/AABB.h>
+
 
 namespace Minecraft {
 	namespace Client {
@@ -12,16 +14,16 @@ namespace Minecraft {
 			Player();
 			~Player();
 
-			void Init(mc::Vector3d pos, float y, float p);
+			void Init(glm::vec3 pos, float y, float p);
 			void Cleanup();
 
-			void SetPosition(mc::Vector3d pos);
+			void SetPosition(glm::vec3 pos);
 			void SetLook(float y, float p);
 
-			inline void SetVelocity(mc::Vector3d vel) {
+			inline void SetVelocity(glm::vec3 vel) {
 				velocity = vel;
 			}
-			inline void SetAcceleration(mc::Vector3d acc) {
+			inline void SetAcceleration(glm::vec3 acc) {
 				acceleration = acc;
 			}
 
@@ -42,7 +44,7 @@ namespace Minecraft {
 				return onGround;
 			}
 
-			inline mc::Vector3d getPosition() {
+			inline glm::vec3 getPosition() {
 				return position;
 			}
 
@@ -71,10 +73,11 @@ namespace Minecraft {
 			ScePspFMatrix4 viewMatrix;
 			ScePspFMatrix4 viewPreMatrix;
 			ScePspFMatrix4 projViewMatrix;
+			AABB boundingBox;
 
 		private:
 			float yaw, pitch, orientation; //In degrees!
-			mc::Vector3d position, velocity, acceleration;
+			glm::vec3 position, velocity, acceleration;
 			bool onGround;
 			bool sneak, sprint;
 

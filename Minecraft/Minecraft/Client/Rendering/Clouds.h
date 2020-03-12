@@ -3,7 +3,7 @@
 #include <Shadow/Graphics/RenderManager.h>
 #include <Shadow/Graphics/Vertex.h>
 #include <mclib/common/Vector.h>
-
+#include <glm/glm.hpp>
 using namespace Shadow::Graphics;
 
 namespace Minecraft::Rendering {
@@ -13,7 +13,7 @@ namespace Minecraft::Rendering {
 		~Clouds();
 
 		void Update();
-		void Draw(mc::Vector3d pos, s64 timeOfDay);
+		void Draw(glm::vec3 pos, s64 timeOfDay);
 
 
 	private:

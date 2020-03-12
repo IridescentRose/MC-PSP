@@ -6,7 +6,7 @@
 #include <Shadow/System/Input.h>
 #include <glm/gtx/rotate_vector.hpp>
 #include <pspmath.h>
-
+#include <iostream>
 #define DEGTORAD(angleDegrees) ((angleDegrees) * 3.14159f / 180.0f)
 
 
@@ -16,7 +16,7 @@ using namespace Shadow::Graphics;
 
 namespace Minecraft {
 	namespace Client {
-		Player::Player()
+		Player::Player(): boundingBox({0.6, 0.6, 1.8})
 		{
 			position = { 0, 0, 0 };
 			yaw = 0;
@@ -34,7 +34,7 @@ namespace Minecraft {
 		{
 		}
 		
-		void Player::Init(mc::Vector3d pos, float y, float p)
+		void Player::Init(glm::vec3 pos, float y, float p)
 		{
 			position = pos;
 			yaw = y;
@@ -63,7 +63,7 @@ namespace Minecraft {
 		}
 
 
-		void Player::SetPosition(mc::Vector3d pos)
+		void Player::SetPosition(glm::vec3 pos)
 		{
 			position = pos;
 		}
@@ -77,6 +77,8 @@ namespace Minecraft {
 		void Player::Update(float dt)
 		{
 			Input::InputUpdate();
+
+			boundingBox.position = glm::vec3(-position.x, position.y, -position.z) - glm::vec3(0.3f, 1.625f , 0.3f);
 
 
 			float rotSpeed = 60.0f; //Speed at which to rotate per second
@@ -133,6 +135,10 @@ namespace Minecraft {
 				if (!sprint) {
 					sneak = !sneak;
 				}
+			}
+
+			if(isFly()){
+				sneak = false;
 			}
 
 			if (changingFOV) {
@@ -199,16 +205,78 @@ namespace Minecraft {
 					velocity.y -= 4.317 *dt;
 				}
 			}
+
+			if(g_World->gameMode != 3){
+			glm::vec3 testPos = {(float)position.x, (float)position.y, (float)position.z};
 			if(flyEnabled){
-				position += velocity / 4.0f;
-				velocity *= 0.9f;
+				testPos += velocity / 4.0f;
 			}else{
-				position += velocity;
+				testPos += velocity;
+			}
+
+			if(g_World->chunkMan->getBlock((int)-testPos.x, (int)testPos.y, (int)-testPos.z).ID == 0 && g_World->chunkMan->getBlock((int)-testPos.x, (int)testPos.y + 1.5f, (int)-testPos.z).ID == 0){
+				bool flag = true;
+
+				if(g_World->chunkMan->getBlock((int)(-testPos.x + 0.15f), (int)(testPos.y), (int)(-testPos.z)).ID != 0){
+					testPos.x = (float)((int)testPos.x - 1) + 0.15f;
+					velocity = {0, 0, 0};
+				}
+				if(g_World->chunkMan->getBlock((int)(-testPos.x - 0.15f), (int)(testPos.y), (int)(-testPos.z)).ID != 0){
+					testPos.x = (float)((int)testPos.x -1) + 0.85f;
+					velocity = {0, 0, 0};
+				}
+
+				if(g_World->chunkMan->getBlock((int)(-testPos.x + 0.15f), (int)(testPos.y + 1.5f), (int)(-testPos.z)).ID != 0){
+					testPos.x = (float)((int)testPos.x - 1) + 0.15f;
+					velocity = {0, 0, 0};
+				}
+				if(g_World->chunkMan->getBlock((int)(-testPos.x - 0.15f), (int)(testPos.y + 1.5f), (int)(-testPos.z)).ID != 0){
+					testPos.x = (float)((int)testPos.x -1) + 0.85f;
+					velocity = {0, 0, 0};
+				}
+
+
+				if(g_World->chunkMan->getBlock((int)(-testPos.x), (int)(testPos.y), (int)(-testPos.z + 0.15f)).ID != 0){
+					testPos.z = (float)((int)testPos.z - 1) + 0.15f;
+					velocity = {0, 0, 0};
+				}
+				if(g_World->chunkMan->getBlock((int)(-testPos.x), (int)(testPos.y), (int)(-testPos.z - 0.15f)).ID != 0){
+					testPos.z = (float)((int)testPos.z -1) + 0.85f;
+					velocity = {0, 0, 0};
+				}
+
+
+				if(g_World->chunkMan->getBlock((int)(-testPos.x), (int)(testPos.y + 1.5f), (int)(-testPos.z + 0.15f)).ID != 0){
+					testPos.z = (float)((int)testPos.z - 1) + 0.15f;
+					velocity = {0, 0, 0};
+				}
+				if(g_World->chunkMan->getBlock((int)(-testPos.x), (int)(testPos.y + 1.5f), (int)(-testPos.z - 0.15f)).ID != 0){
+					testPos.z = (float)((int)testPos.z -1) + 0.85f;
+					velocity = {0, 0, 0};
+				}
+
+
+				if(flag)
+					position = testPos;
+				
+			}else{
 				velocity = {0, 0, 0};
 			}
 
+			
 
-			ScePspFVector3 pos = { (float)position.x, -(float)position.y, (float)position.z };
+			if(!flyEnabled){
+				velocity = {0, 0, 0};
+			}else{
+				velocity *= 0.9f;
+			}
+			}else{
+				position += velocity / 4.0f;
+				velocity *= 0.9f;
+			}
+
+
+			ScePspFVector3 pos = { (float)position.x, -(float)position.y - 1.625f, (float)position.z };
 			sceGumTranslate(&pos);
 			sceGumStoreMatrix(&viewMatrix);
 
@@ -223,11 +291,19 @@ namespace Minecraft {
 				glm::normalize(unitVec);
 				unitVec *= 0.25;
 
-				glm::vec3 currVec = glm::vec3(-position.x, position.y, -position.z);
+				glm::vec3 currVec = glm::vec3(-position.x, position.y + 1.625f, -position.z);
 				glm::vec3 diffVec = glm::vec3(0, 0, 0);
 
+
+				int numBlocks = 0;
+				if(g_World->gameMode == 1){
+					numBlocks = 20;
+				}else{
+					numBlocks = 18;
+				}
+
 				//Do this out to 4 blocks (0.25 * 8)
-				for(int i = 0; i < 16; i++){
+				for(int i = 0; i < numBlocks; i++){
 					
 					currVec += unitVec;
 					//Check if it hits a block
@@ -259,15 +335,20 @@ namespace Minecraft {
 				unitVec *= 0.25;
 
 				glm::vec3 currVec = glm::vec3(-position.x, position.y, -position.z);
+				glm::vec3 refVec = glm::vec3(-position.x, position.y, -position.z);
 				glm::vec3 diffVec = glm::vec3(0, 0, 0);
 
+				int numBlocks = 0;
+				if(g_World->gameMode == 1){
+					numBlocks = 20;
+				}else{
+					numBlocks = 18;
+				}
+
 				//Do this out to 4 blocks (0.25 * 16)
-				for(int i = 0; i < 16; i++){
+				for(int i = 0; i < numBlocks; i++){
 					
 					currVec += unitVec;
-
-					Logging::info("TRACE VEC " + std::to_string((int)currVec.x) + " " + std::to_string((int)currVec.y) + " " + std::to_string((int)currVec.z));
-
 
 					//Check if it hits a block
 					ChunkBlock blk = g_World->chunkMan->getBlock((int)currVec.x, (int)currVec.y, (int)currVec.z);
@@ -286,10 +367,13 @@ namespace Minecraft {
 							untrace -= unitVec * 0.02f;
 						}
 
+						
 						e->placePositionAbsolute = mc::Vector3d((int)untrace.x, (int)untrace.y, (int)untrace.z);
 						e->blk = BlockData::InstancePointer()->registered_blocks[currBlock];
 						g_World->eventBus.push(e);
 						break;
+						
+
 					}
 				}
 			}

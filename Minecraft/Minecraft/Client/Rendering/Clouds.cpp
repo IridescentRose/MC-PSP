@@ -103,7 +103,7 @@ namespace Minecraft::Rendering {
 
 	}
 
-	void Clouds::Draw(mc::Vector3d pos, s64 dt)
+	void Clouds::Draw(glm::vec3 pos, s64 dt)
 	{
 		sceGuEnable(GU_TEXTURE_2D);
 		sceGuEnable(GU_BLEND);
