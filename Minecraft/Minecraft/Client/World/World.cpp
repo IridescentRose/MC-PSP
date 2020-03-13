@@ -687,7 +687,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 					}
 				}
 				if(!g_World->genning)
-					sceKernelDelayThread(10 * 1000);
+					sceKernelDelayThread(4 * 1000);
 
         		for(int x = 0; x < CHUNK_SIZE; x++){
             		for(int z = 0; z < CHUNK_SIZE; z++){
@@ -697,7 +697,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
         		}
 
 				if(!g_World->genning)
-					sceKernelDelayThread(10 * 1000);
+					sceKernelDelayThread(4 * 1000);
 				
 				str.c = c;
 				str.bioMap = Terrain::bioMap;
@@ -707,7 +707,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 				sceKernelDcacheWritebackInvalidateAll();
 				BeginME(mei, (int)(&Terrain::WorldProvider::GenerateME), (int)(&str), -1, 0, -1, 0);
 				while(!mei->done){
-					sceKernelDelayThread(6 * 1000);
+					sceKernelDelayThread(4 * 1000);
 				} 
 				sceKernelDcacheWritebackInvalidateAll();
 
@@ -720,7 +720,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 				}
 
 				if(!g_World->genning)
-					sceKernelDelayThread(10 * 1000);
+					sceKernelDelayThread(4 * 1000);
 
 				for(int x = 0; x < CHUNK_SIZE; x++){
 					for(int z = 0; z < CHUNK_SIZE; z++){
@@ -741,7 +741,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 				#endif
 
 				if(!g_World->genning)
-					sceKernelDelayThread(20 * 1000);
+					sceKernelDelayThread(4 * 1000);
 			}
 		}
 
@@ -750,14 +750,14 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		for(mc::Vector3i& v : needed){			
 			g_World->chunkMan->loadChunkData2(v.x, v.y, v.z);
 			if(!g_World->genning)
-				sceKernelDelayThread(8 * 1000);
+				sceKernelDelayThread(4 * 1000);
 		}
 
 		//CPU ONLY
 		for(mc::Vector3i& v : needed){
 			g_World->chunkMan->loadChunkData3(v.x, v.y, v.z);
 			if(!g_World->genning)
-				sceKernelDelayThread(8 * 1000);
+				sceKernelDelayThread(4 * 1000);
 		}
 
 
@@ -766,7 +766,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 				g_World->chunkMan->loadChunkMesh(v.x, v.y, v.z);
 			
 				if(!g_World->genning)
-					sceKernelDelayThread(32 * 1000);
+					sceKernelDelayThread(16 * 1000);
 				
 			}
 		}
@@ -775,7 +775,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		last_pos = center;
 		}
 		g_World->genning = false;
-		sceKernelDelayThread(50 * 1000);
+		sceKernelDelayThread(20 * 1000);
 	}
 
 			#ifdef ME_ENABLED

@@ -217,41 +217,41 @@ namespace Minecraft {
 			if(g_World->chunkMan->getBlock((int)-testPos.x, (int)testPos.y, (int)-testPos.z).ID == 0 && g_World->chunkMan->getBlock((int)-testPos.x, (int)testPos.y + 1.5f, (int)-testPos.z).ID == 0){
 				bool flag = true;
 
-				if(g_World->chunkMan->getBlock((int)(-testPos.x + 0.15f), (int)(testPos.y), (int)(-testPos.z)).ID != 0){
-					testPos.x = (float)((int)testPos.x - 1) + 0.15f;
+				if(g_World->chunkMan->getBlock((int)(-testPos.x + 0.2f), (int)(testPos.y), (int)(-testPos.z)).ID != 0){
+					testPos.x = (float)((int)testPos.x - 1) + 0.2f;
 					velocity.x = 0;
 				}
-				if(g_World->chunkMan->getBlock((int)(-testPos.x - 0.15f), (int)(testPos.y), (int)(-testPos.z)).ID != 0){
-					testPos.x = (float)((int)testPos.x -1) + 0.85f;
-					velocity.x = 0;
-				}
-
-				if(g_World->chunkMan->getBlock((int)(-testPos.x + 0.15f), (int)(testPos.y + 1.5f), (int)(-testPos.z)).ID != 0){
-					testPos.x = (float)((int)testPos.x - 1) + 0.15f;
-					velocity.x = 0;
-				}
-				if(g_World->chunkMan->getBlock((int)(-testPos.x - 0.15f), (int)(testPos.y + 1.5f), (int)(-testPos.z)).ID != 0){
-					testPos.x = (float)((int)testPos.x -1) + 0.85f;
+				if(g_World->chunkMan->getBlock((int)(-testPos.x - 0.2f), (int)(testPos.y), (int)(-testPos.z)).ID != 0){
+					testPos.x = (float)((int)testPos.x -1) + 0.8f;
 					velocity.x = 0;
 				}
 
+				if(g_World->chunkMan->getBlock((int)(-testPos.x + 0.2f), (int)(testPos.y + 1.5f), (int)(-testPos.z)).ID != 0){
+					testPos.x = (float)((int)testPos.x - 1) + 0.2f;
+					velocity.x = 0;
+				}
+				if(g_World->chunkMan->getBlock((int)(-testPos.x - 0.2f), (int)(testPos.y + 1.5f), (int)(-testPos.z)).ID != 0){
+					testPos.x = (float)((int)testPos.x -1) + 0.8f;
+					velocity.x = 0;
+				}
 
-				if(g_World->chunkMan->getBlock((int)(-testPos.x), (int)(testPos.y), (int)(-testPos.z + 0.15f)).ID != 0){
-					testPos.z = (float)((int)testPos.z - 1) + 0.15f;
+
+				if(g_World->chunkMan->getBlock((int)(-testPos.x), (int)(testPos.y), (int)(-testPos.z + 0.2f)).ID != 0){
+					testPos.z = (float)((int)testPos.z - 1) + 0.2f;
 					velocity.z = 0;
 				}
-				if(g_World->chunkMan->getBlock((int)(-testPos.x), (int)(testPos.y), (int)(-testPos.z - 0.15f)).ID != 0){
-					testPos.z = (float)((int)testPos.z -1) + 0.85f;
+				if(g_World->chunkMan->getBlock((int)(-testPos.x), (int)(testPos.y), (int)(-testPos.z - 0.2f)).ID != 0){
+					testPos.z = (float)((int)testPos.z -1) + 0.8f;
 					velocity.z = 0;
 				}
 
 
-				if(g_World->chunkMan->getBlock((int)(-testPos.x), (int)(testPos.y + 1.5f), (int)(-testPos.z + 0.15f)).ID != 0){
-					testPos.z = (float)((int)testPos.z - 1) + 0.15f;
+				if(g_World->chunkMan->getBlock((int)(-testPos.x), (int)(testPos.y + 1.5f), (int)(-testPos.z + 0.2f)).ID != 0){
+					testPos.z = (float)((int)testPos.z - 1) + 0.2f;
 					velocity.z = 0;
 				}
-				if(g_World->chunkMan->getBlock((int)(-testPos.x), (int)(testPos.y + 1.5f), (int)(-testPos.z - 0.15f)).ID != 0){
-					testPos.z = (float)((int)testPos.z -1) + 0.85f;
+				if(g_World->chunkMan->getBlock((int)(-testPos.x), (int)(testPos.y + 1.5f), (int)(-testPos.z - 0.2f)).ID != 0){
+					testPos.z = (float)((int)testPos.z -1) + 0.8f;
 					velocity.z = 0;
 				}
 
