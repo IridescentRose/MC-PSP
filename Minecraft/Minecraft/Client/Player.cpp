@@ -81,7 +81,7 @@ namespace Minecraft {
 			boundingBox.position = glm::vec3(-position.x, position.y, -position.z) - glm::vec3(0.3f, 1.625f , 0.3f);
 
 
-			float rotSpeed = 60.0f; //Speed at which to rotate per second
+			float rotSpeed = 120.0f; //Speed at which to rotate per second
 
 			if (Input::KeyPressed(PSP_CTRL_CROSS) || Input::KeyHold(PSP_CTRL_CROSS)) {
 				pitch += rotSpeed * dt;
