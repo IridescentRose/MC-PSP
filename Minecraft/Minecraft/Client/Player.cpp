@@ -214,9 +214,11 @@ namespace Minecraft {
 				testPos += velocity;
 			}
 
-			if(g_World->chunkMan->getBlock((int)-testPos.x, (int)testPos.y, (int)-testPos.z).ID == 0 && g_World->chunkMan->getBlock((int)-testPos.x, (int)testPos.y + 1.5f, (int)-testPos.z).ID == 0){
+			if(g_World->chunkMan->getBlock((int)-testPos.x, (int)testPos.y, (int)-testPos.z).ID == 0 && g_World->chunkMan->getBlock((int)-testPos.x, (int)(testPos.y + 1.8f), (int)-testPos.z).ID == 0){
 				bool flag = true;
 
+				std::cout << testPos.y << std::endl;
+				
 				if(g_World->chunkMan->getBlock((int)(-testPos.x + 0.2f), (int)(testPos.y), (int)(-testPos.z)).ID != 0){
 					testPos.x = (float)((int)testPos.x - 1) + 0.2f;
 					velocity.x = 0;
@@ -263,8 +265,6 @@ namespace Minecraft {
 				velocity = {0, 0, 0};
 			}
 
-			
-
 			if(!flyEnabled){
 				velocity = {0, 0, 0};
 			}else{
@@ -302,7 +302,6 @@ namespace Minecraft {
 					numBlocks = 18;
 				}
 
-				//Do this out to 4 blocks (0.25 * 8)
 				for(int i = 0; i < numBlocks; i++){
 					
 					currVec += unitVec;
@@ -334,7 +333,7 @@ namespace Minecraft {
 				glm::normalize(unitVec);
 				unitVec *= 0.25;
 
-				glm::vec3 currVec = glm::vec3(-position.x, position.y, -position.z);
+				glm::vec3 currVec = glm::vec3(-position.x, position.y + 1.625f, -position.z);
 				glm::vec3 refVec = glm::vec3(-position.x, position.y, -position.z);
 				glm::vec3 diffVec = glm::vec3(0, 0, 0);
 
@@ -345,7 +344,6 @@ namespace Minecraft {
 					numBlocks = 18;
 				}
 
-				//Do this out to 4 blocks (0.25 * 16)
 				for(int i = 0; i < numBlocks; i++){
 					
 					currVec += unitVec;
@@ -355,22 +353,24 @@ namespace Minecraft {
 
 					//If it hits something real...
 					if(blk.ID != 0){
-						
-						BlockPlaceEvent* e = new BlockPlaceEvent();
-						e->type = EVENT_TYPE_PLACE;
-
-						//We now have a collision location and need to trace back one
-
 						glm::vec3 untrace = currVec;
 						
 						while((int) untrace.x == (int) currVec.x && (int) untrace.y == (int) currVec.y && (int) untrace.z == (int) currVec.z){
 							untrace -= unitVec * 0.02f;
 						}
 
-						
-						e->placePositionAbsolute = mc::Vector3d((int)untrace.x, (int)untrace.y, (int)untrace.z);
-						e->blk = BlockData::InstancePointer()->registered_blocks[currBlock];
-						g_World->eventBus.push(e);
+
+						glm::vec3 currPos = {-(float)position.x, (float)position.y + 1.625f, -(float)position.z};
+						std::cout << "UNTRACE " << untrace.x << " " << untrace.y << " " << untrace.y << std::endl;
+						std::cout << "CurrPos " << currPos.x << " " << currPos.y << " " << currPos.y << std::endl;
+						std::cout << "DIST " << (untrace - currPos).x << " " << (untrace - currPos).y << " " << (untrace - currPos).z << std::endl;
+						if( (abs((untrace - currPos).x) > 0.81f || abs((untrace - currPos).z) > 0.81f) || ((untrace - currPos).y > 0.5f) || (untrace - currPos).y < -1.75f){
+							BlockPlaceEvent* e = new BlockPlaceEvent();
+							e->type = EVENT_TYPE_PLACE;
+							e->placePositionAbsolute = mc::Vector3d((int)untrace.x, (int)untrace.y, (int)untrace.z);
+							e->blk = BlockData::InstancePointer()->registered_blocks[currBlock];
+							g_World->eventBus.push(e);
+						}
 						break;
 						
 
