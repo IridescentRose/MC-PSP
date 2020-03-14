@@ -70,6 +70,24 @@ void Minecraft::Client::World::Init()
 	mkdir( ("saves/" + Terrain::WorldProvider::worldName).c_str(), 0777);
 
 	std::ifstream file("saves/" + Terrain::WorldProvider::worldName + "/level.dat");
+	if(file.is_open()){
+		file >> Terrain::WorldProvider::seed;
+		glm::vec3 position;
+
+		file >> position.x >> position.y >> position.z;
+
+		file >> gameMode;
+		file >> timeData->time;
+		file >> timeData->worldAge;
+
+		p->SetPosition(position);
+
+ 		file.close();
+	}else{
+		file.close();
+		
+		Save();
+	}
 	
 	if(file.is_open()){
 		file >> Terrain::WorldProvider::seed;
@@ -430,7 +448,6 @@ void Minecraft::Client::World::Update(float dt)
 
 
 void Minecraft::Client::World::handleGM(){
-	
 	if(gameMode != 1 && gameMode != 3){
 		p->toggleFly();
 	}

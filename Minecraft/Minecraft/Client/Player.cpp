@@ -198,13 +198,24 @@ namespace Minecraft {
 			if(flyEnabled){
 				if(Input::KeyPressed(PSP_CTRL_SELECT) || Input::KeyHold(PSP_CTRL_SELECT)){
 					//Fly upwards
-					velocity.y += 5.612 * dt;
+					velocity.y += 5.812 * dt;
 				}
 				if(Input::KeyPressed(PSP_CTRL_DOWN) || Input::KeyHold(PSP_CTRL_DOWN)){
 					//Fly downwards
 					velocity.y -= 4.317 *dt;
 				}
+			}else{
+				velocity.y -= 28.0f * dt * dt;
+				if(velocity.y > 90.0f * dt){
+					velocity.y = 90.0f * dt;
+				}
 			}
+
+			if(Input::KeyPressed(PSP_CTRL_LTRIGGER) && Input::KeyPressed(PSP_CTRL_RTRIGGER)){
+				toggleFly();
+			}
+
+
 
 			if(g_World->gameMode != 3){
 			glm::vec3 testPos = {(float)position.x, (float)position.y, (float)position.z};
@@ -214,10 +225,8 @@ namespace Minecraft {
 				testPos += velocity;
 			}
 
-			if(g_World->chunkMan->getBlock((int)-testPos.x, (int)testPos.y, (int)-testPos.z).ID == 0 && g_World->chunkMan->getBlock((int)-testPos.x, (int)(testPos.y + 1.8f), (int)-testPos.z).ID == 0){
+			if(g_World->chunkMan->getBlock((int)-testPos.x, (int)testPos.y, (int)-testPos.z).ID == 0 && g_World->chunkMan->getBlock((int)-testPos.x, (int)(testPos.y + 1.8f), (int)-testPos.z).ID == 0 && g_World->chunkMan->getBlock((int)-testPos.x, (int)(testPos.y + 0.9f), (int)-testPos.z).ID == 0 ){
 				bool flag = true;
-
-				std::cout << testPos.y << std::endl;
 				
 				if(g_World->chunkMan->getBlock((int)(-testPos.x + 0.2f), (int)(testPos.y), (int)(-testPos.z)).ID != 0){
 					testPos.x = (float)((int)testPos.x - 1) + 0.2f;
@@ -262,11 +271,77 @@ namespace Minecraft {
 					position = testPos;
 				
 			}else{
-				velocity = {0, 0, 0};
+				velocity.y = 0.0f;
+
+				testPos = {(float)position.x, (float)position.y, (float)position.z};
+				testPos += velocity;
+
+				if(g_World->chunkMan->getBlock((int)-testPos.x, (int)testPos.y, (int)-testPos.z).ID == 0 && g_World->chunkMan->getBlock((int)-testPos.x, (int)(testPos.y + 1.8f), (int)-testPos.z).ID == 0){
+				bool flag = true;
+				
+				if(g_World->chunkMan->getBlock((int)(-testPos.x + 0.2f), (int)(testPos.y), (int)(-testPos.z)).ID != 0){
+					testPos.x = (float)((int)testPos.x - 1) + 0.2f;
+					velocity.x = 0;
+				}
+				if(g_World->chunkMan->getBlock((int)(-testPos.x - 0.2f), (int)(testPos.y), (int)(-testPos.z)).ID != 0){
+					testPos.x = (float)((int)testPos.x -1) + 0.8f;
+					velocity.x = 0;
+				}
+
+				if(g_World->chunkMan->getBlock((int)(-testPos.x + 0.2f), (int)(testPos.y + 1.5f), (int)(-testPos.z)).ID != 0){
+					testPos.x = (float)((int)testPos.x - 1) + 0.2f;
+					velocity.x = 0;
+				}
+				if(g_World->chunkMan->getBlock((int)(-testPos.x - 0.2f), (int)(testPos.y + 1.5f), (int)(-testPos.z)).ID != 0){
+					testPos.x = (float)((int)testPos.x -1) + 0.8f;
+					velocity.x = 0;
+				}
+
+
+				if(g_World->chunkMan->getBlock((int)(-testPos.x), (int)(testPos.y), (int)(-testPos.z + 0.2f)).ID != 0){
+					testPos.z = (float)((int)testPos.z - 1) + 0.2f;
+					velocity.z = 0;
+				}
+				if(g_World->chunkMan->getBlock((int)(-testPos.x), (int)(testPos.y), (int)(-testPos.z - 0.2f)).ID != 0){
+					testPos.z = (float)((int)testPos.z -1) + 0.8f;
+					velocity.z = 0;
+				}
+
+
+				if(g_World->chunkMan->getBlock((int)(-testPos.x), (int)(testPos.y + 1.5f), (int)(-testPos.z + 0.2f)).ID != 0){
+					testPos.z = (float)((int)testPos.z - 1) + 0.2f;
+					velocity.z = 0;
+				}
+				if(g_World->chunkMan->getBlock((int)(-testPos.x), (int)(testPos.y + 1.5f), (int)(-testPos.z - 0.2f)).ID != 0){
+					testPos.z = (float)((int)testPos.z -1) + 0.8f;
+					velocity.z = 0;
+				}
+
+
+				if(flag)
+					position = testPos;
+				}
+			}
+
+
+			if(Input::KeyPressed(PSP_CTRL_SELECT) && !isFly() && velocity.y > -0.2f){
+				velocity.y = 8.945f * dt;
+
+				// 1.25
+				// 1.25 = 16.0f * t^2 + v0 * t
+				// v = v - 32t
+				// v0 = 32t 
+				// v = 0
+
+				// 1.25 = 16t^2 + 32t
+				// 1.25 = 16t(t + 2)
+				// 5 / 64 = t(t+2)
+				//
 			}
 
 			if(!flyEnabled){
-				velocity = {0, 0, 0};
+				velocity = {0.f, velocity.y, 0.f};
+				
 			}else{
 				velocity *= 0.9f;
 			}
@@ -361,9 +436,6 @@ namespace Minecraft {
 
 
 						glm::vec3 currPos = {-(float)position.x, (float)position.y + 1.625f, -(float)position.z};
-						std::cout << "UNTRACE " << untrace.x << " " << untrace.y << " " << untrace.y << std::endl;
-						std::cout << "CurrPos " << currPos.x << " " << currPos.y << " " << currPos.y << std::endl;
-						std::cout << "DIST " << (untrace - currPos).x << " " << (untrace - currPos).y << " " << (untrace - currPos).z << std::endl;
 						if( (abs((untrace - currPos).x) > 0.81f || abs((untrace - currPos).z) > 0.81f) || ((untrace - currPos).y > 0.5f) || (untrace - currPos).y < -1.75f){
 							BlockPlaceEvent* e = new BlockPlaceEvent();
 							e->type = EVENT_TYPE_PLACE;
