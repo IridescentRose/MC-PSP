@@ -1,0 +1,52 @@
+{
+    "listeners" : [
+        {
+            "name" : "walkForward",
+            "button" : 2
+        },
+        {
+            "name" : "walkBackward",
+            "button" : 2
+        },
+        {
+            "name" : "walkStrafeLeft",
+            "button" : 4
+        },
+        {
+            "name" : "walkStrafeRight",
+            "button" : 4
+        },
+        {
+            "name" : "break",
+            "button" : 256
+        },
+        {
+            "name" : "place",
+            "button" : 512
+        },
+        {
+            "name" : "lookUp",
+            "button" : 16
+        },
+        {
+            "name" : "lookDown",
+            "button" : 64
+        },
+        {
+            "name" : "lookLeft",
+            "button" : 128
+        },
+        {
+            "name" : "lookRight",
+            "button" : 32
+        },
+        {
+            "name" : "pause",
+            "button" : 8
+        },
+        {
+            "name" : "jump",
+            "button" : 1
+        }
+    ]
+}

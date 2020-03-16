@@ -7,6 +7,9 @@
 #include <json/json.h>
 #include <string.h>
 
+#define PSP_CTRL_ANALOG_X 0x2
+#define PSP_CTRL_ANALOG_Y 0x4
+
 namespace Shadow::System::Input {
 
 	//input
@@ -22,6 +25,8 @@ namespace Shadow::System::Input {
 	void registerActionHandler(ActionHandler act, std::string str);
 	void loadConfiguration(std::string name);
 	void writeConfiguration(std::string name);
+
+	void makeDefaultConfig();
 
 	extern std::map<int, std::string> actions;
 	extern std::map<std::string, ActionHandler> handlers;

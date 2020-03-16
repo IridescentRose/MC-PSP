@@ -101,4 +101,9 @@ namespace Shadow::System::Input {
 		file << v;
 		file.close();
 	}
+
+
+	void makeDefaultConfig(){
+		
+	}
 }
