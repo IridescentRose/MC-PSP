@@ -44,6 +44,13 @@ namespace Minecraft::Menus{
 
         }
 
+        //INPUT!!!
+
+        Input::makeDefaultConfig();
+        Input::loadConfiguration("config.json");
+
+        std::cerr << "ACT" << Input::actions.size() << std::endl;
+
 
         t = Timer();
         Common::g_OptionsManager.init();

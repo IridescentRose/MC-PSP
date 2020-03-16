@@ -104,6 +104,7 @@ namespace Shadow::System::Input {
 
 
 	void makeDefaultConfig(){
-		
+		actions.clear();
+		handlers.clear();
 	}
 }
