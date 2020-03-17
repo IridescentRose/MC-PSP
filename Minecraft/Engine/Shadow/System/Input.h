@@ -7,8 +7,11 @@
 #include <json/json.h>
 #include <string.h>
 
-#define PSP_CTRL_ANALOG_X 0x2
-#define PSP_CTRL_ANALOG_Y 0x4
+#define PSP_CTRL_ANALOG_UP 0x2
+#define PSP_CTRL_ANALOG_RIGHT 0x4
+
+#define PSP_CTRL_ANALOG_DOWN 0x3
+#define PSP_CTRL_ANALOG_LEFT 0x5
 
 namespace Shadow::System::Input {
 
@@ -32,4 +35,6 @@ namespace Shadow::System::Input {
 
 	extern std::map<int, std::string> actions;
 	extern std::map<std::string, ActionHandler> handlers;
+
+	std::string toString(int but);
 }

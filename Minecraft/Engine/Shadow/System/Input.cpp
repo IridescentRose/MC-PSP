@@ -118,4 +118,85 @@ namespace Shadow::System::Input {
 
 		return (PspCtrlButtons)-1;
 	}
+
+	std::string toString(int inputs) {
+	switch (inputs) {
+	case PSP_CTRL_ANALOG_UP:
+		return "Analog Up";
+
+		break;
+	
+	case PSP_CTRL_ANALOG_DOWN:
+		return "Analog Down";
+
+		break;
+	case PSP_CTRL_ANALOG_LEFT:
+		return "Analog Left";
+
+		break;
+
+	case PSP_CTRL_ANALOG_RIGHT:
+		return "Analog Right";
+
+		break;
+
+
+
+	case PSP_CTRL_DOWN:
+		return "Down";
+
+		break;
+	case PSP_CTRL_UP:
+		return "Up";
+
+		break;
+	case PSP_CTRL_LEFT:
+		return "Left";
+
+		break;
+	case PSP_CTRL_RIGHT:
+		return "Right";
+
+		break;
+
+		
+	case PSP_CTRL_CROSS:
+		return "Cross";
+
+		break;
+	case PSP_CTRL_CIRCLE:
+		return "Circle";
+
+		break;
+	case PSP_CTRL_TRIANGLE:
+		return "Triangle";
+
+		break;
+	case PSP_CTRL_SQUARE:
+		return "Square";
+
+		break;
+
+
+	case PSP_CTRL_RTRIGGER:
+		return "RTrigger";
+
+		break;
+	case PSP_CTRL_LTRIGGER:
+		return "LTrigger";
+
+		break;
+	case PSP_CTRL_SELECT:
+		return "Select";
+
+		break;
+	case PSP_CTRL_START:
+		return "Start";
+
+		break;
+
+	}
+
+	return "";
+}
 }

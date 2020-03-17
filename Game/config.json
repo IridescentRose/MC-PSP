@@ -6,11 +6,11 @@
         },
         {
             "name" : "walkBackward",
-            "button" : 2
+            "button" : 3
         },
         {
             "name" : "walkStrafeLeft",
-            "button" : 4
+            "button" : 5
         },
         {
             "name" : "walkStrafeRight",
