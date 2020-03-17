@@ -33,6 +33,7 @@ namespace Minecraft::Menus{
         }
 
 
+        g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         g_RenderManager.DebugPrint(240, 24, Common::g_TranslationOBJ.getText("controls.title").c_str());
 
         if(selectPosY == 0){
@@ -197,12 +198,248 @@ namespace Minecraft::Menus{
 
         if(Input::KeyPressed(PSP_CTRL_CROSS) && selectPosY == 16){
             Input::writeConfiguration("config.json");
+            Input::loadConfiguration("config.json");
 
             selectPosX = 0;
             selectPosY = 0;
             selectRegion = 0;
             previous_states = menu_states;
             menu_states = MENU_STATE_OPTIONS_MAIN;
+        }
+
+        if(Input::KeyPressed(PSP_CTRL_CROSS) && selectPosY != 16){
+            switch(selectPosY){
+                case 0:{
+                    int act = (PspCtrlButtons)Input::nextAction();
+
+                    Input::actions.erase(act);
+                    
+                    int i = Input::findButtonPair("walkForwards");
+                    if(i != -1){
+                        Input::actions.erase(i);
+                    }
+
+                    Input::actions.emplace(act, "walkForwards");
+                    break;
+                }
+
+                case 1:{
+                    int act = (PspCtrlButtons)Input::nextAction();
+
+                    Input::actions.erase(act);
+                    
+                    int i = Input::findButtonPair("walkBackward");
+                    if(i != -1){
+                        Input::actions.erase(i);
+                    }
+
+                    Input::actions.emplace(act, "walkBackward");
+                    break;
+                }
+
+                case 2:{
+                    int act = (PspCtrlButtons)Input::nextAction();
+
+                    Input::actions.erase(act);
+                    
+                    int i = Input::findButtonPair("walkStrafeLeft");
+                    if(i != -1){
+                        Input::actions.erase(i);
+                    }
+
+                    Input::actions.emplace(act, "walkStrafeLeft");
+                    break;
+                }
+
+                case 3:{
+                    int act = (PspCtrlButtons)Input::nextAction();
+
+                    Input::actions.erase(act);
+                    
+                    int i = Input::findButtonPair("walkStrafeRight");
+                    if(i != -1){
+                        Input::actions.erase(i);
+                    }
+
+                    Input::actions.emplace(act, "walkStrafeRight");
+                    break;
+                }
+
+
+                case 4:{
+                    int act = (PspCtrlButtons)Input::nextAction();
+
+                    Input::actions.erase(act);
+                    
+                    int i = Input::findButtonPair("lookUp");
+                    if(i != -1){
+                        Input::actions.erase(i);
+                    }
+
+                    Input::actions.emplace(act, "lookUp");
+
+                    break;
+                }
+
+                case 5:{
+                    
+                    int act = (PspCtrlButtons)Input::nextAction();
+
+                    Input::actions.erase(act);
+                    
+                    int i = Input::findButtonPair("lookDown");
+                    if(i != -1){
+                        Input::actions.erase(i);
+                    }
+
+                    Input::actions.emplace(act, "lookDown");
+
+                    break;
+                }
+
+                case 6:{
+                    int act = (PspCtrlButtons)Input::nextAction();
+
+                    Input::actions.erase(act);
+                    
+                    int i = Input::findButtonPair("lookLeft");
+                    if(i != -1){
+                        Input::actions.erase(i);
+                    }
+
+                    Input::actions.emplace(act, "lookLeft");
+
+                    break;
+                }
+
+                case 7:{
+                    int act = (PspCtrlButtons)Input::nextAction();
+
+                    Input::actions.erase(act);
+                    
+                    int i = Input::findButtonPair("lookRight");
+                    if(i != -1){
+                        Input::actions.erase(i);
+                    }
+
+                    Input::actions.emplace(act, "lookRight");
+
+                    break;
+                }
+                case 8:{
+                    int act = (PspCtrlButtons)Input::nextAction();
+
+                    Input::actions.erase(act);
+                    
+                    int i = Input::findButtonPair("sprint");
+                    if(i != -1){
+                        Input::actions.erase(i);
+                    }
+
+                    Input::actions.emplace(act, "sprint");
+
+                    break;
+                }
+                case 9:{
+                    int act = (PspCtrlButtons)Input::nextAction();
+
+                    Input::actions.erase(act);
+                    
+                    int i = Input::findButtonPair("sneak");
+                    if(i != -1){
+                        Input::actions.erase(i);
+                    }
+
+                    Input::actions.emplace(act, "sneak");
+
+                    break;
+                }
+                case 10:{
+                    int act = (PspCtrlButtons)Input::nextAction();
+
+                    Input::actions.erase(act);
+                    
+                    int i = Input::findButtonPair("jump");
+                    if(i != -1){
+                        Input::actions.erase(i);
+                    }
+
+                    Input::actions.emplace(act, "jump");
+
+                    break;
+                }
+                case 11:{
+                    int act = (PspCtrlButtons)Input::nextAction();
+
+                    Input::actions.erase(act);
+                    
+                    int i = Input::findButtonPair("pause");
+                    if(i != -1){
+                        Input::actions.erase(i);
+                    }
+
+                    Input::actions.emplace(act, "pause");
+
+                    break;
+                }
+                case 12:{
+                    int act = (PspCtrlButtons)Input::nextAction();
+
+                    Input::actions.erase(act);
+                    
+                    int i = Input::findButtonPair("break");
+                    if(i != -1){
+                        Input::actions.erase(i);
+                    }
+
+                    Input::actions.emplace(act, "break");
+
+                    break;
+                }
+                case 13:{
+                    int act = (PspCtrlButtons)Input::nextAction();
+
+                    Input::actions.erase(act);
+                    
+                    int i = Input::findButtonPair("place");
+                    if(i != -1){
+                        Input::actions.erase(i);
+                    }
+
+                    Input::actions.emplace(act, "place");
+
+                    break;
+                }
+                case 14:{
+                    int act = (PspCtrlButtons)Input::nextAction();
+
+                    Input::actions.erase(act);
+                    
+                    int i = Input::findButtonPair("hotLeft");
+                    if(i != -1){
+                        Input::actions.erase(i);
+                    }
+
+                    Input::actions.emplace(act, "hotLeft");
+
+                    break;
+                }
+                case 15:{
+                    int act = (PspCtrlButtons)Input::nextAction();
+
+                    Input::actions.erase(act);
+                    
+                    int i = Input::findButtonPair("hotRight");
+                    if(i != -1){
+                        Input::actions.erase(i);
+                    }
+
+                    Input::actions.emplace(act, "hotRight");
+
+                    break;
+                }
+                
+            }
         }
 
     }

@@ -5,6 +5,7 @@
 #include <pspctrl.h>
 #include <psputility.h>
 #include <json/json.h>
+#include <Shadow/Utils/Timer.hpp>
 #include <string.h>
 
 #define PSP_CTRL_ANALOG_UP 0x2
@@ -37,4 +38,5 @@ namespace Shadow::System::Input {
 	extern std::map<std::string, ActionHandler> handlers;
 
 	std::string toString(int but);
+	PspCtrlButtons nextAction();
 }

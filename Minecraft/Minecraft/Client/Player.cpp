@@ -153,7 +153,7 @@ namespace Minecraft {
 
 			}
 
-			if (Input::GetAnalogY() > 0.4) {
+			if (Input::KeyPressed(Input::findButtonPair("walkForwards"))) {
 
 				float s = walkSpeed;
 
@@ -168,17 +168,17 @@ namespace Minecraft {
 				velocity.z += -vfpu_cosf(DEGTORAD(-yaw)) * s * dt;
 			}
 
-			if (Input::GetAnalogY() < -0.4) {
+			if (Input::KeyPressed(Input::findButtonPair("walkBackward"))) {
 				velocity.x += vfpu_sinf(DEGTORAD(-yaw)) * walkSpeed * dt;
 				velocity.z += vfpu_cosf(DEGTORAD(-yaw)) * walkSpeed * dt;
 			}
 
-			if (Input::GetAnalogX() < -0.4) {
+			if (Input::KeyPressed(Input::findButtonPair("walkStrafeLeft"))) {
 				velocity.x += -vfpu_sinf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt;
 				velocity.z += -vfpu_cosf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt;
 			}
 
-			if (Input::GetAnalogX() > 0.4) {
+			if (Input::KeyPressed(Input::findButtonPair("walkStrafeRight"))) {
 				velocity.x += -vfpu_sinf(DEGTORAD((-yaw - 270))) * walkSpeed * 0.7 * dt;
 				velocity.z += -vfpu_cosf(DEGTORAD((-yaw - 270))) * walkSpeed * 0.7 * dt;
 			}
