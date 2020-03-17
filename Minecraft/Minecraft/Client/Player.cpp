@@ -83,19 +83,19 @@ namespace Minecraft {
 
 			float rotSpeed = 120.0f; //Speed at which to rotate per second
 
-			if (Input::KeyPressed(PSP_CTRL_CROSS) || Input::KeyHold(PSP_CTRL_CROSS)) {
-				pitch += rotSpeed * dt;
-			}
-
-			if (Input::KeyPressed(PSP_CTRL_TRIANGLE) || Input::KeyHold(PSP_CTRL_TRIANGLE)) {
+			if (Input::KeyPressed( Input::findButtonPair("lookUp") ) || Input::KeyHold(Input::findButtonPair("lookUp"))) {
 				pitch -= rotSpeed * dt;
 			}
 
-			if (Input::KeyPressed(PSP_CTRL_SQUARE) || Input::KeyHold(PSP_CTRL_SQUARE)) {
+			if (Input::KeyPressed(Input::findButtonPair("lookDown")) || Input::KeyHold(Input::findButtonPair("lookDown"))) {
+				pitch += rotSpeed * dt;
+			}
+
+			if (Input::KeyPressed(Input::findButtonPair("lookLeft")) || Input::KeyHold(Input::findButtonPair("lookLeft"))) {
 				yaw -= rotSpeed * dt;
 			}
 
-			if (Input::KeyPressed(PSP_CTRL_CIRCLE) || Input::KeyHold(PSP_CTRL_CIRCLE)) {
+			if (Input::KeyPressed(Input::findButtonPair("lookRight")) || Input::KeyHold(Input::findButtonPair("lookRight"))) {
 				yaw += rotSpeed * dt;
 			}
 
@@ -124,18 +124,6 @@ namespace Minecraft {
 			sceGumStoreMatrix(&viewPreMatrix);
 
 			float walkSpeed = 4.317;
-
-			if (Input::KeyPressed(PSP_CTRL_UP)) {
-				if(!sneak){
-					sprint = !sprint;
-					changingFOV = true;
-				}
-			}
-			if (Input::KeyPressed(PSP_CTRL_DOWN)) {
-				if (!sprint) {
-					sneak = !sneak;
-				}
-			}
 
 			if(isFly()){
 				sneak = false;
@@ -196,11 +184,11 @@ namespace Minecraft {
 			}
 
 			if(flyEnabled){
-				if(Input::KeyPressed(PSP_CTRL_SELECT) || Input::KeyHold(PSP_CTRL_SELECT)){
+				if(Input::KeyPressed(Input::findButtonPair("jump")) || Input::KeyHold(Input::findButtonPair("jump"))){
 					//Fly upwards
 					velocity.y += 5.812 * dt;
 				}
-				if(Input::KeyPressed(PSP_CTRL_DOWN) || Input::KeyHold(PSP_CTRL_DOWN)){
+				if(Input::KeyPressed(Input::findButtonPair("sneak")) || Input::KeyHold(Input::findButtonPair("sneak"))){
 					//Fly downwards
 					velocity.y -= 4.317 *dt;
 				}
@@ -211,10 +199,21 @@ namespace Minecraft {
 				}
 			}
 
-			if(Input::KeyPressed(PSP_CTRL_LTRIGGER) && Input::KeyPressed(PSP_CTRL_RTRIGGER)){
+			if(Input::KeyPressed(Input::findButtonPair("break")) && Input::KeyPressed(Input::findButtonPair("place"))){
 				toggleFly();
 			}
 
+			if (Input::KeyPressed(Input::findButtonPair("sprint"))) {
+				if(!sneak){
+					sprint = !sprint;
+					changingFOV = true;
+				}
+			}
+			if (Input::KeyPressed(Input::findButtonPair("sneak"))) {
+				if (!sprint) {
+					sneak = !sneak;
+				}
+			}
 
 
 			if(g_World->gameMode != 3){
@@ -324,8 +323,8 @@ namespace Minecraft {
 			}
 
 
-			if(Input::KeyPressed(PSP_CTRL_SELECT) && !isFly() && velocity.y > -0.2f){
-				velocity.y = 8.945f * dt;
+			if(Input::KeyPressed(Input::findButtonPair("jump")) && !isFly() && velocity.y > -0.2f){
+				velocity.y = 8.945f * 1.f / 60.0f;
 
 				// 1.25
 				// 1.25 = 16.0f * t^2 + v0 * t
@@ -355,7 +354,7 @@ namespace Minecraft {
 			sceGumTranslate(&pos);
 			sceGumStoreMatrix(&viewMatrix);
 
-			if(Input::KeyPressed(PSP_CTRL_LTRIGGER)){
+			if(Input::KeyPressed(Input::findButtonPair("break"))){
 				
 
 				//RAY CAST
@@ -397,7 +396,7 @@ namespace Minecraft {
 
 			}
 			
-			if(Input::KeyPressed(PSP_CTRL_RTRIGGER)){
+			if(Input::KeyPressed(Input::findButtonPair("place"))){
 
 
 				//RAY CAST
@@ -450,14 +449,14 @@ namespace Minecraft {
 				}
 			}
 
-			if(Input::KeyPressed(PSP_CTRL_LEFT)){
+			if(Input::KeyPressed(Input::findButtonPair("scrollLeft"))){
 				currBlock--;
 				if(currBlock < 0){
 					currBlock = BlockData::InstancePointer()->registered_blocks.size() - 1;
 				}
 			}
 
-			if(Input::KeyPressed(PSP_CTRL_RIGHT)){
+			if(Input::KeyPressed(Input::findButtonPair("scrollRight"))){
 				currBlock++;
 				if(currBlock == BlockData::InstancePointer()->registered_blocks.size()){
 					currBlock = 0;

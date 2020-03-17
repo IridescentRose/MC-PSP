@@ -28,6 +28,8 @@ namespace Shadow::System::Input {
 
 	void makeDefaultConfig();
 
+	PspCtrlButtons findButtonPair(std::string str);
+
 	extern std::map<int, std::string> actions;
 	extern std::map<std::string, ActionHandler> handlers;
 }

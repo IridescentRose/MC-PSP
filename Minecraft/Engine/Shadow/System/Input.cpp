@@ -107,4 +107,15 @@ namespace Shadow::System::Input {
 		actions.clear();
 		handlers.clear();
 	}
+
+	PspCtrlButtons findButtonPair(std::string s){
+		for(const auto& [but, str] : actions){
+			if(str == s){
+				return (PspCtrlButtons)but;
+				break;
+			}
+		}
+
+		return (PspCtrlButtons)-1;
+	}
 }

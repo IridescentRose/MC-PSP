@@ -26,19 +26,19 @@
         },
         {
             "name" : "lookUp",
-            "button" : 16
+            "button" : 4096
         },
         {
             "name" : "lookDown",
-            "button" : 64
+            "button" : 16384
         },
         {
             "name" : "lookLeft",
-            "button" : 128
+            "button" : 32768
         },
         {
             "name" : "lookRight",
-            "button" : 32
+            "button" : 8192
         },
         {
             "name" : "pause",
@@ -47,6 +47,22 @@
         {
             "name" : "jump",
             "button" : 1
+        },
+        {
+            "name" : "scrollLeft",
+            "button" : 128 
+        },
+        {
+            "name" : "scrollRight",
+            "button" : 32
+        },
+        {
+            "name" : "sprint",
+            "button" : 16
+        },
+        {
+            "name" : "sneak",
+            "button" : 64
         }
     ]
 }
