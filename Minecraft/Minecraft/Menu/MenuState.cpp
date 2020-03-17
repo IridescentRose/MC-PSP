@@ -350,6 +350,11 @@ namespace Minecraft::Menus{
                 playGenerateUpdate(sManager);
                 break;
             }
+
+            case MENU_STATE_CONTROL:{
+                controlUpdate();
+                break;
+            }
         }
     }
     
@@ -372,6 +377,11 @@ namespace Minecraft::Menus{
         switch(menu_states){
             case MENU_STATE_LOAD_SELECT:{
                 playSelectDraw();
+                break;
+            }
+
+            case MENU_STATE_CONTROL:{
+                controlDraw();
                 break;
             }
 

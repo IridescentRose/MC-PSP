@@ -242,6 +242,12 @@ namespace Minecraft::Menus{
                 }
                 if(selectPosY == 2){
                     //CONTROLS
+                    selectPosX = 0;
+                    selectPosY = 0;
+                    selectRegion = 0;
+                    previous_states = menu_states;
+                    menu_states = MENU_STATE_CONTROL;
+                    
                 }
                 if(selectPosY == 3){
                     //CHAT SETTINGS
