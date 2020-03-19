@@ -37,3 +37,7 @@ If you want to see the Antivirus scans, 3 out of 68 find a false flag: <https://
 *This will update your PSP to the latest version and you will now skip the launcher*
 *To update after doing this, repeat steps 1 - 3 but in the 'MC-PSP' folder instead*
 
+#### Donate: https://www.paypal.me/IridescenceTech 
+
+PayPal Donations are paid addressable to Iridescence-Technologies, which is a sole proprietorship. This business's primary functions are computer programming and video production. All donations go towards investment in more content for this YouTube channel, including capital goods and non-capital assets essential for video production. These donations are not to be used to act as leverage or for extortion. These donations are purely donations and are not in exchange for a service. Donators do not get extra content, nor are obligated to a service or good.
+
