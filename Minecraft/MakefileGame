@@ -63,12 +63,12 @@ CXXFLAGS = -std=gnu++17
 ASFLAGS = $(CFLAGS)
 
 BUILD_PRX = 1
-PSP_FW_VERSION=371
+PSP_FW_VERSION=500
 PSP_LARGE_MEMORY = 1
 
 LIBDIR += ./libs/lib/
 LDFLAGS =
-LIBS= -lpng -lpspaudiolib -lpspaudio -lpspaudiocodec -lintraFont -lz -ljson -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath
+LIBS= -lstardust -lpng -lpspaudiolib -lpspaudio -lpspaudiocodec -lintraFont -lz -ljson -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpsphttp -lpspmath
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Minecraft
