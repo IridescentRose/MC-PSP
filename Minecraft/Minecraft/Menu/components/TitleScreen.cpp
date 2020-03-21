@@ -116,7 +116,7 @@ namespace Minecraft::Menus{
                     if(selectPosY < 0){
                         selectPosY = 0;
                     }
-                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+                    button->Play(0);
                 }
                 if(Input::KeyPressed(PSP_CTRL_DOWN)){
                     selectPosY++;
@@ -124,7 +124,7 @@ namespace Minecraft::Menus{
                     if(selectPosY > 3){
                         selectPosY = 3;
                     }
-                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+                    button->Play(0);
                 }
                 if(Input::KeyPressed(PSP_CTRL_LEFT)){
                     selectPosX--;
@@ -132,7 +132,7 @@ namespace Minecraft::Menus{
                     if(selectPosX < 0){
                         selectPosX = 0;
                     }
-                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+                    button->Play(0);
                 }
                 if(Input::KeyPressed(PSP_CTRL_RIGHT)){
                     selectPosX++;
@@ -140,7 +140,7 @@ namespace Minecraft::Menus{
                     if(selectPosX > 2){
                         selectPosX = 2;
                     }
-                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+                    button->Play(0);
                 }
 
                 if(Input::KeyPressed(PSP_CTRL_START)){

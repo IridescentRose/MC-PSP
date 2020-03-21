@@ -109,7 +109,7 @@ namespace Minecraft::Menus{
                 menu_states = previous_states;
                 previous_states = MENU_STATE_LANGUAGE;
 
-                g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+                button->Play(0);
 
                 selectRegion = 0;
             }

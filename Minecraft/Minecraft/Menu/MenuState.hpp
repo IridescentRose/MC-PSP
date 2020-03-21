@@ -3,7 +3,7 @@
 #include <Shadow/Utils/StateManager.h>
 #include <Shadow/Utils/GameState.h>
 #include "components/Panorama.hpp"
-#include <Shadow/Audio/AudioManager.hpp>
+#include <Audio/AudioClip.h>
 #include <Shadow/Utils/Timer.hpp>
 #include <Shadow/Graphics/Sprite.h>
 #include <json/json.h>
@@ -24,7 +24,6 @@
 #define PSP_MENU_SIZE 1.0
 
 using namespace Shadow::System;
-using namespace Shadow::Audio;
 using namespace Shadow::Utils;
 
 namespace Minecraft::Menus{
@@ -102,7 +101,7 @@ namespace Minecraft::Menus{
 		void controlDraw();
 		void controlUpdate();
 
-        OSL_SOUND* bgm, *button;
+        Stardust::Audio::AudioClip* bgm, *button;
 		Panorama* panorama;
 		Timer t;
 

@@ -1,11 +1,5 @@
 TARGET = Minecraft
-OBJS = Engine/Shadow/Audio/sound_utils/pgeWav.o \
-Minecraft/Client/World/BlockData.o \
-Engine/Shadow/Audio/sound_utils/vfsFile.o \
-Engine/Shadow/Audio/sound_utils/VirtualFile.o \
-Engine/Shadow/Audio/sound_utils/audio.o \
-Engine/Shadow/Audio/sound_utils/bgm.o \
-Engine/Shadow/Audio/AudioManager.o \
+OBJS = Minecraft/Client/World/BlockData.o \
 Engine/Shadow/Utils/Timer.o \
 Engine/Shadow/Utils/StateManager.o \
 Engine/Shadow/Utils/Logger.o \

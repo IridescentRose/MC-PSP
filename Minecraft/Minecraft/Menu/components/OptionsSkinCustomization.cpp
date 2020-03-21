@@ -105,7 +105,7 @@ namespace Minecraft::Menus{
 
     void MenuState::optionsSkinScreenUpdate(){
         if(Input::KeyPressed(PSP_CTRL_RTRIGGER)){
-            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+            button->Play(0);
             selectRegion++;
             if(selectRegion > 1){
                 selectRegion = 1;
@@ -113,7 +113,7 @@ namespace Minecraft::Menus{
         }
 
         if(Input::KeyPressed(PSP_CTRL_LTRIGGER)){
-            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+            button->Play(0);
             selectRegion--;
             if(selectRegion < 0){
                 selectRegion = 0;
@@ -121,7 +121,7 @@ namespace Minecraft::Menus{
         }
 
         if(Input::KeyPressed(PSP_CTRL_DOWN)){
-            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+            button->Play(0);
             selectPosY++;
             if(selectPosY > 4){
                 selectPosY = 4;
@@ -129,7 +129,7 @@ namespace Minecraft::Menus{
         }
         
         if(Input::KeyPressed(PSP_CTRL_UP)){
-            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+            button->Play(0);
             selectPosY--;
             if(selectPosY < 0){
                 selectPosY = 0;
@@ -137,7 +137,7 @@ namespace Minecraft::Menus{
         }
 
         if(Input::KeyPressed(PSP_CTRL_CROSS)){
-            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+            button->Play(0);
             if(selectRegion == 0){ //LEFT SIDE
                 if(selectPosY == 0){
                     Common::g_OptionsManager.options.modelPart_cape = !Common::g_OptionsManager.options.modelPart_cape;

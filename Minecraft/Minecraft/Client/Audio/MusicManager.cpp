@@ -22,7 +22,7 @@ namespace Minecraft::Audio {
 	RandomMusicGenerator::RandomMusicGenerator()
 	{
 		timeUntilNext = 0;
-		snd = NULL;
+		clip = NULL;
 	}
 	RandomMusicGenerator::~RandomMusicGenerator()
 	{
@@ -35,8 +35,9 @@ namespace Minecraft::Audio {
 	}
 	void RandomMusicGenerator::Cleanup()
 	{
-		if(snd != NULL){
-			oslStopSound(snd);
+		if(clip != NULL){
+			clip->Stop();
+			delete clip;
 		}
 	}
 	void RandomMusicGenerator::FixedUpdate()
@@ -44,8 +45,9 @@ namespace Minecraft::Audio {
 		if (timeUntilNext <= 0) {
 			//PLAY RANDOM
 			
-			if (snd != NULL) {
-				oslStopSound(snd);
+			if (clip != NULL) {
+				clip->Stop();
+				delete clip;
 			}
 
 			int choice = rand() % 4;
@@ -81,13 +83,11 @@ namespace Minecraft::Audio {
 			path += std::to_string(actualChoice);
 			path += ".bgm";
 
-			snd = oslLoadSoundFile(path.c_str(), OSL_FMT_STREAM); //STREAM!
-			g_AudioManager.PlayMusic(snd);
+			clip = new AudioClip(path);
+			clip->Play(7);
 
 			srand(time(NULL));
 			timeUntilNext = 6001 + (rand() % 2000);
-
-			Logging::log("Music Time Left: " + std::to_string(timeUntilNext), Logging::LOGGER_LEVEL_INFO);
 		}
 	}
 }

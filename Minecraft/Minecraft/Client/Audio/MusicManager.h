@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Shadow/Audio/AudioManager.hpp>
-using namespace Shadow::Audio;
+#include <Audio/AudioClip.h>
+using namespace Stardust::Audio;
 
 namespace Minecraft::Audio {
 	class RandomMusicGenerator {
@@ -17,6 +17,6 @@ namespace Minecraft::Audio {
 
 		int timeUntilNext;
 	private:
-		OSL_SOUND* snd;
+		AudioClip* clip;
 	};
 }

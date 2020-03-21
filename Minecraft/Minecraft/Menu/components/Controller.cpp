@@ -181,7 +181,7 @@ namespace Minecraft::Menus{
 	void MenuState::controlUpdate(){
 
         if(Input::KeyPressed(PSP_CTRL_DOWN)){
-            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+            button->Play(0);
             selectPosY++;
             if(selectPosY > 16){
                 selectPosY = 16;
@@ -189,7 +189,7 @@ namespace Minecraft::Menus{
         }
         
         if(Input::KeyPressed(PSP_CTRL_UP)){
-            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+            button->Play(0);
             selectPosY--;
             if(selectPosY < 0){
                 selectPosY = 0;

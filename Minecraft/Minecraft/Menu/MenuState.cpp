@@ -62,9 +62,9 @@ namespace Minecraft::Menus{
         ss << musicChoice;
         ss << ".bgm";
 
-	    bgm = oslLoadSoundFile(ss.str().c_str(),OSL_FMT_STREAM);
-        button = oslLoadSoundFile("./assets/sounds/random/click.wav", 0);
-	    g_AudioManager.PlayMusic(bgm);
+	    bgm = new Stardust::Audio::AudioClip(ss.str(), true);
+        button = new Stardust::Audio::AudioClip("./assets/sounds/random/click.wav");
+	    bgm->Play(7);
 
         panorama = new Panorama();
 
@@ -158,10 +158,10 @@ namespace Minecraft::Menus{
 
 	void MenuState::Pause(){
 		//CLEAN SOUND
-        oslStopSound(bgm);
-        oslStopSound(button);
-		oslDeleteSound(bgm);
-		oslDeleteSound(button);
+        bgm->Stop();
+        button->Stop();
+        delete bgm;
+        delete button;
 
         
 
@@ -223,9 +223,10 @@ namespace Minecraft::Menus{
 		std::string s(os.str());
 		std::cout << "RAM AVAILABLE FOR CLIENT: " + s << std::endl;
 
-		bgm = oslLoadSoundFile(ss.str().c_str(), OSL_FMT_STREAM);
-		button = oslLoadSoundFile("./assets/sounds/random/click.wav", 0);
-		g_AudioManager.PlayMusic(bgm);
+
+	    bgm = new Stardust::Audio::AudioClip(ss.str(), true);
+        button = new Stardust::Audio::AudioClip("./assets/sounds/random/click.wav");
+	    bgm->Play(7);
 
 		panorama = new Panorama();
 
@@ -289,7 +290,7 @@ namespace Minecraft::Menus{
 	void MenuState::Update(StateManager* sManager){
         dt = t.deltaTime();
         elapsed += dt;
-        g_AudioManager.Update();
+        
 
         Input::InputUpdate();
         switch(menu_states){

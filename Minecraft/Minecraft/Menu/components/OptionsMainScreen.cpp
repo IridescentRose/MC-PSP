@@ -140,7 +140,7 @@ namespace Minecraft::Menus{
     }
 	void MenuState::optionsMainScreenUpdate(){
         if(Input::KeyPressed(PSP_CTRL_RTRIGGER)){
-            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+            button->Play(0);
             selectRegion++;
             if(selectRegion > 1){
                 selectRegion = 1;
@@ -148,7 +148,7 @@ namespace Minecraft::Menus{
         }
 
         if(Input::KeyPressed(PSP_CTRL_LTRIGGER)){
-            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+            button->Play(0);
             selectRegion--;
             if(selectRegion < 0){
                 selectRegion = 0;
@@ -156,7 +156,7 @@ namespace Minecraft::Menus{
         }
 
         if(Input::KeyPressed(PSP_CTRL_DOWN)){
-            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+            button->Play(0);
             selectPosY++;
             if(selectPosY > 5){
                 selectPosY = 5;
@@ -164,7 +164,7 @@ namespace Minecraft::Menus{
         }
         
         if(Input::KeyPressed(PSP_CTRL_UP)){
-            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+            button->Play(0);
             selectPosY--;
             if(selectPosY < 0){
                 selectPosY = 0;
@@ -190,7 +190,7 @@ namespace Minecraft::Menus{
     
 
         if(Input::KeyPressed(PSP_CTRL_CROSS)){
-            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+            button->Play(0);
             if(selectRegion == 0){ //LEFT SIDE
                 if(selectPosY == 0){} //NOTHING, this is modified by L/R
                 if(selectPosY == 1){

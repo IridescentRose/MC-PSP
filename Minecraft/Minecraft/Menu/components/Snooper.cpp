@@ -148,7 +148,7 @@ namespace Minecraft::Menus{
 	void MenuState::optionsSnooperScreenUpdate(){
 
         if(Input::KeyPressed(PSP_CTRL_CROSS)){
-            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+            button->Play(0);
             selectPosX = 0;
             selectPosY = 0;
             selectRegion = 0;

@@ -3,15 +3,15 @@
 
 #include <Shadow/Graphics/RenderManager.h>
 #include <Shadow/Utils/StateManager.h>
-#include <Shadow/Audio/AudioManager.hpp>
 #include <Shadow/Graphics/TextureUtil.h>
+
+#include <Platform/Platform.h>
 
 #include "Minecraft/Menu/Logo.hpp"
 #include "Minecraft/Version.hpp"
 #include "Minecraft/Menu/MenuState.hpp"
 using namespace Minecraft::Menus;
 
-using namespace Shadow::Audio;
 using namespace Shadow::Graphics;
 using namespace Shadow::Utils;
 using namespace Shadow;
@@ -21,10 +21,6 @@ PSP_MAIN_THREAD_ATTR(THREAD_ATTR_VFPU|THREAD_ATTR_USER);
 PSP_HEAP_SIZE_KB(-256);
 
 void initGame(){
-SetupCallbacks();
-	scePowerSetClockFrequency(333, 333, 166);
-	srand(time(NULL));
-
 	//initialize render manager
 	{
 		g_RenderManager.Init();
@@ -45,8 +41,8 @@ SetupCallbacks();
 		sceGumLoadIdentity();
 	}
 
-	//init and load sounds
-	g_AudioManager.init();
+	VirtualFileInit();
+	oslInitAudio();
 }
 
 void doSplash(){

@@ -148,7 +148,7 @@ if(Input::KeyPressed(PSP_CTRL_UP)){
                         if(selectPosX > 2){
                             selectPosX = 2;
                         }
-                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+                    button->Play(0);
                 }
                 if(Input::KeyPressed(PSP_CTRL_DOWN)){
                     selectPosY++;
@@ -156,7 +156,7 @@ if(Input::KeyPressed(PSP_CTRL_UP)){
                     if(selectPosY > 1){
                         selectPosY = 1;
                     }
-                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+                    button->Play(0);
                 }
                 if(Input::KeyPressed(PSP_CTRL_LEFT)){
                     selectPosX--;
@@ -164,7 +164,7 @@ if(Input::KeyPressed(PSP_CTRL_UP)){
                     if(selectPosX < 0){
                         selectPosX = 0;
                     }
-                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+                    button->Play(0);
                 }
                 if(Input::KeyPressed(PSP_CTRL_RIGHT)){
                     selectPosX++;
@@ -175,11 +175,11 @@ if(Input::KeyPressed(PSP_CTRL_UP)){
                     if(selectPosY == 0 && selectPosX > 2){
                         selectPosX = 2;
                     }
-                    g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+                    button->Play(0);
                 }
         if(Input::KeyPressed(PSP_CTRL_CROSS)){
 
-            g_AudioManager.PlaySound(button, AUDIO_CHANNEL_GUI);
+            button->Play(0);
             if(selectPosX == 3){
                 selectPosX = 0;
                 selectPosY = 0;
