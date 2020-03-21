@@ -1,11 +1,10 @@
 #pragma once
 #include <Shadow/Graphics/RenderManager.h>
 #include <Shadow/Graphics/Sprite.h>
-#include <Shadow/Utils/Timer.hpp>
+#include <Utilities/Timer.h>
 #include <Shadow/Graphics/Texture.h>
 
 using namespace Shadow::Graphics;
-using namespace Shadow::Utils;
 
 namespace Minecraft::Menus{
     class Logo{
@@ -17,7 +16,7 @@ namespace Minecraft::Menus{
 
         private:
 
-        Timer time;
+        Stardust::Utilities::Timer time;
         Sprite* sprite;
     };
 }

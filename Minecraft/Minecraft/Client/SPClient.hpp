@@ -2,7 +2,7 @@
 #include <string>
 #include <Shadow/Utils/StateManager.h>
 #include <Shadow/Utils/GameState.h>
-#include <Shadow/Utils/Timer.hpp>
+#include <Utilities/Timer.h>
 #include "Player.h"
 #include "World/World.h"
 
@@ -27,7 +27,7 @@ namespace Minecraft {
 			void Draw(StateManager* sManager);
 
 		private:
-			Timer updateTimer;
+			Stardust::Utilities::Timer updateTimer;
 			Player* player;
 		};
 	}

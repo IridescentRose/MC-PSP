@@ -10,7 +10,7 @@ namespace Minecraft::Menus{
     }
 
     void Logo::render(Texture* tex, unsigned int backgroundColor, float t){
-        time = Timer();
+        time = Stardust::Utilities::Timer();
         sprite = new Sprite(tex);
         sprite->SetPosition(240, 136);
         float timer = 0.0f;

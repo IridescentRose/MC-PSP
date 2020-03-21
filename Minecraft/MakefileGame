@@ -1,10 +1,8 @@
 TARGET = Minecraft
 OBJS = Minecraft/Client/World/BlockData.o \
-Engine/Shadow/Utils/Timer.o \
 Engine/Shadow/Utils/StateManager.o \
 Engine/Shadow/Utils/Logger.o \
 Engine/Shadow/Utils/common.o \
-Engine/Shadow/Utils/vfram.o \
 Engine/Shadow/Utils/vram.o \
 Engine/Shadow/System/Input.o \
 Engine/Shadow/System/Ram.o \

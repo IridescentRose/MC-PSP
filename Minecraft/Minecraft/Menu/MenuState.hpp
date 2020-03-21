@@ -4,7 +4,7 @@
 #include <Shadow/Utils/GameState.h>
 #include "components/Panorama.hpp"
 #include <Audio/AudioClip.h>
-#include <Shadow/Utils/Timer.hpp>
+#include <Utilities/Timer.h>
 #include <Shadow/Graphics/Sprite.h>
 #include <json/json.h>
 #include <pspmath.h>
@@ -103,7 +103,7 @@ namespace Minecraft::Menus{
 
         Stardust::Audio::AudioClip* bgm, *button;
 		Panorama* panorama;
-		Timer t;
+		Stardust::Utilities::Timer t;
 
 		Texture* logo;
 		Sprite* Minecraft1, *Minecraft2;

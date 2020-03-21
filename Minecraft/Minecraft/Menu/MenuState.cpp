@@ -52,7 +52,7 @@ namespace Minecraft::Menus{
         std::cerr << "ACT" << Input::actions.size() << std::endl;
 
 
-        t = Timer();
+        t = Stardust::Utilities::Timer();
         Common::g_OptionsManager.init();
         //BGM!!!
         srand(time(0));
@@ -207,7 +207,7 @@ namespace Minecraft::Menus{
         DIR *dir;
         struct dirent *ent;
 
-		t = Timer();
+		t = Stardust::Utilities::Timer();
 		//BGM!!!
 		srand(time(0));
 		int musicChoice = rand() % 4 + 1; //1 - 4

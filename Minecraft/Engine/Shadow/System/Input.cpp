@@ -153,8 +153,8 @@ float getY()
 	PspCtrlButtons nextAction()
 {
 
-	Utils::Timer t;
-	t = Utils::Timer();
+	Stardust::Utilities::Timer t;
+	t = Stardust::Utilities::Timer();
 
 	float delay = 0.1f;
 

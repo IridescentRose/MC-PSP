@@ -1,6 +1,6 @@
 #pragma once
 #include <pspkernel.h>
-#include <Shadow/Utils/Timer.hpp>
+#include <Utilities/Timer.h>
 #include "../Rendering/Sky.h"
 #include "../Rendering/Sun.h"
 #include "../Rendering/Moon.h"
@@ -15,7 +15,6 @@
 #include "../../Menu/LoadingScreen.hpp"
 #include "BlockData.h"
 
-using namespace Shadow::Utils;
 using namespace Shadow::Graphics;
 using namespace Minecraft::Terrain;
 namespace Minecraft::Client {
@@ -59,7 +58,7 @@ namespace Minecraft::Client {
 
 		void Save();
 
-		Timer tickTimer;
+		Stardust::Utilities::Timer tickTimer;
 		Terrain::ChunkManager* chunkMan;
 		Player* p;
 		int fps;

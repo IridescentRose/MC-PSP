@@ -19,7 +19,7 @@ namespace Minecraft::Client {
 	}
 
 	void SPClient::Init() {
-		updateTimer = Timer();
+		updateTimer = Stardust::Utilities::Timer();
 		
 		updateTimer.reset();
 		player = new Player();
