@@ -50,7 +50,7 @@ Minecraft/Client/ME/MediaEngine.o \
 
 INCDIR = $(PSPPATH)/include
 INCDIR += ./LameCraft ./include ./Engine ./libs ./libs/include
-CFLAGS = -O3 -g3 -mpreferred-stack-boundary=4 -ffast-math -fno-rtti -fno-exceptions #-DME_ENABLED
+CFLAGS = -O3 -g3 -mpreferred-stack-boundary=4 -ffast-math -fno-rtti -fno-exceptions -DME_ENABLED
 CXXFLAGS = -std=gnu++17
 ASFLAGS = $(CFLAGS)
 
