@@ -387,7 +387,7 @@ namespace Minecraft {
 						
 						BlockBreakEvent* e = new BlockBreakEvent();
 						e->type = EVENT_TYPE_BREAK;
-						e->breakPositionAbsolute = mc::Vector3d((int)currVec.x, (int)currVec.y, (int)currVec.z);
+						e->breakPositionAbsolute = glm::vec3((int)currVec.x, (int)currVec.y, (int)currVec.z);
 						g_World->eventBus.push(e);
 						break;
 					}
@@ -438,7 +438,7 @@ namespace Minecraft {
 						if( (abs((untrace - currPos).x) > 0.81f || abs((untrace - currPos).z) > 0.81f) || ((untrace - currPos).y > 0.5f) || (untrace - currPos).y < -1.75f){
 							BlockPlaceEvent* e = new BlockPlaceEvent();
 							e->type = EVENT_TYPE_PLACE;
-							e->placePositionAbsolute = mc::Vector3d((int)untrace.x, (int)untrace.y, (int)untrace.z);
+							e->placePositionAbsolute = glm::vec3((int)untrace.x, (int)untrace.y, (int)untrace.z);
 							e->blk = BlockData::InstancePointer()->registered_blocks[currBlock];
 							g_World->eventBus.push(e);
 						}

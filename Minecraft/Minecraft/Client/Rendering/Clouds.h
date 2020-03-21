@@ -2,7 +2,6 @@
 
 #include <Shadow/Graphics/RenderManager.h>
 #include <Shadow/Graphics/Vertex.h>
-#include <mclib/common/Vector.h>
 #include <glm/glm.hpp>
 using namespace Shadow::Graphics;
 

@@ -1,8 +1,9 @@
 #pragma once
 
 #include <array>
+#include <glm/glm.hpp>
 #include <vector>
-#include <mclib/common/Vector.h>
+#include <sstream>
 
 namespace std
 {
@@ -40,9 +41,9 @@ namespace Minecraft::Terrain {
 		~ChunkMesh();
 
 		void addFace(int faceType, const float blockFace[12], std::array<float, 8> texCoords,
-			mc::Vector3i chunkPosition,
-			mc::Vector3i blockPosition,
-			mc::Vector3f colorOffsets);
+			glm::vec3 chunkPosition,
+			glm::vec3 blockPosition,
+			glm::vec3 colorOffsets);
 
 		int faces;
 

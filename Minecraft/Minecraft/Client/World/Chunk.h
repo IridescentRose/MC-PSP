@@ -1,17 +1,17 @@
 #pragma once
 #include "ChunkMesh.h"
 #include <array>
-#include <mclib/common/Vector.h>
 #include "BlockData.h"
 #include <map>
 #include "WorldProvider.h"
 #define CHUNK_SIZE 16
 #include <Shadow/Physics/AABB.h>
+#include <mclib/common/Vector.h>
 #include <fstream>
 namespace Minecraft::Terrain{
 
 struct ChunkDataEntry{
-	mc::Vector3i position;
+	glm::vec3 position;
 	ChunkBlock blk;
 };
 
@@ -37,7 +37,7 @@ public:
 	void DrawTrans();
 	void Update(float dt);
 
-	void tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> texCoords, const mc::Vector3i& blockPosition, const mc::Vector3f& blockFacing, int type, ChunkManager* man, mc::Vector3f colorOffsets);
+	void tryAddFaceToMesh(const float blockFace[12], std::array<float, 8> texCoords, const glm::vec3& blockPosition, const glm::vec3& blockFacing, int type, ChunkManager* man, glm::vec3 colorOffsets);
 
 	//MESH
 	

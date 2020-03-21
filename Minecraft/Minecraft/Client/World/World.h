@@ -31,10 +31,10 @@ namespace Minecraft::Client {
 	};
 
 	struct BlockBreakEvent : Event {
-		mc::Vector3d breakPositionAbsolute;
+		glm::vec3 breakPositionAbsolute;
 	};
 	struct BlockPlaceEvent : Event {
-		mc::Vector3d placePositionAbsolute;
+		glm::vec3 placePositionAbsolute;
 		ChunkBlock blk;
 	};
 

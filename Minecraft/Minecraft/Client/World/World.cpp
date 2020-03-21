@@ -261,26 +261,26 @@ void Minecraft::Client::World::Update(float dt)
 				if(g_World->gameMode <= 1 || g_World->gameMode == 4){
 
 				BlockBreakEvent* b = (BlockBreakEvent*) v;
-				mc::Vector3i pos = mc::Vector3i(b->breakPositionAbsolute.x, b->breakPositionAbsolute.y, b->breakPositionAbsolute.z);
+				glm::vec3 pos = glm::vec3(b->breakPositionAbsolute.x, b->breakPositionAbsolute.y, b->breakPositionAbsolute.z);
 
 
 
 				//Calculate chunk position & relative position
-				mc::Vector3i chunkPos = mc::Vector3i(pos.x/16, pos.y/16, pos.z/16);
-				mc::Vector3i relPos = mc::Vector3i(pos.x%16, pos.y%16, pos.z%16);
+				glm::vec3 chunkPos = glm::vec3((int)pos.x/16, (int)pos.y/16, (int)pos.z/16);
+				glm::vec3 relPos = glm::vec3((int)pos.x%16, (int)pos.y%16, (int)pos.z%16);
 
 				chunkMan->setBlock(b->breakPositionAbsolute.x, b->breakPositionAbsolute.y, b->breakPositionAbsolute.z, {0, 0});
 				Chunk* ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z);
 				
 				bool check = false;
 				for(int i = 0; i < ch->delta.size(); i++){
-					if(ch->delta.at(i).position == mc::Vector3i(relPos.x, relPos.y, relPos.z)) {
+					if(ch->delta.at(i).position == glm::vec3(relPos.x, relPos.y, relPos.z)) {
 						check = true;
-						ch->delta.at(i) = {mc::Vector3i(relPos.x, relPos.y, relPos.z), {0,0}};
+						ch->delta.at(i) = {glm::vec3(relPos.x, relPos.y, relPos.z), {0,0}};
 					}
 				}
 				if(!check){
-					ch->delta.push_back({mc::Vector3i(relPos.x, relPos.y, relPos.z), {0, 0}});
+					ch->delta.push_back({glm::vec3(relPos.x, relPos.y, relPos.z), {0, 0}});
 				}
 
 				ch->updateMesh(chunkMan);
@@ -320,26 +320,26 @@ void Minecraft::Client::World::Update(float dt)
 			case EVENT_TYPE_PLACE:{
 				if(g_World->gameMode <= 1 || g_World->gameMode == 4){
 					BlockPlaceEvent* b = (BlockPlaceEvent*) v;
-				mc::Vector3i pos = mc::Vector3i(b->placePositionAbsolute.x, b->placePositionAbsolute.y, b->placePositionAbsolute.z);
+				glm::vec3 pos = glm::vec3(b->placePositionAbsolute.x, b->placePositionAbsolute.y, b->placePositionAbsolute.z);
 
 				//Calculate chunk position & relative position
-				mc::Vector3i chunkPos = mc::Vector3i(pos.x/16, pos.y/16, pos.z/16);
-				mc::Vector3i relPos = mc::Vector3i(pos.x%16, pos.y%16, pos.z%16);
+				glm::vec3 chunkPos = glm::vec3((int)pos.x/16, (int)pos.y/16, (int)pos.z/16);
+				glm::vec3 relPos = glm::vec3((int)pos.x%16, (int)pos.y%16, (int)pos.z%16);
 
 				Chunk* ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z);
-				if(ch->blocks[relPos.x][relPos.y][relPos.z].ID == 0){	
+				if(ch->blocks[(int)relPos.x][(int)relPos.y][(int)relPos.z].ID == 0){	
 					chunkMan->setBlock(b->placePositionAbsolute.x, b->placePositionAbsolute.y, b->placePositionAbsolute.z, b->blk);
-					ch->delta.push_back({mc::Vector3i(relPos.x, relPos.y, relPos.z), b->blk});
+					ch->delta.push_back({glm::vec3(relPos.x, relPos.y, relPos.z), b->blk});
 
 					bool check = false;
 				for(int i = 0; i < ch->delta.size(); i++){
-					if(ch->delta.at(i).position == mc::Vector3i(relPos.x, relPos.y, relPos.z)) {
+					if(ch->delta.at(i).position == glm::vec3(relPos.x, relPos.y, relPos.z)) {
 						check = true;
-						ch->delta.at(i) = {mc::Vector3i(relPos.x, relPos.y, relPos.z), b->blk};
+						ch->delta.at(i) = {glm::vec3(relPos.x, relPos.y, relPos.z), b->blk};
 					}
 				}
 				if(!check){
-					ch->delta.push_back({mc::Vector3i(relPos.x, relPos.y, relPos.z), b->blk});
+					ch->delta.push_back({glm::vec3(relPos.x, relPos.y, relPos.z), b->blk});
 				}
 
 				}
@@ -626,10 +626,10 @@ int Minecraft::Client::World::ChunkMan2(int gWorld){
 
 int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 {	
-	mc::Vector3i last_pos = mc::Vector3i(0, -1, 0);
+	glm::vec3 last_pos = glm::vec3(0, -1, 0);
 	while(!g_World->killReceived){
 
-		mc::Vector3i center = mc::Vector3i((-g_World->p->getPosition().x) / 16, (g_World->p->getPosition().y) / 16, (-g_World->p->getPosition().z) / 16);
+		glm::vec3 center = glm::vec3((-g_World->p->getPosition().x) / 16, (g_World->p->getPosition().y) / 16, (-g_World->p->getPosition().z) / 16);
 		
 		if(center != last_pos){
 		

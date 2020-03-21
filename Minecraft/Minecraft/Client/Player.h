@@ -1,6 +1,4 @@
 #pragma once
-#include <mclib/mclib.h>
-#include <mclib/common/Vector.h>
 #include <pspgum.h>
 #include "World/World.h"
 #include <Shadow/Graphics/Frustum.h>
