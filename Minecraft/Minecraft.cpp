@@ -6,6 +6,7 @@
 #include <Utilities/Timer.h>
 #include <Graphics/RendererCore.h>
 #include "Minecraft/Version.hpp"
+#include "Minecraft/State/StateManager.h"
 
 PSP_MODULE_INFO("Minecraft", 0, VERSION_MAJOR, VERSION_MINOR);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_VFPU|THREAD_ATTR_USER);
@@ -52,7 +53,18 @@ void doSplash(){
 
 
 void mainLoop(){
-	
+	StateManager stateManager;
+	stateManager.running = true;
+
+	//State *state = new MenuState();
+	//state->Init();
+	//stateManager.ChangeState(state);
+
+	while ( stateManager.running )
+	{
+		//stateManager.Update();
+		//stateManager.Draw();
+	}
 }
 
 

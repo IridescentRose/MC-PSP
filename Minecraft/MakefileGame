@@ -1,5 +1,6 @@
 TARGET = Minecraft
-OBJS = Minecraft.o
+OBJS = Minecraft/State/StateManager.o \
+Minecraft.o
 # Minecraft/Client/World/BlockData.o \
 # Minecraft/Common/Translations.o \
 # Minecraft/Common/Options.o \
