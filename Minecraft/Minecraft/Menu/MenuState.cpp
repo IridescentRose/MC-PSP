@@ -53,7 +53,6 @@ namespace Minecraft::Menus{
 
 
 	    bgm = new Stardust::Audio::AudioClip(ss.str(), true);
-        std::cerr << "WTF" << std::endl;
         bgm->Play(7);
 
         button = new Stardust::Audio::AudioClip("./assets/sounds/random/click.wav");
