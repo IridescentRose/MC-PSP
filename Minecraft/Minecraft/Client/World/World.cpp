@@ -508,7 +508,7 @@ void dcache_wbinv_all()
 void Minecraft::Client::World::Draw()
 {
 	if(!genning){
-		g_RenderManager.StartFrame(0, 0, 0);
+		g_RenderCore.StartFrame(0, 0, 0);
 
 	
 	//Load Projection Matrix
@@ -584,25 +584,25 @@ void Minecraft::Client::World::Draw()
 
 	sceGuDisable(GU_FOG);
 
-	g_RenderManager.SetOrtho();
+	g_RenderCore.SetOrtho();
 
-	g_RenderManager.DrawSetInverseColors();
+	g_RenderCore.DrawSetInverseColors();
 	
 	sceGuEnable(GU_BLEND);
 	crosshair->SetPosition(240, 136);
 	crosshair->Draw();
 
 
-	g_RenderManager.DrawSetDefaultColors();
+	g_RenderCore.DrawSetDefaultColors();
 
-	g_RenderManager.SetFontStyle(0.8f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_LEFT, 0);
-	g_RenderManager.DebugPrint(0, 7, "%s v%s", GAME_NAME, (IS_SNAPSHOT) ? INTERNAL_SNAPSHOT : INTERNAL_VERSION);
-	g_RenderManager.DebugPrint(0, 14, "%5.2f %5.2f %5.2f", p->getPosition().x + 32000, p->getPosition().y, p->getPosition().z + 32000);
+	g_RenderCore.SetFontStyle(0.8f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_LEFT, 0);
+	g_RenderCore.DebugPrint(0, 7, "%s v%s", GAME_NAME, (IS_SNAPSHOT) ? INTERNAL_SNAPSHOT : INTERNAL_VERSION);
+	g_RenderCore.DebugPrint(0, 14, "%5.2f %5.2f %5.2f", p->getPosition().x + 32000, p->getPosition().y, p->getPosition().z + 32000);
 
-	g_RenderManager.SetFontStyle(0.8f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_RIGHT, 0);
-	g_RenderManager.DebugPrint(480, 7, "FPS: %d", (int)fps + 1);
+	g_RenderCore.SetFontStyle(0.8f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_RIGHT, 0);
+	g_RenderCore.DebugPrint(480, 7, "FPS: %d", (int)fps + 1);
 
-		g_RenderManager.EndFrame();
+		g_RenderCore.EndFrame();
 	}
 }
 

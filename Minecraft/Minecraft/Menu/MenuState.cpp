@@ -46,10 +46,10 @@ namespace Minecraft::Menus{
 
         //INPUT!!!
 
-        Input::makeDefaultConfig();
-        Input::loadConfiguration("config.json");
+        makeDefaultConfig();
+        loadConfiguration("config.json");
 
-        std::cerr << "ACT" << Input::actions.size() << std::endl;
+        std::cerr << "ACT" << actions.size() << std::endl;
 
 
         t = Stardust::Utilities::Timer();
@@ -292,7 +292,7 @@ namespace Minecraft::Menus{
         elapsed += dt;
         
 
-        Input::InputUpdate();
+        InputUpdate();
         switch(menu_states){
 
             case MENU_STATE_LOAD_SELECT:{
@@ -361,17 +361,17 @@ namespace Minecraft::Menus{
     
 
 	void MenuState::Draw(StateManager* sManager){
-        g_RenderManager.StartFrame(0, 0, 0);
+        g_RenderCore.StartFrame(0, 0, 0);
 
         if(menu_states == MENU_STATE_TITLE){
-            g_RenderManager.SetPerspective(75, 480.0f / 272.0f, 0.3f, 1000.0f); //Into 3D Mode for panorama
+            g_RenderCore.SetPerspective(75, 480.0f / 272.0f, 0.3f, 1000.0f); //Into 3D Mode for panorama
             panoramaPass();
         }
 
-        g_RenderManager.SetOrtho(); //Into 2D Mode for menu pass
+        g_RenderCore.SetOrtho(); //Into 2D Mode for menu pass
         menuPass();
 
-        g_RenderManager.EndFrame();
+        g_RenderCore.EndFrame();
     }
 
     void MenuState::menuPass(){

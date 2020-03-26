@@ -12,8 +12,8 @@ namespace Minecraft::Menus{
         }
 
 
-        g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-        g_RenderManager.DebugPrint(240, 32, Common::g_TranslationOBJ.getText("options.sounds.title").c_str());
+        g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        g_RenderCore.DebugPrint(240, 32, Common::g_TranslationOBJ.getText("options.sounds.title").c_str());
 
         
         mega_slider->SetPosition(240, 64);
@@ -95,93 +95,93 @@ namespace Minecraft::Menus{
 
         //Text
         if(selectPosY == 6){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240, 208, "%s: %s", Common::g_TranslationOBJ.getText("options.showSubtitles").c_str(), (Common::g_OptionsManager.options.showSubtitles) ? Common::g_TranslationOBJ.getText("options.on").c_str() : Common::g_TranslationOBJ.getText("options.off").c_str());
+        g_RenderCore.DebugPrint(240, 208, "%s: %s", Common::g_TranslationOBJ.getText("options.showSubtitles").c_str(), (Common::g_OptionsManager.options.showSubtitles) ? Common::g_TranslationOBJ.getText("options.on").c_str() : Common::g_TranslationOBJ.getText("options.off").c_str());
 
         if(selectPosY == 7){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240, 240, Common::g_TranslationOBJ.getText("gui.done").c_str());
+        g_RenderCore.DebugPrint(240, 240, Common::g_TranslationOBJ.getText("gui.done").c_str());
 
         if(selectPosY == 0){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240, 64, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.master").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_master * 100));
+        g_RenderCore.DebugPrint(240, 64, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.master").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_master * 100));
 
         if(selectRegion == 0 && selectPosY == 1){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240-88, 64 + 24, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.music").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_music * 100));
+        g_RenderCore.DebugPrint(240-88, 64 + 24, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.music").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_music * 100));
 
         if(selectRegion == 0 && selectPosY == 2){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240-88, 64 + 48, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.weather").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_weather * 100));
+        g_RenderCore.DebugPrint(240-88, 64 + 48, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.weather").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_weather * 100));
 
         if(selectRegion == 0 && selectPosY == 3){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240-88, 64 + 72, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.hostile").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_hostile * 100));
+        g_RenderCore.DebugPrint(240-88, 64 + 72, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.hostile").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_hostile * 100));
         
         if(selectRegion == 0 && selectPosY == 4){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240-88, 64 + 96, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.player").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_player * 100));
+        g_RenderCore.DebugPrint(240-88, 64 + 96, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.player").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_player * 100));
 
         if(selectPosY == 5){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240-88, 64 + 120, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.voice").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_voice * 100));
+        g_RenderCore.DebugPrint(240-88, 64 + 120, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.voice").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_voice * 100));
 
 
         if(selectRegion == 1 && selectPosY == 1){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240+88, 64 + 24, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.record").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_record * 100));
+        g_RenderCore.DebugPrint(240+88, 64 + 24, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.record").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_record * 100));
 
         if(selectRegion == 1 && selectPosY == 2){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240+88, 64 + 48, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.block").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_block * 100));
+        g_RenderCore.DebugPrint(240+88, 64 + 48, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.block").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_block * 100));
 
         if(selectRegion == 1 && selectPosY == 3){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240+88, 64 + 72, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.neutral").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_neutral * 100));
+        g_RenderCore.DebugPrint(240+88, 64 + 72, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.neutral").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_neutral * 100));
         
         if(selectRegion == 1 && selectPosY == 4){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240+88, 64 + 96, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.ambient").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_ambient * 100));
+        g_RenderCore.DebugPrint(240+88, 64 + 96, "%s: %d%%", Common::g_TranslationOBJ.getText("soundCategory.ambient").c_str(), (int)(Common::g_OptionsManager.options.soundCategory_ambient * 100));
     }
 
     void MenuState::optionsMusicScreenUpdate(){
-        if(Input::KeyPressed(PSP_CTRL_RTRIGGER)){
+        if(KeyPressed(PSP_CTRL_RTRIGGER)){
             button->Play(0);
             selectRegion++;
             if(selectRegion > 1){
@@ -189,7 +189,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(Input::KeyPressed(PSP_CTRL_LTRIGGER)){
+        if(KeyPressed(PSP_CTRL_LTRIGGER)){
             button->Play(0);
             selectRegion--;
             if(selectRegion < 0){
@@ -197,7 +197,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(Input::KeyPressed(PSP_CTRL_DOWN)){
+        if(KeyPressed(PSP_CTRL_DOWN)){
             button->Play(0);
             selectPosY++;
             if(selectPosY > 7){
@@ -205,7 +205,7 @@ namespace Minecraft::Menus{
             }
         }
         
-        if(Input::KeyPressed(PSP_CTRL_UP)){
+        if(KeyPressed(PSP_CTRL_UP)){
             button->Play(0);
             selectPosY--;
             if(selectPosY < 0){
@@ -213,7 +213,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(Input::KeyPressed(PSP_CTRL_LEFT)){
+        if(KeyPressed(PSP_CTRL_LEFT)){
 
             if(selectPosY == 0){
                 Common::g_OptionsManager.options.soundCategory_master -= 0.01f;
@@ -316,7 +316,7 @@ namespace Minecraft::Menus{
             }
 
         }
-        if(Input::KeyPressed(PSP_CTRL_RIGHT)){
+        if(KeyPressed(PSP_CTRL_RIGHT)){
             if(selectPosY == 0){
                 Common::g_OptionsManager.options.soundCategory_master += 0.01f;
                 if(Common::g_OptionsManager.options.soundCategory_master < 0){
@@ -418,7 +418,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(Input::KeyPressed(PSP_CTRL_CROSS)){
+        if(KeyPressed(PSP_CTRL_CROSS)){
             if(selectPosY == 6){
                 Common::g_OptionsManager.options.showSubtitles = !Common::g_OptionsManager.options.showSubtitles;
             }

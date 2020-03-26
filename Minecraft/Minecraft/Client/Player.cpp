@@ -76,26 +76,26 @@ namespace Minecraft {
 
 		void Player::Update(float dt)
 		{
-			Input::InputUpdate();
+			InputUpdate();
 
 			boundingBox.position = glm::vec3(-position.x, position.y, -position.z) - glm::vec3(0.3f, 1.625f , 0.3f);
 
 
 			float rotSpeed = 120.0f; //Speed at which to rotate per second
 
-			if (Input::KeyPressed( Input::findButtonPair("lookUp") ) || Input::KeyHold(Input::findButtonPair("lookUp"))) {
+			if (KeyPressed( findButtonPair("lookUp") ) || KeyHold(findButtonPair("lookUp"))) {
 				pitch -= rotSpeed * dt;
 			}
 
-			if (Input::KeyPressed(Input::findButtonPair("lookDown")) || Input::KeyHold(Input::findButtonPair("lookDown"))) {
+			if (KeyPressed(findButtonPair("lookDown")) || KeyHold(findButtonPair("lookDown"))) {
 				pitch += rotSpeed * dt;
 			}
 
-			if (Input::KeyPressed(Input::findButtonPair("lookLeft")) || Input::KeyHold(Input::findButtonPair("lookLeft"))) {
+			if (KeyPressed(findButtonPair("lookLeft")) || KeyHold(findButtonPair("lookLeft"))) {
 				yaw -= rotSpeed * dt;
 			}
 
-			if (Input::KeyPressed(Input::findButtonPair("lookRight")) || Input::KeyHold(Input::findButtonPair("lookRight"))) {
+			if (KeyPressed(findButtonPair("lookRight")) || KeyHold(findButtonPair("lookRight"))) {
 				yaw += rotSpeed * dt;
 			}
 
@@ -153,7 +153,7 @@ namespace Minecraft {
 
 			}
 
-			if (Input::KeyPressed(Input::findButtonPair("walkForwards"))) {
+			if (KeyPressed(findButtonPair("walkForwards"))) {
 
 				float s = walkSpeed;
 
@@ -168,27 +168,27 @@ namespace Minecraft {
 				velocity.z += -vfpu_cosf(DEGTORAD(-yaw)) * s * dt;
 			}
 
-			if (Input::KeyPressed(Input::findButtonPair("walkBackward"))) {
+			if (KeyPressed(findButtonPair("walkBackward"))) {
 				velocity.x += vfpu_sinf(DEGTORAD(-yaw)) * walkSpeed * dt;
 				velocity.z += vfpu_cosf(DEGTORAD(-yaw)) * walkSpeed * dt;
 			}
 
-			if (Input::KeyPressed(Input::findButtonPair("walkStrafeLeft"))) {
+			if (KeyPressed(findButtonPair("walkStrafeLeft"))) {
 				velocity.x += -vfpu_sinf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt;
 				velocity.z += -vfpu_cosf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt;
 			}
 
-			if (Input::KeyPressed(Input::findButtonPair("walkStrafeRight"))) {
+			if (KeyPressed(findButtonPair("walkStrafeRight"))) {
 				velocity.x += -vfpu_sinf(DEGTORAD((-yaw - 270))) * walkSpeed * 0.7 * dt;
 				velocity.z += -vfpu_cosf(DEGTORAD((-yaw - 270))) * walkSpeed * 0.7 * dt;
 			}
 
 			if(flyEnabled){
-				if(Input::KeyPressed(Input::findButtonPair("jump")) || Input::KeyHold(Input::findButtonPair("jump"))){
+				if(KeyPressed(findButtonPair("jump")) || KeyHold(findButtonPair("jump"))){
 					//Fly upwards
 					velocity.y += 5.812 * dt;
 				}
-				if(Input::KeyPressed(Input::findButtonPair("sneak")) || Input::KeyHold(Input::findButtonPair("sneak"))){
+				if(KeyPressed(findButtonPair("sneak")) || KeyHold(findButtonPair("sneak"))){
 					//Fly downwards
 					velocity.y -= 4.317 *dt;
 				}
@@ -199,17 +199,17 @@ namespace Minecraft {
 				}
 			}
 
-			if(Input::KeyPressed(Input::findButtonPair("break")) && Input::KeyPressed(Input::findButtonPair("place"))){
+			if(KeyPressed(findButtonPair("break")) && KeyPressed(findButtonPair("place"))){
 				toggleFly();
 			}
 
-			if (Input::KeyPressed(Input::findButtonPair("sprint"))) {
+			if (KeyPressed(findButtonPair("sprint"))) {
 				if(!sneak){
 					sprint = !sprint;
 					changingFOV = true;
 				}
 			}
-			if (Input::KeyPressed(Input::findButtonPair("sneak"))) {
+			if (KeyPressed(findButtonPair("sneak"))) {
 				if (!sprint) {
 					sneak = !sneak;
 				}
@@ -323,7 +323,7 @@ namespace Minecraft {
 			}
 
 
-			if(Input::KeyPressed(Input::findButtonPair("jump")) && !isFly() && velocity.y > -0.2f){
+			if(KeyPressed(findButtonPair("jump")) && !isFly() && velocity.y > -0.2f){
 				velocity.y = 8.945f * 1.f / 60.0f;
 
 				// 1.25
@@ -354,7 +354,7 @@ namespace Minecraft {
 			sceGumTranslate(&pos);
 			sceGumStoreMatrix(&viewMatrix);
 
-			if(Input::KeyPressed(Input::findButtonPair("break"))){
+			if(KeyPressed(findButtonPair("break"))){
 				
 
 				//RAY CAST
@@ -396,7 +396,7 @@ namespace Minecraft {
 
 			}
 			
-			if(Input::KeyPressed(Input::findButtonPair("place"))){
+			if(KeyPressed(findButtonPair("place"))){
 
 
 				//RAY CAST
@@ -449,14 +449,14 @@ namespace Minecraft {
 				}
 			}
 
-			if(Input::KeyPressed(Input::findButtonPair("scrollLeft"))){
+			if(KeyPressed(findButtonPair("scrollLeft"))){
 				currBlock--;
 				if(currBlock < 0){
 					currBlock = BlockData::InstancePointer()->registered_blocks.size() - 1;
 				}
 			}
 
-			if(Input::KeyPressed(Input::findButtonPair("scrollRight"))){
+			if(KeyPressed(findButtonPair("scrollRight"))){
 				currBlock++;
 				if(currBlock == BlockData::InstancePointer()->registered_blocks.size()){
 					currBlock = 0;

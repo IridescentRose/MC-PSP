@@ -6,7 +6,9 @@
 #include <Utilities/Timer.h>
 #include <Graphics/RendererCore.h>
 #include "Minecraft/Version.hpp"
+#include "Minecraft/State/GameState.h"
 #include "Minecraft/State/StateManager.h"
+#include "Minecraft/Menu/MenuState.hpp"
 
 PSP_MODULE_INFO("Minecraft", 0, VERSION_MAJOR, VERSION_MINOR);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_VFPU|THREAD_ATTR_USER);
@@ -56,14 +58,14 @@ void mainLoop(){
 	StateManager stateManager;
 	stateManager.running = true;
 
-	//State *state = new MenuState();
-	//state->Init();
-	//stateManager.ChangeState(state);
+	Minecraft::Menus::MenuState *state = new Minecraft::Menus::MenuState();
+	state->Init();
+	stateManager.ChangeState(state);
 
 	while ( stateManager.running )
 	{
-		//stateManager.Update();
-		//stateManager.Draw();
+		stateManager.Update();
+		stateManager.Draw();
 	}
 }
 

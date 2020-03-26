@@ -59,58 +59,58 @@ namespace Minecraft::Menus{
 
                 //Labels
                 if(selectPosY == 0){
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
-                g_RenderManager.DebugPrint(240, 136, Common::g_TranslationOBJ.getText("menu.singleplayer").c_str());
+                g_RenderCore.DebugPrint(240, 136, Common::g_TranslationOBJ.getText("menu.singleplayer").c_str());
 
                 if(selectPosY == 1){
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
-                g_RenderManager.DebugPrint(240, 162, Common::g_TranslationOBJ.getText("menu.multiplayer").c_str());
+                g_RenderCore.DebugPrint(240, 162, Common::g_TranslationOBJ.getText("menu.multiplayer").c_str());
 
                 if(selectPosY == 2){
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
-                g_RenderManager.DebugPrint(240, 188, Common::g_TranslationOBJ.getText("menu.online").c_str());
+                g_RenderCore.DebugPrint(240, 188, Common::g_TranslationOBJ.getText("menu.online").c_str());
 
                 if(selectPosY == 3 && selectPosX == 1){
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
-                g_RenderManager.DebugPrint(188, 224, Common::g_TranslationOBJ.getText("menu.options").c_str());
+                g_RenderCore.DebugPrint(188, 224, Common::g_TranslationOBJ.getText("menu.options").c_str());
 
                 if(selectPosY == 3 && selectPosX == 2){
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }else{
-                    g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                    g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
                 }
-                g_RenderManager.DebugPrint(292, 224, Common::g_TranslationOBJ.getText("menu.quit").c_str());
+                g_RenderCore.DebugPrint(292, 224, Common::g_TranslationOBJ.getText("menu.quit").c_str());
 
 
                 //FOOT NOTES!
 
-                g_RenderManager.SetFontStyle(splashSize, 0xFF00FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-                g_RenderManager.DebugPrint(344, 72, "%s", splashText.c_str());
+                g_RenderCore.SetFontStyle(splashSize, 0xFF00FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+                g_RenderCore.DebugPrint(344, 72, "%s", splashText.c_str());
 
-                g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_LEFT, 0.0f);
-                g_RenderManager.DebugPrint(0, 272 - 7, " %s %s", GAME_NAME, EMULATED_VERSION);
+                g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_LEFT, 0.0f);
+                g_RenderCore.DebugPrint(0, 272 - 7, " %s %s", GAME_NAME, EMULATED_VERSION);
 
-                g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_RIGHT, 0.0f);
-                g_RenderManager.DebugPrint(480, 272 - 7, "Copyright Mojang AB. Do not distribute! ");
+                g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_RIGHT, 0.0f);
+                g_RenderCore.DebugPrint(480, 272 - 7, "Copyright Mojang AB. Do not distribute! ");
 
     }
 
     void MenuState::titleScreenUpdate(StateManager* sManager){
 
 		splashSize = vfpu_sinf(elapsed * 2 * 2 * 3.14159f) * (0.618f - (1.0f - 0.618f)) / 8 + (1.0f - 0.687f) * 2;
-                if(Input::KeyPressed(PSP_CTRL_UP)){
+                if(KeyPressed(PSP_CTRL_UP)){
                     selectPosY--;
 
                     if(selectPosY < 0){
@@ -118,7 +118,7 @@ namespace Minecraft::Menus{
                     }
                     button->Play(0);
                 }
-                if(Input::KeyPressed(PSP_CTRL_DOWN)){
+                if(KeyPressed(PSP_CTRL_DOWN)){
                     selectPosY++;
 
                     if(selectPosY > 3){
@@ -126,7 +126,7 @@ namespace Minecraft::Menus{
                     }
                     button->Play(0);
                 }
-                if(Input::KeyPressed(PSP_CTRL_LEFT)){
+                if(KeyPressed(PSP_CTRL_LEFT)){
                     selectPosX--;
 
                     if(selectPosX < 0){
@@ -134,7 +134,7 @@ namespace Minecraft::Menus{
                     }
                     button->Play(0);
                 }
-                if(Input::KeyPressed(PSP_CTRL_RIGHT)){
+                if(KeyPressed(PSP_CTRL_RIGHT)){
                     selectPosX++;
 
                     if(selectPosX > 2){
@@ -143,11 +143,11 @@ namespace Minecraft::Menus{
                     button->Play(0);
                 }
 
-                if(Input::KeyPressed(PSP_CTRL_START)){
+                if(KeyPressed(PSP_CTRL_START)){
                     sceKernelExitGame();
                 }
 
-                if(Input::KeyPressed(PSP_CTRL_CROSS)){
+                if(KeyPressed(PSP_CTRL_CROSS)){
                     if(selectPosY == 0){
                         //SINGLE PLAYER MENU
                         selectPosX = 0;

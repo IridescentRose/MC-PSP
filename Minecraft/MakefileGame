@@ -1,26 +1,26 @@
 TARGET = Minecraft
 OBJS = Minecraft/State/StateManager.o \
+Minecraft/Common/Translations.o \
+Minecraft/Common/Options.o \
+Minecraft/Menu/MenuState.o \
+Minecraft/Menu/components/TitleScreen.o \
+Minecraft/Menu/components/PlayGenerate.o \
+Minecraft/Menu/components/PlaySelect.o \
+Minecraft/Menu/components/LanguageScreen.o \
+Minecraft/Menu/components/OptionsMainScreen.o \
+Minecraft/Menu/components/OptionsSkinCustomization.o \
+Minecraft/Menu/components/ResourcePacks.o \
+Minecraft/Menu/components/OptionsMusicScreen.o\
+Minecraft/Menu/components/ChatScreen.o\
+Minecraft/Menu/components/Multiplayer.o\
+Minecraft/Menu/components/Controller.o\
+Minecraft/Menu/components/Snooper.o\
+Minecraft/Menu/components/VideoScreen.o\
+Minecraft/Menu/LoadingScreen.o\
+Minecraft/Menu/components/Panorama.o \
 Minecraft.o
+
 # Minecraft/Client/World/BlockData.o \
-# Minecraft/Common/Translations.o \
-# Minecraft/Common/Options.o \
-# Minecraft/Menu/Logo.o \
-# Minecraft/Menu/MenuState.o \
-# Minecraft/Menu/components/TitleScreen.o \
-# Minecraft/Menu/components/PlayGenerate.o \
-# Minecraft/Menu/components/PlaySelect.o \
-# Minecraft/Menu/components/LanguageScreen.o \
-# Minecraft/Menu/components/OptionsMainScreen.o \
-# Minecraft/Menu/components/OptionsSkinCustomization.o \
-# Minecraft/Menu/components/ResourcePacks.o \
-# Minecraft/Menu/components/OptionsMusicScreen.o\
-# Minecraft/Menu/components/ChatScreen.o\
-# Minecraft/Menu/components/Multiplayer.o\
-# Minecraft/Menu/components/Controller.o\
-# Minecraft/Menu/components/Snooper.o\
-# Minecraft/Menu/components/VideoScreen.o\
-# Minecraft/Menu/LoadingScreen.o\
-# Minecraft/Menu/components/Panorama.o \
 # Minecraft/Client/World/World.o \
 # Minecraft/Client/Player.o \
 # Minecraft/Client/SPClient.o \

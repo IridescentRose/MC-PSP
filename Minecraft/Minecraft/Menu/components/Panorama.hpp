@@ -1,11 +1,13 @@
 #pragma once
-#include <Shadow/Graphics/Vertex.h>
-#include <Shadow/Graphics/TextureUtil.h>
+#include <Graphics/RenderTypes.h>
+#include <Graphics/TextureUtil.h>
 #include <pspmath.h>
 
 namespace Minecraft::Menus{
 
-using namespace Shadow::Graphics;
+using namespace Stardust;
+using namespace Stardust::Graphics;
+
     class Panorama{
         public:
 
@@ -21,12 +23,12 @@ using namespace Shadow::Graphics;
         float size;
         int vertCount;
 
-        TexturedVertex* box0;
-        TexturedVertex* box1;
-        TexturedVertex* box2;
-        TexturedVertex* box3;
-        TexturedVertex* box4;
-        TexturedVertex* box5;
+        TextureVertex* box0;
+        TextureVertex* box1;
+        TextureVertex* box2;
+        TextureVertex* box3;
+        TextureVertex* box4;
+        TextureVertex* box5;
 
         Texture* tex0;
         Texture* tex1;

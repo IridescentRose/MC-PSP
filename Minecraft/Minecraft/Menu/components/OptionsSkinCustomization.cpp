@@ -11,8 +11,8 @@ namespace Minecraft::Menus{
         }
 
 
-        g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-        g_RenderManager.DebugPrint(240, 32, Common::g_TranslationOBJ.getText("options.skinCustomisation.title").c_str());
+        g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        g_RenderCore.DebugPrint(240, 32, Common::g_TranslationOBJ.getText("options.skinCustomisation.title").c_str());
 
         for(int i = 0; i < 4; i++){
             opt_unsel->SetPosition(240 - 88, 64 + 24 * i);
@@ -37,74 +37,74 @@ namespace Minecraft::Menus{
 
         //TEXT
         if(selectPosY == 4){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240, 160, Common::g_TranslationOBJ.getText("gui.done").c_str());
+        g_RenderCore.DebugPrint(240, 160, Common::g_TranslationOBJ.getText("gui.done").c_str());
         
         if(selectPosY == 0 && selectRegion == 0){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240 - 88, 64 + 0, "%s: %s ", Common::g_TranslationOBJ.getText("options.modelPart.cape").c_str(), (Common::g_OptionsManager.options.modelPart_cape) ? (Common::g_TranslationOBJ.getText("options.on").c_str()) : (Common::g_TranslationOBJ.getText("options.off").c_str()));
+        g_RenderCore.DebugPrint(240 - 88, 64 + 0, "%s: %s ", Common::g_TranslationOBJ.getText("options.modelPart.cape").c_str(), (Common::g_OptionsManager.options.modelPart_cape) ? (Common::g_TranslationOBJ.getText("options.on").c_str()) : (Common::g_TranslationOBJ.getText("options.off").c_str()));
         
         if(selectPosY == 1 && selectRegion == 0){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240 - 88, 64 + 24, "%s: %s ", Common::g_TranslationOBJ.getText("options.modelPart.left_sleeve").c_str(), (Common::g_OptionsManager.options.modelPart_left_sleeve) ? (Common::g_TranslationOBJ.getText("options.on").c_str()) : (Common::g_TranslationOBJ.getText("options.off").c_str()));
+        g_RenderCore.DebugPrint(240 - 88, 64 + 24, "%s: %s ", Common::g_TranslationOBJ.getText("options.modelPart.left_sleeve").c_str(), (Common::g_OptionsManager.options.modelPart_left_sleeve) ? (Common::g_TranslationOBJ.getText("options.on").c_str()) : (Common::g_TranslationOBJ.getText("options.off").c_str()));
         
         if(selectPosY == 2 && selectRegion == 0){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240 - 88, 64 + 48, "%s: %s ", Common::g_TranslationOBJ.getText("options.modelPart.left_pants_leg").c_str(), (Common::g_OptionsManager.options.modelPart_left_pants_leg) ? (Common::g_TranslationOBJ.getText("options.on").c_str()) : (Common::g_TranslationOBJ.getText("options.off").c_str()));
+        g_RenderCore.DebugPrint(240 - 88, 64 + 48, "%s: %s ", Common::g_TranslationOBJ.getText("options.modelPart.left_pants_leg").c_str(), (Common::g_OptionsManager.options.modelPart_left_pants_leg) ? (Common::g_TranslationOBJ.getText("options.on").c_str()) : (Common::g_TranslationOBJ.getText("options.off").c_str()));
 
         if(selectPosY == 3 && selectRegion == 0){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240 - 88, 64 + 72, "%s: %s ", Common::g_TranslationOBJ.getText("options.modelPart.hat").c_str(), (Common::g_OptionsManager.options.modelPart_hat) ? (Common::g_TranslationOBJ.getText("options.on").c_str()) : (Common::g_TranslationOBJ.getText("options.off").c_str()));
+        g_RenderCore.DebugPrint(240 - 88, 64 + 72, "%s: %s ", Common::g_TranslationOBJ.getText("options.modelPart.hat").c_str(), (Common::g_OptionsManager.options.modelPart_hat) ? (Common::g_TranslationOBJ.getText("options.on").c_str()) : (Common::g_TranslationOBJ.getText("options.off").c_str()));
 
 
         
         if(selectPosY == 0 && selectRegion == 1){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240 + 88, 64 + 0, "%s: %s ", Common::g_TranslationOBJ.getText("options.modelPart.jacket").c_str(), (Common::g_OptionsManager.options.modelPart_jacket) ? (Common::g_TranslationOBJ.getText("options.on").c_str()) : (Common::g_TranslationOBJ.getText("options.off").c_str()));
+        g_RenderCore.DebugPrint(240 + 88, 64 + 0, "%s: %s ", Common::g_TranslationOBJ.getText("options.modelPart.jacket").c_str(), (Common::g_OptionsManager.options.modelPart_jacket) ? (Common::g_TranslationOBJ.getText("options.on").c_str()) : (Common::g_TranslationOBJ.getText("options.off").c_str()));
         
         if(selectPosY == 1 && selectRegion == 1){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240 + 88, 64 + 24, "%s: %s ", Common::g_TranslationOBJ.getText("options.modelPart.right_sleeve").c_str(), (Common::g_OptionsManager.options.modelPart_right_sleeve) ? (Common::g_TranslationOBJ.getText("options.on").c_str()) : (Common::g_TranslationOBJ.getText("options.off").c_str()));
+        g_RenderCore.DebugPrint(240 + 88, 64 + 24, "%s: %s ", Common::g_TranslationOBJ.getText("options.modelPart.right_sleeve").c_str(), (Common::g_OptionsManager.options.modelPart_right_sleeve) ? (Common::g_TranslationOBJ.getText("options.on").c_str()) : (Common::g_TranslationOBJ.getText("options.off").c_str()));
         
         if(selectPosY == 2 && selectRegion == 1){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240 + 88, 64 + 48, "%s: %s ", Common::g_TranslationOBJ.getText("options.modelPart.right_pants_leg").c_str(), (Common::g_OptionsManager.options.modelPart_right_pants_leg) ? (Common::g_TranslationOBJ.getText("options.on").c_str()) : (Common::g_TranslationOBJ.getText("options.off").c_str()));
+        g_RenderCore.DebugPrint(240 + 88, 64 + 48, "%s: %s ", Common::g_TranslationOBJ.getText("options.modelPart.right_pants_leg").c_str(), (Common::g_OptionsManager.options.modelPart_right_pants_leg) ? (Common::g_TranslationOBJ.getText("options.on").c_str()) : (Common::g_TranslationOBJ.getText("options.off").c_str()));
 
         if(selectPosY == 3 && selectRegion == 1){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240 + 88, 64 + 72, "%s: %s ", Common::g_TranslationOBJ.getText("options.mainHand").c_str(), (Common::g_OptionsManager.options.mainHand) ? (Common::g_TranslationOBJ.getText("options.mainHand.right").c_str()) : (Common::g_TranslationOBJ.getText("options.mainHand.left").c_str()));
+        g_RenderCore.DebugPrint(240 + 88, 64 + 72, "%s: %s ", Common::g_TranslationOBJ.getText("options.mainHand").c_str(), (Common::g_OptionsManager.options.mainHand) ? (Common::g_TranslationOBJ.getText("options.mainHand.right").c_str()) : (Common::g_TranslationOBJ.getText("options.mainHand.left").c_str()));
 
     }
 
     void MenuState::optionsSkinScreenUpdate(){
-        if(Input::KeyPressed(PSP_CTRL_RTRIGGER)){
+        if(KeyPressed(PSP_CTRL_RTRIGGER)){
             button->Play(0);
             selectRegion++;
             if(selectRegion > 1){
@@ -112,7 +112,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(Input::KeyPressed(PSP_CTRL_LTRIGGER)){
+        if(KeyPressed(PSP_CTRL_LTRIGGER)){
             button->Play(0);
             selectRegion--;
             if(selectRegion < 0){
@@ -120,7 +120,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(Input::KeyPressed(PSP_CTRL_DOWN)){
+        if(KeyPressed(PSP_CTRL_DOWN)){
             button->Play(0);
             selectPosY++;
             if(selectPosY > 4){
@@ -128,7 +128,7 @@ namespace Minecraft::Menus{
             }
         }
         
-        if(Input::KeyPressed(PSP_CTRL_UP)){
+        if(KeyPressed(PSP_CTRL_UP)){
             button->Play(0);
             selectPosY--;
             if(selectPosY < 0){
@@ -136,7 +136,7 @@ namespace Minecraft::Menus{
             }
         }
 
-        if(Input::KeyPressed(PSP_CTRL_CROSS)){
+        if(KeyPressed(PSP_CTRL_CROSS)){
             button->Play(0);
             if(selectRegion == 0){ //LEFT SIDE
                 if(selectPosY == 0){

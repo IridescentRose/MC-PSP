@@ -45,36 +45,36 @@ namespace Minecraft::Menus{
             unselected->Draw();
         }
 
-        g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-        g_RenderManager.DebugPrint(240, 16, Common::g_TranslationOBJ.getText("selectWorld.create").c_str());
-        g_RenderManager.DebugPrint(240, 44, Common::g_TranslationOBJ.getText("selectWorld.enterName").c_str());
-        g_RenderManager.DebugPrint(240, 84, Common::g_TranslationOBJ.getText("selectWorld.enterSeed").c_str());
+        g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        g_RenderCore.DebugPrint(240, 16, Common::g_TranslationOBJ.getText("selectWorld.create").c_str());
+        g_RenderCore.DebugPrint(240, 44, Common::g_TranslationOBJ.getText("selectWorld.enterName").c_str());
+        g_RenderCore.DebugPrint(240, 84, Common::g_TranslationOBJ.getText("selectWorld.enterSeed").c_str());
 
 
 
 
         if(selectPosY == 0){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
         
-        g_RenderManager.DebugPrint(240, 60, Terrain::WorldProvider::worldName.c_str());
+        g_RenderCore.DebugPrint(240, 60, Terrain::WorldProvider::worldName.c_str());
 
         if(selectPosY == 1){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
         
-        g_RenderManager.DebugPrint(240, 100, seedName.c_str());
+        g_RenderCore.DebugPrint(240, 100, seedName.c_str());
 
 
 
         if(selectPosY == 2){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
 
         std::string modeSelect;
@@ -102,23 +102,23 @@ namespace Minecraft::Menus{
             }
         }
 
-        g_RenderManager.DebugPrint(240, 160, (Common::g_TranslationOBJ.getText("selectWorld.gameMode") + ": " + modeSelect).c_str());
+        g_RenderCore.DebugPrint(240, 160, (Common::g_TranslationOBJ.getText("selectWorld.gameMode") + ": " + modeSelect).c_str());
 
         if(selectPosY == 3){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
         
-        g_RenderManager.DebugPrint(240, 220, Common::g_TranslationOBJ.getText("gui.done").c_str());
+        g_RenderCore.DebugPrint(240, 220, Common::g_TranslationOBJ.getText("gui.done").c_str());
 
 
         if(selectPosY == 4){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240, 250, Common::g_TranslationOBJ.getText("gui.cancel").c_str());
+        g_RenderCore.DebugPrint(240, 250, Common::g_TranslationOBJ.getText("gui.cancel").c_str());
 
     }
 
@@ -141,7 +141,7 @@ namespace Minecraft::Menus{
 
 
 
-        if(Input::KeyPressed(PSP_CTRL_CROSS)){
+        if(KeyPressed(PSP_CTRL_CROSS)){
 
         if(selectPosY == 0){
                 unsigned short test2[16];
@@ -217,13 +217,13 @@ namespace Minecraft::Menus{
                 }
             }
         }
-        if(Input::KeyPressed(PSP_CTRL_UP)){
+        if(KeyPressed(PSP_CTRL_UP)){
             selectPosY--;
             if(selectPosY < 0){
                 selectPosY = 0;
             }
         }
-        if(Input::KeyPressed(PSP_CTRL_DOWN)){
+        if(KeyPressed(PSP_CTRL_DOWN)){
             selectPosY++;
             if(selectPosY > 4){
                 selectPosY = 4;

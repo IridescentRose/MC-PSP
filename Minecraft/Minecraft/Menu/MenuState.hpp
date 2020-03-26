@@ -1,30 +1,31 @@
 #pragma once
 
-#include <Shadow/Utils/StateManager.h>
-#include <Shadow/Utils/GameState.h>
+#include <Minecraft/State/GameState.h>
+#include <Minecraft/State/StateManager.h>
 #include "components/Panorama.hpp"
 #include <Audio/AudioClip.h>
 #include <Utilities/Timer.h>
-#include <Shadow/Graphics/Sprite.h>
+#include <Graphics/2D/SpriteBase.h>
 #include <json/json.h>
 #include <pspmath.h>
 
-#include <Shadow/Graphics/RenderManager.h>
+#include <Graphics/RendererCore.h>
 #include <string>
 #include <fstream>
 #include "../Version.hpp"
 #include <sstream>
 
-#include <Shadow/System/Input.h>
-#include <Shadow/System/Ram.h>
+#include <Utilities/Input.h>
 #include "../Common/Translations.hpp"
 #include "../Common/Options.hpp"
-#include <Shadow/Utils/Logger.h>
+#include <Utilities/Logger.h>
 #include <iostream>
 #define PSP_MENU_SIZE 1.0
 
-using namespace Shadow::System;
-using namespace Shadow::Utils;
+using namespace Stardust;
+using namespace Stardust::Utilities;
+using namespace Stardust::Graphics;
+using namespace Stardust::Graphics::Render2D;
 
 namespace Minecraft::Menus{
 

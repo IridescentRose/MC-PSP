@@ -1,9 +1,10 @@
 #pragma once
 
 #include <pspkerneltypes.h>
-#include <Shadow/Graphics/RenderManager.h>
-#include <Shadow/Graphics/Sprite.h>
-using namespace Shadow::Graphics;
+#include <Graphics/RendererCore.h>
+#include <Graphics/2D/SpriteBase.h>
+using namespace Stardust::Graphics;
+using namespace Stardust::Graphics::Render2D;
 
 
 class LoadingScreen

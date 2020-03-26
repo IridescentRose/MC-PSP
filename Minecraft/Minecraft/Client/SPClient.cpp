@@ -67,7 +67,7 @@ namespace Minecraft::Client {
 		player->Update(dt);	
 		g_World->Update(dt);
 
-		if(System::Input::KeyPressed(System::Input::findButtonPair("pause"))){
+		if(System::KeyPressed(System::findButtonPair("pause"))){
 			g_World->Save();
 			sceKernelExitGame();
 		}

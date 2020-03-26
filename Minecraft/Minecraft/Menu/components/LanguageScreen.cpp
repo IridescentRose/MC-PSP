@@ -20,12 +20,12 @@ namespace Minecraft::Menus{
         }
 
         //Languages at top of screen
-        g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-        g_RenderManager.DebugPrint(240, 24 - 7, Common::g_TranslationOBJ.getText("options.language").c_str());
+        g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        g_RenderCore.DebugPrint(240, 24 - 7, Common::g_TranslationOBJ.getText("options.language").c_str());
 
         //Language Disclaimer
-        g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF777777, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
-        g_RenderManager.DebugPrint(240, 208 - 7, ((std::string)("(" + Common::g_TranslationOBJ.getText("options.languageWarning") + ")")).c_str() );
+        g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF777777, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        g_RenderCore.DebugPrint(240, 208 - 7, ((std::string)("(" + Common::g_TranslationOBJ.getText("options.languageWarning") + ")")).c_str() );
 
         unselected->SetPosition(240, 232);
         unselected->Draw();
@@ -41,25 +41,25 @@ namespace Minecraft::Menus{
 
         //Done button
         if(selectRegion != 1){
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
-            g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+            g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderManager.DebugPrint(240, 240 - 7, Common::g_TranslationOBJ.getText("gui.done").c_str());
+        g_RenderCore.DebugPrint(240, 240 - 7, Common::g_TranslationOBJ.getText("gui.done").c_str());
 
-        g_RenderManager.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
+        g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         
         for(int i = 0; i < 8; i++){
             std::string res = Common::g_TranslationOBJ.availableTranslations()[i + langPos].name + " (" + Common::g_TranslationOBJ.availableTranslations()[i + langPos].region + ")";
-            g_RenderManager.DebugPrint(240, 41 + i * 20, res.c_str());
+            g_RenderCore.DebugPrint(240, 41 + i * 20, res.c_str());
         }
     }
 	void MenuState::languageScreenUpdate(){
 
-        if(Input::KeyPressed(PSP_CTRL_RTRIGGER)){
+        if(KeyPressed(PSP_CTRL_RTRIGGER)){
             selectRegion++;
         }
-        if(Input::KeyPressed(PSP_CTRL_LTRIGGER)){
+        if(KeyPressed(PSP_CTRL_LTRIGGER)){
             selectRegion--;
         }
         if(selectRegion > 1){
@@ -70,7 +70,7 @@ namespace Minecraft::Menus{
         }
 
         if(selectRegion == 0){
-            if(Input::KeyPressed(PSP_CTRL_DOWN)){
+            if(KeyPressed(PSP_CTRL_DOWN)){
                 if(langPosSel == 7){
                     //Then we scroll down the actual pos
                     langPos++;
@@ -82,7 +82,7 @@ namespace Minecraft::Menus{
                     langPosSel++;
                 }
             }
-            if(Input::KeyPressed(PSP_CTRL_UP)){
+            if(KeyPressed(PSP_CTRL_UP)){
                 if(langPosSel == 0){
                     langPos--;
                     if(langPos < 0){
@@ -95,7 +95,7 @@ namespace Minecraft::Menus{
                 }
             }
 
-            if(Input::KeyPressed(PSP_CTRL_CROSS)){
+            if(KeyPressed(PSP_CTRL_CROSS)){
                 Common::g_TranslationOBJ.setTranslation(Common::g_TranslationOBJ.availableTranslations()[langPosSel + langPos].code.c_str());
                 
                 Common::g_OptionsManager.open();
@@ -105,7 +105,7 @@ namespace Minecraft::Menus{
             }
 
         }else{
-            if(Input::KeyPressed(PSP_CTRL_CROSS)){
+            if(KeyPressed(PSP_CTRL_CROSS)){
                 menu_states = previous_states;
                 previous_states = MENU_STATE_LANGUAGE;
 
