@@ -1,5 +1,5 @@
 #include "../MenuState.hpp"
-#include "../../Client/SPClient.hpp"
+//#include "../../Client/SPClient.hpp"
 #include <dirent.h>
 #include <sys/stat.h>
 namespace Minecraft::Menus{
@@ -171,7 +171,7 @@ namespace Minecraft::Menus{
                             closedir (dir);
                         }
                         menu_states = MENU_STATE_LOAD_SELECT;
-                        Terrain::WorldProvider::seed = rand();
+                        //Terrain::WorldProvider::seed = rand();
 
                         
 

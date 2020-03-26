@@ -1,5 +1,5 @@
 #include "MenuState.hpp"
-#include <Shadow/Utils/Logger.h>
+#include <Utilities/Logger.h>
 #include <sys/stat.h>
 #include <dirent.h>
 #include "../Client/World/BlockData.h"
@@ -21,17 +21,10 @@ namespace Minecraft::Menus{
 
 	void MenuState::Init(){
         gm = 0;
-        BlockData::InstancePointer()->loadBlockData();
-		//Delete Logs from past launch
-		remove(Logging::logFile.c_str());
-		Logging::logging_level = Logging::LOGGER_LEVEL_TRACE; //Most "verbose"
+        //BlockData::InstancePointer()->loadBlockData();
+		Utilities::app_Logger->currentLevel = Utilities::LOGGER_LEVEL_TRACE; //Most "verbose"
 
-		u32 ramFree = freeMemory();
-		float ram = ((float)ramFree) / 1024.0f / 1024.0f;
-		std::ostringstream os;
-		os << ram;
-		std::string s(os.str());
-
+		
         struct stat buffer;
 
         if(stat("resourcepacks.txt", &buffer) == 0){
@@ -40,16 +33,14 @@ namespace Minecraft::Menus{
             std::string str;
             file >> str;
 
-            texPacksEnabled.push_back(str);
+            //texPacksEnabled.push_back(str);
 
         }
 
         //INPUT!!!
 
-        makeDefaultConfig();
-        loadConfiguration("config.json");
-
-        std::cerr << "ACT" << actions.size() << std::endl;
+        //makeDefaultConfig();
+        //loadConfiguration("config.json");
 
 
         t = Stardust::Utilities::Timer();
@@ -138,13 +129,6 @@ namespace Minecraft::Menus{
         Common::g_TranslationOBJ.setTranslation(Common::g_OptionsManager.options.lang);
 
         langPosMax = Common::g_TranslationOBJ.availableTranslations().size();
-		
-
-		ramFree = freeMemory();
-		ram = ((float)ramFree) / 1024.0f / 1024.0f;
-		std::ostringstream os2;
-		os2 << ram;
-		std::string s1(os2.str());
 
         entries.clear();
     }
@@ -216,13 +200,6 @@ namespace Minecraft::Menus{
 		ss << musicChoice;
 		ss << ".bgm";
 
-        u32 ramFree = freeMemory();
-		float ram = ((float)ramFree) / 1024.0f / 1024.0f;
-		std::ostringstream os;
-		os << ram;
-		std::string s(os.str());
-		std::cout << "RAM AVAILABLE FOR CLIENT: " + s << std::endl;
-
 
 	    bgm = new Stardust::Audio::AudioClip(ss.str(), true);
         button = new Stardust::Audio::AudioClip("./assets/sounds/random/click.wav");
@@ -292,7 +269,7 @@ namespace Minecraft::Menus{
         elapsed += dt;
         
 
-        InputUpdate();
+        updateInputs();
         switch(menu_states){
 
             case MENU_STATE_LOAD_SELECT:{
@@ -361,17 +338,22 @@ namespace Minecraft::Menus{
     
 
 	void MenuState::Draw(StateManager* sManager){
-        g_RenderCore.StartFrame(0, 0, 0);
+        g_RenderCore.BeginCommands();
+        g_RenderCore.Clear();
 
         if(menu_states == MENU_STATE_TITLE){
-            g_RenderCore.SetPerspective(75, 480.0f / 272.0f, 0.3f, 1000.0f); //Into 3D Mode for panorama
+            sceGumMatrixMode(GU_PROJECTION);
+            sceGumLoadIdentity();
+            sceGumPerspective(75, 480.0f / 272.0f, 0.3f, 1000.0f); //Into 3D Mode for panorama
             panoramaPass();
         }
 
-        g_RenderCore.SetOrtho(); //Into 2D Mode for menu pass
+        sceGumMatrixMode(GU_PROJECTION);
+        sceGumLoadIdentity();
+        sceGumOrtho(0, 480, 272, 0, -30, 30); //Into 2D Mode for menu
         menuPass();
 
-        g_RenderCore.EndFrame();
+        g_RenderCore.EndCommands();
     }
 
     void MenuState::menuPass(){

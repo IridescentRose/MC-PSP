@@ -1,8 +1,7 @@
 #include "../MenuState.hpp"
 
-#include <Shadow/System/NetworkDriver.h>
-#include <Shadow/System/Dialogs.h>
-using namespace Shadow::System;
+#include <Network/NetworkDriver.h>
+#include <Graphics/Dialogs.h>
 
 namespace Minecraft::Menus{
     
@@ -106,10 +105,10 @@ namespace Minecraft::Menus{
 	void MenuState::optionsMultiplayerScreenUpdate(StateManager* sManager){
 
 		if (!tryConnect && !connected) {
-			Network::Init();
+			//Network::Init();
 
-			bool res = Network::dialogConnect();
-			connected = res;
+			//bool res = Network::dialogConnect();
+			connected = false;
 			tryConnect = true;
 			
 			if (connected) {
@@ -118,7 +117,7 @@ namespace Minecraft::Menus{
 
 				unsigned short test2[16];
 				unsigned short opis2[9] = { 'U', 's', 'e', 'r', 'n', 'a', 'm', 'e', '\0' };
-				if (Dialogs::ShowOSK(opis2, test2, 16) != -1)
+				if (ShowOSK(opis2, test2, 16) != -1)
 				{
 					for (int j = 0; test2[j]; j++)
 					{
@@ -133,7 +132,7 @@ namespace Minecraft::Menus{
 				//TODO: STORE USERNAME!!!
 			}
 			else {
-				Network::Cleanup(); //Fixes crashing.
+				//Network::Cleanup(); //Fixes crashing.
 			}
 			
 		}
@@ -192,7 +191,7 @@ if(KeyPressed(PSP_CTRL_UP)){
 
 				unsigned short test2[15];
 				unsigned short opis2[11] = { 'I', 'P', ' ', 'A', 'd', 'd', 'r', 'e', 's', 's', '\0' };
-				if (Dialogs::ShowOSK(opis2, test2, 15) != -1)
+				if (ShowOSK(opis2, test2, 15) != -1)
 				{
 					for (int j = 0; test2[j]; j++)
 					{

@@ -34,8 +34,9 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
     sceGuEnable(GU_TEXTURE);
     sceGuEnable(GU_ALPHA_TEST);
     sceGuEnable(GU_BLEND);
-    g_RenderCore.SetOrtho();
-    g_RenderCore.StartFrame(0, 0, 0);
+    
+    g_RenderCore.BeginCommands();
+    g_RenderCore.Clear();
     
     for(int x = 0; x < 16; x++){
         for(int y = 0; y < 9; y++){
@@ -48,7 +49,7 @@ int LoadingScreen::RunLoadingScreen(SceSize args, void *argp)
     g_RenderCore.SetFontStyle(1.0f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0);
     g_RenderCore.DebugPrint(240, 136, Minecraft::Common::g_TranslationOBJ.getText("menu.generatingTerrain").c_str());
 
-    g_RenderCore.EndFrame();
+    g_RenderCore.EndCommands();
 	while(1){
     sceKernelDelayThread(1000000);
     }

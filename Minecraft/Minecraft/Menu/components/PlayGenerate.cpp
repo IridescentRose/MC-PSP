@@ -1,9 +1,7 @@
 #include "../MenuState.hpp"
 
-#include "../../Client/SPClient.hpp"
-#include <Shadow/System/Dialogs.h>
-
-using namespace Shadow::System;
+//#include "../../Client/SPClient.hpp"
+#include <Graphics/Dialogs.h>
 
 namespace Minecraft::Menus{
     void MenuState::playGenerateDraw(){
@@ -59,7 +57,7 @@ namespace Minecraft::Menus{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
         
-        g_RenderCore.DebugPrint(240, 60, Terrain::WorldProvider::worldName.c_str());
+        //g_RenderCore.DebugPrint(240, 60, Terrain::WorldProvider::worldName.c_str());
 
         if(selectPosY == 1){
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
@@ -77,8 +75,9 @@ namespace Minecraft::Menus{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
 
-        std::string modeSelect;
+        std::string modeSelect = "";
 
+/*
         switch(Client::g_World->gameMode){
             case 0:{
                 modeSelect = Common::g_TranslationOBJ.getText("gameMode.survival");
@@ -101,7 +100,7 @@ namespace Minecraft::Menus{
                 break;
             }
         }
-
+*/
         g_RenderCore.DebugPrint(240, 160, (Common::g_TranslationOBJ.getText("selectWorld.gameMode") + ": " + modeSelect).c_str());
 
         if(selectPosY == 3){
@@ -150,15 +149,15 @@ namespace Minecraft::Menus{
             test2[i] = '\0';
         }
 		unsigned short opis2[5] = { 'N', 'a', 'm', 'e', '\0' };
-		if (Dialogs::ShowOSK(opis2, test2, 16) != -1)
+		if (ShowOSK(opis2, test2, 16) != -1)
 		{
 
-        Terrain::WorldProvider::worldName = "";
+        //Terrain::WorldProvider::worldName = "";
 			for (int j = 0; test2[j]; j++)
 			{
 				unsigned c = test2[j];
-				if (32 <= c && c <= 127) // print ascii only
-					Terrain::WorldProvider::worldName += c;
+				//if (32 <= c && c <= 127) // print ascii only
+					//Terrain::WorldProvider::worldName += c;
 			}
 		}
 
@@ -173,7 +172,7 @@ namespace Minecraft::Menus{
             test2[i] = '\0';
         }
 		unsigned short opis2[5] = { 'S', 'e', 'e', 'd', '\0' };
-		if (Dialogs::ShowOSK(opis2, test2, 16) != -1)
+		if (ShowOSK(opis2, test2, 16) != -1)
 		{
 			for (int j = 0; test2[j]; j++)
 			{
@@ -183,7 +182,7 @@ namespace Minecraft::Menus{
 			}
 		}
         
-		        Terrain::WorldProvider::seed = hashString(seedName);
+		        //Terrain::WorldProvider::seed = hashString(seedName);
             }
 
             if(selectPosY == 4){
@@ -196,25 +195,25 @@ namespace Minecraft::Menus{
             }
             if(selectPosY == 3){
                 //Generate
-                terrain_atlas = TextureUtil::LoadPng("assets/minecraft/textures/terrain_atlas.png");
+                //terrain_atlas = TextureUtil::LoadPng("assets/minecraft/textures/terrain_atlas.png");
                 
-                gm = Client::g_World->gameMode;
-                Client::SPClient* client = new Client::SPClient();
+                //gm = Client::g_World->gameMode;
+                //Client::SPClient* client = new Client::SPClient();
 						
-		        client->Init();
+		        //client->Init();
 
                 
-                Client::g_World->gameMode = gm;
-                Client::g_World->handleGM();
-                std::cout << gm << std::endl;
-		        sManager->PushState(client);
+                //Client::g_World->gameMode = gm;
+                //Client::g_World->handleGM();
+                //std::cout << gm << std::endl;
+		        //sManager->PushState(client);
             }
 
             if(selectPosY == 2){
-                Client::g_World->gameMode++;
-                if(Client::g_World->gameMode > 4){
-                    Client::g_World->gameMode = 0;
-                }
+                //Client::g_World->gameMode++;
+                //if(Client::g_World->gameMode > 4){
+                //    Client::g_World->gameMode = 0;
+                //}
             }
         }
         if(KeyPressed(PSP_CTRL_UP)){

@@ -5,12 +5,12 @@ namespace Minecraft::Menus{
         vertCount = 0;
 
         //BUILD VERTICES
-        box0 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
-		box1 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
-		box2 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
-		box3 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
-		box4 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
-		box5 = (TexturedVertex*)memalign(16,4 * sizeof(TexturedVertex));
+        box0 = (TextureVertex*)memalign(16,4 * sizeof(TextureVertex));
+		box1 = (TextureVertex*)memalign(16,4 * sizeof(TextureVertex));
+		box2 = (TextureVertex*)memalign(16,4 * sizeof(TextureVertex));
+		box3 = (TextureVertex*)memalign(16,4 * sizeof(TextureVertex));
+		box4 = (TextureVertex*)memalign(16,4 * sizeof(TextureVertex));
+		box5 = (TextureVertex*)memalign(16,4 * sizeof(TextureVertex));
 
         tex0 = TextureUtil::LoadPng("./assets/minecraft/textures/gui/title/background/panorama_1.png");
         tex1 = TextureUtil::LoadPng("./assets/minecraft/textures/gui/title/background/panorama_3.png");
@@ -51,7 +51,7 @@ namespace Minecraft::Menus{
 			box0[i].v = 1;
 			i++;
 
-			sceKernelDcacheWritebackInvalidateRange(box0,4 * sizeof(TexturedVertex));
+			sceKernelDcacheWritebackInvalidateRange(box0,4 * sizeof(TextureVertex));
 
             i = 0;
 
@@ -83,7 +83,7 @@ namespace Minecraft::Menus{
 			box1[i].v = 1;
 			i++;
 
-			sceKernelDcacheWritebackInvalidateRange(box1,4 * sizeof(TexturedVertex));
+			sceKernelDcacheWritebackInvalidateRange(box1,4 * sizeof(TextureVertex));
 
             i = 0;
 
@@ -115,7 +115,7 @@ namespace Minecraft::Menus{
 			box2[i].v = 1;
 			i++;
 
-			sceKernelDcacheWritebackInvalidateRange(box2,4 * sizeof(TexturedVertex));
+			sceKernelDcacheWritebackInvalidateRange(box2,4 * sizeof(TextureVertex));
 
             i = 0;
 
@@ -147,7 +147,7 @@ namespace Minecraft::Menus{
 			box3[i].v = 0;
 			i++;
 
-			sceKernelDcacheWritebackInvalidateRange(box3,4 * sizeof(TexturedVertex));
+			sceKernelDcacheWritebackInvalidateRange(box3,4 * sizeof(TextureVertex));
 
             i = 0;
 
@@ -179,7 +179,7 @@ namespace Minecraft::Menus{
 			box4[i].v = 1;
 			i++;
 
-			sceKernelDcacheWritebackInvalidateRange(box4,4 * sizeof(TexturedVertex));
+			sceKernelDcacheWritebackInvalidateRange(box4,4 * sizeof(TextureVertex));
 
             i = 0;
 
@@ -211,7 +211,7 @@ namespace Minecraft::Menus{
 			box5[i].v = 1;
 			i++;
 
-			sceKernelDcacheWritebackInvalidateRange(box5,4 * sizeof(TexturedVertex));
+			sceKernelDcacheWritebackInvalidateRange(box5,4 * sizeof(TextureVertex));
     }
 
     Panorama::~Panorama(){

@@ -4,10 +4,9 @@
 #include <sys/stat.h>
 
 
-#include <Shadow/System/Dialogs.h>
+#include <Graphics/Dialogs.h>
 
-#include "../../Client/SPClient.hpp"
-using namespace Shadow::System;
+//#include "../../Client/SPClient.hpp"
 
 void remove_dir(char *path)
 {
@@ -258,14 +257,14 @@ namespace Minecraft::Menus{
                 if(entries.size() > 0 ){
                     
                 if(selectPosY == 0 && selectPosX == 0){
-                    Terrain::WorldProvider::worldName = entries[loadPosSel];
+                    //Terrain::WorldProvider::worldName = entries[loadPosSel];
                     //LOAD WORLD!
-                    terrain_atlas = TextureUtil::LoadPng("assets/minecraft/textures/terrain_atlas.png");
-                    Client::SPClient* client = new Client::SPClient();
+                    //terrain_atlas = TextureUtil::LoadPng("assets/minecraft/textures/terrain_atlas.png");
+                    //Client::SPClient* client = new Client::SPClient();
 						
-		            client->Init();
+		            //client->Init();
 
-		            sManager->PushState(client);
+		            //sManager->PushState(client);
                 }
 
                 if(selectPosY == 1 && selectPosX == 0){
@@ -279,7 +278,7 @@ namespace Minecraft::Menus{
                     }
 		            unsigned short opis2[5] = { 'N', 'a', 'm', 'e', '\0' };
 		
-                    if (Dialogs::ShowOSK(opis2, test2, 16) != -1){
+                    if (ShowOSK(opis2, test2, 16) != -1){
                         newName = "";
 			            for (int j = 0; test2[j]; j++){
 				            unsigned c = test2[j];
@@ -338,7 +337,6 @@ namespace Minecraft::Menus{
                     selectRegion = 0;
                     previous_states = menu_states;
 
-                    std::cout << "LOAD" << std::endl;
                     menu_states = MENU_STATE_PLAY_GENERATE;
                 }
 
