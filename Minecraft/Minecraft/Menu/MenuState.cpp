@@ -24,7 +24,6 @@ namespace Minecraft::Menus{
         //BlockData::InstancePointer()->loadBlockData();
 		Utilities::app_Logger->currentLevel = Utilities::LOGGER_LEVEL_TRACE; //Most "verbose"
 
-		
         struct stat buffer;
 
         if(stat("resourcepacks.txt", &buffer) == 0){
@@ -42,7 +41,6 @@ namespace Minecraft::Menus{
         //makeDefaultConfig();
         //loadConfiguration("config.json");
 
-
         t = Stardust::Utilities::Timer();
         Common::g_OptionsManager.init();
         //BGM!!!
@@ -53,9 +51,13 @@ namespace Minecraft::Menus{
         ss << musicChoice;
         ss << ".bgm";
 
+
 	    bgm = new Stardust::Audio::AudioClip(ss.str(), true);
+        std::cerr << "WTF" << std::endl;
+        bgm->Play(7);
+
         button = new Stardust::Audio::AudioClip("./assets/sounds/random/click.wav");
-	    bgm->Play(7);
+	    
 
         panorama = new Panorama();
 
@@ -68,7 +70,6 @@ namespace Minecraft::Menus{
         std::ifstream infile("./assets/minecraft/texts/splashes.txt");
 
         std::vector<std::string> splashes;
-
         std::string temp;
 	    while(std::getline(infile, temp)){
 		    splashes.push_back(temp);
@@ -124,6 +125,7 @@ namespace Minecraft::Menus{
         options_bg = TextureUtil::LoadPng("assets/minecraft/textures/gui/options_background.png");
         options_tile = new Sprite(options_bg);
         options_tile->Scale(2.0f, 2.0f);
+
 
         Common::g_TranslationOBJ.init();
         Common::g_TranslationOBJ.setTranslation(Common::g_OptionsManager.options.lang);
