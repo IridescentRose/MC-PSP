@@ -188,6 +188,7 @@ namespace Minecraft::Rendering {
 	void Sky::Draw()
 	{
 		sceGuEnable(GU_BLEND);
+		sceGuShadeModel(GU_SMOOTH);
 		sceGuDisable(GU_DEPTH_TEST);
 		sceGuFrontFace(GU_CCW);
 
