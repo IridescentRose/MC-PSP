@@ -82,23 +82,21 @@ namespace Minecraft {
 
 			float rotSpeed = 120.0f; //Speed at which to rotate per second
 
-			/*
-			if (KeyPressed( findButtonPair("lookUp") ) || KeyHold(findButtonPair("lookUp"))) {
-				pitch -= rotSpeed * dt;
-			}
-
-			if (KeyPressed(findButtonPair("lookDown")) || KeyHold(findButtonPair("lookDown"))) {
+			if (KeyPressed(PSP_CTRL_CROSS) || KeyHold(PSP_CTRL_CROSS)) {
 				pitch += rotSpeed * dt;
 			}
 
-			if (KeyPressed(findButtonPair("lookLeft")) || KeyHold(findButtonPair("lookLeft"))) {
+			if (KeyPressed(PSP_CTRL_TRIANGLE) || KeyHold(PSP_CTRL_TRIANGLE)) {
+				pitch -= rotSpeed * dt;
+			}
+
+			if (KeyPressed(PSP_CTRL_SQUARE) || KeyHold(PSP_CTRL_SQUARE)) {
 				yaw -= rotSpeed * dt;
 			}
 
-			if (KeyPressed(findButtonPair("lookRight")) || KeyHold(findButtonPair("lookRight"))) {
+			if (KeyPressed(PSP_CTRL_CIRCLE) || KeyHold(PSP_CTRL_CIRCLE)) {
 				yaw += rotSpeed * dt;
 			}
-			*/
 
 			if (yaw > 360) {
 				yaw = 0;
