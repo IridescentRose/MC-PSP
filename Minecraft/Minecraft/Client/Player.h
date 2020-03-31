@@ -1,8 +1,7 @@
 #pragma once
 #include <pspgum.h>
-#include "World/World.h"
-#include <Shadow/Graphics/Frustum.h>
-#include <Shadow/Physics/AABB.h>
+#include <Math/Frustum.h>
+#include <Math/AABB.h>
 
 
 namespace Minecraft {
@@ -62,7 +61,7 @@ namespace Minecraft {
 				return flyEnabled;
 			}
 
-			inline ViewFrustum getFrustum(){
+			inline Stardust::Math::ViewFrustum getFrustum(){
 				return m_Frustum;
 			}
 
@@ -71,7 +70,7 @@ namespace Minecraft {
 			ScePspFMatrix4 viewMatrix;
 			ScePspFMatrix4 viewPreMatrix;
 			ScePspFMatrix4 projViewMatrix;
-			AABB boundingBox;
+			Stardust::Math::AABB boundingBox;
 
 			inline int getGameMode(){
 				return gamemode;
@@ -90,7 +89,7 @@ namespace Minecraft {
 
 			int gamemode;
 
-			ViewFrustum m_Frustum;
+			Stardust::Math::ViewFrustum m_Frustum;
 			float tilt; //Extra
 
 			int currBlock;

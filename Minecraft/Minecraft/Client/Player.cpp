@@ -1,22 +1,20 @@
 #include "Player.h"
-#include <Shadow/Utils/Logger.h>
-#include <Shadow/Graphics/RenderManager.h>
+#include <Graphics/RendererCore.h>
 #include "../Common/Options.hpp"
 #include <glm/glm.hpp>
-#include <Shadow/System/Input.h>
+#include <Utilities/Input.h>
 #include <glm/gtx/rotate_vector.hpp>
 #include <pspmath.h>
 #include <iostream>
 #define DEGTORAD(angleDegrees) ((angleDegrees) * 3.14159f / 180.0f)
 
 
-using namespace Shadow::System;
-using namespace Shadow::Utils;
-using namespace Shadow::Graphics;
+using namespace Stardust::Utilities;
+using namespace Stardust::Graphics;
 
 namespace Minecraft {
 	namespace Client {
-		Player::Player(): boundingBox({0.6, 0.6, 1.8})
+		Player::Player()
 		{
 			position = { 0, 0, 0 };
 			yaw = 0;
@@ -28,6 +26,7 @@ namespace Minecraft {
 			fovChange = 0;
 			changingFOV = false;
 			currBlock = 0;
+			boundingBox.extent = {0.6f, 1.625f, 0.6f};
 		}
 		
 		Player::~Player()
@@ -76,13 +75,14 @@ namespace Minecraft {
 
 		void Player::Update(float dt)
 		{
-			InputUpdate();
+			updateInputs();
 
-			boundingBox.position = glm::vec3(-position.x, position.y, -position.z) - glm::vec3(0.3f, 1.625f , 0.3f);
+			boundingBox.offset = glm::vec3(-position.x, position.y, -position.z) - glm::vec3(0.3f, 1.625f , 0.3f);
 
 
 			float rotSpeed = 120.0f; //Speed at which to rotate per second
 
+			/*
 			if (KeyPressed( findButtonPair("lookUp") ) || KeyHold(findButtonPair("lookUp"))) {
 				pitch -= rotSpeed * dt;
 			}
@@ -98,6 +98,7 @@ namespace Minecraft {
 			if (KeyPressed(findButtonPair("lookRight")) || KeyHold(findButtonPair("lookRight"))) {
 				yaw += rotSpeed * dt;
 			}
+			*/
 
 			if (yaw > 360) {
 				yaw = 0;
@@ -152,7 +153,7 @@ namespace Minecraft {
 				sceGumStoreMatrix(&projMatrix);
 
 			}
-
+			/*
 			if (KeyPressed(findButtonPair("walkForwards"))) {
 
 				float s = walkSpeed;
@@ -214,15 +215,18 @@ namespace Minecraft {
 					sneak = !sneak;
 				}
 			}
+			*/
 
 
-			if(g_World->gameMode != 3){
+			if(gamemode != 3){
 			glm::vec3 testPos = {(float)position.x, (float)position.y, (float)position.z};
 			if(flyEnabled){
 				testPos += velocity / 4.0f;
 			}else{
 				testPos += velocity;
 			}
+
+			/*
 
 			if(g_World->chunkMan->getBlock((int)-testPos.x, (int)testPos.y, (int)-testPos.z).ID == 0 && g_World->chunkMan->getBlock((int)-testPos.x, (int)(testPos.y + 1.8f), (int)-testPos.z).ID == 0 && g_World->chunkMan->getBlock((int)-testPos.x, (int)(testPos.y + 0.9f), (int)-testPos.z).ID == 0 ){
 				bool flag = true;
@@ -322,21 +326,12 @@ namespace Minecraft {
 				}
 			}
 
+			
 
 			if(KeyPressed(findButtonPair("jump")) && !isFly() && velocity.y > -0.2f){
 				velocity.y = 8.945f * 1.f / 60.0f;
-
-				// 1.25
-				// 1.25 = 16.0f * t^2 + v0 * t
-				// v = v - 32t
-				// v0 = 32t 
-				// v = 0
-
-				// 1.25 = 16t^2 + 32t
-				// 1.25 = 16t(t + 2)
-				// 5 / 64 = t(t+2)
-				//
 			}
+			*/
 
 			if(!flyEnabled){
 				velocity = {0.f, velocity.y, 0.f};
@@ -354,6 +349,7 @@ namespace Minecraft {
 			sceGumTranslate(&pos);
 			sceGumStoreMatrix(&viewMatrix);
 
+			/*
 			if(KeyPressed(findButtonPair("break"))){
 				
 
@@ -370,7 +366,7 @@ namespace Minecraft {
 
 
 				int numBlocks = 0;
-				if(g_World->gameMode == 1){
+				if(gamemode == 1){
 					numBlocks = 20;
 				}else{
 					numBlocks = 18;
@@ -412,7 +408,7 @@ namespace Minecraft {
 				glm::vec3 diffVec = glm::vec3(0, 0, 0);
 
 				int numBlocks = 0;
-				if(g_World->gameMode == 1){
+				if(gamemode == 1){
 					numBlocks = 20;
 				}else{
 					numBlocks = 18;
@@ -462,6 +458,7 @@ namespace Minecraft {
 					currBlock = 0;
 				}
 			}
+			*/
 
 			glm::mat4 p = glm::perspective(Common::g_OptionsManager.options.fov * 40 + 70 + fovChange, 480.0f / 272.0f, 0.1f, 256.0f);
 			glm::mat4 vie = glm::mat4(1);

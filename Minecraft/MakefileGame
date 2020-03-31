@@ -24,10 +24,10 @@ Minecraft/Client/Rendering/Sky.o \
 Minecraft/Client/Rendering/Stars.o \
 Minecraft/Client/Rendering/Clouds.o \
 Minecraft/Client/Audio/MusicManager.o \
+Minecraft/Client/Player.o \
 Minecraft.o
 
 # Minecraft/Client/World/World.o \
-# Minecraft/Client/Player.o \
 # Minecraft/Client/SPClient.o \
 # Minecraft/Client/World/BlockData.o \
 # Minecraft/Client/World/Chunk.o \
