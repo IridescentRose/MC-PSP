@@ -5,8 +5,8 @@
 namespace Minecraft::Rendering {
 	Sun::Sun()
 	{
-		skyVertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
-		tex = TextureUtil::LoadPngTexturePack("environment/sun.png");
+		skyVertices = (TextureVertex*)memalign(16, 4 * sizeof(TextureVertex));
+		tex = TextureUtil::LoadPng("assets/minecraft/textures/environment/sun.png");
 
 		Update(0.0f);
 	}
@@ -56,7 +56,7 @@ namespace Minecraft::Rendering {
 		skyVertices[i].u = 1.f;// * textureScale;
 		skyVertices[i].v = 1.f;// * textureScale;
 
-		sceKernelDcacheWritebackInvalidateRange(skyVertices, 4 * sizeof(TexturedVertex));
+		sceKernelDcacheWritebackInvalidateRange(skyVertices, 4 * sizeof(TextureVertex));
 	}
 
 	void Sun::Draw()

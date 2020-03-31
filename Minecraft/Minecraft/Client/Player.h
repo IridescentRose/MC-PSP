@@ -73,11 +73,22 @@ namespace Minecraft {
 			ScePspFMatrix4 projViewMatrix;
 			AABB boundingBox;
 
+			inline int getGameMode(){
+				return gamemode;
+			}
+			inline void setGameMode(int mode){
+				gamemode = mode;
+
+				//Handle effects
+			}
+
 		private:
 			float yaw, pitch, orientation; //In degrees!
 			glm::vec3 position, velocity, acceleration;
 			bool onGround;
 			bool sneak, sprint;
+
+			int gamemode;
 
 			ViewFrustum m_Frustum;
 			float tilt; //Extra

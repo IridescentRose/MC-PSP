@@ -1,9 +1,10 @@
 #pragma once
 
-#include <Shadow/Graphics/RenderManager.h>
-#include <Shadow/Graphics/Vertex.h>
+#include <Graphics/RendererCore.h>
+#include <Graphics/RenderTypes.h>
+#include <Graphics/TextureUtil.h>
 
-using namespace Shadow::Graphics;
+using namespace Stardust::Graphics;
 
 namespace Minecraft::Rendering {
 	class Sun
@@ -17,7 +18,7 @@ namespace Minecraft::Rendering {
 
 	private:
 		Texture* tex;
-		TexturedVertex* skyVertices;
+		TextureVertex* skyVertices;
 
 		float sun_angle;
 	};

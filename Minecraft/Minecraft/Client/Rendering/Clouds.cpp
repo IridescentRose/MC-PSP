@@ -1,11 +1,12 @@
 #include "Clouds.h"
 #include "../../Common/Options.hpp"
 #include <glm/glm.hpp>
+#include <stdlib.h>
 
 namespace Minecraft::Rendering {
 	Clouds::Clouds()
 	{
-		tex = TextureUtil::LoadPngTexturePack("environment/clouds.png");
+		tex = TextureUtil::LoadPng("assets/minecraft/textures/environment/clouds.png");
 		Update();
 		count = 0;
 	}
@@ -52,7 +53,7 @@ namespace Minecraft::Rendering {
 			}
 		}
 
-		cloudVerts = (TexturedVertex*)memalign(16, (mTriangle.size() * 3) * sizeof(TexturedVertex));
+		cloudVerts = (TextureVertex*)memalign(16, (mTriangle.size() * 3) * sizeof(TextureVertex));
 		count = points;
 		
 		//build verts
@@ -84,7 +85,7 @@ namespace Minecraft::Rendering {
 		}
 
 		//clear the cache or there will be some errors
-		sceKernelDcacheWritebackInvalidateRange(cloudVerts, (mTriangle.size() * 3) * sizeof(TexturedVertex));
+		sceKernelDcacheWritebackInvalidateRange(cloudVerts, (mTriangle.size() * 3) * sizeof(TextureVertex));
 		//sceKernelDcacheWritebackInvalidateAll();
 
 		for (unsigned int aa = 0; aa < mPosition.size(); aa++)
@@ -110,7 +111,7 @@ namespace Minecraft::Rendering {
 		sceGuFrontFace(GU_CW);
 		sceGuDisable(GU_DEPTH_TEST);		
 		
-		tex->bindTextureRepeat(0, 0, true);
+		tex->bindTexture(0, 0, true);
 
 		float alpha = 0.7f;
 
@@ -137,7 +138,7 @@ namespace Minecraft::Rendering {
 		sceGumPushMatrix();
 		sceGumTranslate(&v);
 
-		sceGuColor(GU_COLOR(1.0f, 1.0f, 1.0f, alpha * 0.5f));
+		sceGuColor(GU_COLOR(1.0f, 1.0f, 1.0f, alpha * 0.25f));
 		sceGuTexScale(1.0f, 0.25f);
 		sceGuTexOffset( (float)((int)dt % 9600) / 9600.0f, 0.0f);
 		sceGuDisable(GU_CULL_FACE);

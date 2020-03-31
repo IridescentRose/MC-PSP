@@ -1,16 +1,18 @@
 #include "Stars.h"
+#include <Graphics/TextureUtil.h>
+#include <stdlib.h>
 
 namespace Minecraft::Rendering {
 	Stars::Stars()
 	{
-		boxVertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
-		boxVertices2 = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
-		boxVertices3 = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
-		boxVertices4 = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
-		boxVertices5 = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
-		boxVertices6 = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
+		boxVertices = (TextureVertex*)memalign(16, 4 * sizeof(TextureVertex));
+		boxVertices2 = (TextureVertex*)memalign(16, 4 * sizeof(TextureVertex));
+		boxVertices3 = (TextureVertex*)memalign(16, 4 * sizeof(TextureVertex));
+		boxVertices4 = (TextureVertex*)memalign(16, 4 * sizeof(TextureVertex));
+		boxVertices5 = (TextureVertex*)memalign(16, 4 * sizeof(TextureVertex));
+		boxVertices6 = (TextureVertex*)memalign(16, 4 * sizeof(TextureVertex));
 
-		tex = TextureUtil::LoadPngTexturePack("environment/stars.png");
+		tex = TextureUtil::LoadPng("assets/minecraft/textures/environment/stars.png");
 
 		size = 0.95f;
 
@@ -59,7 +61,7 @@ namespace Minecraft::Rendering {
 		boxVertices[i].v = 1;
 		i++;
 
-		sceKernelDcacheWritebackInvalidateRange(boxVertices, 4 * sizeof(TexturedVertex));
+		sceKernelDcacheWritebackInvalidateRange(boxVertices, 4 * sizeof(TextureVertex));
 
 		i = 0;
 
@@ -91,7 +93,7 @@ namespace Minecraft::Rendering {
 		boxVertices2[i].v = 1;
 		i++;
 
-		sceKernelDcacheWritebackInvalidateRange(boxVertices2, 4 * sizeof(TexturedVertex));
+		sceKernelDcacheWritebackInvalidateRange(boxVertices2, 4 * sizeof(TextureVertex));
 
 		i = 0;
 
@@ -123,7 +125,7 @@ namespace Minecraft::Rendering {
 		boxVertices3[i].v = 1;
 		i++;
 
-		sceKernelDcacheWritebackInvalidateRange(boxVertices3, 4 * sizeof(TexturedVertex));
+		sceKernelDcacheWritebackInvalidateRange(boxVertices3, 4 * sizeof(TextureVertex));
 
 		i = 0;
 
@@ -155,7 +157,7 @@ namespace Minecraft::Rendering {
 		boxVertices4[i].v = 0;
 		i++;
 
-		sceKernelDcacheWritebackInvalidateRange(boxVertices4, 4 * sizeof(TexturedVertex));
+		sceKernelDcacheWritebackInvalidateRange(boxVertices4, 4 * sizeof(TextureVertex));
 
 		i = 0;
 
@@ -187,7 +189,7 @@ namespace Minecraft::Rendering {
 		boxVertices5[i].v = 1;
 		i++;
 
-		sceKernelDcacheWritebackInvalidateRange(boxVertices5, 4 * sizeof(TexturedVertex));
+		sceKernelDcacheWritebackInvalidateRange(boxVertices5, 4 * sizeof(TextureVertex));
 
 		i = 0;
 
@@ -219,7 +221,7 @@ namespace Minecraft::Rendering {
 		boxVertices6[i].v = 1;
 		i++;
 
-		sceKernelDcacheWritebackInvalidateRange(boxVertices6, 4 * sizeof(TexturedVertex));
+		sceKernelDcacheWritebackInvalidateRange(boxVertices6, 4 * sizeof(TextureVertex));
 	}
 
 	void Stars::Draw(float alpha)
@@ -241,7 +243,7 @@ namespace Minecraft::Rendering {
 		sceGuDepthMask(GU_TRUE);
 		sceGuBlendFunc(GU_ADD, GU_FIX, GU_FIX, 0xFFFFFFFF, 0xFFFFFFFF);
 		sceGuEnable(GU_ALPHA_TEST);
-		tex->bindTextureRepeat(GU_NEAREST, GU_NEAREST, true);
+		tex->bindTexture(GU_NEAREST, GU_NEAREST, true);
 
 		sceGumDrawArray(GU_TRIANGLE_FAN, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, 4, 0, boxVertices);
 		sceGumDrawArray(GU_TRIANGLE_FAN, GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_3D, 4, 0, boxVertices2);

@@ -4,8 +4,6 @@
 #include <time.h>
 #include <string>
 #include <sstream>
-#include <Shadow/Utils/Logger.h>
-using namespace Shadow::Utils;
 
 namespace std
 {

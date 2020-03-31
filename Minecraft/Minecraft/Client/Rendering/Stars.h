@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Shadow/Graphics/RenderManager.h>
+#include <Graphics/RendererCore.h>
 
-using namespace Shadow::Graphics;
+using namespace Stardust::Graphics;
 
 namespace Minecraft::Rendering {
 	class Stars {
@@ -14,12 +14,12 @@ namespace Minecraft::Rendering {
 		void Draw(float alpha);
 
 	private:
-		TexturedVertex* boxVertices;
-		TexturedVertex* boxVertices2;
-		TexturedVertex* boxVertices3;
-		TexturedVertex* boxVertices4;
-		TexturedVertex* boxVertices5;
-		TexturedVertex* boxVertices6;
+		TextureVertex* boxVertices;
+		TextureVertex* boxVertices2;
+		TextureVertex* boxVertices3;
+		TextureVertex* boxVertices4;
+		TextureVertex* boxVertices5;
+		TextureVertex* boxVertices6;
 		float size;
 
 		Texture* tex;

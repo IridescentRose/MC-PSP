@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Shadow/Graphics/RenderManager.h>
-#include <Shadow/Graphics/Vertex.h>
+#include <Graphics/RendererCore.h>
+#include <Graphics/TextureUtil.h>
 #include <glm/glm.hpp>
-using namespace Shadow::Graphics;
+using namespace Stardust::Graphics;
 
 namespace Minecraft::Rendering {
 	class Clouds {
@@ -17,7 +17,7 @@ namespace Minecraft::Rendering {
 
 	private:
 		Texture* tex;
-		TexturedVertex* cloudVerts;
+		TextureVertex* cloudVerts;
 		int count;
 	};
 }

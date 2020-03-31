@@ -1,8 +1,10 @@
 #include "Sky.h"
+#include <stdlib.h>
+#include <malloc.h>
 
 namespace Minecraft::Rendering {
 	Sky::Sky() {
-		skyBoxVertices = (ColoredVertex*)memalign(16, 36 * sizeof(ColoredVertex));
+		skyBoxVertices = (ColorVertex*)memalign(16, 36 * sizeof(ColorVertex));
 		Update(0);
 	}
 
@@ -101,6 +103,7 @@ namespace Minecraft::Rendering {
 				return glm::mix(horizonColorNight, horizonColorSunRise, (dayTime - 22000) / 2000);
 			}
 		}
+		return glm::vec3(0, 0, 0);
 	}
 
 	void Sky::Update(s64 timeOfDay) {
@@ -179,7 +182,7 @@ namespace Minecraft::Rendering {
 		skyBoxVertices[i++] = { GU_COLOR(v0[3].x, v0[3].y, v0[3].z, 1.0f), 0.5f,-0.5f, 0.5f}; // 6
 		skyBoxVertices[i++] = { GU_COLOR(v0[3].x, v0[3].y, v0[3].z, 1.0f), 0.5f,-0.5f,-0.5f}; // 5
 
-		sceKernelDcacheWritebackInvalidateRange(skyBoxVertices, 36 * sizeof(ColoredVertex));
+		sceKernelDcacheWritebackInvalidateRange(skyBoxVertices, 36 * sizeof(ColorVertex));
 	}
 
 	void Sky::Draw()

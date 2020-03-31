@@ -1,9 +1,9 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include <Shadow/Graphics/RenderManager.h>
+#include <Graphics/RendererCore.h>
 
-using namespace Shadow::Graphics;
+using namespace Stardust::Graphics;
 
 namespace Minecraft::Rendering {
 	class Sky {
@@ -15,7 +15,7 @@ namespace Minecraft::Rendering {
 		void Draw();
 
 	private:
-		ColoredVertex* skyBoxVertices;
+		ColorVertex* skyBoxVertices;
 
 		float size;
 		int vertsNum;

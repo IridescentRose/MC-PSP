@@ -5,8 +5,8 @@
 namespace Minecraft::Rendering {
 	Moon::Moon()
 	{
-		skyVertices = (TexturedVertex*)memalign(16, 4 * sizeof(TexturedVertex));
-		tex = TextureUtil::LoadPngTexturePack("environment/moon_phases.png");
+		skyVertices = (TextureVertex*)memalign(16, 4 * sizeof(TextureVertex));
+		tex = TextureUtil::LoadPng("assets/minecraft/textures/environment/moon_phases.png");
 	}
 	Moon::~Moon()
 	{
@@ -57,7 +57,7 @@ namespace Minecraft::Rendering {
 		skyVertices[i].u = 0.25f + phaseX*0.25f;// * textureScale;
 		skyVertices[i].v = 0.5f + phaseY * 0.5f;// * textureScale;
 
-		sceKernelDcacheWritebackInvalidateRange(skyVertices, 4 * sizeof(TexturedVertex));
+		sceKernelDcacheWritebackInvalidateRange(skyVertices, 4 * sizeof(TextureVertex));
 	}
 
 	void Moon::Draw()
