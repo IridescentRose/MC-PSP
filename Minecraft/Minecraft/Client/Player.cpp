@@ -52,7 +52,7 @@ namespace Minecraft {
 
 			sceGumMatrixMode(GU_PROJECTION);
 			sceGumLoadIdentity();
-			sceGumPerspective(Common::g_OptionsManager.options.fov * 40 + 70, 480.0f / 272.0f, 0.1f, 256.0f);
+			sceGumPerspective(Common::g_OptionsManager.options.fov * 40 + 70, 480.0f / 272.0f, 0.1f, 1000.0f);
 			sceGumStoreMatrix(&projMatrix);
 
 
@@ -147,7 +147,7 @@ namespace Minecraft {
 				//Only update with FOV modifier
 				sceGumMatrixMode(GU_PROJECTION);
 				sceGumLoadIdentity();
-				sceGumPerspective(Common::g_OptionsManager.options.fov * 40 + 70 + fovChange, 480.0f / 272.0f, 0.1f, 256.0f);
+				sceGumPerspective(Common::g_OptionsManager.options.fov * 40 + 70 + fovChange, 480.0f / 272.0f, 0.1f, 1000.0f);
 				sceGumStoreMatrix(&projMatrix);
 
 			}
@@ -458,7 +458,7 @@ namespace Minecraft {
 			}
 			*/
 
-			glm::mat4 p = glm::perspective(Common::g_OptionsManager.options.fov * 40 + 70 + fovChange, 480.0f / 272.0f, 0.1f, 256.0f);
+			glm::mat4 p = glm::perspective(Common::g_OptionsManager.options.fov * 40 + 70 + fovChange, 480.0f / 272.0f, 0.1f, 1000.0f);
 			glm::mat4 vie = glm::mat4(1);
 			
 			vie = glm::rotate(vie, pitch, {1, 0, 0});
