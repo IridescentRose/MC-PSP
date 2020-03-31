@@ -1,13 +1,9 @@
 #pragma once
 #include <string>
-#include <Shadow/Utils/StateManager.h>
-#include <Shadow/Utils/GameState.h>
+#include "../State/StateManager.h"
+#include "../State/GameState.h"
 #include <Utilities/Timer.h>
 #include "Player.h"
-#include "World/World.h"
-
-using namespace Shadow::Utils;
-using namespace Shadow;
 
 namespace Minecraft {
 	namespace Client {

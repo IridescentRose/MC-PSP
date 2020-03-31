@@ -7,36 +7,23 @@
 #include "../Rendering/Stars.h"
 #include "../Rendering/Clouds.h"
 #include "../Audio/MusicManager.h"
-#include <Shadow/Graphics/Sprite.h>
+#include <Graphics/2D/SpriteBase.h>
+#include "../../Menu/LoadingScreen.hpp"
 
 #include "../Player.h"
+
+/*
 #include "Chunk.h"
 #include <queue>
-#include "../../Menu/LoadingScreen.hpp"
 #include "BlockData.h"
+*/
 
-using namespace Shadow::Graphics;
-using namespace Minecraft::Terrain;
+using namespace Stardust::Graphics;
+using namespace Stardust::Graphics::Render2D;
+
 namespace Minecraft::Client {
 	class Player;
 	
-	enum EventTypes{
-		EVENT_TYPE_BREAK,
-		EVENT_TYPE_PLACE
-	};
-
-	struct Event{
-		int type;
-	};
-
-	struct BlockBreakEvent : Event {
-		glm::vec3 breakPositionAbsolute;
-	};
-	struct BlockPlaceEvent : Event {
-		glm::vec3 placePositionAbsolute;
-		ChunkBlock blk;
-	};
-
 	struct TickTime {
 		s64 worldAge;
 		s64 time;
@@ -59,7 +46,7 @@ namespace Minecraft::Client {
 		void Save();
 
 		Stardust::Utilities::Timer tickTimer;
-		Terrain::ChunkManager* chunkMan;
+		//Terrain::ChunkManager* chunkMan;
 		Player* p;
 		int fps;
 		int frameCounter;
@@ -67,7 +54,6 @@ namespace Minecraft::Client {
 	
 		int gameMode;
 
-		std::queue<Event*> eventBus;
 		TickTime* timeData;
 		volatile bool killReceived;
 		volatile bool tUpReady;

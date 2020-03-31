@@ -3,17 +3,14 @@
 #include <pspkernel.h>
 #include <pspthreadman.h>
 
-#include <Shadow/Utils/Logger.h>
-#include <Shadow/System/Ram.h>
+#include <Utilities/Logger.h>
 #include "../../Version.hpp"
 #include <sys/stat.h> 
 #include <stdlib.h>
 #include <iostream>
-#include "ChunkMesh.h"
+//#include "ChunkMesh.h"
 #include <pspsdk.h>
-#include "../ME/me.h"
-using namespace Shadow;
-using namespace Shadow::Utils;
+//#include "../ME/me.h"
 
 Minecraft::Client::World* Minecraft::Client::g_World = new Minecraft::Client::World();
 
@@ -62,11 +59,11 @@ void Minecraft::Client::World::Init()
 	sceKernelDelayThread(5000);
 	glbl_loadingscreen->StartLoadingScreen();
 
-	lastLevel = lighting(0);
+	lastLevel = 0;
 	tickUpdateThread = sceKernelCreateThread("TickUpdateThread", tickUpdate, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(tickUpdateThread, 0, 0);
 
-
+	/*
 	mkdir( ("saves/" + Terrain::WorldProvider::worldName).c_str(), 0777);
 
 	std::ifstream file("saves/" + Terrain::WorldProvider::worldName + "/level.dat");
@@ -156,7 +153,7 @@ void Minecraft::Client::World::Init()
     Terrain::bioMap.emplace(Terrain::BIOME_Gravelly_Mountains , Terrain::gravelMountainsBiome);
     Terrain::bioMap.emplace(Terrain::BIOME_Badlands , Terrain::mesaBiome);
     Terrain::bioMap.emplace(Terrain::BIOME_Badlands_Plateau , Terrain::mesaPlateauBiome);
-
+*/
 
 	
 
@@ -164,19 +161,20 @@ void Minecraft::Client::World::Init()
 	genning = true;
 	tUpReady = false;
 	cUpReady = false;
-	chunkMan = new Terrain::ChunkManager();
+	//chunkMan = new Terrain::ChunkManager();
 	
 
-	crosshair = new Sprite("assets/minecraft/textures/misc/cross.png", 8, 8, 16, 16);
+	crosshair = new Sprite(TextureUtil::LoadPng("assets/minecraft/textures/misc/cross.png"), 8, 8, 16, 16);
 
 	animationTimer = 0;
 	animationLavaFrame = 0;
 	animationWaterFrame = 0;
 
-	textureWaterAnimationId = TextureUtil::LoadPngTexturePack("blocks/water_still.png");
-	textureLavaAnimationId = TextureUtil::LoadPngTexturePack("blocks/lava_still.png");
+	textureWaterAnimationId = TextureUtil::LoadPng("assets/minecraft/textures/blocks/water_still.png");
+	textureLavaAnimationId = TextureUtil::LoadPng( "assets/minecraft/textures/blocks/lava_still.png");
 	animationLavaStep = true;
 
+/*
 #ifdef ME_ENABLED
 	int ret = pspSdkLoadStartModule("mediaengine.prx", PSP_MEMORY_PARTITION_KERNEL);
 
@@ -191,6 +189,8 @@ void Minecraft::Client::World::Init()
 
 	chunkManagerThread = sceKernelCreateThread("ChunkManagementThread", chunkManagement, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(chunkManagerThread, 0, 0);
+	*/
+
 	frameTimer = 0;
 	fps = 0;
 	frameCounter = 0;
@@ -208,10 +208,12 @@ void Minecraft::Client::World::Cleanup()
 
 	delete timeData;
 
+/*
 	for(const auto& [key, chnk] : chunkMan->getChunks() ){
 		if(chunkMan->chunkExists(key.x, key.y, key.z))
 			chunkMan->unloadChunk(chnk->chunk_x, chnk->chunk_y, chnk->chunk_z);
 	}
+	*/
 
 	rmg->Cleanup();
 	delete rmg;
@@ -221,9 +223,9 @@ void Minecraft::Client::World::Cleanup()
 	delete stars;
 	delete clouds;
 	delete crosshair;
-	delete chunkMan;
-	delete Terrain::WorldProvider::noise;
-	Terrain::bioMap.clear();
+	//delete chunkMan;
+	//delete Terrain::WorldProvider::noise;
+	//Terrain::bioMap.clear();
 }
 #include <iostream>
 
@@ -248,6 +250,7 @@ void Minecraft::Client::World::Update(float dt)
 
 	rmg->FixedUpdate();
 
+/*
 	for(const auto& [key, chnk] : chunkMan->getChunks() ){
 		chnk->Update(dt);
 	}
@@ -388,6 +391,7 @@ void Minecraft::Client::World::Update(float dt)
 		delete v;
 		eventBus.pop();
 	}
+	*/
 
 	animationTimer += dt;
 
@@ -419,7 +423,7 @@ void Minecraft::Client::World::Update(float dt)
             animationLavaFrame -= 1;
         }
 		
-
+		/*
 		
         for(int i = 0; i < waterFrameSize; i++)
         {
@@ -441,6 +445,7 @@ void Minecraft::Client::World::Update(float dt)
                                                       255);
             }
         }
+		*/
     }
 	}
 	
@@ -466,19 +471,23 @@ void Minecraft::Client::World::FixedUpdate()
 	moon->Update((float)(timeData->time % 24000) / 24000.0f * 360.0f, timeData->worldAge);
 	rmg->timeUntilNext--;
 
+	/*
+
 	if(lighting(timeData->time % 24000) != lastLevel){
 		//Lighting update
 		int newLevel = lighting(timeData->time % 24000);
 
-		chunkMan->updateLightingAll(newLevel, lastLevel);
+		//chunkMan->updateLightingAll(newLevel, lastLevel);
 
 		lastLevel = newLevel;
 	}
+	*/
 
 }
 
 void Minecraft::Client::World::Save(){
 
+/*
 	std::ofstream file("saves/" + Terrain::WorldProvider::worldName + "/level.dat");
 	
 	file << Terrain::WorldProvider::seed << std::endl;
@@ -496,19 +505,14 @@ void Minecraft::Client::World::Save(){
 	for(const auto& [key, chnk] : chunkMan->getChunks()){
 		chnk->save();
 	}
+	*/
 }
-void dcache_wbinv_all()
-{
-   for(int i = 0; i < 8192; i += 64)
-   {
-      __builtin_allegrex_cache(0x14, i);
-      __builtin_allegrex_cache(0x14, i);
-   }
-}
+
 void Minecraft::Client::World::Draw()
 {
 	if(!genning){
-		g_RenderCore.StartFrame(0, 0, 0);
+		g_RenderCore.BeginCommands();
+		g_RenderCore.Clear();
 
 	
 	//Load Projection Matrix
@@ -564,6 +568,7 @@ void Minecraft::Client::World::Draw()
 
 	sceGuFog(0.8f, 192.f, GU_COLOR(finalFog, finalFog, finalFog, 1.0));
 
+/*
 	//Draw stuff
 	terrain_atlas->bindTexture(0, 0, true);
 	
@@ -581,19 +586,21 @@ void Minecraft::Client::World::Draw()
 			}
 		}
 	}
+*/
 
 	sceGuDisable(GU_FOG);
 
-	g_RenderCore.SetOrtho();
+	sceGumMatrixMode(GU_PROJECTION);
+	sceGumLoadIdentity();
+	sceGumOrtho(0, 480, 272, 0, -30, 30);
 
-	g_RenderCore.DrawSetInverseColors();
+	sceGuBlendFunc(GU_ABS, GU_ONE_MINUS_SRC_ALPHA, GU_SRC_ALPHA, 0, 0);
 	
 	sceGuEnable(GU_BLEND);
 	crosshair->SetPosition(240, 136);
 	crosshair->Draw();
 
-
-	g_RenderCore.DrawSetDefaultColors();
+	sceGuBlendFunc(GU_ADD, GU_SRC_ALPHA, GU_ONE_MINUS_SRC_ALPHA, 0, 0);
 
 	g_RenderCore.SetFontStyle(0.8f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_LEFT, 0);
 	g_RenderCore.DebugPrint(0, 7, "%s v%s", GAME_NAME, (IS_SNAPSHOT) ? INTERNAL_SNAPSHOT : INTERNAL_VERSION);
@@ -602,7 +609,7 @@ void Minecraft::Client::World::Draw()
 	g_RenderCore.SetFontStyle(0.8f, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_RIGHT, 0);
 	g_RenderCore.DebugPrint(480, 7, "FPS: %d", (int)fps + 1);
 
-		g_RenderCore.EndFrame();
+		g_RenderCore.EndCommands();
 	}
 }
 
@@ -624,6 +631,7 @@ int Minecraft::Client::World::ChunkMan2(int gWorld){
 	return 0;
 }
 
+/*
 int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 {	
 	glm::vec3 last_pos = glm::vec3(0, -1, 0);
@@ -803,3 +811,4 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 
 	return 0;
 }
+*/

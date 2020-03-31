@@ -16,7 +16,7 @@
                 "/usr/local/pspdev/psp/sdk/include/**"
             ],
             "defines": [],
-            "compilerPath": "/usr/local/pspdev/bin/psp-gcc",
+            "compilerPath": "/usr/local/pspdev/bin/psp-gcc -DMC_PSP",
             "cStandard": "c11",
             "cppStandard": "c++17"
         }
