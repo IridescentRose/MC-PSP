@@ -158,7 +158,7 @@ void Minecraft::Client::World::Init()
 	
 
 
-	genning = true;
+	genning = false;
 	tUpReady = false;
 	cUpReady = false;
 	//chunkMan = new Terrain::ChunkManager();

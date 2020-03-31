@@ -2,6 +2,7 @@
 #include <string>
 #include "../State/StateManager.h"
 #include "../State/GameState.h"
+#include "World/World.h"
 #include <Utilities/Timer.h>
 #include "Player.h"
 

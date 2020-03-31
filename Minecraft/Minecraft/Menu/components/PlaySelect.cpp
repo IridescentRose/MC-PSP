@@ -6,7 +6,7 @@
 
 #include <Graphics/Dialogs.h>
 
-//#include "../../Client/SPClient.hpp"
+#include "../../Client/SPClient.hpp"
 
 void remove_dir(char *path)
 {
@@ -257,14 +257,15 @@ namespace Minecraft::Menus{
                 if(entries.size() > 0 ){
                     
                 if(selectPosY == 0 && selectPosX == 0){
+                    
                     //Terrain::WorldProvider::worldName = entries[loadPosSel];
+                    
                     //LOAD WORLD!
-                    //terrain_atlas = TextureUtil::LoadPng("assets/minecraft/textures/terrain_atlas.png");
-                    //Client::SPClient* client = new Client::SPClient();
+                    Client::SPClient* client = new Client::SPClient();
 						
-		            //client->Init();
+		            client->Init();
 
-		            //sManager->PushState(client);
+		            sManager->PushState(client);
                 }
 
                 if(selectPosY == 1 && selectPosX == 0){

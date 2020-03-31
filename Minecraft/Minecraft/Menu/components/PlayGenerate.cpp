@@ -1,6 +1,6 @@
 #include "../MenuState.hpp"
 
-//#include "../../Client/SPClient.hpp"
+#include "../../Client/SPClient.hpp"
 #include <Graphics/Dialogs.h>
 
 namespace Minecraft::Menus{
@@ -77,7 +77,7 @@ namespace Minecraft::Menus{
 
         std::string modeSelect = "";
 
-/*
+
         switch(Client::g_World->gameMode){
             case 0:{
                 modeSelect = Common::g_TranslationOBJ.getText("gameMode.survival");
@@ -100,7 +100,7 @@ namespace Minecraft::Menus{
                 break;
             }
         }
-*/
+
         g_RenderCore.DebugPrint(240, 160, (Common::g_TranslationOBJ.getText("selectWorld.gameMode") + ": " + modeSelect).c_str());
 
         if(selectPosY == 3){
@@ -197,23 +197,22 @@ namespace Minecraft::Menus{
                 //Generate
                 //terrain_atlas = TextureUtil::LoadPng("assets/minecraft/textures/terrain_atlas.png");
                 
-                //gm = Client::g_World->gameMode;
-                //Client::SPClient* client = new Client::SPClient();
+                gm = Client::g_World->gameMode;
+                Client::SPClient* client = new Client::SPClient();
 						
-		        //client->Init();
+		        client->Init();
 
                 
-                //Client::g_World->gameMode = gm;
-                //Client::g_World->handleGM();
-                //std::cout << gm << std::endl;
-		        //sManager->PushState(client);
+                Client::g_World->gameMode = gm;
+                Client::g_World->handleGM();
+		        sManager->PushState(client);
             }
 
             if(selectPosY == 2){
-                //Client::g_World->gameMode++;
-                //if(Client::g_World->gameMode > 4){
-                //    Client::g_World->gameMode = 0;
-                //}
+                Client::g_World->gameMode++;
+                if(Client::g_World->gameMode > 4){
+                    Client::g_World->gameMode = 0;
+                }
             }
         }
         if(KeyPressed(PSP_CTRL_UP)){
