@@ -1,7 +1,7 @@
 #include "../MenuState.hpp"
 
 #include <Utilities/Input.h>
-
+#include <iostream>
 using namespace Stardust::Utilities;
 
 namespace Minecraft::Menus{
@@ -14,7 +14,6 @@ namespace Minecraft::Menus{
                 options_tile->Draw();
             }
         }
-
         for(int i = 0; i < 8; i++){
             unselected->SetPosition(120, 48 + 24 * i);
             unselected->Draw();
@@ -209,77 +208,38 @@ namespace Minecraft::Menus{
             previous_states = menu_states;
             menu_states = MENU_STATE_OPTIONS_MAIN;
         }
-/*
+
         if(KeyPressed(PSP_CTRL_CROSS) && selectPosY != 16){
             switch(selectPosY){
                 case 0:{
                     int act = (PspCtrlButtons)nextAction();
+                    setActionKeyPair("walkForward", act);
 
-                    actions.erase(act);
-                    
-                    int i = buttonFromAction("walkForwards");
-                    if(i != -1){
-                        actions.erase(i);
-                    }
-
-                    actions.emplace(act, "walkForwards");
                     break;
                 }
 
                 case 1:{
                     int act = (PspCtrlButtons)nextAction();
-
-                    actions.erase(act);
-                    
-                    int i = buttonFromAction("walkBackward");
-                    if(i != -1){
-                        actions.erase(i);
-                    }
-
-                    actions.emplace(act, "walkBackward");
+                    setActionKeyPair("walkBackward", act);
                     break;
                 }
 
                 case 2:{
                     int act = (PspCtrlButtons)nextAction();
-
-                    actions.erase(act);
-                    
-                    int i = buttonFromAction("walkStrafeLeft");
-                    if(i != -1){
-                        actions.erase(i);
-                    }
-
-                    actions.emplace(act, "walkStrafeLeft");
+                    setActionKeyPair("walkStrafeLeft", act);
                     break;
                 }
 
                 case 3:{
                     int act = (PspCtrlButtons)nextAction();
-
-                    actions.erase(act);
-                    
-                    int i = buttonFromAction("walkStrafeRight");
-                    if(i != -1){
-                        actions.erase(i);
-                    }
-
-                    actions.emplace(act, "walkStrafeRight");
+                    setActionKeyPair("walkStrafeRight", act);
                     break;
                 }
 
 
                 case 4:{
                     int act = (PspCtrlButtons)nextAction();
-
-                    actions.erase(act);
-                    
-                    int i = buttonFromAction("lookUp");
-                    if(i != -1){
-                        actions.erase(i);
-                    }
-
-                    actions.emplace(act, "lookUp");
+                    setActionKeyPair("lookUp", act);
 
                     break;
                 }
@@ -287,164 +247,67 @@ namespace Minecraft::Menus{
                 case 5:{
                     
                     int act = (PspCtrlButtons)nextAction();
-
-                    actions.erase(act);
-                    
-                    int i = buttonFromAction("lookDown");
-                    if(i != -1){
-                        actions.erase(i);
-                    }
-
-                    actions.emplace(act, "lookDown");
-
+                    setActionKeyPair("lookDown", act);
                     break;
                 }
 
                 case 6:{
                     int act = (PspCtrlButtons)nextAction();
-
-                    actions.erase(act);
-                    
-                    int i = buttonFromAction("lookLeft");
-                    if(i != -1){
-                        actions.erase(i);
-                    }
-
-                    actions.emplace(act, "lookLeft");
+                    setActionKeyPair("lookLeft", act);
 
                     break;
                 }
 
                 case 7:{
                     int act = (PspCtrlButtons)nextAction();
-
-                    actions.erase(act);
-                    
-                    int i = buttonFromAction("lookRight");
-                    if(i != -1){
-                        actions.erase(i);
-                    }
-
-                    actions.emplace(act, "lookRight");
+                    setActionKeyPair("lookRight", act);
 
                     break;
                 }
                 case 8:{
                     int act = (PspCtrlButtons)nextAction();
-
-                    actions.erase(act);
-                    
-                    int i = buttonFromAction("sprint");
-                    if(i != -1){
-                        actions.erase(i);
-                    }
-
-                    actions.emplace(act, "sprint");
+                    setActionKeyPair("sprint", act);
 
                     break;
                 }
                 case 9:{
                     int act = (PspCtrlButtons)nextAction();
-
-                    actions.erase(act);
-                    
-                    int i = buttonFromAction("sneak");
-                    if(i != -1){
-                        actions.erase(i);
-                    }
-
-                    actions.emplace(act, "sneak");
+                    setActionKeyPair("sneak", act);
 
                     break;
                 }
                 case 10:{
                     int act = (PspCtrlButtons)nextAction();
-
-                    actions.erase(act);
-                    
-                    int i = buttonFromAction("jump");
-                    if(i != -1){
-                        actions.erase(i);
-                    }
-
-                    actions.emplace(act, "jump");
-
+                    setActionKeyPair("jump", act);
                     break;
                 }
                 case 11:{
                     int act = (PspCtrlButtons)nextAction();
-
-                    actions.erase(act);
-                    
-                    int i = buttonFromAction("pause");
-                    if(i != -1){
-                        actions.erase(i);
-                    }
-
-                    actions.emplace(act, "pause");
-
+                    setActionKeyPair("pause", act);
                     break;
                 }
                 case 12:{
                     int act = (PspCtrlButtons)nextAction();
-
-                    actions.erase(act);
-                    
-                    int i = buttonFromAction("break");
-                    if(i != -1){
-                        actions.erase(i);
-                    }
-
-                    actions.emplace(act, "break");
-
+                    setActionKeyPair("break", act);
                     break;
                 }
                 case 13:{
                     int act = (PspCtrlButtons)nextAction();
-
-                    actions.erase(act);
-                    
-                    int i = buttonFromAction("place");
-                    if(i != -1){
-                        actions.erase(i);
-                    }
-
-                    actions.emplace(act, "place");
-
+                    setActionKeyPair("place", act);
                     break;
                 }
                 case 14:{
                     int act = (PspCtrlButtons)nextAction();
-
-                    actions.erase(act);
-                    
-                    int i = buttonFromAction("hotLeft");
-                    if(i != -1){
-                        actions.erase(i);
-                    }
-
-                    actions.emplace(act, "hotLeft");
-
+                    setActionKeyPair("hotLeft", act);
                     break;
                 }
                 case 15:{
                     int act = (PspCtrlButtons)nextAction();
-
-                    actions.erase(act);
-                    
-                    int i = buttonFromAction("hotRight");
-                    if(i != -1){
-                        actions.erase(i);
-                    }
-
-                    actions.emplace(act, "hotRight");
-
+                    setActionKeyPair("hotRight", act);
                     break;
                 }
               
             }
         }
-  
-            */
     }
 }
