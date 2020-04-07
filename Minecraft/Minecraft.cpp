@@ -38,6 +38,8 @@ void doSplash(){
 	Stardust::Utilities::Timer* timer = new Stardust::Utilities::Timer();
 	timer->reset();
 
+	Stardust::Graphics::g_RenderCore.SetClearColor(255, 255, 255, 255);
+
 	while(time > 0.0f){
 		Stardust::Graphics::g_RenderCore.BeginCommands();
 		Stardust::Graphics::g_RenderCore.Clear();

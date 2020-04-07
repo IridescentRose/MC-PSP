@@ -3,6 +3,9 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include "../Client/World/BlockData.h"
+#include <Utilities/Input.h>
+using namespace Stardust::Utilities;
+
 namespace Minecraft::Menus{
 
 	MenuState::MenuState(){
@@ -38,9 +41,7 @@ namespace Minecraft::Menus{
 
         //INPUT!!!
 
-        //makeDefaultConfig();
-        //loadConfiguration("config.json");
-
+        
         t = Stardust::Utilities::Timer();
         Common::g_OptionsManager.init();
         //BGM!!!

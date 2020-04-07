@@ -1,5 +1,9 @@
 #include "../MenuState.hpp"
 
+#include <Utilities/Input.h>
+
+using namespace Stardust::Utilities;
+
 namespace Minecraft::Menus{
     
 	void MenuState::controlDraw(){
@@ -35,13 +39,13 @@ namespace Minecraft::Menus{
 
         g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         g_RenderCore.DebugPrint(240, 24, Common::g_TranslationOBJ.getText("controls.title").c_str());
-/*
+
         if(selectPosY == 0){
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFF77FFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }else{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderCore.DebugPrint(120, 48 + 24*0, (Common::g_TranslationOBJ.getText("key.forward") + ": " + toString(findButtonPair("walkForward"))).c_str());
+        g_RenderCore.DebugPrint(120, 48 + 24*0, (Common::g_TranslationOBJ.getText("key.forward") + ": " + toString(buttonFromAction("walkForward"))).c_str());
 
 
         if(selectPosY == 1){
@@ -49,7 +53,7 @@ namespace Minecraft::Menus{
         }else{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderCore.DebugPrint(120, 48 + 24*1, (Common::g_TranslationOBJ.getText("key.back") + ": " + toString(findButtonPair("walkBackward"))).c_str());
+        g_RenderCore.DebugPrint(120, 48 + 24*1, (Common::g_TranslationOBJ.getText("key.back") + ": " + toString(buttonFromAction("walkBackward"))).c_str());
 
 
         if(selectPosY == 2){
@@ -57,7 +61,7 @@ namespace Minecraft::Menus{
         }else{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderCore.DebugPrint(120, 48 + 24*2, (Common::g_TranslationOBJ.getText("key.left") + ": " + toString(findButtonPair("walkStrafeLeft"))).c_str());
+        g_RenderCore.DebugPrint(120, 48 + 24*2, (Common::g_TranslationOBJ.getText("key.left") + ": " + toString(buttonFromAction("walkStrafeLeft"))).c_str());
 
 
         if(selectPosY == 3){
@@ -65,7 +69,7 @@ namespace Minecraft::Menus{
         }else{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderCore.DebugPrint(120, 48 + 24*3, (Common::g_TranslationOBJ.getText("key.right") + ": " + toString(findButtonPair("walkStrafeRight"))).c_str());
+        g_RenderCore.DebugPrint(120, 48 + 24*3, (Common::g_TranslationOBJ.getText("key.right") + ": " + toString(buttonFromAction("walkStrafeRight"))).c_str());
 
 
         if(selectPosY == 4){
@@ -73,7 +77,7 @@ namespace Minecraft::Menus{
         }else{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderCore.DebugPrint(120, 48 + 24*4, ("Look Up: " + toString(findButtonPair("lookUp"))).c_str());
+        g_RenderCore.DebugPrint(120, 48 + 24*4, ("Look Up: " + toString(buttonFromAction("lookUp"))).c_str());
 
 
         if(selectPosY == 5){
@@ -81,7 +85,7 @@ namespace Minecraft::Menus{
         }else{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderCore.DebugPrint(120, 48 + 24*5, ("Look Down: " + toString(findButtonPair("lookDown"))).c_str());
+        g_RenderCore.DebugPrint(120, 48 + 24*5, ("Look Down: " + toString(buttonFromAction("lookDown"))).c_str());
 
 
         if(selectPosY == 6){
@@ -89,7 +93,7 @@ namespace Minecraft::Menus{
         }else{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderCore.DebugPrint(120, 48 + 24*6, ("Look Left: " + toString(findButtonPair("lookLeft"))).c_str());
+        g_RenderCore.DebugPrint(120, 48 + 24*6, ("Look Left: " + toString(buttonFromAction("lookLeft"))).c_str());
 
 
         if(selectPosY == 7){
@@ -97,7 +101,7 @@ namespace Minecraft::Menus{
         }else{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderCore.DebugPrint(120, 48 + 24*7, ("Look Right: " + toString(findButtonPair("lookRight"))).c_str());
+        g_RenderCore.DebugPrint(120, 48 + 24*7, ("Look Right: " + toString(buttonFromAction("lookRight"))).c_str());
 
 
 
@@ -106,7 +110,7 @@ namespace Minecraft::Menus{
         }else{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderCore.DebugPrint(360, 48 + 24*0, (Common::g_TranslationOBJ.getText("key.sprint") + ": " + toString(findButtonPair("sprint"))).c_str());
+        g_RenderCore.DebugPrint(360, 48 + 24*0, (Common::g_TranslationOBJ.getText("key.sprint") + ": " + toString(buttonFromAction("sprint"))).c_str());
 
 
         if(selectPosY == 9){
@@ -114,7 +118,7 @@ namespace Minecraft::Menus{
         }else{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderCore.DebugPrint(360, 48 + 24*1, (Common::g_TranslationOBJ.getText("key.sneak") + ": " + toString(findButtonPair("sneak"))).c_str());
+        g_RenderCore.DebugPrint(360, 48 + 24*1, (Common::g_TranslationOBJ.getText("key.sneak") + ": " + toString(buttonFromAction("sneak"))).c_str());
 
 
         if(selectPosY == 10){
@@ -122,7 +126,7 @@ namespace Minecraft::Menus{
         }else{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderCore.DebugPrint(360, 48 + 24*2, (Common::g_TranslationOBJ.getText("key.jump") + ": " + toString(findButtonPair("jump"))).c_str());
+        g_RenderCore.DebugPrint(360, 48 + 24*2, (Common::g_TranslationOBJ.getText("key.jump") + ": " + toString(buttonFromAction("jump"))).c_str());
 
 
         if(selectPosY == 11){
@@ -130,7 +134,7 @@ namespace Minecraft::Menus{
         }else{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderCore.DebugPrint(360, 48 + 24*3, (Common::g_TranslationOBJ.getText("key.keyboard.pause") + ": " + toString(findButtonPair("pause"))).c_str());
+        g_RenderCore.DebugPrint(360, 48 + 24*3, (Common::g_TranslationOBJ.getText("key.keyboard.pause") + ": " + toString(buttonFromAction("pause"))).c_str());
 
 
 
@@ -139,7 +143,7 @@ namespace Minecraft::Menus{
         }else{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderCore.DebugPrint(360, 48 + 24*4, (Common::g_TranslationOBJ.getText("key.attack") + ": " + toString(findButtonPair("break"))).c_str());
+        g_RenderCore.DebugPrint(360, 48 + 24*4, (Common::g_TranslationOBJ.getText("key.attack") + ": " + toString(buttonFromAction("break"))).c_str());
 
 
         if(selectPosY == 13){
@@ -147,7 +151,7 @@ namespace Minecraft::Menus{
         }else{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderCore.DebugPrint(360, 48 + 24*5, (Common::g_TranslationOBJ.getText("key.use") + ": " + toString(findButtonPair("place"))).c_str());
+        g_RenderCore.DebugPrint(360, 48 + 24*5, (Common::g_TranslationOBJ.getText("key.use") + ": " + toString(buttonFromAction("place"))).c_str());
 
 
         if(selectPosY == 14){
@@ -155,7 +159,7 @@ namespace Minecraft::Menus{
         }else{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderCore.DebugPrint(360, 48 + 24*6, ("Hotbar Left: " + toString(findButtonPair("scrollLeft"))).c_str());
+        g_RenderCore.DebugPrint(360, 48 + 24*6, ("Hotbar Left: " + toString(buttonFromAction("scrollLeft"))).c_str());
 
 
         if(selectPosY == 15){
@@ -163,9 +167,8 @@ namespace Minecraft::Menus{
         }else{
             g_RenderCore.SetFontStyle(PSP_MENU_SIZE, 0xFFFFFFFF, 0, INTRAFONT_ALIGN_CENTER, 0.0f);
         }
-        g_RenderCore.DebugPrint(360, 48 + 24*7, ("Hotbar Right: " + toString(findButtonPair("scrollRight"))).c_str());
+        g_RenderCore.DebugPrint(360, 48 + 24*7, ("Hotbar Right: " + toString(buttonFromAction("scrollRight"))).c_str());
 
-*/
 
 
 
@@ -197,8 +200,8 @@ namespace Minecraft::Menus{
         }
 
         if(KeyPressed(PSP_CTRL_CROSS) && selectPosY == 16){
-            writeConfiguration("config.json");
-            loadConfiguration("config.json");
+            SaveConfiguration("config.json");
+            LoadConfiguration("config.json");
 
             selectPosX = 0;
             selectPosY = 0;
@@ -214,7 +217,7 @@ namespace Minecraft::Menus{
 
                     actions.erase(act);
                     
-                    int i = findButtonPair("walkForwards");
+                    int i = buttonFromAction("walkForwards");
                     if(i != -1){
                         actions.erase(i);
                     }
@@ -228,7 +231,7 @@ namespace Minecraft::Menus{
 
                     actions.erase(act);
                     
-                    int i = findButtonPair("walkBackward");
+                    int i = buttonFromAction("walkBackward");
                     if(i != -1){
                         actions.erase(i);
                     }
@@ -242,7 +245,7 @@ namespace Minecraft::Menus{
 
                     actions.erase(act);
                     
-                    int i = findButtonPair("walkStrafeLeft");
+                    int i = buttonFromAction("walkStrafeLeft");
                     if(i != -1){
                         actions.erase(i);
                     }
@@ -256,7 +259,7 @@ namespace Minecraft::Menus{
 
                     actions.erase(act);
                     
-                    int i = findButtonPair("walkStrafeRight");
+                    int i = buttonFromAction("walkStrafeRight");
                     if(i != -1){
                         actions.erase(i);
                     }
@@ -271,7 +274,7 @@ namespace Minecraft::Menus{
 
                     actions.erase(act);
                     
-                    int i = findButtonPair("lookUp");
+                    int i = buttonFromAction("lookUp");
                     if(i != -1){
                         actions.erase(i);
                     }
@@ -287,7 +290,7 @@ namespace Minecraft::Menus{
 
                     actions.erase(act);
                     
-                    int i = findButtonPair("lookDown");
+                    int i = buttonFromAction("lookDown");
                     if(i != -1){
                         actions.erase(i);
                     }
@@ -302,7 +305,7 @@ namespace Minecraft::Menus{
 
                     actions.erase(act);
                     
-                    int i = findButtonPair("lookLeft");
+                    int i = buttonFromAction("lookLeft");
                     if(i != -1){
                         actions.erase(i);
                     }
@@ -317,7 +320,7 @@ namespace Minecraft::Menus{
 
                     actions.erase(act);
                     
-                    int i = findButtonPair("lookRight");
+                    int i = buttonFromAction("lookRight");
                     if(i != -1){
                         actions.erase(i);
                     }
@@ -331,7 +334,7 @@ namespace Minecraft::Menus{
 
                     actions.erase(act);
                     
-                    int i = findButtonPair("sprint");
+                    int i = buttonFromAction("sprint");
                     if(i != -1){
                         actions.erase(i);
                     }
@@ -345,7 +348,7 @@ namespace Minecraft::Menus{
 
                     actions.erase(act);
                     
-                    int i = findButtonPair("sneak");
+                    int i = buttonFromAction("sneak");
                     if(i != -1){
                         actions.erase(i);
                     }
@@ -359,7 +362,7 @@ namespace Minecraft::Menus{
 
                     actions.erase(act);
                     
-                    int i = findButtonPair("jump");
+                    int i = buttonFromAction("jump");
                     if(i != -1){
                         actions.erase(i);
                     }
@@ -373,7 +376,7 @@ namespace Minecraft::Menus{
 
                     actions.erase(act);
                     
-                    int i = findButtonPair("pause");
+                    int i = buttonFromAction("pause");
                     if(i != -1){
                         actions.erase(i);
                     }
@@ -387,7 +390,7 @@ namespace Minecraft::Menus{
 
                     actions.erase(act);
                     
-                    int i = findButtonPair("break");
+                    int i = buttonFromAction("break");
                     if(i != -1){
                         actions.erase(i);
                     }
@@ -401,7 +404,7 @@ namespace Minecraft::Menus{
 
                     actions.erase(act);
                     
-                    int i = findButtonPair("place");
+                    int i = buttonFromAction("place");
                     if(i != -1){
                         actions.erase(i);
                     }
@@ -415,7 +418,7 @@ namespace Minecraft::Menus{
 
                     actions.erase(act);
                     
-                    int i = findButtonPair("hotLeft");
+                    int i = buttonFromAction("hotLeft");
                     if(i != -1){
                         actions.erase(i);
                     }
@@ -429,7 +432,7 @@ namespace Minecraft::Menus{
 
                     actions.erase(act);
                     
-                    int i = findButtonPair("hotRight");
+                    int i = buttonFromAction("hotRight");
                     if(i != -1){
                         actions.erase(i);
                     }

@@ -246,6 +246,7 @@ namespace Minecraft::Menus{
                     selectPosY = 0;
                     selectRegion = 0;
                     previous_states = menu_states;
+                    LoadConfiguration("config.json");
                     menu_states = MENU_STATE_CONTROL;
                     
                 }
