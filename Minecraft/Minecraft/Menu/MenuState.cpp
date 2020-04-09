@@ -24,8 +24,7 @@ namespace Minecraft::Menus{
 
 	void MenuState::Init(){
         gm = 0;
-        //BlockData::InstancePointer()->loadBlockData();
-		Utilities::app_Logger->currentLevel = Utilities::LOGGER_LEVEL_TRACE; //Most "verbose"
+        Utilities::app_Logger->currentLevel = Utilities::LOGGER_LEVEL_TRACE; //Most "verbose"
 
         struct stat buffer;
 

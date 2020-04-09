@@ -40,8 +40,7 @@ inline void *malloc_64(int size)
 
 void Minecraft::Client::World::Init()
 {
-
-	std::cout << gameMode << std::endl;
+	BlockData::InstancePointer()->loadBlockData();
 	killReceived = false;
 	readyForKill = false;
 	sun = new Rendering::Sun();
@@ -662,7 +661,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 			}
 		}
 
-		
+
 		//Get rid of excesses!
 
 		//CPU ONLY!
@@ -677,85 +676,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		//ME
 		for(mc::Vector3i& v : needed){
 			if(!g_World->chunkMan->chunkExists(v.x, v.y, v.z)){
-				
-				#ifdef ME_ENABLED
-				
-				Terrain::Chunk* c = new Terrain::Chunk();
-        		c->chunk_x = v.x;
-        		c->chunk_y = v.y;
-        		c->chunk_z = v.z;
-
-        		//ME
-				c->m_aabb.update({c->chunk_x * CHUNK_SIZE, c->chunk_y * CHUNK_SIZE, c->chunk_z * CHUNK_SIZE});
-
-
-				
-
-				Terrain::me_generator_struct str;
-
-				int rX = c->chunk_x * CHUNK_SIZE;
-				int rY = c->chunk_y * CHUNK_SIZE;
-				int rZ = c->chunk_z * CHUNK_SIZE;
-
-				for(int x = 0; x < CHUNK_SIZE; x++){
-					for(int z = 0; z < CHUNK_SIZE; z++){
-						str.biomeMap[x][z] = Terrain::getBiome(rX + x, rZ + z);
-					}
-				}
-				if(!g_World->genning)
-					sceKernelDelayThread(4 * 1000);
-
-        		for(int x = 0; x < CHUNK_SIZE; x++){
-            		for(int z = 0; z < CHUNK_SIZE; z++){
-						Terrain::NoiseParameters profile = Terrain::bioMap[str.biomeMap[x][z]].params;
-            	    	str.heightMap[x][z] = Terrain::getHeight(rX + x, rZ + z, profile);
-            		}
-        		}
-
-				if(!g_World->genning)
-					sceKernelDelayThread(4 * 1000);
-				
-				str.c = c;
-				str.bioMap = Terrain::bioMap;
-				str.seed = Terrain::WorldProvider::seed;
-
-
-				sceKernelDcacheWritebackInvalidateAll();
-				BeginME(mei, (int)(&Terrain::WorldProvider::GenerateME), (int)(&str), -1, 0, -1, 0);
-				while(!mei->done){
-					sceKernelDelayThread(4 * 1000);
-				} 
-				sceKernelDcacheWritebackInvalidateAll();
-
-				for(int x = 0; x < CHUNK_SIZE; x++){
-					for(int y = 0; y < CHUNK_SIZE; y++){
-						for(int z = 0; z < CHUNK_SIZE; z++){	
-							makeCavesOres(c, x, rX, y, rY, z, rZ, str.heightMap[x][z]);
-						}
-					}
-				}
-
-				if(!g_World->genning)
-					sceKernelDelayThread(4 * 1000);
-
-				for(int x = 0; x < CHUNK_SIZE; x++){
-					for(int z = 0; z < CHUNK_SIZE; z++){
-						if( (str.heightMap[x][z] + 3) / CHUNK_SIZE == rY / CHUNK_SIZE ){
-							if(c->blocks[x][str.heightMap[x][z] + 2 - rY][z].ID != 0){
-								makeFoliage(c, x, rX, str.heightMap[x][z] + 3 - rY, rY, z, rZ, Terrain::bioMap[str.biomeMap[x][z]]);
-							}
-						}
-
-					}
-				}
-
-
-        		g_World->chunkMan->getChunks().emplace(v, std::move(c));
-
-				#else	
-					g_World->chunkMan->loadChunkData(v.x, v.y, v.z);
-				#endif
-
+				g_World->chunkMan->loadChunkData(v.x, v.y, v.z);
 				if(!g_World->genning)
 					sceKernelDelayThread(4 * 1000);
 			}
@@ -794,9 +715,6 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		sceKernelDelayThread(20 * 1000);
 	}
 
-			#ifdef ME_ENABLED
-				KillME(mei);
-			#endif
 	g_World->cUpReady = true;
 	g_World->readyForKill = g_World->cUpReady && g_World->tUpReady;
 

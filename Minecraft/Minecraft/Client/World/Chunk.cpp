@@ -47,6 +47,8 @@ namespace Minecraft::Terrain{
     }
 
     void ChunkManager::loadChunkMesh(int x, int y, int z){
+
+		
         if(chunkExists(x, y, z)){
             m_chunks[mc::Vector3i(x,y,z)]->generateMesh(this);
         }
@@ -495,7 +497,7 @@ Chunk::Chunk()
 	animPos = -8.0f;
 	firstShow = true;
 	hasStruct = false;
-	m_aabb.extent = glm::vec3(CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE);
+	m_aabb.extent = glm::vec3(-CHUNK_SIZE, -CHUNK_SIZE, -CHUNK_SIZE);
 
 	delta.clear();
 }
