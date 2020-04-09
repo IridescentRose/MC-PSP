@@ -5,16 +5,6 @@
 #include <vector>
 #include <sstream>
 
-namespace std
-{
-    template < typename T > std::string to_string( const T& n )
-    {
-        std::ostringstream stm ;
-        stm << n ;
-        return stm.str() ;
-    }
-}
-
 extern int lighting(float time);
 
 namespace Minecraft::Terrain {

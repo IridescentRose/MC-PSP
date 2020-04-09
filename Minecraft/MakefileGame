@@ -27,19 +27,19 @@ Minecraft/Client/Audio/MusicManager.o \
 Minecraft/Client/Player.o \
 Minecraft/Client/World/World.o \
 Minecraft/Client/SPClient.o \
+Minecraft/Client/World/BlockData.o \
+Minecraft/Client/World/Chunk.o \
+Minecraft/Client/World/Perlin.o \
+Minecraft/Client/World/WorldProvider.o \
+Minecraft/Client/World/ChunkMesh.o \
 Minecraft.o
 
-# Minecraft/Client/World/BlockData.o \
-# Minecraft/Client/World/Chunk.o \
-# Minecraft/Client/World/Perlin.o \
-# Minecraft/Client/World/WorldProvider.o \
-# Minecraft/Client/World/ChunkMesh.o \
 # Minecraft/Client/ME/me.o \
 # Minecraft/Client/ME/MediaEngine.o \
 
 INCDIR = $(PSPPATH)/include
 INCDIR += ./LameCraft ./include ./Engine ./libs ./libs/include
-CFLAGS = -O3 -g3 -mpreferred-stack-boundary=4 -ffast-math -fno-rtti -fno-exceptions -DMC_PSP -DME_ENABLED
+CFLAGS = -O3 -g3 -mpreferred-stack-boundary=4 -ffast-math -fno-rtti -fno-exceptions -DMC_PSP #-DME_ENABLED
 CXXFLAGS = -std=gnu++17
 ASFLAGS = $(CFLAGS)
 

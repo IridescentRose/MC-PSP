@@ -1,10 +1,10 @@
 #include "Chunk.h"
-#include <Shadow/Graphics/RenderManager.h>
-#include <Shadow/Utils/Logger.h>
-#include <Shadow/System/Ram.h>
-using namespace Shadow;
+#include <Graphics/RendererCore.h>
+#include <Utilities/Logger.h>
+
+using namespace Stardust;
 #include <iostream>
-using namespace Shadow::Utils;
+using namespace Stardust::Utilities;
 
 namespace Minecraft::Terrain{
 	ChunkMap m_chunks;
@@ -470,7 +470,7 @@ struct LocalFaces{
 	glm::vec3 back;
 };
 
-Chunk::Chunk() : m_aabb({CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE})
+Chunk::Chunk()
 {
 	struct ChunkBlockExtended c;
 	c.ID = 0;
@@ -494,6 +494,7 @@ Chunk::Chunk() : m_aabb({CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE})
 	animPos = -8.0f;
 	firstShow = true;
 	hasStruct = false;
+	m_aabb.extent = glm::vec3(CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE);
 
 	delta.clear();
 }
@@ -779,7 +780,7 @@ void Chunk::updateMesh(ChunkManager* man)
 	generateMesh(man);
 }
 void Chunk::generateData(){
-	m_aabb.update({chunk_x * CHUNK_SIZE, chunk_y * CHUNK_SIZE, chunk_z * CHUNK_SIZE});
+	m_aabb.offset = {chunk_x * CHUNK_SIZE, chunk_y * CHUNK_SIZE, chunk_z * CHUNK_SIZE};
 	WorldProvider::generate(this);
 
 }

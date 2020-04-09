@@ -1,19 +1,9 @@
 #include "MusicManager.h"
-
+#include <Utilities/Logger.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string>
 #include <sstream>
-
-namespace std
-{
-	template < typename T > std::string to_string(const T& n)
-	{
-		std::ostringstream stm;
-		stm << n;
-		return stm.str();
-	}
-}
 
 
 namespace Minecraft::Audio {

@@ -1,7 +1,7 @@
 #include "WorldProvider.h"
-#include <Shadow/Utils/Logger.h>
+#include <Utilities/Logger.h>
 #include <pspmath.h>
-using namespace Shadow::Utils;
+using namespace Stardust::Utilities;
 #include <cmath>
 #include <iostream>
 

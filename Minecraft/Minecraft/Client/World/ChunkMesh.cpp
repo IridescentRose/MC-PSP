@@ -1,10 +1,10 @@
 #include "ChunkMesh.h"
-#include <Shadow/Utils/Logger.h>
+#include <Utilities/Logger.h>
 #include <sstream>
 #include "World.h"
 
 
-using namespace Shadow::Utils;
+using namespace Stardust::Utilities;
 
 #define CHUNK_SIZE 16
 

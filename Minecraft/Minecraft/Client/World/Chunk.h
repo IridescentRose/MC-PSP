@@ -5,9 +5,12 @@
 #include <map>
 #include "WorldProvider.h"
 #define CHUNK_SIZE 16
-#include <Shadow/Physics/AABB.h>
+#include <Math/AABB.h>
 #include <mclib/common/Vector.h>
 #include <fstream>
+
+using namespace Stardust::Math;
+
 namespace Minecraft::Terrain{
 
 struct ChunkDataEntry{
