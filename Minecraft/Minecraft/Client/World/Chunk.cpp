@@ -497,7 +497,7 @@ Chunk::Chunk()
 	animPos = -8.0f;
 	firstShow = true;
 	hasStruct = false;
-	m_aabb.extent = glm::vec3(-CHUNK_SIZE, -CHUNK_SIZE, -CHUNK_SIZE);
+	m_aabb.extent = glm::vec3(CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE);
 
 	delta.clear();
 }

@@ -564,16 +564,14 @@ void Minecraft::Client::World::Draw()
 	
 	for(const auto& [key, chnk] : chunkMan->getChunks()){
 		if(chnk->hasMesh){
-			if(p->getFrustum().isBoxInFrustum(chnk->m_aabb)){
-				chnk->Draw();
-			}
+			chnk->Draw();
+			
 		}
 	}
 	for(const auto& [key, chnk] : chunkMan->getChunks()){
 		if(chnk->hasMesh){
-			if(p->getFrustum().isBoxInFrustum(chnk->m_aabb)){
-				chnk->DrawTrans();
-			}
+			chnk->DrawTrans();
+			
 		}
 	}
 
