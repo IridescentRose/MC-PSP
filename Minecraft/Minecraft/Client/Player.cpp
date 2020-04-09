@@ -6,6 +6,7 @@
 #include <glm/gtx/rotate_vector.hpp>
 #include <pspmath.h>
 #include <iostream>
+#include "World/World.h"
 #define DEGTORAD(angleDegrees) ((angleDegrees) * 3.14159f / 180.0f)
 
 
@@ -77,8 +78,7 @@ namespace Minecraft {
 		{
 			updateInputs();
 
-			boundingBox.offset = glm::vec3(-position.x, position.y, -position.z) - glm::vec3(0.3f, 1.625f , 0.3f);
-
+			
 
 			float rotSpeed = 120.0f; //Speed at which to rotate per second
 
@@ -124,6 +124,18 @@ namespace Minecraft {
 
 			float walkSpeed = 4.317;
 
+			if (KeyPressed(PSP_CTRL_UP)) {
+				if(!sneak){
+					sprint = !sprint;
+					changingFOV = true;
+				}
+			}
+			if (KeyPressed(PSP_CTRL_DOWN)) {
+				if (!sprint) {
+					sneak = !sneak;
+				}
+			}
+
 			if(isFly()){
 				sneak = false;
 			}
@@ -147,12 +159,12 @@ namespace Minecraft {
 				//Only update with FOV modifier
 				sceGumMatrixMode(GU_PROJECTION);
 				sceGumLoadIdentity();
-				sceGumPerspective(Common::g_OptionsManager.options.fov * 40 + 70 + fovChange, 480.0f / 272.0f, 0.1f, 1000.0f);
+				sceGumPerspective(Common::g_OptionsManager.options.fov * 40 + 70 + fovChange, 480.0f / 272.0f, 0.1f, 256.0f);
 				sceGumStoreMatrix(&projMatrix);
 
 			}
-			/*
-			if (KeyPressed(findButtonPair("walkForwards"))) {
+
+			if (KeyPressed(PSP_CTRL_ANALOG_Y) && KeyStrength(PSP_CTRL_ANALOG_Y) > 0.4) {
 
 				float s = walkSpeed;
 
@@ -163,31 +175,27 @@ namespace Minecraft {
 					s = 1.317;
 				}
 
-				velocity.x += -vfpu_sinf(DEGTORAD(-yaw)) * s * dt;
-				velocity.z += -vfpu_cosf(DEGTORAD(-yaw)) * s * dt;
+				velocity.x += -vfpu_sinf(DEGTORAD(-yaw)) * s * dt * KeyStrength(PSP_CTRL_ANALOG_Y);
+				velocity.z += -vfpu_cosf(DEGTORAD(-yaw)) * s * dt * KeyStrength(PSP_CTRL_ANALOG_Y);
+			}else if (KeyPressed(PSP_CTRL_ANALOG_Y)){
+				velocity.x += vfpu_sinf(DEGTORAD(-yaw)) * walkSpeed * dt * KeyStrength(PSP_CTRL_ANALOG_Y);
+				velocity.z += vfpu_cosf(DEGTORAD(-yaw)) * walkSpeed * dt * KeyStrength(PSP_CTRL_ANALOG_Y);	
 			}
 
-			if (KeyPressed(findButtonPair("walkBackward"))) {
-				velocity.x += vfpu_sinf(DEGTORAD(-yaw)) * walkSpeed * dt;
-				velocity.z += vfpu_cosf(DEGTORAD(-yaw)) * walkSpeed * dt;
-			}
+			
+			
 
-			if (KeyPressed(findButtonPair("walkStrafeLeft"))) {
-				velocity.x += -vfpu_sinf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt;
-				velocity.z += -vfpu_cosf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt;
-			}
-
-			if (KeyPressed(findButtonPair("walkStrafeRight"))) {
-				velocity.x += -vfpu_sinf(DEGTORAD((-yaw - 270))) * walkSpeed * 0.7 * dt;
-				velocity.z += -vfpu_cosf(DEGTORAD((-yaw - 270))) * walkSpeed * 0.7 * dt;
+			if (KeyPressed(PSP_CTRL_ANALOG_X)) {
+				velocity.x += -vfpu_sinf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt * KeyStrength(PSP_CTRL_ANALOG_X);
+				velocity.z += -vfpu_cosf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt * KeyStrength(PSP_CTRL_ANALOG_X);
 			}
 
 			if(flyEnabled){
-				if(KeyPressed(findButtonPair("jump")) || KeyHold(findButtonPair("jump"))){
+				if(KeyPressed(PSP_CTRL_SELECT) || KeyHold(PSP_CTRL_SELECT)){
 					//Fly upwards
 					velocity.y += 5.812 * dt;
 				}
-				if(KeyPressed(findButtonPair("sneak")) || KeyHold(findButtonPair("sneak"))){
+				if(KeyPressed(PSP_CTRL_DOWN) || KeyHold(PSP_CTRL_DOWN)){
 					//Fly downwards
 					velocity.y -= 4.317 *dt;
 				}
@@ -198,33 +206,19 @@ namespace Minecraft {
 				}
 			}
 
-			if(KeyPressed(findButtonPair("break")) && KeyPressed(findButtonPair("place"))){
+			if(KeyPressed(PSP_CTRL_LTRIGGER) && KeyPressed(PSP_CTRL_RTRIGGER)){
 				toggleFly();
 			}
 
-			if (KeyPressed(findButtonPair("sprint"))) {
-				if(!sneak){
-					sprint = !sprint;
-					changingFOV = true;
-				}
-			}
-			if (KeyPressed(findButtonPair("sneak"))) {
-				if (!sprint) {
-					sneak = !sneak;
-				}
-			}
-			*/
 
 
-			if(gamemode != 3){
+			if(g_World->gameMode != 3){
 			glm::vec3 testPos = {(float)position.x, (float)position.y, (float)position.z};
 			if(flyEnabled){
 				testPos += velocity / 4.0f;
 			}else{
 				testPos += velocity;
 			}
-
-			/*
 
 			if(g_World->chunkMan->getBlock((int)-testPos.x, (int)testPos.y, (int)-testPos.z).ID == 0 && g_World->chunkMan->getBlock((int)-testPos.x, (int)(testPos.y + 1.8f), (int)-testPos.z).ID == 0 && g_World->chunkMan->getBlock((int)-testPos.x, (int)(testPos.y + 0.9f), (int)-testPos.z).ID == 0 ){
 				bool flag = true;
@@ -324,12 +318,21 @@ namespace Minecraft {
 				}
 			}
 
-			
 
-			if(KeyPressed(findButtonPair("jump")) && !isFly() && velocity.y > -0.2f){
-				velocity.y = 8.945f * 1.f / 60.0f;
+			if(KeyPressed(PSP_CTRL_SELECT) && !isFly() && velocity.y > -0.2f){
+				velocity.y = 8.945f * dt;
+
+				// 1.25
+				// 1.25 = 16.0f * t^2 + v0 * t
+				// v = v - 32t
+				// v0 = 32t 
+				// v = 0
+
+				// 1.25 = 16t^2 + 32t
+				// 1.25 = 16t(t + 2)
+				// 5 / 64 = t(t+2)
+				//
 			}
-			*/
 
 			if(!flyEnabled){
 				velocity = {0.f, velocity.y, 0.f};
@@ -347,8 +350,7 @@ namespace Minecraft {
 			sceGumTranslate(&pos);
 			sceGumStoreMatrix(&viewMatrix);
 
-			/*
-			if(KeyPressed(findButtonPair("break"))){
+			if(KeyPressed(PSP_CTRL_LTRIGGER)){
 				
 
 				//RAY CAST
@@ -364,7 +366,7 @@ namespace Minecraft {
 
 
 				int numBlocks = 0;
-				if(gamemode == 1){
+				if(g_World->gameMode == 1){
 					numBlocks = 20;
 				}else{
 					numBlocks = 18;
@@ -381,7 +383,7 @@ namespace Minecraft {
 						
 						BlockBreakEvent* e = new BlockBreakEvent();
 						e->type = EVENT_TYPE_BREAK;
-						e->breakPositionAbsolute = glm::vec3((int)currVec.x, (int)currVec.y, (int)currVec.z);
+						e->breakPositionAbsolute = mc::Vector3d((int)currVec.x, (int)currVec.y, (int)currVec.z);
 						g_World->eventBus.push(e);
 						break;
 					}
@@ -390,7 +392,7 @@ namespace Minecraft {
 
 			}
 			
-			if(KeyPressed(findButtonPair("place"))){
+			if(KeyPressed(PSP_CTRL_RTRIGGER)){
 
 
 				//RAY CAST
@@ -406,7 +408,7 @@ namespace Minecraft {
 				glm::vec3 diffVec = glm::vec3(0, 0, 0);
 
 				int numBlocks = 0;
-				if(gamemode == 1){
+				if(g_World->gameMode == 1){
 					numBlocks = 20;
 				}else{
 					numBlocks = 18;
@@ -432,7 +434,7 @@ namespace Minecraft {
 						if( (abs((untrace - currPos).x) > 0.81f || abs((untrace - currPos).z) > 0.81f) || ((untrace - currPos).y > 0.5f) || (untrace - currPos).y < -1.75f){
 							BlockPlaceEvent* e = new BlockPlaceEvent();
 							e->type = EVENT_TYPE_PLACE;
-							e->placePositionAbsolute = glm::vec3((int)untrace.x, (int)untrace.y, (int)untrace.z);
+							e->placePositionAbsolute = mc::Vector3d((int)untrace.x, (int)untrace.y, (int)untrace.z);
 							e->blk = BlockData::InstancePointer()->registered_blocks[currBlock];
 							g_World->eventBus.push(e);
 						}
@@ -443,22 +445,21 @@ namespace Minecraft {
 				}
 			}
 
-			if(KeyPressed(findButtonPair("scrollLeft"))){
+			if(KeyPressed(PSP_CTRL_LEFT)){
 				currBlock--;
 				if(currBlock < 0){
 					currBlock = BlockData::InstancePointer()->registered_blocks.size() - 1;
 				}
 			}
 
-			if(KeyPressed(findButtonPair("scrollRight"))){
+			if(KeyPressed(PSP_CTRL_RIGHT)){
 				currBlock++;
 				if(currBlock == BlockData::InstancePointer()->registered_blocks.size()){
 					currBlock = 0;
 				}
 			}
-			*/
 
-			glm::mat4 p = glm::perspective(Common::g_OptionsManager.options.fov * 40 + 70 + fovChange, 480.0f / 272.0f, 0.1f, 1000.0f);
+			glm::mat4 p = glm::perspective(Common::g_OptionsManager.options.fov * 40 + 70 + fovChange, 480.0f / 272.0f, 0.1f, 256.0f);
 			glm::mat4 vie = glm::mat4(1);
 			
 			vie = glm::rotate(vie, pitch, {1, 0, 0});
