@@ -152,12 +152,12 @@ namespace Minecraft::Menus{
 		if (ShowOSK(opis2, test2, 16) != -1)
 		{
 
-        //Terrain::WorldProvider::worldName = "";
+        Terrain::WorldProvider::worldName = "";
 			for (int j = 0; test2[j]; j++)
 			{
 				unsigned c = test2[j];
-				//if (32 <= c && c <= 127) // print ascii only
-					//Terrain::WorldProvider::worldName += c;
+				if (32 <= c && c <= 127) // print ascii only
+					Terrain::WorldProvider::worldName += c;
 			}
 		}
 
@@ -182,7 +182,7 @@ namespace Minecraft::Menus{
 			}
 		}
         
-		        //Terrain::WorldProvider::seed = hashString(seedName);
+		        Terrain::WorldProvider::seed = hashString(seedName);
             }
 
             if(selectPosY == 4){
@@ -195,7 +195,7 @@ namespace Minecraft::Menus{
             }
             if(selectPosY == 3){
                 //Generate
-                //terrain_atlas = TextureUtil::LoadPng("assets/minecraft/textures/terrain_atlas.png");
+               Client::terrain_atlas = TextureUtil::LoadPng("assets/minecraft/textures/terrain_atlas.png");
                 
                 gm = Client::g_World->gameMode;
                 Client::SPClient* client = new Client::SPClient();

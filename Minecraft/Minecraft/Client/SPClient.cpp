@@ -3,7 +3,7 @@
 #include <sstream>
 #include <Graphics/RendererCore.h>
 #include "World/World.h"
-
+#include <iostream>
 using namespace Stardust::Graphics;
 
 
@@ -60,6 +60,7 @@ namespace Minecraft::Client {
 		*/
 	}
 	void SPClient::Draw(StateManager* sManager) {
+
 		g_World->Draw();
 	}
 

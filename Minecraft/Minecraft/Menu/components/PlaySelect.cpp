@@ -258,8 +258,10 @@ namespace Minecraft::Menus{
                     
                 if(selectPosY == 0 && selectPosX == 0){
                     
-                    //Terrain::WorldProvider::worldName = entries[loadPosSel];
+                    Terrain::WorldProvider::worldName = entries[loadPosSel];
                     
+                    Client::terrain_atlas = TextureUtil::LoadPng("assets/minecraft/textures/terrain_atlas.png");
+
                     //LOAD WORLD!
                     Client::SPClient* client = new Client::SPClient();
 						

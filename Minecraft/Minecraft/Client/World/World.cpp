@@ -8,9 +8,11 @@
 #include <sys/stat.h> 
 #include <stdlib.h>
 #include <iostream>
-//#include "ChunkMesh.h"
+#include "ChunkMesh.h"
 #include <pspsdk.h>
 //#include "../ME/me.h"
+
+Stardust::Graphics::Texture* Minecraft::Client::terrain_atlas = NULL;
 
 Minecraft::Client::World* Minecraft::Client::g_World = new Minecraft::Client::World();
 
@@ -38,6 +40,7 @@ inline void *malloc_64(int size)
 
 void Minecraft::Client::World::Init()
 {
+
 	std::cout << gameMode << std::endl;
 	killReceived = false;
 	readyForKill = false;
@@ -63,7 +66,7 @@ void Minecraft::Client::World::Init()
 	tickUpdateThread = sceKernelCreateThread("TickUpdateThread", tickUpdate, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(tickUpdateThread, 0, 0);
 
-	/*
+	
 	mkdir( ("saves/" + Terrain::WorldProvider::worldName).c_str(), 0777);
 
 	std::ifstream file("saves/" + Terrain::WorldProvider::worldName + "/level.dat");
@@ -104,7 +107,6 @@ void Minecraft::Client::World::Init()
 		
 		Save();
 	}
-
 	srand(time(0));
 	Terrain::WorldProvider::noise = new FastNoise(Terrain::WorldProvider::seed);
 	Terrain::WorldProvider::noise->SetFrequency(0.1);
@@ -153,7 +155,7 @@ void Minecraft::Client::World::Init()
     Terrain::bioMap.emplace(Terrain::BIOME_Gravelly_Mountains , Terrain::gravelMountainsBiome);
     Terrain::bioMap.emplace(Terrain::BIOME_Badlands , Terrain::mesaBiome);
     Terrain::bioMap.emplace(Terrain::BIOME_Badlands_Plateau , Terrain::mesaPlateauBiome);
-*/
+
 
 	
 
@@ -161,7 +163,7 @@ void Minecraft::Client::World::Init()
 	genning = false;
 	tUpReady = false;
 	cUpReady = false;
-	//chunkMan = new Terrain::ChunkManager();
+	chunkMan = new Terrain::ChunkManager();
 	
 
 	crosshair = new Sprite(TextureUtil::LoadPng("assets/minecraft/textures/misc/cross.png"), 8, 8, 16, 16);
@@ -174,22 +176,12 @@ void Minecraft::Client::World::Init()
 	textureLavaAnimationId = TextureUtil::LoadPng( "assets/minecraft/textures/blocks/lava_still.png");
 	animationLavaStep = true;
 
-/*
-#ifdef ME_ENABLED
-	int ret = pspSdkLoadStartModule("mediaengine.prx", PSP_MEMORY_PARTITION_KERNEL);
 
-	mei = (volatile struct me_struct*)malloc_64(sizeof(struct me_struct*));
-	mei = (volatile struct me_struct*)(reinterpret_cast< void * >( reinterpret_cast<u32>( (mei) ) | 0x40000000 ) );
-
-	InitME(mei);
-	sceKernelDcacheWritebackInvalidateAll();
-#endif
 
 
 
 	chunkManagerThread = sceKernelCreateThread("ChunkManagementThread", chunkManagement, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(chunkManagerThread, 0, 0);
-	*/
 
 	frameTimer = 0;
 	fps = 0;
@@ -208,12 +200,12 @@ void Minecraft::Client::World::Cleanup()
 
 	delete timeData;
 
-/*
+
 	for(const auto& [key, chnk] : chunkMan->getChunks() ){
 		if(chunkMan->chunkExists(key.x, key.y, key.z))
 			chunkMan->unloadChunk(chnk->chunk_x, chnk->chunk_y, chnk->chunk_z);
 	}
-	*/
+	
 
 	rmg->Cleanup();
 	delete rmg;
@@ -223,9 +215,9 @@ void Minecraft::Client::World::Cleanup()
 	delete stars;
 	delete clouds;
 	delete crosshair;
-	//delete chunkMan;
-	//delete Terrain::WorldProvider::noise;
-	//Terrain::bioMap.clear();
+	delete chunkMan;
+	delete Terrain::WorldProvider::noise;
+	Terrain::bioMap.clear();
 }
 #include <iostream>
 
@@ -250,7 +242,7 @@ void Minecraft::Client::World::Update(float dt)
 
 	rmg->FixedUpdate();
 
-/*
+
 	for(const auto& [key, chnk] : chunkMan->getChunks() ){
 		chnk->Update(dt);
 	}
@@ -273,7 +265,7 @@ void Minecraft::Client::World::Update(float dt)
 				glm::vec3 relPos = glm::vec3((int)pos.x%16, (int)pos.y%16, (int)pos.z%16);
 
 				chunkMan->setBlock(b->breakPositionAbsolute.x, b->breakPositionAbsolute.y, b->breakPositionAbsolute.z, {0, 0});
-				Chunk* ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z);
+				Terrain::Chunk* ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z);
 				
 				bool check = false;
 				for(int i = 0; i < ch->delta.size(); i++){
@@ -329,7 +321,7 @@ void Minecraft::Client::World::Update(float dt)
 				glm::vec3 chunkPos = glm::vec3((int)pos.x/16, (int)pos.y/16, (int)pos.z/16);
 				glm::vec3 relPos = glm::vec3((int)pos.x%16, (int)pos.y%16, (int)pos.z%16);
 
-				Chunk* ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z);
+				Terrain::Chunk* ch = chunkMan->getChunk(chunkPos.x, chunkPos.y, chunkPos.z);
 				if(ch->blocks[(int)relPos.x][(int)relPos.y][(int)relPos.z].ID == 0){	
 					chunkMan->setBlock(b->placePositionAbsolute.x, b->placePositionAbsolute.y, b->placePositionAbsolute.z, b->blk);
 					ch->delta.push_back({glm::vec3(relPos.x, relPos.y, relPos.z), b->blk});
@@ -391,7 +383,7 @@ void Minecraft::Client::World::Update(float dt)
 		delete v;
 		eventBus.pop();
 	}
-	*/
+	
 
 	animationTimer += dt;
 
@@ -423,7 +415,7 @@ void Minecraft::Client::World::Update(float dt)
             animationLavaFrame -= 1;
         }
 		
-		/*
+		
 		
         for(int i = 0; i < waterFrameSize; i++)
         {
@@ -445,7 +437,7 @@ void Minecraft::Client::World::Update(float dt)
                                                       255);
             }
         }
-		*/
+		
     }
 	}
 	
@@ -471,7 +463,7 @@ void Minecraft::Client::World::FixedUpdate()
 	moon->Update((float)(timeData->time % 24000) / 24000.0f * 360.0f, timeData->worldAge);
 	rmg->timeUntilNext--;
 
-	/*
+	
 
 	if(lighting(timeData->time % 24000) != lastLevel){
 		//Lighting update
@@ -481,13 +473,13 @@ void Minecraft::Client::World::FixedUpdate()
 
 		lastLevel = newLevel;
 	}
-	*/
+	
 
 }
 
 void Minecraft::Client::World::Save(){
 
-/*
+
 	std::ofstream file("saves/" + Terrain::WorldProvider::worldName + "/level.dat");
 	
 	file << Terrain::WorldProvider::seed << std::endl;
@@ -505,7 +497,7 @@ void Minecraft::Client::World::Save(){
 	for(const auto& [key, chnk] : chunkMan->getChunks()){
 		chnk->save();
 	}
-	*/
+	
 }
 
 void Minecraft::Client::World::Draw()
@@ -568,7 +560,6 @@ void Minecraft::Client::World::Draw()
 
 	sceGuFog(0.8f, 192.f, GU_COLOR(finalFog, finalFog, finalFog, 1.0));
 
-/*
 	//Draw stuff
 	terrain_atlas->bindTexture(0, 0, true);
 	
@@ -586,7 +577,7 @@ void Minecraft::Client::World::Draw()
 			}
 		}
 	}
-*/
+
 
 	sceGuDisable(GU_FOG);
 
@@ -631,7 +622,7 @@ int Minecraft::Client::World::ChunkMan2(int gWorld){
 	return 0;
 }
 
-/*
+
 int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 {	
 	glm::vec3 last_pos = glm::vec3(0, -1, 0);
@@ -811,4 +802,3 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 
 	return 0;
 }
-*/

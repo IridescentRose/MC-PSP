@@ -6,6 +6,7 @@ using namespace Stardust;
 #include <iostream>
 using namespace Stardust::Utilities;
 
+
 namespace Minecraft::Terrain{
 	ChunkMap m_chunks;
     ChunkManager::ChunkManager(){

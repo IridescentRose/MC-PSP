@@ -8,6 +8,7 @@
 #include <Math/AABB.h>
 #include <mclib/common/Vector.h>
 #include <fstream>
+#include <Graphics/TextureUtil.h>
 
 using namespace Stardust::Math;
 

@@ -12,21 +12,39 @@
 
 #include "../Player.h"
 
-/*
+
 #include "Chunk.h"
 #include <queue>
 #include "BlockData.h"
-*/
+
 
 using namespace Stardust::Graphics;
 using namespace Stardust::Graphics::Render2D;
 
 namespace Minecraft::Client {
+	extern Stardust::Graphics::Texture* terrain_atlas;
 	class Player;
 	
 	struct TickTime {
 		s64 worldAge;
 		s64 time;
+	};
+
+	enum EventTypes{
+		EVENT_TYPE_BREAK,
+		EVENT_TYPE_PLACE
+	};
+
+	struct Event{
+		int type;
+	};
+
+	struct BlockBreakEvent : Event {
+		mc::Vector3d breakPositionAbsolute;
+	};
+	struct BlockPlaceEvent : Event {
+		mc::Vector3d placePositionAbsolute;
+		ChunkBlock blk;
 	};
 
 	class World {
@@ -46,8 +64,9 @@ namespace Minecraft::Client {
 		void Save();
 
 		Stardust::Utilities::Timer tickTimer;
-		//Terrain::ChunkManager* chunkMan;
+		Terrain::ChunkManager* chunkMan;
 		Player* p;
+		std::queue<Event*> eventBus;
 		int fps;
 		int frameCounter;
 		float frameTimer;
@@ -90,6 +109,7 @@ namespace Minecraft::Client {
 		Texture* textureWaterAnimationId, *textureLavaAnimationId;
 
 	};
+
 
 	extern World* g_World;
 }
