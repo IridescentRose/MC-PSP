@@ -4,7 +4,9 @@
 #include <Graphics/RendererCore.h>
 #include "World/World.h"
 #include <iostream>
+#include <Utilities/Input.h>
 using namespace Stardust::Graphics;
+using namespace Stardust::Utilities;
 
 
 namespace Minecraft::Client {
@@ -52,12 +54,12 @@ namespace Minecraft::Client {
 		player->Update(dt);	
 		g_World->Update(dt);
 
-		/*
-		if(System::KeyPressed(System::findButtonPair("pause"))){
+		
+		if(KeyPressed(PSP_CTRL_START)){
 			g_World->Save();
 			sceKernelExitGame();
 		}
-		*/
+		
 	}
 	void SPClient::Draw(StateManager* sManager) {
 

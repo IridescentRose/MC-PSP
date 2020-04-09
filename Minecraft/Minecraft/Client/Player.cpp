@@ -178,16 +178,16 @@ namespace Minecraft {
 				velocity.x += -vfpu_sinf(DEGTORAD(-yaw)) * s * dt * KeyStrength(PSP_CTRL_ANALOG_Y);
 				velocity.z += -vfpu_cosf(DEGTORAD(-yaw)) * s * dt * KeyStrength(PSP_CTRL_ANALOG_Y);
 			}else if (KeyPressed(PSP_CTRL_ANALOG_Y)){
-				velocity.x += vfpu_sinf(DEGTORAD(-yaw)) * walkSpeed * dt * KeyStrength(PSP_CTRL_ANALOG_Y);
-				velocity.z += vfpu_cosf(DEGTORAD(-yaw)) * walkSpeed * dt * KeyStrength(PSP_CTRL_ANALOG_Y);	
+				velocity.x += -vfpu_sinf(DEGTORAD(-yaw)) * walkSpeed * dt * KeyStrength(PSP_CTRL_ANALOG_Y);
+				velocity.z += -vfpu_cosf(DEGTORAD(-yaw)) * walkSpeed * dt * KeyStrength(PSP_CTRL_ANALOG_Y);	
 			}
 
 			
 			
 
 			if (KeyPressed(PSP_CTRL_ANALOG_X)) {
-				velocity.x += -vfpu_sinf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt * KeyStrength(PSP_CTRL_ANALOG_X);
-				velocity.z += -vfpu_cosf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt * KeyStrength(PSP_CTRL_ANALOG_X);
+				velocity.x += vfpu_sinf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt * KeyStrength(PSP_CTRL_ANALOG_X);
+				velocity.z += vfpu_cosf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt * KeyStrength(PSP_CTRL_ANALOG_X);
 			}
 
 			if(flyEnabled){
