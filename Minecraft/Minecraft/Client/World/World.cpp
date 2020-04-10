@@ -106,6 +106,8 @@ void Minecraft::Client::World::Init()
 		
 		Save();
 	}
+
+	handleGM();
 	srand(time(0));
 	Terrain::WorldProvider::noise = new FastNoise(Terrain::WorldProvider::seed);
 	Terrain::WorldProvider::noise->SetFrequency(0.1);
@@ -666,7 +668,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		for(mc::Vector3i& v : excess){
 			g_World->chunkMan->unloadChunk(v.x, v.y, v.z);
 			if(!g_World->genning){
-				sceKernelDelayThread(16 * 1000);
+				sceKernelDelayThread(4 * 1000);
 			}
   		}
 		excess.clear();
@@ -701,7 +703,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 				g_World->chunkMan->loadChunkMesh(v.x, v.y, v.z);
 			
 				if(!g_World->genning)
-					sceKernelDelayThread(16 * 1000);
+					sceKernelDelayThread(4 * 1000);
 				
 			}
 		}
@@ -710,7 +712,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		last_pos = center;
 		}
 		g_World->genning = false;
-		sceKernelDelayThread(20 * 1000);
+		sceKernelDelayThread(16 * 1000);
 	}
 
 	g_World->cUpReady = true;
