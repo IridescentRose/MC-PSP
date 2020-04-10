@@ -1,5 +1,4 @@
 #include "SPClient.hpp"
-#include "ME/me.h"
 #include <sstream>
 #include <Graphics/RendererCore.h>
 #include "World/World.h"
