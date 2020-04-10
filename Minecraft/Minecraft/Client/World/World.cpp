@@ -161,7 +161,7 @@ void Minecraft::Client::World::Init()
 	
 
 
-	genning = false;
+	genning = true;
 	tUpReady = false;
 	cUpReady = false;
 	chunkMan = new Terrain::ChunkManager();
@@ -243,6 +243,8 @@ void Minecraft::Client::World::Update(float dt)
 
 	rmg->FixedUpdate();
 
+
+	p->Update(dt);	
 
 	for(const auto& [key, chnk] : chunkMan->getChunks() ){
 		chnk->Update(dt);

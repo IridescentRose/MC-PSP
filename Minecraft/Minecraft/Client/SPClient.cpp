@@ -50,7 +50,6 @@ namespace Minecraft::Client {
 		float dt = updateTimer.deltaTime();
 
 		int fps = 1.0f / dt;
-		player->Update(dt);	
 		g_World->Update(dt);
 
 		
