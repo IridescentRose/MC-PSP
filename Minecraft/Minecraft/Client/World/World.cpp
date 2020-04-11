@@ -554,7 +554,9 @@ void Minecraft::Client::World::Draw()
 	sceGumLoadMatrix(&p->viewMatrix);
 
 	//Clouds
-	clouds->Draw(p->getPosition(), timeData->time);
+	if(Common::g_OptionsManager.options.renderClouds != 0){
+		clouds->Draw(p->getPosition(), timeData->time);
+	}
 	
 
 	sceGuEnable(GU_FOG);
