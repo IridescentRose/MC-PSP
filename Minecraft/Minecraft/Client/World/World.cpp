@@ -2,7 +2,7 @@
 
 #include <pspkernel.h>
 #include <pspthreadman.h>
-
+#include "../../Common/Options.hpp"
 #include <Utilities/Logger.h>
 #include "../../Version.hpp"
 #include <sys/stat.h> 
@@ -639,8 +639,8 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		std::vector<mc::Vector3i> excess;
 		excess.clear();
 		//Box bounds
-		mc::Vector3i top = {center.x + 1.5f, center.y+1, center.z + 1.5f};
-		mc::Vector3i bot = {center.x - 1.5f, center.y-1, center.z - 1.5f};
+		mc::Vector3i top = {center.x + (float)Common::g_OptionsManager.options.renderDistance / 2.0f, center.y+1, center.z + (float)Common::g_OptionsManager.options.renderDistance / 2.0f};
+		mc::Vector3i bot = {center.x - (float)Common::g_OptionsManager.options.renderDistance / 2.0f, center.y-1, center.z - (float)Common::g_OptionsManager.options.renderDistance / 2.0f};
 		for(int y = bot.y; y <= top.y && y < 17 && y >= -1; y++){
 			for(int x = bot.x; x <= top.x; x++){
 				for(int z = bot.z; z <= top.z; z++){
