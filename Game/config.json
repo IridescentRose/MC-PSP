@@ -2,19 +2,19 @@
     "listeners" : [
         {
             "name" : "walkForward",
-            "button" : 2
-        },
-        {
-            "name" : "walkBackward",
-            "button" : 3
-        },
-        {
-            "name" : "walkStrafeLeft",
             "button" : 5
         },
         {
+            "name" : "walkBackward",
+            "button" : 5
+        },
+        {
+            "name" : "walkStrafeLeft",
+            "button" : 3
+        },
+        {
             "name" : "walkStrafeRight",
-            "button" : 4
+            "button" : 3
         },
         {
             "name" : "break",

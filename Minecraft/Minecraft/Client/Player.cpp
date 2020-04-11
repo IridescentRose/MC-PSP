@@ -343,7 +343,7 @@ namespace Minecraft {
 
 
 			if(KeyPressed(PSP_CTRL_SELECT) && !isFly() && velocity.y > -0.2f){
-				velocity.y = 8.945f * dt;
+				velocity.y = 8.945f / 60.0f;
 
 				// 1.25
 				// 1.25 = 16.0f * t^2 + v0 * t
