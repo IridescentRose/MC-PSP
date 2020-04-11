@@ -11,6 +11,7 @@
 #include "ChunkMesh.h"
 #include <pspsdk.h>
 #include <melib.h>
+#include <Utilities/Input.h>
 
 Stardust::Graphics::Texture* Minecraft::Client::terrain_atlas = NULL;
 
@@ -182,6 +183,8 @@ void Minecraft::Client::World::Init()
 		J_Init(false);
 	#endif
 
+	
+	Stardust::Utilities::LoadConfiguration("config.json");
 
 	chunkManagerThread = sceKernelCreateThread("ChunkManagementThread", chunkManagement, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
 	sceKernelStartThread(chunkManagerThread, 0, 0);

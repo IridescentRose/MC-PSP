@@ -200,7 +200,6 @@ namespace Minecraft::Menus{
 
         if(KeyPressed(PSP_CTRL_CROSS) && selectPosY == 16){
             SaveConfiguration("config.json");
-            LoadConfiguration("config.json");
 
             selectPosX = 0;
             selectPosY = 0;

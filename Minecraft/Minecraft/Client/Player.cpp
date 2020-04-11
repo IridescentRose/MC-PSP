@@ -82,19 +82,19 @@ namespace Minecraft {
 
 			float rotSpeed = 120.0f; //Speed at which to rotate per second
 
-			if (KeyPressed(PSP_CTRL_CROSS) || KeyHold(PSP_CTRL_CROSS)) {
-				pitch += rotSpeed * dt;
-			}
-
-			if (KeyPressed(PSP_CTRL_TRIANGLE) || KeyHold(PSP_CTRL_TRIANGLE)) {
+			if (KeyHold(buttonFromAction("lookUp"))) {
 				pitch -= rotSpeed * dt;
 			}
 
-			if (KeyPressed(PSP_CTRL_SQUARE) || KeyHold(PSP_CTRL_SQUARE)) {
+			if (KeyHold(buttonFromAction("lookDown"))) {
+				pitch += rotSpeed * dt;
+			}
+
+			if (KeyHold(buttonFromAction("lookLeft"))) {
 				yaw -= rotSpeed * dt;
 			}
 
-			if (KeyPressed(PSP_CTRL_CIRCLE) || KeyHold(PSP_CTRL_CIRCLE)) {
+			if ( KeyHold(buttonFromAction("lookRight"))) {
 				yaw += rotSpeed * dt;
 			}
 
@@ -124,13 +124,13 @@ namespace Minecraft {
 
 			float walkSpeed = 4.317;
 
-			if (KeyPressed(PSP_CTRL_UP)) {
+			if (KeyHold(buttonFromAction("sprint"))) {
 				if(!sneak){
 					sprint = !sprint;
 					changingFOV = true;
 				}
 			}
-			if (KeyPressed(PSP_CTRL_DOWN)) {
+			if (KeyHold(buttonFromAction("sneak"))) {
 				if (!sprint) {
 					sneak = !sneak;
 				}
@@ -164,8 +164,7 @@ namespace Minecraft {
 
 			}
 
-			if (KeyPressed(PSP_CTRL_ANALOG_Y) && KeyStrength(PSP_CTRL_ANALOG_Y) > 0.4) {
-
+			if (KeyHold(buttonFromAction("walkForward"))) {
 				float s = walkSpeed;
 
 				if (sprint) {
@@ -174,28 +173,52 @@ namespace Minecraft {
 				if (sneak) {
 					s = 1.317;
 				}
+				if(buttonFromAction("walkForward") == PSP_CTRL_ANALOG_X || buttonFromAction("walkForward") == PSP_CTRL_ANALOG_Y){
+				    velocity.x += -vfpu_sinf(DEGTORAD(-yaw)) * s * dt * KeyStrength(buttonFromAction("walkForward"));
+				    velocity.z += -vfpu_cosf(DEGTORAD(-yaw)) * s * dt * KeyStrength(buttonFromAction("walkForward"));
+				}else{
+					velocity.x += -vfpu_sinf(DEGTORAD(-yaw)) * s * dt;
+					velocity.z += -vfpu_cosf(DEGTORAD(-yaw)) * s * dt;
+				}
 
-				velocity.x += -vfpu_sinf(DEGTORAD(-yaw)) * s * dt * KeyStrength(PSP_CTRL_ANALOG_Y);
-				velocity.z += -vfpu_cosf(DEGTORAD(-yaw)) * s * dt * KeyStrength(PSP_CTRL_ANALOG_Y);
-			}else if (KeyPressed(PSP_CTRL_ANALOG_Y)){
-				velocity.x += -vfpu_sinf(DEGTORAD(-yaw)) * walkSpeed * dt * KeyStrength(PSP_CTRL_ANALOG_Y);
-				velocity.z += -vfpu_cosf(DEGTORAD(-yaw)) * walkSpeed * dt * KeyStrength(PSP_CTRL_ANALOG_Y);	
+			}else if (KeyHold(buttonFromAction("walkBackward"))){
+				if(buttonFromAction("walkBackward") == PSP_CTRL_ANALOG_X || buttonFromAction("walkBackward") == PSP_CTRL_ANALOG_Y){
+				    velocity.x += -vfpu_sinf(DEGTORAD(-yaw)) * dt * KeyStrength(buttonFromAction("walkBackward"));
+				    velocity.z += -vfpu_cosf(DEGTORAD(-yaw)) * dt * KeyStrength(buttonFromAction("walkBackward"));
+				}else{
+					velocity.x += vfpu_sinf(DEGTORAD(-yaw)) * walkSpeed * dt;
+					velocity.z += vfpu_cosf(DEGTORAD(-yaw)) * walkSpeed * dt;	
+				}
 			}
 
 			
 			
 
-			if (KeyPressed(PSP_CTRL_ANALOG_X)) {
-				velocity.x += vfpu_sinf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt * KeyStrength(PSP_CTRL_ANALOG_X);
-				velocity.z += vfpu_cosf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt * KeyStrength(PSP_CTRL_ANALOG_X);
+			if (KeyHold(buttonFromAction("walkStrafeLeft"))) {
+				if(buttonFromAction("walkStrafeLeft") == PSP_CTRL_ANALOG_X || buttonFromAction("walkStrafeLeft") == PSP_CTRL_ANALOG_Y){
+					velocity.x += vfpu_sinf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt * KeyStrength(buttonFromAction("walkStrafeLeft"));;
+					velocity.z += vfpu_cosf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt * KeyStrength(buttonFromAction("walkStrafeLeft"));;
+				}else{
+					velocity.x += vfpu_sinf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt;
+					velocity.z += vfpu_cosf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt;
+				}
+			}
+			if (KeyHold(buttonFromAction("walkStrafeRight"))) {
+				if(buttonFromAction("walkStrafeRight") == PSP_CTRL_ANALOG_X || buttonFromAction("walkStrafeRight") == PSP_CTRL_ANALOG_Y){
+					velocity.x += vfpu_sinf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt * KeyStrength(buttonFromAction("walkStrafeRight"));;
+					velocity.z += vfpu_cosf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt * KeyStrength(buttonFromAction("walkStrafeRight"));;
+				}else{
+					velocity.x += -vfpu_sinf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt;
+					velocity.z += -vfpu_cosf(DEGTORAD((-yaw + 270))) * walkSpeed * 0.7 * dt;
+				}
 			}
 
 			if(flyEnabled){
-				if(KeyPressed(PSP_CTRL_SELECT) || KeyHold(PSP_CTRL_SELECT)){
+				if(KeyHold(buttonFromAction("jump"))){
 					//Fly upwards
 					velocity.y += 5.812 * dt;
 				}
-				if(KeyPressed(PSP_CTRL_DOWN) || KeyHold(PSP_CTRL_DOWN)){
+				if(KeyHold(buttonFromAction("sneak"))){
 					//Fly downwards
 					velocity.y -= 4.317 *dt;
 				}
@@ -206,7 +229,7 @@ namespace Minecraft {
 				}
 			}
 
-			if(KeyPressed(PSP_CTRL_LTRIGGER) && KeyPressed(PSP_CTRL_RTRIGGER)){
+			if(KeyPressed(buttonFromAction("break")) && KeyPressed(buttonFromAction("place"))){
 				toggleFly();
 			}
 
@@ -350,7 +373,7 @@ namespace Minecraft {
 			sceGumTranslate(&pos);
 			sceGumStoreMatrix(&viewMatrix);
 
-			if(KeyPressed(PSP_CTRL_LTRIGGER)){
+			if(KeyPressed(buttonFromAction("break"))){
 				
 
 				//RAY CAST
@@ -392,7 +415,7 @@ namespace Minecraft {
 
 			}
 			
-			if(KeyPressed(PSP_CTRL_RTRIGGER)){
+			if(KeyPressed(buttonFromAction("place"))){
 
 
 				//RAY CAST
@@ -445,14 +468,14 @@ namespace Minecraft {
 				}
 			}
 
-			if(KeyPressed(PSP_CTRL_LEFT)){
+			if(KeyPressed(buttonFromAction("hotbarLeft"))){
 				currBlock--;
 				if(currBlock < 0){
 					currBlock = BlockData::InstancePointer()->registered_blocks.size() - 1;
 				}
 			}
 
-			if(KeyPressed(PSP_CTRL_RIGHT)){
+			if(KeyPressed(buttonFromAction("hotbarRight"))){
 				currBlock++;
 				if(currBlock == BlockData::InstancePointer()->registered_blocks.size()){
 					currBlock = 0;
