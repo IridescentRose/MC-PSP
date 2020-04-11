@@ -178,7 +178,9 @@ void Minecraft::Client::World::Init()
 	animationLavaStep = true;
 
 
-
+	#ifdef ME_ENABLED
+		J_Init(false);
+	#endif
 
 
 	chunkManagerThread = sceKernelCreateThread("ChunkManagementThread", chunkManagement, 0x18, 0x10000, THREAD_ATTR_VFPU | THREAD_ATTR_USER, NULL);
@@ -191,6 +193,10 @@ void Minecraft::Client::World::Init()
 
 void Minecraft::Client::World::Cleanup()
 {
+
+	#ifdef ME_ENABLED
+		J_Cleanup();
+	#endif
 
 	Save();
 	
@@ -472,7 +478,7 @@ void Minecraft::Client::World::FixedUpdate()
 		//Lighting update
 		int newLevel = lighting(timeData->time % 24000);
 
-		//chunkMan->updateLightingAll(newLevel, lastLevel);
+		chunkMan->updateLightingAll(newLevel, lastLevel);
 
 		lastLevel = newLevel;
 	}
@@ -677,7 +683,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
   		}
 		excess.clear();
 
-		//ME
+		//ME OPTIMIZABLE
 		for(mc::Vector3i& v : needed){
 			if(!g_World->chunkMan->chunkExists(v.x, v.y, v.z)){
 				g_World->chunkMan->loadChunkData(v.x, v.y, v.z);
@@ -687,7 +693,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 		}
 
 
-		
+		//ME OPTIMIZABLE
 		for(mc::Vector3i& v : needed){			
 			g_World->chunkMan->loadChunkData2(v.x, v.y, v.z);
 			if(!g_World->genning)
@@ -701,7 +707,7 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 				sceKernelDelayThread(4 * 1000);
 		}
 
-
+		//ME OPTIMIZABLE
 		for(mc::Vector3i& v : needed){
 			if(g_World->chunkMan->chunkExists(v.x, v.y, v.z) && !g_World->chunkMan->getChunk(v.x, v.y, v.z)->hasMesh){
 				g_World->chunkMan->loadChunkMesh(v.x, v.y, v.z);
@@ -714,6 +720,11 @@ int Minecraft::Client::World::chunkManagement(SceSize args, void* argp)
 
 
 		last_pos = center;
+
+		#ifdef ME_ENABLED
+			J_DispatchJobs(0.0f);
+		#endif
+
 		}
 		g_World->genning = false;
 		sceKernelDelayThread(16 * 1000);
