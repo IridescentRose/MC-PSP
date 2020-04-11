@@ -10,7 +10,7 @@
 #include <iostream>
 #include "ChunkMesh.h"
 #include <pspsdk.h>
-//#include "../ME/me.h"
+#include <melib.h>
 
 Stardust::Graphics::Texture* Minecraft::Client::terrain_atlas = NULL;
 
