@@ -9,7 +9,7 @@
 #include "../Audio/MusicManager.h"
 #include <Graphics/2D/SpriteBase.h>
 #include "../../Menu/LoadingScreen.hpp"
-
+#include "../../Common/Translations.hpp"
 #include "../Player.h"
 
 

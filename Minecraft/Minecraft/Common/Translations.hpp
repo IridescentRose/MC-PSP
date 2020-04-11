@@ -1,3 +1,4 @@
+#pragma once
 #include <json/json.h>
 
 namespace Minecraft::Common{
