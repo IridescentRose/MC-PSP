@@ -32,6 +32,8 @@ Minecraft/Client/World/Chunk.o \
 Minecraft/Client/World/Perlin.o \
 Minecraft/Client/World/WorldProvider.o \
 Minecraft/Client/World/ChunkMesh.o \
+Minecraft/Client/World/Registry/ItemRegistry.o \
+Minecraft/Client/World/Registry/BlockRegistry.o \
 Minecraft.o
 
 INCDIR = $(PSPPATH)/include
