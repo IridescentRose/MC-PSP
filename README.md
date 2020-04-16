@@ -1,10 +1,13 @@
+# Hi, this repostiory is going to be archived. The Project has been moved to Project-Raven.
+# Please go HERE: https://github.com/NT-Bourgeois-Iridescence-Technologies/Project-Raven
+
 # MC-PSP
 
 MC-PSP is a brand new Minecraft port for the PSP!
 
 # News
 
-v0.4 IS HERE! The game now has infinite worlds, building, and will be gaining more features soon!
+Project Raven Begins!
 
 ## How to Install
 
